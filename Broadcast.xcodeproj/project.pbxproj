@@ -15,6 +15,8 @@
 		1D34340725624B4C00886245 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D34340525624B4C00886245 /* LaunchScreen.storyboard */; };
 		1D34341225624B4C00886245 /* BroadcastTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D34341125624B4C00886245 /* BroadcastTests.swift */; };
 		1D34341D25624B4C00886245 /* BroadcastUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D34341C25624B4C00886245 /* BroadcastUITests.swift */; };
+		1D916D0A25629C080059E549 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D916D0925629C080059E549 /* ViewModel.swift */; };
+		1D916D1225629C1E0059E549 /* ViewModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D916D1125629C1E0059E549 /* ViewModelController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		1D34341825624B4C00886245 /* BroadcastUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BroadcastUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D34341C25624B4C00886245 /* BroadcastUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastUITests.swift; sourceTree = "<group>"; };
 		1D34341E25624B4C00886245 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1D916D0925629C080059E549 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		1D916D1125629C1E0059E549 /* ViewModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +103,10 @@
 		1D3433F925624B4400886245 /* Broadcast */ = {
 			isa = PBXGroup;
 			children = (
+				1D916D0425629A800059E549 /* Presentation */,
+				1D916D0525629A970059E549 /* Utilities */,
+				1D916D0625629A9C0059E549 /* Domain */,
+				1D916D0825629BCA0059E549 /* Services */,
 				1D3433FA25624B4400886245 /* AppDelegate.swift */,
 				1D3433FC25624B4400886245 /* SceneDelegate.swift */,
 				1D3433FE25624B4400886245 /* ViewController.swift */,
@@ -126,6 +134,36 @@
 				1D34341E25624B4C00886245 /* Info.plist */,
 			);
 			path = BroadcastUITests;
+			sourceTree = "<group>";
+		};
+		1D916D0425629A800059E549 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				1D916D0925629C080059E549 /* ViewModel.swift */,
+				1D916D1125629C1E0059E549 /* ViewModelController.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		1D916D0525629A970059E549 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		1D916D0625629A9C0059E549 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		1D916D0825629BCA0059E549 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,6 +298,8 @@
 			files = (
 				1D3433FF25624B4400886245 /* ViewController.swift in Sources */,
 				1D3433FB25624B4400886245 /* AppDelegate.swift in Sources */,
+				1D916D0A25629C080059E549 /* ViewModel.swift in Sources */,
+				1D916D1225629C1E0059E549 /* ViewModelController.swift in Sources */,
 				1D3433FD25624B4400886245 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -439,10 +479,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KTKP5PRF82;
 				INFOPLIST_FILE = Broadcast/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.boomday.Broadcast;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -458,10 +500,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KTKP5PRF82;
 				INFOPLIST_FILE = Broadcast/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.boomday.Broadcast;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
