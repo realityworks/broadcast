@@ -23,6 +23,9 @@
 		1D916D342562A4CF0059E549 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D916D332562A4CF0059E549 /* State.swift */; };
 		1D916D392562A4D90059E549 /* StateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D916D382562A4D90059E549 /* StateController.swift */; };
 		1D916D442562A7180059E549 /* UseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D916D432562A7180059E549 /* UseCases.swift */; };
+		1D916D592562C2920059E549 /* Schedulers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D916D582562C2920059E549 /* Schedulers.swift */; };
+		1D916D5F2562C3870059E549 /* BoomdayError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D916D5E2562C3870059E549 /* BoomdayError.swift */; };
+		1D916D672562C7500059E549 /* Domain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D916D662562C7500059E549 /* Domain.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +63,9 @@
 		1D916D332562A4CF0059E549 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		1D916D382562A4D90059E549 /* StateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateController.swift; sourceTree = "<group>"; };
 		1D916D432562A7180059E549 /* UseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCases.swift; sourceTree = "<group>"; };
+		1D916D582562C2920059E549 /* Schedulers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedulers.swift; sourceTree = "<group>"; };
+		1D916D5E2562C3870059E549 /* BoomdayError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoomdayError.swift; sourceTree = "<group>"; };
+		1D916D662562C7500059E549 /* Domain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Domain.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +161,7 @@
 		1D916D0525629A970059E549 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				1D916D582562C2920059E549 /* Schedulers.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -162,6 +169,7 @@
 		1D916D0625629A9C0059E549 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				1D916D662562C7500059E549 /* Domain.swift */,
 				1D916D332562A4CF0059E549 /* State.swift */,
 				1D916D382562A4D90059E549 /* StateController.swift */,
 				1D916D432562A7180059E549 /* UseCases.swift */,
@@ -188,6 +196,7 @@
 		1D916D492562A7CE0059E549 /* State */ = {
 			isa = PBXGroup;
 			children = (
+				1D916D5E2562C3870059E549 /* BoomdayError.swift */,
 			);
 			path = State;
 			sourceTree = "<group>";
@@ -353,11 +362,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D916D5F2562C3870059E549 /* BoomdayError.swift in Sources */,
+				1D916D672562C7500059E549 /* Domain.swift in Sources */,
 				1D916D392562A4D90059E549 /* StateController.swift in Sources */,
 				1D3433FB25624B4400886245 /* AppDelegate.swift in Sources */,
 				1D916D442562A7180059E549 /* UseCases.swift in Sources */,
 				1D916D0A25629C080059E549 /* ViewModel.swift in Sources */,
 				1D916D1225629C1E0059E549 /* ViewController.swift in Sources */,
+				1D916D592562C2920059E549 /* Schedulers.swift in Sources */,
 				1D3433FD25624B4400886245 /* SceneDelegate.swift in Sources */,
 				1D916D342562A4CF0059E549 /* State.swift in Sources */,
 			);
@@ -529,7 +541,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KTKP5PRF82;
-				INFOPLIST_FILE = Broadcast/Info.plist;
+				INFOPLIST_FILE = Broadcast/Assets/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -550,7 +562,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KTKP5PRF82;
-				INFOPLIST_FILE = Broadcast/Info.plist;
+				INFOPLIST_FILE = Broadcast/Assets/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

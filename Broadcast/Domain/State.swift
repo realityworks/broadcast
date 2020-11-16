@@ -9,6 +9,6 @@ import Foundation
 
 /// Base class used to describe the local state of all data on the application.
 /// The state can be updated and propagated throughout.
-class State : Equatable {
+struct State : Equatable {
     
 }
