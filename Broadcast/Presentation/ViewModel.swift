@@ -6,14 +6,14 @@
 //
 
 import Foundation
-
-protocol ViewModelleable {
-    associatedtype Cancellable : Hashable
-    
-    var cancellables: Set<Cancellable> { get set }
-}
+import RxSwift
 
 /// Protocol extension for the base class
-class ViewModel : ViewModelleable {
+class ViewModel {
+    let stateController: StateController
+    let dispatchGroup = DispatchGroup()
     
+    init(stateController: StateController) {
+        self.stateController = stateController
+    }
 }
