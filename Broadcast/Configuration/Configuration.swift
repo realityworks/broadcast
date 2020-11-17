@@ -13,7 +13,7 @@ import Foundation
 extension Configuration {
     static var versionString: String { castedValue(for: .versionString, as: String.self)! }
     static var buildString: String { castedValue(for: .buildString, as: String.self)! }
-    static var apiServiceBaseURL: URL { URL(string: "A url")! }
+    static var apiServiceURL: URL { castedURL(for: .apiServiceURL)! }
 }
 
 // MARK: - Private
@@ -21,12 +21,12 @@ extension Configuration {
 private enum ConfigKey: String, CaseIterable {
     case versionString = "CFBundleShortVersionString"
     case buildString = "CFBundleVersion"
-    case apiServiceBaseURL = "APIServiceBaseURL"
+    case apiServiceURL = "SERVICE_ROOT_URL"
 }
 
 class Configuration {
 
-    private static func castedArray<T>(for key: BundledConfigKey) -> [T]? {
+    private static func castedArray<T>(for key: ConfigKey) -> [T]? {
         guard let array = castedValue(for: key, as: [Any].self) else {
             return nil
         }
@@ -34,7 +34,7 @@ class Configuration {
         return (array.count == castedArray.count) ? castedArray : nil
     }
 
-    private static func castedDictionary<T>(for key: BundledConfigKey) -> [String: T]? {
+    private static func castedDictionary<T>(for key: ConfigKey) -> [String: T]? {
         guard let dictionary = castedValue(for: key, as: [String: Any].self) else {
             return nil
         }
@@ -42,7 +42,7 @@ class Configuration {
         return (dictionary.count == castedDictionary.count) ? castedDictionary : nil
     }
 
-    private static func castedValue<T>(for key: BundledConfigKey, as _: T.Type) -> T? {
+    private static func castedValue<T>(for key: ConfigKey, as _: T.Type) -> T? {
         do {
             guard let anyValue = envSpecificInfo[key.rawValue] ?? appInfo[key.rawValue] else {
                 throw Error.invalidKey
@@ -57,7 +57,7 @@ class Configuration {
         }
     }
 
-    private static func castedURL(for key: BundledConfigKey) -> URL? {
+    private static func castedURL(for key: ConfigKey) -> URL? {
         do {
             guard let anyValue = envSpecificInfo[key.rawValue] ?? appInfo[key.rawValue] else {
                 throw Error.invalidKey

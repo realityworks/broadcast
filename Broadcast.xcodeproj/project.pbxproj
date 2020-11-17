@@ -33,6 +33,9 @@
 		1D916D93256406B10059E549 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D916D92256406B10059E549 /* Configuration.swift */; };
 		1D916D98256408CC0059E549 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D916D97256408CC0059E549 /* Logger.swift */; };
 		1D916D9E25640C430059E549 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 1D916D9D25640C430059E549 /* SDWebImage */; };
+		1D916DA625640C810059E549 /* Development.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 1D916DA325640C810059E549 /* Development.xcconfig */; };
+		1D916DA725640C810059E549 /* Production.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 1D916DA425640C810059E549 /* Production.xcconfig */; };
+		1D916DA825640C810059E549 /* Staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 1D916DA525640C810059E549 /* Staging.xcconfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +82,9 @@
 		1D916D8C256404ED0059E549 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		1D916D92256406B10059E549 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		1D916D97256408CC0059E549 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		1D916DA325640C810059E549 /* Development.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
+		1D916DA425640C810059E549 /* Production.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Production.xcconfig; sourceTree = "<group>"; };
+		1D916DA525640C810059E549 /* Staging.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +143,7 @@
 			children = (
 				1D916D4B2562A8170059E549 /* Assets */,
 				1D916D4A2562A80B0059E549 /* App */,
+				1D916DA225640C720059E549 /* Configuration */,
 				1D916D0625629A9C0059E549 /* Domain */,
 				1D916D0425629A800059E549 /* Presentation */,
 				1D916D0825629BCA0059E549 /* Services */,
@@ -229,7 +236,6 @@
 		1D916D4A2562A80B0059E549 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				1D916D92256406B10059E549 /* Configuration.swift */,
 				1D3433FA25624B4400886245 /* AppDelegate.swift */,
 				1D3433FC25624B4400886245 /* SceneDelegate.swift */,
 			);
@@ -286,6 +292,17 @@
 			children = (
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		1D916DA225640C720059E549 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				1D916D92256406B10059E549 /* Configuration.swift */,
+				1D916DA325640C810059E549 /* Development.xcconfig */,
+				1D916DA425640C810059E549 /* Production.xcconfig */,
+				1D916DA525640C810059E549 /* Staging.xcconfig */,
+			);
+			path = Configuration;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -406,7 +423,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D916DA625640C810059E549 /* Development.xcconfig in Resources */,
+				1D916DA725640C810059E549 /* Production.xcconfig in Resources */,
 				1D34340725624B4C00886245 /* LaunchScreen.storyboard in Resources */,
+				1D916DA825640C810059E549 /* Staging.xcconfig in Resources */,
 				1D34340425624B4C00886245 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
