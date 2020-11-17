@@ -30,6 +30,8 @@
 		1D916D83256403F80059E549 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D916D82256403F70059E549 /* Post.swift */; };
 		1D916D88256404190059E549 /* AuthenticationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D916D87256404190059E549 /* AuthenticationState.swift */; };
 		1D916D8D256404ED0059E549 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D916D8C256404ED0059E549 /* Profile.swift */; };
+		1D916D93256406B10059E549 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D916D92256406B10059E549 /* Configuration.swift */; };
+		1D916D98256408CC0059E549 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D916D97256408CC0059E549 /* Logger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +76,8 @@
 		1D916D82256403F70059E549 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		1D916D87256404190059E549 /* AuthenticationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationState.swift; sourceTree = "<group>"; };
 		1D916D8C256404ED0059E549 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		1D916D92256406B10059E549 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		1D916D97256408CC0059E549 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +181,7 @@
 			children = (
 				1D916D582562C2920059E549 /* Schedulers.swift */,
 				1D916D6E2563F5240059E549 /* KeyboardEventsAdapter.swift */,
+				1D916D97256408CC0059E549 /* Logger.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -222,6 +227,7 @@
 		1D916D4A2562A80B0059E549 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				1D916D92256406B10059E549 /* Configuration.swift */,
 				1D3433FA25624B4400886245 /* AppDelegate.swift */,
 				1D3433FC25624B4400886245 /* SceneDelegate.swift */,
 			);
@@ -428,6 +434,8 @@
 				1D916D8D256404ED0059E549 /* Profile.swift in Sources */,
 				1D916D83256403F80059E549 /* Post.swift in Sources */,
 				1D916D392562A4D90059E549 /* StateController.swift in Sources */,
+				1D916D93256406B10059E549 /* Configuration.swift in Sources */,
+				1D916D98256408CC0059E549 /* Logger.swift in Sources */,
 				1D3433FB25624B4400886245 /* AppDelegate.swift in Sources */,
 				1D916D442562A7180059E549 /* UseCases.swift in Sources */,
 				1D916D0A25629C080059E549 /* ViewModel.swift in Sources */,
