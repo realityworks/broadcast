@@ -27,6 +27,9 @@
 		1D916D5F2562C3870059E549 /* BoomdayError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D916D5E2562C3870059E549 /* BoomdayError.swift */; };
 		1D916D672562C7500059E549 /* Domain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D916D662562C7500059E549 /* Domain.swift */; };
 		1D916D6F2563F5250059E549 /* KeyboardEventsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D916D6E2563F5240059E549 /* KeyboardEventsAdapter.swift */; };
+		1D916D83256403F80059E549 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D916D82256403F70059E549 /* Post.swift */; };
+		1D916D88256404190059E549 /* AuthenticationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D916D87256404190059E549 /* AuthenticationState.swift */; };
+		1D916D8D256404ED0059E549 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D916D8C256404ED0059E549 /* Profile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +71,9 @@
 		1D916D5E2562C3870059E549 /* BoomdayError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoomdayError.swift; sourceTree = "<group>"; };
 		1D916D662562C7500059E549 /* Domain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Domain.swift; sourceTree = "<group>"; };
 		1D916D6E2563F5240059E549 /* KeyboardEventsAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardEventsAdapter.swift; sourceTree = "<group>"; };
+		1D916D82256403F70059E549 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		1D916D87256404190059E549 /* AuthenticationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationState.swift; sourceTree = "<group>"; };
+		1D916D8C256404ED0059E549 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +212,9 @@
 			isa = PBXGroup;
 			children = (
 				1D916D5E2562C3870059E549 /* BoomdayError.swift */,
+				1D916D82256403F70059E549 /* Post.swift */,
+				1D916D87256404190059E549 /* AuthenticationState.swift */,
+				1D916D8C256404ED0059E549 /* Profile.swift */,
 			);
 			path = State;
 			sourceTree = "<group>";
@@ -416,11 +425,14 @@
 				1D916D6F2563F5250059E549 /* KeyboardEventsAdapter.swift in Sources */,
 				1D916D5F2562C3870059E549 /* BoomdayError.swift in Sources */,
 				1D916D672562C7500059E549 /* Domain.swift in Sources */,
+				1D916D8D256404ED0059E549 /* Profile.swift in Sources */,
+				1D916D83256403F80059E549 /* Post.swift in Sources */,
 				1D916D392562A4D90059E549 /* StateController.swift in Sources */,
 				1D3433FB25624B4400886245 /* AppDelegate.swift in Sources */,
 				1D916D442562A7180059E549 /* UseCases.swift in Sources */,
 				1D916D0A25629C080059E549 /* ViewModel.swift in Sources */,
 				1D916D1225629C1E0059E549 /* ViewController.swift in Sources */,
+				1D916D88256404190059E549 /* AuthenticationState.swift in Sources */,
 				1D916D592562C2920059E549 /* Schedulers.swift in Sources */,
 				1D3433FD25624B4400886245 /* SceneDelegate.swift in Sources */,
 				1D916D342562A4CF0059E549 /* State.swift in Sources */,

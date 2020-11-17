@@ -10,5 +10,7 @@ import Foundation
 /// Base class used to describe the local state of all data on the application.
 /// The state can be updated and propagated throughout.
 struct State : Equatable {
-    
+    var authenticationState: AuthenticationState = .loggedOut
+    var posts: [Post] = []
+    var profile: Profile?
 }
