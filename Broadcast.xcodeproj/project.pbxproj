@@ -21,6 +21,9 @@
 		1D3B2A172564D258001874FD /* StandardAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3B2A162564D258001874FD /* StandardAuthenticationService.swift */; };
 		1D3B2A1C2564D411001874FD /* CredentialsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3B2A1B2564D411001874FD /* CredentialsService.swift */; };
 		1D3B2A212564D76C001874FD /* StandardCredentialsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3B2A202564D76C001874FD /* StandardCredentialsService.swift */; };
+		1D3B2A262564E6F1001874FD /* UploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3B2A252564E6F1001874FD /* UploadService.swift */; };
+		1D3B2A2C2564E7A5001874FD /* LocalUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3B2A2B2564E7A5001874FD /* LocalUploadService.swift */; };
+		1D3B2A342564E7AF001874FD /* StandardUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3B2A332564E7AF001874FD /* StandardUploadService.swift */; };
 		1D916D0A25629C080059E549 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D916D0925629C080059E549 /* ViewModel.swift */; };
 		1D916D1225629C1E0059E549 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D916D1125629C1E0059E549 /* ViewController.swift */; };
 		1D916D1825629EBF0059E549 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1D916D1725629EBF0059E549 /* RxSwift */; };
@@ -84,6 +87,9 @@
 		1D3B2A162564D258001874FD /* StandardAuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardAuthenticationService.swift; sourceTree = "<group>"; };
 		1D3B2A1B2564D411001874FD /* CredentialsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialsService.swift; sourceTree = "<group>"; };
 		1D3B2A202564D76C001874FD /* StandardCredentialsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardCredentialsService.swift; sourceTree = "<group>"; };
+		1D3B2A252564E6F1001874FD /* UploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadService.swift; sourceTree = "<group>"; };
+		1D3B2A2B2564E7A5001874FD /* LocalUploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUploadService.swift; sourceTree = "<group>"; };
+		1D3B2A332564E7AF001874FD /* StandardUploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardUploadService.swift; sourceTree = "<group>"; };
 		1D916D0925629C080059E549 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		1D916D1125629C1E0059E549 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1D916D332562A4CF0059E549 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
@@ -213,6 +219,9 @@
 		1D3B2A072564CFB1001874FD /* Uploader */ = {
 			isa = PBXGroup;
 			children = (
+				1D3B2A252564E6F1001874FD /* UploadService.swift */,
+				1D3B2A2B2564E7A5001874FD /* LocalUploadService.swift */,
+				1D3B2A332564E7AF001874FD /* StandardUploadService.swift */,
 			);
 			path = Uploader;
 			sourceTree = "<group>";
@@ -267,12 +276,12 @@
 		1D916D0825629BCA0059E549 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				1D3B2A112564D1F0001874FD /* Services.swift */,
 				1D3B2A052564CF92001874FD /* API */,
 				1D3B2A042564CF86001874FD /* Authentication */,
 				1D3B2A082564CFD2001874FD /* Credentials */,
 				1D3B2A062564CF99001874FD /* Persistence */,
 				1D3B2A072564CFB1001874FD /* Uploader */,
-				1D3B2A112564D1F0001874FD /* Services.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -518,12 +527,14 @@
 			files = (
 				1D916D6F2563F5250059E549 /* KeyboardEventsAdapter.swift in Sources */,
 				1D916D5F2562C3870059E549 /* BoomdayError.swift in Sources */,
+				1D3B2A2C2564E7A5001874FD /* LocalUploadService.swift in Sources */,
 				1D3B2A0D2564D0EA001874FD /* LocalAuthenticationService.swift in Sources */,
 				1D916D672562C7500059E549 /* Domain.swift in Sources */,
 				1D916D8D256404ED0059E549 /* Profile.swift in Sources */,
 				1D916D83256403F80059E549 /* Post.swift in Sources */,
 				1D916D392562A4D90059E549 /* StateController.swift in Sources */,
 				1D916D93256406B10059E549 /* Configuration.swift in Sources */,
+				1D3B2A262564E6F1001874FD /* UploadService.swift in Sources */,
 				1D3B2A172564D258001874FD /* StandardAuthenticationService.swift in Sources */,
 				1D3B29F625641BAF001874FD /* MainViewController.swift in Sources */,
 				1D916D98256408CC0059E549 /* Logger.swift in Sources */,
@@ -536,6 +547,7 @@
 				1D916D592562C2920059E549 /* Schedulers.swift in Sources */,
 				1D3B2A002564CF7F001874FD /* AuthenticationService.swift in Sources */,
 				1D3B2A1C2564D411001874FD /* CredentialsService.swift in Sources */,
+				1D3B2A342564E7AF001874FD /* StandardUploadService.swift in Sources */,
 				1D3433FD25624B4400886245 /* SceneDelegate.swift in Sources */,
 				1D916D342562A4CF0059E549 /* State.swift in Sources */,
 				1D3B2A212564D76C001874FD /* StandardCredentialsService.swift in Sources */,

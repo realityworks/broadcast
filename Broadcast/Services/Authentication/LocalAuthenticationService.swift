@@ -9,7 +9,7 @@ import Foundation
 
 /// The service performs only local authentication and login/logout
 class LocalAuthenticationService : AuthenticationService {
-    var stateController: StateController
+    private (set) var stateController: StateController
     
     init(stateController: StateController) {
         self.stateController = stateController
