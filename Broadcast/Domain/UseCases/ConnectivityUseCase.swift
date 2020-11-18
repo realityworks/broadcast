@@ -7,6 +7,14 @@
 
 import Foundation
 
-class ConnectivityUseCase : StateControllerInjector {
+class ConnectivityUseCase {
+    typealias T = ConnectivityUseCase
+    var stateController: StateController!
     
+    init() {
+        
+    }
+}
+
+extension ConnectivityUseCase : StateControllerInjector {
 }

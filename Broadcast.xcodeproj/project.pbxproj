@@ -12,6 +12,7 @@
 		1D2A03EF256561BB008CE2D4 /* PostContentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2A03EE256561BB008CE2D4 /* PostContentUseCase.swift */; };
 		1D2A03F4256561D5008CE2D4 /* AppLifeCycleUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2A03F3256561D5008CE2D4 /* AppLifeCycleUseCase.swift */; };
 		1D2A03F9256562A1008CE2D4 /* ConnectivityUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2A03F8256562A1008CE2D4 /* ConnectivityUseCase.swift */; };
+		1D2A03FE25656C03008CE2D4 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2A03FD25656C03008CE2D4 /* AppState.swift */; };
 		1D3433FB25624B4400886245 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3433FA25624B4400886245 /* AppDelegate.swift */; };
 		1D3433FD25624B4400886245 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3433FC25624B4400886245 /* SceneDelegate.swift */; };
 		1D34340425624B4C00886245 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D34340325624B4C00886245 /* Assets.xcassets */; };
@@ -81,6 +82,7 @@
 		1D2A03EE256561BB008CE2D4 /* PostContentUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostContentUseCase.swift; sourceTree = "<group>"; };
 		1D2A03F3256561D5008CE2D4 /* AppLifeCycleUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLifeCycleUseCase.swift; sourceTree = "<group>"; };
 		1D2A03F8256562A1008CE2D4 /* ConnectivityUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityUseCase.swift; sourceTree = "<group>"; };
+		1D2A03FD25656C03008CE2D4 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		1D3433F725624B4400886245 /* Broadcast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Broadcast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D3433FA25624B4400886245 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1D3433FC25624B4400886245 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -327,6 +329,7 @@
 				1D916D82256403F70059E549 /* Post.swift */,
 				1D916D87256404190059E549 /* AuthenticationState.swift */,
 				1D916D8C256404ED0059E549 /* Profile.swift */,
+				1D2A03FD25656C03008CE2D4 /* AppState.swift */,
 			);
 			path = State;
 			sourceTree = "<group>";
@@ -582,6 +585,7 @@
 				1D3B2A1C2564D411001874FD /* CredentialsService.swift in Sources */,
 				1D3B2A342564E7AF001874FD /* StandardUploadService.swift in Sources */,
 				1D3433FD25624B4400886245 /* SceneDelegate.swift in Sources */,
+				1D2A03FE25656C03008CE2D4 /* AppState.swift in Sources */,
 				1D2A03EA25655FFC008CE2D4 /* ProfileUseCase.swift in Sources */,
 				1D2A03EF256561BB008CE2D4 /* PostContentUseCase.swift in Sources */,
 				1D916D342562A4CF0059E549 /* State.swift in Sources */,

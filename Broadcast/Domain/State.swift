@@ -11,6 +11,7 @@ import Foundation
 /// The state can be updated and propagated throughout.
 struct State : Equatable {
     var authenticationState: AuthenticationState = .loggedOut
+    var appState: AppState = .inactive
     var posts: [Post] = []
     var profile: Profile?
 }

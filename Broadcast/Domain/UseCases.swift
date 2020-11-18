@@ -23,8 +23,15 @@ class UseCases {
     let connectivityUseCase: ConnectivityUseCase
     
     init(authenticationUseCase: AuthenticationUseCase,
-         profileUseCase: ProfileUseCase) {
-        
+         profileUseCase: ProfileUseCase,
+         postContentUseCase: PostContentUseCase,
+         appLifeCycleUseCase: AppLifeCycleUseCase,
+         connectivityUseCase: ConnectivityUseCase) {
+        self.authenticationUseCase = authenticationUseCase
+        self.profileUseCase = profileUseCase
+        self.appLifeCycleUseCase = appLifeCycleUseCase
+        self.postContentUseCase = postContentUseCase
+        self.connectivityUseCase = connectivityUseCase
     }
 }
 
@@ -34,6 +41,7 @@ extension UseCases : StateControllerInjector {
         
         // Inject the StateController into the usecases
         authenticationUseCase.with(stateController: stateController)
+        profileUseCase.with(stateController: stateController)
         
         return self
     }
@@ -44,6 +52,9 @@ extension UseCases : StateControllerInjector {
 extension UseCases {
     static let standard: UseCases = {
         return UseCases(authenticationUseCase: AuthenticationUseCase.standard,
-                        profileUseCase: ProfileUseCase.standard)
+                        profileUseCase: ProfileUseCase.standard,
+                        postContentUseCase: PostContentUseCase.standard,
+                        appLifeCycleUseCase: AppLifeCycleUseCase.standard,
+                        connectivityUseCase: ConnectivityUseCase.standard)
     }()
 }
