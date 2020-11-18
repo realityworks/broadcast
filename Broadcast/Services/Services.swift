@@ -36,6 +36,6 @@ extension Services {
         return Services(
             authenticationService: LocalAuthenticationService(stateController: StateController.standard),
             credentialsService: StandardCredentialsService(),
-            uploadService: LocalUploadService(stateController: StateController.standard)
+            uploadService: LocalUploadService(stateController: StateController.standard))
     }()
 }
