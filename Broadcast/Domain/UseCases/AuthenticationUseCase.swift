@@ -14,7 +14,7 @@ class AuthenticationUseCase {
     
     var stateController: StateController!
     
-    let authenticationService: AuthenticationService
+    private let authenticationService: AuthenticationService
     
     init(authenticationService: AuthenticationService) {
         self.authenticationService = authenticationService

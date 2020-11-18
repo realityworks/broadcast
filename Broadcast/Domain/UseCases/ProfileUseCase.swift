@@ -12,7 +12,7 @@ class ProfileUseCase {
     
     var stateController: StateController!
     
-    let apiService: APIService
+    private let apiService: APIService
     
     init(apiService: APIService) {
         self.apiService = apiService

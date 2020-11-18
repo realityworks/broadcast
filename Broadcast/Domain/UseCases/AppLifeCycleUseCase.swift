@@ -72,10 +72,16 @@ extension AppLifeCycleUseCase : StateControllerInjector {
     }
 }
 
+// MARK: - Instance Method
+extension AppLifeCycleUseCase {
+    static let standard: AppLifeCycleUseCase = {
+        return AppLifeCycleUseCase()
+    }()
+}
+
 // MARK: - Notifications Dependencies
 
 extension AppLifeCycleUseCase {
-
     struct Dependencies {
         let didFinishLaunching: Observable<Void>
         let willEnterForeground: Observable<Void>

@@ -13,7 +13,8 @@ class ConnectivityUseCase {
     
     var stateController: StateController!
     
-    let monitor: NWPathMonitor
+    private let monitor: NWPathMonitor
+    private let backgroudQueue = DispatchQueue.global(qos: .background)
     
     init(monitor: NWPathMonitor) {
         self.monitor = monitor

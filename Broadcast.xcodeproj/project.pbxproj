@@ -14,6 +14,7 @@
 		1D2A03F9256562A1008CE2D4 /* ConnectivityUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2A03F8256562A1008CE2D4 /* ConnectivityUseCase.swift */; };
 		1D2A03FE25656C03008CE2D4 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2A03FD25656C03008CE2D4 /* AppState.swift */; };
 		1D2A04092565761B008CE2D4 /* ConnectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2A04082565761B008CE2D4 /* ConnectionState.swift */; };
+		1D2A0420256582A0008CE2D4 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2A041F256582A0008CE2D4 /* Router.swift */; };
 		1D3433FB25624B4400886245 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3433FA25624B4400886245 /* AppDelegate.swift */; };
 		1D3433FD25624B4400886245 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3433FC25624B4400886245 /* SceneDelegate.swift */; };
 		1D34340425624B4C00886245 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D34340325624B4C00886245 /* Assets.xcassets */; };
@@ -85,6 +86,7 @@
 		1D2A03F8256562A1008CE2D4 /* ConnectivityUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityUseCase.swift; sourceTree = "<group>"; };
 		1D2A03FD25656C03008CE2D4 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		1D2A04082565761B008CE2D4 /* ConnectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionState.swift; sourceTree = "<group>"; };
+		1D2A041F256582A0008CE2D4 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		1D3433F725624B4400886245 /* Broadcast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Broadcast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D3433FA25624B4400886245 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1D3433FC25624B4400886245 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -366,6 +368,7 @@
 		1D916D7D2563FF660059E549 /* Router */ = {
 			isa = PBXGroup;
 			children = (
+				1D2A041F256582A0008CE2D4 /* Router.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -583,6 +586,7 @@
 				1D916D0A25629C080059E549 /* ViewModel.swift in Sources */,
 				1D916D1225629C1E0059E549 /* ViewController.swift in Sources */,
 				1D916D88256404190059E549 /* AuthenticationState.swift in Sources */,
+				1D2A0420256582A0008CE2D4 /* Router.swift in Sources */,
 				1D916D592562C2920059E549 /* Schedulers.swift in Sources */,
 				1D3B2A002564CF7F001874FD /* AuthenticationService.swift in Sources */,
 				1D3B2A1C2564D411001874FD /* CredentialsService.swift in Sources */,
