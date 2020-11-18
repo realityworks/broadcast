@@ -1,23 +1,22 @@
 //
-//  MainViewModel.swift
+//  LoginViewModel.swift
 //  Broadcast
 //
-//  Created by Piotr Suwara on 17/11/20.
+//  Created by Piotr Suwara on 18/11/20.
 //
 
 import Foundation
 
-class MainViewModel : ViewModel {
+
+class LoginViewModel : ViewModel {
     
     init(dependencies: Dependencies = .standard) {
         super.init(stateController: dependencies.stateController)
-        
     }
-    
 }
 
-/// MainViewModel dependencies component
-extension MainViewModel {
+/// LoginViewModel dependencies component
+extension LoginViewModel {
     struct Dependencies {
         
         let stateController: StateController
