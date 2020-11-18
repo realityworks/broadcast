@@ -9,7 +9,21 @@ import Foundation
 
 /// Collection of the usecases available to the application. Each use case manages a specific
 /// set of commands that are service independant
+/// Usecases are the bridge between `Services` and `State`. This bridge is managed
+/// by the `StateController`
 class UseCases {
+    
+    let authenticationUseCase: AuthenticationUseCase
+    let profileUseCase: ProfileUseCase
+    let postContentUseCase: PostContentUseCase
+    let appLifeCycleUseCase: AppLifeCycleUseCase
+    let connectivityUseCase: ConnectivityUseCase
+    
+    init(authenticationUseCase: AuthenticationUseCase,
+         profileUseCase: ProfileUseCase) {
+        
+    }
+    
     func with(stateController: StateController) -> UseCases {
         //self.stateController = stateController
         
@@ -23,6 +37,7 @@ class UseCases {
 
 extension UseCases {
     static let standard: UseCases = {
-       return UseCases()
+        return UseCases(authenticationUseCase: AuthenticationUseCase.standard,
+                        profileUseCase: ProfileUseCase.standard)
     }()
 }

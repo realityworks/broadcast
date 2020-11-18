@@ -9,6 +9,11 @@ import Foundation
 import RxCocoa
 import RxSwift
 
+protocol StateControllerInjector {
+    var stateController: StateController! { get set }
+    func with(stateController: StateController)
+}
+
 class StateController {
     private let schedulers: Schedulers
     private let stateSubject: BehaviorRelay<State>
