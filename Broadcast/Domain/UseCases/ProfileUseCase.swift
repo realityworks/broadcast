@@ -7,15 +7,31 @@
 
 import Foundation
 
-class ProfileUseCase : StateControllerInjector {
-    let profileService: ProfileService
+class ProfileUseCase {
+    typealias T = ProfileUseCase
+    
+    let apiService: APIService
     var stateController: StateController!
     
-    init(authenticationService: AuthenticationService) {
-        self.authenticationService = authenticationService
+    init(apiService: APIService) {
+        self.apiService = apiService
     }
-    
-    func with(stateController: StateController) {
+}
+
+// MARK: - StateControllerInjector
+
+extension ProfileUseCase : StateControllerInjector {
+    @discardableResult
+    func with(stateController: StateController) -> ProfileUseCase {
         self.stateController = stateController
+        return self
     }
+}
+
+// MARK: - Instances
+
+extension ProfileUseCase {
+    static let standard = {
+        return ProfileUseCase(apiService: Services.local.apiService)
+    }()
 }

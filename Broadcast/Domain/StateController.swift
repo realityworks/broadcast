@@ -10,8 +10,11 @@ import RxCocoa
 import RxSwift
 
 protocol StateControllerInjector {
+    associatedtype T
     var stateController: StateController! { get set }
-    func with(stateController: StateController)
+    
+    @discardableResult
+    func with(stateController: StateController) -> T
 }
 
 class StateController {

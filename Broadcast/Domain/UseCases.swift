@@ -12,6 +12,9 @@ import Foundation
 /// Usecases are the bridge between `Services` and `State`. This bridge is managed
 /// by the `StateController`
 class UseCases {
+    typealias T = UseCases
+    
+    var stateController: StateController!
     
     let authenticationUseCase: AuthenticationUseCase
     let profileUseCase: ProfileUseCase
@@ -23,11 +26,14 @@ class UseCases {
          profileUseCase: ProfileUseCase) {
         
     }
-    
+}
+
+extension UseCases : StateControllerInjector {
     func with(stateController: StateController) -> UseCases {
-        //self.stateController = stateController
+        self.stateController = stateController
         
         // Inject the StateController into the usecases
+        authenticationUseCase.with(stateController: stateController)
         
         return self
     }

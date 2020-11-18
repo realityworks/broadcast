@@ -7,7 +7,8 @@
 
 import Foundation
 
-class AuthenticationUseCase : StateControllerInjector {
+class AuthenticationUseCase {
+    typealias T = AuthenticationUseCase
     
     let authenticationService: AuthenticationService
     var stateController: StateController!
@@ -15,12 +16,19 @@ class AuthenticationUseCase : StateControllerInjector {
     init(authenticationService: AuthenticationService) {
         self.authenticationService = authenticationService
     }
+}
     
-    func with(stateController: StateController) {
+// MARK: - StateControllerInjector
+
+extension AuthenticationUseCase : StateControllerInjector {
+    @discardableResult
+    func with(stateController: StateController) -> AuthenticationUseCase {
         self.stateController = stateController
+        return self
     }
 }
 
+// MARK: - Instances
 
 extension AuthenticationUseCase {
     static let standard = {
