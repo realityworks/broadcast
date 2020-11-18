@@ -25,6 +25,9 @@
 		1D3B2A2C2564E7A5001874FD /* LocalUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3B2A2B2564E7A5001874FD /* LocalUploadService.swift */; };
 		1D3B2A342564E7AF001874FD /* StandardUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3B2A332564E7AF001874FD /* StandardUploadService.swift */; };
 		1D3B2A392564F0D5001874FD /* PersistanceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3B2A382564F0D4001874FD /* PersistanceService.swift */; };
+		1D3B2A3E2564F21E001874FD /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3B2A3D2564F21E001874FD /* APIService.swift */; };
+		1D3B2A432564F22F001874FD /* LocalAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3B2A422564F22F001874FD /* LocalAPIService.swift */; };
+		1D3B2A482564F238001874FD /* StandardAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3B2A472564F238001874FD /* StandardAPIService.swift */; };
 		1D916D0A25629C080059E549 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D916D0925629C080059E549 /* ViewModel.swift */; };
 		1D916D1225629C1E0059E549 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D916D1125629C1E0059E549 /* ViewController.swift */; };
 		1D916D1825629EBF0059E549 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1D916D1725629EBF0059E549 /* RxSwift */; };
@@ -92,6 +95,9 @@
 		1D3B2A2B2564E7A5001874FD /* LocalUploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUploadService.swift; sourceTree = "<group>"; };
 		1D3B2A332564E7AF001874FD /* StandardUploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardUploadService.swift; sourceTree = "<group>"; };
 		1D3B2A382564F0D4001874FD /* PersistanceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceService.swift; sourceTree = "<group>"; };
+		1D3B2A3D2564F21E001874FD /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		1D3B2A422564F22F001874FD /* LocalAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAPIService.swift; sourceTree = "<group>"; };
+		1D3B2A472564F238001874FD /* StandardAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardAPIService.swift; sourceTree = "<group>"; };
 		1D916D0925629C080059E549 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		1D916D1125629C1E0059E549 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1D916D332562A4CF0059E549 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
@@ -207,6 +213,9 @@
 		1D3B2A052564CF92001874FD /* API */ = {
 			isa = PBXGroup;
 			children = (
+				1D3B2A3D2564F21E001874FD /* APIService.swift */,
+				1D3B2A422564F22F001874FD /* LocalAPIService.swift */,
+				1D3B2A472564F238001874FD /* StandardAPIService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -530,9 +539,11 @@
 			files = (
 				1D916D6F2563F5250059E549 /* KeyboardEventsAdapter.swift in Sources */,
 				1D916D5F2562C3870059E549 /* BoomdayError.swift in Sources */,
+				1D3B2A3E2564F21E001874FD /* APIService.swift in Sources */,
 				1D3B2A2C2564E7A5001874FD /* LocalUploadService.swift in Sources */,
 				1D3B2A0D2564D0EA001874FD /* LocalAuthenticationService.swift in Sources */,
 				1D916D672562C7500059E549 /* Domain.swift in Sources */,
+				1D3B2A432564F22F001874FD /* LocalAPIService.swift in Sources */,
 				1D3B2A392564F0D5001874FD /* PersistanceService.swift in Sources */,
 				1D916D8D256404ED0059E549 /* Profile.swift in Sources */,
 				1D916D83256403F80059E549 /* Post.swift in Sources */,
@@ -544,6 +555,7 @@
 				1D916D98256408CC0059E549 /* Logger.swift in Sources */,
 				1D3B2A122564D1F0001874FD /* Services.swift in Sources */,
 				1D3433FB25624B4400886245 /* AppDelegate.swift in Sources */,
+				1D3B2A482564F238001874FD /* StandardAPIService.swift in Sources */,
 				1D916D442562A7180059E549 /* UseCases.swift in Sources */,
 				1D916D0A25629C080059E549 /* ViewModel.swift in Sources */,
 				1D916D1225629C1E0059E549 /* ViewController.swift in Sources */,

@@ -12,13 +12,17 @@ class Services {
     private (set) var authenticationService: AuthenticationService
     private (set) var credentialsService: CredentialsService
     private (set) var uploadService: UploadService
+    private (set) var apiService: APIService
     
     init(authenticationService: AuthenticationService,
          credentialsService: CredentialsService,
-         uploadService: UploadService) {
+         uploadService: UploadService,
+         apiService: APIService) {
+        
         self.authenticationService = authenticationService
         self.credentialsService = credentialsService
         self.uploadService = uploadService
+        self.apiService = apiService
     }
 }
 
@@ -29,13 +33,15 @@ extension Services {
         return Services(
             authenticationService: StandardAuthenticationService(stateController: StateController.standard),
             credentialsService: StandardCredentialsService(),
-            uploadService: StandardUploadService(stateController: StateController.standard))
+            uploadService: StandardUploadService(stateController: StateController.standard),
+            apiService: StandardAPIService())
     }()
     
     static let local = {
         return Services(
             authenticationService: LocalAuthenticationService(stateController: StateController.standard),
             credentialsService: StandardCredentialsService(),
-            uploadService: LocalUploadService(stateController: StateController.standard))
+            uploadService: LocalUploadService(stateController: StateController.standard),
+            apiService: LocalAPIService())
     }()
 }
