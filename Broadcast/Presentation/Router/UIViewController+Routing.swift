@@ -5,8 +5,12 @@
 //  Created by Piotr Suwara on 18/11/20.
 //
 
-import Foundation
+import UIKit
 
 extension UIViewController {
-    func presentRoute(
+    func present(with route: Route) {
+        self.present(route.viewControllerInstance(), animated: false) {
+            // TODO
+        } //
+    }
 }

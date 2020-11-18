@@ -28,3 +28,9 @@ extension ConnectivityUseCase : StateControllerInjector {
         return self
     }
 }
+
+extension ConnectivityUseCase {
+    static let standard: ConnectivityUseCase = {
+        return ConnectivityUseCase(monitor: NWPathMonitor())
+    }()
+}

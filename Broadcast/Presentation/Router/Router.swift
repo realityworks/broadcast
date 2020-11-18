@@ -11,7 +11,7 @@ class Router {
     private let stateController: StateController
     
     init(dependencies: Dependencies = .standard) {
-        self.stateController = stateController
+        self.stateController = dependencies.stateController
     }
 }
 

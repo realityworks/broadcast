@@ -12,7 +12,6 @@ indirect enum Route {
     case mainScreen(child: Route)
 }
 
-
 extension Route {
     func viewControllerInstance() -> UIViewController {
         switch self {
