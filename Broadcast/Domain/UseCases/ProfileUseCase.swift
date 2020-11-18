@@ -10,8 +10,9 @@ import Foundation
 class ProfileUseCase {
     typealias T = ProfileUseCase
     
-    let apiService: APIService
     var stateController: StateController!
+    
+    let apiService: APIService
     
     init(apiService: APIService) {
         self.apiService = apiService

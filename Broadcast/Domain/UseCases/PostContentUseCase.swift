@@ -10,8 +10,9 @@ import Foundation
 class PostContentUseCase {
     typealias T = PostContentUseCase
     
-    let apiService: APIService
     var stateController: StateController!
+    
+    let apiService: APIService
     
     init(apiService: APIService) {
         self.apiService = apiService
@@ -21,6 +22,7 @@ class PostContentUseCase {
 // MARK: - StateControllerInjector
 
 extension PostContentUseCase : StateControllerInjector {
+    @discardableResult
     func with(stateController: StateController) -> PostContentUseCase {
         self.stateController = stateController
         return self

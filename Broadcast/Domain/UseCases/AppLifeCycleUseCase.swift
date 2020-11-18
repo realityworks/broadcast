@@ -65,6 +65,7 @@ class AppLifeCycleUseCase {
 // MARK: - StateControllerInjector
 
 extension AppLifeCycleUseCase : StateControllerInjector {
+    @discardableResult
     func with(stateController: StateController) -> AppLifeCycleUseCase {
         self.stateController = stateController
         return self

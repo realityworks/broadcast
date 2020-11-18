@@ -7,11 +7,14 @@
 
 import Foundation
 
+/// This use case provides the functionality to authenticate and handles
+/// all functions related to authentication
 class AuthenticationUseCase {
     typealias T = AuthenticationUseCase
     
-    let authenticationService: AuthenticationService
     var stateController: StateController!
+    
+    let authenticationService: AuthenticationService
     
     init(authenticationService: AuthenticationService) {
         self.authenticationService = authenticationService

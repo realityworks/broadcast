@@ -17,14 +17,6 @@ protocol StateControllerInjector {
     func with(stateController: StateController) -> T
 }
 
-extension StateControllerInjector where Self: AnyObject {
-    @discardableResult
-    mutating func with(stateController: StateController) -> Self {
-        self.stateController = stateController
-        return self
-    }
-}
-
 class StateController {
     private let schedulers: Schedulers
     private let stateSubject: BehaviorRelay<State>

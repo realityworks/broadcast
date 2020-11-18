@@ -6,15 +6,24 @@
 //
 
 import Foundation
+import Network
 
 class ConnectivityUseCase {
     typealias T = ConnectivityUseCase
+    
     var stateController: StateController!
     
-    init() {
-        
+    let monitor: NWPathMonitor
+    
+    init(monitor: NWPathMonitor) {
+        self.monitor = monitor
     }
 }
 
 extension ConnectivityUseCase : StateControllerInjector {
+    @discardableResult
+    func with(stateController: StateController) -> ConnectivityUseCase {
+        self.stateController = stateController
+        return self
+    }
 }

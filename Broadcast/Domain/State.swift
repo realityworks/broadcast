@@ -12,6 +12,7 @@ import Foundation
 struct State : Equatable {
     var authenticationState: AuthenticationState = .loggedOut
     var appState: AppState = .inactive
+    var connectionState: ConnectionState = .connected
     var posts: [Post] = []
     var profile: Profile?
 }
