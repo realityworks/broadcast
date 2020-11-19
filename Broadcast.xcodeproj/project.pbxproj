@@ -43,6 +43,7 @@
 		1D3ED5F525663504004236BB /* UIButton+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3ED5F425663504004236BB /* UIButton+Styling.swift */; };
 		1D3ED5FA25663512004236BB /* UIFont+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3ED5F925663512004236BB /* UIFont+Styling.swift */; };
 		1D3ED5FF25663521004236BB /* UIColor+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3ED5FE25663521004236BB /* UIColor+Styling.swift */; };
+		1D3ED60425663AAD004236BB /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3ED60325663AAD004236BB /* UINavigationController.swift */; };
 		1D916D0A25629C080059E549 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D916D0925629C080059E549 /* ViewModel.swift */; };
 		1D916D1225629C1E0059E549 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D916D1125629C1E0059E549 /* ViewController.swift */; };
 		1D916D1825629EBF0059E549 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1D916D1725629EBF0059E549 /* RxSwift */; };
@@ -128,6 +129,7 @@
 		1D3ED5F425663504004236BB /* UIButton+Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Styling.swift"; sourceTree = "<group>"; };
 		1D3ED5F925663512004236BB /* UIFont+Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Styling.swift"; sourceTree = "<group>"; };
 		1D3ED5FE25663521004236BB /* UIColor+Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Styling.swift"; sourceTree = "<group>"; };
+		1D3ED60325663AAD004236BB /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		1D916D0925629C080059E549 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		1D916D1125629C1E0059E549 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1D916D332562A4CF0059E549 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
@@ -388,6 +390,7 @@
 				1D2A041F256582A0008CE2D4 /* Router.swift */,
 				1D2A042425658367008CE2D4 /* Route.swift */,
 				1D2A0429256583E8008CE2D4 /* UIViewController+Routing.swift */,
+				1D3ED60325663AAD004236BB /* UINavigationController.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -590,6 +593,7 @@
 				1D3B2A3E2564F21E001874FD /* APIService.swift in Sources */,
 				1D3B2A2C2564E7A5001874FD /* LocalUploadService.swift in Sources */,
 				1D3B2A0D2564D0EA001874FD /* LocalAuthenticationService.swift in Sources */,
+				1D3ED60425663AAD004236BB /* UINavigationController.swift in Sources */,
 				1D916D672562C7500059E549 /* Domain.swift in Sources */,
 				1D3B2A432564F22F001874FD /* LocalAPIService.swift in Sources */,
 				1D3B2A392564F0D5001874FD /* PersistanceService.swift in Sources */,
