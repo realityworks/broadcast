@@ -8,16 +8,19 @@
 import UIKit
 
 indirect enum Route {
+    case none
     case login
-    case mainScreen(child: Route)
+    case main(child: Route)
 }
 
 extension Route {
-    func viewControllerInstance() -> UIViewController {
+    func viewControllerInstance() -> UIViewController? {
         switch self {
+        case .none:
+            return nil
         case .login:
             return LoginViewController()
-        case .mainScreen(let child):
+        case .main(let child):
             return MainViewController()
         }
     }

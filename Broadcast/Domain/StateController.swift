@@ -33,9 +33,9 @@ class StateController {
     /// - Parameters:
     ///   - state: State object that will be used to describe the application local state
     ///   - schedulers: Collection of schedulers that will run the transports for state and error subjects
-    init(state: State, schedulers: Schedulers) {
-        self.state = state
-        self.schedulers = schedulers
+    init(dependencies: Dependencies = .standard) {
+        self.state = dependencies.state
+        self.schedulers = dependencies.schedulers
         
         stateSubject = BehaviorRelay<State>(value: state)
         errorSubject = PublishRelay<BoomdayError>()
@@ -71,6 +71,18 @@ extension StateController {
 
 extension StateController {
     static let standard: StateController = {
-        return StateController(state: State(), schedulers: Schedulers.standard)
+        return StateController()
     }()
+}
+
+// MARK: Dependencies
+
+extension StateController {
+    struct Dependencies {
+        let state: State
+        let schedulers: Schedulers
+        
+        static var standard = Dependencies(state: State(),
+                                           schedulers: Schedulers.standard)
+    }
 }

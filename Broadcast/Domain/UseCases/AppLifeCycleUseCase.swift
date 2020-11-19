@@ -79,7 +79,7 @@ extension AppLifeCycleUseCase {
     }()
 }
 
-// MARK: - Notifications Dependencies
+// MARK: - Dependencies
 
 extension AppLifeCycleUseCase {
     struct Dependencies {
