@@ -30,6 +30,7 @@ class Router {
     private let stateController: StateController
     private let errorObservable: Observable<BoomdayError>
     private let connectionStateObservable: Observable<ConnectionState>
+    private let authenticationStateObservable: Observable<AuthenticationState>
     
     private let selectedRouteSubject: BehaviorRelay<Route> = BehaviorRelay(value: .main(child: .none))
     private let disposeBag = DisposeBag()
@@ -39,6 +40,7 @@ class Router {
         self.selectedRouteObservable = selectedRouteSubject.asObservable()
         self.errorObservable = dependencies.errorObservable
         self.connectionStateObservable = dependencies.connectionStateObservable
+        self.authenticationStateObservable = dependencies.authenticationStateObservable
     }
     
     /// Configure the observables to catch the changes in
@@ -55,10 +57,12 @@ extension Router {
         let stateController: StateController
         let errorObservable: Observable<BoomdayError>
         let connectionStateObservable: Observable<ConnectionState>
+        let authenticationStateObservable: Observable<AuthenticationState>
         
         static var standard = Dependencies(
             stateController: Domain.standard.stateController,
             errorObservable: Domain.standard.stateController.errorObservable(),
-            connectionStateObservable: Domain.standard.stateController.stateObservable(of: \.connectionState))
+            connectionStateObservable: Domain.standard.stateController.stateObservable(of: \.connectionState),
+            authenticationStateObservable: Domain.standard.stateController.stateObservable(of: \.authenticationState))
     }
 }
