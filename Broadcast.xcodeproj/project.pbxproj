@@ -40,6 +40,9 @@
 		1D3B2A3E2564F21E001874FD /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3B2A3D2564F21E001874FD /* APIService.swift */; };
 		1D3B2A432564F22F001874FD /* LocalAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3B2A422564F22F001874FD /* LocalAPIService.swift */; };
 		1D3B2A482564F238001874FD /* StandardAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3B2A472564F238001874FD /* StandardAPIService.swift */; };
+		1D3ED5F525663504004236BB /* UIButton+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3ED5F425663504004236BB /* UIButton+Styling.swift */; };
+		1D3ED5FA25663512004236BB /* UIFont+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3ED5F925663512004236BB /* UIFont+Styling.swift */; };
+		1D3ED5FF25663521004236BB /* UIColor+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3ED5FE25663521004236BB /* UIColor+Styling.swift */; };
 		1D916D0A25629C080059E549 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D916D0925629C080059E549 /* ViewModel.swift */; };
 		1D916D1225629C1E0059E549 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D916D1125629C1E0059E549 /* ViewController.swift */; };
 		1D916D1825629EBF0059E549 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1D916D1725629EBF0059E549 /* RxSwift */; };
@@ -122,6 +125,9 @@
 		1D3B2A3D2564F21E001874FD /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		1D3B2A422564F22F001874FD /* LocalAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAPIService.swift; sourceTree = "<group>"; };
 		1D3B2A472564F238001874FD /* StandardAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardAPIService.swift; sourceTree = "<group>"; };
+		1D3ED5F425663504004236BB /* UIButton+Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Styling.swift"; sourceTree = "<group>"; };
+		1D3ED5F925663512004236BB /* UIFont+Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Styling.swift"; sourceTree = "<group>"; };
+		1D3ED5FE25663521004236BB /* UIColor+Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Styling.swift"; sourceTree = "<group>"; };
 		1D916D0925629C080059E549 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		1D916D1125629C1E0059E549 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1D916D332562A4CF0059E549 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
@@ -369,6 +375,9 @@
 		1D916D7C2563F95A0059E549 /* Styling */ = {
 			isa = PBXGroup;
 			children = (
+				1D3ED5F425663504004236BB /* UIButton+Styling.swift */,
+				1D3ED5F925663512004236BB /* UIFont+Styling.swift */,
+				1D3ED5FE25663521004236BB /* UIColor+Styling.swift */,
 			);
 			path = Styling;
 			sourceTree = "<group>";
@@ -573,6 +582,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D3ED5FF25663521004236BB /* UIColor+Styling.swift in Sources */,
 				1D2A042F2565847B008CE2D4 /* LoginViewController.swift in Sources */,
 				1D2A03F9256562A1008CE2D4 /* ConnectivityUseCase.swift in Sources */,
 				1D916D6F2563F5250059E549 /* KeyboardEventsAdapter.swift in Sources */,
@@ -602,6 +612,7 @@
 				1D916D1225629C1E0059E549 /* ViewController.swift in Sources */,
 				1D916D88256404190059E549 /* AuthenticationState.swift in Sources */,
 				1D2A0420256582A0008CE2D4 /* Router.swift in Sources */,
+				1D3ED5FA25663512004236BB /* UIFont+Styling.swift in Sources */,
 				1D916D592562C2920059E549 /* Schedulers.swift in Sources */,
 				1D2A042A256583E8008CE2D4 /* UIViewController+Routing.swift in Sources */,
 				1D3B2A002564CF7F001874FD /* AuthenticationService.swift in Sources */,
@@ -609,6 +620,7 @@
 				1D3B2A342564E7AF001874FD /* StandardUploadService.swift in Sources */,
 				1D2A04092565761B008CE2D4 /* ConnectionState.swift in Sources */,
 				1D3433FD25624B4400886245 /* SceneDelegate.swift in Sources */,
+				1D3ED5F525663504004236BB /* UIButton+Styling.swift in Sources */,
 				1D2A03FE25656C03008CE2D4 /* AppState.swift in Sources */,
 				1D2A03EA25655FFC008CE2D4 /* ProfileUseCase.swift in Sources */,
 				1D2A03EF256561BB008CE2D4 /* PostContentUseCase.swift in Sources */,
