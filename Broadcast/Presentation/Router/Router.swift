@@ -28,12 +28,23 @@ class Router {
 
     // MARK: Private properties
     private let stateController: StateController
+    private let errorObservable: Observable<BoomdayError>
+    private let connectionStateObservable: Observable<ConnectionState>
+    
     private let selectedRouteSubject: BehaviorRelay<Route> = BehaviorRelay(value: .main(child: .none))
     private let disposeBag = DisposeBag()
     
     init(dependencies: Dependencies = .standard) {
         self.stateController = dependencies.stateController
         self.selectedRouteObservable = selectedRouteSubject.asObservable()
+        self.errorObservable = dependencies.errorObservable
+        self.connectionStateObservable = dependencies.connectionStateObservable
+    }
+    
+    /// Configure the observables to catch the changes in
+    /// the app state that will alter the current state of view controllers
+    func setup() {
+        
     }
 }
 
@@ -42,7 +53,12 @@ class Router {
 extension Router {
     struct Dependencies {
         let stateController: StateController
-    
-        static var standard = Dependencies(stateController: Domain.standard.stateController)
+        let errorObservable: Observable<BoomdayError>
+        let connectionStateObservable: Observable<ConnectionState>
+        
+        static var standard = Dependencies(
+            stateController: Domain.standard.stateController,
+            errorObservable: Domain.standard.stateController.errorObservable(),
+            connectionStateObservable: Domain.standard.stateController.stateObservable(of: \.connectionState))
     }
 }
