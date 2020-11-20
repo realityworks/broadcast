@@ -44,6 +44,8 @@
 		1D3ED5FA25663512004236BB /* UIFont+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3ED5F925663512004236BB /* UIFont+Styling.swift */; };
 		1D3ED5FF25663521004236BB /* UIColor+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3ED5FE25663521004236BB /* UIColor+Styling.swift */; };
 		1D3ED60425663AAD004236BB /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3ED60325663AAD004236BB /* UINavigationController.swift */; };
+		1D87DF3F256834A6000652D6 /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF3E256834A6000652D6 /* AddPostViewController.swift */; };
+		1D87DF44256834C4000652D6 /* AddPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF43256834C4000652D6 /* AddPostViewModel.swift */; };
 		1D916D0A25629C080059E549 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D916D0925629C080059E549 /* ViewModel.swift */; };
 		1D916D1225629C1E0059E549 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D916D1125629C1E0059E549 /* ViewController.swift */; };
 		1D916D1825629EBF0059E549 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1D916D1725629EBF0059E549 /* RxSwift */; };
@@ -130,6 +132,8 @@
 		1D3ED5F925663512004236BB /* UIFont+Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Styling.swift"; sourceTree = "<group>"; };
 		1D3ED5FE25663521004236BB /* UIColor+Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Styling.swift"; sourceTree = "<group>"; };
 		1D3ED60325663AAD004236BB /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
+		1D87DF3E256834A6000652D6 /* AddPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
+		1D87DF43256834C4000652D6 /* AddPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostViewModel.swift; sourceTree = "<group>"; };
 		1D916D0925629C080059E549 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		1D916D1125629C1E0059E549 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1D916D332562A4CF0059E549 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
@@ -279,14 +283,46 @@
 			path = Credentials;
 			sourceTree = "<group>";
 		};
+		1D87DF3A2568313E000652D6 /* My Posts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "My Posts";
+			sourceTree = "<group>";
+		};
+		1D87DF3B25683330000652D6 /* Edit Profile */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Edit Profile";
+			sourceTree = "<group>";
+		};
+		1D87DF3C25683347000652D6 /* Post Detail */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Post Detail";
+			sourceTree = "<group>";
+		};
+		1D87DF3D25683479000652D6 /* New Post */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Post";
+			sourceTree = "<group>";
+		};
 		1D916D0425629A800059E549 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
 				1D916D0925629C080059E549 /* ViewModel.swift */,
 				1D916D1125629C1E0059E549 /* ViewController.swift */,
 				1D916D80256400C30059E549 /* Add Post */,
+				1D87DF3B25683330000652D6 /* Edit Profile */,
 				1D916D7E256400530059E549 /* Login */,
 				1D916D7F2564006C0059E549 /* Main */,
+				1D87DF3A2568313E000652D6 /* My Posts */,
+				1D87DF3D25683479000652D6 /* New Post */,
+				1D87DF3C25683347000652D6 /* Post Detail */,
 				1D916D81256400D50059E549 /* Profile */,
 				1D916D7D2563FF660059E549 /* Router */,
 				1D916D7C2563F95A0059E549 /* Styling */,
@@ -416,6 +452,8 @@
 		1D916D80256400C30059E549 /* Add Post */ = {
 			isa = PBXGroup;
 			children = (
+				1D87DF3E256834A6000652D6 /* AddPostViewController.swift */,
+				1D87DF43256834C4000652D6 /* AddPostViewModel.swift */,
 			);
 			path = "Add Post";
 			sourceTree = "<group>";
@@ -589,6 +627,7 @@
 				1D2A042F2565847B008CE2D4 /* LoginViewController.swift in Sources */,
 				1D2A03F9256562A1008CE2D4 /* ConnectivityUseCase.swift in Sources */,
 				1D916D6F2563F5250059E549 /* KeyboardEventsAdapter.swift in Sources */,
+				1D87DF3F256834A6000652D6 /* AddPostViewController.swift in Sources */,
 				1D916D5F2562C3870059E549 /* BoomdayError.swift in Sources */,
 				1D3B2A3E2564F21E001874FD /* APIService.swift in Sources */,
 				1D3B2A2C2564E7A5001874FD /* LocalUploadService.swift in Sources */,
@@ -597,6 +636,7 @@
 				1D916D672562C7500059E549 /* Domain.swift in Sources */,
 				1D3B2A432564F22F001874FD /* LocalAPIService.swift in Sources */,
 				1D3B2A392564F0D5001874FD /* PersistanceService.swift in Sources */,
+				1D87DF44256834C4000652D6 /* AddPostViewModel.swift in Sources */,
 				1D916D8D256404ED0059E549 /* Profile.swift in Sources */,
 				1D916D83256403F80059E549 /* Post.swift in Sources */,
 				1D2A03F4256561D5008CE2D4 /* AppLifeCycleUseCase.swift in Sources */,
