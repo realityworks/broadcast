@@ -1,5 +1,5 @@
 //
-//  NewPostEditViewModel.swift
+//  PostDetailViewModel.swift
 //  Broadcast
 //
 //  Created by Piotr Suwara on 20/11/20.
@@ -8,7 +8,7 @@
 import Foundation
 
 /// NewPostViewModel dependencies component
-extension NewPostEditViewModel {
+extension PostDetailViewModel {
     struct Dependencies {
         
         let stateController: StateController
