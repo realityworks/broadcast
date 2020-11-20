@@ -1,5 +1,5 @@
 //
-//  MyPostsViewController.swift
+//  NewPostGuideViewController.swift
 //  Broadcast
 //
 //  Created by Piotr Suwara on 20/11/20.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-class MyPostsViewController: ViewController {
-    private let viewModel = MyPostsViewModel()
+class NewPostGuideViewController: ViewController {
+    private let viewModel = NewPostGuideViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()

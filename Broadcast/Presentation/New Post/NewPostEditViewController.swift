@@ -1,5 +1,5 @@
 //
-//  MyPostsViewController.swift
+//  NewPostEditViewController.swift
 //  Broadcast
 //
 //  Created by Piotr Suwara on 20/11/20.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-class MyPostsViewController: ViewController {
-    private let viewModel = MyPostsViewModel()
+class NewPostEditViewController: ViewController {
+    private let viewModel = NewPostEditViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
