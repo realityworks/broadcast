@@ -46,6 +46,8 @@
 		1D3ED60425663AAD004236BB /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3ED60325663AAD004236BB /* UINavigationController.swift */; };
 		1D87DF3F256834A6000652D6 /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF3E256834A6000652D6 /* AddPostViewController.swift */; };
 		1D87DF44256834C4000652D6 /* AddPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF43256834C4000652D6 /* AddPostViewModel.swift */; };
+		1D87DF4925683535000652D6 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF4825683535000652D6 /* EditProfileViewController.swift */; };
+		1D87DF4E2568353F000652D6 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF4D2568353F000652D6 /* EditProfileViewModel.swift */; };
 		1D916D0A25629C080059E549 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D916D0925629C080059E549 /* ViewModel.swift */; };
 		1D916D1225629C1E0059E549 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D916D1125629C1E0059E549 /* ViewController.swift */; };
 		1D916D1825629EBF0059E549 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1D916D1725629EBF0059E549 /* RxSwift */; };
@@ -134,6 +136,8 @@
 		1D3ED60325663AAD004236BB /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		1D87DF3E256834A6000652D6 /* AddPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
 		1D87DF43256834C4000652D6 /* AddPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostViewModel.swift; sourceTree = "<group>"; };
+		1D87DF4825683535000652D6 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		1D87DF4D2568353F000652D6 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		1D916D0925629C080059E549 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		1D916D1125629C1E0059E549 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1D916D332562A4CF0059E549 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
@@ -293,6 +297,8 @@
 		1D87DF3B25683330000652D6 /* Edit Profile */ = {
 			isa = PBXGroup;
 			children = (
+				1D87DF4825683535000652D6 /* EditProfileViewController.swift */,
+				1D87DF4D2568353F000652D6 /* EditProfileViewModel.swift */,
 			);
 			path = "Edit Profile";
 			sourceTree = "<group>";
@@ -632,6 +638,7 @@
 				1D3B2A3E2564F21E001874FD /* APIService.swift in Sources */,
 				1D3B2A2C2564E7A5001874FD /* LocalUploadService.swift in Sources */,
 				1D3B2A0D2564D0EA001874FD /* LocalAuthenticationService.swift in Sources */,
+				1D87DF4E2568353F000652D6 /* EditProfileViewModel.swift in Sources */,
 				1D3ED60425663AAD004236BB /* UINavigationController.swift in Sources */,
 				1D916D672562C7500059E549 /* Domain.swift in Sources */,
 				1D3B2A432564F22F001874FD /* LocalAPIService.swift in Sources */,
@@ -671,6 +678,7 @@
 				1D916D342562A4CF0059E549 /* State.swift in Sources */,
 				1D3B2A212564D76C001874FD /* StandardCredentialsService.swift in Sources */,
 				1D3B29FB25641C3A001874FD /* MainViewModel.swift in Sources */,
+				1D87DF4925683535000652D6 /* EditProfileViewController.swift in Sources */,
 				1D2A03E525655BB1008CE2D4 /* AuthenticationUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
