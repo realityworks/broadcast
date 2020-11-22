@@ -7,6 +7,15 @@
 
 import Foundation
 
+class NewPostEditViewModel : ViewModel {
+    
+    init(dependencies: Dependencies = .standard) {
+        super.init(stateController: dependencies.stateController)
+        
+    }
+    
+}
+
 /// NewPostViewModel dependencies component
 extension NewPostEditViewModel {
     struct Dependencies {

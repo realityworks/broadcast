@@ -7,6 +7,15 @@
 
 import Foundation
 
+class MyPostsViewModel : ViewModel {
+    
+    init(dependencies: Dependencies = .standard) {
+        super.init(stateController: dependencies.stateController)
+        
+    }
+    
+}
+
 /// MainViewModel dependencies component
 extension MyPostsViewModel {
     struct Dependencies {

@@ -7,6 +7,15 @@
 
 import Foundation
 
+class NewPostGuideViewModel : ViewModel {
+    
+    init(dependencies: Dependencies = .standard) {
+        super.init(stateController: dependencies.stateController)
+        
+    }
+    
+}
+
 /// MainViewModel dependencies component
 extension NewPostGuideViewModel {
     struct Dependencies {
