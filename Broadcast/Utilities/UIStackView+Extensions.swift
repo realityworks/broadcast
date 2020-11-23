@@ -19,5 +19,6 @@ extension UIStackView {
         
         spaceView.backgroundColor = color
         spaceView.height(height, relation: relation, priority: priority)
+        return spaceView
     }
 }

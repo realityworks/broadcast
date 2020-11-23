@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DimissableLabel : UIView {
+class DismissableLabel : UIView {
     
     private let cancelButton = UIButton()
     private let textLabel = UILabel()
