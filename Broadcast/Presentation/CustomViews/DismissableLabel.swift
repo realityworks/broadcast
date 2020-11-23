@@ -12,6 +12,15 @@ class DimissableLabel : UIView {
     private let cancelButton = UIButton()
     private let textLabel = UILabel()
     
+    convenience init(text: String,
+                     backgroundColor: UIColor) {
+        self.init(frame: .zero)
+        configureViews()
+        
+        self.textLabel.text = text
+        self.backgroundColor = backgroundColor
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureViews()
@@ -23,6 +32,10 @@ class DimissableLabel : UIView {
     }
     
     private func configureViews() {
+        // Add the views and response
+        addSubview(cancelButton)
+        addSubview(textLabel)
         
+        // Setup the layout of the views
     }
 }
