@@ -81,6 +81,8 @@
 		1D916DA625640C810059E549 /* Development.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 1D916DA325640C810059E549 /* Development.xcconfig */; };
 		1D916DA725640C810059E549 /* Production.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 1D916DA425640C810059E549 /* Production.xcconfig */; };
 		1D916DA825640C810059E549 /* Staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 1D916DA525640C810059E549 /* Staging.xcconfig */; };
+		1D91A0CC256C1B8E0043A943 /* UIStackView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D91A0CB256C1B8E0043A943 /* UIStackView+Extensions.swift */; };
+		1D91A0D2256C1DD60043A943 /* DismissableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D91A0D1256C1DD60043A943 /* DismissableLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -175,6 +177,8 @@
 		1D916DA325640C810059E549 /* Development.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
 		1D916DA425640C810059E549 /* Production.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Production.xcconfig; sourceTree = "<group>"; };
 		1D916DA525640C810059E549 /* Staging.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
+		1D91A0CB256C1B8E0043A943 /* UIStackView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extensions.swift"; sourceTree = "<group>"; };
+		1D91A0D1256C1DD60043A943 /* DismissableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissableLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -351,6 +355,7 @@
 				1D916D0925629C080059E549 /* ViewModel.swift */,
 				1D916D1125629C1E0059E549 /* ViewController.swift */,
 				1D916D80256400C30059E549 /* Add Post */,
+				1D91A0D0256C1DBD0043A943 /* CustomViews */,
 				1D87DF3B25683330000652D6 /* Edit Profile */,
 				1D916D7E256400530059E549 /* Login */,
 				1D916D7F2564006C0059E549 /* Main */,
@@ -370,6 +375,7 @@
 				1D916D582562C2920059E549 /* Schedulers.swift */,
 				1D916D6E2563F5240059E549 /* KeyboardEventsAdapter.swift */,
 				1D916D97256408CC0059E549 /* Logger.swift */,
+				1D91A0CB256C1B8E0043A943 /* UIStackView+Extensions.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -510,6 +516,14 @@
 				1D916DA525640C810059E549 /* Staging.xcconfig */,
 			);
 			path = Configuration;
+			sourceTree = "<group>";
+		};
+		1D91A0D0256C1DBD0043A943 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				1D91A0D1256C1DD60043A943 /* DismissableLabel.swift */,
+			);
+			path = CustomViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -666,6 +680,7 @@
 				1D916D6F2563F5250059E549 /* KeyboardEventsAdapter.swift in Sources */,
 				1D87DF3F256834A6000652D6 /* AddPostViewController.swift in Sources */,
 				1D916D5F2562C3870059E549 /* BoomdayError.swift in Sources */,
+				1D91A0CC256C1B8E0043A943 /* UIStackView+Extensions.swift in Sources */,
 				1D3B2A3E2564F21E001874FD /* APIService.swift in Sources */,
 				1D3B2A2C2564E7A5001874FD /* LocalUploadService.swift in Sources */,
 				1D3B2A0D2564D0EA001874FD /* LocalAuthenticationService.swift in Sources */,
@@ -714,6 +729,7 @@
 				1D2A03FE25656C03008CE2D4 /* AppState.swift in Sources */,
 				1D2A03EA25655FFC008CE2D4 /* ProfileUseCase.swift in Sources */,
 				1D2A03EF256561BB008CE2D4 /* PostContentUseCase.swift in Sources */,
+				1D91A0D2256C1DD60043A943 /* DismissableLabel.swift in Sources */,
 				1D916D342562A4CF0059E549 /* State.swift in Sources */,
 				1D3B2A212564D76C001874FD /* StandardCredentialsService.swift in Sources */,
 				1D3B29FB25641C3A001874FD /* MainViewModel.swift in Sources */,

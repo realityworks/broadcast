@@ -16,27 +16,36 @@ class LoginViewController: ViewController {
     // MARK: UI Components
     private let scrollView = UIScrollView()
     private let contentStackView = UIStackView()
-    private let logoImage = UIImage()
-    private let loginButton = UIButton()
+    private let logoImageView = UIImageView()
+    
     private let usernameTextField = UITextField()
     private let passwordTextField = UITextField()
+    private let errorDispayView = DismissableLabel()
+    private let loginButton = UIButton()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        configureComponents()
+        configureLayout()
         configureBindings()
         style()
     }
     
     /// Setup the UI component layout
-    private func configureComponents() {
+    private func configureLayout() {
         
         view.addSubview(scrollView)
         scrollView.edgesToSuperview()
         
         scrollView.addSubview(contentStackView)
+        contentStackView.addSubview(logoImageView)
+        contentStackView.addSpace(height: 100)
+        contentStackView.addSubview(usernameTextField)
+        contentStackView.addSubview(passwordTextField)
+        contentStackView.addSubview(passwordTextField)
+        
     }
     
     /// Configure the bindings between the view model and
