@@ -22,8 +22,8 @@ class LoginViewModel : ViewModel {
         
         isLoginEnabled = Observable.combineLatest(usernamePublisher, passwordPublisher) { username, password in
             guard let username = username,
-                  let password = password = 
-            return username.
+                  let password = password else { return false }
+            return !username.isEmpty && !password.isEmpty
         }
         
         super.init(stateController: dependencies.stateController)
