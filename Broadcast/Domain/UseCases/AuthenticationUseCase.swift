@@ -12,12 +12,18 @@ import Foundation
 class AuthenticationUseCase {
     typealias T = AuthenticationUseCase
     
-    var stateController: StateController!
-    
+    private var stateController: StateController!
     private let authenticationService: AuthenticationService
+    private let credentialsService: CredentialsService
     
-    init(authenticationService: AuthenticationService) {
-        self.authenticationService = authenticationService
+    init(dependencies: Dependencies = .standard) {
+        self.authenticationService = dependencies.authenticationService
+        self.credentialsService = dependencies.credentialsService
+    }
+    
+    func login(username: String,
+               password: String) {
+        credentialsService.clearCredentials()
     }
 }
     
@@ -35,6 +41,19 @@ extension AuthenticationUseCase : StateControllerInjector {
 
 extension AuthenticationUseCase {
     static let standard = {
-        return AuthenticationUseCase(authenticationService: Services.local.authenticationService)
+        return AuthenticationUseCase(dependencies: .standard)
     }()
+}
+
+// MARK: - Dependencies
+
+extension AuthenticationUseCase {
+    struct Dependencies {
+        let authenticationService: AuthenticationService
+        let credentialsService: CredentialsService
+        
+        static let standard = Dependencies(
+            authenticationService: Services.local.authenticationService,
+            credentialsService: Services.local.credentialsService)
+    }
 }

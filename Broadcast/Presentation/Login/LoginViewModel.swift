@@ -30,7 +30,8 @@ class LoginViewModel : ViewModel {
     }
     
     func login() {
-        
+        authenticationUseCase.login(username: username.value ?? "",
+                                    password: password.value ?? "")
     }
 }
 
