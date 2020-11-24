@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 protocol AuthenticationService {
     var stateController: StateController { get }
     
-    func login(with username: String, password: String)
-    func logout()
+    func authenticate(withUsername username: String, password: String) -> Single<AuthenticateResponse>
 }
 

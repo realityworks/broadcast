@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 /// The service performs only local authentication and login/logout
 class LocalAuthenticationService : AuthenticationService {
@@ -15,11 +17,7 @@ class LocalAuthenticationService : AuthenticationService {
         self.stateController = stateController
     }
     
-    func login(with username: String, password: String) {
-        
-    }
-    
-    func logout() {
+    func authenticate(withUsername username: String, password: String) -> Single<AuthenticateResponse> {
         
     }
 }

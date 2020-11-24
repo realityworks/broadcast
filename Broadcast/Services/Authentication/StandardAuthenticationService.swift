@@ -15,11 +15,7 @@ class StandardAuthenticationService : AuthenticationService {
         self.stateController = stateController
     }
     
-    func login(with username: String, password: String) {
+    func authenticate(withUsername username: String, password: String) -> Single<AuthenticateResponse> {
         
-    }
-    
-    func logout() {
-        
-    }
+    }    
 }

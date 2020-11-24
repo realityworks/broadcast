@@ -24,6 +24,8 @@ class AuthenticationUseCase {
     func login(username: String,
                password: String) {
         credentialsService.clearCredentials()
+        authenticationService.authenticate(withUsername: username,
+                                           password: password)
     }
 }
     

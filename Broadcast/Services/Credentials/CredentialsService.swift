@@ -9,6 +9,6 @@ import Foundation
 
 protocol CredentialsService {
     func clearCredentials()
-    private (set) var refreshToken: String? { get set }
-    private (set) var authenticationToken: String? { get set }
+    var refreshToken: String? { get set }
+    var authenticationToken: String? { get set }
 }
