@@ -83,6 +83,7 @@
 		1D916DA825640C810059E549 /* Staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 1D916DA525640C810059E549 /* Staging.xcconfig */; };
 		1D91A0CC256C1B8E0043A943 /* UIStackView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D91A0CB256C1B8E0043A943 /* UIStackView+Extensions.swift */; };
 		1D91A0D2256C1DD60043A943 /* DismissableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D91A0D1256C1DD60043A943 /* DismissableLabel.swift */; };
+		1DD1FE05256CA55F00C598CE /* UITextField+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD1FE04256CA55F00C598CE /* UITextField+Styling.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -179,6 +180,7 @@
 		1D916DA525640C810059E549 /* Staging.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
 		1D91A0CB256C1B8E0043A943 /* UIStackView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extensions.swift"; sourceTree = "<group>"; };
 		1D91A0D1256C1DD60043A943 /* DismissableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissableLabel.swift; sourceTree = "<group>"; };
+		1DD1FE04256CA55F00C598CE /* UITextField+Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Styling.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -456,6 +458,7 @@
 				1D3ED5F425663504004236BB /* UIButton+Styling.swift */,
 				1D3ED5F925663512004236BB /* UIFont+Styling.swift */,
 				1D3ED5FE25663521004236BB /* UIColor+Styling.swift */,
+				1DD1FE04256CA55F00C598CE /* UITextField+Styling.swift */,
 			);
 			path = Styling;
 			sourceTree = "<group>";
@@ -721,6 +724,7 @@
 				1D87DF752568387B000652D6 /* NewPostGuideViewModel.swift in Sources */,
 				1D3B2A1C2564D411001874FD /* CredentialsService.swift in Sources */,
 				1D87DF8925683AC1000652D6 /* PostDetailViewModel.swift in Sources */,
+				1DD1FE05256CA55F00C598CE /* UITextField+Styling.swift in Sources */,
 				1D3B2A342564E7AF001874FD /* StandardUploadService.swift in Sources */,
 				1D87DF582568368A000652D6 /* MyPostsViewModel.swift in Sources */,
 				1D2A04092565761B008CE2D4 /* ConnectionState.swift in Sources */,

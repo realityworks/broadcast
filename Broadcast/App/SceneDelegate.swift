@@ -17,7 +17,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow()
         
-        window?.rootViewController = Route.main(child: .none).viewControllerInstance()
+        // The root view controller will need to be sorted via the router
+        //window?.rootViewController = Route.main(child: .none).viewControllerInstance()
+        window?.rootViewController = Route.login.viewControllerInstance()
         window?.makeKeyAndVisible()
         
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.

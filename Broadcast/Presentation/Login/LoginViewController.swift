@@ -18,11 +18,10 @@ class LoginViewController: ViewController {
     private let contentStackView = UIStackView()
     private let logoImageView = UIImageView()
     
-    private let usernameTextField = UITextField()
-    private let passwordTextField = UITextField()
+    private let usernameTextField = UITextField.standard(withPlaceholder: "Username")
+    private let passwordTextField = UITextField.password(withPlaceholder: "Password")
     private let errorDisplayView = DismissableLabel()
     private let loginButton = UIButton.loginButton()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +35,6 @@ class LoginViewController: ViewController {
     
     /// Setup the UI component layout
     private func configureViews() {
-        loginButton.setTitle("LOGIN", for: .normal)
         
     }
     

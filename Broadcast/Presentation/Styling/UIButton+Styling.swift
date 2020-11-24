@@ -17,6 +17,8 @@ extension UIButton {
         button.height(80)
         button.layer.cornerRadius = 25
         button.setTitle("LOGIN", for: .normal)
+        
+        return button
     }
 }
 
