@@ -12,8 +12,8 @@ import RxSwift
 class LoginViewModel : ViewModel {
     private let authenticationUseCase: AuthenticationUseCase
     
-    let usernamePublisher = BehaviorRelay<String?>(value: nil)
-    let passwordPublisher = BehaviorRelay<String?>(value: nil)
+    let username = BehaviorRelay<String?>(value: nil)
+    let password = BehaviorRelay<String?>(value: nil)
     let isLoadingActivityVisible = BehaviorRelay<Bool>(value: false)
     let isLoginEnabled: Observable<Bool>
     
@@ -27,6 +27,10 @@ class LoginViewModel : ViewModel {
         }
         
         super.init(stateController: dependencies.stateController)
+    }
+    
+    func login() {
+        
     }
 }
 

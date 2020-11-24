@@ -16,7 +16,7 @@ extension UIStackView {
                   priority: LayoutPriority = .required) -> UIView {
         
         let spaceView: UIView = UIView()
-        addSubview(spaceView)
+        addArrangedSubview(spaceView)
         
         spaceView.backgroundColor = color
         spaceView.height(height, relation: relation, priority: priority)

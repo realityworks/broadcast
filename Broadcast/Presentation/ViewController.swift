@@ -15,6 +15,30 @@ class ViewController : UIViewController {
     var disposeBag = DisposeBag()
     
     // MARK: View Controller overrides
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        Logger.verbose(topic: .appState, message: "viewDidLoad")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        Logger.verbose(topic: .appState, message: "viewWillAppear")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        Logger.verbose(topic: .appState, message: "viewDidAppear")
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        Logger.verbose(topic: .appState, message: "viewWillDisappear")
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        Logger.verbose(topic: .appState, message: "viewDidDisappear")
+    }
     
     // MARK: Configuration
 }

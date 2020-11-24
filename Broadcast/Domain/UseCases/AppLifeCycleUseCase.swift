@@ -37,27 +37,27 @@ class AppLifeCycleUseCase {
     }
     
     private func didFinishLaunching() {
-        Logger.verbose(topic: .debug, message: "didFinishLaunching")
+        Logger.verbose(topic: .appState, message: "didFinishLaunching")
     }
 
     private func willEnterForeground() {
-        Logger.verbose(topic: .debug, message: "willEnterForeground")
+        Logger.verbose(topic: .appState, message: "willEnterForeground")
     }
 
     private func didBecomeActive() {
-        Logger.verbose(topic: .debug, message: "didBecomeActive")
+        Logger.verbose(topic: .appState, message: "didBecomeActive")
     }
 
     private func willResignActive() {
-        Logger.verbose(topic: .debug, message: "willResignActive")
+        Logger.verbose(topic: .appState, message: "willResignActive")
     }
 
     private func didEnterBackground() {
-        Logger.verbose(topic: .debug, message: "didEnterBackground")
+        Logger.verbose(topic: .appState, message: "didEnterBackground")
     }
 
     private func willTerminate() {
-        Logger.verbose(topic: .debug, message: "willTerminate")
+        Logger.verbose(topic: .appState, message: "willTerminate")
     }
 
 }

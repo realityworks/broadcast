@@ -12,6 +12,7 @@ extension UITextField {
         let textField = UITextField()
         textField.borderStyle = .roundedRect
         textField.placeholder = placeholder
+        textField.height(50)
         return textField
     }
     

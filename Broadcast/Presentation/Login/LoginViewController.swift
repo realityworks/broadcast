@@ -10,7 +10,9 @@ import TinyConstraints
 import RxCocoa
 import RxSwift
 
-class LoginViewController: ViewController {
+class LoginViewController: ViewController, KeyboardEventsAdapter {
+    var dismissKeyboardGestureRecognizer: UIGestureRecognizer = UITapGestureRecognizer()
+    
     private let viewModel = LoginViewModel()
     
     // MARK: UI Components
@@ -21,7 +23,10 @@ class LoginViewController: ViewController {
     private let usernameTextField = UITextField.standard(withPlaceholder: "Username")
     private let passwordTextField = UITextField.password(withPlaceholder: "Password")
     private let errorDisplayView = DismissableLabel()
-    private let loginButton = UIButton.loginButton()
+    private let loginButton = UIButton.loginButton(withTitle: "Let's go!")
+    private let applyHereLabel = UILabel()
+    private let termsAndConditionsLabel = UILabel()
+    private let forgotPasswordLabel = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,36 +36,93 @@ class LoginViewController: ViewController {
         configureLayout()
         configureBindings()
         style()
+        registerForKeyboardEvents()
     }
     
     /// Setup the UI component layout
     private func configureViews() {
+        view.addGestureRecognizer(dismissKeyboardGestureRecognizer)
+        dismissKeyboardGestureRecognizer.addTarget(self, action: #selector(dismissKeyboard))
         
+        contentStackView.axis = .vertical
+        contentStackView.alignment = .center
+        contentStackView.distribution = .equalSpacing
     }
     
     private func configureLayout() {
         view.addSubview(scrollView)
-        scrollView.edgesToSuperview()
         
+        /// Setup scroll view
+        scrollView.edgesToSuperview(usingSafeArea: true)
         scrollView.addSubview(contentStackView)
-        contentStackView.edgesToSuperview(excluding: .bottom)
         
+        /// Setup content stack view
+        contentStackView.topToSuperview()
+        contentStackView.widthToSuperview()
         contentStackView.addSubview(logoImageView)
-        contentStackView.addSpace(height: 100)
-        contentStackView.addSubview(usernameTextField)
-        contentStackView.addSubview(passwordTextField)
-        contentStackView.addSubview(errorDisplayView)
-        contentStackView.addSubview(loginButton)
+        contentStackView.spacing = 16
+        
+        /// Add arranged views to stack
+        contentStackView.addSpace(height: 300)
+        contentStackView.addArrangedSubview(usernameTextField)
+        contentStackView.addArrangedSubview(passwordTextField)
+        contentStackView.addArrangedSubview(errorDisplayView)
+        contentStackView.addArrangedSubview(loginButton)
+        
+        /// Configure insets of arranged sub views
+        let textFields = [usernameTextField, passwordTextField]
+        textFields.forEach {
+            $0.leftToSuperview(offset: 32)
+        }
+        
+        loginButton.width(150)
     }
     
     /// Configure the bindings between the view model and
     private func configureBindings() {
+        usernameTextField.rx.controlEvent([.editingDidEndOnExit])
+            .subscribe(onNext: { [unowned self] _ in
+                self.passwordTextField.becomeFirstResponder()
+            })
+            .disposed(by: disposeBag)
         
+        passwordTextField.rx.controlEvent([.editingDidEndOnExit])
+            .subscribe(onNext: { [unowned self] _ in
+                self.passwordTextField.resignFirstResponder()
+                self.viewModel.login()
+            })
+            .disposed(by: disposeBag)
+        
+        loginButton.rx.tap
+            .subscribe(onNext: { [unowned self] _ in
+                self.dismissKeyboard()
+                self.viewModel.login()
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.isLoginEnabled
+            .bind(to: loginButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        usernameTextField.rx.controlEvent(.editingChanged)
+            .map { [unowned self] in self.usernameTextField.text }
+            .bind(to: viewModel.username)
+            .disposed(by: disposeBag)
+        
+        passwordTextField.rx.controlEvent(.editingChanged)
+            .map { [unowned self] in self.passwordTextField.text }
+            .bind(to: viewModel.password)
+            .disposed(by: disposeBag)
     }
     
     /// Style the user interface and components
     private func style() {
-        
+        view.backgroundColor = .white
+    }
+    
+    @objc func dismissKeyboard() {
+        usernameTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
     }
 }
 
