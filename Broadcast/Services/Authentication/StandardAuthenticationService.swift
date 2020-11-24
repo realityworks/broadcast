@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 /// The service performs only local authentication and login/logout
 class StandardAuthenticationService : AuthenticationService {
@@ -16,6 +18,10 @@ class StandardAuthenticationService : AuthenticationService {
     }
     
     func authenticate(withUsername username: String, password: String) -> Single<AuthenticateResponse> {
-        
+        let single = Single<AuthenticateResponse>.create { observer in
+            observer(.error(BoomdayError.unsupported))
+            return Disposables.create { }
+        }
+        return single
     }    
 }

@@ -12,7 +12,7 @@ import Foundation
 class AuthenticationUseCase {
     typealias T = AuthenticationUseCase
     
-    private var stateController: StateController!
+    var stateController: StateController!
     private let authenticationService: AuthenticationService
     private let credentialsService: CredentialsService
     

@@ -7,6 +7,7 @@
 
 import Foundation
 
-enum BoomdayError {
+enum BoomdayError : Error {
     case unknownError
+    case unsupported // Currently not implemented
 }
