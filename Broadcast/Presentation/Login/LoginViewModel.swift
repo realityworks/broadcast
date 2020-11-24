@@ -20,7 +20,7 @@ class LoginViewModel : ViewModel {
     init(dependencies: Dependencies = .standard) {
         self.authenticationUseCase = dependencies.authenticationUseCase
         
-        isLoginEnabled = Observable.combineLatest(usernamePublisher, passwordPublisher) { username, password in
+        isLoginEnabled = Observable.combineLatest(username, password) { username, password in
             guard let username = username,
                   let password = password else { return false }
             return !username.isEmpty && !password.isEmpty

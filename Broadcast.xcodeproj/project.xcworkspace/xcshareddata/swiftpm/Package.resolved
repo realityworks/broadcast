@@ -11,30 +11,12 @@
         }
       },
       {
-        "package": "Nimble",
-        "repositoryURL": "https://github.com/Quick/Nimble.git",
-        "state": {
-          "branch": null,
-          "revision": "e9d769113660769a4d9dd3afb855562c0b7ae7b0",
-          "version": "7.3.4"
-        }
-      },
-      {
         "package": "OHHTTPStubs",
         "repositoryURL": "https://github.com/AliSoftware/OHHTTPStubs.git",
         "state": {
           "branch": null,
           "revision": "e92b5a5746ef16add2a1424f1fc19529d9a75cde",
           "version": "9.0.0"
-        }
-      },
-      {
-        "package": "Quick",
-        "repositoryURL": "https://github.com/Quick/Quick.git",
-        "state": {
-          "branch": null,
-          "revision": "f2b5a06440ea87eba1a167cab37bf6496646c52e",
-          "version": "1.3.4"
         }
       },
       {
@@ -65,12 +47,12 @@
         }
       },
       {
-        "package": "RichString",
-        "repositoryURL": "https://github.com/svdo/swift-RichString",
+        "package": "SwiftRichString",
+        "repositoryURL": "https://github.com/malcommac/SwiftRichString",
         "state": {
           "branch": null,
-          "revision": "002c2394aed67e46fba6968418e91f4ee1ec500f",
-          "version": "2.2.0"
+          "revision": "9bf4b5af6bb4386865636fc504d6c588c2b65040",
+          "version": "3.7.2"
         }
       },
       {

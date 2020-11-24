@@ -9,6 +9,7 @@ import UIKit
 import TinyConstraints
 import RxCocoa
 import RxSwift
+import SwiftRichString
 
 class LoginViewController: ViewController, KeyboardEventsAdapter {
     var dismissKeyboardGestureRecognizer: UIGestureRecognizer = UITapGestureRecognizer()
@@ -24,7 +25,7 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
     private let passwordTextField = UITextField.password(withPlaceholder: "Password")
     private let errorDisplayView = DismissableLabel()
     private let loginButton = UIButton.loginButton(withTitle: "Let's go!")
-    private let applyHereLabel = UILabel()
+    private let applyHereTextView = UITextView()
     private let termsAndConditionsLabel = UILabel()
     private let forgotPasswordLabel = UILabel()
     
@@ -47,6 +48,8 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         contentStackView.axis = .vertical
         contentStackView.alignment = .center
         contentStackView.distribution = .equalSpacing
+        
+        applyHereTextView.isScrollEnabled = false
     }
     
     private func configureLayout() {
@@ -68,6 +71,7 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         contentStackView.addArrangedSubview(passwordTextField)
         contentStackView.addArrangedSubview(errorDisplayView)
         contentStackView.addArrangedSubview(loginButton)
+        contentStackView.addArrangedSubview(applyHereTextView)
         
         /// Configure insets of arranged sub views
         let textFields = [usernameTextField, passwordTextField]
@@ -76,6 +80,11 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         }
         
         loginButton.width(150)
+        
+        /// Configure the apply here label
+        applyHereTextView.height(30)
+        applyHereTextView.leftToSuperview()
+        applyHereTextView.rightToSuperview()
     }
     
     /// Configure the bindings between the view model and
@@ -118,6 +127,25 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
     /// Style the user interface and components
     private func style() {
         view.backgroundColor = .white
+        
+        // Style attributed strings
+        let applyNormal = Style {
+            $0.font = SystemFonts.Helvetica_Light.font(size: 15)
+            $0.alignment = .center
+        }
+        
+        let applyUnderline = Style {
+            $0.font = SystemFonts.Helvetica_Light.font(size: 15)
+            $0.underline = (.single, UIColor.black)
+            $0.linkURL = URL(string: "https://boomday.com")
+            $0.alignment = .center
+        }
+        
+        applyHereTextView.attributedText =
+            "No account? ".set(style: applyNormal) +
+            "Apply here".set(style: applyUnderline)
+
+        applyHereTextView.tintColor = .black
     }
     
     @objc func dismissKeyboard() {

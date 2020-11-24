@@ -84,7 +84,7 @@
 		1D91A0CC256C1B8E0043A943 /* UIStackView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D91A0CB256C1B8E0043A943 /* UIStackView+Extensions.swift */; };
 		1D91A0D2256C1DD60043A943 /* DismissableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D91A0D1256C1DD60043A943 /* DismissableLabel.swift */; };
 		1DD1FE05256CA55F00C598CE /* UITextField+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD1FE04256CA55F00C598CE /* UITextField+Styling.swift */; };
-		1DD1FE0B256CDF8E00C598CE /* RichString in Frameworks */ = {isa = PBXBuildFile; productRef = 1DD1FE0A256CDF8E00C598CE /* RichString */; };
+		1DD1FE17256CE2E000C598CE /* SwiftRichString in Frameworks */ = {isa = PBXBuildFile; productRef = 1DD1FE16256CE2E000C598CE /* SwiftRichString */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -191,11 +191,11 @@
 			files = (
 				1D916D9E25640C430059E549 /* SDWebImage in Frameworks */,
 				1D916D202562A1180059E549 /* Alamofire in Frameworks */,
+				1DD1FE17256CE2E000C598CE /* SwiftRichString in Frameworks */,
 				1D916D1A25629EBF0059E549 /* RxCocoa in Frameworks */,
 				1D916D1825629EBF0059E549 /* RxSwift in Frameworks */,
 				1D916D2C2562A2840059E549 /* RxAlamofire in Frameworks */,
 				1D916D262562A16D0059E549 /* TinyConstraints in Frameworks */,
-				1DD1FE0B256CDF8E00C598CE /* RichString in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -554,7 +554,7 @@
 				1D916D252562A16D0059E549 /* TinyConstraints */,
 				1D916D2B2562A2840059E549 /* RxAlamofire */,
 				1D916D9D25640C430059E549 /* SDWebImage */,
-				1DD1FE0A256CDF8E00C598CE /* RichString */,
+				1DD1FE16256CE2E000C598CE /* SwiftRichString */,
 			);
 			productName = Broadcast;
 			productReference = 1D3433F725624B4400886245 /* Broadcast.app */;
@@ -633,7 +633,7 @@
 				1D916D242562A16D0059E549 /* XCRemoteSwiftPackageReference "TinyConstraints" */,
 				1D916D2A2562A2840059E549 /* XCRemoteSwiftPackageReference "RxAlamofire" */,
 				1D916D9C25640C420059E549 /* XCRemoteSwiftPackageReference "SDWebImage" */,
-				1DD1FE09256CDF8D00C598CE /* XCRemoteSwiftPackageReference "swift-RichString" */,
+				1DD1FE15256CE2E000C598CE /* XCRemoteSwiftPackageReference "SwiftRichString" */,
 			);
 			productRefGroup = 1D3433F825624B4400886245 /* Products */;
 			projectDirPath = "";
@@ -1114,12 +1114,12 @@
 				minimumVersion = 5.9.5;
 			};
 		};
-		1DD1FE09256CDF8D00C598CE /* XCRemoteSwiftPackageReference "swift-RichString" */ = {
+		1DD1FE15256CE2E000C598CE /* XCRemoteSwiftPackageReference "SwiftRichString" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/svdo/swift-RichString";
+			repositoryURL = "https://github.com/malcommac/SwiftRichString";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.2.0;
+				minimumVersion = 3.7.2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1155,10 +1155,10 @@
 			package = 1D916D9C25640C420059E549 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
 		};
-		1DD1FE0A256CDF8E00C598CE /* RichString */ = {
+		1DD1FE16256CE2E000C598CE /* SwiftRichString */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1DD1FE09256CDF8D00C598CE /* XCRemoteSwiftPackageReference "swift-RichString" */;
-			productName = RichString;
+			package = 1DD1FE15256CE2E000C598CE /* XCRemoteSwiftPackageReference "SwiftRichString" */;
+			productName = SwiftRichString;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
