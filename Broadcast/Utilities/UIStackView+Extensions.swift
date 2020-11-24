@@ -14,11 +14,13 @@ extension UIStackView {
                   color: UIColor = .clear,
                   relation: TinyConstraints.ConstraintRelation = .equal,
                   priority: LayoutPriority = .required) -> UIView {
+        
         let spaceView: UIView = UIView()
         addSubview(spaceView)
         
         spaceView.backgroundColor = color
         spaceView.height(height, relation: relation, priority: priority)
+        
         return spaceView
     }
 }
