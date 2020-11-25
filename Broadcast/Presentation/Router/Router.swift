@@ -49,21 +49,30 @@ class Router {
         authenticationStateObservable
             .skip(1)
             .subscribe(onNext: { authenticationState in
-                self.authenticationStateChanged(authenticationState, animated: true)
+                self.authenticationStateChanged(authenticationState)
             })
             .disposed(by: disposeBag)
+        
+        /// Listen to when a new route is pushed, the router here will force the selected route on
+        /// to the root view controller. This handles the top level routing
+        selectedRouteSubject
+            .subscribe(onNext: { route in
+                UIApplication.shared.windows[0].rootViewController = route.viewControllerInstance()
+            })
+            .disposed(by: disposeBag)
+
     }
     
     private func authenticationStateChanged(
-        _ authenticationState: AuthenticationState,
-        animated: Bool) {
+        _ authenticationState: AuthenticationState) {
         guard authenticationState != .loggingIn,
               authenticationState != .loggingOut else { return }
         
-        let viewController: UIViewController
         switch authenticationState {
         case .loggedIn:
-            <#code#>
+            selectedRoute = .main(child: .none)
+        case .loggedOut:
+            selectedRoute = .login
         default:
             fatalError("Unhandled authentication state, should never get here!")
         }
