@@ -30,8 +30,17 @@ class LoginViewModel : ViewModel {
     }
     
     func login() {
+        stateController.state.authenticationState = AuthenticationState.loggingIn
         authenticationUseCase.login(username: username.value ?? "",
                                     password: password.value ?? "")
+            .subscribe {
+                self.stateController.state.authenticationState = AuthenticationState.loggedIn
+            } onError: { _ in
+                // TODO (Loading indicator update)
+                self.stateController.state.authenticationState = AuthenticationState.loggedOut
+            }
+            .disposed(by: disposeBag)
+
     }
 }
 

@@ -23,7 +23,7 @@ class StateController {
     private let errorSubject: PublishRelay<BoomdayError>
     
     /// Current Model representing the app state, when did set, pushes the update up in the subject
-    private (set) var state: State {
+    var state: State {
         didSet {
             stateSubject.accept(state)
         }

@@ -17,6 +17,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow()
         
+        Domain.standard.router.setup()
+        
         // The root view controller will need to be sorted via the router
         //window?.rootViewController = Route.main(child: .none).viewControllerInstance()
         window?.rootViewController = Route.login.viewControllerInstance()

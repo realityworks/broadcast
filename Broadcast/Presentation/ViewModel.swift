@@ -11,6 +11,7 @@ import RxSwift
 /// Protocol extension for the base class
 class ViewModel {
 
+    let disposeBag = DisposeBag()
     let stateController: StateController
     let dispatchGroup = DispatchGroup()
     

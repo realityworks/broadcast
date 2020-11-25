@@ -46,7 +46,27 @@ class Router {
     /// Configure the observables to catch the changes in
     /// the app state that will alter the current state of view controllers
     func setup() {
+        authenticationStateObservable
+            .skip(1)
+            .subscribe(onNext: { authenticationState in
+                self.authenticationStateChanged(authenticationState, animated: true)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func authenticationStateChanged(
+        _ authenticationState: AuthenticationState,
+        animated: Bool) {
+        guard authenticationState != .loggingIn,
+              authenticationState != .loggingOut else { return }
         
+        let viewController: UIViewController
+        switch authenticationState {
+        case .loggedIn:
+            <#code#>
+        default:
+            fatalError("Unhandled authentication state, should never get here!")
+        }
     }
 }
 
