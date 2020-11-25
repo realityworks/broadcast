@@ -18,6 +18,7 @@ extension UIButton {
         button.height(50)
         button.layer.cornerRadius = 12
         button.setTitle(title, for: .normal)
+        button.clipsToBounds = true
         
         return button
     }
