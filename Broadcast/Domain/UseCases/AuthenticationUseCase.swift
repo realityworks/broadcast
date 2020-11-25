@@ -26,7 +26,7 @@ class AuthenticationUseCase {
     }
     
     func login(username: String,
-               password: String) -> Complet {
+               password: String) -> Completable {
         credentialsService.clearCredentials()
         
         // Handle the response for authentication
