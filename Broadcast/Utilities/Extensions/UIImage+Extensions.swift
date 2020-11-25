@@ -25,5 +25,10 @@ extension UIImage {
 
         self.init(cgImage: image)
     }
-
+    
+    /// Convenience initalizer to create a UIImage from the Name enum
+    /// - Parameter assetName: Name enum that defines an image asset.
+    convenience init(assetName: Name) {
+        self.init(named: assetName.rawValue)!
+    }
 }
