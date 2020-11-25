@@ -30,7 +30,6 @@ class AuthenticationUseCase {
         credentialsService.clearCredentials()
         
         // Handle the response for authentication
-        #warning("TODO")
         return authenticationService.authenticate(
             withUsername: username,
             password: password).do(

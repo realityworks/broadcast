@@ -32,7 +32,7 @@ class Router {
     private let connectionStateObservable: Observable<ConnectionState>
     private let authenticationStateObservable: Observable<AuthenticationState>
     
-    private let selectedRouteSubject: BehaviorRelay<Route> = BehaviorRelay(value: .main(child: .none))
+    private let selectedRouteSubject: BehaviorRelay<Route> = BehaviorRelay(value: .login)
     private let disposeBag = DisposeBag()
     
     init(dependencies: Dependencies = .standard) {
@@ -57,7 +57,8 @@ class Router {
         /// to the root view controller. This handles the top level routing
         selectedRouteSubject
             .subscribe(onNext: { route in
-                UIApplication.shared.windows[0].rootViewController = route.viewControllerInstance()
+                guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+                appDelegate.window?.rootViewController = route.viewControllerInstance()
             })
             .disposed(by: disposeBag)
 
@@ -77,6 +78,15 @@ class Router {
             fatalError("Unhandled authentication state, should never get here!")
         }
     }
+}
+
+// MARK: - Instance methods
+
+extension Router {
+
+    static let standard: Router = {
+        Router()
+    }()
 }
 
 // MARK: - Dependencies

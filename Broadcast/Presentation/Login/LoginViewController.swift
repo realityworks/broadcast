@@ -90,7 +90,7 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         view.addSubview(bottomStackView)
         bottomStackView.addArrangedSubview(forgotPasswordTextView)
         bottomStackView.addArrangedSubview(termsAndConditionsTextView)
-        bottomStackView.bottomToSuperview()
+        bottomStackView.bottomToSuperview(usingSafeArea: true)
         bottomStackView.widthToSuperview()
         
         /// Configure the text views

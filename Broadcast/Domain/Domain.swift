@@ -10,12 +10,10 @@ import Foundation
 class Domain {
     let stateController: StateController
     let useCases: UseCases
-    let router: Router
     
     init(dependencies: Dependencies = .standard) {
         self.stateController = dependencies.stateController
         self.useCases = dependencies.useCases
-        self.router = dependencies.router
     }
 }
 
@@ -34,11 +32,10 @@ extension Domain {
         
         let stateController: StateController
         let useCases: UseCases
-        let router: Router
+        //let router: Router
         
         static let standard = Dependencies(
             stateController: StateController.standard,
-            useCases: UseCases.standard.with(stateController: StateController.standard),
-            router: Router())
+            useCases: UseCases.standard.with(stateController: StateController.standard))
     }
 }
