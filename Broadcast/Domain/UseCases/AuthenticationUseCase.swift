@@ -34,7 +34,8 @@ class AuthenticationUseCase {
         return authenticationService.authenticate(
             withUsername: username,
             password: password).do(
-                afterSuccess: { authenticationResponse in
+                afterSuccess: { [unowned self] authenticationResponse in
+                    self.credentialsService.authenticationToken 
                 })
             .observeOn(schedulers.main)
             .asCompletable()
