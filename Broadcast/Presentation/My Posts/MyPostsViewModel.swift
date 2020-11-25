@@ -21,9 +21,11 @@ extension MyPostsViewModel {
     struct Dependencies {
         
         let stateController: StateController
+        let postContentUseCase: PostContentUseCase
         
         static let standard = Dependencies(
-            stateController: StateController.standard)
+            stateController: Domain.standard.stateController,
+            postContentUseCase: Domain.standard.useCases.postContentUseCase)
         
     }
 }
