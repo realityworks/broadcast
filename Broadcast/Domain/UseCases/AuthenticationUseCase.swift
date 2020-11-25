@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 /// This use case provides the functionality to authenticate and handles
 /// all functions related to authentication
@@ -15,17 +17,27 @@ class AuthenticationUseCase {
     var stateController: StateController!
     private let authenticationService: AuthenticationService
     private let credentialsService: CredentialsService
+    private let schedulers: Schedulers
     
     init(dependencies: Dependencies = .standard) {
         self.authenticationService = dependencies.authenticationService
         self.credentialsService = dependencies.credentialsService
+        self.schedulers = dependencies.schedulers
     }
     
     func login(username: String,
-               password: String) {
+               password: String) -> Complet {
         credentialsService.clearCredentials()
-        authenticationService.authenticate(withUsername: username,
-                                           password: password)
+        
+        // Handle the response for authentication
+        #warning("TODO")
+        return authenticationService.authenticate(
+            withUsername: username,
+            password: password).do(
+                afterSuccess: { authenticationResponse in
+                })
+            .observeOn(schedulers.main)
+            .asCompletable()
     }
 }
     
@@ -53,9 +65,11 @@ extension AuthenticationUseCase {
     struct Dependencies {
         let authenticationService: AuthenticationService
         let credentialsService: CredentialsService
+        let schedulers: Schedulers
         
         static let standard = Dependencies(
             authenticationService: Services.local.authenticationService,
-            credentialsService: Services.local.credentialsService)
+            credentialsService: Services.local.credentialsService,
+            schedulers: Schedulers.standard)
     }
 }
