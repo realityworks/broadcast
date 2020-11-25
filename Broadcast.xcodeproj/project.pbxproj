@@ -87,6 +87,8 @@
 		1DD1FE17256CE2E000C598CE /* SwiftRichString in Frameworks */ = {isa = PBXBuildFile; productRef = 1DD1FE16256CE2E000C598CE /* SwiftRichString */; };
 		1DD1FE1D256D6F7300C598CE /* AuthenticateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD1FE1C256D6F7300C598CE /* AuthenticateResponse.swift */; };
 		1DD1FE23256DF4B700C598CE /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 1DD1FE22256DF4B700C598CE /* KeychainAccess */; };
+		1DD1FE28256E16B600C598CE /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD1FE27256E16B600C598CE /* UIButton+Extensions.swift */; };
+		1DD1FE2E256E16D100C598CE /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD1FE2D256E16D100C598CE /* UIImage+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -185,6 +187,8 @@
 		1D91A0D1256C1DD60043A943 /* DismissableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissableLabel.swift; sourceTree = "<group>"; };
 		1DD1FE04256CA55F00C598CE /* UITextField+Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Styling.swift"; sourceTree = "<group>"; };
 		1DD1FE1C256D6F7300C598CE /* AuthenticateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateResponse.swift; sourceTree = "<group>"; };
+		1DD1FE27256E16B600C598CE /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
+		1DD1FE2D256E16D100C598CE /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -380,10 +384,10 @@
 		1D916D0525629A970059E549 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				1DD1FE2C256E16BF00C598CE /* Extensions */,
 				1D916D582562C2920059E549 /* Schedulers.swift */,
 				1D916D6E2563F5240059E549 /* KeyboardEventsAdapter.swift */,
 				1D916D97256408CC0059E549 /* Logger.swift */,
-				1D91A0CB256C1B8E0043A943 /* UIStackView+Extensions.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -544,6 +548,16 @@
 			path = Responses;
 			sourceTree = "<group>";
 		};
+		1DD1FE2C256E16BF00C598CE /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1DD1FE27256E16B600C598CE /* UIButton+Extensions.swift */,
+				1D91A0CB256C1B8E0043A943 /* UIStackView+Extensions.swift */,
+				1DD1FE2D256E16D100C598CE /* UIImage+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -701,6 +715,7 @@
 				1D2A03F9256562A1008CE2D4 /* ConnectivityUseCase.swift in Sources */,
 				1D916D6F2563F5250059E549 /* KeyboardEventsAdapter.swift in Sources */,
 				1D87DF3F256834A6000652D6 /* AddPostViewController.swift in Sources */,
+				1DD1FE2E256E16D100C598CE /* UIImage+Extensions.swift in Sources */,
 				1D916D5F2562C3870059E549 /* BoomdayError.swift in Sources */,
 				1D91A0CC256C1B8E0043A943 /* UIStackView+Extensions.swift in Sources */,
 				1D3B2A3E2564F21E001874FD /* APIService.swift in Sources */,
@@ -726,6 +741,7 @@
 				1D3B2A262564E6F1001874FD /* UploadService.swift in Sources */,
 				1D3B2A172564D258001874FD /* StandardAuthenticationService.swift in Sources */,
 				1D3B29F625641BAF001874FD /* MainViewController.swift in Sources */,
+				1DD1FE28256E16B600C598CE /* UIButton+Extensions.swift in Sources */,
 				1D916D98256408CC0059E549 /* Logger.swift in Sources */,
 				1D2A043425658484008CE2D4 /* LoginViewModel.swift in Sources */,
 				1D3B2A122564D1F0001874FD /* Services.swift in Sources */,

@@ -92,23 +92,15 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         bottomStackView.addArrangedSubview(termsAndConditionsTextView)
         bottomStackView.bottomToSuperview(offset: -8, usingSafeArea: true)
         bottomStackView.widthToSuperview()
-        //bottomStackView.height(30)
         
         /// Configure the text views
-        let textViews = [applyHereTextView]
-//,
-//                         forgotPasswordTextView,
-//                         termsAndConditionsTextView]
         
         applyHereTextView.height(30)
         applyHereTextView.leftToSuperview()
         applyHereTextView.rightToSuperview()
         
         forgotPasswordTextView.height(30)
-        //forgotPasswordTextView.width(200)
-        
         termsAndConditionsTextView.height(30)
-        //termsAndConditionsTextView.width(200)
     }
     
     /// Configure the bindings between the view model and
