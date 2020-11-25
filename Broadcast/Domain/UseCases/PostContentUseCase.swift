@@ -17,6 +17,11 @@ class PostContentUseCase {
     init(apiService: APIService) {
         self.apiService = apiService
     }
+    
+    func retrieveMyPosts() {
+        // Load posts into the app state
+        #warning("TODO")
+    }
 }
 
 // MARK: - StateControllerInjector
