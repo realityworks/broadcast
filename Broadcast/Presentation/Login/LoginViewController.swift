@@ -19,6 +19,7 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
     // MARK: UI Components
     private let scrollView = UIScrollView()
     private let contentStackView = UIStackView()
+    private let bottomStackView = UIStackView()
     private let logoImageView = UIImageView()
     
     private let usernameTextField = UITextField.standard(withPlaceholder: "Username")
@@ -26,8 +27,8 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
     private let errorDisplayView = DismissableLabel()
     private let loginButton = UIButton.loginButton(withTitle: "Let's go!")
     private let applyHereTextView = UITextView()
-    private let termsAndConditionsLabel = UILabel()
-    private let forgotPasswordLabel = UILabel()
+    private let termsAndConditionsTextView = UITextView()
+    private let forgotPasswordTextView = UITextView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +51,10 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         contentStackView.distribution = .equalSpacing
         
         applyHereTextView.isScrollEnabled = false
+        
+        bottomStackView.axis = .horizontal
+        bottomStackView.alignment = .center
+        bottomStackView.distribution = .equalSpacing
     }
     
     private func configureLayout() {
@@ -81,10 +86,23 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         
         loginButton.width(150)
         
-        /// Configure the apply here label
-        applyHereTextView.height(30)
-        applyHereTextView.leftToSuperview()
-        applyHereTextView.rightToSuperview()
+        /// Configure the bottom stackview
+        view.addSubview(bottomStackView)
+        bottomStackView.addArrangedSubview(forgotPasswordTextView)
+        bottomStackView.addArrangedSubview(termsAndConditionsTextView)
+        bottomStackView.bottomToSuperview()
+        bottomStackView.widthToSuperview()
+        
+        /// Configure the text views
+        let textViews = [applyHereTextView,
+                         forgotPasswordTextView,
+                         termsAndConditionsTextView]
+        
+        textViews.forEach {
+            $0.height(30)
+            $0.leftToSuperview()
+            $0.rightToSuperview()
+        }
     }
     
     /// Configure the bindings between the view model and
@@ -129,12 +147,12 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         view.backgroundColor = .white
         
         // Style attributed strings
-        let applyNormal = Style {
+        let applyNormalStyle = Style {
             $0.font = SystemFonts.Helvetica_Light.font(size: 15)
             $0.alignment = .center
         }
         
-        let applyUnderline = Style {
+        let applyUnderlineStyle = Style {
             $0.font = SystemFonts.Helvetica_Light.font(size: 15)
             $0.underline = (.single, UIColor.black)
             $0.linkURL = URL(string: "https://boomday.com")
@@ -142,10 +160,31 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         }
         
         applyHereTextView.attributedText =
-            "No account? ".set(style: applyNormal) +
-            "Apply here".set(style: applyUnderline)
+            "No account? ".set(style: applyNormalStyle) +
+            "Apply here".set(style: applyUnderlineStyle)
+        
+        let forgotPasswordStyle = Style {
+            $0.font = SystemFonts.Helvetica_Light.font(size: 15)
+            $0.alignment = .center
+            $0.linkURL = URL(string: "https://boomday.com")
+        }
+        
+        forgotPasswordTextView.attributedText = "Forgot your password?".set(style: forgotPasswordStyle)
+                
+        let termsAndConditionsStyle = Style {
+            $0.font = SystemFonts.Helvetica_Light.font(size: 15)
+            $0.alignment = .center
+            $0.linkURL = URL(string: "https://boomday.com")
+        }
+        
+        termsAndConditionsTextView.attributedText = "Terms and Conditions".set(style: termsAndConditionsStyle)
 
-        applyHereTextView.tintColor = .black
+        // Style the text views
+        let textViews = [applyHereTextView,
+                         forgotPasswordTextView,
+                         termsAndConditionsTextView]
+        
+        textViews.forEach { $0.tintColor = .black }
     }
     
     @objc func dismissKeyboard() {
