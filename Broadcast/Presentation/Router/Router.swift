@@ -31,6 +31,7 @@ class Router {
     private let errorObservable: Observable<BoomdayError>
     private let connectionStateObservable: Observable<ConnectionState>
     private let authenticationStateObservable: Observable<AuthenticationState>
+    private let schedulers: Schedulers
     
     private let selectedRouteSubject: BehaviorRelay<Route> = BehaviorRelay(value: .login)
     private let disposeBag = DisposeBag()
@@ -41,6 +42,7 @@ class Router {
         self.errorObservable = dependencies.errorObservable
         self.connectionStateObservable = dependencies.connectionStateObservable
         self.authenticationStateObservable = dependencies.authenticationStateObservable
+        self.schedulers = dependencies.schedulers
     }
     
     /// Configure the observables to catch the changes in
@@ -56,6 +58,7 @@ class Router {
         /// Listen to when a new route is pushed, the router here will force the selected route on
         /// to the root view controller. This handles the top level routing
         selectedRouteSubject
+            .observeOn(schedulers.main)
             .subscribe(onNext: { route in
                 guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
                 appDelegate.window?.rootViewController = route.viewControllerInstance()
@@ -97,11 +100,13 @@ extension Router {
         let errorObservable: Observable<BoomdayError>
         let connectionStateObservable: Observable<ConnectionState>
         let authenticationStateObservable: Observable<AuthenticationState>
+        let schedulers: Schedulers
         
         static var standard = Dependencies(
             stateController: Domain.standard.stateController,
             errorObservable: Domain.standard.stateController.errorObservable(),
             connectionStateObservable: Domain.standard.stateController.stateObservable(of: \.connectionState),
-            authenticationStateObservable: Domain.standard.stateController.stateObservable(of: \.authenticationState))
+            authenticationStateObservable: Domain.standard.stateController.stateObservable(of: \.authenticationState),
+            schedulers: Schedulers.standard)
     }
 }

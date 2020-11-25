@@ -60,10 +60,12 @@ class MainViewController: UITabBarController {
         
         let profileTabBarItem = UITabBarItem(
             title: "Profile",
-            image: UIImage(systemName: "person"),
-            selectedImage: UIImage(systemName: "person.fill"))
+            image: UIImage(systemName: "rectangle.stack.person.crop"),
+            selectedImage: UIImage(systemName: "rectangle.stack.person.crop.fill"))
         
         profileViewController.tabBarItem = profileTabBarItem
+        
+        viewControllers = [myPostViewController, profileViewController]
     }
 }
 
