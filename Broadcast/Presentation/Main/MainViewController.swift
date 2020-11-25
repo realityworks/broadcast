@@ -9,17 +9,40 @@ import UIKit
 
 class MainViewController: UITabBarController {
     
-    let myPostViewController    = MyPostsViewController()
-    let profileViewController   = ProfileViewController()
+    enum TabBarItems : Int {
+        case myPosts = 0
+        case profile = 1
+    }
+    
+    private (set) var myPostViewController: UIViewController!
+    private (set) var profileViewController: UIViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.delegate = self
         
+        myPostViewController    = Route.myPosts.viewControllerInstance()
+        profileViewController   = Route.profile.viewControllerInstance()
+
         // Do any additional setup after loading the view.
         configureViews()
         styleView()
+    }
+    
+    /// Select a specific route in the Main View Controller
+    /// - Parameter route: Selected Route
+    func selectRoute(_ route: Route) {
+        switch route {
+        case .myPosts:
+            selectedIndex = TabBarItems.myPosts.rawValue
+        case .profile:
+            selectedIndex = TabBarItems.profile.rawValue
+            
+        // Default handling is just to directly select the my posts item
+        default:
+            selectedIndex = TabBarItems.myPosts.rawValue
+        }
     }
     
     /// Style the contentviews

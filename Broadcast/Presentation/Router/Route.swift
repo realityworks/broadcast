@@ -11,6 +11,8 @@ indirect enum Route {
     case none
     case login
     case main(child: Route)
+    case myPosts
+    case profile
 }
 
 extension Route {
@@ -21,7 +23,13 @@ extension Route {
         case .login:
             return LoginViewController()
         case .main(let child):
-            return MainViewController()
+            let mainViewController = MainViewController()
+            mainViewController.selectRoute(child)
+            return mainViewController
+        case .myPosts:
+            return MyPostsViewController()
+        case .profile:
+            return ProfileViewController()
         }
     }
 }
