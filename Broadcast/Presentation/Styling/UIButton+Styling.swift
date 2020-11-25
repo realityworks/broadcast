@@ -12,7 +12,8 @@ extension UIButton {
     static func loginButton(withTitle title: String) -> UIButton {
         let button = UIButton()
         
-        button.backgroundColor = .blue
+        button.setBackgroundColor(.blue, for: .normal)
+        button.setBackgroundColor(UIColor.blue.withAlphaComponent(0.5), for: .disabled)
         button.setTitleColor(.white, for: .normal)
         button.height(50)
         button.layer.cornerRadius = 12
