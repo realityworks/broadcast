@@ -11,7 +11,7 @@ import SDWebImage
 class PostSummaryView : UIView {
     let thumbnailImageView = UIImageView()
     #warning("TODO")
-    //let processingView =
+    let processingView = ProcessingView()
 
     let postTitleLabel = UILabel.postTitle()
     let postStatsView = PostStatsView()
