@@ -5,7 +5,7 @@
 //  Created by Piotr Suwara on 20/11/20.
 //
 
-import Foundation
+import UIKit
 import RxSwift
 import RxCocoa
 
@@ -13,12 +13,23 @@ class MyPostsViewModel : ViewModel {
     
     private let postContentUseCase: PostContentUseCase
     
-    let myPostsObservable: Observable<[Post]>
+    let myPostsObservable: Observable<[MyPostCellModel]>
     
     init(dependencies: Dependencies = .standard) {
         
         self.postContentUseCase = dependencies.postContentUseCase
         self.myPostsObservable = dependencies.myPostsObservable
+            .map { posts in
+                return posts.map { _ in
+                    MyPostCellModel(title: "",
+                                    caption: "",
+                                    thumbnailImage: UIImage(systemName: "profile"),
+                                    isProcessing: false,
+                                    dateCreated: "Created yesterday",
+                                    commentCount: 100,
+                                    lockerCount: 100)
+                }
+            }
         
         super.init(stateController: dependencies.stateController)
     }

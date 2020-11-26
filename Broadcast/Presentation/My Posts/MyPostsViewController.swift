@@ -7,6 +7,8 @@
 
 import UIKit
 import TinyConstraints
+import RxSwift
+import RxCocoa
 
 class MyPostsViewController: ViewController {
     
@@ -36,6 +38,16 @@ class MyPostsViewController: ViewController {
     
     private func configureBindings() {
         // Setup the table view
+
+        viewModel.myPostsObservable
+            .bind(to: tableView.rx.items) {
+                (tableView: UITableView, index: Int, element: String) in
+                let cell = MyPostTableViewCell(style: .default, reuseIdentifier: "cell")
+                cell.textLabel?.text = element
+                return cell
+            }
+            .disposed(by: disposeBag)
+            
     }
     
     private func style() {
