@@ -6,7 +6,9 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 protocol APIService {
-    
+    func retrieveMyPosts() -> Single<RetrieveMyPostsResponse>
 }

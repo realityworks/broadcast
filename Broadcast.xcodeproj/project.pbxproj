@@ -89,6 +89,7 @@
 		1DD1FE28256E16B600C598CE /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD1FE27256E16B600C598CE /* UIButton+Extensions.swift */; };
 		1DD1FE2E256E16D100C598CE /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD1FE2D256E16D100C598CE /* UIImage+Extensions.swift */; };
 		1DD1FE53256E987B00C598CE /* UIImage+Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD1FE52256E987A00C598CE /* UIImage+Assets.swift */; };
+		1DDEC77B256F5D1D00D65023 /* RetrieveMyPostsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DDEC77A256F5D1D00D65023 /* RetrieveMyPostsResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -182,6 +183,7 @@
 		1DD1FE27256E16B600C598CE /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
 		1DD1FE2D256E16D100C598CE /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		1DD1FE52256E987A00C598CE /* UIImage+Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Assets.swift"; sourceTree = "<group>"; };
+		1DDEC77A256F5D1D00D65023 /* RetrieveMyPostsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrieveMyPostsResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -530,6 +532,7 @@
 			isa = PBXGroup;
 			children = (
 				1DD1FE1C256D6F7300C598CE /* AuthenticateResponse.swift */,
+				1DDEC77A256F5D1D00D65023 /* RetrieveMyPostsResponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -688,6 +691,7 @@
 				1D3B2A0D2564D0EA001874FD /* LocalAuthenticationService.swift in Sources */,
 				1D87DF4E2568353F000652D6 /* EditProfileViewModel.swift in Sources */,
 				1D3ED60425663AAD004236BB /* UINavigationController.swift in Sources */,
+				1DDEC77B256F5D1D00D65023 /* RetrieveMyPostsResponse.swift in Sources */,
 				1D87DF7F256838A9000652D6 /* NewPostEditViewModel.swift in Sources */,
 				1D916D672562C7500059E549 /* Domain.swift in Sources */,
 				1D3B2A432564F22F001874FD /* LocalAPIService.swift in Sources */,

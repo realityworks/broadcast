@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct Post: Equatable {
+struct Post: Equatable, Codable {
     
 }

@@ -10,8 +10,6 @@ import RxSwift
 import RxCocoa
 
 protocol AuthenticationService {
-    var stateController: StateController { get }
-    
     func authenticate(withUsername username: String, password: String) -> Single<AuthenticateResponse>
 }
 

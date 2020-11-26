@@ -11,7 +11,6 @@ class PostContentUseCase {
     typealias T = PostContentUseCase
     
     var stateController: StateController!
-    
     private let apiService: APIService
     
     init(apiService: APIService) {
@@ -21,6 +20,8 @@ class PostContentUseCase {
     func retrieveMyPosts() {
         // Load posts into the app state
         #warning("TODO")
+        
+        
     }
 }
 
