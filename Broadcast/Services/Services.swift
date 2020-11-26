@@ -33,7 +33,7 @@ extension Services {
         return Services(
             authenticationService: StandardAPIService.standard,
             credentialsService: StandardCredentialsService(),
-            uploadService: StandardUploadService(stateController: Domain.standard.stateController),
+            uploadService: StandardUploadService(stateController: StateController.standard),
             apiService: StandardAPIService.standard)
     }()
     

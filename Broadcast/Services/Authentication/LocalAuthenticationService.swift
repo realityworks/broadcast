@@ -31,6 +31,6 @@ class LocalAuthenticationService : AuthenticationService {
 
 extension LocalAuthenticationService {
     static let standard = {
-        LocalAuthenticationService(stateController: Domain.standard.stateController)
+        LocalAuthenticationService(stateController: StateController.standard)
     }()
 }
