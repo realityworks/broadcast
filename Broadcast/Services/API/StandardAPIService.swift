@@ -36,3 +36,11 @@ extension StandardAPIService : AuthenticationService {
         return single
     }
 }
+
+// MARK: - Instance
+
+extension StandardAPIService {
+    static let standard = {
+        StandardAPIService(stateController: Domain.standard.stateController)
+    }()
+}

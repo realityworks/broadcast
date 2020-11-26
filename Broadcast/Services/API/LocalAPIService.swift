@@ -22,6 +22,13 @@ class LocalAPIService : APIService {
             return Disposables.create { }
         }
         return single
-
     }
+}
+
+// MARK: - Instance
+
+extension LocalAPIService {
+    static let standard = {
+        LocalAPIService()
+    }()
 }

@@ -26,3 +26,11 @@ class LocalAuthenticationService : AuthenticationService {
         return single
     }
 }
+
+// MARK: - Instance
+
+extension LocalAuthenticationService {
+    static let standard = {
+        LocalAuthenticationService(stateController: Domain.standard.stateController)
+    }()
+}

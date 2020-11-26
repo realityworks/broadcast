@@ -31,17 +31,17 @@ class Services {
 extension Services {
     static let standard = {
         return Services(
-            authenticationService: StandardAuthenticationService(stateController: StateController.standard),
+            authenticationService: StandardAPIService.standard,
             credentialsService: StandardCredentialsService(),
-            uploadService: StandardUploadService(stateController: StateController.standard),
-            apiService: StandardAPIService())
+            uploadService: StandardUploadService(stateController: Domain.standard.stateController),
+            apiService: StandardAPIService.standard)
     }()
     
     static let local = {
         return Services(
-            authenticationService: LocalAuthenticationService(stateController: StateController.standard),
+            authenticationService: LocalAuthenticationService.standard,
             credentialsService: StandardCredentialsService(),
             uploadService: LocalUploadService(stateController: StateController.standard),
-            apiService: LocalAPIService())
+            apiService: LocalAPIService.standard)
     }()
 }
