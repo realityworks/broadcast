@@ -6,10 +6,11 @@
 //
 
 import UIKit
+import TinyConstraints
 
 class MyPostsViewController: ViewController {
-    private let viewModel = MyPostsViewModel()
     
+    private let viewModel = MyPostsViewModel()
     private let tableView = UITableView()
     
     override func viewDidLoad() {
@@ -25,11 +26,12 @@ class MyPostsViewController: ViewController {
     }
     
     private func configureViews() {
-        
+        tableView.delegate = self
+        //tableView.datasource = self
     }
     
     private func configureLayout() {
-        
+        tableView.edgesToSuperview()
     }
     
     private func configureBindings() {
@@ -39,6 +41,12 @@ class MyPostsViewController: ViewController {
     private func style() {
         
     }
+}
+
+// MARK: - UITableViewDelegate
+
+extension MyPostsViewController : UITableViewDelegate {
+    
 }
 
 

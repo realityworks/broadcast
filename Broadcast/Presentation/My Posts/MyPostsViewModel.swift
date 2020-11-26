@@ -6,14 +6,27 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 class MyPostsViewModel : ViewModel {
     
+    private let postContentUseCase: PostContentUseCase
+    
+    let myPostsObservable: Observable<[Post]>
+    
     init(dependencies: Dependencies = .standard) {
-        super.init(stateController: dependencies.stateController)
         
+        self.postContentUseCase = dependencies.postContentUseCase
+        self.myPostsObservable = dependencies.myPostsObservable
+        
+        super.init(stateController: dependencies.stateController)
     }
     
+    
+    func refreshMyPostsList() {
+        
+    }
 }
 
 /// MainViewModel dependencies component
@@ -22,10 +35,12 @@ extension MyPostsViewModel {
         
         let stateController: StateController
         let postContentUseCase: PostContentUseCase
+        let myPostsObservable: Observable<[Post]>
         
         static let standard = Dependencies(
             stateController: Domain.standard.stateController,
-            postContentUseCase: Domain.standard.useCases.postContentUseCase)
+            postContentUseCase: Domain.standard.useCases.postContentUseCase,
+            myPostsObservable: Domain.standard.stateController.stateObservable(of: \.myPosts))
         
     }
 }
