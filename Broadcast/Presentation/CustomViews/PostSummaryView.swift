@@ -35,7 +35,7 @@ class PostSummaryView : UIView {
         #warning("TODO")
         
         if let url = thumbnailURL {
-            thumbnailImageView.sd_setImage(with: url, placeholderImage: UIImage(systemName: "")
+            thumbnailImageView.sd_setImage(with: url, placeholderImage: UIImage(systemName: "paintbrush"))
         }
         
         postStatsView.configure(withCommentCount: commentCount,
