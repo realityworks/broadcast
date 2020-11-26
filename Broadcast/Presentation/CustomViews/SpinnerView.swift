@@ -9,5 +9,5 @@ import UIKit
 
 /// Custom CoreGraphics circle spinner
 final class SpinnerView : UIView {
-    
+    #warning("TODO")
 }

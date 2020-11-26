@@ -10,7 +10,6 @@ import SDWebImage
 
 class PostSummaryView : UIView {
     let thumbnailImageView = UIImageView()
-    #warning("TODO")
     let processingView = ProcessingView()
 
     let postTitleLabel = UILabel.postTitle()
@@ -19,6 +18,9 @@ class PostSummaryView : UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        #warning("TODO")
+
     }
     
     required init?(coder: NSCoder) {
