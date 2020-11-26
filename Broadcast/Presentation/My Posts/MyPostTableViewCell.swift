@@ -36,10 +36,11 @@ class MyPostTableViewCell : UITableViewCell {
     
     func configure(withViewModel viewModel: MyPostCellViewModel) {
         postSummaryView.configure(
-            withTitle:
-            thumbnailURL: thumbnailURL,
-            commentCount: commentCount,
-            lockerCount: lockerCount,
-            isProcessing: isProcessing)
+            withTitle: viewModel.title,
+            thumbnailURL: viewModel.thumbnailURL,
+            commentCount: viewModel.commentCount,
+            lockerCount: viewModel.lockerCount,
+            dateCreated: viewModel.dateCreated,
+            isProcessing: viewModel.isProcessing)
     }
 }

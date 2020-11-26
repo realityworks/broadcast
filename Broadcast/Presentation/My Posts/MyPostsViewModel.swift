@@ -13,7 +13,7 @@ class MyPostsViewModel : ViewModel {
     
     private let postContentUseCase: PostContentUseCase
     
-    let myPostsObservable: Observable<[MyPostCellModel]>
+    let myPostsObservable: Observable<[MyPostCellViewModel]>
     
     init(dependencies: Dependencies = .standard) {
         
@@ -21,13 +21,12 @@ class MyPostsViewModel : ViewModel {
         self.myPostsObservable = dependencies.myPostsObservable
             .map { posts in
                 return posts.map { _ in
-                    MyPostCellModel(title: "",
-                                    caption: "",
-                                    thumbnailImage: UIImage(systemName: "profile"),
-                                    isProcessing: false,
-                                    dateCreated: "Created yesterday",
-                                    commentCount: 100,
-                                    lockerCount: 100)
+                    MyPostCellViewModel(title: "",
+                                        thumbnailURL: URL(string: ""),
+                                        isProcessing: false,
+                                        dateCreated: "Created yesterday",
+                                        commentCount: 100,
+                                        lockerCount: 100)
                 }
             }
         

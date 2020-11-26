@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class PostSummaryView : UIView {
     let thumbnailImageView = UIImageView()
@@ -24,10 +25,20 @@ class PostSummaryView : UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(withThumbnailURL: URL,
-                   commentCount: Int,
-                   lockerCount: Int,
-                   isProcessing: Bool) {
+    func configure(
+        withTitle title: String,
+        thumbnailURL: URL?,
+        commentCount: Int,
+        lockerCount: Int,
+        dateCreated: String,
+        isProcessing: Bool) {
+        #warning("TODO")
         
+        if let url = thumbnailURL {
+            thumbnailImageView.sd_setImage(with: url, placeholderImage: UIImage(systemName: "")
+        }
+        
+        postStatsView.configure(withCommentCount: commentCount,
+                                lockerCount: lockerCount)
     }
 }

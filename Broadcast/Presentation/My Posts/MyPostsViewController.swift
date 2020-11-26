@@ -39,21 +39,11 @@ class MyPostsViewController: ViewController {
     
     private func configureBindings() {
         // Setup the table view
-
         viewModel.myPostsObservable
-//            .bind(to: tableView.rx.items(cellIdentifier: MyPostCellModel.identifier, cellType: MyPostCellModel.self)) { _, model, cell in
-//                cell.configure(with: model)
-//            }
-            .bind(to: tableView.rx.items(cellIdentifier: MyPostTableViewCell.identifier, cellType: MyPostTableViewCell.self)) {
-                _, model, cell in
-                //let cell = MyPostTableViewCell(style: .default, reuseIdentifier: "cell")
-//                let model = MyPostCellModel(
-                cell.configure(withThumbnailURL: model.thumbnailURL,
-                               commentCount: <#T##Int#>, lockerCount: <#T##Int#>, isProcessing: <#T##Bool#>)
-                return cell
+            .bind(to: tableView.rx.items(cellIdentifier: MyPostTableViewCell.identifier, cellType: MyPostTableViewCell.self)) { _, model, cell in
+                cell.configure(withViewModel: model)
             }
             .disposed(by: disposeBag)
-            
     }
     
     private func style() {
