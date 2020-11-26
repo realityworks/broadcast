@@ -42,6 +42,7 @@
 		1D3ED5FA25663512004236BB /* UIFont+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3ED5F925663512004236BB /* UIFont+Styling.swift */; };
 		1D3ED5FF25663521004236BB /* UIColor+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3ED5FE25663521004236BB /* UIColor+Styling.swift */; };
 		1D3ED60425663AAD004236BB /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3ED60325663AAD004236BB /* UINavigationController.swift */; };
+		1D3F71C2256FFC0B00DE7F05 /* UILabel+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3F71C1256FFC0B00DE7F05 /* UILabel+Styling.swift */; };
 		1D87DF3F256834A6000652D6 /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF3E256834A6000652D6 /* AddPostViewController.swift */; };
 		1D87DF44256834C4000652D6 /* AddPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF43256834C4000652D6 /* AddPostViewModel.swift */; };
 		1D87DF4925683535000652D6 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF4825683535000652D6 /* EditProfileViewController.swift */; };
@@ -145,6 +146,7 @@
 		1D3ED5F925663512004236BB /* UIFont+Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Styling.swift"; sourceTree = "<group>"; };
 		1D3ED5FE25663521004236BB /* UIColor+Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Styling.swift"; sourceTree = "<group>"; };
 		1D3ED60325663AAD004236BB /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
+		1D3F71C1256FFC0B00DE7F05 /* UILabel+Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Styling.swift"; sourceTree = "<group>"; };
 		1D87DF3E256834A6000652D6 /* AddPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
 		1D87DF43256834C4000652D6 /* AddPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostViewModel.swift; sourceTree = "<group>"; };
 		1D87DF4825683535000652D6 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
@@ -461,6 +463,7 @@
 				1D3ED5F925663512004236BB /* UIFont+Styling.swift */,
 				1D3ED5FE25663521004236BB /* UIColor+Styling.swift */,
 				1DD1FE04256CA55F00C598CE /* UITextField+Styling.swift */,
+				1D3F71C1256FFC0B00DE7F05 /* UILabel+Styling.swift */,
 			);
 			path = Styling;
 			sourceTree = "<group>";
@@ -679,6 +682,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D3F71C2256FFC0B00DE7F05 /* UILabel+Styling.swift in Sources */,
 				1D3ED5FF25663521004236BB /* UIColor+Styling.swift in Sources */,
 				1D2A042F2565847B008CE2D4 /* LoginViewController.swift in Sources */,
 				1DD1FE53256E987B00C598CE /* UIImage+Assets.swift in Sources */,
