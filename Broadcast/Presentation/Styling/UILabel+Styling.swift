@@ -8,7 +8,7 @@
 import UIKit
 
 extension UILabel {
-    static func postTitle(_ title: String) -> UILabel {
+    static func postTitle(_ title: String? = nil) -> UILabel {
         let label = UILabel()
         label.text = title
         label.font = .postTitle
