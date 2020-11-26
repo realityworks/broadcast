@@ -11,20 +11,35 @@ import SDWebImage
 class MyPostTableViewCell : UITableViewCell {
     static let identifier = "MyPostTableViewCell"
     
-    let postView = PostView()
-    
-    #warning("TODO")
-    //let processingView =
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    let postSummaryView = PostSummaryView()
+        
+    override init(style: UITableViewCell.CellStyle,
+                  reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        // Setup the view
-        self.addSubview(thumbnailImageView)
-        self.addSubview(postTitleLabel)
+        configureView()
+        styleView()
+    }
+    
+    func configureView() {
+        contentView.addSubview(postSummaryView)
+        postSummaryView.edgesToSuperview()
+    }
+    
+    func styleView() {
+        contentView.backgroundColor = .white
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configure(withViewModel viewModel: MyPostCellViewModel) {
+        postSummaryView.configure(
+            withTitle:
+            thumbnailURL: thumbnailURL,
+            commentCount: commentCount,
+            lockerCount: lockerCount,
+            isProcessing: isProcessing)
     }
 }

@@ -44,10 +44,12 @@ class MyPostsViewController: ViewController {
 //            .bind(to: tableView.rx.items(cellIdentifier: MyPostCellModel.identifier, cellType: MyPostCellModel.self)) { _, model, cell in
 //                cell.configure(with: model)
 //            }
-            .bind(to: tableView.rx.items) {
-                (tableView: UITableView, index: Int, element: Post) in
-                let cell = MyPostTableViewCell(style: .default, reuseIdentifier: "cell")
-                cell.textLabel?.text = element
+            .bind(to: tableView.rx.items(cellIdentifier: MyPostTableViewCell.identifier, cellType: MyPostTableViewCell.self)) {
+                _, model, cell in
+                //let cell = MyPostTableViewCell(style: .default, reuseIdentifier: "cell")
+//                let model = MyPostCellModel(
+                cell.configure(withThumbnailURL: model.thumbnailURL,
+                               commentCount: <#T##Int#>, lockerCount: <#T##Int#>, isProcessing: <#T##Bool#>)
                 return cell
             }
             .disposed(by: disposeBag)

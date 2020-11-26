@@ -1,5 +1,5 @@
 //
-//  MyPostCellModel.swift
+//  MyPostCellViewModel.swift
 //  Broadcast
 //
 //  Created by Piotr Suwara on 26/11/20.
@@ -7,10 +7,9 @@
 
 import UIKit
 
-struct MyPostCellModel {
+struct MyPostCellViewModel {
     let title: String
-    let caption: String
-    let thumbnailImage: UIImage?
+    let thumbnailURL: URL?
     let isProcessing: Bool
     let dateCreated: String
     let commentCount: Int
