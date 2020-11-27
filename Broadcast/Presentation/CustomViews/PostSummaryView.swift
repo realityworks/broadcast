@@ -9,8 +9,10 @@ import UIKit
 import SDWebImage
 
 class PostSummaryView : UIView {
+    let verticalStackView = UIStackView()
     let thumbnailImageView = UIImageView()
     let processingView = ProcessingView()
+    let containerTopView = UIView()
 
     let postTitleLabel = UILabel.postTitle()
     let postStatsView = PostStatsView()
@@ -19,8 +21,36 @@ class PostSummaryView : UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        #warning("TODO")
-
+        configureViews()
+        configureLayout()
+        style()
+    }
+    
+    func configureViews() {
+        verticalStackView.axis = .vertical
+    }
+    
+    func configureLayout() {
+        // Layout container top view
+        addSubview(containerTopView)
+        containerTopView.edgesToSuperview(excluding: [.bottom])
+        
+        containerTopView.addSubview(thumbnailImageView)
+        containerTopView.addSubview(processingView)
+        
+        thumbnailImageView.edgesToSuperview()
+        processingView.edgesToSuperview()
+        
+        // Layout vertical stack
+        addSubview(verticalStackView)
+        
+        verticalStackView.addArrangedSubview(containerTopView)
+        verticalStackView.addArrangedSubview(postStatsView)
+        verticalStackView.addArrangedSubview(dateCreatedLabel)
+    }
+    
+    func style() {
+        
     }
     
     required init?(coder: NSCoder) {
@@ -42,5 +72,7 @@ class PostSummaryView : UIView {
         
         postStatsView.configure(withCommentCount: commentCount,
                                 lockerCount: lockerCount)
+        
+        dateCreatedLabel.text =
     }
 }
