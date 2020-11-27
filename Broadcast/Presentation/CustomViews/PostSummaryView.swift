@@ -56,6 +56,7 @@ class PostSummaryView : UIView {
         processingView.edgesToSuperview()
         thumbnailImageView.edgesToSuperview()
         
+        postStatsView.height(15)
         verticalStackView.addSpace(height: 10)
     }
     

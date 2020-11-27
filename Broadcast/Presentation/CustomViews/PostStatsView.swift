@@ -49,7 +49,7 @@ class PostStatsView : UIView {
     
     private func layoutViews() {
         addSubview(horizontalStackView)
-        horizontalStackView.height(15)
+        horizontalStackView.edgesToSuperview()
         
         commentStackView.addArrangedSubview(commentImageView)
         commentStackView.addArrangedSubview(commentCountLabel)
