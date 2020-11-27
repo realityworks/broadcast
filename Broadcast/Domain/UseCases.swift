@@ -42,6 +42,7 @@ extension UseCases : StateControllerInjector {
         // Inject the StateController into the usecases
         authenticationUseCase.with(stateController: stateController)
         profileUseCase.with(stateController: stateController)
+        postContentUseCase.with(stateController: stateController)
         
         return self
     }
