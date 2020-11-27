@@ -8,15 +8,15 @@
 import UIKit
 
 extension UITextField {
-    static func standard(withPlaceholder placeholder: String) -> UITextField {
+    static func standard(withPlaceholder placeholder: LocalizedString) -> UITextField {
         let textField = UITextField()
         textField.borderStyle = .roundedRect
-        textField.placeholder = placeholder
+        textField.placeholder = placeholder.localized
         textField.height(50)
         return textField
     }
     
-    static func password(withPlaceholder placeholder: String) -> UITextField {
+    static func password(withPlaceholder placeholder: LocalizedString) -> UITextField {
         let textField = standard(withPlaceholder: placeholder)
         textField.isSecureTextEntry = true
         return textField

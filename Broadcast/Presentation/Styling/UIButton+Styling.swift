@@ -9,7 +9,7 @@ import UIKit
 import TinyConstraints
 
 extension UIButton {
-    static func loginButton(withTitle title: String) -> UIButton {
+    static func loginButton(withTitle title: LocalizedString) -> UIButton {
         let button = UIButton()
         
         button.setBackgroundColor(.blue, for: .normal)
@@ -17,7 +17,7 @@ extension UIButton {
         button.setTitleColor(.white, for: .normal)
         button.height(50)
         button.layer.cornerRadius = 12
-        button.setTitle(title, for: .normal)
+        button.setTitle(title.localized, for: .normal)
         button.clipsToBounds = true
         
         return button

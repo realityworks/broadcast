@@ -49,6 +49,7 @@
 		1D3F71D42570184500DE7F05 /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3F71D32570184500DE7F05 /* SpinnerView.swift */; };
 		1D3F71D82571205200DE7F05 /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3F71D72571205200DE7F05 /* LocalizedString.swift */; };
 		1D3F71E22571244900DE7F05 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1D3F71E42571244900DE7F05 /* Localizable.strings */; };
+		1D3F71E82571294F00DE7F05 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3F71E72571294F00DE7F05 /* String+Extensions.swift */; };
 		1D87DF3F256834A6000652D6 /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF3E256834A6000652D6 /* AddPostViewController.swift */; };
 		1D87DF44256834C4000652D6 /* AddPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF43256834C4000652D6 /* AddPostViewModel.swift */; };
 		1D87DF4925683535000652D6 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF4825683535000652D6 /* EditProfileViewController.swift */; };
@@ -159,6 +160,7 @@
 		1D3F71D32570184500DE7F05 /* SpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
 		1D3F71D72571205200DE7F05 /* LocalizedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedString.swift; sourceTree = "<group>"; };
 		1D3F71E32571244900DE7F05 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1D3F71E72571294F00DE7F05 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		1D87DF3E256834A6000652D6 /* AddPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
 		1D87DF43256834C4000652D6 /* AddPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostViewModel.swift; sourceTree = "<group>"; };
 		1D87DF4825683535000652D6 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
@@ -575,6 +577,7 @@
 				1DD1FE27256E16B600C598CE /* UIButton+Extensions.swift */,
 				1D91A0CB256C1B8E0043A943 /* UIStackView+Extensions.swift */,
 				1DD1FE2D256E16D100C598CE /* UIImage+Extensions.swift */,
+				1D3F71E72571294F00DE7F05 /* String+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -710,6 +713,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D3F71C2256FFC0B00DE7F05 /* UILabel+Styling.swift in Sources */,
+				1D3F71E82571294F00DE7F05 /* String+Extensions.swift in Sources */,
 				1D3F71D42570184500DE7F05 /* SpinnerView.swift in Sources */,
 				1D3ED5FF25663521004236BB /* UIColor+Styling.swift in Sources */,
 				1D2A042F2565847B008CE2D4 /* LoginViewController.swift in Sources */,

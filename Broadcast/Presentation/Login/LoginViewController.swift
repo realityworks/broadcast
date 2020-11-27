@@ -22,10 +22,16 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
     private let bottomStackView = UIStackView()
     private let logoImageView = UIImageView()
     
-    private let usernameTextField = UITextField.standard(withPlaceholder: "Username")
-    private let passwordTextField = UITextField.password(withPlaceholder: "Password")
+    private let usernameTextField = UITextField.standard(
+        withPlaceholder: LocalizedString.usernamePlaceholder)
+    
+    private let passwordTextField = UITextField.password(
+        withPlaceholder: LocalizedString.passwordPlaceholder)
+    
     private let errorDisplayView = DismissableLabel()
-    private let loginButton = UIButton.loginButton(withTitle: "Let's go!")
+    private let loginButton = UIButton.loginButton(
+        withTitle: LocalizedString.loginButton)
+    
     private let applyHereTextView = UITextView()
     private let termsAndConditionsTextView = UITextView()
     private let forgotPasswordTextView = UITextView()
