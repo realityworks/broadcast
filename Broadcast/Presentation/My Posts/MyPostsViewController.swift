@@ -9,10 +9,14 @@ import UIKit
 import TinyConstraints
 import RxSwift
 import RxCocoa
+import RxDataSources
 
 class MyPostsViewController: ViewController {
     
     private let viewModel = MyPostsViewModel()
+    
+    var dataSource: RxTableViewSectionedReloadDataSource<MyPostsSection>!
+    
     private let tableView = UITableView()
     
     override func viewDidLoad() {
@@ -41,13 +45,22 @@ class MyPostsViewController: ViewController {
     }
     
     private func configureBindings() {
+        // Setup the datasource
+        dataSource = RxTableViewSectionedReloadDataSource<MyPostsSection>(
+            configureCell: { (_, tableView, indexPath, viewModel) -> UITableViewCell in
+                let cell = tableView.dequeueReusableCell(withIdentifier: MyPostTableViewCell.identifier, for: indexPath) as! MyPostTableViewCell
+                cell.configure(withViewModel: viewModel)
+                return cell
+            })
+        
         // Setup the table view
         viewModel.myPostsObservable
-            .bind(to: tableView.rx.items(cellIdentifier: MyPostTableViewCell.identifier, cellType: MyPostTableViewCell.self)) { _, model, cell in
-                Logger.log(level: .verbose, topic: .debug, message: "Init cell : \(model.title)")
-                cell.configure(withViewModel: model)
-            }
+            .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
+        
+        tableView.rx
+            .setDelegate(self)
+            .disposed(by: DisposeBag())
     }
     
     private func style() {
