@@ -83,8 +83,7 @@ struct Log {
     enum Topic: String {
         case appState = "App State"
         case authentication = "Authentication"
-        case rest = "REST"
-        case signalR = "SignalR"
+        case api = "Api"
         case other = "Other"
         case debug = "Debug"
     }

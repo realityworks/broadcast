@@ -35,7 +35,7 @@ class MyPostsViewModel : ViewModel {
     
     
     func refreshMyPostsList() {
-        
+        postContentUseCase.retrieveMyPosts()
     }
 }
 
@@ -47,10 +47,11 @@ extension MyPostsViewModel {
         let postContentUseCase: PostContentUseCase
         let myPostsObservable: Observable<[Post]>
         
-        static let standard = Dependencies(
-            stateController: Domain.standard.stateController,
-            postContentUseCase: Domain.standard.useCases.postContentUseCase,
-            myPostsObservable: Domain.standard.stateController.stateObservable(of: \.myPosts))
-        
+        static var standard: Dependencies {
+            return Dependencies(
+                stateController: Domain.standard.stateController,
+                postContentUseCase: Domain.standard.useCases.postContentUseCase,
+                myPostsObservable: Domain.standard.stateController.stateObservable(of: \.myPosts))
+        }
     }
 }

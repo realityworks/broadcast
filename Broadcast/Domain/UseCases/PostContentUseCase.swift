@@ -6,9 +6,13 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 class PostContentUseCase {
     typealias T = PostContentUseCase
+    
+    var disposeBag = DisposeBag()
     
     var stateController: StateController!
     private let apiService: APIService
@@ -19,9 +23,14 @@ class PostContentUseCase {
     
     func retrieveMyPosts() {
         // Load posts into the app state
-        #warning("TODO")
-        
-        
+        apiService.retrieveMyPosts()
+            .subscribe(onSuccess: { [unowned self] response in
+                self.stateController.state.myPosts = response.posts
+            }, onError: { [unowned self] error in
+                #warning("TODO")
+                Logger.log(level: .error, topic: .api, message: "Failed to load posts \(error)")
+            })
+            .disposed(by: disposeBag)
     }
 }
 
