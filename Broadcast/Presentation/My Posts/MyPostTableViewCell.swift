@@ -23,7 +23,10 @@ class MyPostTableViewCell : UITableViewCell {
     
     func configureView() {
         contentView.addSubview(postSummaryView)
-        postSummaryView.edgesToSuperview()
+        postSummaryView.topToSuperview()
+        postSummaryView.bottomToSuperview()
+        postSummaryView.leftToSuperview(offset: 20)
+        postSummaryView.rightToSuperview(offset: -20)
     }
     
     func styleView() {

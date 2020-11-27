@@ -33,7 +33,6 @@ class MyPostsViewController: ViewController {
     private func configureViews() {
         tableView.register(MyPostTableViewCell.self, forCellReuseIdentifier: MyPostTableViewCell.identifier)
         tableView.separatorStyle = .none
-        tableView.rowHeight = 200
     }
     
     private func configureLayout() {

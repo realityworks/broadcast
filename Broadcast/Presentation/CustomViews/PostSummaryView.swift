@@ -28,10 +28,13 @@ class PostSummaryView : UIView {
     
     func configureViews() {
         verticalStackView.axis = .vertical
-        verticalStackView.distribution = .equalCentering
+        verticalStackView.distribution = .equalSpacing
         verticalStackView.spacing = 5
+        
         thumbnailImageView.contentMode = .scaleAspectFill
-        thumbnailImageView.clipsToBounds = true
+        
+        containerTopView.layer.cornerRadius = 20
+        containerTopView.clipsToBounds = true
     }
     
     func configureLayout() {
@@ -47,7 +50,7 @@ class PostSummaryView : UIView {
         
         // Layout container top view
         containerTopView.edgesToSuperview(excluding: [.bottom])
-        containerTopView.height(100)
+        containerTopView.height(210)
         
         // Order important
         containerTopView.addSubview(processingView)
