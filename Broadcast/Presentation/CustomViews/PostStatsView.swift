@@ -51,8 +51,11 @@ class PostStatsView : UIView {
         addSubview(horizontalStackView)
         
         commentStackView.addArrangedSubview(commentImageView)
+        commentStackView.addSpace(2)
         commentStackView.addArrangedSubview(commentCountLabel)
+        
         lockerStackView.addArrangedSubview(lockerImageView)
+        lockerStackView.addSpace(2)
         lockerStackView.addArrangedSubview(lockerCountLabel)
         
         horizontalStackView.edgesToSuperview(excluding: [.left, .right])

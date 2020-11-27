@@ -60,7 +60,7 @@ class PostSummaryView : UIView {
         thumbnailImageView.edgesToSuperview()
         
         postStatsView.height(15)
-        verticalStackView.addSpace(height: 10)
+        verticalStackView.addSpace(10)
     }
     
     func style() {

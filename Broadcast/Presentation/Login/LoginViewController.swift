@@ -77,7 +77,7 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         contentStackView.spacing = 16
         
         /// Add arranged views to stack
-        contentStackView.addSpace(height: 300)
+        contentStackView.addSpace(300)
         contentStackView.addArrangedSubview(usernameTextField)
         contentStackView.addArrangedSubview(passwordTextField)
         contentStackView.addArrangedSubview(errorDisplayView)

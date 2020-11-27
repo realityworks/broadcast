@@ -10,7 +10,7 @@ import TinyConstraints
 
 extension UIStackView {
     @discardableResult
-    func addSpace(height: CGFloat,
+    func addSpace(_ space: CGFloat,
                   color: UIColor = .clear,
                   relation: TinyConstraints.ConstraintRelation = .equal,
                   priority: LayoutPriority = .required) -> UIView {
@@ -19,7 +19,12 @@ extension UIStackView {
         addArrangedSubview(spaceView)
         
         spaceView.backgroundColor = color
-        spaceView.height(height, relation: relation, priority: priority)
+        
+        if axis == .horizontal {
+            spaceView.width(space, relation: relation, priority: priority)
+        } else {
+            spaceView.height(space, relation: relation, priority: priority)
+        }
         
         return spaceView
     }
