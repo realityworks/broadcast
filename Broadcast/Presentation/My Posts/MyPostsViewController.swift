@@ -21,16 +21,18 @@ class MyPostsViewController: ViewController {
         // Do any additional setup after loading the view.
         title = "My Posts"
         
-        configureViews()
         configureLayout()
+        configureViews()
         configureBindings()
         style()
+        
+        #warning("Need to move this on account finished loading...")
+        viewModel.refreshMyPostsList()
     }
     
     private func configureViews() {
-        //tableView.delegate = self
-        //tableView.datasource = self
         tableView.register(MyPostTableViewCell.self, forCellReuseIdentifier: MyPostTableViewCell.identifier)
+        tableView.separatorStyle = .none
     }
     
     private func configureLayout() {
@@ -42,6 +44,7 @@ class MyPostsViewController: ViewController {
         // Setup the table view
         viewModel.myPostsObservable
             .bind(to: tableView.rx.items(cellIdentifier: MyPostTableViewCell.identifier, cellType: MyPostTableViewCell.self)) { _, model, cell in
+                Logger.log(level: .verbose, topic: .debug, message: "Init cell : \(model.title)")
                 cell.configure(withViewModel: model)
             }
             .disposed(by: disposeBag)
