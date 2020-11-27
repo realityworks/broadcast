@@ -63,7 +63,7 @@ class PostSummaryView : UIView {
         commentCount: Int,
         lockerCount: Int,
         dateCreated: String,
-        isProcessing: Bool) {
+        isEncoding: Bool) {
         #warning("TODO")
         
         if let url = thumbnailURL {
@@ -73,6 +73,6 @@ class PostSummaryView : UIView {
         postStatsView.configure(withCommentCount: commentCount,
                                 lockerCount: lockerCount)
         
-        dateCreatedLabel.text =
+        dateCreatedLabel.text = dateCreated
     }
 }
