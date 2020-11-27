@@ -20,13 +20,15 @@ class MyPostsViewModel : ViewModel {
         self.postContentUseCase = dependencies.postContentUseCase
         self.myPostsObservable = dependencies.myPostsObservable
             .map { posts in
-                return posts.map { _ in
-                    MyPostCellViewModel(title: "",
-                                        thumbnailURL: URL(string: "https://cdn.lifestyleasia.com/wp-content/uploads/sites/6/2020/03/17155127/alo.jpg"),
-                                        isEncoding: false,
-                                        dateCreated: "Created yesterday",
-                                        commentCount: 100,
-                                        lockerCount: 100)
+                return posts.map { post in
+                    #warning("Setup is encoding")
+                    return MyPostCellViewModel(
+                        title: post.title,
+                        thumbnailURL: URL(string: "https://cdn.lifestyleasia.com/wp-content/uploads/sites/6/2020/03/17155127/alo.jpg"),
+                        isEncoding: false,
+                        dateCreated: "Created yesterday",
+                        commentCount: post.comments,
+                        lockerCount: post.lockers)
                 }
             }
         

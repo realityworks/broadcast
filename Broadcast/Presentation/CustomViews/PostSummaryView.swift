@@ -29,6 +29,7 @@ class PostSummaryView : UIView {
     func configureViews() {
         verticalStackView.axis = .vertical
         verticalStackView.distribution = .equalCentering
+        verticalStackView.spacing = 5
         thumbnailImageView.contentMode = .scaleAspectFill
         thumbnailImageView.clipsToBounds = true
     }
@@ -54,6 +55,8 @@ class PostSummaryView : UIView {
         
         processingView.edgesToSuperview()
         thumbnailImageView.edgesToSuperview()
+        
+        verticalStackView.addSpace(height: 10)
     }
     
     func style() {

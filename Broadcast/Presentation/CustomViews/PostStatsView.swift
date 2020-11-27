@@ -10,14 +10,19 @@ import UIKit
 class PostStatsView : UIView {
     let commentImageView = UIImageView()
     let commentCountLabel = UILabel()
+    let commentStackView = UIStackView()
+    
     let lockerImageView = UIImageView()
     let lockerCountLabel = UILabel()
+    let lockerStackView = UIStackView()
+    
     let horizontalStackView = UIStackView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         configureViews()
+        layoutViews()
     }
     
     required init?(coder: NSCoder) {
@@ -25,20 +30,34 @@ class PostStatsView : UIView {
     }
     
     private func configureViews() {
+        commentImageView.contentMode = .scaleAspectFit
+        commentImageView.image = UIImage(systemName: "bubble.right")?.withRenderingMode(.alwaysTemplate)
+        commentImageView.tintColor = .black
+        
+        commentImageView.aspectRatio(1)
+        
+        lockerImageView.contentMode = .scaleAspectFit
+        lockerImageView.image = UIImage(systemName: "bookmark")?.withRenderingMode(.alwaysTemplate)
+        lockerImageView.tintColor = .black
+        
+        lockerImageView.aspectRatio(1)
         
         horizontalStackView.axis = .horizontal
-        horizontalStackView.distribution = .fill
+        horizontalStackView.distribution = .fillEqually
         horizontalStackView.alignment = .fill
     }
     
     private func layoutViews() {
         addSubview(horizontalStackView)
-        horizontalStackView.height(40)
+        horizontalStackView.height(15)
         
-        horizontalStackView.addArrangedSubview(commentImageView)
-        horizontalStackView.addArrangedSubview(commentCountLabel)
-        horizontalStackView.addArrangedSubview(lockerImageView)
-        horizontalStackView.addArrangedSubview(lockerCountLabel)
+        commentStackView.addArrangedSubview(commentImageView)
+        commentStackView.addArrangedSubview(commentCountLabel)
+        lockerStackView.addArrangedSubview(lockerImageView)
+        lockerStackView.addArrangedSubview(lockerCountLabel)
+        
+        horizontalStackView.addArrangedSubview(commentStackView)
+        horizontalStackView.addArrangedSubview(lockerStackView)
     }
     
     /// Configure the view content with view model data
