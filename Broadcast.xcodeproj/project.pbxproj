@@ -53,6 +53,7 @@
 		1D3F71ED2571516600DE7F05 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 1D3F71EC2571516600DE7F05 /* RxDataSources */; };
 		1D3F71EF2571516600DE7F05 /* Differentiator in Frameworks */ = {isa = PBXBuildFile; productRef = 1D3F71EE2571516600DE7F05 /* Differentiator */; };
 		1D3F71F32571523E00DE7F05 /* MyPostsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3F71F22571523E00DE7F05 /* MyPostsSection.swift */; };
+		1D3F72262571634E00DE7F05 /* RxTableViewSectionedReloadDataSource+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3F72252571634D00DE7F05 /* RxTableViewSectionedReloadDataSource+Extensions.swift */; };
 		1D87DF3F256834A6000652D6 /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF3E256834A6000652D6 /* AddPostViewController.swift */; };
 		1D87DF44256834C4000652D6 /* AddPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF43256834C4000652D6 /* AddPostViewModel.swift */; };
 		1D87DF4925683535000652D6 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF4825683535000652D6 /* EditProfileViewController.swift */; };
@@ -165,6 +166,7 @@
 		1D3F71E32571244900DE7F05 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1D3F71E72571294F00DE7F05 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		1D3F71F22571523E00DE7F05 /* MyPostsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsSection.swift; sourceTree = "<group>"; };
+		1D3F72252571634D00DE7F05 /* RxTableViewSectionedReloadDataSource+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RxTableViewSectionedReloadDataSource+Extensions.swift"; sourceTree = "<group>"; };
 		1D87DF3E256834A6000652D6 /* AddPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
 		1D87DF43256834C4000652D6 /* AddPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostViewModel.swift; sourceTree = "<group>"; };
 		1D87DF4825683535000652D6 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
@@ -585,6 +587,7 @@
 				1D91A0CB256C1B8E0043A943 /* UIStackView+Extensions.swift */,
 				1DD1FE2D256E16D100C598CE /* UIImage+Extensions.swift */,
 				1D3F71E72571294F00DE7F05 /* String+Extensions.swift */,
+				1D3F72252571634D00DE7F05 /* RxTableViewSectionedReloadDataSource+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -734,6 +737,7 @@
 				1D87DF3F256834A6000652D6 /* AddPostViewController.swift in Sources */,
 				1DD1FE2E256E16D100C598CE /* UIImage+Extensions.swift in Sources */,
 				1D916D5F2562C3870059E549 /* BoomdayError.swift in Sources */,
+				1D3F72262571634E00DE7F05 /* RxTableViewSectionedReloadDataSource+Extensions.swift in Sources */,
 				1D91A0CC256C1B8E0043A943 /* UIStackView+Extensions.swift in Sources */,
 				1D3B2A3E2564F21E001874FD /* APIService.swift in Sources */,
 				1D3B2A2C2564E7A5001874FD /* LocalUploadService.swift in Sources */,

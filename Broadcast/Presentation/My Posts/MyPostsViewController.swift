@@ -35,7 +35,13 @@ class MyPostsViewController: ViewController {
     }
     
     private func configureViews() {
-        tableView.register(MyPostTableViewCell.self, forCellReuseIdentifier: MyPostTableViewCell.identifier)
+        tableView.rx
+            .setDelegate(self)
+            .disposed(by: DisposeBag())
+
+        tableView.register(MyPostTableViewCell.self,
+                           forCellReuseIdentifier: MyPostTableViewCell.identifier)
+        
         tableView.separatorStyle = .none
     }
     
@@ -57,10 +63,6 @@ class MyPostsViewController: ViewController {
         viewModel.myPostsObservable
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
-        
-        tableView.rx
-            .setDelegate(self)
-            .disposed(by: DisposeBag())
     }
     
     private func style() {
@@ -68,10 +70,16 @@ class MyPostsViewController: ViewController {
     }
 }
 
-// MARK: - UITableViewDelegate
-
-extension MyPostsViewController : UITableViewDelegate {
-    
-}
+//// MARK: - UITableViewDelegate
+//
+//extension MyPostsViewController : UITableViewDelegate {
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        return UILabel.largeTitle(LocalizedString.myPostsHeading)
+//    }
+//    
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 200
+//    }
+//}
 
 

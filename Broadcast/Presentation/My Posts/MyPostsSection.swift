@@ -11,7 +11,6 @@ import RxSwift
 import RxDataSources
 
 struct MyPostsSection {
-    var heading: String
     var items: [MyPostCellViewModel]
 }
 

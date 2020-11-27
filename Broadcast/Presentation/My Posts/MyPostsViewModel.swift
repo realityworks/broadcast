@@ -32,9 +32,7 @@ class MyPostsViewModel : ViewModel {
                         lockerCount: post.lockers)
                 }
                 
-                return [MyPostsSection(
-                    heading: String(LocalizedString.myPostsHeading),
-                    items: items)]
+                return [MyPostsSection(items: items)]
             }
         
         super.init(stateController: dependencies.stateController)

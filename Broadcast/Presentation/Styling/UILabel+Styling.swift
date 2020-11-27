@@ -16,6 +16,10 @@ extension UILabel {
         return label
     }
     
+    static func largeTitle(_ title: LocalizedString) -> UILabel {
+        return largeTitle(title.localized)
+    }
+    
     static func body(_ text: String? = nil) -> UILabel {
         let label = UILabel()
         label.text = text
