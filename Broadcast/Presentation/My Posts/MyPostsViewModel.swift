@@ -22,7 +22,7 @@ class MyPostsViewModel : ViewModel {
             .map { posts in
                 return posts.map { _ in
                     MyPostCellViewModel(title: "",
-                                        thumbnailURL: URL(string: ""),
+                                        thumbnailURL: URL(string: "https://cdn.lifestyleasia.com/wp-content/uploads/sites/6/2020/03/17155127/alo.jpg"),
                                         isEncoding: false,
                                         dateCreated: "Created yesterday",
                                         commentCount: 100,
@@ -32,8 +32,7 @@ class MyPostsViewModel : ViewModel {
         
         super.init(stateController: dependencies.stateController)
     }
-    
-    
+
     func refreshMyPostsList() {
         postContentUseCase.retrieveMyPosts()
     }

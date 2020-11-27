@@ -12,6 +12,7 @@ class PostStatsView : UIView {
     let commentCountLabel = UILabel()
     let lockerImageView = UIImageView()
     let lockerCountLabel = UILabel()
+    let horizontalStackView = UIStackView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,10 +25,15 @@ class PostStatsView : UIView {
     }
     
     private func configureViews() {
-        let horizontalStackView = UIStackView()
+        
         horizontalStackView.axis = .horizontal
         horizontalStackView.distribution = .fill
         horizontalStackView.alignment = .fill
+    }
+    
+    private func layoutViews() {
+        addSubview(horizontalStackView)
+        horizontalStackView.height(40)
         
         horizontalStackView.addArrangedSubview(commentImageView)
         horizontalStackView.addArrangedSubview(commentCountLabel)
@@ -35,6 +41,10 @@ class PostStatsView : UIView {
         horizontalStackView.addArrangedSubview(lockerCountLabel)
     }
     
+    /// Configure the view content with view model data
+    /// - Parameters:
+    ///   - commentCount: Number of comments
+    ///   - lockerCount: Number of lockers this post is in
     func configure(withCommentCount commentCount: Int, lockerCount: Int) {
         commentCountLabel.text = "\(commentCount)"
         lockerCountLabel.text = "\(lockerCount)"

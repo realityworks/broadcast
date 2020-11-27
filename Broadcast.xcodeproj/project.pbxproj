@@ -47,6 +47,8 @@
 		1D3F71CA2570082800DE7F05 /* PostStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3F71C92570082800DE7F05 /* PostStatsView.swift */; };
 		1D3F71D0257016D000DE7F05 /* ProcessingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3F71CF257016D000DE7F05 /* ProcessingView.swift */; };
 		1D3F71D42570184500DE7F05 /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3F71D32570184500DE7F05 /* SpinnerView.swift */; };
+		1D3F71D82571205200DE7F05 /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3F71D72571205200DE7F05 /* LocalizedString.swift */; };
+		1D3F71E22571244900DE7F05 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1D3F71E42571244900DE7F05 /* Localizable.strings */; };
 		1D87DF3F256834A6000652D6 /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF3E256834A6000652D6 /* AddPostViewController.swift */; };
 		1D87DF44256834C4000652D6 /* AddPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF43256834C4000652D6 /* AddPostViewModel.swift */; };
 		1D87DF4925683535000652D6 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF4825683535000652D6 /* EditProfileViewController.swift */; };
@@ -155,6 +157,8 @@
 		1D3F71C92570082800DE7F05 /* PostStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostStatsView.swift; sourceTree = "<group>"; };
 		1D3F71CF257016D000DE7F05 /* ProcessingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingView.swift; sourceTree = "<group>"; };
 		1D3F71D32570184500DE7F05 /* SpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
+		1D3F71D72571205200DE7F05 /* LocalizedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedString.swift; sourceTree = "<group>"; };
+		1D3F71E32571244900DE7F05 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1D87DF3E256834A6000652D6 /* AddPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
 		1D87DF43256834C4000652D6 /* AddPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostViewModel.swift; sourceTree = "<group>"; };
 		1D87DF4825683535000652D6 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
@@ -321,6 +325,14 @@
 			path = Credentials;
 			sourceTree = "<group>";
 		};
+		1D3F71DB257123B600DE7F05 /* Strings */ = {
+			isa = PBXGroup;
+			children = (
+				1D3F71E42571244900DE7F05 /* Localizable.strings */,
+			);
+			path = Strings;
+			sourceTree = "<group>";
+		};
 		1D87DF3A2568313E000652D6 /* My Posts */ = {
 			isa = PBXGroup;
 			children = (
@@ -389,6 +401,7 @@
 				1D916D582562C2920059E549 /* Schedulers.swift */,
 				1D916D6E2563F5240059E549 /* KeyboardEventsAdapter.swift */,
 				1D916D97256408CC0059E549 /* Logger.swift */,
+				1D3F71D72571205200DE7F05 /* LocalizedString.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -457,6 +470,7 @@
 		1D916D4B2562A8170059E549 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				1D3F71DB257123B600DE7F05 /* Strings */,
 				1D34340825624B4C00886245 /* Info.plist */,
 				1D34340525624B4C00886245 /* LaunchScreen.storyboard */,
 				1D34340325624B4C00886245 /* Assets.xcassets */,
@@ -673,6 +687,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D916DA625640C810059E549 /* Development.xcconfig in Resources */,
+				1D3F71E22571244900DE7F05 /* Localizable.strings in Resources */,
 				1D916DA725640C810059E549 /* Production.xcconfig in Resources */,
 				1D34340725624B4C00886245 /* LaunchScreen.storyboard in Resources */,
 				1D916DA825640C810059E549 /* Staging.xcconfig in Resources */,
@@ -732,6 +747,7 @@
 				1D3B29F625641BAF001874FD /* MainViewController.swift in Sources */,
 				1D3F71C6257006D100DE7F05 /* PostSummaryView.swift in Sources */,
 				1DD1FE28256E16B600C598CE /* UIButton+Extensions.swift in Sources */,
+				1D3F71D82571205200DE7F05 /* LocalizedString.swift in Sources */,
 				1D916D98256408CC0059E549 /* Logger.swift in Sources */,
 				1D2A043425658484008CE2D4 /* LoginViewModel.swift in Sources */,
 				1D3B2A122564D1F0001874FD /* Services.swift in Sources */,
@@ -797,6 +813,14 @@
 				1D34340625624B4C00886245 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		1D3F71E42571244900DE7F05 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1D3F71E32571244900DE7F05 /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
