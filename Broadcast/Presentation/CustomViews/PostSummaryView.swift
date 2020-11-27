@@ -34,6 +34,8 @@ class PostSummaryView : UIView {
         
         // Layout vertical stack
         addSubview(verticalStackView)
+        verticalStackView.edgesToSuperview()
+        
         verticalStackView.addArrangedSubview(containerTopView)
         verticalStackView.addArrangedSubview(postTitleLabel)
         verticalStackView.addArrangedSubview(postStatsView)
@@ -41,6 +43,7 @@ class PostSummaryView : UIView {
         
         // Layout container top view
         containerTopView.edgesToSuperview(excluding: [.bottom])
+        containerTopView.height(100)
         
         // Order important
         containerTopView.addSubview(processingView)
