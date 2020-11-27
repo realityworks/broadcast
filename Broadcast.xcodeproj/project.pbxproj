@@ -52,7 +52,6 @@
 		1D3F71E82571294F00DE7F05 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3F71E72571294F00DE7F05 /* String+Extensions.swift */; };
 		1D3F71ED2571516600DE7F05 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 1D3F71EC2571516600DE7F05 /* RxDataSources */; };
 		1D3F71EF2571516600DE7F05 /* Differentiator in Frameworks */ = {isa = PBXBuildFile; productRef = 1D3F71EE2571516600DE7F05 /* Differentiator */; };
-		1D3F71F32571523E00DE7F05 /* MyPostsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3F71F22571523E00DE7F05 /* MyPostsSection.swift */; };
 		1D3F72262571634E00DE7F05 /* RxTableViewSectionedReloadDataSource+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3F72252571634D00DE7F05 /* RxTableViewSectionedReloadDataSource+Extensions.swift */; };
 		1D87DF3F256834A6000652D6 /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF3E256834A6000652D6 /* AddPostViewController.swift */; };
 		1D87DF44256834C4000652D6 /* AddPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF43256834C4000652D6 /* AddPostViewModel.swift */; };
@@ -165,7 +164,6 @@
 		1D3F71D72571205200DE7F05 /* LocalizedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedString.swift; sourceTree = "<group>"; };
 		1D3F71E32571244900DE7F05 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1D3F71E72571294F00DE7F05 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
-		1D3F71F22571523E00DE7F05 /* MyPostsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsSection.swift; sourceTree = "<group>"; };
 		1D3F72252571634D00DE7F05 /* RxTableViewSectionedReloadDataSource+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RxTableViewSectionedReloadDataSource+Extensions.swift"; sourceTree = "<group>"; };
 		1D87DF3E256834A6000652D6 /* AddPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
 		1D87DF43256834C4000652D6 /* AddPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostViewModel.swift; sourceTree = "<group>"; };
@@ -350,7 +348,6 @@
 				1D87DF572568368A000652D6 /* MyPostsViewModel.swift */,
 				1DDEC780256F6AC300D65023 /* MyPostTableViewCell.swift */,
 				1DDEC784256F6BA800D65023 /* MyPostCellViewModel.swift */,
-				1D3F71F22571523E00DE7F05 /* MyPostsSection.swift */,
 			);
 			path = "My Posts";
 			sourceTree = "<group>";
@@ -759,7 +756,6 @@
 				1D2A03F4256561D5008CE2D4 /* AppLifeCycleUseCase.swift in Sources */,
 				1D87DF9325683B3E000652D6 /* ProfileViewController.swift in Sources */,
 				1D916D392562A4D90059E549 /* StateController.swift in Sources */,
-				1D3F71F32571523E00DE7F05 /* MyPostsSection.swift in Sources */,
 				1D2A042525658367008CE2D4 /* Route.swift in Sources */,
 				1D916D93256406B10059E549 /* Configuration.swift in Sources */,
 				1D3B2A262564E6F1001874FD /* UploadService.swift in Sources */,

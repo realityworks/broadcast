@@ -15,8 +15,6 @@ class MyPostsViewController: ViewController {
     
     private let viewModel = MyPostsViewModel()
     
-    var dataSource: RxTableViewSectionedReloadDataSource<MyPostsSection>!
-    
     private let tableView = UITableView()
     
     override func viewDidLoad() {
@@ -35,10 +33,6 @@ class MyPostsViewController: ViewController {
     }
     
     private func configureViews() {
-        tableView.rx
-            .setDelegate(self)
-            .disposed(by: DisposeBag())
-
         tableView.register(MyPostTableViewCell.self,
                            forCellReuseIdentifier: MyPostTableViewCell.identifier)
         
@@ -50,19 +44,25 @@ class MyPostsViewController: ViewController {
         tableView.edgesToSuperview()
     }
     
-    private func configureBindings() {
-        // Setup the datasource
-        dataSource = RxTableViewSectionedReloadDataSource<MyPostsSection>(
-            configureCell: { (_, tableView, indexPath, viewModel) -> UITableViewCell in
-                let cell = tableView.dequeueReusableCell(withIdentifier: MyPostTableViewCell.identifier, for: indexPath) as! MyPostTableViewCell
-                cell.configure(withViewModel: viewModel)
-                return cell
-            })
-        
+    private func configureBindings() {        
         // Setup the table view
         viewModel.myPostsObservable
-            .bind(to: tableView.rx.items(dataSource: dataSource))
+            .bind(to: tableView.rx.items(cellIdentifier: MyPostTableViewCell.identifier, cellType: MyPostTableViewCell.self)) { _, model, cell in
+                Logger.log(level: .verbose, topic: .debug, message: "Init cell : \(model.title)")
+                cell.configure(withViewModel: model)
+            }
             .disposed(by: disposeBag)
+        
+        let titleLabel = UILabel.largeTitle(.myPostsHeading)
+        let titleHeaderView = UIView()
+        
+        titleHeaderView.addSubview(titleLabel)
+        titleLabel.edgesToSuperview(excluding: [.left, .right])
+        titleLabel.leftToSuperview(offset: 20)
+        titleLabel.rightToSuperview(offset: -20)
+        
+        titleHeaderView.frame = CGRect(x: 0, y: 0, width: 200, height: 50)
+        tableView.tableHeaderView = titleHeaderView
     }
     
     private func style() {
@@ -76,7 +76,7 @@ class MyPostsViewController: ViewController {
 //    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 //        return UILabel.largeTitle(LocalizedString.myPostsHeading)
 //    }
-//    
+//
 //    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 //        return 200
 //    }

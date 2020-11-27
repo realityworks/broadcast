@@ -14,14 +14,14 @@ class MyPostsViewModel : ViewModel {
     
     private let postContentUseCase: PostContentUseCase
     
-    let myPostsObservable: Observable<[MyPostsSection]>
+    let myPostsObservable: Observable<[MyPostCellViewModel]>
     
     init(dependencies: Dependencies = .standard) {
         
         self.postContentUseCase = dependencies.postContentUseCase
         self.myPostsObservable = dependencies.myPostsObservable
             .map { posts in
-                let items: [MyPostCellViewModel] = posts.map { post in
+                return posts.map { post in
                     #warning("Setup is encoding")
                     return MyPostCellViewModel(
                         title: post.title,
@@ -31,8 +31,6 @@ class MyPostsViewModel : ViewModel {
                         commentCount: post.comments,
                         lockerCount: post.lockers)
                 }
-                
-                return [MyPostsSection(items: items)]
             }
         
         super.init(stateController: dependencies.stateController)
