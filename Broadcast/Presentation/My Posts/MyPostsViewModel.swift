@@ -8,10 +8,13 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxDataSources
 
 class MyPostsViewModel : ViewModel {
     
     private let postContentUseCase: PostContentUseCase
+    
+    struct MyPostListSection : 
     
     let myPostsObservable: Observable<[MyPostCellViewModel]>
     

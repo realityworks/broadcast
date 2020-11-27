@@ -16,6 +16,7 @@ class LocalAPIService : APIService {
         Post(id: "2", title: "Test 1", caption: "Test 1", comments: 12, lockers: 88, postVideo: nil, postImage: nil),
         Post(id: "3", title: "Test 2", caption: "Test 2", comments: 12, lockers: 41, postVideo: nil, postImage: nil),
         Post(id: "4", title: "Test 3", caption: "Test 3", comments: 50, lockers: 12, postVideo: nil, postImage: nil),
+        Post(id: "5", title: "This is a great title!", caption: "This is a caption", comments: 50, lockers: 12, postVideo: nil, postImage: nil),
     ]
     
     func retrieveMyPosts() -> Single<RetrieveMyPostsResponse> {
