@@ -27,7 +27,9 @@ extension Route {
             mainViewController.selectRoute(child)
             return mainViewController
         case .myPosts:
-            return MyPostsViewController()
+            let myPostsViewController = MyPostsViewController()
+            let navigationController = UINavigationController(rootViewController: myPostsViewController)
+            return navigationController
         case .profile:
             return ProfileViewController()
         }
