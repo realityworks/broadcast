@@ -17,5 +17,6 @@ extension UIFont {
         return UIFont.systemFont(ofSize: size, weight: weight)
     }
     
-    static var postTitle: UIFont { .customFont(ofSize: 18, weight: .bold ) }
+    static var largeTitle: UIFont { .customFont(ofSize: 18, weight: .bold ) }
+    static var body: UIFont { .customFont(ofSize: 12, weight: .regular ) }
 }

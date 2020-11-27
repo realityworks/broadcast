@@ -13,7 +13,9 @@ class LocalAPIService : APIService {
     
     let mockPostData: [Post] = [
         Post(id: "1", title: "Test", caption: "Test", postVideo: nil, postImage: nil),
-        Post(id: "2", title: "Test", caption: "Test", postVideo: nil, postImage: nil),
+        Post(id: "2", title: "Test 1", caption: "Test 1", postVideo: nil, postImage: nil),
+        Post(id: "3", title: "Test 2", caption: "Test 2", postVideo: nil, postImage: nil),
+        Post(id: "4", title: "Test 3", caption: "Test 3", postVideo: nil, postImage: nil),
     ]
     
     func retrieveMyPosts() -> Single<RetrieveMyPostsResponse> {

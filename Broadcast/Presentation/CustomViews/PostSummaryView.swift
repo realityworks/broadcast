@@ -14,9 +14,9 @@ class PostSummaryView : UIView {
     let processingView = ProcessingView()
     let containerTopView = UIView()
 
-    let postTitleLabel = UILabel.postTitle()
+    let postTitleLabel = UILabel.largeTitle()
     let postStatsView = PostStatsView()
-    let dateCreatedLabel = UILabel()
+    let dateCreatedLabel = UILabel.body()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,22 +31,23 @@ class PostSummaryView : UIView {
     }
     
     func configureLayout() {
-        // Layout container top view
-        addSubview(containerTopView)
-        containerTopView.edgesToSuperview(excluding: [.bottom])
-        
-        containerTopView.addSubview(thumbnailImageView)
-        containerTopView.addSubview(processingView)
-        
-        thumbnailImageView.edgesToSuperview()
-        processingView.edgesToSuperview()
         
         // Layout vertical stack
         addSubview(verticalStackView)
-        
         verticalStackView.addArrangedSubview(containerTopView)
+        verticalStackView.addArrangedSubview(postTitleLabel)
         verticalStackView.addArrangedSubview(postStatsView)
         verticalStackView.addArrangedSubview(dateCreatedLabel)
+        
+        // Layout container top view
+        containerTopView.edgesToSuperview(excluding: [.bottom])
+        
+        // Order important
+        containerTopView.addSubview(processingView)
+        containerTopView.addSubview(thumbnailImageView)
+        
+        processingView.edgesToSuperview()
+        thumbnailImageView.edgesToSuperview()
     }
     
     func style() {
@@ -66,6 +67,8 @@ class PostSummaryView : UIView {
         isEncoding: Bool) {
         #warning("TODO")
         
+        thumbnailImageView.isHidden = isEncoding
+        
         if let url = thumbnailURL {
             thumbnailImageView.sd_setImage(with: url, placeholderImage: UIImage(systemName: "paintbrush"))
         }
@@ -73,6 +76,7 @@ class PostSummaryView : UIView {
         postStatsView.configure(withCommentCount: commentCount,
                                 lockerCount: lockerCount)
         
+        postTitleLabel.text = title
         dateCreatedLabel.text = dateCreated
     }
 }

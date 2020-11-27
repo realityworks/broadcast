@@ -34,6 +34,7 @@ class MyPostsViewController: ViewController {
     }
     
     private func configureLayout() {
+        view.addSubview(tableView)
         tableView.edgesToSuperview()
     }
     
