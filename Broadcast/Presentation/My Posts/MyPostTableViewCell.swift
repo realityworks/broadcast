@@ -41,6 +41,6 @@ class MyPostTableViewCell : UITableViewCell {
             commentCount: viewModel.commentCount,
             lockerCount: viewModel.lockerCount,
             dateCreated: viewModel.dateCreated,
-            isProcessing: viewModel.isProcessing)
+            isEncoding: viewModel.isEncoding)
     }
 }

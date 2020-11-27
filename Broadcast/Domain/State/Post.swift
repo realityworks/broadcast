@@ -14,9 +14,11 @@ struct Post: Equatable, Codable {
     let caption: String
     
     let postVideo: PostVideo?
+    let postImage: PostImage?
     
-    struct PostVideo : Codable {
-        enum VideoState : String {
+    struct PostVideo : Equatable, Codable {
+        
+        enum VideoState : String, Equatable, Codable {
             case available
             case encoding
             case failed
@@ -24,7 +26,7 @@ struct Post: Equatable, Codable {
             case uploadComplete
         }
         
-        enum VideoProcessingStatus : String {
+        enum VideoProcessingStatus : String, Equatable, Codable {
             case downloading
             case error
             case inProgress
@@ -40,7 +42,7 @@ struct Post: Equatable, Codable {
         
     }
     
-    struct PostImage {
+    struct PostImage : Equatable, Codable {
         let postImage: String
     }
     

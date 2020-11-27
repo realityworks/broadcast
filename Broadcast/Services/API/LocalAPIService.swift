@@ -12,8 +12,8 @@ import RxCocoa
 class LocalAPIService : APIService {
     
     let mockPostData: [Post] = [
-        Post(),
-        Post()
+        Post(id: "1", title: "Test", caption: "Test", postVideo: nil, postImage: nil),
+        Post(id: "2", title: "Test", caption: "Test", postVideo: nil, postImage: nil),
     ]
     
     func retrieveMyPosts() -> Single<RetrieveMyPostsResponse> {

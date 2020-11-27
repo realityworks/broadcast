@@ -10,7 +10,7 @@ import UIKit
 struct MyPostCellViewModel {
     let title: String
     let thumbnailURL: URL?
-    let isProcessing: Bool
+    let isEncoding: Bool
     let dateCreated: String
     let commentCount: Int
     let lockerCount: Int

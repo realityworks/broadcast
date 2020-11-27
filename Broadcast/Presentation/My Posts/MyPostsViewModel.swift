@@ -23,7 +23,7 @@ class MyPostsViewModel : ViewModel {
                 return posts.map { _ in
                     MyPostCellViewModel(title: "",
                                         thumbnailURL: URL(string: ""),
-                                        isProcessing: false,
+                                        isEncoding: false,
                                         dateCreated: "Created yesterday",
                                         commentCount: 100,
                                         lockerCount: 100)
