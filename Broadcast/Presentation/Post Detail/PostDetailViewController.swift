@@ -48,15 +48,15 @@ class PostDetailViewController: ViewController {
     }
     
     private func configureBindings() {
-        viewModel.postObservable
-            .subscribe(onNext: { [weak self] _ in
+        viewModel.postSummary
+            .subscribe(onNext: { [weak self] summaryViewModel in
                 self?.postSummaryView.configure(
-                    withTitle: <#T##String#>,
-                    thumbnailURL: <#T##URL?#>,
-                    commentCount: <#T##Int#>,
-                    lockerCount: <#T##Int#>,
-                    dateCreated: <#T##String#>,
-                    isEncoding: <#T##Bool#>)
+                    withTitle: summaryViewModel.title,
+                    thumbnailURL: summaryViewModel.thumbnailURL,
+                    commentCount: summaryViewModel.commentCount,
+                    lockerCount: summaryViewModel.lockerCount,
+                    dateCreated: summaryViewModel.dateCreated,
+                    isEncoding: summaryViewModel.isEncoding)
             })
             .disposed(by: disposeBag)
         
