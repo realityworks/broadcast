@@ -15,6 +15,7 @@ class MyPostsViewModel : ViewModel {
     private let postContentUseCase: PostContentUseCase
     
     let myPostsObservable: Observable<[MyPostsCellViewModel]>
+    let selectedSubject = PublishRelay<()>()
     
     init(dependencies: Dependencies = .standard) {
         
@@ -43,6 +44,7 @@ class MyPostsViewModel : ViewModel {
     
     func selectPost(with postId: PostID) {
         postContentUseCase.selectPost(with: postId)
+        selectedSubject.accept(())
     }
 }
 

@@ -65,8 +65,15 @@ class MyPostsViewController: ViewController {
         tableView.tableHeaderView = titleHeaderView
         
         tableView.rx.modelSelected(MyPostsCellViewModel.self)
+            .observeOn(Schedulers.standard.main)
             .subscribe(onNext: { model in
                 self.viewModel.selectPost(with: model.postId)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.selectedSubject
+            .subscribe(onNext: { _ in
+                self.navigationController?.push(with: .postDetail)
             })
             .disposed(by: disposeBag)
     }
