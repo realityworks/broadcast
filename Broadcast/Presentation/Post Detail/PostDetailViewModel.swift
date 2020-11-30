@@ -12,10 +12,13 @@ import RxCocoa
 class PostDetailViewModel : ViewModel {
     
     let postObservable: Observable<Post>
+    let postCaption: Observable<String>
     
     init(postId: PostID, dependencies: Dependencies = .standard) {
         postObservable = dependencies.myPosts
             .compactMap { $0.first(where: { $0.id == postId }) }
+        
+        postCaption = postObservable.map { $0.caption }
         
         super.init(stateController: dependencies.stateController)
     }

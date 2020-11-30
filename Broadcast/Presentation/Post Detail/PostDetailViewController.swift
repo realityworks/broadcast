@@ -5,15 +5,20 @@
 //  Created by Piotr Suwara on 20/11/20.
 //
 
-import Foundation
+import UIKit
 
 class PostDetailViewController: ViewController {
     private let viewModel: PostDetailViewModel!
     
+    // MARK: - UI Components
+    let verticalStackView = UIStackView()
+    let postSummaryView = PostSummaryView()
+    let postCaptionLabel = UILabel()
+    
     /// Custom required initializer to configure the controller from the specified post ID
     /// - Parameter postID: The Post to view the details of
     init(postID: PostID) {
-        viewModel = PostDetailViewModel(postID: postID)
+        viewModel = PostDetailViewModel(postId: postID)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -25,5 +30,42 @@ class PostDetailViewController: ViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        configureViews()
+        configureBindings()
+        style()
+    }
+    
+    private func configureViews() {
+        // Configure the view settings
+        view.addSubview(verticalStackView)
+        
+        
+        
+        // Layout the subviews
+        verticalStackView.addArrangedSubview(postSummaryView)
+        verticalStackView.addArrangedSubview(postCaptionLabel)
+        
+    }
+    
+    private func configureBindings() {
+        viewModel.postObservable
+            .subscribe(onNext: { [weak self] _ in
+                self?.postSummaryView.configure(
+                    withTitle: <#T##String#>,
+                    thumbnailURL: <#T##URL?#>,
+                    commentCount: <#T##Int#>,
+                    lockerCount: <#T##Int#>,
+                    dateCreated: <#T##String#>,
+                    isEncoding: <#T##Bool#>)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.postCaption
+            .bind(to: postCaptionLabel.rx.text)
+            .disposed(by: disposeBag)
+    }
+    
+    private func style() {
+        
     }
 }

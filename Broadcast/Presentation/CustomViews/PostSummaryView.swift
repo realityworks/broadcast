@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 import SDWebImage
 
 class PostSummaryView : UIView {
@@ -93,3 +95,19 @@ class PostSummaryView : UIView {
         dateCreatedLabel.text = dateCreated
     }
 }
+
+extension Reactive where Base: PostSummaryView {
+    /// Reactive wrapper for `isOn` property.
+    var post: Binder<Post> {
+        return Binder(base) {
+            $0.configure(
+                withTitle: $1.title,
+                thumbnailURL: $1.,
+                commentCount: <#T##Int#>,
+                lockerCount: <#T##Int#>,
+                dateCreated: <#T##String#>,
+                isEncoding: <#T##Bool#>)
+        }
+    }
+}
+

@@ -23,7 +23,6 @@ class MyPostsViewController: ViewController {
         // Do any additional setup after loading the view.
         title = "My Posts"
         
-        configureLayout()
         configureViews()
         configureBindings()
         style()
@@ -33,17 +32,18 @@ class MyPostsViewController: ViewController {
     }
     
     private func configureViews() {
+        // Configure view parameters
         tableView.register(MyPostsTableViewCell.self,
                            forCellReuseIdentifier: MyPostsTableViewCell.identifier)
         
         tableView.separatorStyle = .none
-    }
-    
-    private func configureLayout() {
+        
+        // Layout the views
         view.addSubview(tableView)
         tableView.edgesToSuperview()
+
     }
-    
+        
     private func configureBindings() {        
         // Setup the table view
         viewModel.myPostsObservable
