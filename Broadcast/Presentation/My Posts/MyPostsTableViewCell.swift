@@ -1,5 +1,5 @@
 //
-//  MyPostTableViewCell.swift
+//  MyPostsTableViewCell.swift
 //  Broadcast
 //
 //  Created by Piotr Suwara on 26/11/20.
@@ -8,7 +8,7 @@
 import UIKit
 import SDWebImage
 
-class MyPostTableViewCell : UITableViewCell {
+class MyPostsTableViewCell : UITableViewCell {
     static let identifier = "MyPostTableViewCell"
     
     let postSummaryView = PostSummaryView()
