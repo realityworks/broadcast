@@ -16,6 +16,8 @@ struct Post: Equatable, Codable {
     let caption: String
     let comments: Int
     let lockers: Int
+    let thumbnailUrl: String
+    let created: Date
     
     let postVideo: PostVideo?
     let postImage: PostImage?

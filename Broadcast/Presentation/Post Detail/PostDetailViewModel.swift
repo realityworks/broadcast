@@ -11,12 +11,24 @@ import RxCocoa
 
 class PostDetailViewModel : ViewModel {
     
-    let postObservable: Observable<Post>
+    let postObservable: Observable<PostSummaryViewModel>
     let postCaption: Observable<String>
     
-    init(postId: PostID, dependencies: Dependencies = .standard) {
-        postObservable = dependencies.myPosts
-            .compactMap { $0.first(where: { $0.id == postId }) }
+    init(dependencies: Dependencies = .standard) {
+        
+        #warning("Fix thumbnail URL")
+        postObservable = Observable.combineLatest(dependencies.myPosts,
+                                                  dependencies.selectedPostId) { myPosts, selectedPostId in
+                myPosts.first(where: { $0.id == selectedPostId })
+            }
+            .compactMap { $0 }
+            .map { PostSummaryViewModel(title: $0.title,
+                                        thumbnailURL: nil,
+                                        commentCount: $0.comments,
+                                        lockerCount: $0.lockers,
+                                        dateCreated: "",
+                                        isEncoding: <#T##Bool#>)}
+            //.compactMap {  }
         
         postCaption = postObservable.map { $0.caption }
         
@@ -30,9 +42,11 @@ extension PostDetailViewModel {
         
         let stateController: StateController
         let myPosts: Observable<[Post]>
+        let selectedPostId: Observable<PostID?>
         
         static let standard = Dependencies(
             stateController: StateController.standard,
-            myPosts: Domain.standard.stateController.stateObservable(of: \.myPosts))
+            myPosts: Domain.standard.stateController.stateObservable(of: \.myPosts),
+            selectedPostId: Domain.standard.stateController.stateObservable(of: \.selectedPostId))
     }
 }

@@ -22,11 +22,11 @@ class MyPostsViewModel : ViewModel {
         self.myPostsObservable = dependencies.myPostsObservable
             .map { posts in
                 return posts.map { post in
-                    #warning("Setup is encoding")
+                    #warning("Setup all the parameters in the data model")
                     return MyPostsCellViewModel(
                         postId: post.id,
                         title: post.title,
-                        thumbnailURL: URL(string: "https://cdn.lifestyleasia.com/wp-content/uploads/sites/6/2020/03/17155127/alo.jpg"),
+                        thumbnailURL: URL(string: post.thumbnailUrl),
                         isEncoding: false,
                         dateCreated: "Created yesterday",
                         commentCount: post.comments,

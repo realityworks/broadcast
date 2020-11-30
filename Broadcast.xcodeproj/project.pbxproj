@@ -102,6 +102,7 @@
 		1DDEC77B256F5D1D00D65023 /* RetrieveMyPostsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DDEC77A256F5D1D00D65023 /* RetrieveMyPostsResponse.swift */; };
 		1DDEC781256F6AC300D65023 /* MyPostsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DDEC780256F6AC300D65023 /* MyPostsTableViewCell.swift */; };
 		1DDEC785256F6BA800D65023 /* MyPostsCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DDEC784256F6BA800D65023 /* MyPostsCellViewModel.swift */; };
+		1DE3DA2E25751F0E00A7A1F7 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE3DA2D25751F0E00A7A1F7 /* DateExtensions.swift */; };
 		1DF58F502574CB9300563EC2 /* PostSummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF58F4F2574CB9200563EC2 /* PostSummaryViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -207,6 +208,7 @@
 		1DDEC77A256F5D1D00D65023 /* RetrieveMyPostsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrieveMyPostsResponse.swift; sourceTree = "<group>"; };
 		1DDEC780256F6AC300D65023 /* MyPostsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsTableViewCell.swift; sourceTree = "<group>"; };
 		1DDEC784256F6BA800D65023 /* MyPostsCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsCellViewModel.swift; sourceTree = "<group>"; };
+		1DE3DA2D25751F0E00A7A1F7 /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		1DF58F4F2574CB9200563EC2 /* PostSummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSummaryViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -588,6 +590,7 @@
 				1DD1FE2D256E16D100C598CE /* UIImage+Extensions.swift */,
 				1D3F71E72571294F00DE7F05 /* String+Extensions.swift */,
 				1D3F72252571634D00DE7F05 /* RxTableViewSectionedReloadDataSource+Extensions.swift */,
+				1DE3DA2D25751F0E00A7A1F7 /* DateExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -794,6 +797,7 @@
 				1D87DF8925683AC1000652D6 /* PostDetailViewModel.swift in Sources */,
 				1DD1FE05256CA55F00C598CE /* UITextField+Styling.swift in Sources */,
 				1D3B2A342564E7AF001874FD /* StandardUploadService.swift in Sources */,
+				1DE3DA2E25751F0E00A7A1F7 /* DateExtensions.swift in Sources */,
 				1D87DF582568368A000652D6 /* MyPostsViewModel.swift in Sources */,
 				1D2A04092565761B008CE2D4 /* ConnectionState.swift in Sources */,
 				1D3433FD25624B4400886245 /* SceneDelegate.swift in Sources */,
