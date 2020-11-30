@@ -63,23 +63,11 @@ class MyPostsViewController: ViewController {
         
         titleHeaderView.frame = CGRect(x: 0, y: 0, width: 200, height: 50)
         tableView.tableHeaderView = titleHeaderView
+        
+        tableView.rx.modelSelected(MyPostsCellViewModel)
     }
     
     private func style() {
         
     }
 }
-
-//// MARK: - UITableViewDelegate
-//
-//extension MyPostsViewController : UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        return UILabel.largeTitle(LocalizedString.myPostsHeading)
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 200
-//    }
-//}
-
-

@@ -9,7 +9,7 @@ import Foundation
 
 class PostDetailViewModel : ViewModel {
     
-    init(dependencies: Dependencies = .standard) {
+    init(postID: PostID, dependencies: Dependencies = .standard) {
         super.init(stateController: dependencies.stateController)
         
     }

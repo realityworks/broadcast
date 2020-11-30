@@ -23,7 +23,7 @@ class MyPostsViewModel : ViewModel {
             .map { posts in
                 return posts.map { post in
                     #warning("Setup is encoding")
-                    return MyPostCellViewModel(
+                    return MyPostsCellViewModel(
                         title: post.title,
                         thumbnailURL: URL(string: "https://cdn.lifestyleasia.com/wp-content/uploads/sites/6/2020/03/17155127/alo.jpg"),
                         isEncoding: false,

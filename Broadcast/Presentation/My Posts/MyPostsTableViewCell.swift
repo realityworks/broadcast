@@ -37,7 +37,7 @@ class MyPostTableViewCell : UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(withViewModel viewModel: MyPostCellViewModel) {
+    func configure(withViewModel viewModel: MyPostsCellViewModel) {
         postSummaryView.configure(
             withTitle: viewModel.title,
             thumbnailURL: viewModel.thumbnailURL,

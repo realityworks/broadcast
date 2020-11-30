@@ -8,10 +8,13 @@
 import Foundation
 
 class PostDetailViewController: ViewController {
-    private let viewModel: PostDetailViewModel
+    private let viewModel: PostDetailViewModel!
     
+    /// Custom required initializer to configure the controller from the specified post ID
+    /// - Parameter postID: The Post to view the details of
     required init(postID: PostID) {
-        viewModel.configure(withPost)
+        viewModel = PostDetailViewModel(postID: postID)
+        super.init()
     }
     
     required init?(coder: NSCoder) {
