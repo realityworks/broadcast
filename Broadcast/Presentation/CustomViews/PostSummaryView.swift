@@ -97,8 +97,8 @@ class PostSummaryView : UIView {
 }
 
 extension Reactive where Base: PostSummaryView {
-    /// Reactive wrapper for `isOn` property.
-    var post: Binder<Post> {
+    /// Reactive wrapper for `post` property.
+    var viewModel: Binder<Post> {
         return Binder(base) {
             $0.configure(
                 withTitle: $1.title,
