@@ -98,15 +98,15 @@ class PostSummaryView : UIView {
 
 extension Reactive where Base: PostSummaryView {
     /// Reactive wrapper for `post` property.
-    var viewModel: Binder<Post> {
+    var viewModel: Binder<PostSummaryViewModel> {
         return Binder(base) {
             $0.configure(
                 withTitle: $1.title,
-                thumbnailURL: $1.,
-                commentCount: <#T##Int#>,
-                lockerCount: <#T##Int#>,
-                dateCreated: <#T##String#>,
-                isEncoding: <#T##Bool#>)
+                thumbnailURL: $1.thumbnailURL,
+                commentCount: $1.commentCount,
+                lockerCount: $1.lockerCount,
+                dateCreated: $1.dateCreated,
+                isEncoding: $1.isEncoding)
         }
     }
 }
