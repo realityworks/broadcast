@@ -8,6 +8,7 @@
 import UIKit
 
 struct MyPostsCellViewModel {
+    let postId: PostID
     let title: String
     let thumbnailURL: URL?
     let isEncoding: Bool

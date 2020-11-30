@@ -12,9 +12,9 @@ class PostDetailViewController: ViewController {
     
     /// Custom required initializer to configure the controller from the specified post ID
     /// - Parameter postID: The Post to view the details of
-    required init(postID: PostID) {
+    init(postID: PostID) {
         viewModel = PostDetailViewModel(postID: postID)
-        super.init()
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {

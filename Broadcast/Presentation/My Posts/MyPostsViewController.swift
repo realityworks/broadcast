@@ -47,7 +47,7 @@ class MyPostsViewController: ViewController {
     private func configureBindings() {        
         // Setup the table view
         viewModel.myPostsObservable
-            .bind(to: tableView.rx.items(cellIdentifier: MyPostTableViewCell.identifier, cellType: MyPostTableViewCell.self)) { _, model, cell in
+            .bind(to: tableView.rx.items(cellIdentifier: MyPostsTableViewCell.identifier, cellType: MyPostsTableViewCell.self)) { _, model, cell in
                 Logger.log(level: .verbose, topic: .debug, message: "Init cell : \(model.title)")
                 cell.configure(withViewModel: model)
             }
@@ -64,10 +64,18 @@ class MyPostsViewController: ViewController {
         titleHeaderView.frame = CGRect(x: 0, y: 0, width: 200, height: 50)
         tableView.tableHeaderView = titleHeaderView
         
-        tableView.rx.modelSelected(MyPostsCellViewModel)
+        tableView.rx.modelSelected(MyPostsCellViewModel.self)
+            .subscribe(onNext: { model in
+                self.selectedPost(with: model.postId)
+            })
+            .disposed(by: disposeBag)
     }
     
     private func style() {
         
+    }
+    
+    private func selectedPost(with postId: PostID){
+        navigationController?.push(with: .postDetail(postId: postId))
     }
 }

@@ -13,7 +13,7 @@ indirect enum Route {
     case main(child: Route)
     case myPosts
     case profile
-    case postDetail(postID: PostID)
+    case postDetail(postId: PostID)
 }
 
 extension Route {

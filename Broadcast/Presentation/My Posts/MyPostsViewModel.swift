@@ -14,7 +14,7 @@ class MyPostsViewModel : ViewModel {
     
     private let postContentUseCase: PostContentUseCase
     
-    let myPostsObservable: Observable<[MyPostCellViewModel]>
+    let myPostsObservable: Observable<[MyPostsCellViewModel]>
     
     init(dependencies: Dependencies = .standard) {
         
