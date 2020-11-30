@@ -40,6 +40,10 @@ class MyPostsViewModel : ViewModel {
     func refreshMyPostsList() {
         postContentUseCase.retrieveMyPosts()
     }
+    
+    func selectPost(with postId: PostID) {
+        postContentUseCase.selectPost(with: postId)
+    }
 }
 
 /// MainViewModel dependencies component

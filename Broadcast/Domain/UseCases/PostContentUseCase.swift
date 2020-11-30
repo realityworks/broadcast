@@ -21,6 +21,12 @@ class PostContentUseCase {
         self.apiService = apiService
     }
     
+    func selectPost(with postId: PostID) {
+        stateController.state.selectedPostId = postId
+    
+        UINavigationController.current.push(with: .postDetail)
+    }
+    
     func retrieveMyPosts() {
         // Load posts into the app state
         apiService.retrieveMyPosts()

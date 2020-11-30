@@ -41,7 +41,7 @@
 		1D3ED5F525663504004236BB /* UIButton+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3ED5F425663504004236BB /* UIButton+Styling.swift */; };
 		1D3ED5FA25663512004236BB /* UIFont+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3ED5F925663512004236BB /* UIFont+Styling.swift */; };
 		1D3ED5FF25663521004236BB /* UIColor+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3ED5FE25663521004236BB /* UIColor+Styling.swift */; };
-		1D3ED60425663AAD004236BB /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3ED60325663AAD004236BB /* UINavigationController.swift */; };
+		1D3ED60425663AAD004236BB /* UINavigationController+Routing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3ED60325663AAD004236BB /* UINavigationController+Routing.swift */; };
 		1D3F71C2256FFC0B00DE7F05 /* UILabel+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3F71C1256FFC0B00DE7F05 /* UILabel+Styling.swift */; };
 		1D3F71C6257006D100DE7F05 /* PostSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3F71C5257006D100DE7F05 /* PostSummaryView.swift */; };
 		1D3F71CA2570082800DE7F05 /* PostStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3F71C92570082800DE7F05 /* PostStatsView.swift */; };
@@ -158,7 +158,7 @@
 		1D3ED5F425663504004236BB /* UIButton+Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Styling.swift"; sourceTree = "<group>"; };
 		1D3ED5F925663512004236BB /* UIFont+Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Styling.swift"; sourceTree = "<group>"; };
 		1D3ED5FE25663521004236BB /* UIColor+Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Styling.swift"; sourceTree = "<group>"; };
-		1D3ED60325663AAD004236BB /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
+		1D3ED60325663AAD004236BB /* UINavigationController+Routing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Routing.swift"; sourceTree = "<group>"; };
 		1D3F71C1256FFC0B00DE7F05 /* UILabel+Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Styling.swift"; sourceTree = "<group>"; };
 		1D3F71C5257006D100DE7F05 /* PostSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSummaryView.swift; sourceTree = "<group>"; };
 		1D3F71C92570082800DE7F05 /* PostStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostStatsView.swift; sourceTree = "<group>"; };
@@ -510,7 +510,7 @@
 				1D2A041F256582A0008CE2D4 /* Router.swift */,
 				1D2A042425658367008CE2D4 /* Route.swift */,
 				1D2A0429256583E8008CE2D4 /* UIViewController+Routing.swift */,
-				1D3ED60325663AAD004236BB /* UINavigationController.swift */,
+				1D3ED60325663AAD004236BB /* UINavigationController+Routing.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -759,7 +759,7 @@
 				1DE3DA3225751FE500A7A1F7 /* DateFormatter+Extensions.swift in Sources */,
 				1D3B2A0D2564D0EA001874FD /* LocalAuthenticationService.swift in Sources */,
 				1D87DF4E2568353F000652D6 /* EditProfileViewModel.swift in Sources */,
-				1D3ED60425663AAD004236BB /* UINavigationController.swift in Sources */,
+				1D3ED60425663AAD004236BB /* UINavigationController+Routing.swift in Sources */,
 				1DDEC77B256F5D1D00D65023 /* RetrieveMyPostsResponse.swift in Sources */,
 				1D87DF7F256838A9000652D6 /* NewPostEditViewModel.swift in Sources */,
 				1D916D672562C7500059E549 /* Domain.swift in Sources */,

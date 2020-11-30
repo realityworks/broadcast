@@ -66,16 +66,12 @@ class MyPostsViewController: ViewController {
         
         tableView.rx.modelSelected(MyPostsCellViewModel.self)
             .subscribe(onNext: { model in
-                self.selectedPost(with: model.postId)
+                self.viewModel.selectPost(with: model.postId)
             })
             .disposed(by: disposeBag)
     }
     
     private func style() {
         
-    }
-    
-    private func selectedPost(with postId: PostID){
-        navigationController?.push(with: .postDetail(postId: postId))
     }
 }
