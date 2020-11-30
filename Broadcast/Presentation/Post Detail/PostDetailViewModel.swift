@@ -11,28 +11,37 @@ import RxCocoa
 
 class PostDetailViewModel : ViewModel {
     
-    let postObservable: Observable<PostSummaryViewModel>
+    private let isEditingSubject = BehaviorRelay<Bool>(value: false)
+    
+    let postSummary: Observable<PostSummaryViewModel>
     let postCaption: Observable<String>
     
     init(dependencies: Dependencies = .standard) {
         
-        #warning("Fix thumbnail URL")
-        postObservable = Observable.combineLatest(dependencies.myPosts,
+        #warning("Fix isEncoding")
+        let postObservable = Observable.combineLatest(dependencies.myPosts,
                                                   dependencies.selectedPostId) { myPosts, selectedPostId in
                 myPosts.first(where: { $0.id == selectedPostId })
             }
             .compactMap { $0 }
-            .map { PostSummaryViewModel(title: $0.title,
-                                        thumbnailURL: nil,
-                                        commentCount: $0.comments,
-                                        lockerCount: $0.lockers,
-                                        dateCreated: "",
-                                        isEncoding: <#T##Bool#>)}
-            //.compactMap {  }
-        
+            
+        postSummary = postObservable.map { PostSummaryViewModel(title: $0.title,
+                                                                thumbnailURL: URL(string: $0.thumbnailUrl),
+                                                                commentCount: $0.comments,
+                                                                lockerCount: $0.lockers,
+                                                                dateCreated: "Created \($0.created.timeAgo())",
+                                                                isEncoding: false) }
         postCaption = postObservable.map { $0.caption }
         
         super.init(stateController: dependencies.stateController)
+    }
+    
+    func edit() {
+        isEditingSubject.accept(true)
+    }
+    
+    func endEditing() {
+        isEditingSubject.accept(false)
     }
 }
 

@@ -8,7 +8,7 @@
 import UIKit
 
 class PostDetailViewController: ViewController {
-    private let viewModel: PostDetailViewModel!
+    private let viewModel: PostDetailViewModel = PostDetailViewModel()
     
     // MARK: - UI Components
     let verticalStackView = UIStackView()
@@ -17,8 +17,7 @@ class PostDetailViewController: ViewController {
     
     /// Custom required initializer to configure the controller from the specified post ID
     /// - Parameter postID: The Post to view the details of
-    init(postID: PostID) {
-        viewModel = PostDetailViewModel(postId: postID)
+    init(isEditing: Bool) {
         super.init(nibName: nil, bundle: nil)
     }
     
