@@ -36,13 +36,9 @@ class PostDetailViewModel : ViewModel {
         super.init(stateController: dependencies.stateController)
     }
     
-    func edit() {
-        isEditingSubject.accept(true)
-    }
-    
-    func endEditing() {
-        isEditingSubject.accept(false)
-    }
+    func enableEdit(_ enable: Bool) {
+        isEditingSubject.accept(enable)
+    }    
 }
 
 /// NewPostViewModel dependencies component

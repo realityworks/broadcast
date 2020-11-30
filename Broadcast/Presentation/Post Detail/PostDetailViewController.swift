@@ -18,6 +18,7 @@ class PostDetailViewController: ViewController {
     /// Custom required initializer to configure the controller from the specified post ID
     /// - Parameter postID: The Post to view the details of
     init(isEditing: Bool) {
+        viewModel.enableEdit(isEditing)
         super.init(nibName: nil, bundle: nil)
     }
     
