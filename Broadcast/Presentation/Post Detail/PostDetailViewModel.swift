@@ -13,7 +13,13 @@ class PostDetailViewModel : ViewModel {
         super.init(stateController: dependencies.stateController)
         
     }
+
     
+    /// Configure the view model from the PostID passed into this function.
+    /// Model will be updated with the new post detail
+    func configure(withPostID postID: PostID) {
+        
+    }
 }
 
 /// NewPostViewModel dependencies component

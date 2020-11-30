@@ -7,9 +7,11 @@
 
 import Foundation
 
+typealias PostID = String
+
 struct Post: Equatable, Codable {
     
-    let id: String
+    let id: PostID
     let title: String
     let caption: String
     let comments: Int
