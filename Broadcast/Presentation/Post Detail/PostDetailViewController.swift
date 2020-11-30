@@ -8,7 +8,9 @@
 import Foundation
 
 class PostDetailViewController: ViewController {
-    private let viewModel = PostDetailViewModel()
+    private let viewModel: PostDetailViewModel
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
