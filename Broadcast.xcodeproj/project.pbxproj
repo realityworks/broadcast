@@ -104,6 +104,7 @@
 		1DDEC785256F6BA800D65023 /* MyPostsCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DDEC784256F6BA800D65023 /* MyPostsCellViewModel.swift */; };
 		1DE3DA2E25751F0E00A7A1F7 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE3DA2D25751F0E00A7A1F7 /* Date+Extensions.swift */; };
 		1DE3DA3225751FE500A7A1F7 /* DateFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE3DA3125751FE500A7A1F7 /* DateFormatter+Extensions.swift */; };
+		1DE3DA382575506100A7A1F7 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE3DA372575506100A7A1F7 /* UIViewController+Extensions.swift */; };
 		1DF58F502574CB9300563EC2 /* PostSummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF58F4F2574CB9200563EC2 /* PostSummaryViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -211,6 +212,7 @@
 		1DDEC784256F6BA800D65023 /* MyPostsCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsCellViewModel.swift; sourceTree = "<group>"; };
 		1DE3DA2D25751F0E00A7A1F7 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		1DE3DA3125751FE500A7A1F7 /* DateFormatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extensions.swift"; sourceTree = "<group>"; };
+		1DE3DA372575506100A7A1F7 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		1DF58F4F2574CB9200563EC2 /* PostSummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSummaryViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -594,6 +596,7 @@
 				1D3F72252571634D00DE7F05 /* RxTableViewSectionedReloadDataSource+Extensions.swift */,
 				1DE3DA2D25751F0E00A7A1F7 /* Date+Extensions.swift */,
 				1DE3DA3125751FE500A7A1F7 /* DateFormatter+Extensions.swift */,
+				1DE3DA372575506100A7A1F7 /* UIViewController+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -769,6 +772,7 @@
 				1D87DF44256834C4000652D6 /* AddPostViewModel.swift in Sources */,
 				1D916D8D256404ED0059E549 /* Profile.swift in Sources */,
 				1D87DF9B25683B53000652D6 /* ProfileViewModel.swift in Sources */,
+				1DE3DA382575506100A7A1F7 /* UIViewController+Extensions.swift in Sources */,
 				1D87DF532568367E000652D6 /* MyPostsViewController.swift in Sources */,
 				1D916D83256403F80059E549 /* Post.swift in Sources */,
 				1D2A03F4256561D5008CE2D4 /* AppLifeCycleUseCase.swift in Sources */,

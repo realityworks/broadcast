@@ -63,7 +63,6 @@ class Router {
                 appDelegate.window?.rootViewController = route.viewControllerInstance()
             })
             .disposed(by: disposeBag)
-
     }
     
     private func authenticationStateChanged(
@@ -85,7 +84,6 @@ class Router {
 // MARK: - Instance methods
 
 extension Router {
-
     static let standard: Router = {
         Router()
     }()

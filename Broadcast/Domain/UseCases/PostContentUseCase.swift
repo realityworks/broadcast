@@ -5,7 +5,7 @@
 //  Created by Piotr Suwara on 18/11/20.
 //
 
-import Foundation
+import UIKit
 import RxSwift
 import RxCocoa
 
@@ -23,8 +23,6 @@ class PostContentUseCase {
     
     func selectPost(with postId: PostID) {
         stateController.state.selectedPostId = postId
-    
-        UINavigationController.current.push(with: .postDetail)
     }
     
     func retrieveMyPosts() {

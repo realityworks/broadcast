@@ -13,7 +13,8 @@ indirect enum Route {
     case main(child: Route)
     case myPosts
     case profile
-    case postDetail(postId: PostID)
+    case postDetail
+    case createPost
 }
 
 extension Route {
@@ -33,9 +34,10 @@ extension Route {
             return navigationController
         case .profile:
             return ProfileViewController()
-        case .postDetail(let postID):
-            return PostDetailViewController(postID: postID)
-            
+        case .postDetail:
+            return PostDetailViewController(isEditing: false)
+        case .createPost:
+            return PostDetailViewController(isEditing: true)
         }
     }
 }
