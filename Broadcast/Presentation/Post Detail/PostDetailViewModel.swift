@@ -6,19 +6,18 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 class PostDetailViewModel : ViewModel {
     
-    init(postID: PostID, dependencies: Dependencies = .standard) {
-        super.init(stateController: dependencies.stateController)
-        
-    }
-
+    let postObservable: Observable<Post>
     
-    /// Configure the view model from the PostID passed into this function.
-    /// Model will be updated with the new post detail
-    func configure(withPostID postID: PostID) {
+    init(postId: PostID, dependencies: Dependencies = .standard) {
+        postObservable = dependencies.myPosts
+            .compactMap { $0.first(where: { $0.id == postId }) }
         
+        super.init(stateController: dependencies.stateController)
     }
 }
 
@@ -27,9 +26,10 @@ extension PostDetailViewModel {
     struct Dependencies {
         
         let stateController: StateController
+        let myPosts: Observable<[Post]>
         
         static let standard = Dependencies(
-            stateController: StateController.standard)
-        
+            stateController: StateController.standard,
+            myPosts: Domain.standard.stateController.stateObservable(of: \.myPosts))
     }
 }
