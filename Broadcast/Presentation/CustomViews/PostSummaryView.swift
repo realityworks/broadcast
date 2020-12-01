@@ -57,8 +57,8 @@ class PostSummaryView : UIView {
         
         // Order important
         containerTopView.addSubview(videoPlayerView)
-        containerTopView.addSubview(processingView)
         containerTopView.addSubview(thumbnailImageView)
+        containerTopView.addSubview(processingView)
         
         videoPlayerView.edgesToSuperview()
         processingView.edgesToSuperview()
@@ -87,6 +87,8 @@ class PostSummaryView : UIView {
                                            placeholderImage: UIImage(systemName: "paintbrush"))
         }
         
+        processingView.isHidden = !postSummaryViewModel.isEncoding
+        
         postStatsView.configure(withCommentCount: postSummaryViewModel.commentCount,
                                 lockerCount: postSummaryViewModel.lockerCount)
         
@@ -99,7 +101,7 @@ extension Reactive where Base: PostSummaryView {
     /// Reactive wrapper for `post` property.
     var summaryView: Binder<PostSummaryViewModel> {
         return Binder(base) {
-            $0.configure(withPostSummaryViewMode: $1)
+            $0.configure(withPostSummaryViewModel: $1)
         }
     }    
 }

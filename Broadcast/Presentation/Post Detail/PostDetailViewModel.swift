@@ -29,11 +29,12 @@ class PostDetailViewModel : ViewModel {
             PostSummaryViewModel(
                 title: $0.title,
                 thumbnailURL: nil,
-                videoURL: URL(string: $0.)
+                videoURL: URL(string: $0.postVideo?.postVideoUrl),
                 commentCount: $0.comments,
                 lockerCount: $0.lockers,
                 dateCreated: "Created \($0.created.timeAgo())",
-                isEncoding: false) }
+                isEncoding: $0.postVideo?.videoState != .available,
+                showVideoPlayer: true) }
         postCaption = postObservable.map { $0.caption }
         
         super.init(stateController: dependencies.stateController)

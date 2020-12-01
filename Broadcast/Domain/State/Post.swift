@@ -11,6 +11,7 @@ typealias PostID = String
 
 struct Post: Equatable, Codable {
     
+    // MARK: Data Model
     let id: PostID
     let title: String
     let caption: String
@@ -21,6 +22,12 @@ struct Post: Equatable, Codable {
     
     let postVideo: PostVideo?
     let postImage: PostImage?
+    
+    // MARK: Computed properties
+    var contentUrl: URL? {
+        let urlString = [postVideo?.postVideoUrl, postImage?.postImageUrl].first(where: { $0 != nil }) as? String
+        return URL(string: urlString)
+    }
     
     struct PostVideo : Equatable, Codable {
         
@@ -48,7 +55,7 @@ struct Post: Equatable, Codable {
     }
     
     struct PostImage : Equatable, Codable {
-        let postImage: String
+        let postImageUrl: String
     }
     
 }
