@@ -44,8 +44,7 @@ struct Post: Equatable, Codable {
         
         let videoState: VideoState
         let videoProcessingStatus: VideoProcessingStatus
-        let postVideo: String
-        
+        let postVideoUrl: String
     }
     
     struct PostImage : Equatable, Codable {

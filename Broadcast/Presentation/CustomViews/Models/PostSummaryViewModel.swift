@@ -10,7 +10,7 @@ import Foundation
 struct PostSummaryViewModel {
     let title: String
     let thumbnailURL: URL?
-    let videoURL: Bool
+    let videoURL: URL?
     let commentCount: Int
     let lockerCount: Int
     let dateCreated: String

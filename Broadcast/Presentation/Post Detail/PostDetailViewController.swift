@@ -56,13 +56,7 @@ class PostDetailViewController: ViewController {
     private func configureBindings() {
         viewModel.postSummary
             .subscribe(onNext: { [weak self] summaryViewModel in
-                self?.postSummaryView.configure(
-                    withTitle: summaryViewModel.title,
-                    thumbnailURL: summaryViewModel.thumbnailURL,
-                    commentCount: summaryViewModel.commentCount,
-                    lockerCount: summaryViewModel.lockerCount,
-                    dateCreated: summaryViewModel.dateCreated,
-                    isEncoding: summaryViewModel.isEncoding)
+                self?.postSummaryView.configure(withPostSummaryViewModel: summaryViewModel)
             })
             .disposed(by: disposeBag)
         

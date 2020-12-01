@@ -76,26 +76,22 @@ class PostSummaryView : UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(
-        withTitle title: String,
-        thumbnailURL: URL?,
-        commentCount: Int,
-        lockerCount: Int,
-        dateCreated: String,
-        isEncoding: Bool) {
-        #warning("TODO")
+    func configure(withPostSummaryViewModel postSummaryViewModel: PostSummaryViewModel) {
+        thumbnailImageView.isHidden = postSummaryViewModel.isEncoding
         
-        thumbnailImageView.isHidden = isEncoding
-        
-        if let url = thumbnailURL {
-            thumbnailImageView.sd_setImage(with: url, placeholderImage: UIImage(systemName: "paintbrush"))
+        if postSummaryViewModel.showVideoPlayer,
+           let videoUrl = postSummaryViewModel.videoURL {
+            videoPlayerView.playVideo(withURL: videoUrl)
+        } else if let thumbnailUrl = postSummaryViewModel.thumbnailURL {
+            thumbnailImageView.sd_setImage(with: thumbnailUrl,
+                                           placeholderImage: UIImage(systemName: "paintbrush"))
         }
         
-        postStatsView.configure(withCommentCount: commentCount,
-                                lockerCount: lockerCount)
+        postStatsView.configure(withCommentCount: postSummaryViewModel.commentCount,
+                                lockerCount: postSummaryViewModel.lockerCount)
         
-        postTitleLabel.text = title
-        dateCreatedLabel.text = dateCreated
+        postTitleLabel.text = postSummaryViewModel.title
+        dateCreatedLabel.text = postSummaryViewModel.dateCreated
     }
 }
 
@@ -103,20 +99,8 @@ extension Reactive where Base: PostSummaryView {
     /// Reactive wrapper for `post` property.
     var summaryView: Binder<PostSummaryViewModel> {
         return Binder(base) {
-            $0.configure(
-                withTitle: $1.title,
-                thumbnailURL: $1.thumbnailURL,
-                commentCount: $1.commentCount,
-                lockerCount: $1.lockerCount,
-                dateCreated: $1.dateCreated,
-                isEncoding: $1.isEncoding)
+            $0.configure(withPostSummaryViewMode: $1)
         }
-    }
-    
-    var playerView: Binder<PostSummaryViewModel> {
-        return Binder(base) {
-            
-        }
-    }
+    }    
 }
 

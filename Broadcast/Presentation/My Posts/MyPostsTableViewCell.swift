@@ -37,13 +37,17 @@ class MyPostsTableViewCell : UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(withViewModel viewModel: MyPostsCellViewModel) {
-        postSummaryView.configure(
-            withTitle: viewModel.title,
-            thumbnailURL: viewModel.thumbnailURL,
-            commentCount: viewModel.commentCount,
-            lockerCount: viewModel.lockerCount,
-            dateCreated: viewModel.dateCreated,
-            isEncoding: viewModel.isEncoding)
+    func configure(withViewModel cellViewModel: MyPostsCellViewModel) {        
+        let postSummaryViewModel = PostSummaryViewModel(
+            title: cellViewModel.title,
+            thumbnailURL: cellViewModel.thumbnailURL,
+            videoURL: nil,
+            commentCount: cellViewModel.commentCount,
+            lockerCount: cellViewModel.lockerCount,
+            dateCreated: cellViewModel.dateCreated,
+            isEncoding: cellViewModel.isEncoding,
+            showVideoPlayer: false)
+        
+        postSummaryView.configure(withPostSummaryViewModel: postSummaryViewModel)
     }
 }

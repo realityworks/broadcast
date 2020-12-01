@@ -25,12 +25,15 @@ class PostDetailViewModel : ViewModel {
             }
             .compactMap { $0 }
             
-        postSummary = postObservable.map { PostSummaryViewModel(title: $0.title,
-                                                                thumbnailURL: URL(string: $0.thumbnailUrl),
-                                                                commentCount: $0.comments,
-                                                                lockerCount: $0.lockers,
-                                                                dateCreated: "Created \($0.created.timeAgo())",
-                                                                isEncoding: false) }
+        postSummary = postObservable.map {
+            PostSummaryViewModel(
+                title: $0.title,
+                thumbnailURL: nil,
+                videoURL: URL(string: $0.)
+                commentCount: $0.comments,
+                lockerCount: $0.lockers,
+                dateCreated: "Created \($0.created.timeAgo())",
+                isEncoding: false) }
         postCaption = postObservable.map { $0.caption }
         
         super.init(stateController: dependencies.stateController)
