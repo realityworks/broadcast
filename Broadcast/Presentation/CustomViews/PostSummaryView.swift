@@ -14,6 +14,7 @@ class PostSummaryView : UIView {
     let verticalStackView = UIStackView()
     let thumbnailImageView = UIImageView()
     let processingView = ProcessingView()
+    let videoPlayerView = VideoPlayerView()
     let containerTopView = UIView()
 
     let postTitleLabel = UILabel.largeTitle()
@@ -98,7 +99,7 @@ class PostSummaryView : UIView {
 
 extension Reactive where Base: PostSummaryView {
     /// Reactive wrapper for `post` property.
-    var viewModel: Binder<PostSummaryViewModel> {
+    var summaryView: Binder<PostSummaryViewModel> {
         return Binder(base) {
             $0.configure(
                 withTitle: $1.title,
@@ -107,6 +108,12 @@ extension Reactive where Base: PostSummaryView {
                 lockerCount: $1.lockerCount,
                 dateCreated: $1.dateCreated,
                 isEncoding: $1.isEncoding)
+        }
+    }
+    
+    var playerView: Binder<PostSummaryViewModel> {
+        return Binder(base) {
+            
         }
     }
 }

@@ -105,6 +105,7 @@
 		1DE3DA2E25751F0E00A7A1F7 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE3DA2D25751F0E00A7A1F7 /* Date+Extensions.swift */; };
 		1DE3DA3225751FE500A7A1F7 /* DateFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE3DA3125751FE500A7A1F7 /* DateFormatter+Extensions.swift */; };
 		1DE3DA382575506100A7A1F7 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE3DA372575506100A7A1F7 /* UIViewController+Extensions.swift */; };
+		1DE3DA3E2575F49500A7A1F7 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE3DA3D2575F49500A7A1F7 /* VideoPlayerView.swift */; };
 		1DF58F502574CB9300563EC2 /* PostSummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF58F4F2574CB9200563EC2 /* PostSummaryViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -213,6 +214,7 @@
 		1DE3DA2D25751F0E00A7A1F7 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		1DE3DA3125751FE500A7A1F7 /* DateFormatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extensions.swift"; sourceTree = "<group>"; };
 		1DE3DA372575506100A7A1F7 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
+		1DE3DA3D2575F49500A7A1F7 /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
 		1DF58F4F2574CB9200563EC2 /* PostSummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSummaryViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -572,6 +574,7 @@
 				1D3F71C92570082800DE7F05 /* PostStatsView.swift */,
 				1D3F71CF257016D000DE7F05 /* ProcessingView.swift */,
 				1D3F71D32570184500DE7F05 /* SpinnerView.swift */,
+				1DE3DA3D2575F49500A7A1F7 /* VideoPlayerView.swift */,
 				1DF58F4E2574CA6600563EC2 /* Models */,
 			);
 			path = CustomViews;
@@ -758,6 +761,7 @@
 				1D91A0CC256C1B8E0043A943 /* UIStackView+Extensions.swift in Sources */,
 				1D3B2A3E2564F21E001874FD /* APIService.swift in Sources */,
 				1D3B2A2C2564E7A5001874FD /* LocalUploadService.swift in Sources */,
+				1DE3DA3E2575F49500A7A1F7 /* VideoPlayerView.swift in Sources */,
 				1D3F71CA2570082800DE7F05 /* PostStatsView.swift in Sources */,
 				1DE3DA3225751FE500A7A1F7 /* DateFormatter+Extensions.swift in Sources */,
 				1D3B2A0D2564D0EA001874FD /* LocalAuthenticationService.swift in Sources */,
