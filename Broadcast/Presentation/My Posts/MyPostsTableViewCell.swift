@@ -11,7 +11,7 @@ import SDWebImage
 class MyPostsTableViewCell : UITableViewCell {
     static let identifier = "MyPostTableViewCell"
     
-    let postSummaryView = PostSummaryView()
+    let postSummaryView = PostSummaryView(withStyling: .list)
         
     override init(style: UITableViewCell.CellStyle,
                   reuseIdentifier: String?) {
@@ -23,10 +23,7 @@ class MyPostsTableViewCell : UITableViewCell {
     
     func configureView() {
         contentView.addSubview(postSummaryView)
-        postSummaryView.topToSuperview()
-        postSummaryView.bottomToSuperview()
-        postSummaryView.leftToSuperview(offset: 20)
-        postSummaryView.rightToSuperview(offset: -20)
+        postSummaryView.edgesToSuperview()
     }
     
     func styleView() {
@@ -37,7 +34,7 @@ class MyPostsTableViewCell : UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(withViewModel cellViewModel: MyPostsCellViewModel) {        
+    func configure(withViewModel cellViewModel: MyPostsCellViewModel) {
         let postSummaryViewModel = PostSummaryViewModel(
             title: cellViewModel.title,
             thumbnailURL: cellViewModel.thumbnailURL,

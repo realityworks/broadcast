@@ -12,7 +12,7 @@ class PostDetailViewController: ViewController {
     
     // MARK: - UI Components
     let verticalStackView = UIStackView()
-    let postSummaryView = PostSummaryView()
+    let postSummaryView = PostSummaryView(withStyling: .detail)
     let postCaptionLabel = UILabel()
     
     /// Custom required initializer to configure the controller from the specified post ID
@@ -41,6 +41,7 @@ class PostDetailViewController: ViewController {
         verticalStackView.distribution = .equalSpacing
         
         postCaptionLabel.font = .body
+        postCaptionLabel.numberOfLines = 0
         
         // Layout the subviews
         view.addSubview(verticalStackView)
@@ -48,9 +49,9 @@ class PostDetailViewController: ViewController {
         verticalStackView.addArrangedSubview(postSummaryView)
         verticalStackView.addArrangedSubview(postCaptionLabel)
         
-        verticalStackView.edgesToSuperview(excluding: [.bottom, .left, .right])
-        verticalStackView.leftToSuperview(offset: 20)
-        verticalStackView.rightToSuperview(offset: -20)
+        verticalStackView.edgesToSuperview(excluding: [.bottom], usingSafeArea: true)
+        postCaptionLabel.leftToSuperview(offset: 20)
+        postCaptionLabel.rightToSuperview(offset: -20)
     }
     
     private func configureBindings() {

@@ -10,33 +10,26 @@ import AVKit
 import TinyConstraints
 
 class VideoPlayerView: UIView {
-    let vwPlayer = UIView()
+    //let vwPlayer = UIView()
+    let playerController = AVPlayerViewController()
     var player: AVPlayer?
-    var playerLayer: AVPlayerLayer?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        addSubview(vwPlayer)
-        vwPlayer.edgesToSuperview()
+        /// Setup the AV Player layer and Player object. Add the layer to the player subview
+        addSubview(playerController.view)
+        backgroundColor = .black
+        playerController.view.backgroundColor = .black
+        playerController.showsPlaybackControls = true
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    fileprivate func addPlayerTo(view: UIView) {
-        player = AVPlayer()
-        playerLayer = AVPlayerLayer(player: player)
-        playerLayer?.videoGravity = .resizeAspectFill
-        
-        if let playerLayer = playerLayer {
-            view.layer.addSublayer(playerLayer)
-        }
-    }
-    
     override func layoutSubviews() {
-        playerLayer?.frame = self.bounds
+        playerController.view.frame = self.bounds
     }
     
     /// Play video from local file
@@ -53,9 +46,9 @@ class VideoPlayerView: UIView {
     /// Play video from URL
     /// - Parameter withURL: Reference URL to play
     func playVideo(withURL url: URL) {
-        let playerItem = AVPlayerItem(url: url)
-        player?.replaceCurrentItem(with: playerItem)
-        player?.play()
+        player = AVPlayer(url: url)
+        playerController.player = player
+        player?.rate = 1 //auto play
     }
 }
 

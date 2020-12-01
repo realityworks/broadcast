@@ -13,7 +13,7 @@ class LocalAPIService : APIService {
     
     // MARK: Mock objects
     static let mockThumbnail = "https://cdn.lifestyleasia.com/wp-content/uploads/sites/6/2020/03/17155127/alo.jpg"
-    static let mockPostVideo = Post.PostVideo(videoState: .available, videoProcessingStatus: .ready, postVideoUrl: "")
+    static let mockPostVideo = Post.PostVideo(videoState: .available, videoProcessingStatus: .ready, postVideoUrl: "https://multiplatform-f.akamaihd.net/i/multi/april11/sintel/sintel-hd_,512x288_450_b,640x360_700_b,768x432_1000_b,1024x576_1400_m,.mp4.csmil/master.m3u8")
     
     // MARK: Local mock data
     let mockPostData: [Post] = [

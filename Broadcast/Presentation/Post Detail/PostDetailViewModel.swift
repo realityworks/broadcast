@@ -17,8 +17,6 @@ class PostDetailViewModel : ViewModel {
     let postCaption: Observable<String>
     
     init(dependencies: Dependencies = .standard) {
-        
-        #warning("Fix isEncoding")
         let postObservable = Observable.combineLatest(dependencies.myPosts,
                                                   dependencies.selectedPostId) { myPosts, selectedPostId in
                 myPosts.first(where: { $0.id == selectedPostId })

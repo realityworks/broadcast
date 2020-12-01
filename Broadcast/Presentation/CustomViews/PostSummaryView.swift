@@ -21,11 +21,16 @@ class PostSummaryView : UIView {
     let postStatsView = PostStatsView()
     let dateCreatedLabel = UILabel.body()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    enum Styling {
+        case list
+        case detail
+    }
+    
+    init(withStyling styling: Styling) {
+        super.init(frame: .zero)
         
         configureViews()
-        configureLayout()
+        configureLayout(withStyling: styling)
         style()
     }
     
@@ -35,16 +40,15 @@ class PostSummaryView : UIView {
         verticalStackView.spacing = 5
         
         thumbnailImageView.contentMode = .scaleAspectFill
+        videoPlayerView.contentMode = .scaleAspectFit
         
-        containerTopView.layer.cornerRadius = 20
         containerTopView.clipsToBounds = true
     }
     
-    func configureLayout() {
+    func configureLayout(withStyling styling: Styling) {
         
         // Layout vertical stack
         addSubview(verticalStackView)
-        verticalStackView.edgesToSuperview()
         
         verticalStackView.addArrangedSubview(containerTopView)
         verticalStackView.addArrangedSubview(postTitleLabel)
@@ -66,6 +70,27 @@ class PostSummaryView : UIView {
         
         postStatsView.height(15)
         verticalStackView.addSpace(10)
+        
+        switch styling {
+        case .detail:
+            let views = [postTitleLabel,
+                         postStatsView,
+                         dateCreatedLabel]
+            
+            views.forEach {
+                $0.leftToSuperview(offset: 20)
+                $0.rightToSuperview(offset: -20)
+            }
+            
+            verticalStackView.edgesToSuperview()
+            
+        case .list:
+            verticalStackView.leftToSuperview(offset: 20)
+            verticalStackView.rightToSuperview(offset: -20)
+            verticalStackView.topToSuperview(usingSafeArea: true)
+            verticalStackView.bottomToSuperview()
+            containerTopView.layer.cornerRadius = 20
+        }
     }
     
     func style() {
