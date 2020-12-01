@@ -37,14 +37,20 @@ class PostDetailViewController: ViewController {
     
     private func configureViews() {
         // Configure the view settings
-        view.addSubview(verticalStackView)
+        verticalStackView.axis = .vertical
+        verticalStackView.distribution = .equalSpacing
         
-        
+        postCaptionLabel.font = .body
         
         // Layout the subviews
+        view.addSubview(verticalStackView)
+        
         verticalStackView.addArrangedSubview(postSummaryView)
         verticalStackView.addArrangedSubview(postCaptionLabel)
         
+        verticalStackView.edgesToSuperview(excluding: [.bottom, .left, .right])
+        verticalStackView.leftToSuperview(offset: 20)
+        verticalStackView.rightToSuperview(offset: -20)
     }
     
     private func configureBindings() {
