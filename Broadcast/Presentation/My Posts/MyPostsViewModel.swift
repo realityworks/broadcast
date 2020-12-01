@@ -29,7 +29,7 @@ class MyPostsViewModel : ViewModel {
                         title: post.title,
                         thumbnailURL: URL(string: post.thumbnailUrl),
                         isEncoding: false,
-                        dateCreated: "Created yesterday",
+                        dateCreated: post.created.timeAgo(),
                         commentCount: post.comments,
                         lockerCount: post.lockers)
                 }

@@ -10,8 +10,12 @@ import RxSwift
 import RxCocoa
 
 class LocalAPIService : APIService {
+    
+    // MARK: Mock objects
     static let mockThumbnail = "https://cdn.lifestyleasia.com/wp-content/uploads/sites/6/2020/03/17155127/alo.jpg"
     static let mockPostVideo = Post.PostVideo(videoState: .available, videoProcessingStatus: .ready, postVideoUrl: "")
+    
+    // MARK: Local mock data
     let mockPostData: [Post] = [
         Post(id: "1", title: "Test", caption: "Test", comments: 100, lockers: 50, thumbnailUrl: LocalAPIService.mockThumbnail, created: Date(), postVideo: LocalAPIService.mockPostVideo, postImage: nil),
         Post(id: "2", title: "Test 1", caption: "Test 1", comments: 12, lockers: 88, thumbnailUrl: LocalAPIService.mockThumbnail, created: Date(), postVideo: LocalAPIService.mockPostVideo, postImage: nil),
