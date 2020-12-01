@@ -57,7 +57,7 @@ class PostSummaryView : UIView {
         
         // Layout container top view
         containerTopView.edgesToSuperview(excluding: [.bottom])
-        containerTopView.height(210)
+        containerTopView.aspectRatio(1)
         
         // Order important
         containerTopView.addSubview(videoPlayerView)
