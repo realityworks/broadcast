@@ -9,7 +9,7 @@ import UIKit
 import AVKit
 import TinyConstraints
 
-class VideoPlayer: UIView {
+class VideoPlayerView: UIView {
     let vwPlayer = UIView()
     var player: AVPlayer?
     var playerLayer: AVPlayerLayer?

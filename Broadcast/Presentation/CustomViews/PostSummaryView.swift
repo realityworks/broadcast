@@ -56,9 +56,11 @@ class PostSummaryView : UIView {
         containerTopView.height(210)
         
         // Order important
+        containerTopView.addSubview(videoPlayerView)
         containerTopView.addSubview(processingView)
         containerTopView.addSubview(thumbnailImageView)
         
+        videoPlayerView.edgesToSuperview()
         processingView.edgesToSuperview()
         thumbnailImageView.edgesToSuperview()
         
