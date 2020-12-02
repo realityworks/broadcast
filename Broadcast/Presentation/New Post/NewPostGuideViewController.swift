@@ -10,7 +10,7 @@ import RxCocoa
 import RxSwift
 import SwiftRichString
 
-class NewPostGuideViewController: ViewController {
+class NewPostGuideViewController: ViewController, MediaPickerAdapter {
     // MARK: View Model
     private let viewModel = NewPostGuideViewModel()
     
@@ -24,7 +24,6 @@ class NewPostGuideViewController: ViewController {
     let tipsBackgroundView = UIView()
     let tipsList = UIStackView()
     let selectButton = UIButton.standard(withTitle: LocalizedString.select)
-    
     
     struct TipData {
         let icon: UIImage?
@@ -117,6 +116,7 @@ class NewPostGuideViewController: ViewController {
         selectButton.rx.tap
             .subscribe(onNext: { [weak self] _ in // TODO
                 //self?.navigationController?.present(with: .newPostDetail)
+                self?.selectMediaFromLibrary()
             })
             .disposed(by: disposeBag)
     }
