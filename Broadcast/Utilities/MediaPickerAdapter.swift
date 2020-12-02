@@ -15,12 +15,10 @@ protocol MediaPickerAdapter: NSObject {
     func showMediaOptionsMenu()
     func selected(imageUrl: URL)
     func selected(videoUrl: URL)
+    var picker: UIImagePickerController { get }
 }
 
 // MARK: Image Picker in a UIViewController
-
-/// Allow the UIViewControllerto handle delegate calls from the ImagePicker
-extension UIViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {}
 
 /// Implementation of the media picker when the current object is a view controller
 extension MediaPickerAdapter where Self: UIViewController {
@@ -29,42 +27,17 @@ extension MediaPickerAdapter where Self: UIViewController {
     
     /// Function to create an image picker controller that allows media selection
     func mediaFromLibrary() {
-        let picker = UIImagePickerController()
-        picker.sourceType = .photoLibrary
-        picker.delegate = self
-        picker.allowsEditing = false
+        picker.sourceType = .savedPhotosAlbum
+        picker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary) ?? []
         present(picker, animated: true, completion: nil)
     }
     
     /// Function to create an image picker controller that allows media selection
     func mediaFromCamera() {
-        let picker = UIImagePickerController()
         picker.sourceType = .camera
-        picker.delegate = self
-        picker.allowsEditing = false
+        picker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .camera) ?? []
         present(picker, animated: true, completion: nil)
     }
-    
-    // MARK: UIImagePickerControllerDelegate
-    func imagePickerController(
-      _ picker: UIImagePickerController,
-      didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        if let imageUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL {
-            selected(imageUrl: imageUrl)
-        } else if let videoUrl = info[UIImagePickerController.InfoKey.mediaURL] as? URL {
-            selected(videoUrl: videoUrl)
-        }
-        
-        dismiss(animated: true, completion: nil)
-    }
-
-    func imagePickerControllerDidCancel(
-      _ picker: UIImagePickerController
-    ) {
-      dismiss(animated: true, completion: nil)
-    }
-    
-    
     
     func showMediaOptionsMenu() {
         let alert = UIAlertController(
@@ -82,7 +55,7 @@ extension MediaPickerAdapter where Self: UIViewController {
             title: "Camera",
             style: .default,
             handler: { [weak self] action in
-                self?.mediaFromLibrary()
+                self?.mediaFromCamera()
             })
         alert.addAction(actPhoto)
 

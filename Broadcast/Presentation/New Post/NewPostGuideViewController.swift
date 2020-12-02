@@ -10,7 +10,7 @@ import RxCocoa
 import RxSwift
 import SwiftRichString
 
-class NewPostGuideViewController: ViewController, MediaPickerAdapter {
+class NewPostGuideViewController: ViewController {
     // MARK: View Model
     private let viewModel = NewPostGuideViewModel()
     
@@ -24,6 +24,9 @@ class NewPostGuideViewController: ViewController, MediaPickerAdapter {
     let tipsBackgroundView = UIView()
     let tipsList = UIStackView()
     let selectButton = UIButton.standard(withTitle: LocalizedString.select)
+    
+    // MARK: UIPickerController
+    var picker = UIImagePickerController()
     
     struct TipData {
         let icon: UIImage?
@@ -44,6 +47,9 @@ class NewPostGuideViewController: ViewController, MediaPickerAdapter {
         super.viewDidLoad()
         
         title = "New Post"
+        
+        picker.delegate = self
+        picker.allowsEditing = false
 
         // Do any additional setup after loading the view.
         configureViews()
@@ -125,8 +131,32 @@ class NewPostGuideViewController: ViewController, MediaPickerAdapter {
             })
             .disposed(by: disposeBag)
     }
-    
-    // MARK: MediaPickerAdapter
+}
+
+// MARK: UIImagePickerControllerDelegate
+extension NewPostGuideViewController: UIImagePickerControllerDelegate,
+                                      UINavigationControllerDelegate {
+    // MARK: UIImagePickerControllerDelegate
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let imageUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL {
+            selected(imageUrl: imageUrl)
+        } else if let videoUrl = info[UIImagePickerController.InfoKey.mediaURL] as? URL {
+            selected(videoUrl: videoUrl)
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
+
+    func imagePickerControllerDidCancel(
+      _ picker: UIImagePickerController
+    ) {
+        dismiss(animated: true, completion: nil)
+    }
+}
+
+// MARK: MediaPickerAdapter
+
+extension NewPostGuideViewController : MediaPickerAdapter {
     func selected(imageUrl url: URL) {
         // Image Selected
         viewModel.mediaSelected(.image(url: url))
