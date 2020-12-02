@@ -20,7 +20,7 @@ class NewPostGuideViewController: ViewController {
     let hotTipsLabel = UILabel()
     
     struct TipData {
-        let icon: UIImage
+        let icon: UIImage?
         let text: NSAttributedString
     }
     
@@ -35,7 +35,7 @@ class NewPostGuideViewController: ViewController {
     }
     
     let tipsListData: [TipData] = [
-        TipData(icon: UIImage(systemName: "paintbrush"), text: <#T##NSAttributedString#>)
+        TipData(icon: UIImage(systemName: "paintbrush"), text: "Text String".set(style: NewPostGuideViewController.normalStyle))
     ]
     
     // MARK: UI Lifecycle
