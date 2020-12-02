@@ -66,10 +66,10 @@ class MainViewController: UITabBarController {
         
         let newPostTabBarItem = UITabBarItem(
             title: "New Post",
-            image: UIImage(systemName: "rectangle.stack.person.crop"),
-            selectedImage: UIImage(systemName: "rectangle.stack.person.crop.fill"))
+            image: UIImage(systemName: "plus.circle"),
+            selectedImage: UIImage(systemName: "plus.circle.fill"))
         
-        profileViewController.tabBarItem = profileTabBarItem
+        newPostViewController.tabBarItem = newPostTabBarItem
         
         
         let profileTabBarItem = UITabBarItem(
