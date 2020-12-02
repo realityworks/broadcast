@@ -54,6 +54,7 @@
 		1D3F71ED2571516600DE7F05 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 1D3F71EC2571516600DE7F05 /* RxDataSources */; };
 		1D3F71EF2571516600DE7F05 /* Differentiator in Frameworks */ = {isa = PBXBuildFile; productRef = 1D3F71EE2571516600DE7F05 /* Differentiator */; };
 		1D3F72262571634E00DE7F05 /* RxTableViewSectionedReloadDataSource+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3F72252571634D00DE7F05 /* RxTableViewSectionedReloadDataSource+Extensions.swift */; };
+		1D5CF0C32577CF50008F8C22 /* MediaPickerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5CF0C22577CF50008F8C22 /* MediaPickerAdapter.swift */; };
 		1D87DF4925683535000652D6 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF4825683535000652D6 /* EditProfileViewController.swift */; };
 		1D87DF4E2568353F000652D6 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF4D2568353F000652D6 /* EditProfileViewModel.swift */; };
 		1D87DF532568367E000652D6 /* MyPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF522568367E000652D6 /* MyPostsViewController.swift */; };
@@ -170,6 +171,7 @@
 		1D3F71E32571244900DE7F05 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1D3F71E72571294F00DE7F05 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		1D3F72252571634D00DE7F05 /* RxTableViewSectionedReloadDataSource+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RxTableViewSectionedReloadDataSource+Extensions.swift"; sourceTree = "<group>"; };
+		1D5CF0C22577CF50008F8C22 /* MediaPickerAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPickerAdapter.swift; sourceTree = "<group>"; };
 		1D87DF4825683535000652D6 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		1D87DF4D2568353F000652D6 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		1D87DF522568367E000652D6 /* MyPostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsViewController.swift; sourceTree = "<group>"; };
@@ -417,6 +419,7 @@
 				1D916D6E2563F5240059E549 /* KeyboardEventsAdapter.swift */,
 				1D916D97256408CC0059E549 /* Logger.swift */,
 				1D3F71D72571205200DE7F05 /* LocalizedString.swift */,
+				1D5CF0C22577CF50008F8C22 /* MediaPickerAdapter.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -807,6 +810,7 @@
 				1D2A03EF256561BB008CE2D4 /* PostContentUseCase.swift in Sources */,
 				1D2CAA1B2577739700A54AE5 /* Style+Styling.swift in Sources */,
 				1D3F71D0257016D000DE7F05 /* ProcessingView.swift in Sources */,
+				1D5CF0C32577CF50008F8C22 /* MediaPickerAdapter.swift in Sources */,
 				1DF58F502574CB9300563EC2 /* PostSummaryViewModel.swift in Sources */,
 				1D91A0D2256C1DD60043A943 /* DismissableLabel.swift in Sources */,
 				1D916D342562A4CF0059E549 /* State.swift in Sources */,
