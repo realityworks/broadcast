@@ -29,7 +29,7 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         withPlaceholder: LocalizedString.passwordPlaceholder)
     
     private let errorDisplayView = DismissableLabel()
-    private let loginButton = UIButton.loginButton(
+    private let loginButton = UIButton.standard(
         withTitle: LocalizedString.loginButton)
     
     private let applyHereTextView = UITextView()
@@ -55,6 +55,7 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         contentStackView.axis = .vertical
         contentStackView.alignment = .center
         contentStackView.distribution = .equalSpacing
+        contentStackView.spacing = 16
         
         applyHereTextView.isScrollEnabled = false
         
@@ -73,8 +74,7 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         /// Setup content stack view
         contentStackView.topToSuperview()
         contentStackView.widthToSuperview()
-        contentStackView.addSubview(logoImageView)
-        contentStackView.spacing = 16
+        contentStackView.addArrangedSubview(logoImageView)
         
         /// Add arranged views to stack
         contentStackView.addSpace(300)
@@ -152,14 +152,14 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         
         // Style attributed strings
         let boomdayLinkStyle = Style {
-            $0.font = UIFont.title
+            $0.font = UIFont.titleBold
             $0.underline = (.single, UIColor.black)
             $0.linkURL = URL(string: "https://boomday.com")
             $0.alignment = .center
         }
         
         applyHereTextView.attributedText =
-            "No account? ".set(style: Style.title) +
+            "No account? ".set(style: Style.titleCenter) +
             "Apply here".set(style: boomdayLinkStyle)
         
         let forgotPasswordStyle = Style {

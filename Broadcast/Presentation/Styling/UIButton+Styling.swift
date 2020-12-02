@@ -9,7 +9,7 @@ import UIKit
 import TinyConstraints
 
 extension UIButton {
-    static func loginButton(withTitle title: LocalizedString) -> UIButton {
+    static func standard(withTitle title: LocalizedString) -> UIButton {
         let button = UIButton()
         
         button.setBackgroundColor(.blue, for: .normal)

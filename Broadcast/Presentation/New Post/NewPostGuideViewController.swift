@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 import SwiftRichString
 
 class NewPostGuideViewController: ViewController {
@@ -21,7 +23,7 @@ class NewPostGuideViewController: ViewController {
     let doNotShowAgainButton = UIButton()
     let tipsBackgroundView = UIView()
     let tipsList = UIStackView()
-    let selectButton = UIButton()
+    let selectButton = UIButton.standard(withTitle: LocalizedString.select)
     
     
     struct TipData {
@@ -48,55 +50,75 @@ class NewPostGuideViewController: ViewController {
         configureViews()
         configureLayout()
         style()
+        configureBindings()
     }
     
     // MARK: UI Configuration
     private func configureViews() {
         mainStackView.axis = .vertical
-        mainStackView.alignment = .center
         mainStackView.distribution = .equalSpacing
         mainStackView.spacing = 10
         
         detailsStackView.axis = .vertical
-        detailsStackView.alignment = .leading
         detailsStackView.distribution = .equalSpacing
+        detailsStackView.spacing = 10
     }
     
     private func configureLayout() {
+        view.addSubview(mainStackView)
+        mainStackView.centerInSuperview()
+        mainStackView.leftToSuperview(offset: 20)
+        mainStackView.rightToSuperview(offset: -20)
+        
         mainStackView.addArrangedSubview(tipTitleLabel)
         
+        detailsStackView.addSpace(10)
         // Setup tips layout with stack views
         tipsListData.forEach { tipData in
             let horizontalStackView = UIStackView()
-            
+
             let imageView = UIImageView(image: tipData.icon)
             imageView.contentMode = .scaleAspectFit
-            imageView.height(15)
+            imageView.height(20)
             imageView.width(30)
-            
+
             let label = UILabel()
             label.attributedText = tipData.text
-            
+
             horizontalStackView.addArrangedSubview(imageView)
             horizontalStackView.addArrangedSubview(label)
-            mainStackView.addArrangedSubview(horizontalStackView)
+            detailsStackView.addArrangedSubview(horizontalStackView)
         }
-        
+        detailsStackView.addSpace(10)
+
         mainStackView.addArrangedSubview(tipsBackgroundView)
-        mainStackView.addArrangedSubview(selectButton)
-        //mainStackView.addArrangedSubview(detailsStackView)
+        let selectButtonContainerView = UIView()
+        selectButtonContainerView.addSubview(selectButton)
+
+        mainStackView.addArrangedSubview(selectButtonContainerView)
+        selectButton.width(150)
+        selectButton.centerInSuperview()
+        selectButtonContainerView.height(to: selectButton)
+        
         tipsBackgroundView.addSubview(detailsStackView)
         detailsStackView.edgesToSuperview()
-        
-        view.addSubview(mainStackView)
-        mainStackView.center(in: view)
+        tipsBackgroundView.height(to: detailsStackView)
     }
     
     private func style() {
-        tipsBackgroundView.layer.cornerRadius = 20
-        tipsBackgroundView.backgroundColor = .lightGray
+        detailsStackView.backgroundColor = .clear
+        tipsBackgroundView.layer.cornerRadius = 10
+        tipsBackgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.1)
         
         tipTitleLabel.attributedText = LocalizedString.newPostTipsTitle.localized.set(style: Style.titleBold)
+    }
+    
+    private func configureBindings() {
+        selectButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in // TODO
+                self?.navigationController?.present(with: .newPostDetail)
+            })
+            .disposed(by: disposeBag)
     }
 }
 

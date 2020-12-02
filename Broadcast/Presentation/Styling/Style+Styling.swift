@@ -11,11 +11,14 @@ import SwiftRichString
 extension Style {
     static let titleBold = Style {
         $0.font = UIFont.titleBold
+    }
+    
+    static let titleCenter = Style {
+        $0.font = UIFont.title
         $0.alignment = .center
     }
     
     static let title = Style {
         $0.font = UIFont.title
-        $0.alignment = .center
     }
 }

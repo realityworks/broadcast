@@ -14,6 +14,7 @@ enum LocalizedString : String {
     case passwordPlaceholder
     case myPostsHeading
     case newPostTipsTitle
+    case select
     
     var localized: String {
         return Bundle.main.localizedString(forKey: self.rawValue, value: nil, table: nil)
