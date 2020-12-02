@@ -116,7 +116,7 @@ class NewPostGuideViewController: ViewController {
     private func configureBindings() {
         selectButton.rx.tap
             .subscribe(onNext: { [weak self] _ in // TODO
-                self?.navigationController?.present(with: .newPostDetail)
+                //self?.navigationController?.present(with: .newPostDetail)
             })
             .disposed(by: disposeBag)
     }
