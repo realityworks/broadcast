@@ -15,7 +15,7 @@ indirect enum Route {
     case profile
     case postDetail
     case newPostGuide
-    case newPostDetail
+    case newPostDetail(selectedMedia: SelectedMedia)
 }
 
 extension Route {

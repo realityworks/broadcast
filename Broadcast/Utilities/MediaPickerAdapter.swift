@@ -13,6 +13,8 @@ protocol MediaPickerAdapter: NSObject {
     func mediaFromLibrary()
     func mediaFromCamera()
     func showMediaOptionsMenu()
+    func selected(imageUrl: URL)
+    func selected(videoUrl: URL)
 }
 
 // MARK: Image Picker in a UIViewController
@@ -37,7 +39,7 @@ extension MediaPickerAdapter where Self: UIViewController {
     /// Function to create an image picker controller that allows media selection
     func mediaFromCamera() {
         let picker = UIImagePickerController()
-        picker.sourceType = .photoLibrary
+        picker.sourceType = .camera
         picker.delegate = self
         picker.allowsEditing = false
         present(picker, animated: true, completion: nil)
@@ -46,9 +48,14 @@ extension MediaPickerAdapter where Self: UIViewController {
     // MARK: UIImagePickerControllerDelegate
     func imagePickerController(
       _ picker: UIImagePickerController,
-      didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]
-    ) {
-      dismiss(animated: true, completion: nil)
+      didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        if let imageUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL {
+            selected(imageUrl: imageUrl)
+        } else if let videoUrl = info[UIImagePickerController.InfoKey.mediaURL] as? URL {
+            selected(videoUrl: videoUrl)
+        }
+        
+        dismiss(animated: true, completion: nil)
     }
 
     func imagePickerControllerDidCancel(
@@ -56,6 +63,8 @@ extension MediaPickerAdapter where Self: UIViewController {
     ) {
       dismiss(animated: true, completion: nil)
     }
+    
+    
     
     func showMediaOptionsMenu() {
         let alert = UIAlertController(
@@ -70,15 +79,19 @@ extension MediaPickerAdapter where Self: UIViewController {
         alert.addAction(actCancel)
 
         let actPhoto = UIAlertAction(
-            title: "Take Photo",
+            title: "Camera",
             style: .default,
-            handler: nil)
+            handler: { [weak self] action in
+                self?.mediaFromLibrary()
+            })
         alert.addAction(actPhoto)
 
         let actLibrary = UIAlertAction(
-            title: "Choose From Library",
+            title: "Library",
             style: .default,
-            handler: )
+            handler: { [weak self] action in
+                self?.mediaFromLibrary()
+            })
         alert.addAction(actLibrary)
 
         present(alert, animated: true, completion: nil)

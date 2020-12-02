@@ -115,10 +115,20 @@ class NewPostGuideViewController: ViewController, MediaPickerAdapter {
     private func configureBindings() {
         selectButton.rx.tap
             .subscribe(onNext: { [weak self] _ in // TODO
-                //self?.navigationController?.present(with: .newPostDetail)
-                self?.selectMediaFromLibrary()
+                self?.showMediaOptionsMenu()
             })
             .disposed(by: disposeBag)
+    }
+    
+    // MARK: MediaPickerAdapter
+    func selected(imageUrl url: URL) {
+        // Image Selected
+        navigationController?.push(with: .newPostDetail(selectedMedia: .image(url: url)))
+    }
+    
+    func selected(videoUrl url: URL) {
+        // Video Selected
+        navigationController?.push(with: .newPostDetail(selectedMedia: .video(url: url)))
     }
 }
 

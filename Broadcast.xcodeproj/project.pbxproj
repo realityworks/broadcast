@@ -92,6 +92,7 @@
 		1D916DA825640C810059E549 /* Staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 1D916DA525640C810059E549 /* Staging.xcconfig */; };
 		1D91A0CC256C1B8E0043A943 /* UIStackView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D91A0CB256C1B8E0043A943 /* UIStackView+Extensions.swift */; };
 		1D91A0D2256C1DD60043A943 /* DismissableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D91A0D1256C1DD60043A943 /* DismissableLabel.swift */; };
+		1D93143E2577DBDF001C85C1 /* SelectedMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D93143D2577DBDF001C85C1 /* SelectedMedia.swift */; };
 		1DD1FE05256CA55F00C598CE /* UITextField+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD1FE04256CA55F00C598CE /* UITextField+Styling.swift */; };
 		1DD1FE17256CE2E000C598CE /* SwiftRichString in Frameworks */ = {isa = PBXBuildFile; productRef = 1DD1FE16256CE2E000C598CE /* SwiftRichString */; };
 		1DD1FE1D256D6F7300C598CE /* AuthenticateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD1FE1C256D6F7300C598CE /* AuthenticateResponse.swift */; };
@@ -203,6 +204,7 @@
 		1D916DA525640C810059E549 /* Staging.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
 		1D91A0CB256C1B8E0043A943 /* UIStackView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extensions.swift"; sourceTree = "<group>"; };
 		1D91A0D1256C1DD60043A943 /* DismissableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissableLabel.swift; sourceTree = "<group>"; };
+		1D93143D2577DBDF001C85C1 /* SelectedMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedMedia.swift; sourceTree = "<group>"; };
 		1DD1FE04256CA55F00C598CE /* UITextField+Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Styling.swift"; sourceTree = "<group>"; };
 		1DD1FE1C256D6F7300C598CE /* AuthenticateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateResponse.swift; sourceTree = "<group>"; };
 		1DD1FE27256E16B600C598CE /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
@@ -472,6 +474,7 @@
 				1D916D8C256404ED0059E549 /* Profile.swift */,
 				1D2A03FD25656C03008CE2D4 /* AppState.swift */,
 				1D2A04082565761B008CE2D4 /* ConnectionState.swift */,
+				1D93143D2577DBDF001C85C1 /* SelectedMedia.swift */,
 			);
 			path = State;
 			sourceTree = "<group>";
@@ -792,6 +795,7 @@
 				1D3ED5FA25663512004236BB /* UIFont+Styling.swift in Sources */,
 				1D916D592562C2920059E549 /* Schedulers.swift in Sources */,
 				1D2A042A256583E8008CE2D4 /* UIViewController+Routing.swift in Sources */,
+				1D93143E2577DBDF001C85C1 /* SelectedMedia.swift in Sources */,
 				1D3B2A002564CF7F001874FD /* AuthenticationService.swift in Sources */,
 				1D87DF84256839C9000652D6 /* PostDetailViewController.swift in Sources */,
 				1D87DF752568387B000652D6 /* NewPostGuideViewModel.swift in Sources */,

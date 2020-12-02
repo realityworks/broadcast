@@ -11,7 +11,6 @@ class NewPostGuideViewModel : ViewModel {
     
     init(dependencies: Dependencies = .standard) {
         super.init(stateController: dependencies.stateController)
-        
     }
     
 }
