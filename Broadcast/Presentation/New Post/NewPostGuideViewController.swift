@@ -58,11 +58,12 @@ class NewPostGuideViewController: ViewController {
         mainStackView.spacing = 10
         
         detailsStackView.axis = .vertical
-        detailsStackView.alignment = .center
+        detailsStackView.alignment = .leading
         detailsStackView.distribution = .equalSpacing
     }
     
     private func configureLayout() {
+        mainStackView.addArrangedSubview(tipTitleLabel)
         
         // Setup tips layout with stack views
         tipsListData.forEach { tipData in
@@ -78,17 +79,17 @@ class NewPostGuideViewController: ViewController {
             
             horizontalStackView.addArrangedSubview(imageView)
             horizontalStackView.addArrangedSubview(label)
+            mainStackView.addArrangedSubview(horizontalStackView)
         }
         
-        mainStackView.addArrangedSubview(tipTitleLabel)
         mainStackView.addArrangedSubview(tipsBackgroundView)
         mainStackView.addArrangedSubview(selectButton)
-        
+        //mainStackView.addArrangedSubview(detailsStackView)
         tipsBackgroundView.addSubview(detailsStackView)
         detailsStackView.edgesToSuperview()
         
         view.addSubview(mainStackView)
-        mainStackView.edgesToSuperview(excluding: [.bottom], usingSafeArea: true)
+        mainStackView.center(in: view)
     }
     
     private func style() {
@@ -96,7 +97,6 @@ class NewPostGuideViewController: ViewController {
         tipsBackgroundView.backgroundColor = .lightGray
         
         tipTitleLabel.attributedText = LocalizedString.newPostTipsTitle.localized.set(style: Style.titleBold)
-
     }
 }
 
