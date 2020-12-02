@@ -13,6 +13,9 @@ protocol MediaPickerAdapter: NSObject {
     func selectMediaFromLibrary()
 }
 
+/// Allow the UIViewControllerto handle delegate calls from the ImagePicker
+extension UIViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {}
+
 /// Implementation of the media picker when the current object is a view controller
 extension MediaPickerAdapter where Self: UIViewController {
     
@@ -25,5 +28,3 @@ extension MediaPickerAdapter where Self: UIViewController {
         present(picker, animated: true, completion: nil)
     }
 }
-
-
