@@ -163,7 +163,7 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
             "Apply here".set(style: boomdayLinkStyle)
         
         let forgotPasswordStyle = Style {
-            $0.font = SystemFonts.Helvetica_Light.font(size: 15)
+            $0.font = UIFont.title
             $0.alignment = .center
             $0.linkURL = URL(string: "https://boomday.com")
         }
@@ -171,7 +171,7 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         forgotPasswordTextView.attributedText = "Forgot your password?".set(style: forgotPasswordStyle)
                 
         let termsAndConditionsStyle = Style {
-            $0.font = SystemFonts.Helvetica_Light.font(size: 15)
+            $0.font = UIFont.title
             $0.alignment = .center
             $0.linkURL = URL(string: "https://boomday.com")
         }

@@ -29,20 +29,12 @@ class NewPostGuideViewController: ViewController {
         let text: NSAttributedString
     }
     
-    private static let boldStyle = Style {
-        $0.font = SystemFonts.Helvetica_Bold.font(size: 15)
-    }
-    
-    private static let normalStyle = Style {
-        $0.font = SystemFonts.Helvetica_Bold.font(size: 15)
-    }
-    
     let tipsListData: [TipData] = [
         TipData(icon: UIImage(systemName: "paintbrush"),
-                text: "Upload or record in ".set(style: NewPostGuideViewController.normalStyle) +
-                    "portrait".set(style: NewPostGuideViewController.boldStyle)),
-        TipData(icon: UIImage(systemName: "paintbrush"), text: "Keep it snappy".set(style: NewPostGuideViewController.normalStyle)),
-        TipData(icon: UIImage(systemName: "paintbrush"), text: "Remember, good sound and lighting!".set(style: NewPostGuideViewController.normalStyle))
+                text: "Upload or record in ".set(style: Style.title) +
+                    "portrait".set(style: Style.titleBold)),
+        TipData(icon: UIImage(systemName: "paintbrush"), text: "Keep it snappy".set(style: Style.title)),
+        TipData(icon: UIImage(systemName: "paintbrush"), text: "Remember, good sound and lighting!".set(style: Style.title))
     ]
     
     // MARK: UI Lifecycle
@@ -103,7 +95,7 @@ class NewPostGuideViewController: ViewController {
         tipsBackgroundView.layer.cornerRadius = 20
         tipsBackgroundView.backgroundColor = .lightGray
         
-        tipTitleLabel.attributedText = "HOT TIPS FOR GREAT CONTENT".set(style: Self.boldStyle)
+        tipTitleLabel.attributedText = LocalizedString.newPostTipsTitle.localized.set(style: Style.titleBold)
 
     }
 }
