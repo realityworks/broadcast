@@ -49,6 +49,8 @@ class NewPostGuideViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "New Post"
 
         // Do any additional setup after loading the view.
         configureViews()
@@ -86,11 +88,15 @@ class NewPostGuideViewController: ViewController {
             horizontalStackView.addArrangedSubview(label)
         }
         
+        
         mainStackView.addArrangedSubview(tipsBackgroundView)
         mainStackView.addArrangedSubview(selectButton)
         
         tipsBackgroundView.addSubview(detailsStackView)
         detailsStackView.edgesToSuperview()
+        
+        view.addSubview(mainStackView)
+        mainStackView.edgesToSuperview(excluding: [.bottom], usingSafeArea: true)
     }
     
     private func style() {

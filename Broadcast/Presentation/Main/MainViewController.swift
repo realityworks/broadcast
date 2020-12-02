@@ -64,6 +64,7 @@ class MainViewController: UITabBarController {
         
         myPostsViewController.tabBarItem = myPostsTabBarItem
         
+        /// Create the New Post Tab bar item
         let newPostTabBarItem = UITabBarItem(
             title: "New Post",
             image: UIImage(systemName: "plus.circle"),
@@ -71,7 +72,7 @@ class MainViewController: UITabBarController {
         
         newPostViewController.tabBarItem = newPostTabBarItem
         
-        
+        /// Create the Profile Tab bar item
         let profileTabBarItem = UITabBarItem(
             title: "Profile",
             image: UIImage(systemName: "rectangle.stack.person.crop"),
@@ -90,6 +91,6 @@ extension MainViewController : UITabBarControllerDelegate {
     
     func tabBarController(_ tabBarController: UITabBarController,
                           didSelect viewController: UIViewController) {
-            print("Selected \(viewController.title!)")
+            print("Selected \(viewController.title ?? "No title")")
     }
 }
