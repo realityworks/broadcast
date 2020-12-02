@@ -118,17 +118,23 @@ class NewPostGuideViewController: ViewController, MediaPickerAdapter {
                 self?.showMediaOptionsMenu()
             })
             .disposed(by: disposeBag)
+        
+        viewModel.mediaSelected
+            .subscribe(onNext: { [weak self] _ in
+                self?.navigationController?.push(with: .newPostDetail)
+            })
+            .disposed(by: disposeBag)
     }
     
     // MARK: MediaPickerAdapter
     func selected(imageUrl url: URL) {
         // Image Selected
-        navigationController?.push(with: .newPostDetail(selectedMedia: .image(url: url)))
+        viewModel.mediaSelected(.image(url: url))
     }
     
     func selected(videoUrl url: URL) {
         // Video Selected
-        navigationController?.push(with: .newPostDetail(selectedMedia: .video(url: url)))
+        viewModel.mediaSelected(.video(url: url))
     }
 }
 

@@ -15,7 +15,7 @@ indirect enum Route {
     case profile
     case postDetail
     case newPostGuide
-    case newPostDetail(selectedMedia: SelectedMedia)
+    case newPostDetail
 }
 
 extension Route {
@@ -38,7 +38,9 @@ extension Route {
         case .postDetail:
             return PostDetailViewController(isEditing: false)
         case .newPostGuide:
-            return NewPostGuideViewController()
+            let newPostGuideViewController = NewPostGuideViewController()
+            let navigationController = UINavigationController(rootViewController: newPostGuideViewController)
+            return navigationController
         case .newPostDetail:
             return PostDetailViewController(isEditing: true)
         }

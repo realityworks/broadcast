@@ -25,6 +25,10 @@ class PostContentUseCase {
         stateController.state.selectedPostId = postId
     }
     
+    func selectMedia(with mediaUrl: MediaUrl) {
+        stateController.state.selectedMedia = mediaUrl
+    }
+    
     func retrieveMyPosts() {
         // Load posts into the app state
         apiService.retrieveMyPosts()

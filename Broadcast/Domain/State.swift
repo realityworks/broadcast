@@ -14,6 +14,8 @@ struct State : Equatable {
     var appState: AppState = .inactive
     var connectionState: ConnectionState = .connected
     var myPosts: [Post] = []
-    var selectedPostId: PostID?
     var profile: Profile?
+    
+    var selectedPostId: PostID?
+    var selectedMedia: MediaUrl?
 }
