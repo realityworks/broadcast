@@ -17,14 +17,17 @@ class NewPostGuideViewController: ViewController {
     let titleLabel = UILabel()
     
     let detailsStackView = UIStackView()
-    let hotTipsLabel = UILabel()
+    let hotTipsTitleLabel = UILabel()
+    let doNotShowAgainButton = UIButton()
+    let tipsBackgroundView = UIView()
+    let tipsList = UIStackView()
+    let selectButton = UIButton()
+    
     
     struct TipData {
         let icon: UIImage?
         let text: NSAttributedString
     }
-    
-    var tipsList: UIStackView!
     
     private static let boldStyle = Style {
         $0.font = SystemFonts.Helvetica_Bold.font(size: 15)
@@ -35,14 +38,57 @@ class NewPostGuideViewController: ViewController {
     }
     
     let tipsListData: [TipData] = [
-        TipData(icon: UIImage(systemName: "paintbrush"), text: "Text String".set(style: NewPostGuideViewController.normalStyle))
+        TipData(icon: UIImage(systemName: "paintbrush"),
+                text: "Upload or record in ".set(style: NewPostGuideViewController.normalStyle) +
+                    "portrait".set(style: NewPostGuideViewController.boldStyle)),
+        TipData(icon: UIImage(systemName: "paintbrush"), text: "Keep it snappy".set(style: NewPostGuideViewController.normalStyle)),
+        TipData(icon: UIImage(systemName: "paintbrush"), text: "Remember, good sound and lighting!".set(style: NewPostGuideViewController.normalStyle))
     ]
     
     // MARK: UI Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        configureViews()
+        configureLayout()
+        style()
+    }
+    
+    // MARK: UI Configuration
+    private func configureViews() {
+        mainStackView.axis = .vertical
+        mainStackView.alignment = .center
+        mainStackView.distribution = .equalSpacing
+        mainStackView.spacing = 10
+        
+        detailsStackView.axis = .vertical
+        detailsStackView.alignment = .center
+        detailsStackView.distribution = .equalSpacing
+    }
+    
+    private func configureLayout() {
+        
+        // Setup tips layout with stack views
+        tipsListData.forEach { tipData in
+            let horizontalStackView = UIStackView()
+            
+            let imageView = UIImageView(image: tipData.icon)
+            imageView.contentMode = .scaleAspectFit
+            imageView.height(15)
+            imageView.width(30)
+            
+            let label = UILabel()
+            label.attributedText = tipData.text
+            
+            horizontalStackView.addArrangedSubview(imageView)
+            horizontalStackView.addArrangedSubview(label)
+        }
+    }
+    
+    private func style() {
+        
     }
 }
 
