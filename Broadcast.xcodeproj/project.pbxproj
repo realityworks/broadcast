@@ -53,8 +53,6 @@
 		1D3F71ED2571516600DE7F05 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 1D3F71EC2571516600DE7F05 /* RxDataSources */; };
 		1D3F71EF2571516600DE7F05 /* Differentiator in Frameworks */ = {isa = PBXBuildFile; productRef = 1D3F71EE2571516600DE7F05 /* Differentiator */; };
 		1D3F72262571634E00DE7F05 /* RxTableViewSectionedReloadDataSource+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3F72252571634D00DE7F05 /* RxTableViewSectionedReloadDataSource+Extensions.swift */; };
-		1D87DF3F256834A6000652D6 /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF3E256834A6000652D6 /* AddPostViewController.swift */; };
-		1D87DF44256834C4000652D6 /* AddPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF43256834C4000652D6 /* AddPostViewModel.swift */; };
 		1D87DF4925683535000652D6 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF4825683535000652D6 /* EditProfileViewController.swift */; };
 		1D87DF4E2568353F000652D6 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF4D2568353F000652D6 /* EditProfileViewModel.swift */; };
 		1D87DF532568367E000652D6 /* MyPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF522568367E000652D6 /* MyPostsViewController.swift */; };
@@ -170,8 +168,6 @@
 		1D3F71E32571244900DE7F05 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1D3F71E72571294F00DE7F05 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		1D3F72252571634D00DE7F05 /* RxTableViewSectionedReloadDataSource+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RxTableViewSectionedReloadDataSource+Extensions.swift"; sourceTree = "<group>"; };
-		1D87DF3E256834A6000652D6 /* AddPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
-		1D87DF43256834C4000652D6 /* AddPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostViewModel.swift; sourceTree = "<group>"; };
 		1D87DF4825683535000652D6 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		1D87DF4D2568353F000652D6 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		1D87DF522568367E000652D6 /* MyPostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsViewController.swift; sourceTree = "<group>"; };
@@ -397,7 +393,6 @@
 				1D916D0925629C080059E549 /* ViewModel.swift */,
 				1D916D1125629C1E0059E549 /* ViewController.swift */,
 				1DD1FE51256E985D00C598CE /* Asset Management */,
-				1D916D80256400C30059E549 /* Add Post */,
 				1D91A0D0256C1DBD0043A943 /* CustomViews */,
 				1D87DF3B25683330000652D6 /* Edit Profile */,
 				1D916D7E256400530059E549 /* Login */,
@@ -535,15 +530,6 @@
 				1D3B29FA25641C3A001874FD /* MainViewModel.swift */,
 			);
 			path = Main;
-			sourceTree = "<group>";
-		};
-		1D916D80256400C30059E549 /* Add Post */ = {
-			isa = PBXGroup;
-			children = (
-				1D87DF3E256834A6000652D6 /* AddPostViewController.swift */,
-				1D87DF43256834C4000652D6 /* AddPostViewModel.swift */,
-			);
-			path = "Add Post";
 			sourceTree = "<group>";
 		};
 		1D916D81256400D50059E549 /* Profile */ = {
@@ -754,7 +740,6 @@
 				1D87DF7025683863000652D6 /* NewPostGuideViewController.swift in Sources */,
 				1D2A03F9256562A1008CE2D4 /* ConnectivityUseCase.swift in Sources */,
 				1D916D6F2563F5250059E549 /* KeyboardEventsAdapter.swift in Sources */,
-				1D87DF3F256834A6000652D6 /* AddPostViewController.swift in Sources */,
 				1DD1FE2E256E16D100C598CE /* UIImage+Extensions.swift in Sources */,
 				1D916D5F2562C3870059E549 /* BoomdayError.swift in Sources */,
 				1D3F72262571634E00DE7F05 /* RxTableViewSectionedReloadDataSource+Extensions.swift in Sources */,
@@ -773,7 +758,6 @@
 				1D3B2A432564F22F001874FD /* LocalAPIService.swift in Sources */,
 				1D3B2A392564F0D5001874FD /* PersistanceService.swift in Sources */,
 				1DD1FE1D256D6F7300C598CE /* AuthenticateResponse.swift in Sources */,
-				1D87DF44256834C4000652D6 /* AddPostViewModel.swift in Sources */,
 				1D916D8D256404ED0059E549 /* Profile.swift in Sources */,
 				1D87DF9B25683B53000652D6 /* ProfileViewModel.swift in Sources */,
 				1DE3DA382575506100A7A1F7 /* UIViewController+Extensions.swift in Sources */,
