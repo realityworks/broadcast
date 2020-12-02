@@ -11,10 +11,12 @@ class MainViewController: UITabBarController {
     
     enum TabBarItems : Int {
         case myPosts = 0
-        case profile = 1
+        case upload = 1
+        case profile = 2
     }
     
-    private (set) var myPostViewController: UIViewController!
+    private (set) var myPostsViewController: UIViewController!
+    private (set) var newPostViewController: UIViewController!
     private (set) var profileViewController: UIViewController!
     
     override func viewDidLoad() {
@@ -22,7 +24,8 @@ class MainViewController: UITabBarController {
 
         self.delegate = self
         
-        myPostViewController    = Route.myPosts.viewControllerInstance()
+        myPostsViewController   = Route.myPosts.viewControllerInstance()
+        newPostViewController   = Route.newPostGuide.viewControllerInstance()
         profileViewController   = Route.profile.viewControllerInstance()
 
         // Do any additional setup after loading the view.
@@ -36,6 +39,8 @@ class MainViewController: UITabBarController {
         switch route {
         case .myPosts:
             selectedIndex = TabBarItems.myPosts.rawValue
+        case .newPostGuide, .newPostDetail:
+            selectedIndex = TabBarItems.upload.rawValue
         case .profile:
             selectedIndex = TabBarItems.profile.rawValue
             
@@ -51,12 +56,21 @@ class MainViewController: UITabBarController {
     }
     
     private func configureViews() {
-        let myPostTabBarItem = UITabBarItem(
+        /// Create the MyPosts Tab bar item
+        let myPostsTabBarItem = UITabBarItem(
             title: "My Posts",
             image: UIImage(systemName: "person"),
             selectedImage: UIImage(systemName: "person.fill"))
         
-        myPostViewController.tabBarItem = myPostTabBarItem
+        myPostsViewController.tabBarItem = myPostsTabBarItem
+        
+        let newPostTabBarItem = UITabBarItem(
+            title: "New Post",
+            image: UIImage(systemName: "rectangle.stack.person.crop"),
+            selectedImage: UIImage(systemName: "rectangle.stack.person.crop.fill"))
+        
+        profileViewController.tabBarItem = profileTabBarItem
+        
         
         let profileTabBarItem = UITabBarItem(
             title: "Profile",
@@ -65,7 +79,8 @@ class MainViewController: UITabBarController {
         
         profileViewController.tabBarItem = profileTabBarItem
         
-        viewControllers = [myPostViewController, profileViewController]
+        viewControllers = [myPostsViewController, newPostViewController, profileViewController]
+        
     }
 }
 

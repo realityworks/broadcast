@@ -85,10 +85,17 @@ class NewPostGuideViewController: ViewController {
             horizontalStackView.addArrangedSubview(imageView)
             horizontalStackView.addArrangedSubview(label)
         }
+        
+        mainStackView.addArrangedSubview(tipsBackgroundView)
+        mainStackView.addArrangedSubview(selectButton)
+        
+        tipsBackgroundView.addSubview(detailsStackView)
+        detailsStackView.edgesToSuperview()
     }
     
     private func style() {
-        
+        tipsBackgroundView.layer.cornerRadius = 20
+        tipsBackgroundView.backgroundColor = .lightGray
     }
 }
 
