@@ -18,5 +18,8 @@ extension UIFont {
     }
     
     static var largeTitle: UIFont { .customFont(ofSize: 18, weight: .bold ) }
+    static var title: UIFont { .customFont(ofSize: 15, weight: .regular ) }
+    static var titleBold: UIFont { .customFont(ofSize: 15, weight: .bold ) }
     static var body: UIFont { .customFont(ofSize: 12, weight: .regular ) }
+    static var bodyBold: UIFont { .customFont(ofSize: 12, weight: .bold ) }
 }

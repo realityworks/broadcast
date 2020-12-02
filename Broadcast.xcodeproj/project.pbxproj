@@ -19,6 +19,7 @@
 		1D2A042A256583E8008CE2D4 /* UIViewController+Routing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2A0429256583E8008CE2D4 /* UIViewController+Routing.swift */; };
 		1D2A042F2565847B008CE2D4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2A042E2565847B008CE2D4 /* LoginViewController.swift */; };
 		1D2A043425658484008CE2D4 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2A043325658484008CE2D4 /* LoginViewModel.swift */; };
+		1D2CAA1B2577739700A54AE5 /* Style+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2CAA1A2577739700A54AE5 /* Style+Styling.swift */; };
 		1D3433FB25624B4400886245 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3433FA25624B4400886245 /* AppDelegate.swift */; };
 		1D3433FD25624B4400886245 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3433FC25624B4400886245 /* SceneDelegate.swift */; };
 		1D34340425624B4C00886245 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D34340325624B4C00886245 /* Assets.xcassets */; };
@@ -130,6 +131,7 @@
 		1D2A0429256583E8008CE2D4 /* UIViewController+Routing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Routing.swift"; sourceTree = "<group>"; };
 		1D2A042E2565847B008CE2D4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1D2A043325658484008CE2D4 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		1D2CAA1A2577739700A54AE5 /* Style+Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Style+Styling.swift"; sourceTree = "<group>"; };
 		1D3433F725624B4400886245 /* Broadcast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Broadcast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D3433FA25624B4400886245 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1D3433FC25624B4400886245 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -499,6 +501,7 @@
 				1D3ED5FE25663521004236BB /* UIColor+Styling.swift */,
 				1DD1FE04256CA55F00C598CE /* UITextField+Styling.swift */,
 				1D3F71C1256FFC0B00DE7F05 /* UILabel+Styling.swift */,
+				1D2CAA1A2577739700A54AE5 /* Style+Styling.swift */,
 			);
 			path = Styling;
 			sourceTree = "<group>";
@@ -802,6 +805,7 @@
 				1D2A03EA25655FFC008CE2D4 /* ProfileUseCase.swift in Sources */,
 				1DDEC781256F6AC300D65023 /* MyPostsTableViewCell.swift in Sources */,
 				1D2A03EF256561BB008CE2D4 /* PostContentUseCase.swift in Sources */,
+				1D2CAA1B2577739700A54AE5 /* Style+Styling.swift in Sources */,
 				1D3F71D0257016D000DE7F05 /* ProcessingView.swift in Sources */,
 				1DF58F502574CB9300563EC2 /* PostSummaryViewModel.swift in Sources */,
 				1D91A0D2256C1DD60043A943 /* DismissableLabel.swift in Sources */,

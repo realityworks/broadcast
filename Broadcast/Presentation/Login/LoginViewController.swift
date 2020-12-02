@@ -151,21 +151,16 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         view.backgroundColor = .white
         
         // Style attributed strings
-        let applyNormalStyle = Style {
-            $0.font = SystemFonts.Helvetica_Light.font(size: 15)
-            $0.alignment = .center
-        }
-        
-        let applyUnderlineStyle = Style {
-            $0.font = SystemFonts.Helvetica_Light.font(size: 15)
+        let boomdayLinkStyle = Style {
+            $0.font = UIFont.title
             $0.underline = (.single, UIColor.black)
             $0.linkURL = URL(string: "https://boomday.com")
             $0.alignment = .center
         }
         
         applyHereTextView.attributedText =
-            "No account? ".set(style: applyNormalStyle) +
-            "Apply here".set(style: applyUnderlineStyle)
+            "No account? ".set(style: Style.title) +
+            "Apply here".set(style: boomdayLinkStyle)
         
         let forgotPasswordStyle = Style {
             $0.font = SystemFonts.Helvetica_Light.font(size: 15)

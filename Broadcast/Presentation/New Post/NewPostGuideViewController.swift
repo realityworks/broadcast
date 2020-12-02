@@ -14,7 +14,7 @@ class NewPostGuideViewController: ViewController {
     
     // MARK: UI Components
     let mainStackView = UIStackView()
-    let titleLabel = UILabel()
+    let tipTitleLabel = UILabel()
     
     let detailsStackView = UIStackView()
     let hotTipsTitleLabel = UILabel()
@@ -88,7 +88,7 @@ class NewPostGuideViewController: ViewController {
             horizontalStackView.addArrangedSubview(label)
         }
         
-        
+        mainStackView.addArrangedSubview(tipTitleLabel)
         mainStackView.addArrangedSubview(tipsBackgroundView)
         mainStackView.addArrangedSubview(selectButton)
         
@@ -102,6 +102,9 @@ class NewPostGuideViewController: ViewController {
     private func style() {
         tipsBackgroundView.layer.cornerRadius = 20
         tipsBackgroundView.backgroundColor = .lightGray
+        
+        tipTitleLabel.attributedText = "HOT TIPS FOR GREAT CONTENT".set(style: Self.boldStyle)
+
     }
 }
 
