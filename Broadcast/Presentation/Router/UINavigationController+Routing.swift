@@ -10,6 +10,6 @@ import UIKit
 extension UINavigationController {
     func push(with route: Route) {
         guard let viewController = route.viewControllerInstance() else { return }
-        self.pushViewController(viewController, animated: false)
+        self.pushViewController(viewController, animated: true)
     }
 }
