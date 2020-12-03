@@ -6,6 +6,7 @@
   
 */
 
+"none" = "";
 "loginButton" = "Let's Go!";
 "usernamePlaceholder" = "Username";
 "passwordPlaceholder" = "Password";
@@ -19,3 +20,6 @@
 "termsAndConditions" = "Terms & Conditions";
 "shareProfile" = "Share Boomday profile";
 "logout" = "Log out";
+"accountSettings" = "ACCOUNT SETTINGS";
+"support" = "SUPPORT";
+"legal" = "LEGAL";

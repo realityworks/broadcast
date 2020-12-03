@@ -18,15 +18,15 @@ extension UILabel {
         return label
     }
     
-    static func body(_ text: LocalizedString) -> UILabel {
+    static func body(_ text: LocalizedString = .none) -> UILabel {
         return Self.text(text.localized)
     }
     
-    static func largeTitle(_ text: LocalizedString) -> UILabel {
+    static func largeTitle(_ text: LocalizedString = .none) -> UILabel {
         return Self.text(text.localized, font: .largeTitle, textColor: .blue)
     }
     
-    static func bodyBold(_ text: LocalizedString = ) -> UILabel {
+    static func bodyBold(_ text: LocalizedString = .none) -> UILabel {
         return Self.text(text.localized, font: .bodyBold)
     }
 }

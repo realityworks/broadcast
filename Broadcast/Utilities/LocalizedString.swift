@@ -22,7 +22,9 @@ enum LocalizedString : String {
     case termsAndConditions
     case shareProfile
     case logout
-    
+    case accountSettings
+    case support
+    case legal
     
     var localized: String {
         return Bundle.main.localizedString(forKey: self.rawValue, value: nil, table: nil)

@@ -8,23 +8,24 @@
 import UIKit
 
 
-class SettingsSectionHeaderCell: UITableViewCell {
-    let label = UILabel.bodyBold(<#T##text: LocalizedString##LocalizedString#>)
+class ProfileSectionHeaderCell: UITableViewCell {
+    let label = UILabel.bodyBold()
 
     static let cellHeight: CGFloat = 33
-    static let identifier: String = "SettingsSectionHeaderCell"
+    static let identifier: String = "ProfileSectionHeaderCell"
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        styleView()
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: Self.identifier)
+        configureView()
     }
-
-    private func styleView() {
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func configureView() {
         // This needs to be a solid colour since other rows can potentially scroll under it
-        backgroundColor = .clear
-        label.textColor = .mist
-        label.font = .sectionHeaderText
+        addSubview(label)
+        label.edgesToSuperview()
     }
 }
-
-
