@@ -9,6 +9,16 @@ import Foundation
 
 class ProfileViewModel : ViewModel {
     
+    private enum Row {
+        case detail
+        case subscription
+        case frequentlyAskedQuestions
+        case privacyPolicy
+        case termsAndConditions
+        case share
+        case logout
+    }
+    
     init(dependencies: Dependencies = .standard) {
         super.init(stateController: dependencies.stateController)
         

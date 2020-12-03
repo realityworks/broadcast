@@ -98,6 +98,7 @@
 		1D91A0D2256C1DD60043A943 /* DismissableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D91A0D1256C1DD60043A943 /* DismissableLabel.swift */; };
 		1D93143E2577DBDF001C85C1 /* MediaUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D93143D2577DBDF001C85C1 /* MediaUrl.swift */; };
 		1D9314452577E991001C85C1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D9314442577E991001C85C1 /* MobileCoreServices.framework */; };
+		1D9E1938257897AE001960AF /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9E1937257897AE001960AF /* ProfileTableViewCell.swift */; };
 		1DD1FE05256CA55F00C598CE /* UITextField+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD1FE04256CA55F00C598CE /* UITextField+Styling.swift */; };
 		1DD1FE17256CE2E000C598CE /* SwiftRichString in Frameworks */ = {isa = PBXBuildFile; productRef = 1DD1FE16256CE2E000C598CE /* SwiftRichString */; };
 		1DD1FE1D256D6F7300C598CE /* AuthenticateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD1FE1C256D6F7300C598CE /* AuthenticateResponse.swift */; };
@@ -215,6 +216,7 @@
 		1D91A0D1256C1DD60043A943 /* DismissableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissableLabel.swift; sourceTree = "<group>"; };
 		1D93143D2577DBDF001C85C1 /* MediaUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaUrl.swift; sourceTree = "<group>"; };
 		1D9314442577E991001C85C1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		1D9E1937257897AE001960AF /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		1DD1FE04256CA55F00C598CE /* UITextField+Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Styling.swift"; sourceTree = "<group>"; };
 		1DD1FE1C256D6F7300C598CE /* AuthenticateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateResponse.swift; sourceTree = "<group>"; };
 		1DD1FE27256E16B600C598CE /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
@@ -370,8 +372,7 @@
 			children = (
 				1D87DF522568367E000652D6 /* MyPostsViewController.swift */,
 				1D87DF572568368A000652D6 /* MyPostsViewModel.swift */,
-				1DDEC780256F6AC300D65023 /* MyPostsTableViewCell.swift */,
-				1DDEC784256F6BA800D65023 /* MyPostsCellViewModel.swift */,
+				1D9E193B257897C7001960AF /* Views */,
 			);
 			path = "My Posts";
 			sourceTree = "<group>";
@@ -556,12 +557,13 @@
 		1D916D81256400D50059E549 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				1D87DF9225683B3E000652D6 /* ProfileViewController.swift */,
-				1D87DF9A25683B53000652D6 /* ProfileViewModel.swift */,
 				1D7127FA257883A80065B8EA /* ProfileDetailViewController.swift */,
 				1D7127FE2578900F0065B8EA /* ProfileDetailViewModel.swift */,
 				1D712803257890440065B8EA /* ProfileSubscriptionViewController.swift */,
 				1D712802257890440065B8EA /* ProfileSubscriptionViewModel.swift */,
+				1D87DF9225683B3E000652D6 /* ProfileViewController.swift */,
+				1D87DF9A25683B53000652D6 /* ProfileViewModel.swift */,
+				1D9E193C257897D2001960AF /* Views */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -597,6 +599,23 @@
 				1D9314442577E991001C85C1 /* MobileCoreServices.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1D9E193B257897C7001960AF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1DDEC780256F6AC300D65023 /* MyPostsTableViewCell.swift */,
+				1DDEC784256F6BA800D65023 /* MyPostsCellViewModel.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		1D9E193C257897D2001960AF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1D9E1937257897AE001960AF /* ProfileTableViewCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		1DD1FE1B256D6F5500C598CE /* Responses */ = {
@@ -835,6 +854,7 @@
 				1D2A04092565761B008CE2D4 /* ConnectionState.swift in Sources */,
 				1D3433FD25624B4400886245 /* SceneDelegate.swift in Sources */,
 				1D3ED5F525663504004236BB /* UIButton+Styling.swift in Sources */,
+				1D9E1938257897AE001960AF /* ProfileTableViewCell.swift in Sources */,
 				1D2A03FE25656C03008CE2D4 /* AppState.swift in Sources */,
 				1D2A03EA25655FFC008CE2D4 /* ProfileUseCase.swift in Sources */,
 				1DDEC781256F6AC300D65023 /* MyPostsTableViewCell.swift in Sources */,
