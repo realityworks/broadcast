@@ -17,8 +17,13 @@ class PostSummaryView : UIView {
     let videoPlayerView = VideoPlayerView()
     let containerTopView = UIView()
 
+    let postTitleContainer = UIView()
     let postTitleLabel = UILabel.largeTitle()
+    
+    let postStatsContainer = UIView()
     let postStatsView = PostStatsView()
+    
+    let dateCreatedContainer = UIView()
     let dateCreatedLabel = UILabel.body()
     
     enum Styling {
@@ -26,11 +31,14 @@ class PostSummaryView : UIView {
         case detail
     }
     
+    let styling: Styling!
+    
     init(withStyling styling: Styling) {
+        self.styling = styling
         super.init(frame: .zero)
         
         configureViews()
-        configureLayout(withStyling: styling)
+        configureLayout()
         style()
     }
     
@@ -40,44 +48,54 @@ class PostSummaryView : UIView {
         verticalStackView.spacing = 5
         
         thumbnailImageView.contentMode = .scaleAspectFill
-        videoPlayerView.contentMode = .scaleAspectFit
-        
         containerTopView.clipsToBounds = true
     }
     
-    func configureLayout(withStyling styling: Styling) {
+    func configureLayout() {
         
         // Layout vertical stack
         addSubview(verticalStackView)
         
+        postTitleContainer.addSubview(postTitleLabel)
+        postStatsContainer.addSubview(postStatsView)
+        dateCreatedContainer.addSubview(dateCreatedLabel)
+        
         verticalStackView.addArrangedSubview(containerTopView)
-        verticalStackView.addArrangedSubview(postTitleLabel)
-        verticalStackView.addArrangedSubview(postStatsView)
-        verticalStackView.addArrangedSubview(dateCreatedLabel)
+        verticalStackView.addArrangedSubview(postTitleContainer)
+        verticalStackView.addArrangedSubview(postStatsContainer)
+        verticalStackView.addArrangedSubview(dateCreatedContainer)
+        
+        postTitleContainer.height(15)
+        postStatsContainer.height(15)
+        dateCreatedContainer.height(15)
         
         // Layout container top view
         containerTopView.edgesToSuperview(excluding: [.bottom])
         containerTopView.aspectRatio(1)
         
         // Order important
-        containerTopView.addSubview(videoPlayerView)
+        if styling == .detail {
+            containerTopView.addSubview(videoPlayerView)
+            videoPlayerView.edgesToSuperview()
+        }
+        
         containerTopView.addSubview(thumbnailImageView)
         containerTopView.addSubview(processingView)
+        // End order important
         
-        videoPlayerView.edgesToSuperview()
         processingView.edgesToSuperview()
         thumbnailImageView.edgesToSuperview()
         
         postStatsView.height(15)
         verticalStackView.addSpace(10)
         
+        let containedViews = [postTitleLabel,
+                              postStatsView,
+                              dateCreatedLabel]
+        
         switch styling {
         case .detail:
-            let views = [postTitleLabel,
-                         postStatsView,
-                         dateCreatedLabel]
-            
-            views.forEach {
+            containedViews.forEach {
                 $0.leftToSuperview(offset: 20)
                 $0.rightToSuperview(offset: -20)
             }
@@ -85,11 +103,19 @@ class PostSummaryView : UIView {
             verticalStackView.edgesToSuperview()
             
         case .list:
+            containedViews.forEach {
+                $0.leftToSuperview()
+                $0.rightToSuperview()
+            }
+            
             verticalStackView.leftToSuperview(offset: 20)
             verticalStackView.rightToSuperview(offset: -20)
             verticalStackView.topToSuperview(usingSafeArea: true)
             verticalStackView.bottomToSuperview()
             containerTopView.layer.cornerRadius = 20
+            
+        case .none:
+            break
         }
     }
     

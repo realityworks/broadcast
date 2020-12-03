@@ -19,9 +19,9 @@ class VideoPlayerView: UIView {
         
         /// Setup the AV Player layer and Player object. Add the layer to the player subview
         backgroundColor = .black
-        addSubview(playerController.view)
         playerController.view.backgroundColor = .black
         playerController.showsPlaybackControls = true
+        addSubview(playerController.view)
     }
     
     required init?(coder: NSCoder) {
