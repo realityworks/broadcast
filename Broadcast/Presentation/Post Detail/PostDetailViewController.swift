@@ -12,7 +12,7 @@ class PostDetailViewController: ViewController {
     
     // MARK: - UI Components
     let verticalStackView = UIStackView()
-    let postSummaryView = PostSummaryView(withStyling: .detail)
+    var postSummaryView: PostSummaryView!
     let postCaptionLabel = UILabel()
     
     /// Custom required initializer to configure the controller from the specified post ID
@@ -28,6 +28,8 @@ class PostDetailViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        postSummaryView = PostSummaryView(withStyling: .detail)
 
         // Do any additional setup after loading the view.
         configureViews()
@@ -67,6 +69,6 @@ class PostDetailViewController: ViewController {
     }
     
     private func style() {
-        
+        view.backgroundColor = .white
     }
 }

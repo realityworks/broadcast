@@ -120,6 +120,10 @@ class PostSummaryView : UIView {
         postTitleLabel.text = postSummaryViewModel.title
         dateCreatedLabel.text = postSummaryViewModel.dateCreated
     }
+    
+    func configureSubviews() {
+        videoPlayerView.configureVideoPlayer()
+    }
 }
 
 extension Reactive where Base: PostSummaryView {

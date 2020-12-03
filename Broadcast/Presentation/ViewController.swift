@@ -17,6 +17,10 @@ class ViewController : UIViewController {
     // MARK: View Controller overrides
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Set the default background colour
+        view.backgroundColor = .white
+        
         Logger.verbose(topic: .appState, message: "viewDidLoad")
     }
     
@@ -26,12 +30,12 @@ class ViewController : UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+        super.viewDidAppear(animated)
         Logger.verbose(topic: .appState, message: "viewDidAppear")
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+        super.viewWillDisappear(animated)
         Logger.verbose(topic: .appState, message: "viewWillDisappear")
     }
     

@@ -11,10 +11,11 @@ import SDWebImage
 class MyPostsTableViewCell : UITableViewCell {
     static let identifier = "MyPostTableViewCell"
     
-    let postSummaryView = PostSummaryView(withStyling: .list)
+    let postSummaryView: PostSummaryView!
         
     override init(style: UITableViewCell.CellStyle,
                   reuseIdentifier: String?) {
+        postSummaryView = PostSummaryView(withStyling: .list)
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         configureView()

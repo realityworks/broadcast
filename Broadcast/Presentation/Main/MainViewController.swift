@@ -88,7 +88,6 @@ class MainViewController: UITabBarController {
 // MARK: - MainView
 
 extension MainViewController : UITabBarControllerDelegate {
-    
     func tabBarController(_ tabBarController: UITabBarController,
                           didSelect viewController: UIViewController) {
             print("Selected \(viewController.title ?? "No title")")

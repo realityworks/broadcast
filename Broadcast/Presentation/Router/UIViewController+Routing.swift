@@ -10,8 +10,6 @@ import UIKit
 extension UIViewController {
     func present(with route: Route) {
         guard let viewController = route.viewControllerInstance() else { return }
-        self.present(viewController, animated: false) {
-            // TODO
-        } //
+        self.present(viewController, animated: true)
     }
 }
