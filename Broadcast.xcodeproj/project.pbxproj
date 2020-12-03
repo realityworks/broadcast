@@ -57,6 +57,8 @@
 		1D5CF0C32577CF50008F8C22 /* MediaPickerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5CF0C22577CF50008F8C22 /* MediaPickerAdapter.swift */; };
 		1D7127FB257883A80065B8EA /* ProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7127FA257883A80065B8EA /* ProfileDetailViewController.swift */; };
 		1D7127FF257890100065B8EA /* ProfileDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7127FE2578900F0065B8EA /* ProfileDetailViewModel.swift */; };
+		1D712804257890450065B8EA /* ProfileSubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D712803257890440065B8EA /* ProfileSubscriptionViewController.swift */; };
+		1D712805257890450065B8EA /* ProfileSubscriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D712802257890440065B8EA /* ProfileSubscriptionViewModel.swift */; };
 		1D87DF4925683535000652D6 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF4825683535000652D6 /* EditProfileViewController.swift */; };
 		1D87DF4E2568353F000652D6 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF4D2568353F000652D6 /* EditProfileViewModel.swift */; };
 		1D87DF532568367E000652D6 /* MyPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF522568367E000652D6 /* MyPostsViewController.swift */; };
@@ -178,6 +180,8 @@
 		1D5CF0C22577CF50008F8C22 /* MediaPickerAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPickerAdapter.swift; sourceTree = "<group>"; };
 		1D7127FA257883A80065B8EA /* ProfileDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewController.swift; sourceTree = "<group>"; };
 		1D7127FE2578900F0065B8EA /* ProfileDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewModel.swift; sourceTree = "<group>"; };
+		1D712802257890440065B8EA /* ProfileSubscriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSubscriptionViewModel.swift; sourceTree = "<group>"; };
+		1D712803257890440065B8EA /* ProfileSubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSubscriptionViewController.swift; sourceTree = "<group>"; };
 		1D87DF4825683535000652D6 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		1D87DF4D2568353F000652D6 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		1D87DF522568367E000652D6 /* MyPostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsViewController.swift; sourceTree = "<group>"; };
@@ -556,6 +560,8 @@
 				1D87DF9A25683B53000652D6 /* ProfileViewModel.swift */,
 				1D7127FA257883A80065B8EA /* ProfileDetailViewController.swift */,
 				1D7127FE2578900F0065B8EA /* ProfileDetailViewModel.swift */,
+				1D712803257890440065B8EA /* ProfileSubscriptionViewController.swift */,
+				1D712802257890440065B8EA /* ProfileSubscriptionViewModel.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -764,6 +770,7 @@
 				1D3ED5FF25663521004236BB /* UIColor+Styling.swift in Sources */,
 				1D2A042F2565847B008CE2D4 /* LoginViewController.swift in Sources */,
 				1DD1FE53256E987B00C598CE /* UIImage+Assets.swift in Sources */,
+				1D712804257890450065B8EA /* ProfileSubscriptionViewController.swift in Sources */,
 				1D87DF7025683863000652D6 /* NewPostGuideViewController.swift in Sources */,
 				1D2A03F9256562A1008CE2D4 /* ConnectivityUseCase.swift in Sources */,
 				1D916D6F2563F5250059E549 /* KeyboardEventsAdapter.swift in Sources */,
@@ -834,6 +841,7 @@
 				1D2A03EF256561BB008CE2D4 /* PostContentUseCase.swift in Sources */,
 				1D2CAA1B2577739700A54AE5 /* Style+Styling.swift in Sources */,
 				1D3F71D0257016D000DE7F05 /* ProcessingView.swift in Sources */,
+				1D712805257890450065B8EA /* ProfileSubscriptionViewModel.swift in Sources */,
 				1D5CF0C32577CF50008F8C22 /* MediaPickerAdapter.swift in Sources */,
 				1DF58F502574CB9300563EC2 /* PostSummaryViewModel.swift in Sources */,
 				1D91A0D2256C1DD60043A943 /* DismissableLabel.swift in Sources */,
