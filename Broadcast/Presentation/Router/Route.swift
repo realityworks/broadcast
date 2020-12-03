@@ -34,7 +34,9 @@ extension Route {
             let navigationController = UINavigationController(rootViewController: myPostsViewController)
             return navigationController
         case .profile:
-            return ProfileViewController()
+            let profileViewController = ProfileViewController()
+            let navigationController = UINavigationController(rootViewController: profileViewController)
+            return navigationController
         case .postDetail:
             return PostDetailViewController(isEditing: false)
         case .newPostGuide:

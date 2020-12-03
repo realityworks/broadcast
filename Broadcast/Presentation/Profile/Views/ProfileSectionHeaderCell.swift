@@ -26,6 +26,6 @@ class ProfileSectionHeaderCell: UITableViewCell {
     private func configureView() {
         // This needs to be a solid colour since other rows can potentially scroll under it
         addSubview(label)
-        label.edgesToSuperview()
+        label.edgesToSuperview(insets: UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0))
     }
 }

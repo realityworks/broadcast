@@ -13,7 +13,7 @@ class ProfileTableViewCell : UITableViewCell {
     static let cellHeight:CGFloat = 50
     
     let titleLabel = UILabel()
-    let icon = UIImageView()
+    let iconImageView = UIImageView()
         
     override init(style: UITableViewCell.CellStyle,
                   reuseIdentifier: String?) {
@@ -31,22 +31,28 @@ class ProfileTableViewCell : UITableViewCell {
     func configure(withTitle titleText: LocalizedString,
                    icon: UIImage? = nil,
                    titleColor: UIColor = .darkGray) {
-        titleLabel.attributedText = titleText.localized.set(style: Style.title)
+        let titleRed = Style { $0.color = titleColor }
+        
+        titleLabel.attributedText = titleText.localized
+            .set(style: Style.title)
+            .add(style: titleRed)
+        
+        iconImageView.image = icon?.withRenderingMode(.alwaysTemplate)
+        iconImageView.tintColor = .darkGray
     }
     
     private func configureView() {
         contentView.addSubview(titleLabel)
-        contentView.addSubview(icon)
-        titleLabel.leftToSuperview(offset: 10)
-        titleLabel.rightToLeft(of: icon)
-        titleLabel.topToSuperview()
-        titleLabel.bottomToSuperview()
+        contentView.addSubview(iconImageView)
         
-        icon.rightToSuperview(offset: -10)
-        icon.centerYToSuperview()
-        icon.height(20)
-        icon.aspectRatio(1)
-        icon.contentMode = .scaleAspectFit
+        titleLabel.edgesToSuperview(excluding: [.right], insets: UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0))
+        titleLabel.rightToLeft(of: iconImageView)
+        
+        iconImageView.rightToSuperview(offset: -20)
+        iconImageView.centerYToSuperview()
+        iconImageView.height(20)
+        iconImageView.aspectRatio(1)
+        iconImageView.contentMode = .scaleAspectFit
     }
     
     private func styleView() {

@@ -30,7 +30,7 @@ class ProfileViewController: ViewController {
         tableView.register(ProfileTableViewCell.self,
                            forCellReuseIdentifier: ProfileTableViewCell.identifier)
         tableView.register(ProfileSectionHeaderCell.self,
-                           forHeaderFooterViewReuseIdentifier: ProfileSectionHeaderCell.identifier)
+                           forCellReuseIdentifier: ProfileSectionHeaderCell.identifier)
     }
     
     private func configureLayout() {
@@ -46,22 +46,22 @@ class ProfileViewController: ViewController {
             switch row {
             case .detail:
                 cell.configure(withTitle: LocalizedString.profileInformation,
-                               icon: UIImage(systemName: "link.circle"))
+                               icon: UIImage(systemName: "person.fill"))
             case .subscription:
                 cell.configure(withTitle:  LocalizedString.subscription,
-                               icon: UIImage(systemName: "link.circle"))
+                               icon: UIImage(systemName: "creditcard.fill"))
             case .frequentlyAskedQuestions:
                 cell.configure(withTitle: LocalizedString.frequentlyAskedQuestions,
-                               icon: UIImage(systemName: "link.circle"))
+                               icon: UIImage(systemName: "questionmark"))
             case .privacyPolicy:
                 cell.configure(withTitle: LocalizedString.privacyPolicy,
-                               icon: UIImage(systemName: "link.circle"))
+                               icon: nil)
             case .termsAndConditions:
                 cell.configure(withTitle: LocalizedString.termsAndConditions,
-                               icon: UIImage(systemName: "link.circle"))
+                               icon: nil)
             case .share:
                 cell.configure(withTitle: LocalizedString.shareProfile,
-                               icon: UIImage(systemName: "link.circle"))
+                               icon: UIImage(systemName: "square.and.arrow.up"))
             case .logout:
                 cell.configure(withTitle: LocalizedString.logout,
                                titleColor: .red)
@@ -104,12 +104,17 @@ class ProfileViewController: ViewController {
             .disposed(by: disposeBag)
         
         tableView.delegate = datasource
-        
+    }
+    
+    private func setupTableViewBindings() {
         // TableView selection
         tableView.rx.itemSelected
             .subscribe(onNext: { [weak self] (indexPath: IndexPath) in
                 self?.tableView.deselectRow(at: indexPath, animated: true)
             })
             .disposed(by: disposeBag)
+        
+        tableView.rx.modelSelected(ProfileViewModel.Row.self)
+            .s
     }
 }
