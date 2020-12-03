@@ -1,5 +1,5 @@
 //
-//  ProfileDetailViewModel.swift
+//  ProfileSubscriptionViewModel.swift
 //  Broadcast
 //
 //  Created by Piotr Suwara on 3/12/20.

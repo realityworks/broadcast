@@ -1,5 +1,5 @@
 //
-//  ProfileDetailViewController.swift
+//  ProfileSubscriptionViewController.swift
 //  Broadcast
 //
 //  Created by Piotr Suwara on 3/12/20.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileDetailViewController: ViewController {
+class ProfileSubscriptionViewController: ViewController {
     private let viewModel = ProfileDetailViewModel()
     
     override func viewDidLoad() {

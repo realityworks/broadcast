@@ -6,9 +6,14 @@
 //
 
 import UIKit
+import RxDataSources
+import RxSwift
+import RxCocoa
 
 class ProfileViewController: ViewController {
     private let viewModel = ProfileViewModel()
+    
+    typealias Datasource = ReactiveTableViewModelSource<SectionModel<String?, ProfileViewModel.Row>>
     
     let tableView = UITableView()
     
@@ -24,7 +29,9 @@ class ProfileViewController: ViewController {
     }
     
     private func configureViews() {
-        tableView.register(ProfileTableViewCell.Self, forCellReuseIdentifier: ProfileTableCellView.identifier)
+        tableView.register(ProfileTableViewCell.self,
+                           forCellReuseIdentifier: ProfileTableViewCell.identifier)
+        
     }
     
     private func configureLayout() {
@@ -32,7 +39,21 @@ class ProfileViewController: ViewController {
     }
     
     private func configureBindings() {
-        
+        let datasource = Datasource(configureCell: { _, tableView, indexPath, row -> UITableViewCell in
+            switch row {
+            case detail:
+                let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTableViewCell.identifier, for: indexPath) as! ProfileTableViewCell
+                cell.configure(title: icon:)
+                return cell
+            case subscription:
+            case frequentlyAskedQuestions:
+            case privacyPolicy:
+            case termsAndConditions:
+            case share:
+            case logout:
+                
+            }
+        }))
     }
     
 }

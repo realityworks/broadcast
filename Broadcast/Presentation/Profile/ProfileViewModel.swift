@@ -9,7 +9,7 @@ import Foundation
 
 class ProfileViewModel : ViewModel {
     
-    private enum Row {
+    enum Row {
         case detail
         case subscription
         case frequentlyAskedQuestions

@@ -26,10 +26,29 @@ class ProfileTableViewCell : UITableViewCell {
     }
 
     // MARK: Configuration and Styling
-    func configureView() {
+    func configure(withTitle title: String,
+                   icon: UIImage?,
+                   titleColor: UIColor = .darkGray) {
+        
     }
     
-    func styleView() {
+    private func configureView() {
+        addSubview(titleLabel)
+        addSubview(icon)
+        titleLabel.leftToSuperview(offset: 10)
+        titleLabel.rightToLeft(of: icon)
+        titleLabel.topToSuperview()
+        titleLabel.bottomToSuperview()
+        
+        icon.rightToSuperview(offset: -10)
+        icon.centerYToSuperview()
+        icon.height(20)
+        icon.aspectRatio(1)
+        icon.contentMode = .scaleAspectFit
+    }
+    
+    private func styleView() {
+        
     }
 }
 
