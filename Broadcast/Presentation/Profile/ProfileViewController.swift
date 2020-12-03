@@ -13,8 +13,6 @@ import RxCocoa
 class ProfileViewController: ViewController {
     private let viewModel = ProfileViewModel()
     
-    typealias Datasource = ReactiveTableViewModelSource<SectionModel<String?, ProfileViewModel.Row>>
-    
     let tableView = UITableView()
     
     override func viewDidLoad() {
@@ -39,7 +37,7 @@ class ProfileViewController: ViewController {
     }
     
     private func configureBindings() {
-        let datasource = Datasource(configureCell: { _, tableView, indexPath, row -> UITableViewCell in
+        let datasource = ReactiveTableViewModelSource<SectionModel<LocalizedString, ProfileViewModel.Row>>(configureCell: { _, tableView, indexPath, row -> UITableViewCell in
             
             let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTableViewCell.identifier, for: indexPath) as! ProfileTableViewCell
             
@@ -70,21 +68,26 @@ class ProfileViewController: ViewController {
         })
         
         datasource.viewForHeaderInSection = { dataSource, tableView, section -> UIView? in
-            guard let sectionTitle = dataSource.sectionModels[section].model,
-                let cell = tableView.dequeueReusableCell(withIdentifier: ProfileSectionHeaderCell.identifier) as? ProfileSectionHeaderCell else { return nil }
-            cell.label.text = sectionTitle
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: ProfileSectionHeaderCell.identifier) as? ProfileSectionHeaderCell else { return nil }
+            
+            let sectionTitle = datasource.sectionModels[section].model
+            cell.label.text = sectionTitle.localized
+            
             return cell
         }
 
-        dataSource.heightForHeaderInSection = { $0.sectionModels[$1].model != nil ? SettingsSectionHeaderCell.cellHeight : 0 }
+        datasource.heightForHeaderInSection = { $0.sectionModels[$1].model != nil ? ProfileSectionHeaderCell.cellHeight : 0 }
         
         let items = Observable.just(
             [
-                SectionModel(model: "ACCOUNT SETTINGS", items:
+                SectionModel(model: LocalizedString.accountSettings, items:
                                 []),
-                SectionModel(model: "SUPPORT", items: []),
-                SectionModel(model: "LEGAL", items: []),
+                SectionModel(model: LocalizedString.support, items: []),
+                SectionModel(model: LocalizedString.legal, items: []),
             ])
+        
+        items
+            .bind(to: tableView.rx.items(dataSource: datasource))
     }
     
 }
