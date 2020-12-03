@@ -5,7 +5,7 @@
 //  Created by Piotr Suwara on 20/11/20.
 //
 
-import Foundation
+import UIKit
 
 class ProfileViewController: ViewController {
     private let viewModel = ProfileViewModel()

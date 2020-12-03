@@ -55,6 +55,8 @@
 		1D3F71EF2571516600DE7F05 /* Differentiator in Frameworks */ = {isa = PBXBuildFile; productRef = 1D3F71EE2571516600DE7F05 /* Differentiator */; };
 		1D3F72262571634E00DE7F05 /* RxTableViewSectionedReloadDataSource+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3F72252571634D00DE7F05 /* RxTableViewSectionedReloadDataSource+Extensions.swift */; };
 		1D5CF0C32577CF50008F8C22 /* MediaPickerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5CF0C22577CF50008F8C22 /* MediaPickerAdapter.swift */; };
+		1D7127FB257883A80065B8EA /* ProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7127FA257883A80065B8EA /* ProfileDetailViewController.swift */; };
+		1D7127FF257890100065B8EA /* ProfileDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7127FE2578900F0065B8EA /* ProfileDetailViewModel.swift */; };
 		1D87DF4925683535000652D6 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF4825683535000652D6 /* EditProfileViewController.swift */; };
 		1D87DF4E2568353F000652D6 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF4D2568353F000652D6 /* EditProfileViewModel.swift */; };
 		1D87DF532568367E000652D6 /* MyPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF522568367E000652D6 /* MyPostsViewController.swift */; };
@@ -174,6 +176,8 @@
 		1D3F71E72571294F00DE7F05 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		1D3F72252571634D00DE7F05 /* RxTableViewSectionedReloadDataSource+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RxTableViewSectionedReloadDataSource+Extensions.swift"; sourceTree = "<group>"; };
 		1D5CF0C22577CF50008F8C22 /* MediaPickerAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPickerAdapter.swift; sourceTree = "<group>"; };
+		1D7127FA257883A80065B8EA /* ProfileDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewController.swift; sourceTree = "<group>"; };
+		1D7127FE2578900F0065B8EA /* ProfileDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewModel.swift; sourceTree = "<group>"; };
 		1D87DF4825683535000652D6 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		1D87DF4D2568353F000652D6 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		1D87DF522568367E000652D6 /* MyPostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsViewController.swift; sourceTree = "<group>"; };
@@ -550,6 +554,8 @@
 			children = (
 				1D87DF9225683B3E000652D6 /* ProfileViewController.swift */,
 				1D87DF9A25683B53000652D6 /* ProfileViewModel.swift */,
+				1D7127FA257883A80065B8EA /* ProfileDetailViewController.swift */,
+				1D7127FE2578900F0065B8EA /* ProfileDetailViewModel.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -761,12 +767,14 @@
 				1D87DF7025683863000652D6 /* NewPostGuideViewController.swift in Sources */,
 				1D2A03F9256562A1008CE2D4 /* ConnectivityUseCase.swift in Sources */,
 				1D916D6F2563F5250059E549 /* KeyboardEventsAdapter.swift in Sources */,
+				1D7127FF257890100065B8EA /* ProfileDetailViewModel.swift in Sources */,
 				1DD1FE2E256E16D100C598CE /* UIImage+Extensions.swift in Sources */,
 				1D916D5F2562C3870059E549 /* BoomdayError.swift in Sources */,
 				1D3F72262571634E00DE7F05 /* RxTableViewSectionedReloadDataSource+Extensions.swift in Sources */,
 				1D91A0CC256C1B8E0043A943 /* UIStackView+Extensions.swift in Sources */,
 				1D3B2A3E2564F21E001874FD /* APIService.swift in Sources */,
 				1D3B2A2C2564E7A5001874FD /* LocalUploadService.swift in Sources */,
+				1D7127FB257883A80065B8EA /* ProfileDetailViewController.swift in Sources */,
 				1DE3DA3E2575F49500A7A1F7 /* VideoPlayerView.swift in Sources */,
 				1D3F71CA2570082800DE7F05 /* PostStatsView.swift in Sources */,
 				1DE3DA3225751FE500A7A1F7 /* DateFormatter+Extensions.swift in Sources */,
