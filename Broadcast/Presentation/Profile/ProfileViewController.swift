@@ -39,6 +39,11 @@ class ProfileViewController: ViewController {
     }
     
     private func configureBindings() {
+        setupDatasourceBindings()
+        setupTableViewBindings()
+    }
+    
+    private func setupDatasourceBindings() {
         let datasource = ReactiveTableViewModelSource<SectionModel<LocalizedString, ProfileViewModel.Row>>(configureCell: { _, tableView, indexPath, row -> UITableViewCell in
             
             let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTableViewCell.identifier, for: indexPath) as! ProfileTableViewCell
@@ -89,7 +94,7 @@ class ProfileViewController: ViewController {
             [
                 SectionModel(model: LocalizedString.accountSettings, items: [
                                 ProfileViewModel.Row.detail,
-                                ProfileViewModel.Row.subscription]),
+                                ProfileViewModel.Row.stripeAccount]),
                 SectionModel(model: LocalizedString.support, items: [
                                 ProfileViewModel.Row.frequentlyAskedQuestions]),
                 SectionModel(model: LocalizedString.legal, items: [

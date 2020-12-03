@@ -47,6 +47,10 @@ extension Route {
             return navigationController
         case .newPostDetail:
             return PostDetailViewController(isEditing: true)
+        case .profileDetail:
+            return ProfileDetailViewController()
+        case .stripeAccount:
+            return ProfileStripeAccountViewController()
         }
     }
 }
