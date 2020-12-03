@@ -13,6 +13,8 @@ indirect enum Route {
     case main(child: Route)
     case myPosts
     case profile
+    case profileDetail
+    case stripeAccount
     case postDetail
     case newPostGuide
     case newPostDetail

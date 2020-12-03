@@ -11,7 +11,7 @@ class ProfileViewModel : ViewModel {
     
     enum Row {
         case detail
-        case subscription
+        case stripeAccount
         case frequentlyAskedQuestions
         case privacyPolicy
         case termsAndConditions

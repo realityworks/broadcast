@@ -47,7 +47,7 @@ class ProfileViewController: ViewController {
             case .detail:
                 cell.configure(withTitle: LocalizedString.profileInformation,
                                icon: UIImage(systemName: "person.fill"))
-            case .subscription:
+            case .stripeAccount:
                 cell.configure(withTitle:  LocalizedString.subscription,
                                icon: UIImage(systemName: "creditcard.fill"))
             case .frequentlyAskedQuestions:
@@ -115,6 +115,30 @@ class ProfileViewController: ViewController {
             .disposed(by: disposeBag)
         
         tableView.rx.modelSelected(ProfileViewModel.Row.self)
-            .s
+            .observeOn(Schedulers.standard.main)
+            .subscribe(onNext: { [weak self] row in
+                switch row {
+                case .detail:
+                    self?.navigationController?.push(with: .profileDetail)
+                case .stripeAccount:
+                    self?.navigationController?.push(with: .stripeAccount)
+                case .frequentlyAskedQuestions:
+                    #warning("TODO - Link out to a webpage")
+                    break
+                case .privacyPolicy:
+                    #warning("TODO - Link out to a webpage")
+                    break
+                case .termsAndConditions:
+                    #warning("TODO - Link out to a webpage")
+                    break
+                case .share:
+                    #warning("TODO - Setup sharing")
+                    break
+                case .logout:
+                    #warning("TODO - Setup authentication and logout")
+                    break
+                }
+            })
+            .disposed(by: disposeBag)
     }
 }

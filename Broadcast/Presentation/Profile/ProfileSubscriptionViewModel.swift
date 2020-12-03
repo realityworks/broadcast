@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ProfileSubscriptionViewModel : ViewModel {
+class ProfileStripeAccountViewModel : ViewModel {
     
     init(dependencies: Dependencies = .standard) {
         super.init(stateController: dependencies.stateController)
@@ -17,7 +17,7 @@ class ProfileSubscriptionViewModel : ViewModel {
 }
 
 /// NewPostViewModel dependencies component
-extension ProfileSubscriptionViewModel {
+extension ProfileStripeAccountViewModel {
     struct Dependencies {
         
         let stateController: StateController
