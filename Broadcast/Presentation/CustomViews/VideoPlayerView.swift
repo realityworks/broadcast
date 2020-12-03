@@ -19,6 +19,7 @@ class VideoPlayerView: UIView {
         
         /// Setup the AV Player layer and Player object. Add the layer to the player subview
         backgroundColor = .black
+        addSubview(playerController.view)
         playerController.view.backgroundColor = .black
         playerController.showsPlaybackControls = true
     }
@@ -26,11 +27,7 @@ class VideoPlayerView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func configureVideoPlayer() {
-        addSubview(playerController.view)
-    }
-    
+        
     override func layoutSubviews() {
         playerController.view.frame = self.bounds
     }
