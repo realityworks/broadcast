@@ -13,7 +13,7 @@ import RxCocoa
 class ProfileViewController: ViewController {
     private let viewModel = ProfileViewModel()
     
-    let tableView = UITableView()
+    let tableView = UITableView(frame: .zero, style: .grouped)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,11 +29,13 @@ class ProfileViewController: ViewController {
     private func configureViews() {
         tableView.register(ProfileTableViewCell.self,
                            forCellReuseIdentifier: ProfileTableViewCell.identifier)
-        
+        tableView.register(ProfileSectionHeaderCell.self,
+                           forHeaderFooterViewReuseIdentifier: ProfileSectionHeaderCell.identifier)
     }
     
     private func configureLayout() {
-        
+        view.addSubview(tableView)
+        tableView.edgesToSuperview()
     }
     
     private func configureBindings() {
@@ -66,8 +68,15 @@ class ProfileViewController: ViewController {
             }
             return cell
         })
+
+        datasource.heightForRowAtIndexPath = { _, _ -> CGFloat in
+            ProfileTableViewCell.cellHeight
+        }
+        datasource.heightForHeaderInSection = { _, _ -> CGFloat in
+            ProfileSectionHeaderCell.cellHeight
+        }
         
-        datasource.viewForHeaderInSection = { dataSource, tableView, section -> UIView? in
+        datasource.viewForHeaderInSection = { datasource, tableView, section in
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ProfileSectionHeaderCell.identifier) as? ProfileSectionHeaderCell else { return nil }
             
             let sectionTitle = datasource.sectionModels[section].model
@@ -75,19 +84,32 @@ class ProfileViewController: ViewController {
             
             return cell
         }
-
-        datasource.heightForHeaderInSection = { $0.sectionModels[$1].model != nil ? ProfileSectionHeaderCell.cellHeight : 0 }
         
-        let items = Observable.just(
+        let items: Observable<[SectionModel<LocalizedString, ProfileViewModel.Row>]> = Observable.just(
             [
-                SectionModel(model: LocalizedString.accountSettings, items:
-                                []),
-                SectionModel(model: LocalizedString.support, items: []),
-                SectionModel(model: LocalizedString.legal, items: []),
+                SectionModel(model: LocalizedString.accountSettings, items: [
+                                ProfileViewModel.Row.detail,
+                                ProfileViewModel.Row.subscription]),
+                SectionModel(model: LocalizedString.support, items: [
+                                ProfileViewModel.Row.frequentlyAskedQuestions]),
+                SectionModel(model: LocalizedString.legal, items: [
+                                ProfileViewModel.Row.privacyPolicy,
+                                ProfileViewModel.Row.termsAndConditions,
+                                ProfileViewModel.Row.share,
+                                ProfileViewModel.Row.logout]),
             ])
         
         items
             .bind(to: tableView.rx.items(dataSource: datasource))
+            .disposed(by: disposeBag)
+        
+        tableView.delegate = datasource
+        
+        // TableView selection
+        tableView.rx.itemSelected
+            .subscribe(onNext: { [weak self] (indexPath: IndexPath) in
+                self?.tableView.deselectRow(at: indexPath, animated: true)
+            })
+            .disposed(by: disposeBag)
     }
-    
 }

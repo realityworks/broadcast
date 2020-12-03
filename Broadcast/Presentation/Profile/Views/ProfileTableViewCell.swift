@@ -10,6 +10,7 @@ import SwiftRichString
 
 class ProfileTableViewCell : UITableViewCell {
     static let identifier = "ProfileTableViewCell"
+    static let cellHeight:CGFloat = 50
     
     let titleLabel = UILabel()
     let icon = UIImageView()
@@ -34,8 +35,8 @@ class ProfileTableViewCell : UITableViewCell {
     }
     
     private func configureView() {
-        addSubview(titleLabel)
-        addSubview(icon)
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(icon)
         titleLabel.leftToSuperview(offset: 10)
         titleLabel.rightToLeft(of: icon)
         titleLabel.topToSuperview()
