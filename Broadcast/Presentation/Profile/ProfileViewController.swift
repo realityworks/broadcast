@@ -40,20 +40,51 @@ class ProfileViewController: ViewController {
     
     private func configureBindings() {
         let datasource = Datasource(configureCell: { _, tableView, indexPath, row -> UITableViewCell in
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTableViewCell.identifier, for: indexPath) as! ProfileTableViewCell
+            
             switch row {
-            case detail:
-                let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTableViewCell.identifier, for: indexPath) as! ProfileTableViewCell
-                cell.configure(title: icon:)
-                return cell
-            case subscription:
-            case frequentlyAskedQuestions:
-            case privacyPolicy:
-            case termsAndConditions:
-            case share:
-            case logout:
-                
+            case .detail:
+                cell.configure(withTitle: LocalizedString.profileInformation,
+                               icon: UIImage(systemName: "link.circle"))
+            case .subscription:
+                cell.configure(withTitle:  LocalizedString.subscription,
+                               icon: UIImage(systemName: "link.circle"))
+            case .frequentlyAskedQuestions:
+                cell.configure(withTitle: LocalizedString.frequentlyAskedQuestions,
+                               icon: UIImage(systemName: "link.circle"))
+            case .privacyPolicy:
+                cell.configure(withTitle: LocalizedString.privacyPolicy,
+                               icon: UIImage(systemName: "link.circle"))
+            case .termsAndConditions:
+                cell.configure(withTitle: LocalizedString.termsAndConditions,
+                               icon: UIImage(systemName: "link.circle"))
+            case .share:
+                cell.configure(withTitle: LocalizedString.shareProfile,
+                               icon: UIImage(systemName: "link.circle"))
+            case .logout:
+                cell.configure(withTitle: LocalizedString.logout,
+                               titleColor: .red)
             }
-        }))
+            return cell
+        })
+        
+        datasource.viewForHeaderInSection = { dataSource, tableView, section -> UIView? in
+            guard let sectionTitle = dataSource.sectionModels[section].model,
+                let cell = tableView.dequeueReusableCell(withIdentifier: ProfileSectionHeaderCell.identifier) as? ProfileSectionHeaderCell else { return nil }
+            cell.label.text = sectionTitle
+            return cell
+        }
+
+        dataSource.heightForHeaderInSection = { $0.sectionModels[$1].model != nil ? SettingsSectionHeaderCell.cellHeight : 0 }
+        
+        let items = Observable.just(
+            [
+                SectionModel(model: "ACCOUNT SETTINGS", items:
+                                []),
+                SectionModel(model: "SUPPORT", items: []),
+                SectionModel(model: "LEGAL", items: []),
+            ])
     }
     
 }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftRichString
 
 class ProfileTableViewCell : UITableViewCell {
     static let identifier = "ProfileTableViewCell"
@@ -26,10 +27,10 @@ class ProfileTableViewCell : UITableViewCell {
     }
 
     // MARK: Configuration and Styling
-    func configure(withTitle title: String,
-                   icon: UIImage?,
+    func configure(withTitle titleText: LocalizedString,
+                   icon: UIImage? = nil,
                    titleColor: UIColor = .darkGray) {
-        
+        titleLabel.attributedText = titleText.localized.set(style: Style.title)
     }
     
     private func configureView() {

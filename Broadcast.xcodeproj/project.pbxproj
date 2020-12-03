@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D14AD5925790BA700CB2C82 /* ProfileSectionHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D14AD5825790BA700CB2C82 /* ProfileSectionHeaderCell.swift */; };
 		1D2A03E525655BB1008CE2D4 /* AuthenticationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2A03E425655BB1008CE2D4 /* AuthenticationUseCase.swift */; };
 		1D2A03EA25655FFC008CE2D4 /* ProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2A03E925655FFC008CE2D4 /* ProfileUseCase.swift */; };
 		1D2A03EF256561BB008CE2D4 /* PostContentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2A03EE256561BB008CE2D4 /* PostContentUseCase.swift */; };
@@ -127,6 +128,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1D14AD5825790BA700CB2C82 /* ProfileSectionHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSectionHeaderCell.swift; sourceTree = "<group>"; };
 		1D2A03E425655BB1008CE2D4 /* AuthenticationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationUseCase.swift; sourceTree = "<group>"; };
 		1D2A03E925655FFC008CE2D4 /* ProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUseCase.swift; sourceTree = "<group>"; };
 		1D2A03EE256561BB008CE2D4 /* PostContentUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostContentUseCase.swift; sourceTree = "<group>"; };
@@ -614,6 +616,7 @@
 			isa = PBXGroup;
 			children = (
 				1D9E1937257897AE001960AF /* ProfileTableViewCell.swift */,
+				1D14AD5825790BA700CB2C82 /* ProfileSectionHeaderCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -809,6 +812,7 @@
 				1D3ED60425663AAD004236BB /* UINavigationController+Routing.swift in Sources */,
 				1DDEC77B256F5D1D00D65023 /* RetrieveMyPostsResponse.swift in Sources */,
 				1D87DF7F256838A9000652D6 /* NewPostEditViewModel.swift in Sources */,
+				1D14AD5925790BA700CB2C82 /* ProfileSectionHeaderCell.swift in Sources */,
 				1D916D672562C7500059E549 /* Domain.swift in Sources */,
 				1D3B2A432564F22F001874FD /* LocalAPIService.swift in Sources */,
 				1D3B2A392564F0D5001874FD /* PersistanceService.swift in Sources */,
