@@ -6,9 +6,16 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class ProfileDetailViewController: ViewController {
     private let viewModel = ProfileDetailViewModel()
+    
+    let displayName: Observable<String>
+    let biography: Observable<String>
+    let subscribers: Observable<Int>
+    let thumbnail: Observable<URL>
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -20,7 +20,29 @@ class PostContentUseCase {
     init(apiService: APIService) {
         self.apiService = apiService
     }
-    
+}
+
+// MARK: - StateControllerInjector
+
+extension PostContentUseCase : StateControllerInjector {
+    @discardableResult
+    func with(stateController: StateController) -> PostContentUseCase {
+        self.stateController = stateController
+        return self
+    }
+}
+
+// MARK: - Instances
+
+extension PostContentUseCase {
+    static let standard = {
+        return PostContentUseCase(apiService: Services.local.apiService)
+    }()
+}
+
+// MARK: - Functions
+
+extension PostContentUseCase {
     func selectPost(with postId: PostID) {
         stateController.state.selectedPostId = postId
     }
@@ -40,22 +62,4 @@ class PostContentUseCase {
             })
             .disposed(by: disposeBag)
     }
-}
-
-// MARK: - StateControllerInjector
-
-extension PostContentUseCase : StateControllerInjector {
-    @discardableResult
-    func with(stateController: StateController) -> PostContentUseCase {
-        self.stateController = stateController
-        return self
-    }
-}
-
-// MARK: - Instances
-
-extension PostContentUseCase {
-    static let standard = {
-        return PostContentUseCase(apiService: Services.local.apiService)
-    }()
 }

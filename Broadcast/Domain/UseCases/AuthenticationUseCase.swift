@@ -24,21 +24,6 @@ class AuthenticationUseCase {
         self.credentialsService = dependencies.credentialsService
         self.schedulers = dependencies.schedulers
     }
-    
-    func login(username: String,
-               password: String) -> Completable {
-        credentialsService.clearCredentials()
-        
-        // Handle the response for authentication
-        return authenticationService.authenticate(
-            withUsername: username,
-            password: password).do(
-                afterSuccess: { [unowned self] authenticationResponse in
-                    self.credentialsService.authenticationToken
-                })
-            .observeOn(schedulers.main)
-            .asCompletable()
-    }
 }
     
 // MARK: - StateControllerInjector
@@ -71,5 +56,23 @@ extension AuthenticationUseCase {
             authenticationService: Services.local.authenticationService,
             credentialsService: Services.local.credentialsService,
             schedulers: Schedulers.standard)
+    }
+}
+
+// MARK: - Functions
+extension AuthenticationUseCase {
+    func login(username: String,
+               password: String) -> Completable {
+        credentialsService.clearCredentials()
+        
+        // Handle the response for authentication
+        return authenticationService.authenticate(
+            withUsername: username,
+            password: password).do(
+                afterSuccess: { [unowned self] authenticationResponse in
+                    self.credentialsService.authenticationToken
+                })
+            .observeOn(schedulers.main)
+            .asCompletable()
     }
 }
