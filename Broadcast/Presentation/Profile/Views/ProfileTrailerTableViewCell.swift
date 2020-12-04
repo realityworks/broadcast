@@ -10,6 +10,7 @@ import RxSwift
 
 class ProfileTrailerTableViewCell: UITableViewCell {
     static let identifier: String = "ProfileTrailerTableViewCell"
+    static let cellHeight: CGFloat = 300
 
     override init(style: UITableViewCell.CellStyle,
                   reuseIdentifier: String?) {

@@ -71,7 +71,17 @@ class ProfileDetailViewController: ViewController {
         })
 
         datasource.heightForRowAtIndexPath = { datasource, indexPath -> CGFloat in
-            ProfileTableViewCell.cellHeight
+            let row = datasource[indexPath]
+            switch row {
+            case .profileInfo:
+                return ProfileInfoTableViewCell.cellHeight
+            case .displayName:
+                return 100
+            case .biography:
+                return 200
+            case .trailerVideo:
+                return ProfileTrailerTableViewCell.cellHeight
+            }
         }
         datasource.heightForHeaderInSection = { _, _ -> CGFloat in
             ProfileSectionHeaderCell.cellHeight

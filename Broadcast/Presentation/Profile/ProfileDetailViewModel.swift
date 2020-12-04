@@ -15,8 +15,17 @@ class ProfileDetailViewModel : ViewModel {
         case displayName(text: String)
         case biography(text: String)
         case trailerVideo(trailer: URL?)
+        
+        var row: Int {
+            switch self {
+            case .profileInfo: return 0
+            case .displayName: return 1
+            case .biography: return 2
+            case .trailerVideo: return 3
+            }
+        }
     }
-    
+        
     let profileUseCase: ProfileUseCase
 
     let displayName: Observable<String>
