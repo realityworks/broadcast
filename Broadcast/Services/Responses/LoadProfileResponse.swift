@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct LoadMyProfileResponse {
+struct LoadProfileResponse {
     let profile: Profile
 }
