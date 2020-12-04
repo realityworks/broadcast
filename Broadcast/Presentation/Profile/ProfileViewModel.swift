@@ -19,9 +19,11 @@ class ProfileViewModel : ViewModel {
         case logout
     }
     
+    let profileUseCase: ProfileUseCase
+    
     init(dependencies: Dependencies = .standard) {
+        self.profileUseCase = dependencies.profileUseCase
         super.init(stateController: dependencies.stateController)
-        
     }
     
 }
@@ -31,9 +33,10 @@ extension ProfileViewModel {
     struct Dependencies {
         
         let stateController: StateController
+        let profileUseCase: ProfileUseCase
         
         static let standard = Dependencies(
-            stateController: StateController.standard)
-        
+            stateController: Domain.standard.stateController,
+            profileUseCase: Domain.standard.useCases.profileUseCase)
     }
 }

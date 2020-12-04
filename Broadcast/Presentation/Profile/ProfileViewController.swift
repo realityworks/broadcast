@@ -24,6 +24,8 @@ class ProfileViewController: ViewController {
         configureViews()
         configureLayout()
         configureBindings()
+        
+        viewModel.refreshMyPostsList()
     }
     
     private func configureViews() {

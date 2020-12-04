@@ -23,7 +23,6 @@ class ProfileInfoTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle,
                   reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         configureViews()
     }
     
@@ -36,6 +35,15 @@ class ProfileInfoTableViewCell: UITableViewCell {
         containerStackView.distribution = .fillEqually
         containerStackView.spacing = 5
         
+        thumbnailContainerStackView.axis = .horizontal
+        thumbnailContainerStackView.spacing = 10
+        thumbnailContainerStackView.alignment = .leading
+        
+        subscribersContainerStackView.axis = .vertical
+        subscribersContainerStackView.spacing = 5
+        subscribersContainerStackView.alignment = .center
+        subscribersContainerStackView.distribution = .fillProportionally
+        
         contentView.addSubview(containerStackView)
         containerStackView.addArrangedSubview(thumbnailContainerStackView)
         containerStackView.addArrangedSubview(subscribersContainerStackView)
@@ -43,10 +51,11 @@ class ProfileInfoTableViewCell: UITableViewCell {
         thumbnailContainerStackView.addArrangedSubview(thumbnailImageView)
         thumbnailContainerStackView.addArrangedSubview(changeThumbnailButton)
         
+        subscribersContainerStackView.addArrangedSubview(subscribersCountLabel)
         subscribersContainerStackView.addArrangedSubview(subscribersTitleLabel)
     }
     
-    func configure(withThumbailUrl thumbnailUrl: URL?, subscribers: Int) {
+    func configure(withThumbnailUrl thumbnailUrl: URL?, subscribers: Int) {
         thumbnailImageView.sd_setImage(with: thumbnailUrl)
         subscribersCountLabel.text = "\(subscribers)"
     }

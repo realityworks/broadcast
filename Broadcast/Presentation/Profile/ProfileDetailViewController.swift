@@ -98,12 +98,12 @@ class ProfileDetailViewController: ViewController {
             return [
                 SectionModel(model: nil, items: [
                                 ProfileDetailViewModel.Row.profileInfo(thumbnail: thumbnail, subscribers: subscribers)]),
-                SectionModel(model: LocalizedString.displayName(displayName), items: [
-                                ProfileDetailViewModel.Row.displayName]),
-                SectionModel(model: LocalizedString.displayBio(biography), items: [
-                                ProfileDetailViewModel.Row.biography]),
-                 SectionModel(model: LocalizedString.trailerVideo(trailer), items: [
-                                 ProfileDetailViewModel.Row.trailerVideo])
+                SectionModel(model: LocalizedString.displayName, items: [
+                                ProfileDetailViewModel.Row.displayName(text: displayName)]),
+                SectionModel(model: LocalizedString.displayBio, items: [
+                                ProfileDetailViewModel.Row.biography(text: biography)]),
+                SectionModel(model: LocalizedString.trailerVideo, items: [
+                                ProfileDetailViewModel.Row.trailerVideo(trailer: trailer)])
             ]
         }
                 
