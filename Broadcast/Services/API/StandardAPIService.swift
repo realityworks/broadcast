@@ -18,8 +18,16 @@ class StandardAPIService {
 }
 
 extension StandardAPIService : APIService {
-    func retrieveMyPosts() -> Single<LoadMyPostsResponse> {
+    func loadMyPosts() -> Single<LoadMyPostsResponse> {
         let single = Single<LoadMyPostsResponse>.create { observer in
+            observer(.error(BoomdayError.unsupported))
+            return Disposables.create { }
+        }
+        return single
+    }
+    
+    func loadProfile() -> Single<LoadProfileResponse> {
+        let single = Single<LoadProfileResponse>.create { observer in
             observer(.error(BoomdayError.unsupported))
             return Disposables.create { }
         }
