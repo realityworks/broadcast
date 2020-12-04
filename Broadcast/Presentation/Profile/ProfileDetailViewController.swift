@@ -59,13 +59,15 @@ class ProfileDetailViewController: ViewController {
                 return cell
             case .displayName:
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextFieldTableViewCell.identifier, for: indexPath) as! ProfileTextFieldTableViewCell
-//                cell.configure(withTitle: LocalizedString.profileInformation,
-//                               icon: UIImage(systemName: "person.fill"))
+                self.viewModel.displayName
+                    .bind(to: cell.rx.text)
+                    .disposed(by: self.disposeBag)
                 return cell
             case .biography:
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextFieldTableViewCell.identifier, for: indexPath) as! ProfileTextFieldTableViewCell
-//                cell.configure(withTitle: LocalizedString.profileInformation,
-//                               icon: UIImage(systemName: "person.fill"))
+                self.viewModel.displayName
+                    .bind(to: cell.rx.text)
+                    .disposed(by: self.disposeBag)
                 return cell
             case .trailerVideo:
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTrailerTableViewCell.identifier, for: indexPath) as! ProfileTrailerTableViewCell
