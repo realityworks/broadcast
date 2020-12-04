@@ -26,9 +26,13 @@ class ProfileViewModel : ViewModel {
         super.init(stateController: dependencies.stateController)
     }
     
+    func loadProfile() {
+        profileUseCase.loadProfile()
+    }
 }
 
-/// NewPostViewModel dependencies component
+// MARK: - Dependencies
+
 extension ProfileViewModel {
     struct Dependencies {
         

@@ -25,7 +25,7 @@ class ProfileViewController: ViewController {
         configureLayout()
         configureBindings()
         
-        viewModel.refreshMyPostsList()
+        viewModel.loadProfile()
     }
     
     private func configureViews() {

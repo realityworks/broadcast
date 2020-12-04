@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 
 class ProfileInfoTableViewCell: UITableViewCell {
-    static let identifier: String = "ProfileTextFieldTableViewCell"
+    static let identifier: String = "ProfileInfoTableViewCell"
     
     let containerStackView = UIStackView()
     let thumbnailContainerStackView = UIStackView()
