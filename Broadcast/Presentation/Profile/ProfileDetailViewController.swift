@@ -37,6 +37,11 @@ class ProfileDetailViewController: ViewController {
                            forCellReuseIdentifier: ProfileTrailerTableViewCell.identifier)
         tableView.register(ProfileSectionHeaderCell.self,
                            forCellReuseIdentifier: ProfileSectionHeaderCell.identifier)
+        
+        tableView.allowsSelection = false
+        tableView.backgroundColor = .clear
+        tableView.backgroundView = nil
+        tableView.separatorStyle = .none
     }
     
     private func configureLayout() {
