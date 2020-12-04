@@ -33,6 +33,8 @@ class ProfileDetailViewController: ViewController {
                            forCellReuseIdentifier: ProfileInfoTableViewCell.identifier)
         tableView.register(ProfileTextFieldTableViewCell.self,
                            forCellReuseIdentifier: ProfileTextFieldTableViewCell.identifier)
+        tableView.register(ProfileTextViewTableViewCell.self,
+                           forCellReuseIdentifier: ProfileTextViewTableViewCell.identifier)
         tableView.register(ProfileTrailerTableViewCell.self,
                            forCellReuseIdentifier: ProfileTrailerTableViewCell.identifier)
         tableView.register(ProfileSectionHeaderCell.self,
@@ -64,7 +66,7 @@ class ProfileDetailViewController: ViewController {
                     .disposed(by: self.disposeBag)
                 return cell
             case .biography:
-                let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextFieldTableViewCell.identifier, for: indexPath) as! ProfileTextFieldTableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextViewTableViewCell.identifier, for: indexPath) as! ProfileTextViewTableViewCell
                 self.viewModel.biography
                     .bind(to: cell.rx.text)
                     .disposed(by: self.disposeBag)

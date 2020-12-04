@@ -33,7 +33,7 @@ class ProfileTextViewTableViewCell: UITableViewCell {
         textView.leftToSuperview(offset: 8)
         textView.rightToSuperview(offset: -8)
         textView.topToSuperview(offset: 8)
-        textView.topToSuperview(offset: -8)
+        textView.bottomToSuperview(offset: -8)
         
         contentView.addSubview(iconImageView)
         iconImageView.rightToSuperview(offset: -8)
