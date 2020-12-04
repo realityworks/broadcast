@@ -25,6 +25,9 @@ enum LocalizedString : String {
     case accountSettings
     case support
     case legal
+    case displayName
+    case displayBio
+    case trailerVideo
     
     var localized: String {
         return Bundle.main.localizedString(forKey: self.rawValue, value: nil, table: nil)

@@ -14,7 +14,7 @@ class ProfileDetailViewModel : ViewModel {
         case profileInfo
         case displayName
         case biography
-        case trailerSelection
+        case trailerVideo
     }
     
     let profileUseCase: ProfileUseCase
@@ -22,7 +22,6 @@ class ProfileDetailViewModel : ViewModel {
     let biography: Observable<String>
     let subscribers: Observable<Int>
     let thumbnail: Observable<URL?>
-
     
     init(dependencies: Dependencies = .standard) {
         

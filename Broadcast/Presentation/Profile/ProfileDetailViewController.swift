@@ -11,6 +11,8 @@ import RxCocoa
 import RxDataSources
 
 class ProfileDetailViewController: ViewController {
+    typealias ProfileDetailSectionModel = SectionModel<LocalizedString?, ProfileDetailViewModel.Row>
+    
     private let viewModel = ProfileDetailViewModel()
     
     let tableView = UITableView(frame: .zero, style: .grouped)
@@ -43,18 +45,12 @@ class ProfileDetailViewController: ViewController {
     }
     
     private func configureBindings() {
-        setupDatasourceBindings()
-        setupTableViewBindings()
-    }
-    
-    private func setupDatasourceBindings() {
-        let datasource = ReactiveTableViewModelSource<SectionModel<LocalizedString, ProfileDetailViewModel.Row>>(configureCell: { _, tableView, indexPath, row -> UITableViewCell in
+        let datasource = ReactiveTableViewModelSource<ProfileDetailSectionModel>(configureCell: { _, tableView, indexPath, row -> UITableViewCell in
             
             switch row {
             case .profileInfo:
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileInfoTableViewCell.identifier, for: indexPath) as! ProfileInfoTableViewCell
-//                cell.configure(withTitle: LocalizedString.profileInformation,
-//                               icon: UIImage(systemName: "person.fill"))
+                v
                 return cell
             case .displayName:
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextFieldTableViewCell.identifier, for: indexPath) as! ProfileTextFieldTableViewCell
@@ -66,7 +62,7 @@ class ProfileDetailViewController: ViewController {
 //                cell.configure(withTitle: LocalizedString.profileInformation,
 //                               icon: UIImage(systemName: "person.fill"))
                 return cell
-            case .trailerSelection:
+            case .trailerVideo:
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTrailerTableViewCell.identifier, for: indexPath) as! ProfileTrailerTableViewCell
 //                cell.configure(withTitle: LocalizedString.profileInformation,
 //                               icon: UIImage(systemName: "person.fill"))
@@ -85,25 +81,31 @@ class ProfileDetailViewController: ViewController {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ProfileSectionHeaderCell.identifier) as? ProfileSectionHeaderCell else { return nil }
             
             let sectionTitle = datasource.sectionModels[section].model
-            cell.label.text = sectionTitle.localized
+            cell.label.text = sectionTitle?.localized
             
             return cell
         }
         
-        let items: Observable<[SectionModel<LocalizedString?, ProfileViewModel.Row>]> = Observable.just(
-            [
-                #warning("TODO : Setup correct model")
+        let items = Observable.combineLatest(
+            viewModel.biography,
+            viewModel.displayName,
+            viewModel.subscribers,
+            viewModel.thumbnail) {
+            
+            biography, displayName, subscribers, thumbnail -> [ProfileDetailSectionModel] in
+            
+            return [
                 SectionModel(model: nil, items: [
                                 ProfileDetailViewModel.Row.profileInfo]),
-                SectionModel(model: LocalizedString.support, items: [
-                                ProfileViewModel.Row.frequentlyAskedQuestions]),
-                SectionModel(model: LocalizedString.legal, items: [
-                                ProfileViewModel.Row.privacyPolicy,
-                                ProfileViewModel.Row.termsAndConditions,
-                                ProfileViewModel.Row.share,
-                                ProfileViewModel.Row.logout]),
-            ])
-        
+                SectionModel(model: LocalizedString.displayName, items: [
+                                ProfileDetailViewModel.Row.displayName]),
+                SectionModel(model: LocalizedString.displayBio, items: [
+                                ProfileDetailViewModel.Row.biography]),
+                 SectionModel(model: LocalizedString.trailerVideo, items: [
+                                 ProfileDetailViewModel.Row.trailerVideo])
+            ]
+        }
+                
         items
             .bind(to: tableView.rx.items(dataSource: datasource))
             .disposed(by: disposeBag)
