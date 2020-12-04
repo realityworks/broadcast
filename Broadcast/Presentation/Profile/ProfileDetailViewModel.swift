@@ -45,7 +45,6 @@ extension ProfileDetailViewModel {
             stateController: Domain.standard.stateController,
             profileUseCase: Domain.standard.useCases.profileUseCase,
             profileObservable: Domain.standard.stateController.stateObservable(of: \.profile))
-        
     }
 }
 
