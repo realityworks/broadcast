@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxDataSources
 
 class ProfileDetailViewController: ViewController {
     private let viewModel = ProfileDetailViewModel()
@@ -47,37 +48,33 @@ class ProfileDetailViewController: ViewController {
     }
     
     private func setupDatasourceBindings() {
-        let datasource = ReactiveTableViewModelSource<SectionModel<LocalizedString, ProfileViewModel.Row>>(configureCell: { _, tableView, indexPath, row -> UITableViewCell in
-            
-            let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTableViewCell.identifier, for: indexPath) as! ProfileTableViewCell
+        let datasource = ReactiveTableViewModelSource<SectionModel<LocalizedString, ProfileDetailViewModel.Row>>(configureCell: { _, tableView, indexPath, row -> UITableViewCell in
             
             switch row {
-            case .detail:
-                cell.configure(withTitle: LocalizedString.profileInformation,
-                               icon: UIImage(systemName: "person.fill"))
-            case .stripeAccount:
-                cell.configure(withTitle:  LocalizedString.subscription,
-                               icon: UIImage(systemName: "creditcard.fill"))
-            case .frequentlyAskedQuestions:
-                cell.configure(withTitle: LocalizedString.frequentlyAskedQuestions,
-                               icon: UIImage(systemName: "questionmark"))
-            case .privacyPolicy:
-                cell.configure(withTitle: LocalizedString.privacyPolicy,
-                               icon: nil)
-            case .termsAndConditions:
-                cell.configure(withTitle: LocalizedString.termsAndConditions,
-                               icon: nil)
-            case .share:
-                cell.configure(withTitle: LocalizedString.shareProfile,
-                               icon: UIImage(systemName: "square.and.arrow.up"))
-            case .logout:
-                cell.configure(withTitle: LocalizedString.logout,
-                               titleColor: .red)
+            case .profileInfo:
+                let cell = tableView.dequeueReusableCell(withIdentifier: ProfileInfoTableViewCell.identifier, for: indexPath) as! ProfileInfoTableViewCell
+//                cell.configure(withTitle: LocalizedString.profileInformation,
+//                               icon: UIImage(systemName: "person.fill"))
+                return cell
+            case .displayName:
+                let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextFieldTableViewCell.identifier, for: indexPath) as! ProfileTextFieldTableViewCell
+//                cell.configure(withTitle: LocalizedString.profileInformation,
+//                               icon: UIImage(systemName: "person.fill"))
+                return cell
+            case .biography:
+                let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextFieldTableViewCell.identifier, for: indexPath) as! ProfileTextFieldTableViewCell
+//                cell.configure(withTitle: LocalizedString.profileInformation,
+//                               icon: UIImage(systemName: "person.fill"))
+                return cell
+            case .trailerSelection:
+                let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTrailerTableViewCell.identifier, for: indexPath) as! ProfileTrailerTableViewCell
+//                cell.configure(withTitle: LocalizedString.profileInformation,
+//                               icon: UIImage(systemName: "person.fill"))
+                return cell
             }
-            return cell
         })
 
-        datasource.heightForRowAtIndexPath = { _, _ -> CGFloat in
+        datasource.heightForRowAtIndexPath = { datasource, indexPath -> CGFloat in
             ProfileTableViewCell.cellHeight
         }
         datasource.heightForHeaderInSection = { _, _ -> CGFloat in
@@ -93,11 +90,11 @@ class ProfileDetailViewController: ViewController {
             return cell
         }
         
-        let items: Observable<[SectionModel<LocalizedString, ProfileViewModel.Row>]> = Observable.just(
+        let items: Observable<[SectionModel<LocalizedString?, ProfileViewModel.Row>]> = Observable.just(
             [
-                SectionModel(model: LocalizedString.accountSettings, items: [
-                                ProfileViewModel.Row.detail,
-                                ProfileViewModel.Row.stripeAccount]),
+                #warning("TODO : Setup correct model")
+                SectionModel(model: nil, items: [
+                                ProfileDetailViewModel.Row.profileInfo]),
                 SectionModel(model: LocalizedString.support, items: [
                                 ProfileViewModel.Row.frequentlyAskedQuestions]),
                 SectionModel(model: LocalizedString.legal, items: [
@@ -112,42 +109,6 @@ class ProfileDetailViewController: ViewController {
             .disposed(by: disposeBag)
         
         tableView.delegate = datasource
-    }
-    
-    private func setupTableViewBindings() {
-        // TableView selection
-        tableView.rx.itemSelected
-            .subscribe(onNext: { [weak self] (indexPath: IndexPath) in
-                self?.tableView.deselectRow(at: indexPath, animated: true)
-            })
-            .disposed(by: disposeBag)
-        
-        tableView.rx.modelSelected(ProfileViewModel.Row.self)
-            .observeOn(Schedulers.standard.main)
-            .subscribe(onNext: { [weak self] row in
-                switch row {
-                case .detail:
-                    self?.navigationController?.push(with: .profileDetail)
-                case .stripeAccount:
-                    self?.navigationController?.push(with: .stripeAccount)
-                case .frequentlyAskedQuestions:
-                    #warning("TODO - Link out to a webpage")
-                    break
-                case .privacyPolicy:
-                    #warning("TODO - Link out to a webpage")
-                    break
-                case .termsAndConditions:
-                    #warning("TODO - Link out to a webpage")
-                    break
-                case .share:
-                    #warning("TODO - Setup sharing")
-                    break
-                case .logout:
-                    #warning("TODO - Setup authentication and logout")
-                    break
-                }
-            })
-            .disposed(by: disposeBag)
     }
 }
 
