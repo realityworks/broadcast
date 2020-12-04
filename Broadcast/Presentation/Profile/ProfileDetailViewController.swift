@@ -48,9 +48,9 @@ class ProfileDetailViewController: ViewController {
         let datasource = ReactiveTableViewModelSource<ProfileDetailSectionModel>(configureCell: { _, tableView, indexPath, row -> UITableViewCell in
             
             switch row {
-            case .profileInfo:
+            case let .profileInfo(thumbnail, subscribers):
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileInfoTableViewCell.identifier, for: indexPath) as! ProfileInfoTableViewCell
-                v
+                cell.configure(withThumbnailUrl: thumbnail, subscribers: subscribers)
                 return cell
             case .displayName:
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextFieldTableViewCell.identifier, for: indexPath) as! ProfileTextFieldTableViewCell
@@ -90,18 +90,19 @@ class ProfileDetailViewController: ViewController {
             viewModel.biography,
             viewModel.displayName,
             viewModel.subscribers,
-            viewModel.thumbnail) {
+            viewModel.thumbnail,
+            viewModel.trailer) {
             
-            biography, displayName, subscribers, thumbnail -> [ProfileDetailSectionModel] in
+            biography, displayName, subscribers, thumbnail, trailer -> [ProfileDetailSectionModel] in
             
             return [
                 SectionModel(model: nil, items: [
-                                ProfileDetailViewModel.Row.profileInfo]),
-                SectionModel(model: LocalizedString.displayName, items: [
+                                ProfileDetailViewModel.Row.profileInfo(thumbnail: thumbnail, subscribers: subscribers)]),
+                SectionModel(model: LocalizedString.displayName(displayName), items: [
                                 ProfileDetailViewModel.Row.displayName]),
-                SectionModel(model: LocalizedString.displayBio, items: [
+                SectionModel(model: LocalizedString.displayBio(biography), items: [
                                 ProfileDetailViewModel.Row.biography]),
-                 SectionModel(model: LocalizedString.trailerVideo, items: [
+                 SectionModel(model: LocalizedString.trailerVideo(trailer), items: [
                                  ProfileDetailViewModel.Row.trailerVideo])
             ]
         }

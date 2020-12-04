@@ -22,5 +22,17 @@ extension UIButton {
         
         return button
     }
+    
+    static func smallText(withTitle title: LocalizedString) -> UIButton {
+        let button = UIButton()
+        
+        button.setTitleColor(.blue, for: .normal)
+        button.setTitleColor(.black, for: .highlighted)
+        button.setTitle(title.localized, for: .normal)
+        button.titleLabel?.font = UIFont.body
+        button.height(25)
+        
+        return button
+    }
 }
 

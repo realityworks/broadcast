@@ -11,17 +11,19 @@ import RxSwift
 class ProfileDetailViewModel : ViewModel {
     
     enum Row {
-        case profileInfo
-        case displayName
-        case biography
-        case trailerVideo
+        case profileInfo(thumbnail: URL?, subscribers: Int)
+        case displayName(text: String)
+        case biography(text: String)
+        case trailerVideo(trailer: URL?)
     }
     
     let profileUseCase: ProfileUseCase
+
     let displayName: Observable<String>
     let biography: Observable<String>
     let subscribers: Observable<Int>
     let thumbnail: Observable<URL?>
+    let trailer: Observable<URL?>
     
     init(dependencies: Dependencies = .standard) {
         
@@ -33,6 +35,7 @@ class ProfileDetailViewModel : ViewModel {
         self.biography = profileObservable.map { $0.biography }
         self.subscribers = profileObservable.map { $0.subscribers }
         self.thumbnail = profileObservable.map { URL(string: $0.thumbnailUrl) }
+        self.trailer = profileObservable.map { URL(string: $0.trailerUrl) }
         
         super.init(stateController: dependencies.stateController)
     }
