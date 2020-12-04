@@ -1,5 +1,5 @@
 //
-//  ProfileTextFieldTableViewCell.swift
+//  ProfileTextViewTableViewCell.swift
 //  Broadcast
 //
 //  Created by Piotr Suwara on 4/12/20.
@@ -9,10 +9,10 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class ProfileTextFieldTableViewCell: UITableViewCell {
-    static let identifier: String = "ProfileTextFieldTableViewCell"
+class ProfileTextViewTableViewCell: UITableViewCell {
+    static let identifier: String = "ProfileTextViewTableViewCell"
 
-    let textField = UITextField()
+    let textView = UITextView()
     let iconImageView = UIImageView()
     
     private let disposeBag = DisposeBag()
@@ -22,7 +22,6 @@ class ProfileTextFieldTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureViews()
         styleView()
-        setupActions()
     }
     
     required init?(coder: NSCoder) {
@@ -30,11 +29,11 @@ class ProfileTextFieldTableViewCell: UITableViewCell {
     }
     
     private func configureViews() {
-        contentView.addSubview(textField)
-        textField.leftToSuperview(offset: 8)
-        textField.rightToSuperview(offset: -8)
-        textField.topToSuperview(offset: 8)
-        textField.topToSuperview(offset: -8)
+        contentView.addSubview(textView)
+        textView.leftToSuperview(offset: 8)
+        textView.rightToSuperview(offset: -8)
+        textView.topToSuperview(offset: 8)
+        textView.topToSuperview(offset: -8)
         
         contentView.addSubview(iconImageView)
         iconImageView.rightToSuperview(offset: -8)
@@ -48,20 +47,11 @@ class ProfileTextFieldTableViewCell: UITableViewCell {
     private func styleView() {
         
     }
-
-    private func setupActions() {
-        textField.resignWhenFinished(disposeBag)
-    }
 }
 
-extension Reactive where Base: ProfileTextFieldTableViewCell {
+extension Reactive where Base: ProfileTextViewTableViewCell {
     /// Reactive wrapper for `Text Field` property.
     var text: ControlProperty<String?> {
-        return base.textField.rx.controlProperty(editingEvents: [.valueChanged],
-                                       getter: { cell in
-                                        cell.text
-                                       }, setter: { cell, value in
-                                        cell.text = value
-                                       })
+        return base.textView.rx.text
     }
 }

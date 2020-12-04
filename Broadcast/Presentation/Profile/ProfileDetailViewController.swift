@@ -65,7 +65,7 @@ class ProfileDetailViewController: ViewController {
                 return cell
             case .biography:
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextFieldTableViewCell.identifier, for: indexPath) as! ProfileTextFieldTableViewCell
-                self.viewModel.displayName
+                self.viewModel.biography
                     .bind(to: cell.rx.text)
                     .disposed(by: self.disposeBag)
                 return cell
@@ -83,9 +83,9 @@ class ProfileDetailViewController: ViewController {
             case .profileInfo:
                 return ProfileInfoTableViewCell.cellHeight
             case .displayName:
-                return 100
+                return 50
             case .biography:
-                return 200
+                return 80
             case .trailerVideo:
                 return ProfileTrailerTableViewCell.cellHeight
             }

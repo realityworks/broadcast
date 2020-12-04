@@ -13,6 +13,7 @@
 		1D14AD6F257A0F5100CB2C82 /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D14AD6E257A0F5100CB2C82 /* UITextField+Extensions.swift */; };
 		1D14AD73257A16AC00CB2C82 /* ProfileInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D14AD72257A16AB00CB2C82 /* ProfileInfoTableViewCell.swift */; };
 		1D14AD77257A16BC00CB2C82 /* ProfileTrailerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D14AD76257A16BC00CB2C82 /* ProfileTrailerTableViewCell.swift */; };
+		1D14AD7B257AA8E900CB2C82 /* ProfileTextViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D14AD7A257AA8E800CB2C82 /* ProfileTextViewTableViewCell.swift */; };
 		1D2A03E525655BB1008CE2D4 /* AuthenticationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2A03E425655BB1008CE2D4 /* AuthenticationUseCase.swift */; };
 		1D2A03EA25655FFC008CE2D4 /* ProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2A03E925655FFC008CE2D4 /* ProfileUseCase.swift */; };
 		1D2A03EF256561BB008CE2D4 /* PostContentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2A03EE256561BB008CE2D4 /* PostContentUseCase.swift */; };
@@ -138,6 +139,7 @@
 		1D14AD6E257A0F5100CB2C82 /* UITextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
 		1D14AD72257A16AB00CB2C82 /* ProfileInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoTableViewCell.swift; sourceTree = "<group>"; };
 		1D14AD76257A16BC00CB2C82 /* ProfileTrailerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTrailerTableViewCell.swift; sourceTree = "<group>"; };
+		1D14AD7A257AA8E800CB2C82 /* ProfileTextViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTextViewTableViewCell.swift; sourceTree = "<group>"; };
 		1D2A03E425655BB1008CE2D4 /* AuthenticationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationUseCase.swift; sourceTree = "<group>"; };
 		1D2A03E925655FFC008CE2D4 /* ProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUseCase.swift; sourceTree = "<group>"; };
 		1D2A03EE256561BB008CE2D4 /* PostContentUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostContentUseCase.swift; sourceTree = "<group>"; };
@@ -626,6 +628,7 @@
 				1D9E1937257897AE001960AF /* ProfileTableViewCell.swift */,
 				1D14AD5825790BA700CB2C82 /* ProfileSectionHeaderCell.swift */,
 				1D14AD6A257A0CFD00CB2C82 /* ProfileTextFieldTableViewCell.swift */,
+				1D14AD7A257AA8E800CB2C82 /* ProfileTextViewTableViewCell.swift */,
 				1D14AD72257A16AB00CB2C82 /* ProfileInfoTableViewCell.swift */,
 				1D14AD76257A16BC00CB2C82 /* ProfileTrailerTableViewCell.swift */,
 			);
@@ -890,6 +893,7 @@
 				1D3B2A212564D76C001874FD /* StandardCredentialsService.swift in Sources */,
 				1D3B29FB25641C3A001874FD /* MainViewModel.swift in Sources */,
 				1D87DF4925683535000652D6 /* EditProfileViewController.swift in Sources */,
+				1D14AD7B257AA8E900CB2C82 /* ProfileTextViewTableViewCell.swift in Sources */,
 				1D14AD672579E41E00CB2C82 /* LoadProfileResponse.swift in Sources */,
 				1D2A03E525655BB1008CE2D4 /* AuthenticationUseCase.swift in Sources */,
 				1D87DF7A2568389E000652D6 /* NewPostEditViewController.swift in Sources */,
