@@ -1,5 +1,5 @@
 //
-//  RetrieveMyPostsResponse.swift
+//  LoadMyPostsResponse.swift
 //  Broadcast
 //
 //  Created by Piotr Suwara on 26/11/20.
@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct RetrieveMyPostsResponse {
+struct LoadMyPostsResponse {
     let posts: [Post]
 }

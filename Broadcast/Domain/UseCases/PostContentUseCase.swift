@@ -53,7 +53,7 @@ extension PostContentUseCase {
     
     func retrieveMyPosts() {
         // Load posts into the app state
-        apiService.retrieveMyPosts()
+        apiService.loadMyPosts()
             .subscribe(onSuccess: { [unowned self] response in
                 self.stateController.state.myPosts = response.posts
             }, onError: { [unowned self] error in

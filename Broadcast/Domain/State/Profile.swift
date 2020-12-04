@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct Profile : Equatable {
+struct Profile : Equatable, Codable {
     
 }

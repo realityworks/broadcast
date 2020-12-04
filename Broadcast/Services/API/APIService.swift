@@ -10,5 +10,6 @@ import RxSwift
 import RxCocoa
 
 protocol APIService {
-    func retrieveMyPosts() -> Single<RetrieveMyPostsResponse>
+    func loadMyPosts() -> Single<LoadMyPostsResponse>
+    func loadProfile() -> Single<LoadProfileResponse>
 }

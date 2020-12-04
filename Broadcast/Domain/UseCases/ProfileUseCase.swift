@@ -6,13 +6,15 @@
 //
 
 import Foundation
+import RxSwift
 
 class ProfileUseCase {
     typealias T = ProfileUseCase
     
     var stateController: StateController!
-    
     private let apiService: APIService
+    
+    let disposeBag = DisposeBag()
     
     init(apiService: APIService) {
         self.apiService = apiService
@@ -35,4 +37,22 @@ extension ProfileUseCase {
     static let standard = {
         return ProfileUseCase(apiService: Services.local.apiService)
     }()
+}
+
+// MARK: - Functions
+
+extension ProfileUseCase {
+    func loadProfile() {
+        apiService.loadProfile()
+            .subscribe(onSuccess: { [self] profile in
+                stateController.state.profile = profile
+            }, onError: { [self] error in
+                if case BoomdayError.notAuthenticated = error {
+                    stateController.state.sendError(.notAuthenticated)
+                } else {
+                    Logger.log(level: .warning, topic: .authentication, message: "Unable to load account details")
+                }
+            })
+            .disposed(by: disposeBag)
+    }
 }
