@@ -10,10 +10,10 @@ import RxSwift
 import RxCocoa
 
 class ProfileTextFieldTableViewCell: UITableViewCell {
-    let textField = UITextField()
-    
     static let identifier: String = "ProfileTextFieldTableViewCell"
 
+    let textField = UITextField()
+    
     private let disposeBag = DisposeBag()
 
     override func awakeFromNib() {

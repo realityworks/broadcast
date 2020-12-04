@@ -10,6 +10,13 @@ import RxSwift
 
 class ProfileDetailViewModel : ViewModel {
     
+    enum Row {
+        case profileInfo
+        case displayName
+        case biography
+        case trailerSelection
+    }
+    
     let profileUseCase: ProfileUseCase
     let displayName: Observable<String>
     let biography: Observable<String>
