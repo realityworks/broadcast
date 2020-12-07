@@ -88,7 +88,7 @@ class ProfileDetailViewController: ViewController {
             case .biography:
                 return 80
             case .trailerVideo:
-                return ProfileTrailerTableViewCell.cellHeight
+                return UITableView.automaticDimension
             }
         }
         datasource.heightForHeaderInSection = { _, _ -> CGFloat in

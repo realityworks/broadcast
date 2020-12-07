@@ -10,7 +10,7 @@ import RxSwift
 
 class ProfileTrailerTableViewCell: UITableViewCell {
     static let identifier: String = "ProfileTrailerTableViewCell"
-    static let cellHeight: CGFloat = 300
+    //static let cellHeight: CGFloat = 300
     
     let verticalStack = UIStackView()
     let videoPlayerView = VideoPlayerView()
@@ -28,7 +28,9 @@ class ProfileTrailerTableViewCell: UITableViewCell {
         verticalStack.alignment = .center
         
         addSubview(verticalStack)
-        verticalStack.edgesToSuperview()
+        verticalStack.edgesToSuperview(excluding: [.left, .right])
+        verticalStack.leadingToSuperview(offset: 16)
+        verticalStack.trailingToSuperview(offset: 16)
     }
     
     required init?(coder: NSCoder) {
@@ -36,13 +38,17 @@ class ProfileTrailerTableViewCell: UITableViewCell {
     }
     
     func configure(thumbnailUrl: URL?) {
-        if let thumbnailUrl = thumbnailUrl {
-            verticalStack.addArrangedSubview(videoPlayerView)
-            verticalStack.addArrangedSubview(selectButton)
-            
-            videoPlayerView.playVideo(withURL: thumbnailUrl)
-        } else {
-            verticalStack.addArrangedSubview(selectButton)
-        }
+//        if let thumbnailUrl = thumbnailUrl {
+//            verticalStack.addArrangedSubview(videoPlayerView)
+//            verticalStack.addArrangedSubview(selectButton)
+//            videoPlayerView.widthToSuperview()
+//            videoPlayerView.height(300)
+//            
+//            videoPlayerView.playVideo(withURL: thumbnailUrl)
+//        }
+        
+        verticalStack.addArrangedSubview(selectButton)
+        selectButton.height(25)
+        selectButton.width(100)
     }
 }
