@@ -10,7 +10,6 @@ import RxSwift
 
 class ProfileTrailerTableViewCell: UITableViewCell {
     static let identifier: String = "ProfileTrailerTableViewCell"
-    //static let cellHeight: CGFloat = 300
     
     let verticalStack = UIStackView()
     let videoPlayerView = VideoPlayerView()
@@ -38,14 +37,14 @@ class ProfileTrailerTableViewCell: UITableViewCell {
     }
     
     func configure(thumbnailUrl: URL?) {
-//        if let thumbnailUrl = thumbnailUrl {
-//            verticalStack.addArrangedSubview(videoPlayerView)
-//            verticalStack.addArrangedSubview(selectButton)
-//            videoPlayerView.widthToSuperview()
-//            videoPlayerView.height(300)
-//            
-//            videoPlayerView.playVideo(withURL: thumbnailUrl)
-//        }
+        if let thumbnailUrl = thumbnailUrl {
+            verticalStack.addArrangedSubview(videoPlayerView)
+            verticalStack.addArrangedSubview(selectButton)
+            videoPlayerView.widthToSuperview()
+            videoPlayerView.height(300)
+
+            videoPlayerView.playVideo(withURL: thumbnailUrl)
+        }
         
         verticalStack.addArrangedSubview(selectButton)
         selectButton.height(25)
