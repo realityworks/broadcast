@@ -8,7 +8,9 @@
 import UIKit
 
 class ProfileStripeAccountViewController: ViewController {
-    private let viewModel = ProfileDetailViewModel()
+    private let viewModel = ProfileStripeAccountViewModel()
+    
+    let tableView = UITableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()

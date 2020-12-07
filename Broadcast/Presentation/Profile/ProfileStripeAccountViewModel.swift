@@ -9,6 +9,10 @@ import Foundation
 
 class ProfileStripeAccountViewModel : ViewModel {
     
+    enum Row {
+        
+    }
+    
     init(dependencies: Dependencies = .standard) {
         super.init(stateController: dependencies.stateController)
         
