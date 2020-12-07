@@ -36,7 +36,7 @@ class SubscriptionInfoTableViewCell : UITableViewCell {
         verticalStackView.alignment = .leading
         
         titleLabel.attributedText = titleText.localized.set(style: Style.title)
-        detailLabel.attributedText = detailText.localized.set(style: Style.title)
+        detailLabel.attributedText = detailText.localized.set(style: Style.body)
     }
     
     private func configureView() {

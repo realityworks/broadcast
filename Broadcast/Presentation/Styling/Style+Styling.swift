@@ -21,4 +21,12 @@ extension Style {
     static let title = Style {
         $0.font = UIFont.title
     }
+    
+    static let body = Style {
+        $0.font = UIFont.body
+    }
+    
+    static let bodyBold = Style {
+        $0.font = UIFont.bodyBold
+    }
 }
