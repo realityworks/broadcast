@@ -103,7 +103,7 @@
 		1D916DA825640C810059E549 /* Staging.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 1D916DA525640C810059E549 /* Staging.xcconfig */; };
 		1D91A0CC256C1B8E0043A943 /* UIStackView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D91A0CB256C1B8E0043A943 /* UIStackView+Extensions.swift */; };
 		1D91A0D2256C1DD60043A943 /* DismissableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D91A0D1256C1DD60043A943 /* DismissableLabel.swift */; };
-		1D9256C5257E6A3200E988B2 /* SubscriptionInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9256C4257E6A3200E988B2 /* SubscriptionInfoTableViewCell.swift */; };
+		1D9256C5257E6A3200E988B2 /* AccountInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9256C4257E6A3200E988B2 /* AccountInfoTableViewCell.swift */; };
 		1D9256C9257E70AF00E988B2 /* Locale+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9256C8257E70AF00E988B2 /* Locale+Extension.swift */; };
 		1D9256CD257E818900E988B2 /* Float+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9256CC257E818800E988B2 /* Float+Extension.swift */; };
 		1D93143E2577DBDF001C85C1 /* MediaUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D93143D2577DBDF001C85C1 /* MediaUrl.swift */; };
@@ -230,7 +230,7 @@
 		1D916DA525640C810059E549 /* Staging.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
 		1D91A0CB256C1B8E0043A943 /* UIStackView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extensions.swift"; sourceTree = "<group>"; };
 		1D91A0D1256C1DD60043A943 /* DismissableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissableLabel.swift; sourceTree = "<group>"; };
-		1D9256C4257E6A3200E988B2 /* SubscriptionInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionInfoTableViewCell.swift; sourceTree = "<group>"; };
+		1D9256C4257E6A3200E988B2 /* AccountInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInfoTableViewCell.swift; sourceTree = "<group>"; };
 		1D9256C8257E70AF00E988B2 /* Locale+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Locale+Extension.swift"; sourceTree = "<group>"; };
 		1D9256CC257E818800E988B2 /* Float+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+Extension.swift"; sourceTree = "<group>"; };
 		1D93143D2577DBDF001C85C1 /* MediaUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaUrl.swift; sourceTree = "<group>"; };
@@ -637,7 +637,7 @@
 				1D14AD7A257AA8E800CB2C82 /* ProfileTextViewTableViewCell.swift */,
 				1D14AD72257A16AB00CB2C82 /* ProfileInfoTableViewCell.swift */,
 				1D14AD76257A16BC00CB2C82 /* ProfileTrailerTableViewCell.swift */,
-				1D9256C4257E6A3200E988B2 /* SubscriptionInfoTableViewCell.swift */,
+				1D9256C4257E6A3200E988B2 /* AccountInfoTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -848,7 +848,7 @@
 				1D87DF9B25683B53000652D6 /* ProfileViewModel.swift in Sources */,
 				1DE3DA382575506100A7A1F7 /* UIViewController+Extensions.swift in Sources */,
 				1D87DF532568367E000652D6 /* MyPostsViewController.swift in Sources */,
-				1D9256C5257E6A3200E988B2 /* SubscriptionInfoTableViewCell.swift in Sources */,
+				1D9256C5257E6A3200E988B2 /* AccountInfoTableViewCell.swift in Sources */,
 				1D916D83256403F80059E549 /* Post.swift in Sources */,
 				1D2A03F4256561D5008CE2D4 /* AppLifeCycleUseCase.swift in Sources */,
 				1D87DF9325683B3E000652D6 /* ProfileViewController.swift in Sources */,
