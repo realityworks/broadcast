@@ -50,34 +50,28 @@ class ProfileStripeAccountViewController: ViewController {
     private func configureBindings() {
         let datasource = ReactiveTableViewModelSource<ProfileStripeAccountSectionModel>(configureCell: { _, tableView, indexPath, row -> UITableViewCell in
             
+            let cell = tableView.dequeueReusableCell(withIdentifier: AccountInfoTableViewCell.identifier, for: indexPath) as! AccountInfoTableViewCell
+            
             let cellDetailText: String
             switch row {
             
-            
             case let .name(text):
-                
+                cellDetailText = text
             case let .identifier(text):
-                
+                cellDetailText = text
             case let .pricing(text):
-                
+                cellDetailText = text
             case let .payments(text):
-                
+                cellDetailText = text
             case let .payouts(text):
-                
+                cellDetailText = text
             case let .totalBalance(text):
-                
+                cellDetailText = text
             case let .lifetimeTotalVolume(text):
-                
-            
-            
-            
-            
-            
-            
-            
-            
-            
+                cellDetailText = text
             }
+            
+            cell.configure(withTitle: <#T##LocalizedString#>, detail: <#T##LocalizedString#>)
         })
 
         datasource.heightForRowAtIndexPath = { _, indexPath -> CGFloat in

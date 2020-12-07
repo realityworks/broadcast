@@ -12,9 +12,7 @@ class AccountInfoTableViewCell : UITableViewCell {
     static let identifier = "AccountInfoTableViewCell"
     static let cellHeight: CGFloat = 80
     
-    //let verticalStackView = UIStackView()
-    //let titleLabel = UILabel()
-    let detailLabel = UILabel()
+    let titleLabel = UILabel()
         
     override init(style: UITableViewCell.CellStyle,
                   reuseIdentifier: String?) {
@@ -29,25 +27,14 @@ class AccountInfoTableViewCell : UITableViewCell {
     }
 
     // MARK: Configuration and Styling
-    func configure(withTitle titleText: LocalizedString,
-                   detail detailText: LocalizedString) {
-        
-//        verticalStackView.axis = .vertical
-//        verticalStackView.alignment = .leading
-//        titleLabel.attributedText = titleText.localized.set(style: Style.title)
-        detailLabel.attributedText = detailText.localized.set(style: Style.body)
+    func configure(withTitle titleText: String) {
+        titleLabel.attributedText = titleText.set(style: Style.title)
     }
     
     private func configureView() {
-        
-        contentView.addSubview(detailLabel)
-//        verticalStackView.addArrangedSubview(titleLabel)
-//        verticalStackView.addArrangedSubview(detailLabel)
-//
-//        verticalStackView.edgesToSuperview(insets: UIEdgeInsets(top: 0,
-//                                                                left: 16,
-//                                                                bottom: 0,
-//                                                                right: 0))
+        contentView.addSubview(titleLabel)
+        titleLabel.edgesToSuperview(excluding: [.leading])
+        titleLabel.leadingToSuperview(offset: 16)
     }
     
     private func styleView() {
