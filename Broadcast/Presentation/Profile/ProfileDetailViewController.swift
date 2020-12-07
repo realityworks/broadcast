@@ -72,10 +72,7 @@ class ProfileDetailViewController: ViewController {
                 
                 cell.rx.text
                     .compactMap { $0 }
-                    .subscribe(onNext: { text in
-                        print("Update Display Name: \(text)")
-                    })
-                    //.bind(to: self.viewModel.displayNameSubject)
+                    .bind(to: self.viewModel.displayNameSubject)
                     .disposed(by: self.disposeBag)
                 
                 return cell
@@ -84,6 +81,11 @@ class ProfileDetailViewController: ViewController {
                 
                 self.viewModel.biography
                     .bind(to: cell.rx.text)
+                    .disposed(by: self.disposeBag)
+                
+                cell.rx.text
+                    .compactMap { $0 }
+                    .bind(to: self.viewModel.biographySubject)
                     .disposed(by: self.disposeBag)
                 
                 cell.rx.text
