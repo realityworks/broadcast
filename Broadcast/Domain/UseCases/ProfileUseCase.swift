@@ -12,12 +12,16 @@ class ProfileUseCase {
     typealias T = ProfileUseCase
     
     var stateController: StateController!
+    
     private let apiService: APIService
+    private let uploadService: UploadService
     
     let disposeBag = DisposeBag()
     
-    init(apiService: APIService) {
+    init(apiService: APIService,
+         uploadService: UploadService) {
         self.apiService = apiService
+        self.uploadService = uploadService
     }
 }
 
@@ -35,7 +39,9 @@ extension ProfileUseCase : StateControllerInjector {
 
 extension ProfileUseCase {
     static let standard = {
-        return ProfileUseCase(apiService: Services.local.apiService)
+        return ProfileUseCase(
+            apiService: Services.local.apiService,
+            uploadService: Services.local.uploadService)
     }()
 }
 
@@ -59,5 +65,9 @@ extension ProfileUseCase {
     
     func updateProfile(displayName: String, biography: String) {
         
+    }
+    
+    func uploadTrailer(withUrl url: URL) {
+        uploadService.upload(content: .video(fileUrl: url))
     }
 }

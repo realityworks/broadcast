@@ -10,12 +10,24 @@ import UIKit
 /// Protocol that defines the functionality related to selecting
 /// media from the phone
 protocol MediaPickerAdapter: NSObject {
+    func supportedAlbumModes() -> [String]
+    func supportedCameraModes() -> [String]
     func mediaFromLibrary()
     func mediaFromCamera()
     func showMediaOptionsMenu()
     func selected(imageUrl: URL)
     func selected(videoUrl: URL)
     var picker: UIImagePickerController { get }
+}
+
+extension MediaPickerAdapter {
+    func supportedAlbumModes() -> [String] {
+        return UIImagePickerController.availableMediaTypes(for: .photoLibrary) ?? []
+    }
+    
+    func supportedCameraModes() -> [String] {
+        return UIImagePickerController.availableMediaTypes(for: .camera) ?? []
+    }
 }
 
 // MARK: Image Picker in a UIViewController
@@ -28,14 +40,14 @@ extension MediaPickerAdapter where Self: UIViewController {
     /// Function to create an image picker controller that allows media selection
     func mediaFromLibrary() {
         picker.sourceType = .savedPhotosAlbum
-        picker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary) ?? []
+        picker.mediaTypes = supportedAlbumModes()
         present(picker, animated: true, completion: nil)
     }
     
     /// Function to create an image picker controller that allows media selection
     func mediaFromCamera() {
         picker.sourceType = .camera
-        picker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .camera) ?? []
+        picker.mediaTypes = supportedCameraModes()
         present(picker, animated: true, completion: nil)
     }
     

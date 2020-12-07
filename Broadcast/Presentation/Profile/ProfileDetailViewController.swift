@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import AVKit
+import MobileCoreServices
 import RxSwift
 import RxCocoa
 import RxDataSources
@@ -16,6 +18,9 @@ class ProfileDetailViewController: ViewController {
     private let viewModel = ProfileDetailViewModel()
     
     let tableView = UITableView(frame: .zero, style: .grouped)
+    
+    // MARK: UIPickerController
+    var picker = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,7 +101,14 @@ class ProfileDetailViewController: ViewController {
                 return cell
             case let .trailerVideo(thumbnailUrl):
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTrailerTableViewCell.identifier, for: indexPath) as! ProfileTrailerTableViewCell
+                
                 cell.configure(thumbnailUrl: thumbnailUrl)
+                cell.selectButton.rx.tap
+                    .subscribe(onNext: { [unowned self] _ in
+                        self.showMediaOptionsMenu()
+                    })
+                    .disposed(by: self.disposeBag)
+                
                 return cell
             }
         })
@@ -161,6 +173,51 @@ class ProfileDetailViewController: ViewController {
 extension ProfileDetailViewController {
     @objc func savePressed() {
         viewModel.updateProfile()
+    }
+}
+
+// MARK: UIImagePickerControllerDelegate
+
+extension ProfileDetailViewController: UIImagePickerControllerDelegate,
+                                      UINavigationControllerDelegate {
+    // MARK: UIImagePickerControllerDelegate
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let imageUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL {
+            selected(imageUrl: imageUrl)
+        } else if let videoUrl = info[UIImagePickerController.InfoKey.mediaURL] as? URL {
+            selected(videoUrl: videoUrl)
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
+
+    func imagePickerControllerDidCancel(
+      _ picker: UIImagePickerController
+    ) {
+        dismiss(animated: true, completion: nil)
+    }
+}
+
+// MARK: MediaPickerAdapter
+
+extension ProfileDetailViewController : MediaPickerAdapter {
+    func supportedAlbumModes() -> [String] {
+        // Trailer only supports video
+        return [kUTTypeMovie as String]
+    }
+    
+    func supportedCameraModes() -> [String] {
+        // Trailer only supports video
+        return [kUTTypeMovie as String]
+    }
+    
+    func selected(imageUrl url: URL) {
+        // DO NOTHING, Image not supported
+    }
+    
+    func selected(videoUrl url: URL) {
+        // Video Selected
+        viewModel.trailerSelected(withUrl: url)
     }
 }
 

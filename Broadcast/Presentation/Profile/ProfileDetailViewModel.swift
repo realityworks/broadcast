@@ -84,4 +84,8 @@ extension ProfileDetailViewModel {
         profileUseCase.updateProfile(displayName: displayName,
                                      biography: biography)
     }
+    
+    func trailerSelected(withUrl url: URL) {
+        profileUseCase.uploadTrailer(withUrl: url)
+    }
 }

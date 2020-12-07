@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
 class ProfileTrailerTableViewCell: UITableViewCell {
     static let identifier: String = "ProfileTrailerTableViewCell"
@@ -14,6 +15,8 @@ class ProfileTrailerTableViewCell: UITableViewCell {
     let verticalStack = UIStackView()
     let videoPlayerView = VideoPlayerView()
     let selectButton = UIButton.standard(withTitle: LocalizedString.select)
+    
+    let disposeBag = DisposeBag()
 
     override init(style: UITableViewCell.CellStyle,
                   reuseIdentifier: String?) {
@@ -26,7 +29,7 @@ class ProfileTrailerTableViewCell: UITableViewCell {
         verticalStack.spacing = 5
         verticalStack.alignment = .center
         
-        addSubview(verticalStack)
+        contentView.addSubview(verticalStack)
         verticalStack.edgesToSuperview(excluding: [.left, .right])
         verticalStack.leadingToSuperview(offset: 16)
         verticalStack.trailingToSuperview(offset: 16)
@@ -37,14 +40,13 @@ class ProfileTrailerTableViewCell: UITableViewCell {
     }
     
     func configure(thumbnailUrl: URL?) {
-        if let thumbnailUrl = thumbnailUrl {
-            verticalStack.addArrangedSubview(videoPlayerView)
-            verticalStack.addArrangedSubview(selectButton)
-            videoPlayerView.widthToSuperview()
-            videoPlayerView.height(300)
-
-            videoPlayerView.playVideo(withURL: thumbnailUrl)
-        }
+//        if let thumbnailUrl = thumbnailUrl {
+//            verticalStack.addArrangedSubview(videoPlayerView)
+//            videoPlayerView.widthToSuperview()
+//            videoPlayerView.height(300)
+//
+//            videoPlayerView.playVideo(withURL: thumbnailUrl)
+//        }
         
         verticalStack.addArrangedSubview(selectButton)
         selectButton.height(25)

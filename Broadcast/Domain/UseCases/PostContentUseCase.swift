@@ -15,10 +15,13 @@ class PostContentUseCase {
     var disposeBag = DisposeBag()
     
     var stateController: StateController!
-    private let apiService: APIService
     
-    init(apiService: APIService) {
+    private let apiService: APIService
+    private let uploadService: UploadService
+    
+    init(apiService: APIService, uploadService: UploadService) {
         self.apiService = apiService
+        self.uploadService = uploadService
     }
 }
 
@@ -36,7 +39,9 @@ extension PostContentUseCase : StateControllerInjector {
 
 extension PostContentUseCase {
     static let standard = {
-        return PostContentUseCase(apiService: Services.local.apiService)
+        return PostContentUseCase(
+            apiService: Services.local.apiService,
+            uploadService: Services.local.uploadService)
     }()
 }
 
@@ -49,6 +54,10 @@ extension PostContentUseCase {
     
     func selectMedia(with mediaUrl: MediaUrl) {
         stateController.state.selectedMedia = mediaUrl
+    }
+    
+    func uploadPost() {
+        #warning("TODO")
     }
     
     func retrieveMyPosts() {
