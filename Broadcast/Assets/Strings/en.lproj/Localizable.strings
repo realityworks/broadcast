@@ -30,3 +30,10 @@
 "subscribers" = "Subscribers";
 "disabled" = "Disabled";
 "enabled" = "Enabled";
+"name" = "Name";
+"id" = "ID";
+"pricing" = "Pricing";
+"payments" = "Payments";
+"payouts" = "Payouts";
+"totalBalance" = "Total Balance";
+"lifetimeTotalVolume" = "Lifetime Total Volume";

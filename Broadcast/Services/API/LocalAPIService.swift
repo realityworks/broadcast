@@ -37,7 +37,7 @@ class LocalAPIService : APIService {
         stripeAccount: Profile.StripeAccount(
             name: "stripeaccount@stripe.com",
             id: "prod_iUmEPMQJFjaLs6",
-            currency: "$",
+            currencyCode: CurrencyCode.gdp,
             pricing: 10.0,
             balance: 80.0,
             totalVolume: 100.0,

@@ -32,6 +32,13 @@ enum LocalizedString : String {
     case subscribers
     case disabled
     case enabled
+    case name
+    case id
+    case pricing
+    case payments
+    case payouts
+    case totalBalance
+    case lifetimeTotalVolume
     
     var localized: String {
         return Bundle.main.localizedString(forKey: self.rawValue, value: nil, table: nil)

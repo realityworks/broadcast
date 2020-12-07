@@ -32,8 +32,8 @@ class ProfileStripeAccountViewController: ViewController {
     
     private func configureViews() {
         // Configure Views
-        tableView.register(ProfileInfoTableViewCell.self,
-                           forCellReuseIdentifier: ProfileInfoTableViewCell.identifier)
+        tableView.register(AccountInfoTableViewCell.self,
+                           forCellReuseIdentifier: AccountInfoTableViewCell.identifier)
         
         tableView.allowsSelection = false
         tableView.backgroundColor = .clear
@@ -71,7 +71,8 @@ class ProfileStripeAccountViewController: ViewController {
                 cellDetailText = text
             }
             
-            cell.configure(withTitle: <#T##LocalizedString#>, detail: <#T##LocalizedString#>)
+            cell.configure(withTitle: cellDetailText)
+            return cell
         })
 
         datasource.heightForRowAtIndexPath = { _, indexPath -> CGFloat in
@@ -92,23 +93,31 @@ class ProfileStripeAccountViewController: ViewController {
         }
         
         let items = Observable.combineLatest(
-            viewModel.biography,
-            viewModel.displayName,
-            viewModel.subscribers,
-            viewModel.thumbnail,
-            viewModel.trailer) {
+            viewModel.nameObservable,
+            viewModel.identifierObservable,
+            viewModel.pricingObservable,
+            viewModel.paymentsObservable,
+            viewModel.payoutsObservable,
+            viewModel.totalBalanceObservable,
+            viewModel.lifetimeTotalVolumeObservable) {
             
-            biography, displayName, subscribers, thumbnail, trailer -> [ProfileDetailSectionModel] in
+            name, identifier, pricing, payments, payouts, totalBalance, lifetimeTotalVolume -> [ProfileStripeAccountSectionModel] in
             
             return [
-                SectionModel(model: nil, items: [
-                                ProfileDetailViewModel.Row.profileInfo(thumbnail: thumbnail, subscribers: subscribers)]),
-                SectionModel(model: LocalizedString.displayName, items: [
-                                ProfileDetailViewModel.Row.displayName(text: displayName)]),
-                SectionModel(model: LocalizedString.displayBio, items: [
-                                ProfileDetailViewModel.Row.biography(text: biography)]),
-                SectionModel(model: LocalizedString.trailerVideo, items: [
-                                ProfileDetailViewModel.Row.trailerVideo(trailer: trailer)])
+                SectionModel(model: LocalizedString.name, items: [
+                                ProfileStripeAccountViewModel.Row.name(text: name)]),
+                SectionModel(model: LocalizedString.id, items: [
+                                ProfileStripeAccountViewModel.Row.identifier(text: identifier)]),
+                SectionModel(model: LocalizedString.pricing, items: [
+                                ProfileStripeAccountViewModel.Row.pricing(text: name)]),
+                SectionModel(model: LocalizedString.payments, items: [
+                                ProfileStripeAccountViewModel.Row.payments(text: name)]),
+                SectionModel(model: LocalizedString.payouts, items: [
+                                ProfileStripeAccountViewModel.Row.payouts(text: name)]),
+                SectionModel(model: LocalizedString.totalBalance, items: [
+                                ProfileStripeAccountViewModel.Row.totalBalance(text: name)]),
+                SectionModel(model: LocalizedString.lifetimeTotalVolume, items: [
+                                ProfileStripeAccountViewModel.Row.lifetimeTotalVolume(text: name)]),
             ]
         }
                 
