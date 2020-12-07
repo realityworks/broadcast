@@ -33,6 +33,10 @@ extension StandardAPIService : APIService {
         }
         return single
     }
+    
+    func updateProfile(withDisplayName displayName: String, biography: String) -> Completable {
+        return Completable.empty()
+    }
 }
 
 extension StandardAPIService : AuthenticationService {

@@ -7,6 +7,7 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 
 class ProfileDetailViewModel : ViewModel {
     
@@ -34,6 +35,9 @@ class ProfileDetailViewModel : ViewModel {
     let subscribers: Observable<Int>
     let thumbnail: Observable<URL?>
     let trailer: Observable<URL?>
+    
+    let displayNameSubject = BehaviorRelay<String?>(value: nil)
+    let biographySubject = BehaviorRelay<String?>(value: nil)
     
     init(dependencies: Dependencies = .standard) {
         
@@ -73,11 +77,11 @@ extension ProfileDetailViewModel {
 // MARK: - Usecase functions
 
 extension ProfileDetailViewModel {
-    func update(displayName: String) {
-        // TODO
-    }
-    
-    func update(biography: String){
-        // TODO
+    func updateProfile() {
+        guard let displayName = displayNameSubject.value,
+              let biography = biographySubject.value else { return }
+        
+        profileUseCase.updateProfile(displayName: displayName,
+                                     biography: biography)
     }
 }

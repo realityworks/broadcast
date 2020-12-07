@@ -72,4 +72,8 @@ extension LocalAPIService {
         }
         return single
     }
+    
+    func updateProfile(withDisplayName displayName: String, biography: String) -> Completable {
+        return .empty()
+    }
 }

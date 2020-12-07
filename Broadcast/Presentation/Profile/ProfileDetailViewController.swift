@@ -29,6 +29,7 @@ class ProfileDetailViewController: ViewController {
     }
     
     private func configureViews() {
+        // Configure Views
         tableView.register(ProfileInfoTableViewCell.self,
                            forCellReuseIdentifier: ProfileInfoTableViewCell.identifier)
         tableView.register(ProfileTextFieldTableViewCell.self,
@@ -44,6 +45,9 @@ class ProfileDetailViewController: ViewController {
         tableView.backgroundColor = .clear
         tableView.backgroundView = nil
         tableView.separatorStyle = .none
+        
+        // Configure Bar button item
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(savePressed))
     }
     
     private func configureLayout() {
@@ -67,18 +71,26 @@ class ProfileDetailViewController: ViewController {
                     .disposed(by: self.disposeBag)
                 
                 cell.rx.text
-                    .debounce(.milliseconds(1000), scheduler: self.viewModel.schedulers.main)
+                    .compactMap { $0 }
                     .subscribe(onNext: { text in
-                        self.viewModel.update(displayName: text)
+                        print("Update Display Name: \(text)")
                     })
+                    //.bind(to: self.viewModel.displayNameSubject)
                     .disposed(by: self.disposeBag)
                 
                 return cell
             case .biography:
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextViewTableViewCell.identifier, for: indexPath) as! ProfileTextViewTableViewCell
+                
                 self.viewModel.biography
                     .bind(to: cell.rx.text)
                     .disposed(by: self.disposeBag)
+                
+                cell.rx.text
+                    .compactMap { $0 }
+                    .bind(to: self.viewModel.biographySubject)
+                    .disposed(by: self.disposeBag)
+                
                 return cell
             case let .trailerVideo(thumbnailUrl):
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTrailerTableViewCell.identifier, for: indexPath) as! ProfileTrailerTableViewCell
@@ -139,6 +151,14 @@ class ProfileDetailViewController: ViewController {
             .disposed(by: disposeBag)
         
         tableView.delegate = datasource
+    }
+}
+
+// MARK: - Objc Handlers
+
+extension ProfileDetailViewController {
+    @objc func savePressed() {
+        viewModel.updateProfile()
     }
 }
 

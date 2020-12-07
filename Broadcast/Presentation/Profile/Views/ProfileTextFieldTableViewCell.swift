@@ -57,7 +57,7 @@ class ProfileTextFieldTableViewCell: UITableViewCell {
 extension Reactive where Base: ProfileTextFieldTableViewCell {
     /// Reactive wrapper for `Text Field` property.
     var text: ControlProperty<String?> {
-        return base.textField.rx.controlProperty(editingEvents: [.valueChanged],
+        return base.textField.rx.controlProperty(editingEvents: [.valueChanged, .editingDidEnd],
                                        getter: { cell in
                                         cell.text
                                        }, setter: { cell, value in

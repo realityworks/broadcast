@@ -12,4 +12,5 @@ import RxCocoa
 protocol APIService {
     func loadMyPosts() -> Single<LoadMyPostsResponse>
     func loadProfile() -> Single<LoadProfileResponse>
+    func updateProfile(withDisplayName displayName: String, biography: String) -> Completable
 }

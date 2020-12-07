@@ -56,4 +56,8 @@ extension ProfileUseCase {
             })
             .disposed(by: disposeBag)
     }
+    
+    func updateProfile(displayName: String, biography: String) {
+        
+    }
 }
