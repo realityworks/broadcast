@@ -71,10 +71,9 @@ class ProfileDetailViewController: ViewController {
                     .bind(to: cell.rx.text)
                     .disposed(by: self.disposeBag)
                 return cell
-            case .trailerVideo:
+            case let .trailerVideo(thumbnailUrl):
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTrailerTableViewCell.identifier, for: indexPath) as! ProfileTrailerTableViewCell
-//                cell.configure(withTitle: LocalizedString.profileInformation,
-//                               icon: UIImage(systemName: "person.fill"))
+                cell.configure(thumbnailUrl: thumbnailUrl)
                 return cell
             }
         })

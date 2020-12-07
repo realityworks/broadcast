@@ -22,6 +22,13 @@ class ProfileTrailerTableViewCell: UITableViewCell {
         
         videoPlayerView.layer.cornerRadius = 10
         videoPlayerView.clipsToBounds = true
+        
+        verticalStack.axis = .vertical
+        verticalStack.spacing = 5
+        verticalStack.alignment = .center
+        
+        addSubview(verticalStack)
+        verticalStack.edgesToSuperview()
     }
     
     required init?(coder: NSCoder) {
@@ -32,8 +39,10 @@ class ProfileTrailerTableViewCell: UITableViewCell {
         if let thumbnailUrl = thumbnailUrl {
             verticalStack.addArrangedSubview(videoPlayerView)
             verticalStack.addArrangedSubview(selectButton)
-        } else {
             
+            videoPlayerView.playVideo(withURL: thumbnailUrl)
+        } else {
+            verticalStack.addArrangedSubview(selectButton)
         }
     }
 }
