@@ -26,6 +26,7 @@ class ProfileDetailViewModel : ViewModel {
         }
     }
         
+    let schedulers: Schedulers
     let profileUseCase: ProfileUseCase
 
     let displayName: Observable<String>
@@ -36,6 +37,7 @@ class ProfileDetailViewModel : ViewModel {
     
     init(dependencies: Dependencies = .standard) {
         
+        self.schedulers = dependencies.schedulers
         self.profileUseCase = dependencies.profileUseCase
         
         let profileObservable = dependencies.profileObservable.compactMap { $0 }
@@ -48,7 +50,6 @@ class ProfileDetailViewModel : ViewModel {
         
         super.init(stateController: dependencies.stateController)
     }
-    
 }
 
 /// NewPostViewModel dependencies component
@@ -56,13 +57,27 @@ extension ProfileDetailViewModel {
     struct Dependencies {
         
         let stateController: StateController
+        let schedulers: Schedulers
         let profileUseCase: ProfileUseCase
         let profileObservable: Observable<Profile?>
         
+        
         static let standard = Dependencies(
             stateController: Domain.standard.stateController,
+            schedulers: Schedulers.standard,
             profileUseCase: Domain.standard.useCases.profileUseCase,
             profileObservable: Domain.standard.stateController.stateObservable(of: \.profile))
     }
 }
 
+// MARK: - Usecase functions
+
+extension ProfileDetailViewModel {
+    func update(displayName: String) {
+        // TODO
+    }
+    
+    func update(biography: String){
+        // TODO
+    }
+}

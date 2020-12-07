@@ -61,9 +61,18 @@ class ProfileDetailViewController: ViewController {
                 return cell
             case .displayName:
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextFieldTableViewCell.identifier, for: indexPath) as! ProfileTextFieldTableViewCell
+                
                 self.viewModel.displayName
                     .bind(to: cell.rx.text)
                     .disposed(by: self.disposeBag)
+                
+                cell.rx.text
+                    .debounce(.milliseconds(1000), scheduler: self.viewModel.schedulers.main)
+                    .subscribe(onNext: { text in
+                        self.viewModel.update(displayName: text)
+                    })
+                    .disposed(by: self.disposeBag)
+                
                 return cell
             case .biography:
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextViewTableViewCell.identifier, for: indexPath) as! ProfileTextViewTableViewCell
