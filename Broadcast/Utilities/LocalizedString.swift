@@ -30,6 +30,8 @@ enum LocalizedString : String {
     case trailerVideo
     case change
     case subscribers
+    case disabled
+    case enabled
     
     var localized: String {
         return Bundle.main.localizedString(forKey: self.rawValue, value: nil, table: nil)

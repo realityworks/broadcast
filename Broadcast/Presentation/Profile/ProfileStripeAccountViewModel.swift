@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 class ProfileStripeAccountViewModel : ViewModel {
     
@@ -22,15 +24,35 @@ class ProfileStripeAccountViewModel : ViewModel {
     let nameObservable: Observable<String>
     let identifierObservable: Observable<String>
     let pricingObservable: Observable<String>
-    let payments: Observable<String>
-    let payouts: Observable<String>
-    let totalBalance: Observable<String>
-    let lifetimeTotalVolume: Observable<String>
+    let paymentsObservable: Observable<String>
+    let payoutsObservable: Observable<String>
+    let totalBalanceObservable: Observable<String>
+    let lifetimeTotalVolumeObservable: Observable<String>
     
     init(dependencies: Dependencies = .standard) {
-        super.init(stateController: dependencies.stateController)
+        let stripeAccountObservable = dependencies.profileObservable
+            .compactMap { $0?.stripeAccount }
         
-        currencyCode: CurrencyCode, amount: Float
+        self.nameObservable = stripeAccountObservable.map { $0.name }
+        self.identifierObservable = stripeAccountObservable.map { $0.id }
+        self.paymentsObservable = stripeAccountObservable.map { $0.paymentsDisabled ? "Disabled" : "Enabled" }
+        
+        self.pricingObservable = stripeAccountObservable.map {
+            $0.pricing.asCurrencyString(withCurrencyCode: $0.currencyCode)
+        }
+        
+        self.payoutsObservable = stripeAccountObservable.map { $0.payoutsDisabled ? LocalizedString.disabled.localized : LocalizedString.enabled.localized
+        }
+        
+        self.totalBalanceObservable = stripeAccountObservable.map {
+            $0.balance.asCurrencyString(withCurrencyCode: $0.currencyCode)
+        }
+        
+        self.lifetimeTotalVolumeObservable = stripeAccountObservable.map {
+            $0.totalVolume.asCurrencyString(withCurrencyCode: $0.currencyCode)
+        }
+
+        super.init(stateController: dependencies.stateController)
     }
     
 }
@@ -40,9 +62,11 @@ extension ProfileStripeAccountViewModel {
     struct Dependencies {
         
         let stateController: StateController
+        let profileObservable: Observable<Profile?>
         
         static let standard = Dependencies(
-            stateController: StateController.standard)
+            stateController: Domain.standard.stateController,
+            profileObservable: Domain.standard.stateController.stateObservable(of: \.profile))
     }
 }
 

@@ -8,13 +8,13 @@
 import Foundation
 
 extension Locale {
-    static func locale(from currencyIdentifier: String) -> Locale? {
+    static func locale(from currencyCode: CurrencyCode) -> Locale? {
         let allLocales = Locale.availableIdentifiers.map({ Locale.init(identifier: $0) })
-        return allLocales.filter({ $0.currencyCode == currencyIdentifier }).first
+        return allLocales.filter({ $0.currencyCode == currencyCode.rawValue }).first
     }
     
-    static func currencySymbol(for currencyIdentifier: String) -> String? {
-        guard let locale = Self.locale(from: currencyIdentifier) else { return nil }
+    static func currencySymbol(from currencyCode: CurrencyCode) -> String? {
+        guard let locale = Self.locale(from: currencyCode) else { return nil }
         return locale.currencySymbol
     }
 }

@@ -105,6 +105,7 @@
 		1D91A0D2256C1DD60043A943 /* DismissableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D91A0D1256C1DD60043A943 /* DismissableLabel.swift */; };
 		1D9256C5257E6A3200E988B2 /* SubscriptionInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9256C4257E6A3200E988B2 /* SubscriptionInfoTableViewCell.swift */; };
 		1D9256C9257E70AF00E988B2 /* Locale+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9256C8257E70AF00E988B2 /* Locale+Extension.swift */; };
+		1D9256CD257E818900E988B2 /* Float+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9256CC257E818800E988B2 /* Float+Extension.swift */; };
 		1D93143E2577DBDF001C85C1 /* MediaUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D93143D2577DBDF001C85C1 /* MediaUrl.swift */; };
 		1D9E1938257897AE001960AF /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9E1937257897AE001960AF /* ProfileTableViewCell.swift */; };
 		1DD1FE05256CA55F00C598CE /* UITextField+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD1FE04256CA55F00C598CE /* UITextField+Styling.swift */; };
@@ -231,6 +232,7 @@
 		1D91A0D1256C1DD60043A943 /* DismissableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissableLabel.swift; sourceTree = "<group>"; };
 		1D9256C4257E6A3200E988B2 /* SubscriptionInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionInfoTableViewCell.swift; sourceTree = "<group>"; };
 		1D9256C8257E70AF00E988B2 /* Locale+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Locale+Extension.swift"; sourceTree = "<group>"; };
+		1D9256CC257E818800E988B2 /* Float+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+Extension.swift"; sourceTree = "<group>"; };
 		1D93143D2577DBDF001C85C1 /* MediaUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaUrl.swift; sourceTree = "<group>"; };
 		1D9314442577E991001C85C1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		1D9E1937257897AE001960AF /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
@@ -663,6 +665,7 @@
 				1DE3DA372575506100A7A1F7 /* UIViewController+Extensions.swift */,
 				1D14AD6E257A0F5100CB2C82 /* UITextField+Extensions.swift */,
 				1D9256C8257E70AF00E988B2 /* Locale+Extension.swift */,
+				1D9256CC257E818800E988B2 /* Float+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -851,6 +854,7 @@
 				1D87DF9325683B3E000652D6 /* ProfileViewController.swift in Sources */,
 				1D916D392562A4D90059E549 /* StateController.swift in Sources */,
 				1D2A042525658367008CE2D4 /* Route.swift in Sources */,
+				1D9256CD257E818900E988B2 /* Float+Extension.swift in Sources */,
 				1D916D93256406B10059E549 /* Configuration.swift in Sources */,
 				1D3B2A262564E6F1001874FD /* UploadService.swift in Sources */,
 				1D3B29F625641BAF001874FD /* MainViewController.swift in Sources */,
