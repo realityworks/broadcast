@@ -72,8 +72,6 @@
 		1D87DF582568368A000652D6 /* MyPostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF572568368A000652D6 /* MyPostsViewModel.swift */; };
 		1D87DF7025683863000652D6 /* NewPostGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF6F25683863000652D6 /* NewPostGuideViewController.swift */; };
 		1D87DF752568387B000652D6 /* NewPostGuideViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF742568387B000652D6 /* NewPostGuideViewModel.swift */; };
-		1D87DF7A2568389E000652D6 /* NewPostEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF792568389E000652D6 /* NewPostEditViewController.swift */; };
-		1D87DF7F256838A9000652D6 /* NewPostEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF7E256838A9000652D6 /* NewPostEditViewModel.swift */; };
 		1D87DF84256839C9000652D6 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF83256839C9000652D6 /* PostDetailViewController.swift */; };
 		1D87DF8925683AC1000652D6 /* PostDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF8825683AC1000652D6 /* PostDetailViewModel.swift */; };
 		1D87DF9325683B3E000652D6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF9225683B3E000652D6 /* ProfileViewController.swift */; };
@@ -205,8 +203,6 @@
 		1D87DF572568368A000652D6 /* MyPostsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsViewModel.swift; sourceTree = "<group>"; };
 		1D87DF6F25683863000652D6 /* NewPostGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostGuideViewController.swift; sourceTree = "<group>"; };
 		1D87DF742568387B000652D6 /* NewPostGuideViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostGuideViewModel.swift; sourceTree = "<group>"; };
-		1D87DF792568389E000652D6 /* NewPostEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostEditViewController.swift; sourceTree = "<group>"; };
-		1D87DF7E256838A9000652D6 /* NewPostEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostEditViewModel.swift; sourceTree = "<group>"; };
 		1D87DF83256839C9000652D6 /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
 		1D87DF8825683AC1000652D6 /* PostDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewModel.swift; sourceTree = "<group>"; };
 		1D87DF9225683B3E000652D6 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -418,8 +414,6 @@
 			children = (
 				1D87DF6F25683863000652D6 /* NewPostGuideViewController.swift */,
 				1D87DF742568387B000652D6 /* NewPostGuideViewModel.swift */,
-				1D87DF792568389E000652D6 /* NewPostEditViewController.swift */,
-				1D87DF7E256838A9000652D6 /* NewPostEditViewModel.swift */,
 			);
 			path = "New Post";
 			sourceTree = "<group>";
@@ -837,7 +831,6 @@
 				1D14AD6B257A0CFD00CB2C82 /* ProfileTextFieldTableViewCell.swift in Sources */,
 				1D3ED60425663AAD004236BB /* UINavigationController+Routing.swift in Sources */,
 				1DDEC77B256F5D1D00D65023 /* LoadMyPostsResponse.swift in Sources */,
-				1D87DF7F256838A9000652D6 /* NewPostEditViewModel.swift in Sources */,
 				1D14AD5925790BA700CB2C82 /* ProfileSectionHeaderCell.swift in Sources */,
 				1D14AD77257A16BC00CB2C82 /* ProfileTrailerTableViewCell.swift in Sources */,
 				1D916D672562C7500059E549 /* Domain.swift in Sources */,
@@ -908,7 +901,6 @@
 				1D14AD7B257AA8E900CB2C82 /* ProfileTextViewTableViewCell.swift in Sources */,
 				1D14AD672579E41E00CB2C82 /* LoadProfileResponse.swift in Sources */,
 				1D2A03E525655BB1008CE2D4 /* AuthenticationUseCase.swift in Sources */,
-				1D87DF7A2568389E000652D6 /* NewPostEditViewController.swift in Sources */,
 				1DDEC785256F6BA800D65023 /* MyPostsCellViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
