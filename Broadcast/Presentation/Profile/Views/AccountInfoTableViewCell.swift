@@ -10,7 +10,7 @@ import SwiftRichString
 
 class AccountInfoTableViewCell : UITableViewCell {
     static let identifier = "AccountInfoTableViewCell"
-    static let cellHeight: CGFloat = 80
+    static let cellHeight: CGFloat = 50
     
     let titleLabel = UILabel()
         
@@ -33,8 +33,9 @@ class AccountInfoTableViewCell : UITableViewCell {
     
     private func configureView() {
         contentView.addSubview(titleLabel)
-        titleLabel.edgesToSuperview(excluding: [.leading])
-        titleLabel.leadingToSuperview(offset: 16)
+        titleLabel.edgesToSuperview(excluding: [.leading, .bottom])
+        titleLabel.leadingToSuperview(offset: 20)
+        titleLabel.height(40)
     }
     
     private func styleView() {

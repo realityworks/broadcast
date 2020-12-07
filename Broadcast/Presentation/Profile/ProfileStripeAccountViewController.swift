@@ -16,7 +16,7 @@ class ProfileStripeAccountViewController: ViewController {
     
     private let viewModel = ProfileStripeAccountViewModel()
     
-    let tableView = UITableView()
+    let tableView = UITableView(frame: .zero, style: .grouped)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,11 +35,13 @@ class ProfileStripeAccountViewController: ViewController {
         tableView.register(AccountInfoTableViewCell.self,
                            forCellReuseIdentifier: AccountInfoTableViewCell.identifier)
         
+        tableView.register(ProfileSectionHeaderCell.self,
+                           forCellReuseIdentifier: ProfileSectionHeaderCell.identifier)
+        
         tableView.allowsSelection = false
         tableView.backgroundColor = .clear
         tableView.backgroundView = nil
         tableView.separatorStyle = .none
-        
     }
     
     private func configureLayout() {
