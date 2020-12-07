@@ -7,6 +7,13 @@
 
 import Foundation
 
+enum CurrencyCode: String, Codable {
+    case eur = "EUR"
+    case usd = "USD"
+    case cad = "CAD"
+    case gdp = "GDP"
+}
+
 struct Profile : Equatable, Codable {
     let firstName: String
     let lastName: String
@@ -19,7 +26,7 @@ struct Profile : Equatable, Codable {
     struct StripeAccount : Equatable, Codable {
         let name: String
         let id: String
-        let currency: String
+        let currencyCode: CurrencyCode
         
         let pricing: Float
         let balance: Float
