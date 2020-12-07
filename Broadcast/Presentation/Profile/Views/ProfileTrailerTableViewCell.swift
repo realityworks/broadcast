@@ -40,13 +40,13 @@ class ProfileTrailerTableViewCell: UITableViewCell {
     }
     
     func configure(thumbnailUrl: URL?) {
-//        if let thumbnailUrl = thumbnailUrl {
-//            verticalStack.addArrangedSubview(videoPlayerView)
-//            videoPlayerView.widthToSuperview()
-//            videoPlayerView.height(300)
-//
-//            videoPlayerView.playVideo(withURL: thumbnailUrl)
-//        }
+        if let thumbnailUrl = thumbnailUrl {
+            verticalStack.addArrangedSubview(videoPlayerView)
+            videoPlayerView.widthToSuperview()
+            videoPlayerView.height(300)
+
+            videoPlayerView.playVideo(withURL: thumbnailUrl)
+        }
         
         verticalStack.addArrangedSubview(selectButton)
         selectButton.height(25)
