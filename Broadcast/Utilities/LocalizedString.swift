@@ -42,6 +42,7 @@ enum LocalizedString : String {
     case videoToUpload
     case addTitle
     case captionTitle
+    case publish
     
     var localized: String {
         return Bundle.main.localizedString(forKey: self.rawValue, value: nil, table: nil)

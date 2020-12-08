@@ -23,7 +23,7 @@ class EditPostView: UIView {
     private let captionHeading = UILabel.bodyBold(LocalizedString.captionTitle)
     private let captionTextView = UITextView()
     
-    private let uploadButton = UIButton.standard()
+    private let uploadButton = UIButton.standard(withTitle: LocalizedString.publish)
     
     init() {
         super.init(frame: .zero)
@@ -34,9 +34,15 @@ class EditPostView: UIView {
         verticalStackView.distribution = .equalSpacing
         
         addSubview(scrollView)
-        scrollView.edgesToSuperview()
+        scrollView.topToSuperview()
+        scrollView.bottomToSuperview()
+        scrollView.leadingToSuperview(offset: 16)
+        scrollView.trailingToSuperview(offset: 16)
+
         scrollView.addSubview(verticalStackView)
-        verticalStackView.edgesToSuperview(excluding: [.bottom])
+        
+        verticalStackView.topToSuperview()
+        verticalStackView.widthToSuperview()
         
         verticalStackView.addArrangedSubview(uploadTitle)
         
@@ -46,8 +52,15 @@ class EditPostView: UIView {
         verticalStackView.addArrangedSubview(captionHeading)
         verticalStackView.addArrangedSubview(captionTextView)
         
-        verticalStackView.edgesToSuperview()
+        scrollView.addSubview(uploadButton)
+        
+        uploadButton.topToBottom(of: verticalStackView)
+        uploadButton.width(150)
+        uploadButton.centerXToSuperview()
+        //uploadButton.height(50)
+        
         captionTextView.height(100)
+        captionTextView.width(200)
     }
     
     required init?(coder: NSCoder) {
