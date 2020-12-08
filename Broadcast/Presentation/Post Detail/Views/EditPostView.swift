@@ -57,7 +57,6 @@ class EditPostView: UIView {
         uploadButton.topToBottom(of: verticalStackView)
         uploadButton.width(150)
         uploadButton.centerXToSuperview()
-        //uploadButton.height(50)
         
         captionTextView.height(100)
         captionTextView.width(200)
