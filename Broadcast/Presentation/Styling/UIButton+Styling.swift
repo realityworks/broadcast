@@ -9,7 +9,7 @@ import UIKit
 import TinyConstraints
 
 extension UIButton {
-    static func standard(withTitle title: LocalizedString) -> UIButton {
+    static func standard(withTitle title: LocalizedString? = nil) -> UIButton {
         let button = UIButton()
         
         button.setBackgroundColor(.blue, for: .normal)
@@ -22,7 +22,7 @@ extension UIButton {
         return button
     }
     
-    static func smallText(withTitle title: LocalizedString) -> UIButton {
+    static func smallText(withTitle title: LocalizedString? = nil) -> UIButton {
         let button = UIButton()
         
         button.setTitleColor(.blue, for: .normal)
