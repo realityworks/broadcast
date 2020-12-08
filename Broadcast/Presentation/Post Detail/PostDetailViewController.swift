@@ -14,14 +14,7 @@ class PostDetailViewController: ViewController {
     let verticalStackView = UIStackView()
     var postSummaryView: PostSummaryView!
     let postCaptionLabel = UILabel()
-    
-    /// Custom required initializer to configure the controller from the specified post ID
-    /// - Parameter postID: The Post to view the details of
-    init(isEditing: Bool) {
-        viewModel.enableEdit(isEditing)
-        super.init(nibName: nil, bundle: nil)
-    }
-    
+        
     required init?(coder: NSCoder) {
         fatalError("init(coder:) not defined, this view controller is not created using a storyboard")
     }

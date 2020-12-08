@@ -16,7 +16,7 @@ extension UIButton {
         button.setBackgroundColor(UIColor.blue.withAlphaComponent(0.5), for: .disabled)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 12
-        button.setTitle(title.localized, for: .normal)
+        button.setTitle(title?.localized, for: .normal)
         button.clipsToBounds = true
         
         return button
@@ -27,7 +27,7 @@ extension UIButton {
         
         button.setTitleColor(.blue, for: .normal)
         button.setTitleColor(.black, for: .highlighted)
-        button.setTitle(title.localized, for: .normal)
+        button.setTitle(title?.localized, for: .normal)
         button.titleLabel?.font = UIFont.body
         
         return button
