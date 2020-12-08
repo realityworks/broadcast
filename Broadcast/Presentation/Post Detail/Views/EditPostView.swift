@@ -33,7 +33,10 @@ class EditPostView: UIView {
         verticalStackView.alignment = .leading
         verticalStackView.distribution = .equalSpacing
         
-        addSubview(verticalStackView)
+        addSubview(scrollView)
+        scrollView.edgesToSuperview()
+        scrollView.addSubview(verticalStackView)
+        verticalStackView.edgesToSuperview(excluding: [.bottom])
         
         verticalStackView.addArrangedSubview(uploadTitle)
         
