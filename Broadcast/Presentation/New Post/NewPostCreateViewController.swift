@@ -8,9 +8,12 @@
 import UIKit
 
 
-class NewPostCreateViewController : ViewController {
+class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
+    var dismissKeyboardGestureRecognizer: UIGestureRecognizer = UITapGestureRecognizer()
+    
     private let viewModel = NewPostCreateViewModel()
     
+    // MARK: UI Components
     let editPostView = EditPostView()
         
     override func viewDidLoad() {

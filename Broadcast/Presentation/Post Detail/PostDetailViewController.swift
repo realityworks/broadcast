@@ -14,10 +14,6 @@ class PostDetailViewController: ViewController {
     let verticalStackView = UIStackView()
     var postSummaryView: PostSummaryView!
     let postCaptionLabel = UILabel()
-        
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) not defined, this view controller is not created using a storyboard")
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

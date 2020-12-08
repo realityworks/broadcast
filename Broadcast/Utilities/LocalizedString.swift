@@ -39,6 +39,9 @@ enum LocalizedString : String {
     case payouts
     case totalBalance
     case lifetimeTotalVolume
+    case videoToUpload
+    case addTitle
+    case captionTitle
     
     var localized: String {
         return Bundle.main.localizedString(forKey: self.rawValue, value: nil, table: nil)
