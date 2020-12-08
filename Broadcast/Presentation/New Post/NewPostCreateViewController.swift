@@ -11,10 +11,7 @@ import UIKit
 class NewPostCreateViewController : ViewController {
     private let viewModel = NewPostCreateViewModel()
     
-    let verticalStackView = UIStackView()
-    let titleTextField = UITextField()
-    let captionTextView = UITextView()
-    let uploadButton = UIButton()
+    let editPostView = EditPostView()
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +27,8 @@ class NewPostCreateViewController : ViewController {
     }
     
     private func configureLayout() {
-        
+        view.addSubview(editPostView)
+        editPostView.edgesToSuperview()
     }
     
     private func configureBindings() {
