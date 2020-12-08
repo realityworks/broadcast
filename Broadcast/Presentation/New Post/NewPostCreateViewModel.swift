@@ -43,7 +43,7 @@ extension NewPostCreateViewModel {
 extension NewPostCreateViewModel {
     func uploadPost() {
         // Compose post and upload
-        
-        postContentUseCase.uploadPost(newPost)
+        let newPost = NewPost()
+        postContentUseCase.upload(post: newPost)
     }
 }
