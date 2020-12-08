@@ -24,7 +24,8 @@ class NewPostCreateViewModel : ViewModel {
     }
 }
 
-/// LoginViewModel dependencies component
+// MARK: - Dependencies
+
 extension NewPostCreateViewModel {
     struct Dependencies {
         
@@ -34,5 +35,15 @@ extension NewPostCreateViewModel {
         static let standard = Dependencies(
             stateController: Domain.standard.stateController,
             postContentUseCase: Domain.standard.useCases.postContentUseCase)
+    }
+}
+
+// MARK: - Functions
+
+extension NewPostCreateViewModel {
+    func uploadPost() {
+        // Compose post and upload
+        
+        postContentUseCase.uploadPost(newPost)
     }
 }

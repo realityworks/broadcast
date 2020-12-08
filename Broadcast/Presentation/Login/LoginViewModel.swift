@@ -28,7 +28,25 @@ class LoginViewModel : ViewModel {
         
         super.init(stateController: dependencies.stateController)
     }
-    
+}
+
+// MARK: - Dependencies
+
+extension LoginViewModel {
+    struct Dependencies {
+        
+        let stateController: StateController
+        let authenticationUseCase: AuthenticationUseCase
+        
+        static let standard = Dependencies(
+            stateController: Domain.standard.stateController,
+            authenticationUseCase: Domain.standard.useCases.authenticationUseCase)
+    }
+}
+
+// MARK: - Functions
+
+extension LoginViewModel {
     func login() {
         stateController.state.authenticationState = AuthenticationState.loggingIn
         authenticationUseCase.login(username: username.value ?? "",
@@ -41,18 +59,5 @@ class LoginViewModel : ViewModel {
             }
             .disposed(by: disposeBag)
 
-    }
-}
-
-/// LoginViewModel dependencies component
-extension LoginViewModel {
-    struct Dependencies {
-        
-        let stateController: StateController
-        let authenticationUseCase: AuthenticationUseCase
-        
-        static let standard = Dependencies(
-            stateController: Domain.standard.stateController,
-            authenticationUseCase: Domain.standard.useCases.authenticationUseCase)
     }
 }
