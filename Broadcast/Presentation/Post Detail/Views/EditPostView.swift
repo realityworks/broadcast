@@ -21,7 +21,7 @@ class EditPostView: UIView {
         withPlaceholder: LocalizedString.addTitle)
     
     private let captionHeading = UILabel.bodyBold(LocalizedString.captionTitle)
-    private let captionTextView = UITextView()
+    private let captionTextView = UITextView.standard()
     
     private let uploadButton = UIButton.standard(withTitle: LocalizedString.publish)
     
@@ -54,7 +54,7 @@ class EditPostView: UIView {
         
         scrollView.addSubview(uploadButton)
         
-        uploadButton.topToBottom(of: verticalStackView)
+        uploadButton.topToBottom(of: verticalStackView, offset: 20)
         uploadButton.width(150)
         uploadButton.centerXToSuperview()
         
