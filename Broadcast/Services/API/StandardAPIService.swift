@@ -11,6 +11,8 @@ import RxCocoa
 import RxAlamofire
 import Alamofire
 
+typealias APIParameters = Dictionary<String, String>
+
 class StandardAPIService {
     let baseUrl: URL
     let session: Session
@@ -22,18 +24,13 @@ class StandardAPIService {
     
     private func request(method: HTTPMethod,
                          url: URL,
-                         parameters: Parameters,
+                         parameters: APIParameters,
                          encoding: ParameterEncoding = URLEncoding.httpBody) -> Single<(HTTPURLResponse, Data)> {
 
-        
-        
-        return session.rx.request(URLAPIQueryStringRequest(method, url, parameters: <#T##Dictionary<String, String>#>)())
+        return session.rx
+            .request(urlRequest: URLAPIQueryStringRequest(method, url, parameters: parameters))
             .responseData()
             .asSingle()
-    }
-    
-    init(stateController: StateController) {
-        self.stateController = stateController
     }
 }
 
@@ -94,7 +91,11 @@ extension StandardAPIService : AuthenticationService {
 // MARK: - Instance
 
 extension StandardAPIService {
-    static let standard = {
-        StandardAPIService(stateController: Domain.standard.stateController)
-    }()
+    
+    struct Dependencies {
+        let baseUrl: URL
+        
+        static let standard = Dependencies(
+            baseUrl: Configuration.apiServiceURL)
+    }
 }
