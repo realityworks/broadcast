@@ -60,6 +60,7 @@ extension AuthenticationUseCase {
 }
 
 // MARK: - Functions
+
 extension AuthenticationUseCase {
     func login(username: String,
                password: String) -> Completable {
@@ -70,7 +71,9 @@ extension AuthenticationUseCase {
             withUsername: username,
             password: password).do(
                 afterSuccess: { [unowned self] authenticationResponse in
-                    self.credentialsService.authenticationToken
+                    self.credentialsService.updateCredentials(
+                        refreshToken: authenticationResponse.refreshToken,
+                        authenticationToken: authenticationResponse.authenticationToken)
                 })
             .observeOn(schedulers.main)
             .asCompletable()
