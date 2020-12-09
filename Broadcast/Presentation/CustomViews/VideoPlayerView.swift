@@ -21,6 +21,7 @@ class VideoPlayerView: UIView {
         backgroundColor = .black
         playerController.view.backgroundColor = .black
         playerController.showsPlaybackControls = true
+        playerController.view.contentMode = .scaleAspectFill
         addSubview(playerController.view)
     }
     
@@ -47,6 +48,7 @@ class VideoPlayerView: UIView {
     /// - Parameter withURL: Reference URL to play
     func playVideo(withURL url: URL) {
         player = AVPlayer(url: url)
+        playerController.videoGravity = .resizeAspectFill
         playerController.player = player
         player?.rate = 1 //auto play
     }

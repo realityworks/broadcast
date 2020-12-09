@@ -76,4 +76,12 @@ extension LocalAPIService {
     func updateProfile(withDisplayName displayName: String, biography: String) -> Completable {
         return .empty()
     }
+    
+    func uploadProfileImage(withData: Data) -> Completable {
+        return .empty()
+    }
+    
+    func create(newPost: NewPost) -> Completable {
+        return .empty()
+    }
 }

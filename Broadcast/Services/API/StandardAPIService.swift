@@ -37,6 +37,14 @@ extension StandardAPIService : APIService {
     func updateProfile(withDisplayName displayName: String, biography: String) -> Completable {
         return Completable.empty()
     }
+    
+    func uploadProfileImage(withData: Data) -> Completable {
+        return Completable.empty()
+    }
+    
+    func create(newPost: NewPost) -> Completable {
+        return Completable.empty()
+    }
 }
 
 extension StandardAPIService : AuthenticationService {
