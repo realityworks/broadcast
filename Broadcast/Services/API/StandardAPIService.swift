@@ -32,6 +32,16 @@ class StandardAPIService {
             .responseData()
             .asSingle()
     }
+    
+    private func authenticatedRequest(method: HTTPMethod,
+                                      url: URL,
+                                      parameters: APIParameters,
+                                      encoding: ParameterEncoding = URLEncoding.httpBody) -> Single<(HTTPURLResponse, Data)> {
+        return session.rx
+            .request(urlRequest: URLAPIQueryStringRequest(method, url, parameters: parameters))
+            .responseData()
+            .asSingle()
+    }
 }
 
 extension StandardAPIService : APIService {
