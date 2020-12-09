@@ -18,7 +18,14 @@ class LocalAuthenticationService : AuthenticationService {
     }
     
     func authenticate(withUsername username: String, password: String) -> Single<AuthenticateResponse> {
-        
+        let single = Single<AuthenticateResponse>.create { observer in
+            observer(.success(AuthenticateResponse(authenticationToken: "", refreshToken: "")))
+            return Disposables.create { }
+        }
+        return single
+    }
+    
+    func refresh(token: String) -> Single<AuthenticateResponse> {
         let single = Single<AuthenticateResponse>.create { observer in
             observer(.success(AuthenticateResponse(authenticationToken: "", refreshToken: "")))
             return Disposables.create { }
