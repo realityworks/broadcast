@@ -80,12 +80,12 @@ extension StandardAPIService : AuthenticationService {
             .appendingPathComponent("connect")
             .appendingPathComponent("account")
         
-        let payload = ["username": username,
-                       "password": password,
-                       "grant_type": "password",
-                       "scope": "offline_access",]
+        let parameters = ["username": username,
+                          "password": password,
+                          "grant_type": "password",
+                          "scope": "offline_access",]
         
-        return request(method: .post, url: url, body: payload.queryString)
+        return request(method: .post, url: url, parameters: parameters)
             .decode(type: AuthenticateResponse.self)
     }
     
