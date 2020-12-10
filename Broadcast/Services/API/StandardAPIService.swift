@@ -87,7 +87,7 @@ extension StandardAPIService : AuthenticationService {
         let parameters = ["username": username,
                           "password": password,
                           "grant_type": "password",
-                          "scope": "offline_access",]
+                          "scope": "offline_access"]
         
         return request(method: .post, url: url, parameters: parameters)
             .decode(type: AuthenticateResponse.self)

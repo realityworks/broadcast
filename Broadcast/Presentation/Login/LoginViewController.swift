@@ -111,6 +111,11 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
     
     /// Configure the bindings between the view model and
     private func configureBindings() {
+        if Configuration.debugUIEnabled {
+            usernameTextField.text = "test"
+            passwordTextField.text = "test"
+        }
+        
         usernameTextField.rx.controlEvent([.editingDidEndOnExit])
             .subscribe(onNext: { [unowned self] _ in
                 self.passwordTextField.becomeFirstResponder()

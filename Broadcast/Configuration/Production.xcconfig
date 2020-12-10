@@ -9,13 +9,7 @@
 // https://help.apple.com/xcode/#/dev745c5c974
 
 // Service URL
-SERVICE_ROOT_URL = https:/$()/boom-prod-webapp-api.azurewebsites.net/v1/
-
-// Identity URL
-IDENTITY_ROOT_URL = https:/$()/boom-prod-webapp-identity.azurewebsites.net/
-
-// Weblinks URL
-WEBLINKS_ROOT_URL = https:/$()/boom-prod-webapp-publicwebsite.azurewebsites.net/
+SERVICE_ROOT_URL = https:/$()/api.boomday.dev/
 
 // Notifications Connection String
 NOTIFICATIONS_CONNECTION_STRING = Endpoint=sb:/$()/boom-prod-notifications.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=Ob1SCxP74lKRQtFdgvYylM3FXqWFkj8l8H1MN9WtUQ8=

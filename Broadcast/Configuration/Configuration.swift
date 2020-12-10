@@ -14,6 +14,7 @@ extension Configuration {
     static var versionString: String { castedValue(for: .versionString, as: String.self)! }
     static var buildString: String { castedValue(for: .buildString, as: String.self)! }
     static var apiServiceURL: URL { castedURL(for: .apiServiceURL)! }
+    static var debugUIEnabled: Bool { castedValue(for: .debugUI, as: Bool.self)! }
 }
 
 // MARK: - Private
@@ -22,6 +23,7 @@ private enum ConfigKey: String, CaseIterable {
     case versionString = "CFBundleShortVersionString"
     case buildString = "CFBundleVersion"
     case apiServiceURL = "SERVICE_ROOT_URL"
+    case debugUIEnabled = "DEBUG_UI_ENABLED"
 }
 
 class Configuration {
