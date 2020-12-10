@@ -53,7 +53,7 @@ extension AuthenticationUseCase {
         let schedulers: Schedulers
         
         static let standard = Dependencies(
-            authenticationService: Services.local.authenticationService,
+            authenticationService: Services.standard.authenticationService,
             credentialsService: Services.local.credentialsService,
             schedulers: Schedulers.standard)
     }
