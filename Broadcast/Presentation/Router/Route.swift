@@ -42,7 +42,7 @@ extension Route {
         case .postDetail:
             return PostDetailViewController()
         case .newPostGuide:
-            let newPostGuideViewController = NewPostCreateViewController()//NewPostGuideViewController()
+            let newPostGuideViewController = NewPostGuideViewController()
             let navigationController = UINavigationController(rootViewController: newPostGuideViewController)
             return navigationController
         case .newPostDetail:
