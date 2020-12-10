@@ -44,7 +44,7 @@ class Configuration {
 
     private static func castedValue<T>(for key: ConfigKey, as _: T.Type) -> T? {
         do {
-            guard let anyValue = envSpecificInfo[key.rawValue] ?? appInfo[key.rawValue] else {
+            guard let anyValue = appInfo[key.rawValue] else {
                 throw Error.invalidKey
             }
             guard let castedValue = anyValue as? T else {
@@ -59,7 +59,7 @@ class Configuration {
 
     private static func castedURL(for key: ConfigKey) -> URL? {
         do {
-            guard let anyValue = envSpecificInfo[key.rawValue] ?? appInfo[key.rawValue] else {
+            guard let anyValue = appInfo[key.rawValue] else {
                 throw Error.invalidKey
             }
             guard let castedValue = anyValue as? String, let url = URL(string: castedValue) else {
@@ -84,16 +84,5 @@ extension Configuration {
 
     private static var appInfo: [String: Any] {
         return Bundle.main.infoDictionary!
-    }
-
-    private static var envSpecificInfo: [String: Any] {
-        guard
-            let path = Bundle.main.path(forResource: "Configuration", ofType: "plist"),
-            let dictionary = NSDictionary(contentsOfFile: path) as? [String: Any]
-        else {
-            Logger.error(topic: .other, message: "Failed to retrieve environment specific plist")
-            return [:]
-        }
-        return dictionary
     }
 }
