@@ -8,6 +8,9 @@
 import Foundation
 
 enum BoomdayError : Error {
-    case unknownError
+    case unknown
     case unsupported // Currently not implemented
+    case decoding(error: DecodingError)
+    case apiNotFound
+    case apiStatusCode(code: Int)
 }
