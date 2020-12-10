@@ -11,7 +11,7 @@ import KeychainAccess
 class StandardCredentialsService : CredentialsService {
     
     private let keychain = Keychain(service: Bundle.main.bundleIdentifier!)
-    private let authenticationTokenKey = "authenticationToken"
+    private let accessTokenKey = "accessToken"
     private let refreshTokenKey = "refreshToken"
     
     func clearCredentials() {
@@ -19,9 +19,9 @@ class StandardCredentialsService : CredentialsService {
     }
     
     func updateCredentials(refreshToken: String,
-                           authenticationToken: String) {
+                           accessToken: String) {
         self.refreshToken = refreshToken
-        self.authenticationToken = authenticationToken
+        self.accessToken = accessToken
     }
     
     var refreshToken: String? {
@@ -34,13 +34,13 @@ class StandardCredentialsService : CredentialsService {
         }
     }
     
-    var authenticationToken: String? {
+    var accessToken: String? {
         get {
-            return keychain[authenticationTokenKey]
+            return keychain[accessTokenKey]
         }
         
         set {
-            keychain[authenticationTokenKey] = newValue
+            keychain[accessTokenKey] = newValue
         }
     }
 }

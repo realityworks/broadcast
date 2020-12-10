@@ -12,5 +12,5 @@ protocol CredentialsService {
     func updateCredentials(refreshToken: String,
                            authenticationToken: String)
     var refreshToken: String? { get set }
-    var authenticationToken: String? { get set }
+    var accessToken: String? { get set }
 }

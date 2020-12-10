@@ -53,7 +53,7 @@ extension AuthenticationUseCase {
         let schedulers: Schedulers
         
         static let standard = Dependencies(
-            authenticationService: Services.local.authenticationService,
+            authenticationService: Services.standard.authenticationService,
             credentialsService: Services.local.credentialsService,
             schedulers: Schedulers.standard)
     }
@@ -72,8 +72,8 @@ extension AuthenticationUseCase {
             password: password).do(
                 afterSuccess: { [unowned self] authenticationResponse in
                     self.credentialsService.updateCredentials(
-                        refreshToken: authenticationResponse.refreshToken,
-                        authenticationToken: authenticationResponse.authenticationToken)
+                        accessToken: authenticationResponse.accessToken,
+                        refreshToken: authenticationResponse.refreshToken)
                 })
             .observeOn(schedulers.main)
             .asCompletable()
