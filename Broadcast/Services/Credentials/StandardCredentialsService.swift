@@ -18,10 +18,10 @@ class StandardCredentialsService : CredentialsService {
         #warning("TODO")
     }
     
-    func updateCredentials(refreshToken: String,
-                           accessToken: String) {
-        self.refreshToken = refreshToken
+    func updateCredentials(accessToken: String,
+                           refreshToken: String) {
         self.accessToken = accessToken
+        self.refreshToken = refreshToken
     }
     
     var refreshToken: String? {

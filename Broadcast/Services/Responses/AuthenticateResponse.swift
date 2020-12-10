@@ -9,19 +9,16 @@ import Foundation
 
 struct AuthenticateResponse : Decodable {
     let accessToken: String
-    let code: Int
-    let count: Int
-    let deviceCode: String
-    let error: String
-    let errorDescription: String
-    let errorUri: String
     let expiresIn: Int
-    let idToken: String
     let refreshToken: String
-    let scope: String
-    let state: String
     let tokenType: String
-    let userCode: String
+    
+    enum CodingKeys: String, CodingKey {
+        case accessToken = "access_token"
+        case expiresIn = "expires_in"
+        case refreshToken = "refresh_token"
+        case tokenType = "token_type"
+    }
     
     /// Initializer for just an access token and refresh token
     /// - Parameters:
@@ -30,18 +27,7 @@ struct AuthenticateResponse : Decodable {
     init(accessToken: String, refreshToken: String) {
         self.accessToken = accessToken
         self.refreshToken = refreshToken
-
-        self.code = 0
-        self.count = 0
-        self.deviceCode = ""
-        self.error = ""
-        self.errorDescription = ""
-        self.errorUri = ""
         self.expiresIn = 0
-        self.idToken = ""
-        self.scope = ""
-        self.state = ""
         self.tokenType = ""
-        self.userCode = ""
     }
 }
