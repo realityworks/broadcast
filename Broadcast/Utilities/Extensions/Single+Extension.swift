@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 
 extension Single where Element == (HTTPURLResponse, Data), Trait == SingleTrait {
-    func decode<T>(type _: T.Type) ->Single<T> where T: Decodable {
+    func decode<T>(type _: T.Type) -> Single<T> where T: Decodable {
         return flatMap { response, data -> Single<T> in
             let decoder = JSONDecoder()
             do {

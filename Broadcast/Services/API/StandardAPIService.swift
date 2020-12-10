@@ -16,9 +16,11 @@ typealias APIParameters = Dictionary<String, String>
 class StandardAPIService {
     let baseUrl: URL
     let session: Session
+    let schedulers: Schedulers
     
     init(dependencies: Dependencies = .standard) {
         self.baseUrl = dependencies.baseUrl
+        self.schedulers = dependencies.schedulers
         self.session = Session.default
     }
     
@@ -29,6 +31,7 @@ class StandardAPIService {
 
         return session.rx
             .request(urlRequest: URLAPIQueryStringRequest(method, url, parameters: parameters))
+            .observeOn(Schedulers.standard.main)
             .responseData()
             .asSingle()
     }
@@ -39,6 +42,7 @@ class StandardAPIService {
                                       encoding: ParameterEncoding = URLEncoding.httpBody) -> Single<(HTTPURLResponse, Data)> {
         return session.rx
             .request(urlRequest: URLAPIQueryStringRequest(method, url, parameters: parameters))
+            .observeOn(Schedulers.standard.main)
             .responseData()
             .asSingle()
     }
@@ -102,10 +106,17 @@ extension StandardAPIService : AuthenticationService {
 
 extension StandardAPIService {
     
+    static let standard = {
+        StandardAPIService()
+    }()
+    
     struct Dependencies {
+        
+        let schedulers: Schedulers
         let baseUrl: URL
         
         static let standard = Dependencies(
+            schedulers: Schedulers.standard,
             baseUrl: Configuration.apiServiceURL)
     }
 }
