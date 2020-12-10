@@ -111,15 +111,15 @@ class ProfileStripeAccountViewController: ViewController {
                 SectionModel(model: LocalizedString.id, items: [
                                 ProfileStripeAccountViewModel.Row.identifier(text: identifier)]),
                 SectionModel(model: LocalizedString.pricing, items: [
-                                ProfileStripeAccountViewModel.Row.pricing(text: name)]),
+                                ProfileStripeAccountViewModel.Row.pricing(text: pricing)]),
                 SectionModel(model: LocalizedString.payments, items: [
-                                ProfileStripeAccountViewModel.Row.payments(text: name)]),
+                                ProfileStripeAccountViewModel.Row.payments(text: payments)]),
                 SectionModel(model: LocalizedString.payouts, items: [
-                                ProfileStripeAccountViewModel.Row.payouts(text: name)]),
+                                ProfileStripeAccountViewModel.Row.payouts(text: payouts)]),
                 SectionModel(model: LocalizedString.totalBalance, items: [
-                                ProfileStripeAccountViewModel.Row.totalBalance(text: name)]),
+                                ProfileStripeAccountViewModel.Row.totalBalance(text: totalBalance)]),
                 SectionModel(model: LocalizedString.lifetimeTotalVolume, items: [
-                                ProfileStripeAccountViewModel.Row.lifetimeTotalVolume(text: name)]),
+                                ProfileStripeAccountViewModel.Row.lifetimeTotalVolume(text: lifetimeTotalVolume)]),
             ]
         }
                 
