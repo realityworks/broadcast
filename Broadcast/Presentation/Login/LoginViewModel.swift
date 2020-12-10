@@ -53,8 +53,9 @@ extension LoginViewModel {
                                     password: password.value ?? "")
             .subscribe {
                 self.stateController.state.authenticationState = AuthenticationState.loggedIn
-            } onError: { _ in
+            } onError: { error in
                 // TODO (Loading indicator update)
+                Logger.log(level: .warning, topic: .debug, message: "Error during login: \(error)")
                 self.stateController.state.authenticationState = AuthenticationState.loggedOut
             }
             .disposed(by: disposeBag)

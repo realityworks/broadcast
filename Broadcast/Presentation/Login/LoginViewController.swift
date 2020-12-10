@@ -62,6 +62,13 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         bottomStackView.axis = .horizontal
         bottomStackView.alignment = .center
         bottomStackView.distribution = .fillEqually
+        
+        if Configuration.debugUIEnabled {
+            usernameTextField.text = "boomday@sodadigital.com.au"
+            passwordTextField.text = "Pass123$"
+            viewModel.username.accept("boomday@sodadigital.com.au")
+            viewModel.password.accept("Pass123$")
+        }
     }
     
     private func configureLayout() {
@@ -111,10 +118,6 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
     
     /// Configure the bindings between the view model and
     private func configureBindings() {
-        if Configuration.debugUIEnabled {
-            usernameTextField.text = "test"
-            passwordTextField.text = "test"
-        }
         
         usernameTextField.rx.controlEvent([.editingDidEndOnExit])
             .subscribe(onNext: { [unowned self] _ in

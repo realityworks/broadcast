@@ -58,6 +58,7 @@ class Router {
         /// Listen to when a new route is pushed, the router here will force the selected route on
         /// to the root view controller. This handles the top level routing
         selectedRouteSubject
+            .distinctUntilChanged()
             .subscribe(onNext: { route in
                 guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
                 appDelegate.window?.rootViewController = route.viewControllerInstance()

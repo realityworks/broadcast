@@ -14,7 +14,7 @@ extension Configuration {
     static var versionString: String { castedValue(for: .versionString, as: String.self)! }
     static var buildString: String { castedValue(for: .buildString, as: String.self)! }
     static var apiServiceURL: URL { castedURL(for: .apiServiceURL)! }
-    static var debugUIEnabled: Bool { castedValue(for: .debugUI, as: Bool.self)! }
+    static var debugUIEnabled: Bool { Bool(castedValue(for: .debugUIEnabled, as: String.self)!)! }
 }
 
 // MARK: - Private

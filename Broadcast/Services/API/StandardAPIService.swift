@@ -18,6 +18,8 @@ class StandardAPIService {
     let session: Session
     let schedulers: Schedulers
     
+    private let validStatusCodes = [Int](200 ..< 300) + [400, 404, 409, 503, 504]
+    
     init(dependencies: Dependencies = .standard) {
         self.baseUrl = dependencies.baseUrl
         self.schedulers = dependencies.schedulers
@@ -31,7 +33,7 @@ class StandardAPIService {
 
         return session.rx
             .request(urlRequest: URLAPIQueryStringRequest(method, url, parameters: parameters))
-            .observeOn(Schedulers.standard.main)
+            .validate(statusCode: validStatusCodes)
             .responseData()
             .asSingle()
     }
@@ -42,7 +44,6 @@ class StandardAPIService {
                                       encoding: ParameterEncoding = URLEncoding.httpBody) -> Single<(HTTPURLResponse, Data)> {
         return session.rx
             .request(urlRequest: URLAPIQueryStringRequest(method, url, parameters: parameters))
-            .observeOn(Schedulers.standard.main)
             .responseData()
             .asSingle()
     }
@@ -82,7 +83,7 @@ extension StandardAPIService : AuthenticationService {
     func authenticate(withUsername username: String, password: String) -> Single<AuthenticateResponse> {
         let url = baseUrl
             .appendingPathComponent("connect")
-            .appendingPathComponent("account")
+            .appendingPathComponent("token")
         
         let parameters = ["username": username,
                           "password": password,

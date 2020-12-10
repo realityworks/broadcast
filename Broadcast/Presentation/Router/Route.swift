@@ -7,7 +7,7 @@
 
 import UIKit
 
-indirect enum Route {
+indirect enum Route : Equatable {
     case none
     case login
     case main(child: Route)
