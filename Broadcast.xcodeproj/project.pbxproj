@@ -40,7 +40,6 @@
 		1D3B2A1C2564D411001874FD /* CredentialsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3B2A1B2564D411001874FD /* CredentialsService.swift */; };
 		1D3B2A212564D76C001874FD /* StandardCredentialsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3B2A202564D76C001874FD /* StandardCredentialsService.swift */; };
 		1D3B2A262564E6F1001874FD /* UploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3B2A252564E6F1001874FD /* UploadService.swift */; };
-		1D3B2A2C2564E7A5001874FD /* LocalUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3B2A2B2564E7A5001874FD /* LocalUploadService.swift */; };
 		1D3B2A342564E7AF001874FD /* StandardUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3B2A332564E7AF001874FD /* StandardUploadService.swift */; };
 		1D3B2A392564F0D5001874FD /* PersistanceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3B2A382564F0D4001874FD /* PersistanceService.swift */; };
 		1D3B2A3E2564F21E001874FD /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3B2A3D2564F21E001874FD /* APIService.swift */; };
@@ -111,7 +110,7 @@
 		1D9256E0257F5D5100E988B2 /* EditPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9256DF257F5D5100E988B2 /* EditPostView.swift */; };
 		1D9256ED257F635000E988B2 /* NewPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9256EC257F635000E988B2 /* NewPost.swift */; };
 		1D9256F1257FBB0700E988B2 /* UITextView+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9256F0257FBB0600E988B2 /* UITextView+Styling.swift */; };
-		1D93143E2577DBDF001C85C1 /* MediaUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D93143D2577DBDF001C85C1 /* MediaUrl.swift */; };
+		1D93143E2577DBDF001C85C1 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D93143D2577DBDF001C85C1 /* Media.swift */; };
 		1D9E1938257897AE001960AF /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9E1937257897AE001960AF /* ProfileTableViewCell.swift */; };
 		1DD1FE05256CA55F00C598CE /* UITextField+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD1FE04256CA55F00C598CE /* UITextField+Styling.swift */; };
 		1DD1FE17256CE2E000C598CE /* SwiftRichString in Frameworks */ = {isa = PBXBuildFile; productRef = 1DD1FE16256CE2E000C598CE /* SwiftRichString */; };
@@ -181,7 +180,6 @@
 		1D3B2A1B2564D411001874FD /* CredentialsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialsService.swift; sourceTree = "<group>"; };
 		1D3B2A202564D76C001874FD /* StandardCredentialsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardCredentialsService.swift; sourceTree = "<group>"; };
 		1D3B2A252564E6F1001874FD /* UploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadService.swift; sourceTree = "<group>"; };
-		1D3B2A2B2564E7A5001874FD /* LocalUploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUploadService.swift; sourceTree = "<group>"; };
 		1D3B2A332564E7AF001874FD /* StandardUploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardUploadService.swift; sourceTree = "<group>"; };
 		1D3B2A382564F0D4001874FD /* PersistanceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceService.swift; sourceTree = "<group>"; };
 		1D3B2A3D2564F21E001874FD /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
@@ -244,7 +242,7 @@
 		1D9256DF257F5D5100E988B2 /* EditPostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPostView.swift; sourceTree = "<group>"; };
 		1D9256EC257F635000E988B2 /* NewPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPost.swift; sourceTree = "<group>"; };
 		1D9256F0257FBB0600E988B2 /* UITextView+Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Styling.swift"; sourceTree = "<group>"; };
-		1D93143D2577DBDF001C85C1 /* MediaUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaUrl.swift; sourceTree = "<group>"; };
+		1D93143D2577DBDF001C85C1 /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		1D9314442577E991001C85C1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		1D9E1937257897AE001960AF /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		1DD1FE04256CA55F00C598CE /* UITextField+Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Styling.swift"; sourceTree = "<group>"; };
@@ -374,7 +372,6 @@
 			isa = PBXGroup;
 			children = (
 				1D3B2A252564E6F1001874FD /* UploadService.swift */,
-				1D3B2A2B2564E7A5001874FD /* LocalUploadService.swift */,
 				1D3B2A332564E7AF001874FD /* StandardUploadService.swift */,
 			);
 			path = Uploader;
@@ -520,7 +517,7 @@
 				1D916D8C256404ED0059E549 /* Profile.swift */,
 				1D2A03FD25656C03008CE2D4 /* AppState.swift */,
 				1D2A04082565761B008CE2D4 /* ConnectionState.swift */,
-				1D93143D2577DBDF001C85C1 /* MediaUrl.swift */,
+				1D93143D2577DBDF001C85C1 /* Media.swift */,
 				1D9256EC257F635000E988B2 /* NewPost.swift */,
 			);
 			path = State;
@@ -861,7 +858,6 @@
 				1D3F72262571634E00DE7F05 /* RxTableViewSectionedReloadDataSource+Extensions.swift in Sources */,
 				1D91A0CC256C1B8E0043A943 /* UIStackView+Extensions.swift in Sources */,
 				1D3B2A3E2564F21E001874FD /* APIService.swift in Sources */,
-				1D3B2A2C2564E7A5001874FD /* LocalUploadService.swift in Sources */,
 				1D7127FB257883A80065B8EA /* ProfileDetailViewController.swift in Sources */,
 				1DE3DA3E2575F49500A7A1F7 /* VideoPlayerView.swift in Sources */,
 				1D3F71CA2570082800DE7F05 /* PostStatsView.swift in Sources */,
@@ -912,7 +908,7 @@
 				1D916D592562C2920059E549 /* Schedulers.swift in Sources */,
 				1D14AD73257A16AC00CB2C82 /* ProfileInfoTableViewCell.swift in Sources */,
 				1D2A042A256583E8008CE2D4 /* UIViewController+Routing.swift in Sources */,
-				1D93143E2577DBDF001C85C1 /* MediaUrl.swift in Sources */,
+				1D93143E2577DBDF001C85C1 /* Media.swift in Sources */,
 				1D3B2A002564CF7F001874FD /* AuthenticationService.swift in Sources */,
 				1D87DF84256839C9000652D6 /* PostDetailViewController.swift in Sources */,
 				1D87DF752568387B000652D6 /* NewPostGuideViewModel.swift in Sources */,

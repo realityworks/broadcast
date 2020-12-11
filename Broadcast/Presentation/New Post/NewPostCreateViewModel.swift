@@ -14,8 +14,8 @@ class NewPostCreateViewModel : ViewModel {
     
     private let postContentUseCase: PostContentUseCase
     
-    let title = BehaviorRelay<String?>(value: nil)
-    let caption = BehaviorRelay<String?>(value: nil)
+    let title = BehaviorRelay<String>(value: "")
+    let caption = BehaviorRelay<String>(value: "")
     
     init(dependencies: Dependencies = .standard) {
         self.postContentUseCase = dependencies.postContentUseCase
@@ -43,7 +43,7 @@ extension NewPostCreateViewModel {
 extension NewPostCreateViewModel {
     func uploadPost() {
         // Compose post and upload
-        let newPost = NewPost()
-        postContentUseCase.upload(post: newPost)
+        let newPost = NewPost(title: title.value, caption: caption.value)
+        postContentUseCase.upload(content: newPost)
     }
 }

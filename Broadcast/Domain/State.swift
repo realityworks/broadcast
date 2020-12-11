@@ -17,5 +17,5 @@ struct State : Equatable {
     var profile: Profile?
     
     var selectedPostId: PostID?
-    var selectedMedia: MediaUrl?
+    var selectedMedia: Media?
 }

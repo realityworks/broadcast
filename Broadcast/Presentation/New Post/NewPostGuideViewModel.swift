@@ -18,8 +18,8 @@ class NewPostGuideViewModel : ViewModel {
         
     }
     
-    func mediaSelected(_ mediaUrl: MediaUrl) {
-        stateController.state.selectedMedia = mediaUrl
+    func mediaSelected(_ media: Media) {
+        stateController.state.selectedMedia = media
         mediaSelected.accept(())
     }
 }

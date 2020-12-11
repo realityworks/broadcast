@@ -68,6 +68,7 @@ extension ProfileUseCase {
     }
     
     func uploadTrailer(withUrl url: URL) {
-        uploadService.upload(content: .video(fileUrl: url))
+        #warning("TODO")
+        //uploadService.upload(media: .video(fileUrl: url))
     }
 }

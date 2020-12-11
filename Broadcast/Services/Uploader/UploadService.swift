@@ -6,12 +6,11 @@
 //
 
 import Foundation
-
-enum Media {
-    case image(fileUrl: URL)
-    case video(fileUrl: URL)
-}
+import RxSwift
+import RxCocoa
+import RxAlamofire
 
 protocol UploadService {
-    func upload(media: Media, content: NewPost)
+    
+    func upload(media: Media, content: NewPost) -> Observable<(Data?, RxProgress)>
 }

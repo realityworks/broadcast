@@ -52,12 +52,13 @@ extension PostContentUseCase {
         stateController.state.selectedPostId = postId
     }
     
-    func selectMedia(with mediaUrl: MediaUrl) {
-        stateController.state.selectedMedia = mediaUrl
+    func selectMedia(with media: Media) {
+        stateController.state.selectedMedia = media
     }
     
     func upload(content: NewPost) {
-        uploadService.upload(media: stateController.state.selectedMedia,
+        guard let selectedMedia = stateController.state.selectedMedia else { return }
+        uploadService.upload(media: selectedMedia,
                              content: content)
     }
     
