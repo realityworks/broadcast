@@ -21,6 +21,7 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
     private let contentStackView = UIStackView()
     private let bottomStackView = UIStackView()
     private let logoImageView = UIImageView()
+    private let activityIndicator = UIActivityIndicatorView()
     
     private let usernameTextField = UITextField.standard(
         withPlaceholder: LocalizedString.usernamePlaceholder)
@@ -59,6 +60,8 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         
         applyHereTextView.isScrollEnabled = false
         
+        activityIndicator.hidesWhenStopped = true
+        
         bottomStackView.axis = .horizontal
         bottomStackView.alignment = .center
         bottomStackView.distribution = .fillEqually
@@ -77,6 +80,7 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         /// Setup scroll view
         scrollView.edgesToSuperview(usingSafeArea: true)
         scrollView.addSubview(contentStackView)
+        scrollView.addSubview(activityIndicator)
         
         /// Setup content stack view
         contentStackView.topToSuperview()
@@ -90,6 +94,9 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         contentStackView.addArrangedSubview(errorDisplayView)
         contentStackView.addArrangedSubview(loginButton)
         contentStackView.addArrangedSubview(applyHereTextView)
+        
+        activityIndicator.centerY(to: loginButton)
+        activityIndicator.leftToRight(of: loginButton)
         
         /// Configure insets of arranged sub views
         let textFields = [usernameTextField, passwordTextField]
