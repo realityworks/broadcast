@@ -8,8 +8,6 @@
 import Foundation
 
 class StandardUploadService : UploadService {
-    private (set) var stateController: StateController
-    
     func upload(content: UploadableContent) {
         // TODO
     }
@@ -17,4 +15,8 @@ class StandardUploadService : UploadService {
     init(stateController: StateController) {
         self.stateController = stateController
     }
+}
+
+extension StandardUploadService {
+    
 }

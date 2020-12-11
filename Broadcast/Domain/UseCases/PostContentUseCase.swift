@@ -56,8 +56,9 @@ extension PostContentUseCase {
         stateController.state.selectedMedia = mediaUrl
     }
     
-    func upload(post: NewPost) {
-        #warning("TODO")
+    func upload(content: NewPost) {
+        uploadService.upload(media: stateController.state.selectedMedia,
+                             content: content)
     }
     
     func retrieveMyPosts() {

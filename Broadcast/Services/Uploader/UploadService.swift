@@ -7,12 +7,11 @@
 
 import Foundation
 
-enum UploadableContent {
+enum Media {
     case image(fileUrl: URL)
     case video(fileUrl: URL)
 }
 
 protocol UploadService {
-    var stateController: StateController { get }
-    func upload(content: UploadableContent)
+    func upload(media: Media, content: NewPost)
 }

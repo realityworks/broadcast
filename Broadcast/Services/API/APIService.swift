@@ -14,5 +14,4 @@ protocol APIService {
     func loadProfile() -> Single<LoadProfileResponse>
     func updateProfile(withDisplayName displayName: String, biography: String) -> Completable
     func uploadProfileImage(withData: Data) -> Completable
-    func create(newPost: NewPost) -> Completable
 }

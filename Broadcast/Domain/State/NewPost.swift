@@ -8,5 +8,6 @@
 import Foundation
 
 struct NewPost : Codable {
-    
+    let title: String
+    let caption: String
 }
