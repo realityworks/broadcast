@@ -14,8 +14,11 @@ class LoginViewModel : ViewModel {
     
     let username = BehaviorRelay<String?>(value: nil)
     let password = BehaviorRelay<String?>(value: nil)
-    let isLoadingActivityVisible = BehaviorRelay<Bool>(value: false)
+    
+    private let isLoadingSubject = BehaviorRelay<Bool>(value: false)
+    
     let isLoginEnabled: Observable<Bool>
+    let isLoading: Observable<Bool>
     
     init(dependencies: Dependencies = .standard) {
         self.authenticationUseCase = dependencies.authenticationUseCase
@@ -25,6 +28,8 @@ class LoginViewModel : ViewModel {
                   let password = password else { return false }
             return !username.isEmpty && !password.isEmpty
         }
+        
+        isLoading = isLoadingSubject.asObservable()
         
         super.init(stateController: dependencies.stateController)
     }
@@ -49,6 +54,8 @@ extension LoginViewModel {
 extension LoginViewModel {
     func login() {
         stateController.state.authenticationState = AuthenticationState.loggingIn
+        isLoadingSubject.accept(true)
+        
         authenticationUseCase.login(username: username.value ?? "",
                                     password: password.value ?? "")
             .subscribe {
@@ -57,6 +64,7 @@ extension LoginViewModel {
                 // TODO (Loading indicator update)
                 Logger.log(level: .warning, topic: .debug, message: "Error during login: \(error)")
                 self.stateController.state.authenticationState = AuthenticationState.loggedOut
+                self.isLoadingSubject.accept(false)
             }
             .disposed(by: disposeBag)
 

@@ -159,6 +159,15 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
             .map { [unowned self] in self.passwordTextField.text }
             .bind(to: viewModel.password)
             .disposed(by: disposeBag)
+        
+        viewModel.isLoading
+            .bind(to: activityIndicator.rx.isAnimating)
+            .disposed(by: disposeBag)
+        
+        viewModel.isLoading
+            .map { !$0 }
+            .bind(to: loginButton.rx.isEnabled)
+            .disposed(by: disposeBag)
     }
     
     /// Style the user interface and components
