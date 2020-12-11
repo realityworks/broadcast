@@ -142,8 +142,7 @@ class ProfileViewController: ViewController {
                     #warning("TODO - Setup sharing")
                     break
                 case .logout:
-                    #warning("TODO - Setup authentication and logout")
-                    break
+                    self?.viewModel.logout()
                 }
             })
             .disposed(by: disposeBag)
