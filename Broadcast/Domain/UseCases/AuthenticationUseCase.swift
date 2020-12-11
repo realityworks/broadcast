@@ -74,8 +74,16 @@ extension AuthenticationUseCase {
                     self.credentialsService.updateCredentials(
                         accessToken: authenticationResponse.accessToken,
                         refreshToken: authenticationResponse.refreshToken)
+                    self.stateController.state.authenticationState = AuthenticationState.loggedIn
+                }, afterError: { error in
+                    self.stateController.state.authenticationState = AuthenticationState.loggedOut
                 })
             .observeOn(schedulers.main)
             .asCompletable()
+    }
+    
+    func logout() {
+        credentialsService.clearCredentials()
+        stateController.state.authenticationState = AuthenticationState.loggedOut
     }
 }
