@@ -51,15 +51,12 @@ class Router {
     /// the app state that will alter the current state of view controllers
     func setup() {
         authenticationStateObservable
-            .skip(1)
             .subscribe(onNext: { authenticationState in
                 self.authenticationStateChanged(authenticationState)
             })
             .disposed(by: disposeBag)
         
-        let startingRoute: Route = authenticationUseCase.isLoggedIn ? .main(child: .myPosts) : .login
-        
-        selectedRouteSubject.accept(startingRoute)
+        // Initialize authentication state
         
         /// Listen to when a new route is pushed, the router here will force the selected route on
         /// to the root view controller. This handles the top level routing
@@ -70,6 +67,8 @@ class Router {
                 appDelegate.window?.rootViewController = route.viewControllerInstance()
             })
             .disposed(by: disposeBag)
+        
+        stateController.state.authenticationState = authenticationUseCase.isLoggedIn ? .loggedIn : .loggedOut
     }
     
     private func authenticationStateChanged(
