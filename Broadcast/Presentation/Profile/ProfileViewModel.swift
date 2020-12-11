@@ -19,15 +19,21 @@ class ProfileViewModel : ViewModel {
         case logout
     }
     
-    let profileUseCase: ProfileUseCase
+    private let profileUseCase: ProfileUseCase
+    private let authenticationUseCase: AuthenticationUseCase
     
     init(dependencies: Dependencies = .standard) {
         self.profileUseCase = dependencies.profileUseCase
+        self.authenticationUseCase = dependencies.authenticationUseCase
         super.init(stateController: dependencies.stateController)
     }
     
     func loadProfile() {
         profileUseCase.loadProfile()
+    }
+    
+    func logout() {
+        authenticationUseCase.logout()
     }
 }
 
@@ -38,9 +44,11 @@ extension ProfileViewModel {
         
         let stateController: StateController
         let profileUseCase: ProfileUseCase
+        let authenticationUseCase: AuthenticationUseCase
         
         static let standard = Dependencies(
             stateController: Domain.standard.stateController,
-            profileUseCase: Domain.standard.useCases.profileUseCase)
+            profileUseCase: Domain.standard.useCases.profileUseCase,
+            authenticationUseCase: Domain.standard.useCases.authenticationUseCase)
     }
 }
