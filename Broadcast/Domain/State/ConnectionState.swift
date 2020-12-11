@@ -7,6 +7,8 @@
 
 import Foundation
 
+/// Internet/Network Connection State.
+
 enum ConnectionState {
     case connected
     case disconnected

@@ -13,4 +13,5 @@ protocol CredentialsService {
                            refreshToken: String)
     var refreshToken: String? { get set }
     var accessToken: String? { get set }
+    func hasCredentials() -> Bool
 }

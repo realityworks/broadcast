@@ -86,4 +86,8 @@ extension AuthenticationUseCase {
         credentialsService.clearCredentials()
         stateController.state.authenticationState = AuthenticationState.loggedOut
     }
+    
+    var isLoggedIn: Bool {
+        credentialsService.accessToken != nil && credentialsService.refreshToken != nil
+    }
 }

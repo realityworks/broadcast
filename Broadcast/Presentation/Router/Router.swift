@@ -28,16 +28,18 @@ class Router {
 
     // MARK: Private properties
     private let stateController: StateController
+    private let authenticationUseCase: AuthenticationUseCase
     private let errorObservable: Observable<BoomdayError>
     private let connectionStateObservable: Observable<ConnectionState>
     private let authenticationStateObservable: Observable<AuthenticationState>
     private let schedulers: Schedulers
     
-    private let selectedRouteSubject: BehaviorRelay<Route> = BehaviorRelay(value: .login)
+    private let selectedRouteSubject: BehaviorRelay<Route> = BehaviorRelay(value: .none)
     private let disposeBag = DisposeBag()
     
     init(dependencies: Dependencies = .standard) {
         self.stateController = dependencies.stateController
+        self.authenticationUseCase = dependencies.authenticationUseCase
         self.selectedRouteObservable = selectedRouteSubject.asObservable()
         self.errorObservable = dependencies.errorObservable
         self.connectionStateObservable = dependencies.connectionStateObservable
@@ -54,6 +56,10 @@ class Router {
                 self.authenticationStateChanged(authenticationState)
             })
             .disposed(by: disposeBag)
+        
+        let startingRoute: Route = authenticationUseCase.isLoggedIn ? .main(child: .myPosts) : .login
+        
+        selectedRouteSubject.accept(startingRoute)
         
         /// Listen to when a new route is pushed, the router here will force the selected route on
         /// to the root view controller. This handles the top level routing
@@ -95,6 +101,7 @@ extension Router {
 extension Router {
     struct Dependencies {
         let stateController: StateController
+        let authenticationUseCase: AuthenticationUseCase
         let errorObservable: Observable<BoomdayError>
         let connectionStateObservable: Observable<ConnectionState>
         let authenticationStateObservable: Observable<AuthenticationState>
@@ -102,6 +109,7 @@ extension Router {
         
         static var standard = Dependencies(
             stateController: Domain.standard.stateController,
+            authenticationUseCase: Domain.standard.useCases.authenticationUseCase,
             errorObservable: Domain.standard.stateController.errorObservable(),
             connectionStateObservable: Domain.standard.stateController.stateObservable(of: \.connectionState),
             authenticationStateObservable: Domain.standard.stateController.stateObservable(of: \.authenticationState),

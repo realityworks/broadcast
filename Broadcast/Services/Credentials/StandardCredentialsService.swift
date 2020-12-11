@@ -14,16 +14,6 @@ class StandardCredentialsService : CredentialsService {
     private let accessTokenKey = "accessToken"
     private let refreshTokenKey = "refreshToken"
     
-    func clearCredentials() {
-        #warning("TODO")
-    }
-    
-    func updateCredentials(accessToken: String,
-                           refreshToken: String) {
-        self.accessToken = accessToken
-        self.refreshToken = refreshToken
-    }
-    
     var refreshToken: String? {
         get {
             return keychain[refreshTokenKey]
@@ -42,6 +32,24 @@ class StandardCredentialsService : CredentialsService {
         set {
             keychain[accessTokenKey] = newValue
         }
+    }
+
+    
+    func clearCredentials() {
+        try? keychain.remove(accessTokenKey)
+        try? keychain.remove(refreshTokenKey)
+    }
+    
+    func updateCredentials(accessToken: String,
+                           refreshToken: String) {
+        self.accessToken = accessToken
+        self.refreshToken = refreshToken
+    }
+    
+    func hasCredentials() -> Bool {
+        let containsAccessToken     = (try? keychain.contains(accessTokenKey)) ?? false
+        let containsRefreshToken    = (try? keychain.contains(refreshTokenKey)) ?? false
+        return containsAccessToken && containsRefreshToken
     }
 }
 
