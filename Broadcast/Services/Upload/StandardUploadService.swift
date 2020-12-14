@@ -19,7 +19,7 @@ class StandardUploadService {
     
     var apiService: APIService?
     var media: Media?
-    var content: NewPost?
+    var content: PostContent?
     var uploadProgressPublishSubject: PublishSubject<UploadProgress>?
     
     private func createContentForUpload() {
@@ -58,7 +58,7 @@ extension StandardUploadService : UploadService {
         self.apiService = apiService
     }
     
-    func upload(media: Media, content: NewPost) -> Observable<UploadProgress> {
+    func upload(media: Media, content: PostContent) -> Observable<UploadProgress> {
         self.media = media
         self.content = content
         

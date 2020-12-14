@@ -112,6 +112,8 @@
 		1D9256F1257FBB0700E988B2 /* UITextView+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9256F0257FBB0600E988B2 /* UITextView+Styling.swift */; };
 		1D93143E2577DBDF001C85C1 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D93143D2577DBDF001C85C1 /* Media.swift */; };
 		1D9E1938257897AE001960AF /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9E1937257897AE001960AF /* ProfileTableViewCell.swift */; };
+		1DA3E442258748EF00F1825F /* CreatePostResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA3E441258748EE00F1825F /* CreatePostResponse.swift */; };
+		1DA3E44625874ADD00F1825F /* GetUploadUrlResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA3E44525874ADD00F1825F /* GetUploadUrlResponse.swift */; };
 		1DD1FE05256CA55F00C598CE /* UITextField+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD1FE04256CA55F00C598CE /* UITextField+Styling.swift */; };
 		1DD1FE17256CE2E000C598CE /* SwiftRichString in Frameworks */ = {isa = PBXBuildFile; productRef = 1DD1FE16256CE2E000C598CE /* SwiftRichString */; };
 		1DD1FE1D256D6F7300C598CE /* AuthenticateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD1FE1C256D6F7300C598CE /* AuthenticateResponse.swift */; };
@@ -245,6 +247,8 @@
 		1D93143D2577DBDF001C85C1 /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		1D9314442577E991001C85C1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		1D9E1937257897AE001960AF /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
+		1DA3E441258748EE00F1825F /* CreatePostResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostResponse.swift; sourceTree = "<group>"; };
+		1DA3E44525874ADD00F1825F /* GetUploadUrlResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUploadUrlResponse.swift; sourceTree = "<group>"; };
 		1DD1FE04256CA55F00C598CE /* UITextField+Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Styling.swift"; sourceTree = "<group>"; };
 		1DD1FE1C256D6F7300C598CE /* AuthenticateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateResponse.swift; sourceTree = "<group>"; };
 		1DD1FE27256E16B600C598CE /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
@@ -677,6 +681,8 @@
 				1DD1FE1C256D6F7300C598CE /* AuthenticateResponse.swift */,
 				1DDEC77A256F5D1D00D65023 /* LoadMyPostsResponse.swift */,
 				1D14AD662579E41E00CB2C82 /* LoadProfileResponse.swift */,
+				1DA3E441258748EE00F1825F /* CreatePostResponse.swift */,
+				1DA3E44525874ADD00F1825F /* GetUploadUrlResponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -862,6 +868,7 @@
 				1DE3DA3E2575F49500A7A1F7 /* VideoPlayerView.swift in Sources */,
 				1D3F71CA2570082800DE7F05 /* PostStatsView.swift in Sources */,
 				1DE3DA3225751FE500A7A1F7 /* DateFormatter+Extensions.swift in Sources */,
+				1DA3E44625874ADD00F1825F /* GetUploadUrlResponse.swift in Sources */,
 				1D9256D7257F517700E988B2 /* NewPostCreateViewController.swift in Sources */,
 				1D3B2A0D2564D0EA001874FD /* LocalAuthenticationService.swift in Sources */,
 				1D87DF4E2568353F000652D6 /* EditProfileViewModel.swift in Sources */,
@@ -904,6 +911,7 @@
 				1D916D1225629C1E0059E549 /* ViewController.swift in Sources */,
 				1D916D88256404190059E549 /* AuthenticationState.swift in Sources */,
 				1D2A0420256582A0008CE2D4 /* Router.swift in Sources */,
+				1DA3E442258748EF00F1825F /* CreatePostResponse.swift in Sources */,
 				1D3ED5FA25663512004236BB /* UIFont+Styling.swift in Sources */,
 				1D916D592562C2920059E549 /* Schedulers.swift in Sources */,
 				1D14AD73257A16AC00CB2C82 /* ProfileInfoTableViewCell.swift in Sources */,

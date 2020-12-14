@@ -56,7 +56,7 @@ extension PostContentUseCase {
         stateController.state.selectedMedia = media
     }
     
-    func upload(content: NewPost) {
+    func upload(content: PostContent) {
         guard let selectedMedia = stateController.state.selectedMedia else { return }
         uploadService.upload(media: selectedMedia,
                              content: content)

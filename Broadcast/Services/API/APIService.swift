@@ -14,9 +14,11 @@ protocol APIService {
     func inject(credentialsService: CredentialsService)
     
     func createPost() -> Single<CreatePostResponse>
-    func getUploadableMediaEndpoint() -> Single<GetUploadableMediaEndpointResponse>
+    func getUploadUrl(forPostID postID: PostID) -> Single<GetUploadUrlResponse>
     func uploadVideo(from fromUrl: URL, to toUrl: URL) -> Observable<(Data?, RxProgress)>
-    
+    func mediaComplete(postId: PostID, mediaId: MediaID) -> Completable
+    func updatePostContent(postId: PostID, newContent: PostContent)
+    func publish(postId: PostID) -> Completable
     
     func loadMyPosts() -> Single<LoadMyPostsResponse>
     func loadProfile() -> Single<LoadProfileResponse>
