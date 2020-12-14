@@ -17,7 +17,7 @@ class StandardAPIService {
     let baseUrl: URL
     let session: Session
     let schedulers: Schedulers
-    let requestRetrier: Interceptor
+    let requestInteceptor: Interceptor
     
     var credentialsService: CredentialsService?
     
@@ -27,7 +27,7 @@ class StandardAPIService {
         self.baseUrl = dependencies.baseUrl
         self.schedulers = dependencies.schedulers
         self.session = Session.default
-        self.requestRetrier = dependencies.requestRetrier
+        self.requestInteceptor = dependencies.requestInteceptor
         self.credentialsService = nil
     }
     
@@ -91,7 +91,7 @@ class StandardAPIService {
                              parameters: parameters,
                              encoding: encoding,
                              headers: HTTPHeaders(headers),
-                             interceptor: self.requestRetrier)
+                             interceptor: self.requestInteceptor)
                     .responseData()
                     .asSingle()
             }
@@ -232,11 +232,11 @@ extension StandardAPIService {
         
         let baseUrl: URL
         let schedulers: Schedulers
-        let requestRetrier: Interceptor
+        let requestInteceptor: Interceptor
         
         static let standard = Dependencies(
             baseUrl: Configuration.apiServiceURL,
             schedulers: Schedulers.standard,
-            requestRetrier: StandardAPIRetrier())
+            requestInteceptor: StandardAPIInteceptor())
     }
 }
