@@ -27,7 +27,7 @@ extension Single where Element == (HTTPURLResponse, Data), Trait == SingleTrait 
         }
     }
     
-    func onResponse(_ successCode: [Int] = Array(200...299)) -> Completable {
+    func emptyReponseBody(_ successCode: [Int] = Array(200...299)) -> Completable {
         return flatMapCompletable { response, data -> Completable in
             if successCode.contains(response.statusCode) {
                 return .empty()
