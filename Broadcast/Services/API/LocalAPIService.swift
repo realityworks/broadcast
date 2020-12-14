@@ -123,10 +123,6 @@ extension LocalAPIService : APIService {
         return .empty()
     }
     
-    func create(newPost: NewPost) -> Completable {
-        return .empty()
-    }
-    
     func inject(credentialsService: CredentialsService) {
         // Nothing needed here
     }
