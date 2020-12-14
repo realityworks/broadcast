@@ -63,10 +63,11 @@ class StandardAPIService {
         return .error(BoomdayError.unsupported)
     }
     
-    private func queryStringBodyUnauthenticatedRequest(method: HTTPMethod,
-                         url: URL,
-                         parameters: APIParameters = [:],
-                         encoding: ParameterEncoding = URLEncoding.httpBody) -> Single<(HTTPURLResponse, Data)> {
+    private func queryStringBodyUnauthenticatedRequest(
+        method: HTTPMethod,
+        url: URL,
+        parameters: APIParameters = [:],
+        encoding: ParameterEncoding = URLEncoding.httpBody) -> Single<(HTTPURLResponse, Data)> {
 
         return session.rx
             .request(urlRequest: URLAPIQueryStringRequest(method, url, parameters: parameters))
@@ -75,10 +76,12 @@ class StandardAPIService {
             .asSingle()
     }
     
-    private func authenticatedRequest(method: HTTPMethod,
-                                      url: URL,
-                                      parameters: APIParameters = [:],
-                                      encoding: ParameterEncoding = URLEncoding.httpBody) -> Single<(HTTPURLResponse, Data)> {
+    private func authenticatedRequest(
+        method: HTTPMethod,
+        url: URL,
+        parameters: APIParameters = [:],
+        encoding: ParameterEncoding = URLEncoding.httpBody) -> Single<(HTTPURLResponse, Data)> {
+        
         return getHeaders()
             .flatMap { [unowned self] headers -> Single<(HTTPURLResponse, Data)> in
                 return self.session.rx
@@ -125,7 +128,7 @@ extension StandardAPIService : APIService {
             .asObservable()
             .flatMap { [unowned self] headers -> Observable<RxProgress> in
                 return self.session.rx
-                    .upload(fromUrl, to: toUrl, method: .post, headers: HTTPHeaders(headers))
+                    .upload(fromUrl, to: toUrl, method: .put, headers: HTTPHeaders(headers))
             }
     }
     
@@ -141,7 +144,16 @@ extension StandardAPIService : APIService {
     }
     
     func updatePostContent(postId: PostID, newContent: PostContent) -> Completable {
-        return Completable.empty()
+        let url = baseUrl
+            .appendingPathComponent("posts")
+            .appendingPathComponent(postId)
+        
+        let parameters = [
+            "title": newContent.title,
+            "caption": newContent.caption]
+        
+        return authenticatedRequest(method: .put, url: url, parameters: parameters)
+            .emptyResponseBody()
     }
     
     func publish(postId: PostID) -> Completable  {
