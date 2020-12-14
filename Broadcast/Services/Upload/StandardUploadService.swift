@@ -16,7 +16,6 @@ class StandardUploadService {
     let baseUrl: URL
     let uploadSession: Session
     let schedulers: Schedulers
-
     
     var apiService: APIService?
     var media: Media?
