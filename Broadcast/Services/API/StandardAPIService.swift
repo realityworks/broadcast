@@ -117,8 +117,13 @@ extension StandardAPIService : APIService {
             .decode(type: GetUploadUrlResponse.self)
     }
     
-    func uploadVideo(from fromUrl: URL, to toUrl: URL) -> Observable<(Data?, RxProgress)> {
-        
+    func uploadVideo(from fromUrl: URL, to toUrl: URL) -> Observable<RxProgress> {
+        return getHeaders()
+            .asObservable()
+            .flatMap { [unowned self] headers -> Observable<RxProgress> in
+                return self.session.rx
+                    .upload(fromUrl, to: toUrl, method: .post, headers: HTTPHeaders(headers))
+            }
     }
     
     func mediaComplete(postId: PostID, mediaId: MediaID) -> Completable {

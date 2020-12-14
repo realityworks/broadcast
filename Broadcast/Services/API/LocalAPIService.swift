@@ -75,11 +75,11 @@ extension LocalAPIService : APIService {
         return single
     }
     
-    func uploadVideo(from fromUrl: URL, to toUrl: URL) -> Observable<(Data?, RxProgress)> {
-        return Observable<(Data?, RxProgress)>.create { observer in
+    func uploadVideo(from fromUrl: URL, to toUrl: URL) -> Observable<RxProgress> {
+        return Observable<RxProgress>.create { observer in
             
             DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 10, execute: {
-                observer.onNext((nil, RxProgress(bytesWritten: 1, totalBytes: 1)))
+                observer.onNext(RxProgress(bytesWritten: 1, totalBytes: 1))
                 observer.onCompleted()
               })
             
