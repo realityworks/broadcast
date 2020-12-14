@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class LocalAPIService : APIService {
+class LocalAPIService {
     
     // MARK: Mock objects
     static let mockThumbnailUrl = "https://cdn.lifestyleasia.com/wp-content/uploads/sites/6/2020/03/17155127/alo.jpg"
@@ -55,7 +55,7 @@ extension LocalAPIService {
 
 // MARK: - Functions
 
-extension LocalAPIService {
+extension LocalAPIService : APIService {
     
     func loadMyPosts() -> Single<LoadMyPostsResponse> {
         let single = Single<LoadMyPostsResponse>.create { [unowned self] observer in
@@ -83,5 +83,9 @@ extension LocalAPIService {
     
     func create(newPost: NewPost) -> Completable {
         return .empty()
+    }
+    
+    func inject(credentialsService: CredentialsService) {
+        // Nothing needed here
     }
 }

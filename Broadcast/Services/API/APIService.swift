@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 protocol APIService {
-    func injectCredentialsService(credentialsService: CredentialsService)
+    func inject(credentialsService: CredentialsService)
     func loadMyPosts() -> Single<LoadMyPostsResponse>
     func loadProfile() -> Single<LoadProfileResponse>
     func updateProfile(withDisplayName displayName: String, biography: String) -> Completable

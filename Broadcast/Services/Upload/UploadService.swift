@@ -15,5 +15,6 @@ protocol UploadProgress {
 }
 
 protocol UploadService {
+    func inject(apiService: APIService)
     func upload(media: Media, content: NewPost) -> Observable<UploadProgress>
 }

@@ -11,7 +11,7 @@ import RxCocoa
 import RxAlamofire
 import Alamofire
 
-class StandardUploadService : UploadService {
+class StandardUploadService {
     
     let baseUrl: URL
     let uploadSession: Session
@@ -43,6 +43,22 @@ class StandardUploadService : UploadService {
         
     }
     
+    init(dependencies: Dependencies = .standard) {
+        self.media = nil
+        self.content = nil
+        self.uploadProgressPublishSubject = nil
+        
+        self.baseUrl = dependencies.baseUrl
+        self.schedulers = dependencies.schedulers
+        self.uploadSession = Session.default
+    }
+}
+
+extension StandardUploadService : UploadService {
+    func inject(apiService: APIService) {
+        self.apiService = apiService
+    }
+    
     func upload(media: Media, content: NewPost) -> Observable<UploadProgress> {
         self.media = media
         self.content = content
@@ -66,16 +82,6 @@ class StandardUploadService : UploadService {
         
         return uploadProgressPublishSubject!
             .asObservable()
-    }
-    
-    init(dependencies: Dependencies = .standard) {
-        self.media = nil
-        self.content = nil
-        self.uploadProgressPublishSubject = nil
-        
-        self.baseUrl = dependencies.baseUrl
-        self.schedulers = dependencies.schedulers
-        self.uploadSession = Session.default
     }
 }
 

@@ -24,7 +24,8 @@ class Services {
         self.uploadService = uploadService
         self.apiService = apiService
         
-        uploadService.as
+        apiService.inject(credentialsService: self.credentialsService)
+        uploadService.inject(apiService: self.apiService)
     }
 }
 

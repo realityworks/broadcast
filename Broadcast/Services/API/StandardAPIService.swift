@@ -18,7 +18,7 @@ class StandardAPIService {
     let session: Session
     let schedulers: Schedulers
     
-    var credentialsService
+    var credentialsService: CredentialsService?
     
     private let validStatusCodes = [Int](200 ..< 300) + [400, 404, 409, 503, 504]
     
@@ -26,6 +26,7 @@ class StandardAPIService {
         self.baseUrl = dependencies.baseUrl
         self.schedulers = dependencies.schedulers
         self.session = Session.default
+        self.credentialsService = nil
     }
     
     private func request(method: HTTPMethod,
@@ -52,6 +53,10 @@ class StandardAPIService {
 }
 
 extension StandardAPIService : APIService {
+    func inject(credentialsService: CredentialsService) {
+        self.credentialsService = credentialsService
+    }
+    
     func loadMyPosts() -> Single<LoadMyPostsResponse> {
         let single = Single<LoadMyPostsResponse>.create { observer in
             observer(.error(BoomdayError.unsupported))
