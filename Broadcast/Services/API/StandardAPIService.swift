@@ -137,7 +137,7 @@ extension StandardAPIService : APIService {
             .appendingPathComponent(mediaId)
                 
         return authenticatedRequest(method: .post, url: url)
-            .emptyReponseBody()
+            .emptyResponseBody()
     }
     
     func updatePostContent(postId: PostID, newContent: PostContent) -> Completable {
@@ -145,7 +145,13 @@ extension StandardAPIService : APIService {
     }
     
     func publish(postId: PostID) -> Completable  {
-        return Completable.empty()
+        let url = baseUrl
+            .appendingPathComponent("posts")
+            .appendingPathComponent(postId)
+            .appendingPathComponent("publish")
+                
+        return authenticatedRequest(method: .post, url: url)
+            .emptyResponseBody()
     }
     
     // MARK: Content loading
