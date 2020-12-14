@@ -79,10 +79,13 @@ class StandardAPIService {
                                       url: URL,
                                       parameters: APIParameters = [:],
                                       encoding: ParameterEncoding = URLEncoding.httpBody) -> Single<(HTTPURLResponse, Data)> {
-        return session.rx
-            .request(urlRequest: URLAPIQueryStringRequest(method, url, parameters: parameters))
-            .responseData()
-            .asSingle()
+        return getHeaders()
+            .flatMap { [unowned self] headers -> Single<(HTTPURLResponse, Data)> in
+                return self.session.rx
+                    .request(urlRequest: URLAPIQueryStringRequest(method, url, parameters: parameters))
+                    .responseData()
+                    .asSingle()
+            }
     }
 }
 
@@ -115,15 +118,7 @@ extension StandardAPIService : APIService {
     }
     
     func uploadVideo(from fromUrl: URL, to toUrl: URL) -> Observable<(Data?, RxProgress)> {
-        return Observable<(Data?, RxProgress)>.create { observer in
-            
-            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 10, execute: {
-                observer.onNext((nil, RxProgress(bytesWritten: 1, totalBytes: 1)))
-                observer.onCompleted()
-              })
-            
-            return Disposables.create()
-        }
+        
     }
     
     func mediaComplete(postId: PostID, mediaId: MediaID) -> Completable {
