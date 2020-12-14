@@ -8,6 +8,8 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import RxAlamofire
+import Alamofire
 
 class LocalAPIService {
     
@@ -56,6 +58,46 @@ extension LocalAPIService {
 // MARK: - Functions
 
 extension LocalAPIService : APIService {
+    
+    func createPost() -> Single<CreatePostResponse> {
+        let single = Single<CreatePostResponse>.create { observer in
+            observer(.success(CreatePostResponse()))
+            return Disposables.create { }
+        }
+        return single
+    }
+    
+    func getUploadUrl(forPostID postID: PostID) -> Single<GetUploadUrlResponse> {
+        let single = Single<GetUploadUrlResponse>.create { observer in
+            observer(.success(GetUploadUrlResponse()))
+            return Disposables.create { }
+        }
+        return single
+    }
+    
+    func uploadVideo(from fromUrl: URL, to toUrl: URL) -> Observable<(Data?, RxProgress)> {
+        return Observable<(Data?, RxProgress)>.create { observer in
+            
+            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 10, execute: {
+                observer.onNext((nil, RxProgress(bytesWritten: 1, totalBytes: 1)))
+                observer.onCompleted()
+              })
+            
+            return Disposables.create()
+        }
+    }
+    
+    func mediaComplete(postId: PostID, mediaId: MediaID) -> Completable {
+        return Completable.empty()
+    }
+    
+    func updatePostContent(postId: PostID, newContent: PostContent) -> Completable {
+        return Completable.empty()
+    }
+    
+    func publish(postId: PostID) -> Completable  {
+        return Completable.empty()
+    }
     
     func loadMyPosts() -> Single<LoadMyPostsResponse> {
         let single = Single<LoadMyPostsResponse>.create { [unowned self] observer in
