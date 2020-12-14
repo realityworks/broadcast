@@ -23,6 +23,8 @@ class Services {
         self.credentialsService = credentialsService
         self.uploadService = uploadService
         self.apiService = apiService
+        
+        uploadService.as
     }
 }
 
@@ -32,8 +34,8 @@ extension Services {
     static let standard = {
         return Services(
             authenticationService: StandardAPIService.standard,
-            credentialsService: StandardCredentialsService(),
-            uploadService: StandardUploadService(),
+            credentialsService: StandardCredentialsService.standard,
+            uploadService: StandardUploadService.standard,
             apiService: StandardAPIService.standard)
     }()
     

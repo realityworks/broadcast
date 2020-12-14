@@ -18,6 +18,7 @@ class StandardUploadService : UploadService {
     let schedulers: Schedulers
 
     
+    var apiService: APIService?
     var media: Media?
     var content: NewPost?
     var uploadProgressPublishSubject: PublishSubject<UploadProgress>?

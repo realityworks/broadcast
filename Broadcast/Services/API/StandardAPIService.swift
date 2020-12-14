@@ -18,6 +18,8 @@ class StandardAPIService {
     let session: Session
     let schedulers: Schedulers
     
+    var credentialsService
+    
     private let validStatusCodes = [Int](200 ..< 300) + [400, 404, 409, 503, 504]
     
     init(dependencies: Dependencies = .standard) {
