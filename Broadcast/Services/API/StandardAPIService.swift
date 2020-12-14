@@ -100,16 +100,18 @@ extension StandardAPIService : APIService {
             .appendingPathComponent("broadcaster")
             .appendingPathComponent("posts")
         
-        return request(method: .post, url: url)
+        return authenticatedRequest(method: .post, url: url)
             .decode(type: CreatePostResponse.self)
     }
     
     func getUploadUrl(forPostID postID: PostID) -> Single<GetUploadUrlResponse> {
-        let single = Single<GetUploadUrlResponse>.create { observer in
-            observer(.success(GetUploadUrlResponse()))
-            return Disposables.create { }
-        }
-        return single
+        let url = baseUrl
+            .appendingPathComponent("posts")
+            .appendingPathComponent(postID)
+            .appendingPathComponent("media")
+                
+        return authenticatedRequest(method: .post, url: url)
+            .decode(type: GetUploadUrlResponse.self)
     }
     
     func uploadVideo(from fromUrl: URL, to toUrl: URL) -> Observable<(Data?, RxProgress)> {
