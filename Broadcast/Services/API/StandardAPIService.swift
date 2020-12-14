@@ -109,10 +109,12 @@ extension StandardAPIService {
     
     struct Dependencies {
         
+        let credentialsService: CredentialsService
         let schedulers: Schedulers
         let baseUrl: URL
         
         static let standard = Dependencies(
+            credentialsService: Services.standard.credentialsService,
             schedulers: Schedulers.standard,
             baseUrl: Configuration.apiServiceURL)
     }

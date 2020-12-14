@@ -50,16 +50,18 @@ class StandardUploadService : UploadService {
         
         let endpointUrl = ""
         
-        let mediaRequest = request(.get, endpointUrl)
-            .flatMap { request -> Observable<(Data?, RxProgress)> in
-                let dataPart = request.rx
-                    .data()
-                    .map { d -> Data? in d }
-                    .startWith(nil as Data?)
-                let progressPart = request.rx.progress()
-                return Observable.combineLatest(dataPart, progressPart) { ($0, $1) }
-            }
-            .observeOn(MainScheduler.instance)
+//        let mediaRequest = request(.get, endpointUrl)
+//            .flatMap { request -> Observable<(Data?, RxProgress)> in
+//                let dataPart = request.rx
+//                    .data()
+//                    .map { d -> Data? in d }
+//                    .startWith(nil as Data?)
+//                let progressPart = request.rx.progress()
+//                return Observable.combineLatest(dataPart, progressPart) { ($0, $1) }
+//            }
+//            .observeOn(MainScheduler.instance)
+        
+        //let
         
         return uploadProgressPublishSubject!
             .asObservable()
