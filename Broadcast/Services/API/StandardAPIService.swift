@@ -63,7 +63,7 @@ class StandardAPIService {
         return .error(BoomdayError.unsupported)
     }
     
-    private func request(method: HTTPMethod,
+    private func queryStringBodyUnauthenticatedRequest(method: HTTPMethod,
                          url: URL,
                          parameters: APIParameters = [:],
                          encoding: ParameterEncoding = URLEncoding.httpBody) -> Single<(HTTPURLResponse, Data)> {
@@ -82,7 +82,10 @@ class StandardAPIService {
         return getHeaders()
             .flatMap { [unowned self] headers -> Single<(HTTPURLResponse, Data)> in
                 return self.session.rx
-                    .request(urlRequest: URLAPIQueryStringRequest(method, url, parameters: parameters))
+                    .request(method, url,
+                             parameters: parameters,
+                             encoding: encoding,
+                             headers: HTTPHeaders(headers))
                     .responseData()
                     .asSingle()
             }
@@ -176,7 +179,7 @@ extension StandardAPIService : AuthenticationService {
                           "grant_type": "password",
                           "scope": "offline_access"]
         
-        return request(method: .post, url: url, parameters: parameters)
+        return queryStringBodyUnauthenticatedRequest(method: .post, url: url, parameters: parameters)
             .decode(type: AuthenticateResponse.self)
     }
     
