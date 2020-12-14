@@ -65,7 +65,7 @@ class StandardAPIService {
     
     private func request(method: HTTPMethod,
                          url: URL,
-                         parameters: APIParameters,
+                         parameters: APIParameters = [:],
                          encoding: ParameterEncoding = URLEncoding.httpBody) -> Single<(HTTPURLResponse, Data)> {
 
         return session.rx
@@ -77,7 +77,7 @@ class StandardAPIService {
     
     private func authenticatedRequest(method: HTTPMethod,
                                       url: URL,
-                                      parameters: APIParameters,
+                                      parameters: APIParameters = [:],
                                       encoding: ParameterEncoding = URLEncoding.httpBody) -> Single<(HTTPURLResponse, Data)> {
         return session.rx
             .request(urlRequest: URLAPIQueryStringRequest(method, url, parameters: parameters))
@@ -96,11 +96,12 @@ extension StandardAPIService : APIService {
     // MARK: Video upload
     
     func createPost() -> Single<CreatePostResponse> {
-        let single = Single<CreatePostResponse>.create { observer in
-            observer(.success(CreatePostResponse()))
-            return Disposables.create { }
-        }
-        return single
+        let url = baseUrl
+            .appendingPathComponent("broadcaster")
+            .appendingPathComponent("posts")
+        
+        return request(method: .post, url: url)
+            .decode(type: CreatePostResponse.self)
     }
     
     func getUploadUrl(forPostID postID: PostID) -> Single<GetUploadUrlResponse> {
