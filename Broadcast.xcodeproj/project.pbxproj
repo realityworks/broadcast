@@ -368,13 +368,13 @@
 			path = Persistence;
 			sourceTree = "<group>";
 		};
-		1D3B2A072564CFB1001874FD /* Uploader */ = {
+		1D3B2A072564CFB1001874FD /* Upload */ = {
 			isa = PBXGroup;
 			children = (
 				1D3B2A252564E6F1001874FD /* UploadService.swift */,
 				1D3B2A332564E7AF001874FD /* StandardUploadService.swift */,
 			);
-			path = Uploader;
+			path = Upload;
 			sourceTree = "<group>";
 		};
 		1D3B2A082564CFD2001874FD /* Credentials */ = {
@@ -491,7 +491,7 @@
 				1D3B2A042564CF86001874FD /* Authentication */,
 				1D3B2A082564CFD2001874FD /* Credentials */,
 				1D3B2A062564CF99001874FD /* Persistence */,
-				1D3B2A072564CFB1001874FD /* Uploader */,
+				1D3B2A072564CFB1001874FD /* Upload */,
 			);
 			path = Services;
 			sourceTree = "<group>";

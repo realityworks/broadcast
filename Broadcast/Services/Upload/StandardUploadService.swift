@@ -12,6 +12,21 @@ import RxAlamofire
 
 class StandardUploadService : UploadService {
     
+    var media: Media?
+    var content: NewPost?
+    
+    private func createContentForUpload() {
+        
+    }
+    
+    private func createMediaUploadUrl(){
+        
+    }
+    
+    func uploadMedia()
+    func uploadContent()
+    func publishContent()
+    
     func upload(media: Media, content: NewPost) -> Observable<(Data?, RxProgress)> {
         // TODO
         let endpointUrl = ""
