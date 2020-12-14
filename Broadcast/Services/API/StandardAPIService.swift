@@ -29,6 +29,40 @@ class StandardAPIService {
         self.credentialsService = nil
     }
     
+    #warning("Todo in handling refresh token")
+//    func getAccessToken() -> Single<String> {
+//        let url = baseURL
+//            .appendingPathComponent("oauth")
+//            .appendingPathComponent("token")
+//
+//        guard let pairingToken = credentialsService.pairingToken else { return .error(APIError.notAuthenticated) }
+//
+//        let payload = [
+//            "grant_type": "refresh_token",
+//            "refresh_token": pairingToken,
+//            "client_id": "app",
+//        ]
+//
+//        return request(method: .post, url: url, parameters: payload)
+//            .decode(type: AuthenticateResponse.self)
+//            .map { $0.accessToken }
+//            .do(onSuccess: { accessToken in
+//                self.credentialsService.accessToken = accessToken
+//            })
+//    }
+    
+    private func getHeaders() -> Single<[String: String]> {
+        guard let credentialsService = self.credentialsService else { return .just([:]) }
+        
+        if let accessToken = credentialsService.accessToken {
+            return .just([
+                "Authorization": "Bearer \(accessToken)",
+            ])
+        }
+
+        return .error(BoomdayError.unsupported)
+    }
+    
     private func request(method: HTTPMethod,
                          url: URL,
                          parameters: APIParameters,
