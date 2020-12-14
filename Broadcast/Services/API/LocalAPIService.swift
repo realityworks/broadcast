@@ -61,7 +61,7 @@ extension LocalAPIService : APIService {
     
     func createPost() -> Single<CreatePostResponse> {
         let single = Single<CreatePostResponse>.create { observer in
-            observer(.success(CreatePostResponse()))
+            observer(.success(CreatePostResponse(postId: "")))
             return Disposables.create { }
         }
         return single

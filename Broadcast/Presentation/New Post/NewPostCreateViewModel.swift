@@ -12,7 +12,7 @@ import RxCocoa
 
 class NewPostCreateViewModel : ViewModel {
     
-    private let postContentUseCase: PostContentUseCase
+    /*private*/let postContentUseCase: PostContentUseCase
     
     let title = BehaviorRelay<String>(value: "")
     let caption = BehaviorRelay<String>(value: "")

@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct CreatePostResponse : Decodable {
-    
+    let postId: PostID
 }

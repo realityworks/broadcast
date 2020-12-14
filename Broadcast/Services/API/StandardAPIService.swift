@@ -17,6 +17,7 @@ class StandardAPIService {
     let baseUrl: URL
     let session: Session
     let schedulers: Schedulers
+    let requestRetrier: Interceptor
     
     var credentialsService: CredentialsService?
     
@@ -26,6 +27,7 @@ class StandardAPIService {
         self.baseUrl = dependencies.baseUrl
         self.schedulers = dependencies.schedulers
         self.session = Session.default
+        self.requestRetrier = dependencies.requestRetrier
         self.credentialsService = nil
     }
     
@@ -80,7 +82,7 @@ class StandardAPIService {
         method: HTTPMethod,
         url: URL,
         parameters: APIParameters = [:],
-        encoding: ParameterEncoding = URLEncoding.httpBody) -> Single<(HTTPURLResponse, Data)> {
+        encoding: ParameterEncoding = JSONEncoding.default) -> Single<(HTTPURLResponse, Data)> {
         
         return getHeaders()
             .flatMap { [unowned self] headers -> Single<(HTTPURLResponse, Data)> in
@@ -88,7 +90,8 @@ class StandardAPIService {
                     .request(method, url,
                              parameters: parameters,
                              encoding: encoding,
-                             headers: HTTPHeaders(headers))
+                             headers: HTTPHeaders(headers),
+                             interceptor: self.requestRetrier)
                     .responseData()
                     .asSingle()
             }
@@ -227,13 +230,13 @@ extension StandardAPIService {
     
     struct Dependencies {
         
-        let credentialsService: CredentialsService
-        let schedulers: Schedulers
         let baseUrl: URL
+        let schedulers: Schedulers
+        let requestRetrier: Interceptor
         
         static let standard = Dependencies(
-            credentialsService: Services.standard.credentialsService,
+            baseUrl: Configuration.apiServiceURL,
             schedulers: Schedulers.standard,
-            baseUrl: Configuration.apiServiceURL)
+            requestRetrier: StandardAPIRetrier())
     }
 }

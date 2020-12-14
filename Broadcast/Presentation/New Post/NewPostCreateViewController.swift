@@ -39,7 +39,7 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     private func configureViews() {
         bottomHStackView1.axis = .horizontal
         bottomHStackView1.alignment = .center
-        bottomHStackView2.distribution = .fillEqually
+        bottomHStackView1.distribution = .fillEqually
         
         bottomHStackView2.axis = .horizontal
         bottomHStackView2.alignment = .center
@@ -54,16 +54,33 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         editPostView.edgesToSuperview(excluding: [.bottom])
         bottomHStackView1.topToBottom(of: editPostView)
         bottomHStackView2.topToBottom(of: bottomHStackView1)
-        bottomHStackView2.bottomToSuperview()
+        bottomHStackView2.bottomToSuperview(usingSafeArea: true)
         
         bottomHStackView1.leftToSuperview()
         bottomHStackView1.rightToSuperview()
         
         bottomHStackView2.leftToSuperview()
         bottomHStackView2.rightToSuperview()
+        
+        bottomHStackView1.addArrangedSubview(createPostIdButton)
+        bottomHStackView1.addArrangedSubview(requestUploadUrlButton)
+        bottomHStackView1.addArrangedSubview(uploadFileButton)
+        
+        bottomHStackView2.addArrangedSubview(completeFileUploadButton)
+        bottomHStackView2.addArrangedSubview(updateContentButton)
+        bottomHStackView2.addArrangedSubview(publishButton)
     }
     
     private func configureBindings() {
-        
+        createPostIdButton.rx.tap
+            .subscribe(onNext: { [unowned self] _ in
+                self.viewModel.postContentUseCase.apiService.createPost()
+                    .subscribe { response in
+                        print(response)
+                    } onError: { error in
+                        print(error)
+                    }
+            })
+            .disposed(by: disposeBag)
     }
 }

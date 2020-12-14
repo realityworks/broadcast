@@ -16,7 +16,7 @@ class PostContentUseCase {
     
     var stateController: StateController!
     
-    private let apiService: APIService
+    let apiService: APIService
     private let uploadService: UploadService
     
     init(apiService: APIService, uploadService: UploadService) {
@@ -40,8 +40,8 @@ extension PostContentUseCase : StateControllerInjector {
 extension PostContentUseCase {
     static let standard = {
         return PostContentUseCase(
-            apiService: Services.local.apiService,
-            uploadService: Services.local.uploadService)
+            apiService: Services.standard.apiService,
+            uploadService: Services.standard.uploadService)
     }()
 }
 
@@ -69,7 +69,7 @@ extension PostContentUseCase {
                 self.stateController.state.myPosts = response.posts
             }, onError: { [unowned self] error in
                 #warning("TODO")
-                Logger.log(level: .error, topic: .api, message: "Failed to load posts \(error)")
+                Logger.log(level: .warning, topic: .api, message: "Failed to load posts \(error)")
             })
             .disposed(by: disposeBag)
     }
