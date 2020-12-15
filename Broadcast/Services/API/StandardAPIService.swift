@@ -13,11 +13,10 @@ import Alamofire
 
 typealias APIParameters = Dictionary<String, String>
 
-class StandardAPIService {
+class StandardAPIService : Interceptor {
     let baseUrl: URL
     let session: Session
     let schedulers: Schedulers
-    let requestInteceptor: Interceptor
     
     var credentialsService: CredentialsService?
     
@@ -27,8 +26,8 @@ class StandardAPIService {
         self.baseUrl = dependencies.baseUrl
         self.schedulers = dependencies.schedulers
         self.session = Session.default
-        self.requestInteceptor = dependencies.requestInteceptor
         self.credentialsService = nil
+        super.init()
     }
     
     #warning("Todo in handling refresh token")
@@ -72,7 +71,8 @@ class StandardAPIService {
         encoding: ParameterEncoding = URLEncoding.httpBody) -> Single<(HTTPURLResponse, Data)> {
 
         return session.rx
-            .request(urlRequest: URLAPIQueryStringRequest(method, url, parameters: parameters))
+            .request(urlRequest: URLAPIQueryStringRequest(method, url, parameters: parameters),
+                     interceptor: self)
             .validate(statusCode: validStatusCodes)
             .responseData()
             .asSingle()
@@ -91,12 +91,43 @@ class StandardAPIService {
                              parameters: parameters,
                              encoding: encoding,
                              headers: HTTPHeaders(headers),
-                             interceptor: self.requestInteceptor)
+                             interceptor: self)
                     .responseData()
                     .asSingle()
             }
     }
+    
+    //MARK: - Interceptor
+    override func retry(_ request: Request,
+               for session: Session,
+               dueTo error: Error,
+               completion: @escaping (RetryResult) -> Void) {
+        
+        /// Check if we are getting an invalid authentication token response
+        guard let response = request.task?.response as? HTTPURLResponse,
+              response.statusCode == 401,
+              let refreshToken = credentialsService?.refreshToken else {
+            completion(.doNotRetryWithError(error))
+            return
+        }
+        
+        _ = refresh(token: refreshToken)
+            .subscribe(onSuccess: { response in
+                self.credentialsService?.updateCredentials(accessToken: response.accessToken,
+                                                           refreshToken: response.refreshToken)
+                
+                completion(.retryWithDelay(1.0))
+            }, onError: { error in
+                Logger.log(level: .verbose,
+                           topic: .api,
+                           message: "Error retrieving accessToken when retrying failed request")
+                completion(.doNotRetryWithError(error))
+            })
+    }
 }
+
+
+// MARK: - API Service
 
 extension StandardAPIService : APIService {
     
@@ -212,11 +243,15 @@ extension StandardAPIService : AuthenticationService {
     }
     
     func refresh(token: String) -> Single<AuthenticateResponse> {
-        let single = Single<AuthenticateResponse>.create { observer in
-            observer(.success(AuthenticateResponse(accessToken: "", refreshToken: "")))
-            return Disposables.create { }
-        }
-        return single
+        let url = baseUrl
+            .appendingPathComponent("connect")
+            .appendingPathComponent("token")
+        
+        let parameters = ["refresh_token": token,
+                          "grant_type": "refresh_token"]
+        
+        return queryStringBodyUnauthenticatedRequest(method: .post, url: url, parameters: parameters)
+            .decode(type: AuthenticateResponse.self)
     }
 }
 
@@ -232,11 +267,9 @@ extension StandardAPIService {
         
         let baseUrl: URL
         let schedulers: Schedulers
-        let requestInteceptor: Interceptor
         
         static let standard = Dependencies(
             baseUrl: Configuration.apiServiceURL,
-            schedulers: Schedulers.standard,
-            requestInteceptor: StandardAPIInteceptor())
+            schedulers: Schedulers.standard)
     }
 }

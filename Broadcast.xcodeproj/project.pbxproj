@@ -114,7 +114,6 @@
 		1D9E1938257897AE001960AF /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9E1937257897AE001960AF /* ProfileTableViewCell.swift */; };
 		1DA3E442258748EF00F1825F /* CreatePostResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA3E441258748EE00F1825F /* CreatePostResponse.swift */; };
 		1DA3E44625874ADD00F1825F /* GetUploadUrlResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA3E44525874ADD00F1825F /* GetUploadUrlResponse.swift */; };
-		1DA3E44A2587D31000F1825F /* StandardAPIInteceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA3E4492587D30F00F1825F /* StandardAPIInteceptor.swift */; };
 		1DD1FE05256CA55F00C598CE /* UITextField+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD1FE04256CA55F00C598CE /* UITextField+Styling.swift */; };
 		1DD1FE17256CE2E000C598CE /* SwiftRichString in Frameworks */ = {isa = PBXBuildFile; productRef = 1DD1FE16256CE2E000C598CE /* SwiftRichString */; };
 		1DD1FE1D256D6F7300C598CE /* AuthenticateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD1FE1C256D6F7300C598CE /* AuthenticateResponse.swift */; };
@@ -250,7 +249,6 @@
 		1D9E1937257897AE001960AF /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		1DA3E441258748EE00F1825F /* CreatePostResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostResponse.swift; sourceTree = "<group>"; };
 		1DA3E44525874ADD00F1825F /* GetUploadUrlResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUploadUrlResponse.swift; sourceTree = "<group>"; };
-		1DA3E4492587D30F00F1825F /* StandardAPIInteceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardAPIInteceptor.swift; sourceTree = "<group>"; };
 		1DD1FE04256CA55F00C598CE /* UITextField+Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Styling.swift"; sourceTree = "<group>"; };
 		1DD1FE1C256D6F7300C598CE /* AuthenticateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateResponse.swift; sourceTree = "<group>"; };
 		1DD1FE27256E16B600C598CE /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
@@ -362,7 +360,6 @@
 				1D3B2A3D2564F21E001874FD /* APIService.swift */,
 				1D3B2A422564F22F001874FD /* LocalAPIService.swift */,
 				1D3B2A472564F238001874FD /* StandardAPIService.swift */,
-				1DA3E4492587D30F00F1825F /* StandardAPIInteceptor.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -937,7 +934,6 @@
 				1D3ED5F525663504004236BB /* UIButton+Styling.swift in Sources */,
 				1D9E1938257897AE001960AF /* ProfileTableViewCell.swift in Sources */,
 				1D9256F1257FBB0700E988B2 /* UITextView+Styling.swift in Sources */,
-				1DA3E44A2587D31000F1825F /* StandardAPIInteceptor.swift in Sources */,
 				1D2A03FE25656C03008CE2D4 /* AppState.swift in Sources */,
 				1D2A03EA25655FFC008CE2D4 /* ProfileUseCase.swift in Sources */,
 				1DDEC781256F6AC300D65023 /* MyPostsTableViewCell.swift in Sources */,
