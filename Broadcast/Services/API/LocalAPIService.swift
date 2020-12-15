@@ -69,7 +69,7 @@ extension LocalAPIService : APIService {
     
     func getUploadUrl(forPostID postID: PostID) -> Single<GetUploadUrlResponse> {
         let single = Single<GetUploadUrlResponse>.create { observer in
-            observer(.success(GetUploadUrlResponse()))
+            observer(.success(GetUploadUrlResponse(uploadUrl: "", mediaId: "")))
             return Disposables.create { }
         }
         return single
@@ -87,7 +87,7 @@ extension LocalAPIService : APIService {
         }
     }
     
-    func mediaComplete(postId: PostID, mediaId: MediaID) -> Completable {
+    func mediaComplete(for postId: PostID, _ mediaId: MediaID) -> Completable {
         return Completable.empty()
     }
     
