@@ -161,7 +161,7 @@ extension StandardAPIService : APIService {
             }
     }
     
-    func mediaComplete(postId: PostID, mediaId: MediaID) -> Completable {
+    func mediaComplete(for postId: PostID, _ mediaId: MediaID) -> Completable {
         let url = baseUrl
             .appendingPathComponent("posts")
             .appendingPathComponent(postId)

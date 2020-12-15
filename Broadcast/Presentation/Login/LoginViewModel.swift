@@ -59,7 +59,7 @@ extension LoginViewModel {
         authenticationUseCase.login(username: username.value ?? "",
                                     password: password.value ?? "")
             .subscribe {
-                
+                // Handle a successful login
             } onError: { error in
                 Logger.log(level: .warning, topic: .debug, message: "Error during login: \(error)")
                 self.isLoadingSubject.accept(false)

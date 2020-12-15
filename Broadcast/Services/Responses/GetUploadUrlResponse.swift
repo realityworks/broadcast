@@ -8,5 +8,6 @@
 import Foundation
 
 struct GetUploadUrlResponse : Decodable {
-    
+    let uploadUrl: String
+    let mediaId: String
 }
