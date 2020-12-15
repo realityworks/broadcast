@@ -144,6 +144,7 @@ extension StandardAPIService : APIService {
     
     func getUploadUrl(forPostID postID: PostID, for media: Media) -> Single<GetUploadUrlResponse> {
         let url = baseUrl
+            .appendingPathComponent("broadcaster")
             .appendingPathComponent("posts")
             .appendingPathComponent(postID)
             .appendingPathComponent("media")
@@ -165,6 +166,7 @@ extension StandardAPIService : APIService {
     
     func mediaComplete(for postId: PostID, _ mediaId: MediaID) -> Completable {
         let url = baseUrl
+            .appendingPathComponent("broadcaster")
             .appendingPathComponent("posts")
             .appendingPathComponent(postId)
             .appendingPathComponent("media")
@@ -176,6 +178,7 @@ extension StandardAPIService : APIService {
     
     func updatePostContent(postId: PostID, newContent: PostContent) -> Completable {
         let url = baseUrl
+            .appendingPathComponent("broadcaster")
             .appendingPathComponent("posts")
             .appendingPathComponent(postId)
         
@@ -189,6 +192,7 @@ extension StandardAPIService : APIService {
     
     func publish(postId: PostID) -> Completable  {
         let url = baseUrl
+            .appendingPathComponent("broadcaster")
             .appendingPathComponent("posts")
             .appendingPathComponent(postId)
             .appendingPathComponent("publish")
