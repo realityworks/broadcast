@@ -20,7 +20,7 @@ class StandardAPIService : Interceptor {
     
     var credentialsService: CredentialsService?
     
-    private let validStatusCodes = [Int](200 ..< 300) + [400, 404, 409, 503, 504]
+    private let validStatusCodes = [Int](200 ..< 300) + [400, 404, 409, 500, 503, 504]
     
     init(dependencies: Dependencies = .standard) {
         self.baseUrl = dependencies.baseUrl
@@ -29,28 +29,6 @@ class StandardAPIService : Interceptor {
         self.credentialsService = nil
         super.init()
     }
-    
-    #warning("Todo in handling refresh token")
-//    func getAccessToken() -> Single<String> {
-//        let url = baseURL
-//            .appendingPathComponent("oauth")
-//            .appendingPathComponent("token")
-//
-//        guard let pairingToken = credentialsService.pairingToken else { return .error(APIError.notAuthenticated) }
-//
-//        let payload = [
-//            "grant_type": "refresh_token",
-//            "refresh_token": pairingToken,
-//            "client_id": "app",
-//        ]
-//
-//        return request(method: .post, url: url, parameters: payload)
-//            .decode(type: AuthenticateResponse.self)
-//            .map { $0.accessToken }
-//            .do(onSuccess: { accessToken in
-//                self.credentialsService.accessToken = accessToken
-//            })
-//    }
     
     private func getHeaders() -> Single<[String: String]> {
         guard let credentialsService = self.credentialsService else { return .just([:]) }
@@ -98,10 +76,26 @@ class StandardAPIService : Interceptor {
     }
     
     //MARK: - Interceptor
-    override func retry(_ request: Request,
-               for session: Session,
-               dueTo error: Error,
-               completion: @escaping (RetryResult) -> Void) {
+    override func adapt(
+        _ urlRequest: URLRequest,
+        for session: Session,
+        completion: @escaping (Result<URLRequest, Error>) -> Void) {
+        guard let accessToken = credentialsService?.accessToken else {
+            completion(.success(urlRequest))
+            return
+        }
+        
+        var modifiedUrlRequest = urlRequest
+        modifiedUrlRequest.setValue("Bearer \(accessToken)",
+                                    forHTTPHeaderField: "Authorization")
+        completion(.success(modifiedUrlRequest))
+    }
+    
+    override func retry(
+        _ request: Request,
+        for session: Session,
+        dueTo error: Error,
+        completion: @escaping (RetryResult) -> Void) {
         
         /// Check if we are getting an invalid authentication token response
         guard let response = request.task?.response as? HTTPURLResponse,
