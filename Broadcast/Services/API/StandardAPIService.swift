@@ -142,13 +142,15 @@ extension StandardAPIService : APIService {
             .decode(type: CreatePostResponse.self)
     }
     
-    func getUploadUrl(forPostID postID: PostID) -> Single<GetUploadUrlResponse> {
+    func getUploadUrl(forPostID postID: PostID, for media: Media) -> Single<GetUploadUrlResponse> {
         let url = baseUrl
             .appendingPathComponent("posts")
             .appendingPathComponent(postID)
             .appendingPathComponent("media")
-                
-        return authenticatedRequest(method: .post, url: url)
+        
+        let parameters = ["contentType": media.contentType]
+        
+        return authenticatedRequest(method: .post, url: url, parameters: parameters)
             .decode(type: GetUploadUrlResponse.self)
     }
     

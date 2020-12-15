@@ -13,4 +13,13 @@ typealias MediaID = String
 enum Media : Equatable {
     case video(url: URL)
     case image(url: URL)
+    
+    var contentType: String {
+        switch self {
+        case .video:
+            return "video"
+        case .image:
+            return "image"
+        }
+    }
 }

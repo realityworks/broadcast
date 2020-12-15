@@ -67,7 +67,7 @@ extension LocalAPIService : APIService {
         return single
     }
     
-    func getUploadUrl(forPostID postID: PostID) -> Single<GetUploadUrlResponse> {
+    func getUploadUrl(forPostID postID: PostID, for media: Media) -> Single<GetUploadUrlResponse> {
         let single = Single<GetUploadUrlResponse>.create { observer in
             observer(.success(GetUploadUrlResponse(uploadUrl: "", mediaId: "")))
             return Disposables.create { }

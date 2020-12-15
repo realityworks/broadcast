@@ -63,9 +63,10 @@ extension NewPostCreateViewModel {
     }
     
     func requestUploadUrl() {
-        guard let postId = postId else { return }
+        guard let postId = postId,
+              let media = stateController.state.selectedMedia else { return }
         
-        postContentUseCase.apiService.getUploadUrl(forPostID: postId)
+        postContentUseCase.apiService.getUploadUrl(forPostID: postId, for: media)
             .subscribe { [weak self] response in
                 print(response)
                 self?.mediaId = response.mediaId
