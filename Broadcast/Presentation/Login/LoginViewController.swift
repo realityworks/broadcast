@@ -37,6 +37,9 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
     private let termsAndConditionsTextView = UITextView()
     private let forgotPasswordTextView = UITextView()
     
+    private let testUserName: String = "Pink67@gmail.com"
+    private let testPassword: String = "Pass123$"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -67,10 +70,10 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         bottomStackView.distribution = .fillEqually
         
         if Configuration.debugUIEnabled {
-            usernameTextField.text = "boomday@sodadigital.com.au"
-            passwordTextField.text = "Pass123$"
-            viewModel.username.accept("boomday@sodadigital.com.au")
-            viewModel.password.accept("Pass123$")
+            usernameTextField.text = testUserName
+            passwordTextField.text = testPassword
+            viewModel.username.accept(testUserName)
+            viewModel.password.accept(testPassword)
         }
     }
     

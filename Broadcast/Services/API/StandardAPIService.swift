@@ -70,6 +70,7 @@ class StandardAPIService : Interceptor {
                              encoding: encoding,
                              headers: HTTPHeaders(headers),
                              interceptor: self)
+                    .validate(statusCode: validStatusCodes)
                     .responseData()
                     .asSingle()
             }
