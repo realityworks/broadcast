@@ -156,25 +156,30 @@ extension StandardAPIService : APIService {
     }
     
     func uploadVideo(from fromUrl: URL, to toUrl: URL) -> Observable<(HTTPURLResponse, RxProgress)> {
-        return getHeaders()
-            .asObservable()
-            .flatMap { [unowned self] headers -> Observable<(HTTPURLResponse, RxProgress)> in
-                return self.session.rx
-                    .upload(fromUrl, to: toUrl, method: .put, headers: HTTPHeaders(headers))
-                    .flatMap { (uploadRequest: UploadRequest) -> Observable<(HTTPURLResponse, RxProgress)> in
-                        
-                        let progressPart = uploadRequest.rx.progress()
-                        let responsePart = uploadRequest.rx.response()
-                        return Observable.combineLatest(responsePart, progressPart) {
-                            print ("LATEST -> \($0), \($1)")
-                            if $0.statusCode != 200 {
-                                throw BoomdayError.apiStatusCode(code: $0.statusCode)
-                            }
-                            return ($0, $1)
-                        }
+//        let fileSize = FileManager.default.sizeOfFile(atPath: file.path)!
+//
+//        request.addValue("BlockBlob", forHTTPHeaderField: "x-ms-blob-type")
+//        request.addValue("\(fileSize)", forHTTPHeaderField: "Content-Length")
+        
+        let fileSize = fromUrl.fileSize()!
+        
+        let headers = HTTPHeaders(["x-ms-blob-type": "BlockBlob",
+                                   "Content-Length": "\(fileSize)"])
+        return self.session.rx
+            .upload(fromUrl, to: toUrl, method: .put, headers: headers)
+            .flatMap { (uploadRequest: UploadRequest) -> Observable<(HTTPURLResponse, RxProgress)> in
+                
+                let progressPart = uploadRequest.rx.progress()
+                let responsePart = uploadRequest.rx.response()
+                
+                return Observable.combineLatest(responsePart, progressPart) {
+                    print ("LATEST -> \($0), \($1)")
+                    if !Array(200 ..< 300).contains($0.statusCode) {
+                        throw BoomdayError.apiStatusCode(code: $0.statusCode)
                     }
+                    return ($0, $1)
+                }
             }
-            .observeOn(MainScheduler.instance)
     }
     
     func mediaComplete(for postId: PostID, _ mediaId: MediaID) -> Completable {
@@ -184,6 +189,7 @@ extension StandardAPIService : APIService {
             .appendingPathComponent(postId)
             .appendingPathComponent("media")
             .appendingPathComponent(mediaId)
+            .appendingPathComponent("complete")
                 
         return authenticatedRequest(method: .post, url: url)
             .emptyResponseBody()

@@ -114,7 +114,7 @@ extension NewPostCreateViewModel {
             postId: postId,
             newContent: newPost)
             .subscribe {
-                print ("FINALIZED MEDIA UPLOAD COMPLETE")
+                print ("CONTENT SET")
             } onError: { error in
                 print (error)
             }

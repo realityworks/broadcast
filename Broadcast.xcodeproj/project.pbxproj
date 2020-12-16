@@ -114,6 +114,7 @@
 		1D9E1938257897AE001960AF /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9E1937257897AE001960AF /* ProfileTableViewCell.swift */; };
 		1DA3E442258748EF00F1825F /* CreatePostResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA3E441258748EE00F1825F /* CreatePostResponse.swift */; };
 		1DA3E44625874ADD00F1825F /* GetUploadUrlResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA3E44525874ADD00F1825F /* GetUploadUrlResponse.swift */; };
+		1DB3438E2589DC3300486676 /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB3438D2589DC3300486676 /* URL+Extensions.swift */; };
 		1DD1FE05256CA55F00C598CE /* UITextField+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD1FE04256CA55F00C598CE /* UITextField+Styling.swift */; };
 		1DD1FE17256CE2E000C598CE /* SwiftRichString in Frameworks */ = {isa = PBXBuildFile; productRef = 1DD1FE16256CE2E000C598CE /* SwiftRichString */; };
 		1DD1FE1D256D6F7300C598CE /* AuthenticateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD1FE1C256D6F7300C598CE /* AuthenticateResponse.swift */; };
@@ -249,6 +250,7 @@
 		1D9E1937257897AE001960AF /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		1DA3E441258748EE00F1825F /* CreatePostResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostResponse.swift; sourceTree = "<group>"; };
 		1DA3E44525874ADD00F1825F /* GetUploadUrlResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUploadUrlResponse.swift; sourceTree = "<group>"; };
+		1DB3438D2589DC3300486676 /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
 		1DD1FE04256CA55F00C598CE /* UITextField+Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Styling.swift"; sourceTree = "<group>"; };
 		1DD1FE1C256D6F7300C598CE /* AuthenticateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateResponse.swift; sourceTree = "<group>"; };
 		1DD1FE27256E16B600C598CE /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
@@ -703,6 +705,7 @@
 				1D9256CC257E818800E988B2 /* Float+Extension.swift */,
 				1D419B9E258083450096FBB7 /* Dictionary+Extensions.swift */,
 				1D6FCD7E2581B8490062FF54 /* Single+Extension.swift */,
+				1DB3438D2589DC3300486676 /* URL+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -885,6 +888,7 @@
 				1D87DF9B25683B53000652D6 /* ProfileViewModel.swift in Sources */,
 				1DE3DA382575506100A7A1F7 /* UIViewController+Extensions.swift in Sources */,
 				1D87DF532568367E000652D6 /* MyPostsViewController.swift in Sources */,
+				1DB3438E2589DC3300486676 /* URL+Extensions.swift in Sources */,
 				1D9256C5257E6A3200E988B2 /* AccountInfoTableViewCell.swift in Sources */,
 				1D916D83256403F80059E549 /* Post.swift in Sources */,
 				1D2A03F4256561D5008CE2D4 /* AppLifeCycleUseCase.swift in Sources */,
