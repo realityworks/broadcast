@@ -17,7 +17,7 @@ enum Media : Equatable {
     var contentType: String {
         switch self {
         case .video:
-            return "video"
+            return "video/mp4"
         case .image:
             return "image"
         }
