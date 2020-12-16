@@ -83,10 +83,10 @@ extension NewPostCreateViewModel {
             case Media.video(let url) = selectedMedia,
             let uploadUrl = uploadUrl else { return }
         postContentUseCase.apiService.uploadVideo(from: url, to: uploadUrl)
-            .subscribe { progress in
+            .subscribe { response, progress in
                 print ("PROGRESS : \(progress.bytesWritten) / \(progress.totalBytes)")
             } onError: { error in
-                print (error)
+                print ("ERROR: \(error)")
             } onCompleted: {
                 print ("COMPLETED!")
             } onDisposed: {

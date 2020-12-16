@@ -155,13 +155,26 @@ extension StandardAPIService : APIService {
             .decode(type: GetUploadUrlResponse.self)
     }
     
-    func uploadVideo(from fromUrl: URL, to toUrl: URL) -> Observable<RxProgress> {
+    func uploadVideo(from fromUrl: URL, to toUrl: URL) -> Observable<(HTTPURLResponse, RxProgress)> {
         return getHeaders()
             .asObservable()
-            .flatMap { [unowned self] headers -> Observable<RxProgress> in
+            .flatMap { [unowned self] headers -> Observable<(HTTPURLResponse, RxProgress)> in
                 return self.session.rx
                     .upload(fromUrl, to: toUrl, method: .put, headers: HTTPHeaders(headers))
+                    .flatMap { (uploadRequest: UploadRequest) -> Observable<(HTTPURLResponse, RxProgress)> in
+                        
+                        let progressPart = uploadRequest.rx.progress()
+                        let responsePart = uploadRequest.rx.response()
+                        return Observable.combineLatest(responsePart, progressPart) {
+                            print ("LATEST -> \($0), \($1)")
+                            if $0.statusCode != 200 {
+                                throw BoomdayError.apiStatusCode(code: $0.statusCode)
+                            }
+                            return ($0, $1)
+                        }
+                    }
             }
+            .observeOn(MainScheduler.instance)
     }
     
     func mediaComplete(for postId: PostID, _ mediaId: MediaID) -> Completable {

@@ -15,7 +15,7 @@ protocol APIService {
     
     func createPost() -> Single<CreatePostResponse>
     func getUploadUrl(forPostID postID: PostID, for media: Media) -> Single<GetUploadUrlResponse>
-    func uploadVideo(from fromUrl: URL, to toUrl: URL) -> Observable<RxProgress>
+    func uploadVideo(from fromUrl: URL, to toUrl: URL) -> Observable<(HTTPURLResponse, RxProgress)>
     func mediaComplete(for postId: PostID, _ mediaId: MediaID) -> Completable
     func updatePostContent(postId: PostID, newContent: PostContent) -> Completable
     func publish(postId: PostID) -> Completable
