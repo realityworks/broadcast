@@ -202,8 +202,8 @@ extension StandardAPIService : APIService {
             .appendingPathComponent(postId)
         
         let parameters = [
-            "title": newContent.title,
-            "caption": newContent.caption]
+            "title": "test123",//newContent.title,
+            "caption": "this is a caption"]//newContent.caption]
         
         return authenticatedRequest(method: .put, url: url, parameters: parameters)
             .emptyResponseBody()
