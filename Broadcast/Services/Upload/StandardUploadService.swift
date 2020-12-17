@@ -48,17 +48,20 @@ extension StandardUploadService : UploadService {
     
     func upload(media: Media, content: PostContent) -> Observable<UploadProgress> {
         guard let apiService = apiService else { return .error(BoomdayError.unknown) }
-        
+        guard case Media.video(let sourceUrl) = media else { return .error(BoomdayError.unknown)}
+
         self.media = media
         self.content = content
         
         uploadProgress = StandardUploadProgress()
+        uploadProgress.sourceUrl = sourceUrl
         
         // Setup the Create Post observable
         let createPostObservable = Observable<UploadEvent>.create { [unowned self] observer in
             apiService.createPost()
                 .subscribe(onSuccess: { response in
                     observer.onNext(UploadEvent.createPost(postId: response.postId))
+                    observer.onCompleted()
                 }, onError: { error in
                     observer.onError(BoomdayError.uploadFailed(UploadEvent.createPost(postId: nil)))
                 })
@@ -73,6 +76,7 @@ extension StandardUploadService : UploadService {
                 apiService.getUploadUrl(forPostID: postId, for: media)
                     .subscribe(onSuccess: { response in
                         observer.onNext(UploadEvent.requestUploadUrl(uploadUrl: URL(string: response.uploadUrl), mediaId: response.mediaId))
+                        observer.onCompleted()
                     }, onError: { error in
                         observer.onError(BoomdayError.uploadFailed(UploadEvent.requestUploadUrl(uploadUrl: nil, mediaId: nil)))
                     })

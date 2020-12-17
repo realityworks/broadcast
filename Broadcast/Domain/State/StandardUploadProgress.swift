@@ -21,4 +21,9 @@ struct StandardUploadProgress : UploadProgress {
         self.destinationURL = nil
         self.progress = 0
     }
+    
+    init(sourceUrl: URL) {
+        self.init()
+        self.sourceUrl = sourceUrl
+    }
 }

@@ -15,15 +15,12 @@ class EditPostView: UIView {
     private let verticalStackView = UIStackView()
     
     private let uploadTitle = UILabel.bodyBold(LocalizedString.videoToUpload)
-    
     private let titleHeading = UILabel.bodyBold(LocalizedString.addTitle)
-    private let titleTextField = UITextField.standard(
-        withPlaceholder: LocalizedString.addTitle)
-    
     private let captionHeading = UILabel.bodyBold(LocalizedString.captionTitle)
-    private let captionTextView = UITextView.standard()
     
-    private (set) let uploadButton = UIButton.standard(withTitle: LocalizedString.publish)
+    let titleTextField = UITextField.standard(withPlaceholder: LocalizedString.addTitle)
+    let captionTextView = UITextView.standard()
+    let uploadButton = UIButton.standard(withTitle: LocalizedString.publish)
     
     init() {
         super.init(frame: .zero)

@@ -113,5 +113,13 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
                 self.viewModel.uploadPost()
             })
             .disposed(by: disposeBag)
+        
+        viewModel.title
+            .bind(to: editPostView.titleTextField.rx.text)
+            .disposed(by: disposeBag)
+        
+        viewModel.caption
+            .bind(to: editPostView.captionTextView.rx.text)
+            .disposed(by: disposeBag)
     }
 }

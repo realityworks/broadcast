@@ -17,10 +17,6 @@ class NewPostCreateViewModel : ViewModel {
     let title = BehaviorRelay<String>(value: "")
     let caption = BehaviorRelay<String>(value: "")
     
-    var postId: PostID? = nil
-    var mediaId: MediaID? = nil
-    var uploadUrl: URL? = nil
-    
     init(dependencies: Dependencies = .standard) {
         self.postContentUseCase = dependencies.postContentUseCase
         
