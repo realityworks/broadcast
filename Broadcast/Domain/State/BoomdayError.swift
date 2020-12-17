@@ -13,4 +13,5 @@ enum BoomdayError : Error {
     case decoding(error: DecodingError)
     case apiNotFound
     case apiStatusCode(code: Int)
+    case uploadFailed(UploadEvent)
 }
