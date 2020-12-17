@@ -62,6 +62,7 @@ extension PostContentUseCase {
                              content: content)
             .subscribe(onNext: { uploadProgress in
                 print (uploadProgress)
+                #warning("TODO : Push this into an upload progress indicator")
             }, onCompleted: {
                 print ("COMPLETED!")
             })
