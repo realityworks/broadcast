@@ -72,40 +72,5 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     }
     
     private func configureBindings() {
-        createPostIdButton.rx.tap
-            .subscribe(onNext: { [unowned self] _ in
-                self.viewModel.createPost()
-            })
-            .disposed(by: disposeBag)
-        
-        requestUploadUrlButton.rx.tap
-            .subscribe(onNext: { [] _ in
-                self.viewModel.requestUploadUrl()
-            })
-            .disposed(by: disposeBag)
-        
-        uploadFileButton.rx.tap
-            .subscribe(onNext: { [] _ in
-                self.viewModel.uploadFile()
-            })
-            .disposed(by: disposeBag)
-        
-        completeFileUploadButton.rx.tap
-            .subscribe(onNext: { [] _ in
-                self.viewModel.completeFileUpload()
-            })
-            .disposed(by: disposeBag)
-        
-        updateContentButton.rx.tap
-            .subscribe(onNext: { [] _ in
-                self.viewModel.updateContent()
-            })
-            .disposed(by: disposeBag)
-        
-        publishButton.rx.tap
-            .subscribe(onNext: { [] _ in
-                self.viewModel.publish()
-            })
-            .disposed(by: disposeBag)
     }
 }

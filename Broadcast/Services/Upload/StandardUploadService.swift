@@ -11,21 +11,6 @@ import RxCocoa
 import RxAlamofire
 import Alamofire
 
-struct StandardUploadProgress : UploadProgress {
-    var postId: PostID?
-    var mediaId: MediaID?
-    var sourceUrl: URL?
-    var destinationURL: URL?
-    var progress: Float
-    
-    init() {
-        self.postId = nil
-        self.mediaId = nil
-        self.sourceUrl = nil
-        self.destinationURL = nil
-        self.progress = 0
-    }
-}
 
 class StandardUploadService {
     
@@ -36,7 +21,15 @@ class StandardUploadService {
     var apiService: APIService?
     var media: Media?
     var content: PostContent?
+
     var uploadProgressPublishSubject: PublishSubject<UploadProgress>?
+    var uploadProgress = StandardUploadProgress() {
+        didSet {
+            uploadProgressPublishSubject?.onNext(uploadProgress)
+        }
+    }
+    
+    let disposeBag = DisposeBag()
     
     // MARK: - UploadProgress
     
@@ -59,23 +52,62 @@ extension StandardUploadService : UploadService {
         self.apiService = apiService
     }
     
-    func upload(media: Media, content: PostContent) -> Observable<UploadProgress>? {
-        guard let apiService = apiService else { return nil }
+    func upload(media: Media, content: PostContent) -> Observable<UploadProgress> {
+        guard let apiService = apiService else { return .error(BoomdayError.unknown) }
         self.media = media
         self.content = content
         
         uploadProgressPublishSubject = PublishSubject<UploadProgress>()
 
-        let createPostObservable = Observable<UploadEvent>.create { observer in
-            self.apiService?.createPost()
+        // Setup the Create Post observable
+        let createPostObservable = Observable<UploadEvent>.create { [unowned self] observer in
+            apiService.createPost()
                 .subscribe(onSuccess: { response in
                     observer.onNext(UploadEvent.createPost(postId: response.postId))
                 }, onError: { error in
-                    observer.onError(BoomdayError.uploadFailed(UploadEvent.createPost(postId: "")))
+                    observer.onError(BoomdayError.uploadFailed(UploadEvent.createPost(postId: nil)))
                 })
+                .disposed(by: self.disposeBag)
             
             return Disposables.create()
         }
+        
+        let getUploadUrlObservable = Observable<UploadEvent>.create { [unowned self] observer in
+            if let postId = self.uploadProgress.postId,
+               let media = self.media {
+                apiService.getUploadUrl(forPostID: postId, for: media)
+                    .subscribe(onSuccess: { response in
+                        observer.onNext(UploadEvent.requestUploadUrl(uploadUrl: URL(string: response.uploadUrl), mediaId: response.mediaId))
+                    }, onError: { error in
+                        observer.onError(BoomdayError.uploadFailed(UploadEvent.requestUploadUrl(uploadUrl: nil, mediaId: nil)))
+                    })
+                    .disposed(by: self.disposeBag)
+            } else {
+                observer.onError(BoomdayError.unknown)
+            }
+
+            return Disposables.create()
+        }
+        
+        return Observable.concat(createPostObservable, getUploadUrlObservable)
+            .map { event -> UploadProgress in
+                switch event {
+                case .createPost(let postId):
+                    print("CREATE POST")
+                    self.uploadProgress.postId = postId
+                case .requestUploadUrl(let uploadUrl, let mediaId):
+                    print("REQUEST UPLOAD URL")
+                    self.uploadProgress.destinationURL = uploadUrl
+                    self.uploadProgress.mediaId = mediaId
+                
+                default:
+                    break
+                }
+                
+                return self.uploadProgress
+            }
+        
+        //return uploadProgressPublishSubject?.asObservable()
         
 //        let createPostObservable = apiService.createPost()
 //            .flatMap { [unowned self] response -> Single<GetUploadUrlResponse> in
@@ -113,14 +145,14 @@ extension StandardUploadService : UploadService {
 //            }
 //            .disposed(by: disposeBag)
         
-        createPostObservable
-            .flatMap { response -> Single<Result> in
-                <#code#>
-            }
-        guard let postId = postId,
-            let media = stateController.state.selectedMedia else { return }
-            
-        apiService.getUploadUrl(forPostID: postId, for: media)
+//        createPostObservable
+//            .flatMap { response -> Single<Result> in
+//                <#code#>
+//            }
+//        guard let postId = postId,
+//            let media = stateController.state.selectedMedia else { return }
+//
+//        apiService.getUploadUrl(forPostID: postId, for: media)
 //                .subscribe { [weak self] response in
 //                    print(response)
 //                    self?.mediaId = response.mediaId
@@ -130,11 +162,11 @@ extension StandardUploadService : UploadService {
 //                }
 //                .disposed(by: disposeBag)
         
-        guard
-            let selectedMedia = stateController.state.selectedMedia,
-            case Media.video(let url) = selectedMedia,
-            let uploadUrl = uploadUrl else { return }
-        apiService.uploadVideo(from: url, to: uploadUrl)
+//        guard
+//            let selectedMedia = stateController.state.selectedMedia,
+//            case Media.video(let url) = selectedMedia,
+//            let uploadUrl = uploadUrl else { return }
+//        apiService.uploadVideo(from: url, to: uploadUrl)
 //            .subscribe { response, progress in
 //                print ("PROGRESS : \(progress.bytesWritten) / \(progress.totalBytes)")
 //            } onError: { error in
@@ -146,9 +178,9 @@ extension StandardUploadService : UploadService {
 //            }
 //            .disposed(by: disposeBag)
         
-        guard let postId = postId,
-              let mediaId = mediaId else { return }
-        apiService.mediaComplete(for: postId, mediaId)
+//        guard let postId = postId,
+//              let mediaId = mediaId else { return }
+//        apiService.mediaComplete(for: postId, mediaId)
 //                .subscribe {
 //                    print ("FINALIZED MEDIA UPLOAD COMPLETE")
 //                } onError: { error in
@@ -156,11 +188,11 @@ extension StandardUploadService : UploadService {
 //                }
 //                .disposed(by: disposeBag)
         
-        guard let postId = postId else { return }
-        let newPost = PostContent(title: title.value, caption: caption.value)
-        apiService.updatePostContent(
-                postId: postId,
-                newContent: newPost)
+//        guard let postId = postId else { return }
+//        let newPost = PostContent(title: title.value, caption: caption.value)
+//        apiService.updatePostContent(
+//                postId: postId,
+//                newContent: newPost)
 //                .subscribe {
 //                    print ("CONTENT SET")
 //                } onError: { error in
@@ -168,17 +200,14 @@ extension StandardUploadService : UploadService {
 //                }
 //                .disposed(by: disposeBag)
         
-        guard let postId = postId else { return }
-        apiService.publish(postId: postId)
-            .subscribe {
-                print ("PUBLISHED POST!")
-            } onError: { error in
-                print (error)
-            }
-            .disposed(by: disposeBag)
-        
-        return uploadProgressPublishSubject!
-            .asObservable()
+//        guard let postId = postId else { return }
+//        apiService.publish(postId: postId)
+//            .subscribe {
+//                print ("PUBLISHED POST!")
+//            } onError: { error in
+//                print (error)
+//            }
+//            .disposed(by: disposeBag)
     }
 }
 
