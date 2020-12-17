@@ -11,9 +11,23 @@ import RxCocoa
 import RxAlamofire
 import Alamofire
 
-struct StandardUploadProgress
+struct StandardUploadProgress : UploadProgress {
+    var postId: PostID?
+    var mediaId: MediaID?
+    var sourceUrl: URL?
+    var destinationURL: URL?
+    var progress: Float
+    
+    init() {
+        self.postId = nil
+        self.mediaId = nil
+        self.sourceUrl = nil
+        self.destinationURL = nil
+        self.progress = 0
+    }
+}
 
-class StandardUploadService : {
+class StandardUploadService {
     
     let baseUrl: URL
     let uploadSession: Session
@@ -25,15 +39,6 @@ class StandardUploadService : {
     var uploadProgressPublishSubject: PublishSubject<UploadProgress>?
     
     // MARK: - UploadProgress
-    var postId: PostID? {
-        didSet {
-            uploadProgressPublishSubject?.onNext(self)
-        }
-    }
-    var mediaId: MediaID? 
-    var sourceUrl: URL?
-    var destinationURL: URL?
-    var progress: Float
     
     init(dependencies: Dependencies = .standard) {
         self.media = nil
@@ -43,14 +48,6 @@ class StandardUploadService : {
         self.baseUrl = dependencies.baseUrl
         self.schedulers = dependencies.schedulers
         self.uploadSession = Session.default
-        
-        self.postId = nil
-        self.mediaId = nil
-        self.sourceUrl = nil
-        self.destinationURL = nil
-        self.progress = 0
-        
-        
     }
 }
 
