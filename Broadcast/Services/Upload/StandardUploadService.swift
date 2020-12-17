@@ -88,19 +88,53 @@ extension StandardUploadService : UploadService {
             return Disposables.create()
         }
         
-        return Observable.concat(createPostObservable, getUploadUrlObservable)
+        let uploadMediaObservable = Observable<UploadEvent>.create { [unowned self] observer in
+            if let sourceUrl = self.uploadProgress.sourceUrl,
+               let destinationUrl = self.uploadProgress.destinationURL {
+                apiService.uploadVideo(from: sourceUrl,
+                                       to: destinationUrl)
+                        .subscribe { response, progress in
+                            let progressFloat = Float(progress.bytesWritten) / Float(progress.totalBytes)
+                            observer.onNext(
+                                UploadEvent.uploadMedia(progress: progressFloat))
+                            print ("PROGRESS : \(progressFloat)")
+                        } onError: { error in
+                            print ("ERROR: \(error)")
+                            observer.onError(BoomdayError.unknown)
+                        } onCompleted: {
+                            print ("COMPLETED!")
+                            observer.onCompleted()
+                        } onDisposed: {
+                            print ("DISPOSED!")
+                        }
+                        .disposed(by: disposeBag)
+            } else {
+                observer.onError(BoomdayError.unknown)
+            }
+
+            return Disposables.create()
+        }
+        
+        return Observable.concat(createPostObservable, getUploadUrlObservable, uploadMediaObservable)
             .map { event -> UploadProgress in
                 switch event {
                 case .createPost(let postId):
                     print("CREATE POST")
                     self.uploadProgress.postId = postId
                     self.uploadProgress.progress += 0.1
+                    self.uploadProgress.totalProgress += 0.1
                     
                 case .requestUploadUrl(let uploadUrl, let mediaId):
                     print("REQUEST UPLOAD URL")
                     self.uploadProgress.destinationURL = uploadUrl
                     self.uploadProgress.mediaId = mediaId
                     self.uploadProgress.progress += 0.1
+                    self.uploadProgress.totalProgress += 0.1
+                
+                case .uploadMedia(let progress):
+                    self.uploadProgress.uploadProgress = progress
+                    self.uploadProgress.totalProgress =
+                        self.uploadProgress.progress + (progress * 0.6)
                     
                 default:
                     break

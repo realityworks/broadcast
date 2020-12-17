@@ -13,6 +13,8 @@ struct StandardUploadProgress : UploadProgress {
     var sourceUrl: URL?
     var destinationURL: URL?
     var progress: Float
+    var uploadProgress: Float
+    var totalProgress: Float
     
     init() {
         self.postId = nil
@@ -20,6 +22,7 @@ struct StandardUploadProgress : UploadProgress {
         self.sourceUrl = nil
         self.destinationURL = nil
         self.progress = 0
+        self.uploadProgress = 0
     }
     
     init(sourceUrl: URL) {
