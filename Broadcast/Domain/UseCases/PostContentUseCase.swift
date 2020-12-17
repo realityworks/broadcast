@@ -62,6 +62,8 @@ extension PostContentUseCase {
                              content: content)
             .subscribe(onNext: { uploadProgress in
                 print (uploadProgress)
+            }, onCompleted: {
+                print ("COMPLETED!")
             })
             .disposed(by: disposeBag)
     }

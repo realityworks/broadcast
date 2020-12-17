@@ -22,12 +22,7 @@ class StandardUploadService {
     var media: Media?
     var content: PostContent?
 
-    var uploadProgressPublishSubject: PublishSubject<UploadProgress>?
-    var uploadProgress = StandardUploadProgress() {
-        didSet {
-            uploadProgressPublishSubject?.onNext(uploadProgress)
-        }
-    }
+    var uploadProgress = StandardUploadProgress()
     
     let disposeBag = DisposeBag()
     
@@ -36,7 +31,6 @@ class StandardUploadService {
     init(dependencies: Dependencies = .standard) {
         self.media = nil
         self.content = nil
-        self.uploadProgressPublishSubject = nil
         
         self.baseUrl = dependencies.baseUrl
         self.schedulers = dependencies.schedulers
@@ -54,11 +48,12 @@ extension StandardUploadService : UploadService {
     
     func upload(media: Media, content: PostContent) -> Observable<UploadProgress> {
         guard let apiService = apiService else { return .error(BoomdayError.unknown) }
+        
         self.media = media
         self.content = content
         
-        uploadProgressPublishSubject = PublishSubject<UploadProgress>()
-
+        uploadProgress = StandardUploadProgress()
+        
         // Setup the Create Post observable
         let createPostObservable = Observable<UploadEvent>.create { [unowned self] observer in
             apiService.createPost()
@@ -95,11 +90,14 @@ extension StandardUploadService : UploadService {
                 case .createPost(let postId):
                     print("CREATE POST")
                     self.uploadProgress.postId = postId
+                    self.uploadProgress.progress += 0.1
+                    
                 case .requestUploadUrl(let uploadUrl, let mediaId):
                     print("REQUEST UPLOAD URL")
                     self.uploadProgress.destinationURL = uploadUrl
                     self.uploadProgress.mediaId = mediaId
-                
+                    self.uploadProgress.progress += 0.1
+                    
                 default:
                     break
                 }

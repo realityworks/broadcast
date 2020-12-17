@@ -23,7 +23,7 @@ class EditPostView: UIView {
     private let captionHeading = UILabel.bodyBold(LocalizedString.captionTitle)
     private let captionTextView = UITextView.standard()
     
-    private let uploadButton = UIButton.standard(withTitle: LocalizedString.publish)
+    private (set) let uploadButton = UIButton.standard(withTitle: LocalizedString.publish)
     
     init() {
         super.init(frame: .zero)

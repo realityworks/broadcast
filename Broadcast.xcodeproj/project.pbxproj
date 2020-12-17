@@ -303,7 +303,6 @@
 				1D3433F925624B4400886245 /* Broadcast */,
 				1D34341025624B4C00886245 /* BroadcastTests */,
 				1D34341B25624B4C00886245 /* BroadcastUITests */,
-				1D631686258A3F280009A4E1 /* Playgrounds */,
 				1D3433F825624B4400886245 /* Products */,
 				1D9314432577E990001C85C1 /* Frameworks */,
 			);
@@ -401,13 +400,6 @@
 				1D3F71E42571244900DE7F05 /* Localizable.strings */,
 			);
 			path = Strings;
-			sourceTree = "<group>";
-		};
-		1D631686258A3F280009A4E1 /* Playgrounds */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Playgrounds;
 			sourceTree = "<group>";
 		};
 		1D87DF3A2568313E000652D6 /* My Posts */ = {
