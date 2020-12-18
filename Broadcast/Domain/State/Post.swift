@@ -25,17 +25,30 @@ struct Post: Equatable, Codable {
     let postVideo: PostVideo?
     let postImage: PostImage?
     
-    enum PostCodingKeys: CodingKeys {
+    enum PostCodingKeys: String, CodingKey {
         case id = "id"
         case title = "title"
         case caption = "caption"
         case commentCount = "comment_count"
         case lockerCount = "locker_count"
+        case thumbnailUrl = "thumbnail_url"
+        case created = "created"
+        case media = "media"
     }
     
     init(from decoder: Decoder) throws {
+        #warning("TODO : Needs to be fully decoded")
         let container = try decoder.container(keyedBy: PostCodingKeys.self)
-        let
+        self.id = try container.decode(String.self, forKey: .id)
+        self.title = try container.decode(String.self, forKey: .title)
+        self.caption = try container.decode(String.self, forKey: .title)
+        
+        self.comments = 0
+        self.lockers = 0
+        self.created = Date()
+        self.thumbnailUrl = LocalAPIService.mockThumbnailUrl
+        
+        self.media = try container.decode(PostMedia.self, forKey: .media)
     }
     
     // MARK: Computed properties
