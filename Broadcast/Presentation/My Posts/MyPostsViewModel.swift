@@ -28,7 +28,6 @@ class MyPostsViewModel : ViewModel {
         self.myPostsObservable = dependencies.myPostsObservable
             .map { posts in
                 return posts.map { post in
-                    #warning("Setup all the parameters in the data model")
                     return MyPostsCellViewModel(
                         postId: post.id,
                         title: post.title,
@@ -44,7 +43,6 @@ class MyPostsViewModel : ViewModel {
         
         self.myPostsObservable
             .subscribe(onNext: { _ in
-                print("My posts loaded")
                 self.newPostsLoadedSubject.onNext(())
             })
             .disposed(by: disposeBag)

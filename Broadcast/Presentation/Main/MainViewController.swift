@@ -90,6 +90,8 @@ class MainViewController: UITabBarController {
 extension MainViewController : UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController,
                           didSelect viewController: UIViewController) {
-            print("Selected \(viewController.title ?? "No title")")
+        Logger.log(level: .info,
+                   topic: .appState,
+                   message: "Selected \(viewController.title ?? "No title")")
     }
 }

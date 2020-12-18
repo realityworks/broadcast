@@ -190,13 +190,11 @@ extension StandardUploadService : UploadService {
             .map { event -> UploadProgress in
                 switch event {
                 case .createPost(let postId):
-                    print("CREATE POST")
                     self.uploadProgress.postId = postId
                     self.uploadProgress.progress += 0.05
                     self.uploadProgress.totalProgress += 0.05
                     
                 case .requestUploadUrl(let uploadUrl, let mediaId):
-                    print("REQUEST UPLOAD URL")
                     self.uploadProgress.mediaId = mediaId
                     self.uploadProgress.destinationURL = uploadUrl
                     self.uploadProgress.progress += 0.05
