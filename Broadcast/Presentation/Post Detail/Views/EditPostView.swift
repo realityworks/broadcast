@@ -12,15 +12,15 @@ import RxCocoa
 class EditPostView: UIView {
     
     private let scrollView = UIScrollView()
-    private let verticalStackView = UIStackView()
+    
+    let verticalStackView = UIStackView()
+    let titleTextField = UITextField.standard(withPlaceholder: LocalizedString.addTitle)
+    let captionTextView = UITextView.standard()
+    let uploadButton = UIButton.standard(withTitle: LocalizedString.publish)
     
     private let uploadTitle = UILabel.bodyBold(LocalizedString.videoToUpload)
     private let titleHeading = UILabel.bodyBold(LocalizedString.addTitle)
     private let captionHeading = UILabel.bodyBold(LocalizedString.captionTitle)
-    
-    let titleTextField = UITextField.standard(withPlaceholder: LocalizedString.addTitle)
-    let captionTextView = UITextView.standard()
-    let uploadButton = UIButton.standard(withTitle: LocalizedString.publish)
     
     init() {
         super.init(frame: .zero)

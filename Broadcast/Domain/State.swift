@@ -18,4 +18,6 @@ struct State : Equatable {
     
     var selectedPostId: PostID?
     var selectedMedia: Media?
+    
+    var currentUploadProgress: StandardUploadProgress?
 }

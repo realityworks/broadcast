@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct StandardUploadProgress : UploadProgress {
+struct StandardUploadProgress : UploadProgress, Equatable {
     var postId: PostID?
     var mediaId: MediaID?
     var sourceUrl: URL?

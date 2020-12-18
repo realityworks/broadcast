@@ -61,7 +61,7 @@ extension PostContentUseCase {
         uploadService.upload(media: selectedMedia,
                              content: content)
             .subscribe(onNext: { uploadProgress in
-                print (uploadProgress)
+                Logger.log(level: .info, topic: .api, message: "Upload progress : \(uploadProgress.progress)")
                 #warning("TODO : Push this into an upload progress indicator")
             }, onCompleted: {
                 print ("COMPLETED!")
