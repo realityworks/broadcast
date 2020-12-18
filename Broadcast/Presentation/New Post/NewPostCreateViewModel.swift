@@ -16,9 +16,11 @@ class NewPostCreateViewModel : ViewModel {
     
     let title = BehaviorRelay<String>(value: "")
     let caption = BehaviorRelay<String>(value: "")
+    let progress: Observable<Float>
     
     init(dependencies: Dependencies = .standard) {
         self.postContentUseCase = dependencies.postContentUseCase
+        
         
         super.init(stateController: dependencies.stateController)
     }
@@ -31,10 +33,12 @@ extension NewPostCreateViewModel {
         
         let stateController: StateController
         let postContentUseCase: PostContentUseCase
+        let uploadProgressObservable: Observable<StandardUploadProgress?>
         
         static let standard = Dependencies(
             stateController: Domain.standard.stateController,
-            postContentUseCase: Domain.standard.useCases.postContentUseCase)
+            postContentUseCase: Domain.standard.useCases.postContentUseCase,
+            uploadProgressObservable: Domain.standard.stateController.stateObservable(of: \.currentUploadProgress))
     }
 }
 

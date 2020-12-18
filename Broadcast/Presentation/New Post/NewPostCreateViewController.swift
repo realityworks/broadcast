@@ -34,7 +34,8 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         editPostView.edgesToSuperview()
         
         view.addSubview(progressView)
-        progressView.topToBottom(of: editPostView.verticalStackView)
+        progressView.topToBottom(of: editPostView.uploadButton, offset: 20)
+        progressView.centerXToSuperview()
         progressView.width(150)
         progressView.height(25)
     }
@@ -53,5 +54,7 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         viewModel.caption
             .bind(to: editPostView.captionTextView.rx.text)
             .disposed(by: disposeBag)
+        
+        progressView.rx.p
     }
 }
