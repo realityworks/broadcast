@@ -64,7 +64,8 @@ extension PostContentUseCase {
                 Logger.log(level: .info, topic: .api, message: "Upload progress : \(uploadProgress.progress)")
                 self.stateController.state.currentUploadProgress = uploadProgress
             }, onCompleted: {
-                print ("COMPLETED!")
+                Logger.log(level: .info, topic: .api, message: "Post content complete!")
+                self.stateController.state.currentUploadProgress?.completed = true
             })
             .disposed(by: disposeBag)
     }

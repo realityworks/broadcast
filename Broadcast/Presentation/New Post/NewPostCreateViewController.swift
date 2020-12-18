@@ -58,5 +58,10 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         viewModel.progress
             .bind(to: progressView.rx.progress)
             .disposed(by: disposeBag)
+        
+        viewModel.isUploading
+            .map { !$0 }
+            .bind(to: editPostView.uploadButton.rx.isEnabled)
+            .disposed(by: disposeBag)
     }
 }

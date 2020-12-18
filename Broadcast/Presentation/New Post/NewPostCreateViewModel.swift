@@ -16,14 +16,26 @@ class NewPostCreateViewModel : ViewModel {
     
     let title = BehaviorRelay<String>(value: "")
     let caption = BehaviorRelay<String>(value: "")
+    
+    private let uploadingSubject = BehaviorSubject<Bool>(value: false)
+    let isUploading: Observable<Bool>
     let progress: Observable<Float>
     
     init(dependencies: Dependencies = .standard) {
         self.postContentUseCase = dependencies.postContentUseCase
         
-        progress = dependencies.uploadProgressObservable.compactMap { $0?.totalProgress }
+        let uploadingProgressObservable = dependencies.uploadProgressObservable.compactMap { $0 }
+        
+        progress = uploadingProgressObservable.map { $0.totalProgress }
+        isUploading = uploadingSubject.asObservable()
         
         super.init(stateController: dependencies.stateController)
+        
+        uploadingProgressObservable
+            .map { !$0.completed }
+            .distinctUntilChanged()
+            .bind(to: self.uploadingSubject)
+            .disposed(by: disposeBag)
     }
 }
 
@@ -48,6 +60,8 @@ extension NewPostCreateViewModel {
 extension NewPostCreateViewModel {
     func uploadPost() {
         // Compose post and upload
+        uploadingSubject.onNext(true)
+        
         let newPost = PostContent(title: title.value, caption: caption.value)
         postContentUseCase.upload(content: newPost)
     }
