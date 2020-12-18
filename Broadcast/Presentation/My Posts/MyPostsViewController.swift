@@ -92,6 +92,12 @@ class MyPostsViewController: ViewController {
                 self.viewModel.refreshMyPostsList()
             })
             .disposed(by: disposeBag)
+        
+        viewModel.newPostsLoadedSignal
+            .subscribe(onNext: {
+                self.refreshControl.endRefreshing()
+            })
+            .disposed(by: disposeBag)
     }
     
     private func style() {

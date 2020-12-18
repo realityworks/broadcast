@@ -76,8 +76,11 @@ extension PostContentUseCase {
             .subscribe(onSuccess: { [unowned self] response in
                 self.stateController.state.myPosts = response.posts
             }, onError: { [unowned self] error in
-                #warning("TODO")
                 Logger.log(level: .warning, topic: .api, message: "Failed to load posts \(error)")
+                if let error = error as? BoomdayError {
+                    self.stateController.sendError(error)
+                }
+                self.stateController.state.myPosts = []
             })
             .disposed(by: disposeBag)
     }

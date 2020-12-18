@@ -17,9 +17,14 @@ class MyPostsViewModel : ViewModel {
     let myPostsObservable: Observable<[MyPostsCellViewModel]>
     let selectedSubject = PublishRelay<()>()
     
+    private let newPostsLoadedSubject = PublishSubject<()>()
+    let newPostsLoadedSignal: Observable<()>
+    
     init(dependencies: Dependencies = .standard) {
         
         self.postContentUseCase = dependencies.postContentUseCase
+        self.newPostsLoadedSignal = newPostsLoadedSubject.asObservable()
+        
         self.myPostsObservable = dependencies.myPostsObservable
             .map { posts in
                 return posts.map { post in
@@ -36,6 +41,13 @@ class MyPostsViewModel : ViewModel {
             }
         
         super.init(stateController: dependencies.stateController)
+        
+        self.myPostsObservable
+            .subscribe(onNext: { _ in
+                print("My posts loaded")
+                self.newPostsLoadedSubject.onNext(())
+            })
+            .disposed(by: disposeBag)
     }
 
     func refreshMyPostsList() {
@@ -60,7 +72,7 @@ extension MyPostsViewModel {
             return Dependencies(
                 stateController: Domain.standard.stateController,
                 postContentUseCase: Domain.standard.useCases.postContentUseCase,
-                myPostsObservable: Domain.standard.stateController.stateObservable(of: \.myPosts))
+                myPostsObservable: Domain.standard.stateController.stateObservable(of: \.myPosts, distinct: false))
         }
     }
 }

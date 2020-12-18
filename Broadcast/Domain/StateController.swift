@@ -48,11 +48,13 @@ extension StateController {
     /// Create an observable on the keypath of the of the state
     /// - Parameter path: Key path of the state to observe
     /// - Returns: The observable. This needs to conform to Equatable
-    func stateObservable<T: Equatable>(of path: KeyPath<State, T>) -> Observable<T> {
-        return stateSubject
+    func stateObservable<T: Equatable>(of path: KeyPath<State, T>, distinct: Bool = true) -> Observable<T> {
+        
+        let observable = stateSubject
             .map { $0[keyPath: path] }
-            .distinctUntilChanged()
             .observeOn(schedulers.main)
+        
+        return distinct ? observable.distinctUntilChanged() : observable
     }
     
     /// Get an observable on any errors that are propagated
