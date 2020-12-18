@@ -156,13 +156,7 @@ extension StandardAPIService : APIService {
     }
     
     func uploadVideo(from fromUrl: URL, to toUrl: URL) -> Observable<(HTTPURLResponse, RxProgress)> {
-//        let fileSize = FileManager.default.sizeOfFile(atPath: file.path)!
-//
-//        request.addValue("BlockBlob", forHTTPHeaderField: "x-ms-blob-type")
-//        request.addValue("\(fileSize)", forHTTPHeaderField: "Content-Length")
-        
         let fileSize = fromUrl.fileSize()!
-        
         let headers = HTTPHeaders(["x-ms-blob-type": "BlockBlob",
                                    "Content-Length": "\(fileSize)"])
         return self.session.rx
@@ -202,8 +196,8 @@ extension StandardAPIService : APIService {
             .appendingPathComponent(postId)
         
         let parameters = [
-            "title": "test123",//newContent.title,
-            "caption": "this is a caption"]//newContent.caption]
+            "title": newContent.title,
+            "caption": newContent.caption]
         
         return authenticatedRequest(method: .put, url: url, parameters: parameters)
             .emptyResponseBody()

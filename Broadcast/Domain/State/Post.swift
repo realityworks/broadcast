@@ -30,7 +30,6 @@ struct Post: Equatable, Codable {
     }
     
     struct PostVideo : Equatable, Codable {
-        
         enum VideoState : String, Equatable, Codable {
             case available
             case encoding
