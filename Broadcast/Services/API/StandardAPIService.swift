@@ -61,7 +61,6 @@ class StandardAPIService : Interceptor {
         url: URL,
         parameters: APIParameters = [:],
         encoding: ParameterEncoding = JSONEncoding.default) -> Single<(HTTPURLResponse, Data)> {
-        
         return getHeaders()
             .flatMap { [unowned self] headers -> Single<(HTTPURLResponse, Data)> in
                 return self.session.rx
@@ -221,7 +220,7 @@ extension StandardAPIService : APIService {
             .appendingPathComponent("broadcaster")
             .appendingPathComponent("posts")
     
-        return authenticatedRequest(method: .get, url: url)
+        return authenticatedRequest(method: .get, url: url, encoding: URLEncoding.default)
             .decode(type: LoadMyPostsResponse.self)
             
     }

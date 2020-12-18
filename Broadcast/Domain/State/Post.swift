@@ -36,6 +36,27 @@ struct Post: Equatable, Codable {
         case media = "media"
     }
     
+    init(id: String,
+         title: String,
+         caption: String,
+         comments: Int,
+         lockers: Int,
+         thumbnailUrl: String,
+         created: Date,
+         postVideo: PostVideo?,
+         postImage: PostImage?) {
+        self.id = id
+        self.title = title
+        self.caption = caption
+        self.comments = comments
+        self.lockers = lockers
+        self.thumbnailUrl = thumbnailUrl
+        self.created = created
+        self.postImage = postImage
+        self.postVideo = postVideo
+        self.media = PostMedia(id: "", url: "")
+    }
+    
     init(from decoder: Decoder) throws {
         #warning("TODO : Needs to be fully decoded")
         let container = try decoder.container(keyedBy: PostCodingKeys.self)
@@ -47,6 +68,8 @@ struct Post: Equatable, Codable {
         self.lockers = 0
         self.created = Date()
         self.thumbnailUrl = LocalAPIService.mockThumbnailUrl
+        self.postVideo = nil
+        self.postImage = nil
         
         self.media = try container.decode(PostMedia.self, forKey: .media)
     }
