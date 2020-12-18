@@ -21,6 +21,7 @@ class NewPostCreateViewModel : ViewModel {
     init(dependencies: Dependencies = .standard) {
         self.postContentUseCase = dependencies.postContentUseCase
         
+        progress = dependencies.uploadProgressObservable.compactMap { $0?.totalProgress }
         
         super.init(stateController: dependencies.stateController)
     }
@@ -33,7 +34,7 @@ extension NewPostCreateViewModel {
         
         let stateController: StateController
         let postContentUseCase: PostContentUseCase
-        let uploadProgressObservable: Observable<StandardUploadProgress?>
+        let uploadProgressObservable: Observable<UploadProgress?>
         
         static let standard = Dependencies(
             stateController: Domain.standard.stateController,

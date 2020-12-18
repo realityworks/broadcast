@@ -22,7 +22,7 @@ class StandardUploadService {
     var media: Media?
     var content: PostContent?
 
-    var uploadProgress = StandardUploadProgress()
+    var uploadProgress = UploadProgress()
     
     let disposeBag = DisposeBag()
     
@@ -53,7 +53,7 @@ extension StandardUploadService : UploadService {
         self.media = media
         self.content = content
         
-        uploadProgress = StandardUploadProgress()
+        uploadProgress = UploadProgress()
         uploadProgress.sourceUrl = sourceUrl
         
         // Setup the Create Post observable

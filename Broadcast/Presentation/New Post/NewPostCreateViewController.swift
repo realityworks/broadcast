@@ -55,6 +55,8 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
             .bind(to: editPostView.captionTextView.rx.text)
             .disposed(by: disposeBag)
         
-        progressView.rx.p
+        viewModel.progress
+            .bind(to: progressView.rx.progress)
+            .disposed(by: disposeBag)
     }
 }

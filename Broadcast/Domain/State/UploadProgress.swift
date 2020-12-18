@@ -1,5 +1,5 @@
 //
-//  StandardUploadProgress.swift
+//  UploadProgress.swift
 //  Broadcast
 //
 //  Created by Piotr Suwara on 17/12/20.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct StandardUploadProgress : UploadProgress, Equatable {
+struct UploadProgress : Equatable {
     var postId: PostID?
     var mediaId: MediaID?
     var sourceUrl: URL?

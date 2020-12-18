@@ -62,7 +62,7 @@ extension PostContentUseCase {
                              content: content)
             .subscribe(onNext: { uploadProgress in
                 Logger.log(level: .info, topic: .api, message: "Upload progress : \(uploadProgress.progress)")
-                #warning("TODO : Push this into an upload progress indicator")
+                self.stateController.state.currentUploadProgress = uploadProgress
             }, onCompleted: {
                 print ("COMPLETED!")
             })
