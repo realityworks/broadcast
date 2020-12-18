@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct LoadMyPostsResponse {
+struct LoadMyPostsResponse : Decodable {
     let posts: [Post]
 }

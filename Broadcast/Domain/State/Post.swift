@@ -20,13 +20,33 @@ struct Post: Equatable, Codable {
     let thumbnailUrl: String
     let created: Date
     
+    let media: PostMedia
+    
     let postVideo: PostVideo?
     let postImage: PostImage?
+    
+    enum PostCodingKeys: CodingKeys {
+        case id = "id"
+        case title = "title"
+        case caption = "caption"
+        case commentCount = "comment_count"
+        case lockerCount = "locker_count"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: PostCodingKeys.self)
+        let
+    }
     
     // MARK: Computed properties
     var contentUrl: URL? {
         let urlString = [postVideo?.postVideoUrl, postImage?.postImageUrl].first(where: { $0 != nil }) as? String
         return URL(string: urlString)
+    }
+    
+    struct PostMedia : Equatable, Codable {
+        let id: MediaID
+        let url: String
     }
     
     struct PostVideo : Equatable, Codable {

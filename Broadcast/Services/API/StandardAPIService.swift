@@ -217,11 +217,13 @@ extension StandardAPIService : APIService {
     // MARK: Content loading
     
     func loadMyPosts() -> Single<LoadMyPostsResponse> {
-        let single = Single<LoadMyPostsResponse>.create { observer in
-            observer(.error(BoomdayError.unsupported))
-            return Disposables.create { }
-        }
-        return single
+        let url = baseUrl
+            .appendingPathComponent("broadcaster")
+            .appendingPathComponent("posts")
+    
+        return authenticatedRequest(method: .get, url: url)
+            .decode(type: LoadMyPostsResponse.self)
+            
     }
     
     func loadProfile() -> Single<LoadProfileResponse> {
