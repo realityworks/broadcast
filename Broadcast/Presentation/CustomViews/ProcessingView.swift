@@ -42,11 +42,12 @@ class ProcessingView : UIView {
         verticalStackView.addArrangedSubview(activityIndicator)
         verticalStackView.addArrangedSubview(processingLabel)
         processingLabel.text = "PROCESSING"
+        activityIndicator.hidesWhenStopped = false
         
         backgroundColor = .clear
     }
     
-    override func layoutSubviews() {
+    func startAnimating() {
         activityIndicator.startAnimating()
     }
 }
