@@ -67,8 +67,8 @@ struct Post: Equatable, Codable {
         self.lockerCount = try container.decode(Int.self, forKey: .lockerCount)
         self.finishedProcessing = try container.decode(Bool.self, forKey: .finishedProcessing)
         
-        let iso8601String = try container.decode(String.self, forKey: .created)
-        self.created = Date(iso8601String: iso8601String) ?? Date()
+        let apiDateTimeString = try container.decode(String.self, forKey: .created)
+        self.created = Date(apiDateTimeString: apiDateTimeString) ?? Date()
         
         self.postMedia = try container.decode(PostMedia.self, forKey: .postMedia)
     }

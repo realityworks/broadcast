@@ -147,7 +147,7 @@ extension LocalAPIService : APIService {
     
     func loadMyPosts() -> Single<LoadMyPostsResponse> {
         let single = Single<LoadMyPostsResponse>.create { [unowned self] observer in
-            observer(.success(LoadMyPostsResponse(posts: self.mockPostData)))
+            observer(.success(LoadMyPostsResponse(self.mockPostData)))
             return Disposables.create { }
         }
         return single

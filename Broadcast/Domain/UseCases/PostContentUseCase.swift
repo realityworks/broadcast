@@ -74,7 +74,7 @@ extension PostContentUseCase {
         // Load posts into the app state
         apiService.loadMyPosts()
             .subscribe(onSuccess: { [unowned self] response in
-                self.stateController.state.myPosts = response.posts
+                self.stateController.state.myPosts = response
             }, onError: { [unowned self] error in
                 Logger.log(level: .warning, topic: .api, message: "Failed to load posts \(error)")
                 if let error = error as? BoomdayError {

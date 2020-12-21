@@ -14,9 +14,18 @@ extension Date {
     /// Refer to DateFormatter+Extensions.swift for more information on the
     /// conversion.
     /// - Parameter iso8601String: DateTime string defined in iso8601 format.
-    init?(iso8601String: String) {
+    init?(iso8601DateTimeString: String) {
         let df = DateFormatter.iso8601DateTimeFormatter
-        guard let date = df.date(from: iso8601String) else {
+        guard let date = df.date(from: iso8601DateTimeString) else {
+            return nil
+        }
+        
+        self = date
+    }
+    
+    init?(apiDateTimeString: String) {
+        let df = DateFormatter.apiDateTimeFormatter
+        guard let date = df.date(from: apiDateTimeString) else {
             return nil
         }
         
