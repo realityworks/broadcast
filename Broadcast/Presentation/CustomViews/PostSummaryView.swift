@@ -139,6 +139,8 @@ class PostSummaryView : UIView {
         if postSummaryViewModel.showVideoPlayer,
            let media = postSummaryViewModel.media {
             thumbnailImageView.isHidden = true
+            processingView.isHidden = true
+            blurredEffectView.isHidden = true
             
             switch media {
             case .image(let url):
