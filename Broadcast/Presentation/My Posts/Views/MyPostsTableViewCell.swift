@@ -36,10 +36,11 @@ class MyPostsTableViewCell : UITableViewCell {
     }
     
     func configure(withViewModel cellViewModel: MyPostsCellViewModel) {
+        let mockThumbnailUrl2 = "https://videodelivery.net/6b391fb729654c1a93a1b6739610f6a9/thumbnails/thumbnail.jpg"
         let postSummaryViewModel = PostSummaryViewModel(
             title: cellViewModel.title,
             caption: cellViewModel.caption,
-            thumbnailUrl: cellViewModel.thumbnailUrl,
+            thumbnailUrl: URL(string: mockThumbnailUrl2),//cellViewModel.thumbnailUrl,
             media: cellViewModel.media,
             commentCount: cellViewModel.commentCount,
             lockerCount: cellViewModel.lockerCount,

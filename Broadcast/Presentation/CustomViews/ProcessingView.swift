@@ -13,4 +13,7 @@ import UIKit
 class ProcessingView : UIView {
     #warning("TODO")
 
+    init(frame: CGRect) {
+        
+    }
 }
