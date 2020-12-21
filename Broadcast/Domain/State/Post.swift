@@ -26,9 +26,9 @@ struct Post: Equatable, Codable {
         case id = "id"
         case title = "title"
         case caption = "caption"
+        case finishedProcessing = "isProcessed"
         case commentCount = "comment_count"
         case lockerCount = "locker_count"
-        case thumbnailUrl = "thumbnail_url"
         case created = "created"
         case media = "media"
     }
@@ -59,7 +59,7 @@ struct Post: Equatable, Codable {
         
         self.comments = 0
         self.lockers = 0
-        self.created = Date()
+        self.created = (try container.decode(String.self, forKey: .created))
         
         self.media = try container.decode(PostMedia.self, forKey: .media)
     }

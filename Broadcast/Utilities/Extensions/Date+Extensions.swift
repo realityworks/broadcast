@@ -9,6 +9,20 @@ import Foundation
 
 extension Date {
     
+    /// Initialize this date from a date-time string in iso8601 format
+    /// The format should beof the form `yyyy-MM-dd'T'HH:mm:ssZZZZZ`
+    /// Refer to DateFormatter+Extensions.swift for more information on the
+    /// conversion.
+    /// - Parameter iso8601String: DateTime string defined in iso8601 format.
+    init?(iso8601String: String) {
+        let df = DateFormatter.iso8601DateTimeFormatter
+        guard let date = df.date(from: iso8601String) else {
+            return nil
+        }
+        
+        self = date
+    }
+    
     /// Computed property that explicitly defines that the date should be now based on the system clock.
     /// In order to avoid any confusing about the initial state of a Date instance, this makes the definition clearer.
     static var now: Date {
