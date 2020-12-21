@@ -73,7 +73,6 @@ class MyPostsViewController: ViewController {
         
         /// Notify the view model when a cell is tapped
         tableView.rx.modelSelected(MyPostsCellViewModel.self)
-            .observeOn(Schedulers.standard.main)
             .subscribe(onNext: { model in
                 self.viewModel.selectPost(with: model.postId)
             })
