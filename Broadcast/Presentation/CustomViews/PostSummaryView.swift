@@ -26,6 +26,9 @@ class PostSummaryView : UIView {
     let dateCreatedContainer = UIView()
     let dateCreatedLabel = UILabel.body()
     
+    let blurEffect = UIBlurEffect(style: .light)
+    let blurredEffectView: UIVisualEffectView!
+    
     enum Styling {
         case list
         case detail
@@ -35,6 +38,8 @@ class PostSummaryView : UIView {
     
     init(withStyling styling: Styling) {
         self.styling = styling
+        self.blurredEffectView = UIVisualEffectView(effect: blurEffect)
+        
         super.init(frame: .zero)
         
         configureViews()
@@ -80,9 +85,12 @@ class PostSummaryView : UIView {
         }
         
         containerTopView.addSubview(thumbnailImageView)
+        containerTopView.addSubview(blurredEffectView)
         containerTopView.addSubview(processingView)
-        // End order important
         
+        
+        // End order important
+        blurredEffectView.edgesToSuperview()
         processingView.edgesToSuperview()
         thumbnailImageView.edgesToSuperview()
         
@@ -128,18 +136,16 @@ class PostSummaryView : UIView {
     }
     
     func configure(withPostSummaryViewModel postSummaryViewModel: PostSummaryViewModel) {
-        thumbnailImageView.isHidden = postSummaryViewModel.isEncoding
-        
-        if postSummaryViewModel.showVideoPlayer {
-            switch postSummaryViewModel.media {
+        if postSummaryViewModel.showVideoPlayer,
+           let media = postSummaryViewModel.media {
+            thumbnailImageView.isHidden = true
+            
+            switch media {
             case .image(let url):
                 thumbnailImageView.sd_setImage(with: url,
                                                placeholderImage: UIImage(systemName: "paintbrush"))
             case .video(let url):
                 videoPlayerView.playVideo(withURL: url)
-            case .none:
-                Log(level: .warning, topic: .debug, message: "Unsupported media type in PostSummaryViewModel configuration")
-                break
             }
             
         } else if let thumbnailUrl = postSummaryViewModel.thumbnailUrl {
@@ -147,6 +153,7 @@ class PostSummaryView : UIView {
                                            placeholderImage: UIImage(systemName: "paintbrush"))
         }
         
+        blurredEffectView.isHidden = !postSummaryViewModel.isEncoding
         processingView.isHidden = !postSummaryViewModel.isEncoding
         
         postStatsView.configure(withCommentCount: postSummaryViewModel.commentCount,
