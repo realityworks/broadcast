@@ -17,13 +17,10 @@ struct Post: Equatable, Codable {
     let caption: String
     let comments: Int
     let lockers: Int
-    let thumbnailUrl: String
+    let finishedProcessing: Bool
     let created: Date
     
     let media: PostMedia
-    
-    let postVideo: PostVideo?
-    let postImage: PostImage?
     
     enum PostCodingKeys: String, CodingKey {
         case id = "id"
@@ -41,20 +38,16 @@ struct Post: Equatable, Codable {
          caption: String,
          comments: Int,
          lockers: Int,
-         thumbnailUrl: String,
+         finishedProcessing: Bool,
          created: Date,
-         postVideo: PostVideo?,
-         postImage: PostImage?) {
+         media: PostMedia) {
         self.id = id
         self.title = title
         self.caption = caption
         self.comments = comments
         self.lockers = lockers
-        self.thumbnailUrl = thumbnailUrl
         self.created = created
-        self.postImage = postImage
-        self.postVideo = postVideo
-        self.media = PostMedia(id: "", url: "")
+        self.media = media
     }
     
     init(from decoder: Decoder) throws {
@@ -67,22 +60,14 @@ struct Post: Equatable, Codable {
         self.comments = 0
         self.lockers = 0
         self.created = Date()
-        self.thumbnailUrl = LocalAPIService.mockThumbnailUrl
-        self.postVideo = nil
-        self.postImage = nil
         
         self.media = try container.decode(PostMedia.self, forKey: .media)
-    }
-    
-    // MARK: Computed properties
-    var contentUrl: URL? {
-        let urlString = [postVideo?.postVideoUrl, postImage?.postImageUrl].first(where: { $0 != nil }) as? String
-        return URL(string: urlString)
     }
     
     struct PostMedia : Equatable, Codable {
         let id: MediaID
         let url: String
+        
     }
     
     struct PostVideo : Equatable, Codable {
