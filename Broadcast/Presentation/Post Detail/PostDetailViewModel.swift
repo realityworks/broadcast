@@ -29,8 +29,8 @@ class PostDetailViewModel : ViewModel {
                 caption: $0.caption,
                 thumbnailUrl: URL(string: $0.postMedia.thumbnailUrl),
                 media: $0.contentMedia,
-                commentCount: $0.comments,
-                lockerCount: $0.lockers,
+                commentCount: $0.commentCount,
+                lockerCount: $0.lockerCount,
                 dateCreated: "Created \($0.created.timeAgo())",
                 isEncoding: !$0.finishedProcessing,
                 showVideoPlayer: true)

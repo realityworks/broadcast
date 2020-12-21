@@ -137,6 +137,9 @@ class PostSummaryView : UIView {
                                                placeholderImage: UIImage(systemName: "paintbrush"))
             case .video(let url):
                 videoPlayerView.playVideo(withURL: url)
+            case .none:
+                Log(level: .warning, topic: .debug, message: "Unsupported media type in PostSummaryViewModel configuration")
+                break
             }
             
         } else if let thumbnailUrl = postSummaryViewModel.thumbnailUrl {

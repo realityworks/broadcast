@@ -36,8 +36,8 @@ class MyPostsViewModel : ViewModel {
                         media: $0.contentMedia,
                         isEncoding: !$0.finishedProcessing,
                         dateCreated: "Created \($0.created.timeAgo()) ago",
-                        commentCount: $0.comments,
-                        lockerCount: $0.lockers)
+                        commentCount: $0.commentCount,
+                        lockerCount: $0.lockerCount)
                 }
             }
         

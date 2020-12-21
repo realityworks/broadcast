@@ -15,8 +15,8 @@ struct Post: Equatable, Codable {
     let id: PostID
     let title: String
     let caption: String
-    let comments: Int
-    let lockers: Int
+    let commentCount: Int
+    let lockerCount: Int
     let finishedProcessing: Bool
     let created: Date
     
@@ -43,16 +43,16 @@ struct Post: Equatable, Codable {
     init(id: String,
          title: String,
          caption: String,
-         comments: Int,
-         lockers: Int,
+         commentCount: Int,
+         lockerCount: Int,
          finishedProcessing: Bool,
          created: Date,
          postMedia: PostMedia) {
         self.id = id
         self.title = title
         self.caption = caption
-        self.comments = comments
-        self.lockers = lockers
+        self.commentCount = commentCount
+        self.lockerCount = lockerCount
         self.finishedProcessing = finishedProcessing
         self.created = created
         self.postMedia = postMedia
@@ -63,16 +63,14 @@ struct Post: Equatable, Codable {
         self.id = try container.decode(String.self, forKey: .id)
         self.title = try container.decode(String.self, forKey: .title)
         self.caption = try container.decode(String.self, forKey: .title)
+        self.commentCount = try container.decode(Int.self, forKey: .commentCount)
+        self.lockerCount = try container.decode(Int.self, forKey: .lockerCount)
         self.finishedProcessing = try container.decode(Bool.self, forKey: .finishedProcessing)
-        
-        #warning("TODO - Waiting on Bryan for endpoint")
-        self.comments = 0
-        self.lockers = 0
         
         let iso8601String = try container.decode(String.self, forKey: .created)
         self.created = Date(iso8601String: iso8601String) ?? Date()
         
-        self.media = try container.decode(PostMedia.self, forKey: .postMedia)
+        self.postMedia = try container.decode(PostMedia.self, forKey: .postMedia)
     }
     
     struct PostMedia : Equatable, Codable {
