@@ -20,17 +20,24 @@ struct Post: Equatable, Codable {
     let finishedProcessing: Bool
     let created: Date
     
-    let media: PostMedia
+    let postMedia: PostMedia
+    
+    var contentMedia: Media? {
+        guard let contentUrl = URL(string: postMedia.contentUrl) else { return nil }
+        return postMedia.contentType == .video
+            ? Media.video(url: contentUrl)
+            : Media.image(url: contentUrl)
+    }
     
     enum PostCodingKeys: String, CodingKey {
         case id = "id"
         case title = "title"
         case caption = "caption"
         case finishedProcessing = "isProcessed"
-        case commentCount = "comment_count"
-        case lockerCount = "locker_count"
+        case commentCount = "commentCount"
+        case lockerCount = "lockerCount"
         case created = "created"
-        case media = "media"
+        case postMedia = "media"
     }
     
     init(id: String,
@@ -40,7 +47,7 @@ struct Post: Equatable, Codable {
          lockers: Int,
          finishedProcessing: Bool,
          created: Date,
-         media: PostMedia) {
+         postMedia: PostMedia) {
         self.id = id
         self.title = title
         self.caption = caption
@@ -48,7 +55,7 @@ struct Post: Equatable, Codable {
         self.lockers = lockers
         self.finishedProcessing = finishedProcessing
         self.created = created
-        self.media = media
+        self.postMedia = postMedia
     }
     
     init(from decoder: Decoder) throws {
@@ -65,7 +72,7 @@ struct Post: Equatable, Codable {
         let iso8601String = try container.decode(String.self, forKey: .created)
         self.created = Date(iso8601String: iso8601String) ?? Date()
         
-        self.media = try container.decode(PostMedia.self, forKey: .media)
+        self.media = try container.decode(PostMedia.self, forKey: .postMedia)
     }
     
     struct PostMedia : Equatable, Codable {

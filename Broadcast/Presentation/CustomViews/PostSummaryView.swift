@@ -130,10 +130,16 @@ class PostSummaryView : UIView {
     func configure(withPostSummaryViewModel postSummaryViewModel: PostSummaryViewModel) {
         thumbnailImageView.isHidden = postSummaryViewModel.isEncoding
         
-        if postSummaryViewModel.showVideoPlayer,
-           let videoUrl = postSummaryViewModel.videoURL {
-            videoPlayerView.playVideo(withURL: videoUrl)
-        } else if let thumbnailUrl = postSummaryViewModel.thumbnailURL {
+        if postSummaryViewModel.showVideoPlayer {
+            switch postSummaryViewModel.media {
+            case .image(let url):
+                thumbnailImageView.sd_setImage(with: url,
+                                               placeholderImage: UIImage(systemName: "paintbrush"))
+            case .video(let url):
+                videoPlayerView.playVideo(withURL: url)
+            }
+            
+        } else if let thumbnailUrl = postSummaryViewModel.thumbnailUrl {
             thumbnailImageView.sd_setImage(with: thumbnailUrl,
                                            placeholderImage: UIImage(systemName: "paintbrush"))
         }

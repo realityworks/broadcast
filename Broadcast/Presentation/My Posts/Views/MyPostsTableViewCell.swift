@@ -38,8 +38,9 @@ class MyPostsTableViewCell : UITableViewCell {
     func configure(withViewModel cellViewModel: MyPostsCellViewModel) {
         let postSummaryViewModel = PostSummaryViewModel(
             title: cellViewModel.title,
-            thumbnailURL: cellViewModel.thumbnailURL,
-            videoURL: nil,
+            caption: cellViewModel.caption,
+            thumbnailUrl: cellViewModel.thumbnailUrl,
+            media: cellViewModel.media,
             commentCount: cellViewModel.commentCount,
             lockerCount: cellViewModel.lockerCount,
             dateCreated: cellViewModel.dateCreated,

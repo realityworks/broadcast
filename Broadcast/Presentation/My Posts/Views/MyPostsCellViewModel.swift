@@ -10,7 +10,9 @@ import UIKit
 struct MyPostsCellViewModel {
     let postId: PostID
     let title: String
-    let thumbnailURL: URL?
+    let caption: String
+    let thumbnailUrl: URL?
+    let media: Media?
     let isEncoding: Bool
     let dateCreated: String
     let commentCount: Int

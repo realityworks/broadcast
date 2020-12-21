@@ -27,15 +27,17 @@ class MyPostsViewModel : ViewModel {
         
         self.myPostsObservable = dependencies.myPostsObservable
             .map { posts in
-                return posts.map { post in
-                    return MyPostsCellViewModel(
-                        postId: post.id,
-                        title: post.title,
-                        thumbnailURL: URL(string: post.thumbnailUrl),
-                        isEncoding: false,
-                        dateCreated: "Created \(post.created.timeAgo()) ago",
-                        commentCount: post.comments,
-                        lockerCount: post.lockers)
+                return posts.map {
+                    MyPostsCellViewModel(
+                        postId: $0.id,
+                        title: $0.title,
+                        caption: $0.caption,
+                        thumbnailUrl: URL(string: $0.postMedia.thumbnailUrl),
+                        media: $0.contentMedia,
+                        isEncoding: !$0.finishedProcessing,
+                        dateCreated: "Created \($0.created.timeAgo()) ago",
+                        commentCount: $0.comments,
+                        lockerCount: $0.lockers)
                 }
             }
         
