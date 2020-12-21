@@ -153,8 +153,11 @@ class PostSummaryView : UIView {
                                            placeholderImage: UIImage(systemName: "paintbrush"))
         }
         
-        blurredEffectView.isHidden = !postSummaryViewModel.isEncoding
-        processingView.isHidden = !postSummaryViewModel.isEncoding
+        if !postSummaryViewModel.showVideoPlayer {
+            blurredEffectView.isHidden = !postSummaryViewModel.isEncoding
+            processingView.isHidden = !postSummaryViewModel.isEncoding
+            processingView.startAnimating()
+        }
         
         postStatsView.configure(withCommentCount: postSummaryViewModel.commentCount,
                                 lockerCount: postSummaryViewModel.lockerCount)
