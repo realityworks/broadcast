@@ -34,7 +34,6 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         withTitle: LocalizedString.loginButton)
     
     private let applyHereTextView = UITextView()
-    private let termsAndConditionsTextView = UITextView()
     private let forgotPasswordTextView = UITextView()
     
     private let testUserName: String = "Pink67@gmail.com"
@@ -112,7 +111,6 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         /// Configure the bottom stackview
         view.addSubview(bottomStackView)
         bottomStackView.addArrangedSubview(forgotPasswordTextView)
-        bottomStackView.addArrangedSubview(termsAndConditionsTextView)
         bottomStackView.bottomToSuperview(offset: -8, usingSafeArea: true)
         bottomStackView.widthToSuperview()
         
@@ -123,7 +121,6 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         applyHereTextView.rightToSuperview()
         
         forgotPasswordTextView.height(30)
-        termsAndConditionsTextView.height(30)
     }
     
     /// Configure the bindings between the view model and
@@ -195,7 +192,10 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
             $0.linkURL = URL(string: "https://boomday.com")
         }
         
-        forgotPasswordTextView.attributedText = "Forgot your password?".set(style: forgotPasswordStyle)
+        forgotPasswordTextView.attributedText = LocalizedString
+            .forgotPassword
+            .localized
+            .set(style: forgotPasswordStyle)
                 
         let termsAndConditionsStyle = Style {
             $0.font = UIFont.title
@@ -203,8 +203,6 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
             $0.linkURL = URL(string: "https://boomday.com")
         }
         
-        termsAndConditionsTextView.attributedText = "Terms and Conditions".set(style: termsAndConditionsStyle)
-
         // Style the text views
         let textViews = [applyHereTextView,
                          forgotPasswordTextView,

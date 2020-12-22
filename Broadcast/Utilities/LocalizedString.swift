@@ -45,6 +45,7 @@ enum LocalizedString : String {
     case publish
     case notABroadcaster
     case learnMore
+    case forgotPassword
 
     
     var localized: String {
