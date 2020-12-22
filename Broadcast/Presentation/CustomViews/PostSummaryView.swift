@@ -61,6 +61,43 @@ class PostSummaryView : UIView {
         // Layout vertical stack
         addSubview(verticalStackView)
         
+        let containedViews = [postTitleLabel,
+                              postStatsView,
+                              dateCreatedLabel]
+        
+        switch styling {
+        case .detail:
+            configureDetailStyle()
+            containedViews.forEach {
+                $0.leftToSuperview(offset: 20)
+                $0.rightToSuperview(offset: -20)
+            }
+            
+            verticalStackView.edgesToSuperview()
+            
+        case .list:
+            configureListStyle()
+            containedViews.forEach {
+                $0.leftToSuperview()
+                $0.rightToSuperview()
+            }
+            
+            verticalStackView.leftToSuperview(offset: 20)
+            verticalStackView.rightToSuperview(offset: -20)
+            verticalStackView.topToSuperview(usingSafeArea: true)
+            verticalStackView.bottomToSuperview()
+            containerTopView.layer.cornerRadius = 20
+            
+        case .none:
+            break
+        }
+    }
+    
+    private func configureListStyle() {
+        
+    }
+    
+    private func configureDetailStyle() {
         postTitleContainer.addSubview(postTitleLabel)
         postStatsContainer.addSubview(postStatsView)
         dateCreatedContainer.addSubview(dateCreatedLabel)
@@ -96,35 +133,6 @@ class PostSummaryView : UIView {
         
         postStatsView.height(15)
         verticalStackView.addSpace(10)
-        
-        let containedViews = [postTitleLabel,
-                              postStatsView,
-                              dateCreatedLabel]
-        
-        switch styling {
-        case .detail:
-            containedViews.forEach {
-                $0.leftToSuperview(offset: 20)
-                $0.rightToSuperview(offset: -20)
-            }
-            
-            verticalStackView.edgesToSuperview()
-            
-        case .list:
-            containedViews.forEach {
-                $0.leftToSuperview()
-                $0.rightToSuperview()
-            }
-            
-            verticalStackView.leftToSuperview(offset: 20)
-            verticalStackView.rightToSuperview(offset: -20)
-            verticalStackView.topToSuperview(usingSafeArea: true)
-            verticalStackView.bottomToSuperview()
-            containerTopView.layer.cornerRadius = 20
-            
-        case .none:
-            break
-        }
     }
     
     func style() {
