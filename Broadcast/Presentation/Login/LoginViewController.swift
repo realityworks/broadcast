@@ -196,17 +196,10 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
             .forgotPassword
             .localized
             .set(style: forgotPasswordStyle)
-                
-        let termsAndConditionsStyle = Style {
-            $0.font = UIFont.title
-            $0.alignment = .center
-            $0.linkURL = URL(string: "https://boomday.com")
-        }
         
         // Style the text views
         let textViews = [applyHereTextView,
-                         forgotPasswordTextView,
-                         termsAndConditionsTextView]
+                         forgotPasswordTextView]
         
         textViews.forEach { $0.tintColor = .black }
         
