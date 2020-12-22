@@ -29,5 +29,8 @@ extension UIStackView {
         return spaceView
     }
     
-    @discardable
+    @discardableResult
+    func addSeparator(withColor color: UIColor) {
+        addSpace(1, color: color)
+    }
 }
