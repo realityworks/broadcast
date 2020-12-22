@@ -101,15 +101,11 @@ extension StandardUploadService : UploadService {
                             let progressFloat = Float(progress.bytesWritten) / Float(progress.totalBytes)
                             observer.onNext(
                                 UploadEvent.uploadMedia(progress: progressFloat))
-                            print ("PROGRESS : \(progressFloat)")
                         } onError: { error in
-                            print ("ERROR: \(error)")
                             observer.onError(BoomdayError.unknown)
                         } onCompleted: {
-                            print ("COMPLETED!")
                             observer.onCompleted()
                         } onDisposed: {
-                            print ("DISPOSED!")
                         }
                         .disposed(by: disposeBag)
             } else {
@@ -126,7 +122,7 @@ extension StandardUploadService : UploadService {
                 apiService.mediaComplete(for: postId,
                                          mediaId)
                         .subscribe {
-                            print ("FINALIZED MEDIA UPLOAD COMPLETE")
+                            Logger.log(level: .verbose, topic: .debug, message:  "FINALIZED MEDIA UPLOAD COMPLETE")
                             observer.onNext(UploadEvent.completeUpload)
                             observer.onCompleted()
                         } onError: { error in
@@ -148,7 +144,7 @@ extension StandardUploadService : UploadService {
                     postId: postId,
                     newContent: content)
                     .subscribe {
-                        print ("CONTENT SET")
+                        Logger.log(level: .verbose, topic: .debug, message: "CONTENT SET")
                         observer.onNext(UploadEvent.postContent)
                         observer.onCompleted()
                     } onError: { error in
@@ -167,7 +163,7 @@ extension StandardUploadService : UploadService {
             if let postId = self.uploadProgress.postId {
                 apiService.publish(postId: postId)
                     .subscribe {
-                        print ("PUBLISHED")
+                        Logger.log(level: .verbose, topic: .debug, message: "PUBLISHED")
                         observer.onNext(UploadEvent.publish)
                         observer.onCompleted()
                     } onError: { error in
