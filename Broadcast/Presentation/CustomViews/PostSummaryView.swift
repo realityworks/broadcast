@@ -134,11 +134,15 @@ class PostSummaryView : UIView {
         verticalStackView.addArrangedSubview(postStatsContainer)
         
         postTitleContainer.height(15)
+        postCaptionContainer.height(15)
         postStatsContainer.height(15)
         dateCreatedContainer.height(15)
         
+        postCaptionLabel.numberOfLines = 2
+        postCaptionLabel.lineBreakMode = .byTruncatingTail
+        
         // Layout container top view
-        containerTopView.edgesToSuperview(excluding: [.bottom])
+        containerTopView.edgesToSuperview(excluding: [.top, .bottom])
         containerTopView.aspectRatio(1)
         
         // Order important
@@ -151,7 +155,6 @@ class PostSummaryView : UIView {
         containerTopView.addSubview(blurredEffectView)
         containerTopView.addSubview(processingView)
         
-        
         // End order important
         blurredEffectView.edgesToSuperview()
         processingView.edgesToSuperview()
@@ -161,6 +164,7 @@ class PostSummaryView : UIView {
         verticalStackView.addSpace(10)
         
         let containedViews = [postTitleLabel,
+                              postCaptionLabel,
                               postStatsView,
                               dateCreatedLabel]
         
