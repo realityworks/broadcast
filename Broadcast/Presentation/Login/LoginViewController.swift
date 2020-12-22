@@ -61,6 +61,7 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         
         applyHereTextView.isScrollEnabled = false
         forgotPasswordTextView.isScrollEnabled = false
+        forgotPasswordTextView.textAlignment = .left
         
         activityIndicator.hidesWhenStopped = true
         
@@ -109,6 +110,9 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         applyHereTextView.height(30)
         applyHereTextView.leftToSuperview()
         applyHereTextView.rightToSuperview()
+        
+        forgotPasswordTextView.leftToSuperview()
+        forgotPasswordTextView.rightToSuperview()
         
         forgotPasswordTextView.height(30)
     }
@@ -178,7 +182,7 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         
         let forgotPasswordStyle = Style {
             $0.font = UIFont.title
-            $0.alignment = .center
+            $0.alignment = .left
             $0.linkURL = URL(string: "https://boomday.com")
         }
         
