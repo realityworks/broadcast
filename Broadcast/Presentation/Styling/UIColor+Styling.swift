@@ -8,6 +8,6 @@
 import UIKit
 
 extension UIColor {
-    
+    static let primaryRed = UIColor(hexString: "#FD0A4C")
 }
 

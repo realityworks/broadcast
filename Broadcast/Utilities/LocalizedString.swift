@@ -43,6 +43,9 @@ enum LocalizedString : String {
     case addTitle
     case captionTitle
     case publish
+    case notABroadcaster
+    case learnMore
+
     
     var localized: String {
         return Bundle.main.localizedString(forKey: self.rawValue, value: nil, table: nil)

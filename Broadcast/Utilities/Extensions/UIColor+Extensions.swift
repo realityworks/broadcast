@@ -5,10 +5,7 @@
 //  Created by Piotr Suwara on 22/12/20.
 //
 
-import Foundation
 import UIKit
-
-//#FD0A4C
 
 extension UIColor {
     convenience init(hex: String) {
@@ -24,16 +21,15 @@ extension UIColor {
         case 6: // ARGB (24-Bit)
             (a, r, g, b) = (255, hexInt >> 16, hexInt >> 8 & 0xFF, hexInt & 0xFF)
         case 8: // ARGB (32-Bit)
-            (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
+            (a, r, g, b) = (hexInt >> 24, hexInt >> 16 & 0xFF, hexInt >> 8 & 0xFF, hexInt & 0xFF)
         default:
             (a, r, g, b) = (1, 1, 1, 0)
         }
-        
+                
         self.init(
-            .sRGB,
-            red: Double(r) / 255,
-            green: Double(g) / 255,
-            blue:  Double(b) / 255,
-            opacity: Double(a) / 255)
+            displayP3Red: CGFloat(r) / 255,
+            green: CGFloat(g) / 255,
+            blue: CGFloat(b) / 255,
+            alpha: CGFloat(a) / 255)
     }
 }

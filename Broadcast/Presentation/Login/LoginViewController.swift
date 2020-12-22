@@ -87,7 +87,7 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         
         /// Setup content stack view
         contentStackView.topToSuperview()
-        contentStackView.widthToSuperview()
+        contentStackView.widthToSuperview(offset: 24)
         contentStackView.addArrangedSubview(logoImageView)
         
         /// Add arranged views to stack
@@ -104,10 +104,10 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         /// Configure insets of arranged sub views
         let textFields = [usernameTextField, passwordTextField]
         textFields.forEach {
-            $0.leftToSuperview(offset: 32)
+            $0.widthToSuperview()
         }
         
-        loginButton.width(150)
+        loginButton.widthToSuperview()
         
         /// Configure the bottom stackview
         view.addSubview(bottomStackView)
@@ -186,8 +186,8 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         }
         
         applyHereTextView.attributedText =
-            "No account? ".set(style: Style.titleCenter) +
-            "Apply here".set(style: boomdayLinkStyle)
+            "\(LocalizedString.notABroadcaster.localized) ".set(style: Style.titleCenter) +
+            LocalizedString.learnMore.localized.set(style: boomdayLinkStyle)
         
         let forgotPasswordStyle = Style {
             $0.font = UIFont.title
@@ -211,6 +211,9 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
                          termsAndConditionsTextView]
         
         textViews.forEach { $0.tintColor = .black }
+        
+        // Setup the left view for the login/password views
+        
     }
     
     @objc func dismissKeyboard() {
