@@ -57,47 +57,70 @@ class PostSummaryView : UIView {
     }
     
     func configureLayout() {
-        
         // Layout vertical stack
         addSubview(verticalStackView)
         
-        let containedViews = [postTitleLabel,
-                              postStatsView,
-                              dateCreatedLabel]
+        postTitleContainer.addSubview(postTitleLabel)
+        postStatsContainer.addSubview(postStatsView)
+        dateCreatedContainer.addSubview(dateCreatedLabel)
         
         switch styling {
         case .detail:
             configureDetailStyle()
-            containedViews.forEach {
-                $0.leftToSuperview(offset: 20)
-                $0.rightToSuperview(offset: -20)
-            }
-            
-            verticalStackView.edgesToSuperview()
             
         case .list:
             configureListStyle()
-            containedViews.forEach {
-                $0.leftToSuperview()
-                $0.rightToSuperview()
-            }
-            
-            verticalStackView.leftToSuperview(offset: 20)
-            verticalStackView.rightToSuperview(offset: -20)
-            verticalStackView.topToSuperview(usingSafeArea: true)
-            verticalStackView.bottomToSuperview()
-            containerTopView.layer.cornerRadius = 20
             
         case .none:
             break
         }
     }
     
-    private func configureListStyle() {
+    private func configureDetailStyle() {
+        verticalStackView.addArrangedSubview(containerTopView)
+        verticalStackView.addArrangedSubview(postTitleContainer)
+        verticalStackView.addArrangedSubview(postStatsContainer)
+        verticalStackView.addArrangedSubview(dateCreatedContainer)
         
+        postTitleContainer.height(15)
+        postStatsContainer.height(15)
+        dateCreatedContainer.height(15)
+        
+        // Layout container top view
+        containerTopView.edgesToSuperview(excluding: [.bottom])
+        containerTopView.aspectRatio(1)
+        
+        // Order important
+        if styling == .detail {
+            containerTopView.addSubview(videoPlayerView)
+            videoPlayerView.edgesToSuperview()
+        }
+        
+        containerTopView.addSubview(thumbnailImageView)
+        containerTopView.addSubview(blurredEffectView)
+        containerTopView.addSubview(processingView)
+        
+        // End order important
+        blurredEffectView.edgesToSuperview()
+        processingView.edgesToSuperview()
+        thumbnailImageView.edgesToSuperview()
+        
+        postStatsView.height(15)
+        verticalStackView.addSpace(10)
+        
+        let containedViews = [postTitleLabel,
+                              postStatsView,
+                              dateCreatedLabel]
+        
+        containedViews.forEach {
+            $0.leftToSuperview(offset: 20)
+            $0.rightToSuperview(offset: -20)
+        }
+        
+        verticalStackView.edgesToSuperview()
     }
     
-    private func configureDetailStyle() {
+    private func configureListStyle() {
         postTitleContainer.addSubview(postTitleLabel)
         postStatsContainer.addSubview(postStatsView)
         dateCreatedContainer.addSubview(dateCreatedLabel)
@@ -133,6 +156,21 @@ class PostSummaryView : UIView {
         
         postStatsView.height(15)
         verticalStackView.addSpace(10)
+        
+        let containedViews = [postTitleLabel,
+                              postStatsView,
+                              dateCreatedLabel]
+        
+        containedViews.forEach {
+            $0.leftToSuperview()
+            $0.rightToSuperview()
+        }
+        
+        verticalStackView.leftToSuperview(offset: 20)
+        verticalStackView.rightToSuperview(offset: -20)
+        verticalStackView.topToSuperview(usingSafeArea: true)
+        verticalStackView.bottomToSuperview()
+        containerTopView.layer.cornerRadius = 20
     }
     
     func style() {
