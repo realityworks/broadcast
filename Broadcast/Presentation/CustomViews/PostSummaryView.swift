@@ -20,6 +20,9 @@ class PostSummaryView : UIView {
     let postTitleContainer = UIView()
     let postTitleLabel = UILabel.largeTitle()
     
+    let postCaptionContainer = UIView()
+    let postCaptionLabel = UILabel.body()
+    
     let postStatsContainer = UIView()
     let postStatsView = PostStatsView()
     
@@ -61,6 +64,7 @@ class PostSummaryView : UIView {
         addSubview(verticalStackView)
         
         postTitleContainer.addSubview(postTitleLabel)
+        postCaptionContainer.addSubview(postCaptionLabel)
         postStatsContainer.addSubview(postStatsView)
         dateCreatedContainer.addSubview(dateCreatedLabel)
         
@@ -121,16 +125,13 @@ class PostSummaryView : UIView {
     }
     
     private func configureListStyle() {
-        postTitleContainer.addSubview(postTitleLabel)
-        postStatsContainer.addSubview(postStatsView)
-        dateCreatedContainer.addSubview(dateCreatedLabel)
-        
         verticalStackView.addArrangedSubview(dateCreatedContainer)
-        
-        verticalStackView.addArrangedSubview(containerTopView)
+        verticalStackView.addSeparator(withColor: .separator)
         verticalStackView.addArrangedSubview(postTitleContainer)
-        verticalStackView.addArrangedSubview(postStatsContainer)
+        verticalStackView.addArrangedSubview(postCaptionContainer)
+        verticalStackView.addArrangedSubview(containerTopView)
         
+        verticalStackView.addArrangedSubview(postStatsContainer)
         
         postTitleContainer.height(15)
         postStatsContainer.height(15)
@@ -213,6 +214,7 @@ class PostSummaryView : UIView {
                                 lockerCount: postSummaryViewModel.lockerCount)
         
         postTitleLabel.text = postSummaryViewModel.title
+        postCaptionLabel.text = postSummaryViewModel.caption
         dateCreatedLabel.text = postSummaryViewModel.dateCreated
     }
 }
