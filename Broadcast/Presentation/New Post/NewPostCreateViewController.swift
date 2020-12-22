@@ -47,12 +47,22 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
             })
             .disposed(by: disposeBag)
         
-        viewModel.title
-            .bind(to: editPostView.titleTextField.rx.text)
+//        viewModel.title
+//            .bind(to: editPostView.titleTextField.rx.text)
+//            .disposed(by: disposeBag)
+//
+//        viewModel.caption
+//            .bind(to: editPostView.captionTextView.rx.text)
+//            .disposed(by: disposeBag)
+        
+        editPostView.titleTextField.rx.controlEvent(.editingChanged)
+            .map { [unowned self] in self.editPostView.titleTextField.text }
+            .bind(to: viewModel.title)
             .disposed(by: disposeBag)
         
-        viewModel.caption
-            .bind(to: editPostView.captionTextView.rx.text)
+        editPostView.captionTextView.rx.controlEvent(.editingChanged)
+            .map { [unowned self] in self.editPostView.captionTextView.text }
+            .bind(to: viewModel.caption)
             .disposed(by: disposeBag)
         
         viewModel.progress
