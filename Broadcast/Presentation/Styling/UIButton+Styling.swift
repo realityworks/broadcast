@@ -13,10 +13,11 @@ extension UIButton {
     static func standard(withTitle title: String? = nil) -> UIButton {
         let button = UIButton()
         
-        button.setBackgroundColor(.blue, for: .normal)
-        button.setBackgroundColor(UIColor.blue.withAlphaComponent(0.5), for: .disabled)
+        button.setBackgroundColor(.primaryRed, for: .normal)
+        button.setBackgroundColor(UIColor.primaryRed.withAlphaComponent(0.5), for: .disabled)
         button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 12
+        button.layer.cornerRadius = 24
+        button.height(48)
         button.setTitle(title, for: .normal)
         button.clipsToBounds = true
         

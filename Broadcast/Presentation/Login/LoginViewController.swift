@@ -29,7 +29,6 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
     private let passwordTextField = UITextField.password(
         withPlaceholder: LocalizedString.passwordPlaceholder)
     
-    private let errorDisplayView = DismissableLabel()
     private let loginButton = UIButton.standard(
         withTitle: LocalizedString.loginButton)
     
@@ -61,12 +60,9 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         contentStackView.spacing = 16
         
         applyHereTextView.isScrollEnabled = false
+        forgotPasswordTextView.isScrollEnabled = false
         
         activityIndicator.hidesWhenStopped = true
-        
-        bottomStackView.axis = .horizontal
-        bottomStackView.alignment = .center
-        bottomStackView.distribution = .fillEqually
         
         if Configuration.debugUIEnabled {
             usernameTextField.text = testUserName
@@ -80,20 +76,20 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         view.addSubview(scrollView)
         
         /// Setup scroll view
-        scrollView.edgesToSuperview(usingSafeArea: true)
+        scrollView.edgesToSuperview(insets: TinyEdgeInsets(top: 0, left: 24, bottom: 0, right: 24), usingSafeArea: true)
         scrollView.addSubview(contentStackView)
         scrollView.addSubview(activityIndicator)
         
         /// Setup content stack view
         contentStackView.topToSuperview()
-        contentStackView.widthToSuperview(offset: 24)
+        contentStackView.widthToSuperview()
         contentStackView.addArrangedSubview(logoImageView)
         
         /// Add arranged views to stack
         contentStackView.addSpace(300)
         contentStackView.addArrangedSubview(usernameTextField)
         contentStackView.addArrangedSubview(passwordTextField)
-        contentStackView.addArrangedSubview(errorDisplayView)
+        contentStackView.addArrangedSubview(forgotPasswordTextView)
         contentStackView.addArrangedSubview(loginButton)
         contentStackView.addArrangedSubview(applyHereTextView)
         
@@ -107,12 +103,6 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         }
         
         loginButton.widthToSuperview()
-        
-        /// Configure the bottom stackview
-        view.addSubview(bottomStackView)
-        bottomStackView.addArrangedSubview(forgotPasswordTextView)
-        bottomStackView.bottomToSuperview(offset: -8, usingSafeArea: true)
-        bottomStackView.widthToSuperview()
         
         /// Configure the text views
         

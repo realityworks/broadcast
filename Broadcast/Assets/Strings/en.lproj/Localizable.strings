@@ -7,7 +7,7 @@
 */
 
 "none" = "";
-"loginButton" = "Let's Go!";
+"loginButton" = "Sign In";
 "usernamePlaceholder" = "Username";
 "passwordPlaceholder" = "Password";
 "myPostsHeading" = "My Posts";
