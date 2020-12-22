@@ -125,10 +125,12 @@ class PostSummaryView : UIView {
         postStatsContainer.addSubview(postStatsView)
         dateCreatedContainer.addSubview(dateCreatedLabel)
         
+        verticalStackView.addArrangedSubview(dateCreatedContainer)
+        
         verticalStackView.addArrangedSubview(containerTopView)
         verticalStackView.addArrangedSubview(postTitleContainer)
         verticalStackView.addArrangedSubview(postStatsContainer)
-        verticalStackView.addArrangedSubview(dateCreatedContainer)
+        
         
         postTitleContainer.height(15)
         postStatsContainer.height(15)

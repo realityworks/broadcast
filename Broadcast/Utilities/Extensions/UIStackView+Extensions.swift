@@ -28,4 +28,6 @@ extension UIStackView {
         
         return spaceView
     }
+    
+    @discardable
 }
