@@ -32,6 +32,7 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
     private let loginButton = UIButton.standard(
         withTitle: LocalizedString.loginButton)
     
+    private let welcomeLabel = UILabel.largeTitle(LocalizedString.welcome)
     private let applyHereTextView = UITextView()
     private let forgotPasswordTextView = UITextView()
     

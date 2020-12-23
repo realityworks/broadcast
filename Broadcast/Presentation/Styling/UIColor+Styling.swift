@@ -8,6 +8,7 @@
 import UIKit
 
 extension UIColor {
-    static let primaryRed = UIColor(hexString: "#FD0A4C")
+    static let primaryRed = UIColor(hex: "#FD0A4C")
+    static let largeTitle = UIColor(hex: "#040F23")
 }
 

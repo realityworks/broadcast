@@ -8,7 +8,11 @@
 import UIKit
 
 extension UIColor {
-    convenience init(hex: String) {
+    /// Initialize a UIColor from different styles of Hex String representations.
+    /// The string can have an option # symbol prefix or simply hex symbols.
+    /// Support 3 / 6 and 8 Hex character colour representations.
+    /// - Parameter hex: The hexadecimal representation in string form.
+    public convenience init(hex: String) {
         let hexStringTrimmed = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
         
         var hexInt: UInt64 = 0
