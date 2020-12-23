@@ -11,6 +11,27 @@ import RxCocoa
 import RxSwift
 import SwiftRichString
 
+//class LoginTextField: UITextField {
+//    override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
+//        return CGRect(x: bounds.minX+5, y: 5, width: 20, height: bounds.height-10)
+//    }
+//    
+//    static func username(withPlaceholder placeholder: LocalizedString) -> LoginTextField {
+//        let textField = LoginTextField()
+//        textField.borderStyle = .roundedRect
+//        textField.placeholder = placeholder.localized
+//        textField.height(50)
+//        return textField
+//
+//    }
+//    
+//    static func password(withPlaceholder placeholder: LocalizedString) -> LoginTextField {
+//        let textField = username(withPlaceholder: placeholder)
+//        textField.isSecureTextEntry = true
+//        return textField
+//    }
+//}
+
 class LoginViewController: ViewController, KeyboardEventsAdapter {
     var dismissKeyboardGestureRecognizer: UIGestureRecognizer = UITapGestureRecognizer()
     
@@ -63,6 +84,16 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         applyHereTextView.isScrollEnabled = false
         forgotPasswordTextView.isScrollEnabled = false
         forgotPasswordTextView.textAlignment = .left
+        
+        let usernameIcon = UIImageView(image: UIImage(systemName: "person.circle"))
+        usernameTextField.leftView = usernameIcon
+        usernameTextField.leftViewMode = .always
+        usernameTextField.translatesAutoresizingMaskIntoConstraints = false
+        
+        let passwordIcon = UIImageView(image: UIImage(systemName: "lock"))
+        passwordTextField.leftView = passwordIcon
+        passwordTextField.leftViewMode = .always
+        passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         
         activityIndicator.hidesWhenStopped = true
         
