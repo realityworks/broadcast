@@ -88,7 +88,8 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         contentStackView.addArrangedSubview(logoImageView)
         
         /// Add arranged views to stack
-        contentStackView.addSpace(300)
+        contentStackView.addSpace(250)
+        contentStackView.addArrangedSubview(welcomeLabel)
         contentStackView.addArrangedSubview(usernameTextField)
         contentStackView.addArrangedSubview(passwordTextField)
         contentStackView.addArrangedSubview(forgotPasswordTextView)
@@ -107,7 +108,7 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         loginButton.widthToSuperview()
         
         /// Configure the text views
-        
+        welcomeLabel.height(50)
         applyHereTextView.height(30)
         applyHereTextView.leftToSuperview()
         applyHereTextView.rightToSuperview()
