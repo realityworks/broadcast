@@ -9,6 +9,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 import SwiftRichString
+import AVFoundation
 
 class NewPostGuideViewController: ViewController {
     // MARK: View Model
@@ -50,6 +51,8 @@ class NewPostGuideViewController: ViewController {
         
         picker.delegate = self
         picker.allowsEditing = false
+        picker.videoQuality = .typeHigh
+        picker.videoExportPreset = AVAssetExportPresetPassthrough
 
         // Do any additional setup after loading the view.
         configureViews()

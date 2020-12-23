@@ -15,10 +15,4 @@ extension UITextField {
         textField.height(50)
         return textField
     }
-    
-    static func password(withPlaceholder placeholder: LocalizedString) -> UITextField {
-        let textField = standard(withPlaceholder: placeholder)
-        textField.isSecureTextEntry = true
-        return textField
-    }
 }

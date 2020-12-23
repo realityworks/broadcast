@@ -11,26 +11,26 @@ import RxCocoa
 import RxSwift
 import SwiftRichString
 
-//class LoginTextField: UITextField {
-//    override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
-//        return CGRect(x: bounds.minX+5, y: 5, width: 20, height: bounds.height-10)
-//    }
-//
-//    static func username(withPlaceholder placeholder: LocalizedString) -> LoginTextField {
-//        let textField = LoginTextField()
-//        textField.borderStyle = .roundedRect
-//        textField.placeholder = placeholder.localized
-//        textField.height(50)
-//        return textField
-//
-//    }
-//
-//    static func password(withPlaceholder placeholder: LocalizedString) -> LoginTextField {
-//        let textField = username(withPlaceholder: placeholder)
-//        textField.isSecureTextEntry = true
-//        return textField
-//    }
-//}
+class LoginTextField: UITextField {
+    override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
+        return CGRect(x: bounds.minX+10, y: 5, width: 25, height: bounds.height-10)
+    }
+
+    static func username(withPlaceholder placeholder: LocalizedString) -> LoginTextField {
+        let textField = LoginTextField()
+        textField.borderStyle = .roundedRect
+        textField.placeholder = placeholder.localized
+        textField.height(50)
+        return textField
+
+    }
+
+    static func password(withPlaceholder placeholder: LocalizedString) -> LoginTextField {
+        let textField = username(withPlaceholder: placeholder)
+        textField.isSecureTextEntry = true
+        return textField
+    }
+}
 
 class LoginViewController: ViewController, KeyboardEventsAdapter {
     var dismissKeyboardGestureRecognizer: UIGestureRecognizer = UITapGestureRecognizer()
@@ -44,10 +44,10 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
     private let logoImageView = UIImageView()
     private let activityIndicator = UIActivityIndicatorView()
     
-    private let usernameTextField = UITextField.standard(
+    private let usernameTextField = LoginTextField.username(
         withPlaceholder: LocalizedString.usernamePlaceholder)
     
-    private let passwordTextField = UITextField.password(
+    private let passwordTextField = LoginTextField.password(
         withPlaceholder: LocalizedString.passwordPlaceholder)
     
     private let loginButton = UIButton.standard(
@@ -57,7 +57,7 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
     private let applyHereTextView = UITextView()
     private let forgotPasswordTextView = UITextView()
     
-    private let testUserName: String = "Pink67@gmail.com"
+    private let testUserName: String = "Angela84@hotmail.com"
     private let testPassword: String = "Pass123$"
     
     override func viewDidLoad() {
@@ -86,12 +86,14 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         forgotPasswordTextView.textAlignment = .left
         
         let usernameIcon = UIImageView(image: UIImage(systemName: "person.circle")?.withRenderingMode(.alwaysTemplate))
+        usernameIcon.contentMode = .scaleAspectFit
         usernameIcon.tintColor = .lightGray
         usernameTextField.leftView = usernameIcon
         usernameTextField.leftViewMode = .always
         usernameTextField.translatesAutoresizingMaskIntoConstraints = false
         
         let passwordIcon = UIImageView(image: UIImage(systemName: "lock")?.withRenderingMode(.alwaysTemplate))
+        passwordIcon.contentMode = .scaleAspectFit
         passwordIcon.tintColor = .lightGray
         passwordTextField.leftView = passwordIcon
         passwordTextField.leftViewMode = .always
