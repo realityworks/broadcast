@@ -15,7 +15,7 @@ import SwiftRichString
 //    override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
 //        return CGRect(x: bounds.minX+5, y: 5, width: 20, height: bounds.height-10)
 //    }
-//    
+//
 //    static func username(withPlaceholder placeholder: LocalizedString) -> LoginTextField {
 //        let textField = LoginTextField()
 //        textField.borderStyle = .roundedRect
@@ -24,7 +24,7 @@ import SwiftRichString
 //        return textField
 //
 //    }
-//    
+//
 //    static func password(withPlaceholder placeholder: LocalizedString) -> LoginTextField {
 //        let textField = username(withPlaceholder: placeholder)
 //        textField.isSecureTextEntry = true
@@ -85,12 +85,14 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         forgotPasswordTextView.isScrollEnabled = false
         forgotPasswordTextView.textAlignment = .left
         
-        let usernameIcon = UIImageView(image: UIImage(systemName: "person.circle"))
+        let usernameIcon = UIImageView(image: UIImage(systemName: "person.circle")?.withRenderingMode(.alwaysTemplate))
+        usernameIcon.tintColor = .lightGray
         usernameTextField.leftView = usernameIcon
         usernameTextField.leftViewMode = .always
         usernameTextField.translatesAutoresizingMaskIntoConstraints = false
         
-        let passwordIcon = UIImageView(image: UIImage(systemName: "lock"))
+        let passwordIcon = UIImageView(image: UIImage(systemName: "lock")?.withRenderingMode(.alwaysTemplate))
+        passwordIcon.tintColor = .lightGray
         passwordTextField.leftView = passwordIcon
         passwordTextField.leftViewMode = .always
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
