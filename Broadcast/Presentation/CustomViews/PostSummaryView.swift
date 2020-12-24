@@ -9,12 +9,14 @@ import UIKit
 import RxSwift
 import RxCocoa
 import SDWebImage
+import Lottie
 
 class PostSummaryView : UIView {
     let verticalStackView = UIStackView()
     let thumbnailImageView = UIImageView()
     let processingView = ProcessingView()
     let videoPlayerView = VideoPlayerView()
+    let pressPlayOverlayView = AnimationView(name: <#T##String#>)
     let containerTopView = UIView()
 
     let postTitleContainer = UIView()

@@ -70,6 +70,10 @@
 		1D712804257890450065B8EA /* ProfileStripeAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D712803257890440065B8EA /* ProfileStripeAccountViewController.swift */; };
 		1D712805257890450065B8EA /* ProfileStripeAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D712802257890440065B8EA /* ProfileStripeAccountViewModel.swift */; };
 		1D79C10125924C8600AC271B /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D79C10025924C8600AC271B /* UIColor+Extensions.swift */; };
+		1D79C106259446F300AC271B /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 1D79C105259446F300AC271B /* Lottie */; };
+		1D79C10B2594514D00AC271B /* ios-play-button-pulse.json in Resources */ = {isa = PBXBuildFile; fileRef = 1D79C10A2594514D00AC271B /* ios-play-button-pulse.json */; };
+		1D79C10F2594517500AC271B /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D79C10E2594517500AC271B /* Asset.swift */; };
+		1D79C113259451D400AC271B /* AnimationView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D79C112259451D400AC271B /* AnimationView+Extensions.swift */; };
 		1D87DF4925683535000652D6 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF4825683535000652D6 /* EditProfileViewController.swift */; };
 		1D87DF4E2568353F000652D6 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF4D2568353F000652D6 /* EditProfileViewModel.swift */; };
 		1D87DF532568367E000652D6 /* MyPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF522568367E000652D6 /* MyPostsViewController.swift */; };
@@ -214,6 +218,9 @@
 		1D712802257890440065B8EA /* ProfileStripeAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStripeAccountViewModel.swift; sourceTree = "<group>"; };
 		1D712803257890440065B8EA /* ProfileStripeAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStripeAccountViewController.swift; sourceTree = "<group>"; };
 		1D79C10025924C8600AC271B /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		1D79C10A2594514D00AC271B /* ios-play-button-pulse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "ios-play-button-pulse.json"; sourceTree = "<group>"; };
+		1D79C10E2594517500AC271B /* Asset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
+		1D79C112259451D400AC271B /* AnimationView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimationView+Extensions.swift"; sourceTree = "<group>"; };
 		1D87DF4825683535000652D6 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		1D87DF4D2568353F000652D6 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		1D87DF522568367E000652D6 /* MyPostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsViewController.swift; sourceTree = "<group>"; };
@@ -284,6 +291,7 @@
 				1D916D1A25629EBF0059E549 /* RxCocoa in Frameworks */,
 				1DD1FE23256DF4B700C598CE /* KeychainAccess in Frameworks */,
 				1D916D1825629EBF0059E549 /* RxSwift in Frameworks */,
+				1D79C106259446F300AC271B /* Lottie in Frameworks */,
 				1D3F71EF2571516600DE7F05 /* Differentiator in Frameworks */,
 				1D3F71ED2571516600DE7F05 /* RxDataSources in Frameworks */,
 				1D916D2C2562A2840059E549 /* RxAlamofire in Frameworks */,
@@ -406,6 +414,14 @@
 			path = Strings;
 			sourceTree = "<group>";
 		};
+		1D79C10925944FDC00AC271B /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				1D79C10A2594514D00AC271B /* ios-play-button-pulse.json */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
 		1D87DF3A2568313E000652D6 /* My Posts */ = {
 			isa = PBXGroup;
 			children = (
@@ -476,6 +492,7 @@
 				1D3F71D72571205200DE7F05 /* LocalizedString.swift */,
 				1D5CF0C22577CF50008F8C22 /* MediaPickerAdapter.swift */,
 				1DF0972F258114D8007FEE3C /* URLAPIQueryStringRequest.swift */,
+				1D79C10E2594517500AC271B /* Asset.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -549,6 +566,7 @@
 		1D916D4B2562A8170059E549 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				1D79C10925944FDC00AC271B /* Animations */,
 				1D3F71DB257123B600DE7F05 /* Strings */,
 				1D34340825624B4C00886245 /* Info.plist */,
 				1D34340525624B4C00886245 /* LaunchScreen.storyboard */,
@@ -715,6 +733,7 @@
 				1D6FCD7E2581B8490062FF54 /* Single+Extension.swift */,
 				1DB3438D2589DC3300486676 /* URL+Extensions.swift */,
 				1D79C10025924C8600AC271B /* UIColor+Extensions.swift */,
+				1D79C112259451D400AC271B /* AnimationView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -762,6 +781,7 @@
 				1DD1FE22256DF4B700C598CE /* KeychainAccess */,
 				1D3F71EC2571516600DE7F05 /* RxDataSources */,
 				1D3F71EE2571516600DE7F05 /* Differentiator */,
+				1D79C105259446F300AC271B /* Lottie */,
 			);
 			productName = Broadcast;
 			productReference = 1D3433F725624B4400886245 /* Broadcast.app */;
@@ -821,6 +841,7 @@
 				1DD1FE15256CE2E000C598CE /* XCRemoteSwiftPackageReference "SwiftRichString" */,
 				1DD1FE21256DF4B700C598CE /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 				1D3F71EB2571516600DE7F05 /* XCRemoteSwiftPackageReference "RxDataSources" */,
+				1D79C104259446F300AC271B /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 1D3433F825624B4400886245 /* Products */;
 			projectDirPath = "";
@@ -843,6 +864,7 @@
 				1D34340725624B4C00886245 /* LaunchScreen.storyboard in Resources */,
 				1D916DA825640C810059E549 /* Staging.xcconfig in Resources */,
 				1D34340425624B4C00886245 /* Assets.xcassets in Resources */,
+				1D79C10B2594514D00AC271B /* ios-play-button-pulse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -860,6 +882,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D79C10F2594517500AC271B /* Asset.swift in Sources */,
 				1D3F71C2256FFC0B00DE7F05 /* UILabel+Styling.swift in Sources */,
 				1D3F71E82571294F00DE7F05 /* String+Extensions.swift in Sources */,
 				1D3F71D42570184500DE7F05 /* SpinnerView.swift in Sources */,
@@ -938,6 +961,7 @@
 				1D87DF752568387B000652D6 /* NewPostGuideViewModel.swift in Sources */,
 				1D419B9F258083450096FBB7 /* Dictionary+Extensions.swift in Sources */,
 				1DF09730258114D8007FEE3C /* URLAPIQueryStringRequest.swift in Sources */,
+				1D79C113259451D400AC271B /* AnimationView+Extensions.swift in Sources */,
 				1D3B2A1C2564D411001874FD /* CredentialsService.swift in Sources */,
 				1D87DF8925683AC1000652D6 /* PostDetailViewModel.swift in Sources */,
 				1DD1FE05256CA55F00C598CE /* UITextField+Styling.swift in Sources */,
@@ -1260,6 +1284,14 @@
 				minimumVersion = 4.0.1;
 			};
 		};
+		1D79C104259446F300AC271B /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.9;
+			};
+		};
 		1D916D1625629EBF0059E549 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
@@ -1328,6 +1360,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1D3F71EB2571516600DE7F05 /* XCRemoteSwiftPackageReference "RxDataSources" */;
 			productName = Differentiator;
+		};
+		1D79C105259446F300AC271B /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1D79C104259446F300AC271B /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 		1D916D1725629EBF0059E549 /* RxSwift */ = {
 			isa = XCSwiftPackageProductDependency;
