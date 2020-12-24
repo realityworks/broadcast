@@ -8,7 +8,7 @@
 import Foundation
 
 enum AnimationAsset: String {
-    case playAnimation = "ios-play-button-pulse.json"
+    case playAnimation = "ios-play-button-pulse"
 }
 
 //enum ImageAsset: String {

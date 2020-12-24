@@ -7,17 +7,20 @@
 
 import UIKit
 import SDWebImage
+import Lottie
 
 class MyPostsTableViewCell : UITableViewCell {
     static let identifier = "MyPostTableViewCell"
     
     let postSummaryView: PostSummaryView!
+    private let animationView = AnimationView(animationAsset: .playAnimation)
+
         
     override init(style: UITableViewCell.CellStyle,
                   reuseIdentifier: String?) {
         postSummaryView = PostSummaryView(withStyling: .list)
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+    
         configureView()
         styleView()
     }
@@ -48,5 +51,6 @@ class MyPostsTableViewCell : UITableViewCell {
             showVideoPlayer: false)
         
         postSummaryView.configure(withPostSummaryViewModel: postSummaryViewModel)
+        
     }
 }
