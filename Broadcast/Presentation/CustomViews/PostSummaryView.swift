@@ -96,17 +96,13 @@ class PostSummaryView : UIView {
         containerTopView.edgesToSuperview(excluding: [.bottom])
         containerTopView.aspectRatio(1)
         
-        // Order important
-        if styling == .detail {
-            containerTopView.addSubview(videoPlayerView)
-            videoPlayerView.edgesToSuperview()
-        }
-        
+        // Order of view additions is important
+        containerTopView.addSubview(videoPlayerView)
         containerTopView.addSubview(thumbnailImageView)
         containerTopView.addSubview(blurredEffectView)
         containerTopView.addSubview(processingView)
         
-        // End order important
+        videoPlayerView.edgesToSuperview()
         blurredEffectView.edgesToSuperview()
         processingView.edgesToSuperview()
         thumbnailImageView.edgesToSuperview()
@@ -143,22 +139,20 @@ class PostSummaryView : UIView {
         postCaptionLabel.numberOfLines = 2
         postCaptionLabel.lineBreakMode = .byTruncatingTail
         
+        pressPlayOverlayView.loopMode = .loop
+        
         // Layout container top view
         containerTopView.edgesToSuperview(excluding: [.top, .bottom])
         containerTopView.aspectRatio(1)
         
-        // Order important
-        if styling == .detail {
-            containerTopView.addSubview(videoPlayerView)
-            videoPlayerView.edgesToSuperview()
-        }
-        
+        // Order of view additions is important
         containerTopView.addSubview(thumbnailImageView)
+        containerTopView.addSubview(pressPlayOverlayView)
         containerTopView.addSubview(blurredEffectView)
         containerTopView.addSubview(processingView)
         
-        // End order important
         blurredEffectView.edgesToSuperview()
+        pressPlayOverlayView.edgesToSuperview()
         processingView.edgesToSuperview()
         thumbnailImageView.edgesToSuperview()
         
@@ -196,6 +190,7 @@ class PostSummaryView : UIView {
             thumbnailImageView.isHidden = true
             processingView.isHidden = true
             blurredEffectView.isHidden = true
+            pressPlayOverlayView.isHidden = true
             
             switch media {
             case .image(let url):
@@ -208,11 +203,13 @@ class PostSummaryView : UIView {
         } else if let thumbnailUrl = postSummaryViewModel.thumbnailUrl {
             thumbnailImageView.sd_setImage(with: thumbnailUrl,
                                            placeholderImage: UIImage(systemName: "paintbrush"))
+            pressPlayOverlayView.play()
         }
         
         if !postSummaryViewModel.showVideoPlayer {
             blurredEffectView.isHidden = !postSummaryViewModel.isEncoding
             processingView.isHidden = !postSummaryViewModel.isEncoding
+            pressPlayOverlayView.isHidden = !postSummaryViewModel.isEncoding
             processingView.startAnimating()
         }
         
