@@ -71,9 +71,9 @@
 		1D712805257890450065B8EA /* ProfileStripeAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D712802257890440065B8EA /* ProfileStripeAccountViewModel.swift */; };
 		1D79C10125924C8600AC271B /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D79C10025924C8600AC271B /* UIColor+Extensions.swift */; };
 		1D79C106259446F300AC271B /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 1D79C105259446F300AC271B /* Lottie */; };
-		1D79C10B2594514D00AC271B /* ios-play-button-pulse.json in Resources */ = {isa = PBXBuildFile; fileRef = 1D79C10A2594514D00AC271B /* ios-play-button-pulse.json */; };
 		1D79C10F2594517500AC271B /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D79C10E2594517500AC271B /* Asset.swift */; };
 		1D79C113259451D400AC271B /* AnimationView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D79C112259451D400AC271B /* AnimationView+Extensions.swift */; };
+		1D79C119259471B800AC271B /* ios-play-button-pulse.json in Resources */ = {isa = PBXBuildFile; fileRef = 1D79C118259471B800AC271B /* ios-play-button-pulse.json */; };
 		1D87DF4925683535000652D6 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF4825683535000652D6 /* EditProfileViewController.swift */; };
 		1D87DF4E2568353F000652D6 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF4D2568353F000652D6 /* EditProfileViewModel.swift */; };
 		1D87DF532568367E000652D6 /* MyPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF522568367E000652D6 /* MyPostsViewController.swift */; };
@@ -218,9 +218,9 @@
 		1D712802257890440065B8EA /* ProfileStripeAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStripeAccountViewModel.swift; sourceTree = "<group>"; };
 		1D712803257890440065B8EA /* ProfileStripeAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStripeAccountViewController.swift; sourceTree = "<group>"; };
 		1D79C10025924C8600AC271B /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
-		1D79C10A2594514D00AC271B /* ios-play-button-pulse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "ios-play-button-pulse.json"; sourceTree = "<group>"; };
 		1D79C10E2594517500AC271B /* Asset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
 		1D79C112259451D400AC271B /* AnimationView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimationView+Extensions.swift"; sourceTree = "<group>"; };
+		1D79C118259471B800AC271B /* ios-play-button-pulse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "ios-play-button-pulse.json"; sourceTree = "<group>"; };
 		1D87DF4825683535000652D6 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		1D87DF4D2568353F000652D6 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		1D87DF522568367E000652D6 /* MyPostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsViewController.swift; sourceTree = "<group>"; };
@@ -417,7 +417,7 @@
 		1D79C10925944FDC00AC271B /* Animations */ = {
 			isa = PBXGroup;
 			children = (
-				1D79C10A2594514D00AC271B /* ios-play-button-pulse.json */,
+				1D79C118259471B800AC271B /* ios-play-button-pulse.json */,
 			);
 			path = Animations;
 			sourceTree = "<group>";
@@ -864,7 +864,7 @@
 				1D34340725624B4C00886245 /* LaunchScreen.storyboard in Resources */,
 				1D916DA825640C810059E549 /* Staging.xcconfig in Resources */,
 				1D34340425624B4C00886245 /* Assets.xcassets in Resources */,
-				1D79C10B2594514D00AC271B /* ios-play-button-pulse.json in Resources */,
+				1D79C119259471B800AC271B /* ios-play-button-pulse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
