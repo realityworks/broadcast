@@ -221,6 +221,25 @@
 		1D79C10E2594517500AC271B /* Asset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
 		1D79C112259451D400AC271B /* AnimationView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimationView+Extensions.swift"; sourceTree = "<group>"; };
 		1D79C118259471B800AC271B /* ios-play-button-pulse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "ios-play-button-pulse.json"; sourceTree = "<group>"; };
+		1D79C11D2594B36000AC271B /* Inter-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Light.otf"; sourceTree = "<group>"; };
+		1D79C11E2594B36000AC271B /* Inter-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Medium.otf"; sourceTree = "<group>"; };
+		1D79C11F2594B36000AC271B /* Inter-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-SemiBold.otf"; sourceTree = "<group>"; };
+		1D79C1202594B36000AC271B /* Inter-ThinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-ThinItalic.otf"; sourceTree = "<group>"; };
+		1D79C1212594B36000AC271B /* Inter-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-BoldItalic.otf"; sourceTree = "<group>"; };
+		1D79C1222594B36100AC271B /* Inter-ExtraBoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-ExtraBoldItalic.otf"; sourceTree = "<group>"; };
+		1D79C1232594B36100AC271B /* Inter-BlackItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-BlackItalic.otf"; sourceTree = "<group>"; };
+		1D79C1242594B36100AC271B /* Inter-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.otf"; sourceTree = "<group>"; };
+		1D79C1252594B36100AC271B /* Inter-V.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-V.otf"; sourceTree = "<group>"; };
+		1D79C1262594B36100AC271B /* Inter-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Bold.otf"; sourceTree = "<group>"; };
+		1D79C1272594B36100AC271B /* Inter-ExtraLightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-ExtraLightItalic.otf"; sourceTree = "<group>"; };
+		1D79C1282594B36100AC271B /* Inter-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Italic.otf"; sourceTree = "<group>"; };
+		1D79C1292594B36100AC271B /* Inter-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-ExtraLight.otf"; sourceTree = "<group>"; };
+		1D79C12A2594B36100AC271B /* Inter-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-LightItalic.otf"; sourceTree = "<group>"; };
+		1D79C12B2594B36100AC271B /* Inter-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-ExtraBold.otf"; sourceTree = "<group>"; };
+		1D79C12C2594B36200AC271B /* Inter-SemiBoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-SemiBoldItalic.otf"; sourceTree = "<group>"; };
+		1D79C12D2594B36200AC271B /* Inter-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Thin.otf"; sourceTree = "<group>"; };
+		1D79C12E2594B36200AC271B /* Inter-MediumItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-MediumItalic.otf"; sourceTree = "<group>"; };
+		1D79C12F2594B36200AC271B /* Inter-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Black.otf"; sourceTree = "<group>"; };
 		1D87DF4825683535000652D6 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		1D87DF4D2568353F000652D6 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		1D87DF522568367E000652D6 /* MyPostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsViewController.swift; sourceTree = "<group>"; };
@@ -422,6 +441,32 @@
 			path = Animations;
 			sourceTree = "<group>";
 		};
+		1D79C11C2594B35100AC271B /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				1D79C12F2594B36200AC271B /* Inter-Black.otf */,
+				1D79C1232594B36100AC271B /* Inter-BlackItalic.otf */,
+				1D79C1262594B36100AC271B /* Inter-Bold.otf */,
+				1D79C1212594B36000AC271B /* Inter-BoldItalic.otf */,
+				1D79C12B2594B36100AC271B /* Inter-ExtraBold.otf */,
+				1D79C1222594B36100AC271B /* Inter-ExtraBoldItalic.otf */,
+				1D79C1292594B36100AC271B /* Inter-ExtraLight.otf */,
+				1D79C1272594B36100AC271B /* Inter-ExtraLightItalic.otf */,
+				1D79C1282594B36100AC271B /* Inter-Italic.otf */,
+				1D79C11D2594B36000AC271B /* Inter-Light.otf */,
+				1D79C12A2594B36100AC271B /* Inter-LightItalic.otf */,
+				1D79C11E2594B36000AC271B /* Inter-Medium.otf */,
+				1D79C12E2594B36200AC271B /* Inter-MediumItalic.otf */,
+				1D79C1242594B36100AC271B /* Inter-Regular.otf */,
+				1D79C11F2594B36000AC271B /* Inter-SemiBold.otf */,
+				1D79C12C2594B36200AC271B /* Inter-SemiBoldItalic.otf */,
+				1D79C12D2594B36200AC271B /* Inter-Thin.otf */,
+				1D79C1202594B36000AC271B /* Inter-ThinItalic.otf */,
+				1D79C1252594B36100AC271B /* Inter-V.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		1D87DF3A2568313E000652D6 /* My Posts */ = {
 			isa = PBXGroup;
 			children = (
@@ -566,6 +611,7 @@
 		1D916D4B2562A8170059E549 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				1D79C11C2594B35100AC271B /* Fonts */,
 				1D79C10925944FDC00AC271B /* Animations */,
 				1D3F71DB257123B600DE7F05 /* Strings */,
 				1D34340825624B4C00886245 /* Info.plist */,
