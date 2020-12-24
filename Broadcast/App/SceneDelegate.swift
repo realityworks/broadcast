@@ -31,6 +31,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         appDelegate.window = window
         
         Router.standard.setup()
+        
+        for family in UIFont.familyNames.sorted() {
+            let names = UIFont.fontNames(forFamilyName: family)
+            print("Family: \(family) Font names: \(names)")
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
