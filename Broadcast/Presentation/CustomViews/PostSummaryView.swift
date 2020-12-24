@@ -191,7 +191,7 @@ class PostSummaryView : UIView {
             thumbnailImageView.isHidden = true
             processingView.isHidden = true
             blurredEffectView.isHidden = true
-            //pressPlayOverlayView.isHidden = true
+            pressPlayOverlayView.isHidden = true
             
             switch media {
             case .image(let url):
@@ -211,7 +211,7 @@ class PostSummaryView : UIView {
         if !postSummaryViewModel.showVideoPlayer {
             blurredEffectView.isHidden = !postSummaryViewModel.isEncoding
             processingView.isHidden = !postSummaryViewModel.isEncoding
-            //pressPlayOverlayView.isHidden = !postSummaryViewModel.isEncoding
+            pressPlayOverlayView.isHidden = postSummaryViewModel.isEncoding
             processingView.startAnimating()
         }
         
