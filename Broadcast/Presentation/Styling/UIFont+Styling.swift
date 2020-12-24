@@ -6,10 +6,18 @@
 //
 
 import UIKit
+protocol FontWeight {
+    func name() -> String
+}
+
+extension FontWeight where Self : RawRepresentable, Self.RawValue == String {
+    func name() -> String {
+        return self.rawValue
+    }
+}
 
 extension UIFont {
-    
-    enum InterVFontWeight: String {
+    enum InterVFontWeight: String, FontWeight {
         case italic = "InterV_Italic"
         case regular = "InterV"
         case thin = "InterV_Thin"
@@ -30,23 +38,42 @@ extension UIFont {
         case blackItalic = "InterV_Black-Italic"
     }
     
-    enum InterFontWeight {
-        
+    enum InterFontWeight: String, FontWeight {
+        case regular = "Inter-Regular"
+        case italic = "Inter-Italic"
+        case thin = "Inter-Thin"
+        case thinItalic = "Inter-ThinItalic"
+        case extraLight = "Inter-ExtraLight"
+        case extraLightItalic = "Inter-ExtraLightItalic"
+        case light = "Inter-Light"
+        case lightItalic = "Inter-LightItalic"
+        case medium = "Inter-Medium"
+        case mediumItalic = "Inter-MediumItalic"
+        case semiBold = "Inter-SemiBold"
+        case semiBoldItalic = "Inter-SemiBoldItalic"
+        case bold = "Inter-Bold"
+        case boldItalic = "Inter-BoldItalic"
+        case extraBold = "Inter-ExtraBold"
+        case extraBoldItalic = "Inter-ExtraBoldItalic"
+        case black = "Inter-Black"
+        case blackItalic = "Inter-BlackItalic"
     }
     
     /// Creates a font custom to the application style of the Inter font family
     /// - Parameters:
     ///   - size: Font size in points
     ///   - weight: Standard weight for a font (regular, italic etc...)
-    class func interFont(ofSize size: CGFloat, weight: InterFontWeight) -> UIFont {
-        return UIFont(name: weight, size: size)
+    class func customFont(ofSize size: CGFloat, weight: FontWeight) -> UIFont {
+        guard let font = UIFont(name: weight.name(), size: size) else {
+            Logger.log(level: .warning, topic: .debug, message: "Font : \(weight.name()) not found")
+            return UIFont.systemFont(ofSize: size)
+        }
+        return font
     }
     
-    
-    
-    static var largeTitle: UIFont { .interFont(ofSize: 18, weight: .bold ) }
-    static var title: UIFont { .interFont(ofSize: 15, weight: .regular ) }
-    static var titleBold: UIFont { .interFont(ofSize: 15, weight: .bold ) }
-    static var body: UIFont { .interFont(ofSize: 12, weight: .regular ) }
-    static var bodyBold: UIFont { .interFont(ofSize: 12, weight: .bold ) }
+    static var largeTitle: UIFont { .customFont(ofSize: 18, weight: InterFontWeight.bold ) }
+    static var title: UIFont { .customFont(ofSize: 15, weight: InterFontWeight.regular ) }
+    static var titleBold: UIFont { .customFont(ofSize: 15, weight: InterFontWeight.bold ) }
+    static var body: UIFont { .customFont(ofSize: 12, weight: InterFontWeight.regular ) }
+    static var bodyBold: UIFont { .customFont(ofSize: 12, weight: InterFontWeight.bold ) }
 }
