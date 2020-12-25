@@ -13,11 +13,11 @@ extension UIButton {
     /// - Parameters:
     ///   - color: Color supplied for the state
     ///   - state: Background for a `UIControl.State` will be set to the specified color
-    public func setBackgroundColor(_ color: UIColor, for state: UIControl.State) {
+    func setBackgroundColor(_ color: UIColor, for state: UIControl.State) {
         setBackgroundImage(UIImage(color: color), for: state)
     }
     
-    public func setTitle(_ title: LocalizedString, for state: UIControl.State) {
+    func setTitle(_ title: LocalizedString, for state: UIControl.State) {
         setTitle(title.localized, for: state)
     }
 }

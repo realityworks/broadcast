@@ -22,13 +22,13 @@ enum BoomdayError : Error {
         case .unsupported:
             return LocalizedString.unsupportedError.localized
         case .decoding(let decodingError):
-            return "\(LocalizedString.unsupportedError.localized) : \(decodingError)"
+            return "\(LocalizedString.decodingError.localized) : \(decodingError)"
         case .apiNotFound:
-            return "This call does not exist in the API"
+            return LocalizedString.apiNotFoundError.localized
         case .apiStatusCode(let errorCode):
-            return "The Web API returned an undefined error code : \(errorCode)"
+            return "\(LocalizedString.apiStatusCodeError.localized) : \(errorCode)"
         default:
-            return "Invalid Error"
+            return LocalizedString.invalidError.localized
         }
     }
 }

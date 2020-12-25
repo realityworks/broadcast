@@ -16,9 +16,11 @@ class LoginViewModel : ViewModel {
     let password = BehaviorRelay<String?>(value: nil)
     
     private let isLoadingSubject = BehaviorRelay<Bool>(value: false)
+    private let isErrorHiddenSubject = BehaviorRelay<Bool>(value: false)
     
     let isLoginEnabled: Observable<Bool>
     let isLoading: Observable<Bool>
+    let isErrorHidden: Observable<Bool>
     let errorText: Observable<String>
     
     init(dependencies: Dependencies = .standard) {
@@ -31,8 +33,9 @@ class LoginViewModel : ViewModel {
         }
         
         isLoading = isLoadingSubject.asObservable()
+        isErrorHidden = isErrorHiddenSubject.asObservable()
         
-        errorText = stateController.errorObservable()
+        errorText = dependencies.stateController.errorObservable()
             .map { $0.localizedDescription }
         
         super.init(stateController: dependencies.stateController)
@@ -67,7 +70,12 @@ extension LoginViewModel {
             } onError: { error in
                 Logger.log(level: .warning, topic: .debug, message: "Error during login: \(error)")
                 self.isLoadingSubject.accept(false)
+                self.isErrorHiddenSubject.onNext(false)
             }
             .disposed(by: disposeBag)
+    }
+    
+    func closeError() {
+        isErrorHiddenSubject.onNext(true)
     }
 }

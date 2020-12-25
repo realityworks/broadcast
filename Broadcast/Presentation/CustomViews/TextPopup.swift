@@ -62,7 +62,7 @@ class TextPopup : UIView {
     }
 }
 
-extension Reactive where Base: ErrorPopup {
+extension Reactive where Base: TextPopup {
     /// Reactive wrapper for `Button Title Text` property.
     var buttonTitle: Binder<String?> {
         return base.button.rx.title()
