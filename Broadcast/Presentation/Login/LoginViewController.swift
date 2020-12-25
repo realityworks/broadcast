@@ -101,6 +101,8 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
             viewModel.username.accept(testUserName)
             viewModel.password.accept(testPassword)
         }
+        
+        errorPopup.titleLabel = 
     }
     
     private func configureLayout() {
@@ -130,7 +132,7 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         contentStackView.addArrangedSubview(forgotPasswordTextView)
         contentStackView.addSpace(36)
         contentStackView.addArrangedSubview(loginButton)
-        //contentStackView.addSpace(56)
+
         let activityIndicatorContainerView = UIView()
         contentStackView.addArrangedSubview(activityIndicatorContainerView)
         contentStackView.addArrangedSubview(applyHereTextView)

@@ -1,5 +1,5 @@
 //
-//  ErrorPopup.swift
+//  TextPopup.swift
 //  Broadcast
 //
 //  Created by Piotr Suwara on 25/12/20.
@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import TinyConstraints
 
-class ErrorPopup : UIView {
+class TextPopup : UIView {
     
     // MARK: UI Components
     private let verticalStackView = UIStackView()
@@ -35,9 +35,9 @@ class ErrorPopup : UIView {
         containerView.backgroundColor = .darkGrey
         containerView.layer.cornerRadius = 16
         
-        titleLabel.text = "Title Test"
-        descriptionLabel.text = "This is a description label"
-        button.setTitle("Try Again", for: .normal)
+//        titleLabel.text = "Title Test"
+//        descriptionLabel.text = "This is a description label"
+//        button.setTitle("Try Again", for: .normal)
         
         titleLabel.textColor = .primaryWhite
         descriptionLabel.textColor = .primaryWhite
