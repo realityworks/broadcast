@@ -53,6 +53,9 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         configureBindings()
         style()
         registerForKeyboardEvents()
+        
+        view.addSubview(errorPopup)
+        errorPopup.edgesToSuperview()
     }
     
     /// Setup the UI component layout

@@ -8,17 +8,77 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import TinyConstraints
 
 class ErrorPopup : UIView {
-    let button = UIButton.standard(withTitle: LocalizedString.tryAgain)
+    
+    // MARK: UI Components
+    private let verticalStackView = UIStackView()
+    private let containerView = UIView()
+    let button = UIButton.standard()
     let titleLabel = UILabel.largeTitle()
     let descriptionLabel = UILabel.body()
     
     init() {
         super.init(frame: .zero)
+        
+        configureView()
+        configureLayout()
+    }
+    
+    private func configureView() {
+        backgroundColor = UIColor.darkGrey.withAlphaComponent(0.94)
+        
+        verticalStackView.axis = .vertical
+        verticalStackView.alignment = .leading
+        
+        containerView.backgroundColor = .darkGrey
+        containerView.layer.cornerRadius = 16
+        
+        titleLabel.text = "Title Test"
+        descriptionLabel.text = "This is a description label"
+        button.setTitle("Try Again", for: .normal)
+        
+        titleLabel.textColor = .primaryWhite
+        descriptionLabel.textColor = .primaryWhite
+    }
+    
+    private func configureLayout() {
+        addSubview(containerView)
+        containerView.addSubview(verticalStackView)
+        
+        containerView.topToSuperview(offset: 32)
+        containerView.width(315)
+        containerView.centerInSuperview()
+        
+        verticalStackView.edgesToSuperview(insets: TinyEdgeInsets(top: 32, left: 24, bottom: 32, right: 24))
+        
+        verticalStackView.addArrangedSubview(titleLabel)
+        verticalStackView.addSpace(16)
+        verticalStackView.addArrangedSubview(descriptionLabel)
+        verticalStackView.addSpace(32)
+        verticalStackView.addArrangedSubview(button)
+        button.edges(to: verticalStackView, excluding: [.bottom, .top])
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension Reactive where Base: ErrorPopup {
+    /// Reactive wrapper for `Button Title Text` property.
+    var buttonTitle: Binder<String?> {
+        return base.button.rx.title()
+    }
+    
+    /// Reactive wrapper for `Title Text` property.
+    var titleText: Binder<String?> {
+        return base.titleLabel.rx.text
+    }
+    
+    /// Reactive wrapper for `Description Text` property.
+    var descriptionText: Binder<String?> {
+        return base.descriptionLabel.rx.text
     }
 }
