@@ -19,6 +19,7 @@ class LoginViewModel : ViewModel {
     
     let isLoginEnabled: Observable<Bool>
     let isLoading: Observable<Bool>
+    let errorText: Observable<String>
     
     init(dependencies: Dependencies = .standard) {
         self.authenticationUseCase = dependencies.authenticationUseCase
@@ -30,6 +31,9 @@ class LoginViewModel : ViewModel {
         }
         
         isLoading = isLoadingSubject.asObservable()
+        
+        errorText = stateController.errorObservable()
+            .map { $0.localizedDescription }
         
         super.init(stateController: dependencies.stateController)
     }

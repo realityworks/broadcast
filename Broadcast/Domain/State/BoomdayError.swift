@@ -14,4 +14,21 @@ enum BoomdayError : Error {
     case apiNotFound
     case apiStatusCode(code: Int)
     case uploadFailed(UploadEvent)
+    
+    var localizedDescription: String {
+        switch self {
+        case .unknown:
+            return LocalizedString.unknownError.localized
+        case .unsupported:
+            return LocalizedString.unsupportedError.localized
+        case .decoding(let decodingError):
+            return "\(LocalizedString.unsupportedError.localized) : \(decodingError)"
+        case .apiNotFound:
+            return "This call does not exist in the API"
+        case .apiStatusCode(let errorCode):
+            return "The Web API returned an undefined error code : \(errorCode)"
+        default:
+            return "Invalid Error"
+        }
+    }
 }

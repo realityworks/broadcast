@@ -37,7 +37,7 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
     private let applyHereTextView = UITextView()
     private let forgotPasswordTextView = UITextView()
     
-    private let errorPopup = ErrorPopup()
+    private let errorPopup = TextPopup()
     
     // MARK: Test Items
     
@@ -102,7 +102,8 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
             viewModel.password.accept(testPassword)
         }
         
-        errorPopup.titleLabel = 
+        errorPopup.titleLabel.text = LocalizedString.error.localized
+        errorPopup.button.setTitle(LocalizedString.tryAgain, for: .normal)
     }
     
     private func configureLayout() {

@@ -16,4 +16,8 @@ extension UIButton {
     public func setBackgroundColor(_ color: UIColor, for state: UIControl.State) {
         setBackgroundImage(UIImage(color: color), for: state)
     }
+    
+    public func setTitle(_ title: LocalizedString, for state: UIControl.State) {
+        setTitle(title.localized, for: state)
+    }
 }

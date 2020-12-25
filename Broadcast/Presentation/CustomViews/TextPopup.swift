@@ -35,10 +35,6 @@ class TextPopup : UIView {
         containerView.backgroundColor = .darkGrey
         containerView.layer.cornerRadius = 16
         
-//        titleLabel.text = "Title Test"
-//        descriptionLabel.text = "This is a description label"
-//        button.setTitle("Try Again", for: .normal)
-        
         titleLabel.textColor = .primaryWhite
         descriptionLabel.textColor = .primaryWhite
     }

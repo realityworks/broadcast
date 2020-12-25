@@ -48,6 +48,13 @@ enum LocalizedString : String {
     case forgotPassword
     case welcome
     case tryAgain
+    case error
+    case unknownError
+    case unsupportedError
+    case decodingError
+    case apiNotFoundError
+    case apiStatusCodeError
+    case invalidError
     
     var localized: String {
         return Bundle.main.localizedString(forKey: self.rawValue, value: nil, table: nil)
