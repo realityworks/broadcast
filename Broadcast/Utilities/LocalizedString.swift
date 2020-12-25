@@ -47,6 +47,7 @@ enum LocalizedString : String {
     case learnMore
     case forgotPassword
     case welcome
+    case tryAgain
     
     var localized: String {
         return Bundle.main.localizedString(forKey: self.rawValue, value: nil, table: nil)

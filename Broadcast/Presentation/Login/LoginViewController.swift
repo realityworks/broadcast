@@ -37,6 +37,10 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
     private let applyHereTextView = UITextView()
     private let forgotPasswordTextView = UITextView()
     
+    private let errorPopup = ErrorPopup()
+    
+    // MARK: Test Items
+    
     private let testUserName: String = "Angela84@hotmail.com"
     private let testPassword: String = "Pass123$"
     
