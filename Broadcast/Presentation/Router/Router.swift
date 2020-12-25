@@ -29,7 +29,7 @@ class Router {
     // MARK: Private properties
     private let stateController: StateController
     private let authenticationUseCase: AuthenticationUseCase
-    private let errorObservable: Observable<BoomdayError>
+    private let errorObservable: Observable<Error>
     private let connectionStateObservable: Observable<ConnectionState>
     private let authenticationStateObservable: Observable<AuthenticationState>
     private let schedulers: Schedulers
@@ -101,7 +101,7 @@ extension Router {
     struct Dependencies {
         let stateController: StateController
         let authenticationUseCase: AuthenticationUseCase
-        let errorObservable: Observable<BoomdayError>
+        let errorObservable: Observable<Error>
         let connectionStateObservable: Observable<ConnectionState>
         let authenticationStateObservable: Observable<AuthenticationState>
         let schedulers: Schedulers

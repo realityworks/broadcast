@@ -20,7 +20,7 @@ protocol StateControllerInjector {
 class StateController {
     private let schedulers: Schedulers
     private let stateSubject: BehaviorRelay<State>
-    private let errorSubject: PublishRelay<BoomdayError>
+    private let errorSubject: PublishRelay<Error>
     
     /// Current Model representing the app state, when did set, pushes the update up in the subject
     var state: State {
@@ -38,7 +38,7 @@ class StateController {
         self.schedulers = dependencies.schedulers
         
         stateSubject = BehaviorRelay<State>(value: state)
-        errorSubject = PublishRelay<BoomdayError>()
+        errorSubject = PublishRelay<Error>()
     }
 }
 
@@ -59,13 +59,28 @@ extension StateController {
     
     /// Get an observable on any errors that are propagated
     /// - Returns: An observable on errors in the app.
-    func errorObservable() -> Observable<BoomdayError> {
+    func errorObservable() -> Observable<Error> {
         return errorSubject
             .asObservable()
             .observeOn(schedulers.main)
     }
     
-    func sendError(_ error: BoomdayError) {
+    /// Get an observable on any errors that are propagated
+    /// - Returns: An observable on errors in the app.
+    func errorStringObservable() -> Observable<String> {
+        return errorSubject
+            .asObservable()
+            .map {
+                if let boomDayError = $0 as? BoomdayError {
+                    return boomDayError.localizedDescription
+                }
+                
+                return $0.localizedDescription
+            }
+            .observeOn(schedulers.main)
+    }
+    
+    func sendError(_ error: Error) {
         errorSubject.accept(error)
     }
     

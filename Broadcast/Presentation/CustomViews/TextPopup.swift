@@ -34,16 +34,18 @@ class TextPopup : UIView {
         
         containerView.backgroundColor = .darkGrey
         containerView.layer.cornerRadius = 16
-        
+                
         titleLabel.textColor = .primaryWhite
         descriptionLabel.textColor = .primaryWhite
+        
+        descriptionLabel.lineBreakMode = .byWordWrapping
+        descriptionLabel.numberOfLines = 0
     }
     
     private func configureLayout() {
         addSubview(containerView)
         containerView.addSubview(verticalStackView)
         
-        containerView.topToSuperview(offset: 32)
         containerView.width(315)
         containerView.centerInSuperview()
         

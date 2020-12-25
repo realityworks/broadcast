@@ -35,8 +35,7 @@ class LoginViewModel : ViewModel {
         isLoading = isLoadingSubject.asObservable()
         isErrorHidden = isErrorHiddenSubject.asObservable()
         
-        errorText = dependencies.stateController.errorObservable()
-            .map { $0.localizedDescription }
+        errorText = dependencies.stateController.errorStringObservable()
         
         super.init(stateController: dependencies.stateController)
     }
@@ -69,13 +68,14 @@ extension LoginViewModel {
                 // Handle a successful login
             } onError: { error in
                 Logger.log(level: .warning, topic: .debug, message: "Error during login: \(error)")
+                self.stateController.sendError(error)
                 self.isLoadingSubject.accept(false)
-                self.isErrorHiddenSubject.onNext(false)
+                self.isErrorHiddenSubject.accept(false)
             }
             .disposed(by: disposeBag)
     }
     
     func closeError() {
-        isErrorHiddenSubject.onNext(true)
+        isErrorHiddenSubject.accept(true)
     }
 }

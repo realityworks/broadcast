@@ -222,6 +222,10 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
                 self.viewModel.closeError()
             })
             .disposed(by: disposeBag)
+        
+        viewModel.errorText
+            .bind(to: errorPopup.rx.descriptionText)
+            .disposed(by: disposeBag)
     }
     
     /// Style the user interface and components
@@ -256,9 +260,6 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
                          forgotPasswordTextView]
         
         textViews.forEach { $0.tintColor = .primaryGrey }
-        
-        // Setup the left view for the login/password views
-        
     }
     
     @objc func dismissKeyboard() {
