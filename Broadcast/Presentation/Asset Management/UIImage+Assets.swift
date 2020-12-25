@@ -7,8 +7,10 @@
 
 import UIKit
 
-extension UIImage {    
-    enum Name: String {
-        case appIcon = "AppIcon"
-    }
+extension UIImage {
+    static let appIcon = UIImage(named: "AppIcon")
+    static let boomdayLogo = UIImage(named: "logo-boomday")
+    static let broadcasterLogo = UIImage(named: "logo-broadcaster")
+    static let iconProfile = UIImage(named: "icon-profile")
+    static let iconLock = UIImage(named: "icon-lock")
 }

@@ -29,4 +29,10 @@ extension Style {
     static let bodyBold = Style {
         $0.font = UIFont.bodyBold
     }
+    
+    static let bodyCenter = Style {
+        $0.font = UIFont.body
+        $0.color = UIColor.primaryBlack
+        $0.alignment = .center
+    }
 }

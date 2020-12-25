@@ -20,7 +20,8 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
     private let scrollView = UIScrollView()
     private let contentStackView = UIStackView()
     private let bottomStackView = UIStackView()
-    private let logoImageView = UIImageView()
+    private let logoImageView = UIImageView(image: UIImage.boomdayLogo?.withRenderingMode(.alwaysTemplate))
+    private let broadcasterImageView = UIImageView(image: .broadcasterLogo)
     private let activityIndicator = UIActivityIndicatorView()
     
     private let usernameTextField = LoginTextField.username(
@@ -55,23 +56,25 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         view.addGestureRecognizer(dismissKeyboardGestureRecognizer)
         dismissKeyboardGestureRecognizer.addTarget(self, action: #selector(dismissKeyboard))
         
+        logoImageView.tintColor = .primaryBlack
+        logoImageView.contentMode = .scaleAspectFit
+        
         contentStackView.axis = .vertical
         contentStackView.alignment = .center
         contentStackView.distribution = .equalSpacing
-        contentStackView.spacing = 16
         
         applyHereTextView.isScrollEnabled = false
         forgotPasswordTextView.isScrollEnabled = false
         forgotPasswordTextView.textAlignment = .left
         
-        let usernameIcon = UIImageView(image: UIImage(systemName: "person.circle")?.withRenderingMode(.alwaysTemplate))
+        let usernameIcon = UIImageView(image: UIImage.iconProfile?.withRenderingMode(.alwaysTemplate))
         usernameIcon.contentMode = .scaleAspectFit
         usernameIcon.tintColor = .lightGray
         usernameTextField.leftView = usernameIcon
         usernameTextField.leftViewMode = .always
         usernameTextField.translatesAutoresizingMaskIntoConstraints = false
         
-        let passwordIcon = UIImageView(image: UIImage(systemName: "lock")?.withRenderingMode(.alwaysTemplate))
+        let passwordIcon = UIImageView(image: UIImage.iconLock?.withRenderingMode(.alwaysTemplate))
         passwordIcon.contentMode = .scaleAspectFit
         passwordIcon.tintColor = .lightGray
         passwordTextField.leftView = passwordIcon
@@ -102,16 +105,26 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         contentStackView.addArrangedSubview(logoImageView)
         
         /// Add arranged views to stack
-        contentStackView.addSpace(250)
+        contentStackView.addSpace(117)
+        contentStackView.addArrangedSubview(logoImageView)
+        contentStackView.addSpace(13)
+        contentStackView.addArrangedSubview(broadcasterImageView)
+        contentStackView.addSpace(38)
         contentStackView.addArrangedSubview(welcomeLabel)
+        contentStackView.addSpace(10)
         contentStackView.addArrangedSubview(usernameTextField)
+        contentStackView.addSpace(24)
         contentStackView.addArrangedSubview(passwordTextField)
         contentStackView.addArrangedSubview(forgotPasswordTextView)
         contentStackView.addArrangedSubview(loginButton)
+        contentStackView.addSpace(50)
         contentStackView.addArrangedSubview(applyHereTextView)
         
         activityIndicator.centerY(to: loginButton)
         activityIndicator.leftToRight(of: loginButton)
+        
+        logoImageView.height(38)
+        broadcasterImageView.height(28)
         
         /// Configure insets of arranged sub views
         let textFields = [usernameTextField, passwordTextField]
@@ -186,18 +199,18 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         
         // Style attributed strings
         let boomdayLinkStyle = Style {
-            $0.font = UIFont.titleBold
-            $0.underline = (.single, UIColor.black)
+            $0.font = UIFont.body
+            $0.underline = (.single, UIColor.primaryGrey)
             $0.linkURL = URL(string: "https://boomday.com")
             $0.alignment = .center
         }
         
         applyHereTextView.attributedText =
-            "\(LocalizedString.notABroadcaster.localized) ".set(style: Style.titleCenter) +
+            "\(LocalizedString.notABroadcaster.localized) ".set(style: Style.bodyCenter) +
             LocalizedString.learnMore.localized.set(style: boomdayLinkStyle)
         
         let forgotPasswordStyle = Style {
-            $0.font = UIFont.title
+            $0.font = UIFont.smallBody
             $0.alignment = .left
             $0.linkURL = URL(string: "https://boomday.com")
         }
@@ -211,7 +224,7 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         let textViews = [applyHereTextView,
                          forgotPasswordTextView]
         
-        textViews.forEach { $0.tintColor = .black }
+        textViews.forEach { $0.tintColor = .primaryGrey }
         
         // Setup the left view for the login/password views
         

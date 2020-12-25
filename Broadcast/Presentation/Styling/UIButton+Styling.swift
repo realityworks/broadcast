@@ -18,6 +18,7 @@ extension UIButton {
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 24
         button.height(48)
+        button.titleLabel?.font = UIFont.bodyBold
         button.setTitle(title, for: .normal)
         button.clipsToBounds = true
         

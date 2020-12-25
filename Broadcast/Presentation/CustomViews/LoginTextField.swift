@@ -9,14 +9,14 @@ import UIKit
 
 class LoginTextField: UITextField {
     override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
-        return CGRect(x: bounds.minX+10, y: 5, width: 25, height: bounds.height-10)
+        return CGRect(x: bounds.minX+10, y: 10, width: 25, height: bounds.height-20)
     }
 
     static func username(withPlaceholder placeholder: LocalizedString) -> LoginTextField {
         let textField = LoginTextField()
         textField.borderStyle = .roundedRect
         textField.placeholder = placeholder.localized
-        textField.height(50)
+        textField.height(43)
         return textField
 
     }
