@@ -59,6 +59,9 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         logoImageView.tintColor = .primaryBlack
         logoImageView.contentMode = .scaleAspectFit
         
+        activityIndicator.style = .medium
+        activityIndicator.color = .primaryBlack
+        
         contentStackView.axis = .vertical
         contentStackView.alignment = .center
         contentStackView.distribution = .equalSpacing
@@ -97,7 +100,6 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         /// Setup scroll view
         scrollView.edgesToSuperview(insets: TinyEdgeInsets(top: 0, left: 24, bottom: 0, right: 24), usingSafeArea: true)
         scrollView.addSubview(contentStackView)
-        scrollView.addSubview(activityIndicator)
         
         /// Setup content stack view
         contentStackView.topToSuperview()
@@ -119,11 +121,16 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         contentStackView.addArrangedSubview(forgotPasswordTextView)
         contentStackView.addSpace(36)
         contentStackView.addArrangedSubview(loginButton)
-        contentStackView.addSpace(56)
+        //contentStackView.addSpace(56)
+        let activityIndicatorContainerView = UIView()
+        contentStackView.addArrangedSubview(activityIndicatorContainerView)
         contentStackView.addArrangedSubview(applyHereTextView)
         
-        activityIndicator.centerY(to: loginButton)
-        activityIndicator.leftToRight(of: loginButton)
+        activityIndicatorContainerView.addSubview(activityIndicator)
+        //activityIndicatorContainerView.centerInSuperview()
+        activityIndicatorContainerView.height(56)
+        activityIndicatorContainerView.width(56)
+        activityIndicator.edgesToSuperview()
         
         logoImageView.height(38)
         broadcasterImageView.height(28)
