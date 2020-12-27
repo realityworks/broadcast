@@ -16,6 +16,7 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     private let viewModel = NewPostCreateViewModel()
     
     // MARK: UI Components
+    let selectedMediaContainerView = UIView()
     let editPostView = EditPostView()
     let progressView = UIProgressView()
         
