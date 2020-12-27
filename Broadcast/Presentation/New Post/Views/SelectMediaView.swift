@@ -10,20 +10,12 @@ import UIKit
 class SelectMediaView: UIView {
 
     // MARK: - UI Components
-    let dashedBorderView = CustomBorderView()
-    let centralStackView  = UIStackView()
-    let selectMediaButton = UIButton()
-    let selectMediaLabel = UILabel()
-    let imageMediaOverlay = UIImageView()
-    let videoMediaOverlay = VideoPlayerView()
-    
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
+    let dashedBorderView    = CustomBorderView()
+    let centralStackView    = UIStackView()
+    let selectMediaButton   = UIButton()
+    let selectMediaLabel    = UILabel()
+    let imageMediaOverlay   = UIImageView()
+    let videoMediaOverlay   = VideoPlayerView()
     
     override init(frame: CGRect = .zero) {
         super.init(frame: frame)
@@ -39,11 +31,24 @@ class SelectMediaView: UIView {
     private func configureViews() {
         selectMediaButton.backgroundColor = .clear
         selectMediaButton.setImage(.iconPlusCircle, for: .normal)
+        
+        centralStackView.axis = .vertical
+        centralStackView.alignment = .center
+        
         backgroundColor = .primaryGrey
-        layer.bor
+        layer.cornerRadius = 25
+        
+        dashedBorderView.layer.cornerRadius = 25
     }
     
     private func configureLayout() {
+        addSubview(dashedBorderView)
+        addSubview(centralStackView)
         
+        dashedBorderView.edgesToSuperview()
+        
+        centralStackView.centerInSuperview()
+        centralStackView.widthToSuperview()
+        centralStackView.addArrangedSubview()
     }
 }
