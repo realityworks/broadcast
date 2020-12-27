@@ -16,7 +16,7 @@ class LoginViewModel : ViewModel {
     let password = BehaviorRelay<String?>(value: nil)
     
     private let isLoadingSubject = BehaviorRelay<Bool>(value: false)
-    private let isErrorHiddenSubject = BehaviorRelay<Bool>(value: false)
+    private let isErrorHiddenSubject = BehaviorRelay<Bool>(value: true)
     
     let isLoginEnabled: Observable<Bool>
     let isLoading: Observable<Bool>
