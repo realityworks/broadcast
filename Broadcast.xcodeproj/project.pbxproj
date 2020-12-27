@@ -99,8 +99,6 @@
 		1D87DF4E2568353F000652D6 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF4D2568353F000652D6 /* EditProfileViewModel.swift */; };
 		1D87DF532568367E000652D6 /* MyPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF522568367E000652D6 /* MyPostsViewController.swift */; };
 		1D87DF582568368A000652D6 /* MyPostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF572568368A000652D6 /* MyPostsViewModel.swift */; };
-		1D87DF7025683863000652D6 /* NewPostGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF6F25683863000652D6 /* NewPostGuideViewController.swift */; };
-		1D87DF752568387B000652D6 /* NewPostGuideViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF742568387B000652D6 /* NewPostGuideViewModel.swift */; };
 		1D87DF84256839C9000652D6 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF83256839C9000652D6 /* PostDetailViewController.swift */; };
 		1D87DF8925683AC1000652D6 /* PostDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF8825683AC1000652D6 /* PostDetailViewModel.swift */; };
 		1D87DF9325683B3E000652D6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF9225683B3E000652D6 /* ProfileViewController.swift */; };
@@ -267,8 +265,6 @@
 		1D87DF4D2568353F000652D6 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		1D87DF522568367E000652D6 /* MyPostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsViewController.swift; sourceTree = "<group>"; };
 		1D87DF572568368A000652D6 /* MyPostsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsViewModel.swift; sourceTree = "<group>"; };
-		1D87DF6F25683863000652D6 /* NewPostGuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostGuideViewController.swift; sourceTree = "<group>"; };
-		1D87DF742568387B000652D6 /* NewPostGuideViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostGuideViewModel.swift; sourceTree = "<group>"; };
 		1D87DF83256839C9000652D6 /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
 		1D87DF8825683AC1000652D6 /* PostDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewModel.swift; sourceTree = "<group>"; };
 		1D87DF9225683B3E000652D6 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -522,8 +518,6 @@
 		1D87DF3D25683479000652D6 /* New Post */ = {
 			isa = PBXGroup;
 			children = (
-				1D87DF6F25683863000652D6 /* NewPostGuideViewController.swift */,
-				1D87DF742568387B000652D6 /* NewPostGuideViewModel.swift */,
 				1D9256D6257F517600E988B2 /* NewPostCreateViewController.swift */,
 				1D9256DA257F518D00E988B2 /* NewPostCreateViewModel.swift */,
 			);
@@ -981,7 +975,6 @@
 				1DD1FE53256E987B00C598CE /* UIImage+Assets.swift in Sources */,
 				1D63169B258B99DB0009A4E1 /* UploadProgress.swift in Sources */,
 				1D712804257890450065B8EA /* ProfileStripeAccountViewController.swift in Sources */,
-				1D87DF7025683863000652D6 /* NewPostGuideViewController.swift in Sources */,
 				1D2A03F9256562A1008CE2D4 /* ConnectivityUseCase.swift in Sources */,
 				1D916D6F2563F5250059E549 /* KeyboardEventsAdapter.swift in Sources */,
 				1D7127FF257890100065B8EA /* ProfileDetailViewModel.swift in Sources */,
@@ -1050,7 +1043,6 @@
 				1D93143E2577DBDF001C85C1 /* Media.swift in Sources */,
 				1D3B2A002564CF7F001874FD /* AuthenticationService.swift in Sources */,
 				1D87DF84256839C9000652D6 /* PostDetailViewController.swift in Sources */,
-				1D87DF752568387B000652D6 /* NewPostGuideViewModel.swift in Sources */,
 				1D419B9F258083450096FBB7 /* Dictionary+Extensions.swift in Sources */,
 				1DF09730258114D8007FEE3C /* URLAPIQueryStringRequest.swift in Sources */,
 				1D79C113259451D400AC271B /* AnimationView+Extensions.swift in Sources */,

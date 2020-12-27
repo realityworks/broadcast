@@ -16,8 +16,7 @@ indirect enum Route : Equatable {
     case profileDetail
     case stripeAccount
     case postDetail
-    case newPostGuide
-    case newPostDetail
+    case newPostCreate
 }
 
 extension Route {
@@ -41,12 +40,10 @@ extension Route {
             return navigationController
         case .postDetail:
             return PostDetailViewController()
-        case .newPostGuide:
-            let newPostGuideViewController = NewPostGuideViewController()
-            let navigationController = UINavigationController(rootViewController: newPostGuideViewController)
+        case .newPostCreate:
+            let newPostCreateViewController = NewPostCreateViewController()
+            let navigationController = UINavigationController(rootViewController: newPostCreateViewController)
             return navigationController
-        case .newPostDetail:
-            return NewPostCreateViewController()
         case .profileDetail:
             return ProfileDetailViewController()
         case .stripeAccount:

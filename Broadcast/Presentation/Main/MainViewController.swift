@@ -24,9 +24,9 @@ class MainViewController: UITabBarController {
 
         self.delegate = self
         
-        myPostsViewController   = Route.myPosts.viewControllerInstance()
-        newPostViewController   = Route.newPostGuide.viewControllerInstance()
-        profileViewController   = Route.profile.viewControllerInstance()
+        myPostsViewController           = Route.myPosts.viewControllerInstance()
+        newPostViewController           = Route.newPostCreate.viewControllerInstance()
+        profileViewController           = Route.profile.viewControllerInstance()
 
         // Do any additional setup after loading the view.
         configureViews()
@@ -39,7 +39,7 @@ class MainViewController: UITabBarController {
         switch route {
         case .myPosts:
             selectedIndex = TabBarItems.myPosts.rawValue
-        case .newPostGuide, .newPostDetail:
+        case .newPostCreate:
             selectedIndex = TabBarItems.upload.rawValue
         case .profile:
             selectedIndex = TabBarItems.profile.rawValue
