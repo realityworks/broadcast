@@ -10,16 +10,12 @@ import RxSwift
 import RxCocoa
 
 class EditPostView: UIView {
-    
-    private let scrollView = UIScrollView()
-    
     let verticalStackView = UIStackView()
-    let titleTextField = UITextField.standard(withPlaceholder: LocalizedString.addTitle)
+    let titleTextField = UITextField.standard(withPlaceholder: LocalizedString.postDescription)
     let captionTextView = UITextView.standard()
     let uploadButton = UIButton.standard(withTitle: LocalizedString.publish)
     
-    private let uploadTitle = UILabel.bodyBold(LocalizedString.videoToUpload)
-    private let titleHeading = UILabel.bodyBold(LocalizedString.addTitle)
+    private let titleHeading = UILabel.bodyBold(LocalizedString.postTitle)
     private let captionHeading = UILabel.bodyBold(LocalizedString.captionTitle)
     
     init() {
@@ -29,27 +25,19 @@ class EditPostView: UIView {
         verticalStackView.spacing = 10
         verticalStackView.alignment = .leading
         verticalStackView.distribution = .equalSpacing
-        
-        addSubview(scrollView)
-        scrollView.topToSuperview()
-        scrollView.bottomToSuperview()
-        scrollView.leadingToSuperview(offset: 16)
-        scrollView.trailingToSuperview(offset: 16)
 
-        scrollView.addSubview(verticalStackView)
+        addSubview(verticalStackView)
         
         verticalStackView.topToSuperview()
         verticalStackView.widthToSuperview()
-        
-        verticalStackView.addArrangedSubview(uploadTitle)
-        
+
         verticalStackView.addArrangedSubview(titleHeading)
         verticalStackView.addArrangedSubview(titleTextField)
         
         verticalStackView.addArrangedSubview(captionHeading)
         verticalStackView.addArrangedSubview(captionTextView)
         
-        scrollView.addSubview(uploadButton)
+        addSubview(uploadButton)
         
         uploadButton.topToBottom(of: verticalStackView, offset: 20)
         uploadButton.width(150)

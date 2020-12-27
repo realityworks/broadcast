@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import AVFoundation
+import TinyConstraints
 
 
 class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
@@ -17,16 +18,19 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     private let viewModel = NewPostCreateViewModel()
     
     // MARK: UI Components
-    let selectedMediaContainerView = UIView()
-    let editPostView = EditPostView()
-    let progressView = UIProgressView()
-    var picker = UIImagePickerController()
+    private let scrollView = UIScrollView()
+
+    private let selectMediaView = SelectMediaView()
+    private let selectedMediaTitleLabel = UILabel.largeTitle(.noMedia, textColor: .lightGrey)
+    private let tipsButton = UIButton.smallText(withTitle: LocalizedString.tips)
+    private let editPostView = EditPostView()
+    private let progressView = UIProgressView()
+    internal var picker = UIImagePickerController()
         
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        #warning("Move to localized strings")
-        title = "New Post"
+        title = LocalizedString.newPost.localized
 
         // Do any additional setup after loading the view.
         configureViews()
@@ -35,13 +39,23 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     }
     
     private func configureViews() {
+        tipsButton.setImage(.iconHelpCircle, for: .normal)
     }
     
     private func configureLayout() {
-        view.addSubview(editPostView)
-        editPostView.edgesToSuperview()
+        view.addSubview(scrollView)
+        scrollView.edgesToSuperview(insets: TinyEdgeInsets(top: 24, left: 24, bottom: 0, right: 24))
         
-        view.addSubview(progressView)
+        scrollView.addSubview(selectMediaView)
+        selectMediaView.leftToSuperview()
+        selectMediaView.topToSuperview()
+        selectMediaView.width(200)
+        selectMediaView.height(200)
+        
+        scrollView.addSubview(editPostView)
+        editPostView.topToBottom(of: selectMediaView)
+        
+        scrollView.addSubview(progressView)
         progressView.topToBottom(of: editPostView.uploadButton, offset: 20)
         progressView.centerXToSuperview()
         progressView.width(150)
@@ -80,7 +94,8 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
 extension NewPostCreateViewController: UIImagePickerControllerDelegate,
                                        UINavigationControllerDelegate {
     // MARK: UIImagePickerControllerDelegate
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let imageUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL {
             selected(imageUrl: imageUrl)
         } else if let videoUrl = info[UIImagePickerController.InfoKey.mediaURL] as? URL {

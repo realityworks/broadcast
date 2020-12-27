@@ -40,8 +40,10 @@ enum LocalizedString : String {
     case totalBalance
     case lifetimeTotalVolume
     case videoToUpload
-    case addTitle
+    case postTitle
+    case postDescription
     case captionTitle
+    case captionDescription
     case publish
     case notABroadcaster
     case learnMore
@@ -56,6 +58,9 @@ enum LocalizedString : String {
     case apiStatusCodeError
     case invalidError
     case addMedia
+    case newPost
+    case tips
+    case noMedia
     
     var localized: String {
         return Bundle.main.localizedString(forKey: self.rawValue, value: nil, table: nil)

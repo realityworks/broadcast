@@ -22,7 +22,7 @@ extension UILabel {
         return Self.text(text.localized)
     }
     
-    static func largeTitle(_ text: LocalizedString = .none) -> UILabel {
+    static func largeTitle(_ text: LocalizedString = .none, textColor: UIColor = .largeTitle) -> UILabel {
         return Self.text(text.localized, font: .largeTitle, textColor: .largeTitle)
     }
     

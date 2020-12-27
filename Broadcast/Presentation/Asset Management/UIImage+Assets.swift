@@ -14,4 +14,5 @@ extension UIImage {
     static let iconProfile = UIImage(named: "icon-profile")
     static let iconLock = UIImage(named: "icon-lock")
     static let iconPlusCircle = UIImage(named: "icon-plus-circle")
+    static let iconHelpCircle = UIImage(named: "icon-help-circle")
 }

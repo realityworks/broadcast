@@ -38,8 +38,10 @@
 "totalBalance" = "Total Balance";
 "lifetimeTotalVolume" = "Lifetime Total Volume";
 "videoToUpload" = "MEDIA TO UPLOAD";
-"addTitle" = "ADD TITLE";
-"captionTitle" = "CAPTION ABOUT THIS POST";
+"postTitle" = "POST TITLE";
+"postDescription" = "Add a descriptive title";
+"captionTitle" = "CAPTION";
+"captionDescription" = "Say something inspiring about this post";
 "publish" = "PUBLISH POST";
 "notABroadcaster" = "Not a Broadcaster?";
 "learnMore" = "Learn more";
@@ -48,6 +50,9 @@
 "tryAgain" = "Try Again";
 "error" = "Error";
 "addMedia" = "Add video/photo";
+"newPost" = "New Post";
+"tips" = "TIPS";
+"noMedia" = "No media";
 
 // MARK: Error Strings
 "unknownError" = "An unknown error occured";

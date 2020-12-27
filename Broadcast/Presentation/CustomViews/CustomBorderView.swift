@@ -9,7 +9,7 @@ import UIKit
 
 class CustomBorderView: UIView {
     
-    private let dashedLineColor = UIColor.black.cgColor
+    private let dashedLineColor = UIColor.dashedBorder
     private let dashedLinePattern: [NSNumber] = [6, 3]
     private let dashedLineWidth: CGFloat = 4
 
@@ -18,7 +18,7 @@ class CustomBorderView: UIView {
     init() {
         super.init(frame: CGRect.zero)
 
-        borderLayer.strokeColor = dashedLineColor
+        borderLayer.strokeColor = dashedLineColor.cgColor
         borderLayer.lineDashPattern = dashedLinePattern
         borderLayer.backgroundColor = UIColor.clear.cgColor
         borderLayer.fillColor = UIColor.clear.cgColor
