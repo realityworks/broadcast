@@ -11,7 +11,7 @@ class CustomBorderView: UIView {
     
     private let dashedLineColor = UIColor.dashedBorder
     private let dashedLinePattern: [NSNumber] = [6, 3]
-    private let dashedLineWidth: CGFloat = 4
+    private let dashedLineWidth: CGFloat = 1
 
     private let borderLayer = CAShapeLayer()
 
@@ -24,6 +24,7 @@ class CustomBorderView: UIView {
         borderLayer.fillColor = UIColor.clear.cgColor
         borderLayer.lineWidth = dashedLineWidth
         layer.addSublayer(borderLayer)
+        clipsToBounds = false
     }
 
     required init?(coder: NSCoder) {

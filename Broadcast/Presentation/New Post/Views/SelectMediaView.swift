@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import TinyConstraints
 
 class SelectMediaView: UIView {
 
@@ -35,7 +36,8 @@ class SelectMediaView: UIView {
         centralStackView.axis = .vertical
         centralStackView.alignment = .center
         
-        backgroundColor = .primaryGrey
+        clipsToBounds = false
+        backgroundColor = .newPostBackground
         layer.cornerRadius = 25
         
         dashedBorderView.layer.cornerRadius = 25

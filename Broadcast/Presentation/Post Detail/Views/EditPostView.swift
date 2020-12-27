@@ -40,8 +40,9 @@ class EditPostView: UIView {
         addSubview(uploadButton)
         
         uploadButton.topToBottom(of: verticalStackView, offset: 20)
-        uploadButton.width(150)
-        uploadButton.centerXToSuperview()
+        uploadButton.widthToSuperview()
+        
+        titleTextField.width(200)
         
         captionTextView.height(100)
         captionTextView.width(200)

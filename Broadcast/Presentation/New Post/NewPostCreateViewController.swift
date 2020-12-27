@@ -44,16 +44,21 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     
     private func configureLayout() {
         view.addSubview(scrollView)
-        scrollView.edgesToSuperview(insets: TinyEdgeInsets(top: 24, left: 24, bottom: 0, right: 24))
+        scrollView.topToSuperview(offset: 24, usingSafeArea: true)
+        scrollView.leftToSuperview(offset: 24)
+        scrollView.rightToSuperview(offset: -24)
+        scrollView.bottomToSuperview()
+        scrollView.clipsToBounds = false
         
         scrollView.addSubview(selectMediaView)
         selectMediaView.leftToSuperview()
         selectMediaView.topToSuperview()
-        selectMediaView.width(200)
-        selectMediaView.height(200)
+        selectMediaView.width(220)
+        selectMediaView.height(220)
         
         scrollView.addSubview(editPostView)
         editPostView.topToBottom(of: selectMediaView)
+        editPostView.widthToSuperview()
         
         scrollView.addSubview(progressView)
         progressView.topToBottom(of: editPostView.uploadButton, offset: 20)
