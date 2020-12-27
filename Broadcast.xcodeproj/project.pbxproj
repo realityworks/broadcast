@@ -16,6 +16,7 @@
 		1D14AD7B257AA8E900CB2C82 /* ProfileTextViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D14AD7A257AA8E800CB2C82 /* ProfileTextViewTableViewCell.swift */; };
 		1D216A3B2595ED4F007FA845 /* TextPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D216A3A2595ED4F007FA845 /* TextPopup.swift */; };
 		1D216A4A259870CC007FA845 /* SelectMediaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D216A49259870CC007FA845 /* SelectMediaView.swift */; };
+		1D216A5025987CA7007FA845 /* CustomBorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D216A4F25987CA7007FA845 /* CustomBorderView.swift */; };
 		1D2A03E525655BB1008CE2D4 /* AuthenticationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2A03E425655BB1008CE2D4 /* AuthenticationUseCase.swift */; };
 		1D2A03EA25655FFC008CE2D4 /* ProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2A03E925655FFC008CE2D4 /* ProfileUseCase.swift */; };
 		1D2A03EF256561BB008CE2D4 /* PostContentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2A03EE256561BB008CE2D4 /* PostContentUseCase.swift */; };
@@ -180,6 +181,7 @@
 		1D14AD7A257AA8E800CB2C82 /* ProfileTextViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTextViewTableViewCell.swift; sourceTree = "<group>"; };
 		1D216A3A2595ED4F007FA845 /* TextPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPopup.swift; sourceTree = "<group>"; };
 		1D216A49259870CC007FA845 /* SelectMediaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMediaView.swift; sourceTree = "<group>"; };
+		1D216A4F25987CA7007FA845 /* CustomBorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBorderView.swift; sourceTree = "<group>"; };
 		1D2A03E425655BB1008CE2D4 /* AuthenticationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationUseCase.swift; sourceTree = "<group>"; };
 		1D2A03E925655FFC008CE2D4 /* ProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUseCase.swift; sourceTree = "<group>"; };
 		1D2A03EE256561BB008CE2D4 /* PostContentUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostContentUseCase.swift; sourceTree = "<group>"; };
@@ -720,6 +722,7 @@
 		1D91A0D0256C1DBD0043A943 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				1D216A4F25987CA7007FA845 /* CustomBorderView.swift */,
 				1D216A3A2595ED4F007FA845 /* TextPopup.swift */,
 				1D91A0D1256C1DD60043A943 /* DismissableLabel.swift */,
 				1D79C1322594BE7500AC271B /* LoginTextField.swift */,
@@ -1084,6 +1087,7 @@
 				1D916D342562A4CF0059E549 /* State.swift in Sources */,
 				1D3B2A212564D76C001874FD /* StandardCredentialsService.swift in Sources */,
 				1D3B29FB25641C3A001874FD /* MainViewModel.swift in Sources */,
+				1D216A5025987CA7007FA845 /* CustomBorderView.swift in Sources */,
 				1D87DF4925683535000652D6 /* EditProfileViewController.swift in Sources */,
 				1D14AD7B257AA8E900CB2C82 /* ProfileTextViewTableViewCell.swift in Sources */,
 				1D14AD672579E41E00CB2C82 /* LoadProfileResponse.swift in Sources */,

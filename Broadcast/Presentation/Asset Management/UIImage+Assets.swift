@@ -13,4 +13,5 @@ extension UIImage {
     static let broadcasterLogo = UIImage(named: "logo-broadcaster")
     static let iconProfile = UIImage(named: "icon-profile")
     static let iconLock = UIImage(named: "icon-lock")
+    static let iconPlusCircle = UIImage(named: "icon-plus-circle")
 }
