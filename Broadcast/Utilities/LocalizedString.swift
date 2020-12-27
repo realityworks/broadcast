@@ -55,6 +55,7 @@ enum LocalizedString : String {
     case apiNotFoundError
     case apiStatusCodeError
     case invalidError
+    case addMedia
     
     var localized: String {
         return Bundle.main.localizedString(forKey: self.rawValue, value: nil, table: nil)

@@ -14,10 +14,12 @@ class NewPostCreateViewModel : ViewModel {
     
     let postContentUseCase: PostContentUseCase
     
+    private let selectedMedia = BehaviorRelay<Media?>(value: nil)
+    private let uploadingSubject = BehaviorSubject<Bool>(value: false)
+    
     let title = BehaviorRelay<String>(value: "")
     let caption = BehaviorRelay<String>(value: "")
     
-    private let uploadingSubject = BehaviorSubject<Bool>(value: false)
     let isUploading: Observable<Bool>
     let progress: Observable<Float>
     
@@ -59,10 +61,16 @@ extension NewPostCreateViewModel {
 
 extension NewPostCreateViewModel {
     func uploadPost() {
+        guard let media = selectedMedia.value else { return }
+        
         // Compose post and upload
         uploadingSubject.onNext(true)
         
         let newPost = PostContent(title: title.value, caption: caption.value)
-        postContentUseCase.upload(content: newPost)
+        postContentUseCase.upload(content: newPost, media: media)
+    }
+    
+    func selectMedia(_ media: Media) {
+        selectedMedia.accept(media)
     }
 }

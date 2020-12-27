@@ -47,6 +47,7 @@
 "welcome" = "Welcome";
 "tryAgain" = "Try Again";
 "error" = "Error";
+"addMedia" = "Add video/photo";
 
 // MARK: Error Strings
 "unknownError" = "An unknown error occured";

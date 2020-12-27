@@ -13,7 +13,7 @@ class SelectMediaView: UIView {
     let dashedBorderView    = CustomBorderView()
     let centralStackView    = UIStackView()
     let selectMediaButton   = UIButton()
-    let selectMediaLabel    = UILabel()
+    let selectMediaLabel    = UILabel.body(LocalizedString.addMedia)
     let imageMediaOverlay   = UIImageView()
     let videoMediaOverlay   = VideoPlayerView()
     
@@ -49,6 +49,7 @@ class SelectMediaView: UIView {
         
         centralStackView.centerInSuperview()
         centralStackView.widthToSuperview()
-        centralStackView.addArrangedSubview()
+        centralStackView.addArrangedSubview(selectMediaButton)
+        centralStackView.addArrangedSubview(selectMediaLabel)
     }
 }

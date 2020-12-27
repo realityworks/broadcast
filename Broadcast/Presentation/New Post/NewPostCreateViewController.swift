@@ -99,15 +99,15 @@ extension NewPostCreateViewController: UIImagePickerControllerDelegate,
 
 // MARK: MediaPickerAdapter
 
-extension NewPostGuideViewController : MediaPickerAdapter {
+extension NewPostCreateViewController : MediaPickerAdapter {
     func selected(imageUrl url: URL) {
         // Image Selected
-        viewModel.mediaSelected(.image(url: url))
+        viewModel.selectMedia(.image(url: url))
     }
     
     func selected(videoUrl url: URL) {
         // Video Selected
-        viewModel.mediaSelected(.video(url: url))
+        viewModel.selectMedia(.video(url: url))
     }
 }
 

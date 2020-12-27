@@ -51,14 +51,9 @@ extension PostContentUseCase {
     func selectPost(with postId: PostID) {
         stateController.state.selectedPostId = postId
     }
-    
-    func selectMedia(with media: Media) {
-        stateController.state.selectedMedia = media
-    }
-    
-    func upload(content: PostContent) {
-        guard let selectedMedia = stateController.state.selectedMedia else { return }
-        uploadService.upload(media: selectedMedia,
+        
+    func upload(content: PostContent, media: Media) {
+        uploadService.upload(media: media,
                              content: content)
             .subscribe(onNext: { uploadProgress in
                 Logger.log(level: .info, topic: .api, message: "Upload progress : \(uploadProgress.progress)")
