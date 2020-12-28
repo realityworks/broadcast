@@ -92,6 +92,7 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         scrollView.addSubview(editPostView)
         editPostView.topToBottom(of: selectMediaView)
         editPostView.widthToSuperview()
+        editPostView.height(to: editPostView.verticalStackView)
         
         scrollView.addSubview(progressView)
         progressView.topToBottom(of: editPostView.uploadButton, offset: 20)
@@ -151,8 +152,9 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
             .disposed(by: disposeBag)
         
         viewModel.showingMedia
-            .map { !$0 }
-            .bind(to: selectMediaView.dashedBorderView.rx.isHidden)
+            .map { $0 }
+            .bind(to: selectMediaView.dashedBorderView.rx.isHidden,
+                  selectMediaView.selectMediaButton.rx.isHidden)
             .disposed(by: disposeBag)
         
         viewModel.selectedMedia

@@ -19,7 +19,6 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
     // MARK: UI Components
     private let scrollView = UIScrollView()
     private let contentStackView = UIStackView()
-    private let bottomStackView = UIStackView()
     private let logoImageView = UIImageView(image: UIImage.boomdayLogo?.withRenderingMode(.alwaysTemplate))
     private let broadcasterImageView = UIImageView(image: .broadcasterLogo)
     private let activityIndicator = UIActivityIndicatorView()

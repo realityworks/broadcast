@@ -20,12 +20,23 @@ class EditPostView: UIView {
     
     init() {
         super.init(frame: .zero)
-        
+
+        configureView()
+        configureLayout()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func configureView() {
         verticalStackView.axis = .vertical
         verticalStackView.spacing = 10
         verticalStackView.alignment = .leading
         verticalStackView.distribution = .equalSpacing
-
+    }
+    
+    private func configureLayout() {
         addSubview(verticalStackView)
         
         verticalStackView.topToSuperview()
@@ -46,10 +57,6 @@ class EditPostView: UIView {
         
         captionTextView.height(100)
         captionTextView.width(200)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     func configure(withUploadTitle buttonTitle: LocalizedString) {
