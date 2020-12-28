@@ -46,13 +46,15 @@ class VideoPlayerView: UIView {
     
     /// Play video from URL
     /// - Parameter withURL: Reference URL to play
-    func playVideo(withURL url: URL?) {
+    func playVideo(withURL url: URL?, autoplay: Bool = true) {
         guard let url = url else { return }
         
         player = AVPlayer(url: url)
         playerController.videoGravity = .resizeAspectFill
         playerController.player = player
-        player?.rate = 1 //auto play
+        if autoplay == true {
+            player?.rate = 1 //auto play
+        }
     }
 }
 
