@@ -147,7 +147,7 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         
         viewModel.showingVideo
             .map { !$0 }
-            .bind(to: selectMediaView.imageMediaOverlay.rx.isHidden)
+            .bind(to: selectMediaView.videoMediaOverlay.rx.isHidden)
             .disposed(by: disposeBag)
     }
 }

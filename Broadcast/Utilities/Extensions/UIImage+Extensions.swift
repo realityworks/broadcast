@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 extension UIImage {
     ///   Returns an optional image using the specified color
@@ -21,8 +22,24 @@ extension UIImage {
 
         defer { UIGraphicsEndImageContext() }
 
-        guard let image = UIGraphicsGetImageFromCurrentImageContext()?.cgImage else { return nil }
+        guard let cgImage = UIGraphicsGetImageFromCurrentImageContext()?.cgImage else { return nil }
 
-        self.init(cgImage: image)
+        self.init(cgImage: cgImage)
+    }
+    
+    public convenience init?(asThumbnailFromUrl url: URL) {
+        do
+        {
+            let asset = AVURLAsset(url: url)
+            let imgGenerator = AVAssetImageGenerator(asset: asset)
+            imgGenerator.appliesPreferredTrackTransform = true
+            let cgImage = try imgGenerator.copyCGImage(at:CMTimeMake(value: Int64(0), timescale: Int32(1)),actualTime: nil)
+            self.init(cgImage: cgImage)
+        }
+        catch let error as NSError
+        {
+            Logger.log(level: .warning, topic: .other, message: "Error generating thumbnail: \(error)")
+            return nil
+        }
     }
 }
