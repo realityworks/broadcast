@@ -21,6 +21,7 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     private let scrollView = UIScrollView()
 
     private let selectMediaView = SelectMediaView()
+    private let selectMediaInfoStackView = UIStackView()
     private let selectedMediaTitleLabel = UILabel.largeTitle(.noMedia, textColor: .lightGrey)
     private let tipsButton = UIButton.smallText(withTitle: LocalizedString.tips)
     private let editPostView = EditPostView()
@@ -55,6 +56,15 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         selectMediaView.topToSuperview()
         selectMediaView.width(220)
         selectMediaView.height(220)
+        
+        scrollView.addSubview(selectedMediaTitleLabel)
+        scrollView.addSubview(tipsButton)
+        
+        selectedMediaTitleLabel.leftToRight(of: selectMediaView)
+        selectedMediaTitleLabel.width(100)
+        
+        tipsButton.leftToRight(of: selectMediaView)
+        
         
         scrollView.addSubview(editPostView)
         editPostView.topToBottom(of: selectMediaView)
