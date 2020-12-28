@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import AVFoundation
 
 typealias MediaID = String
 
@@ -20,6 +21,19 @@ enum Media : Equatable {
             return "video/mp4"
         case .image:
             return "image"
+        }
+    }
+    
+    var duration: String {
+        switch self {
+        case .video(let url):
+            let asset = AVAsset(url: url)
+            let time = asset.duration
+            let minutes = Int(CMTimeGetSeconds(time) / 60.0)
+            let seconds = Int(CMTimeGetSeconds(time).truncatingRemainder(dividingBy: 60.0))
+            return String(format: "%d:%02d", minutes, seconds)
+        case .image:
+            return ""
         }
     }
 }

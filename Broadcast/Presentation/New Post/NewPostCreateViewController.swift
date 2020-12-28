@@ -122,6 +122,12 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
             .map { !$0 }
             .bind(to: editPostView.uploadButton.rx.isEnabled)
             .disposed(by: disposeBag)
+        
+        selectMediaView.selectMediaButton.rx.tap
+            .subscribe(onNext: { [unowned self] _ in
+                self.showMediaOptionsMenu()
+            })
+            .disposed(by: disposeBag)
     }
 }
 

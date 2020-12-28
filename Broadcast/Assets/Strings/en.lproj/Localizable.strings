@@ -53,6 +53,10 @@
 "newPost" = "New Post";
 "tips" = "TIPS";
 "noMedia" = "No media";
+"duration" = "Run Time";
+"video" = "Video";
+"image" = "Image";
+
 
 // MARK: Error Strings
 "unknownError" = "An unknown error occured";

@@ -35,4 +35,14 @@ extension Style {
         $0.color = UIColor.primaryBlack
         $0.alignment = .center
     }
+    
+    static let smallBodyGrey = Style {
+        $0.font = UIFont.smallBody
+        $0.color = UIColor.lightGrey
+    }
+    
+    static let smallBody = Style {
+        $0.font = UIFont.smallBody
+        $0.color = UIColor.secondaryBlack
+    }
 }

@@ -8,6 +8,8 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import AVKit
+import SwiftRichString
 
 
 class NewPostCreateViewModel : ViewModel {
@@ -19,6 +21,9 @@ class NewPostCreateViewModel : ViewModel {
     
     let title = BehaviorRelay<String>(value: "")
     let caption = BehaviorRelay<String>(value: "")
+    
+    let viewTimeTitle: Observable<NSAttributedString>
+    let mediaTypeTitle: Observable<String>
     
     let isUploading: Observable<Bool>
     let progress: Observable<Float>
@@ -32,6 +37,25 @@ class NewPostCreateViewModel : ViewModel {
         progress = uploadingProgressObservable.map { $0.totalProgress }
         isUploading = uploadingSubject.asObservable()
         selectedMedia = selectedMediaSubject.compactMap { $0 }
+        
+        viewTimeTitle = selectedMedia.map { media in
+            switch media {
+            case .video:
+                return LocalizedString.duration.localized.set(style: Style.smallBodyGrey) +
+                    media.duration.set(style: Style.smallBody)
+            case .image:
+                return NSAttributedString(string: "")
+            }
+        }
+        
+        mediaTypeTitle = selectedMedia.map { media in
+            switch media {
+            case .video:
+                return LocalizedString.video.localized
+            case .image:
+                return LocalizedString.image.localized
+            }
+        }
         
         super.init(stateController: dependencies.stateController)
         
