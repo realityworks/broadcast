@@ -51,6 +51,10 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         selectMediaInfoStackView.axis = .vertical
         selectMediaInfoStackView.alignment = .leading
         selectMediaInfoStackView.spacing = 4
+        
+        picker.delegate = self
+        picker.videoExportPreset = AVAssetExportPresetPassthrough
+        picker.videoQuality = .typeHigh
     }
     
     private func configureLayout() {
@@ -166,9 +170,6 @@ extension NewPostCreateViewController : MediaPickerAdapter {
         viewModel.selectMedia(.video(url: url))
     }
 }
-
-
-
 
 //
 //  NewPostGuideViewController.swift

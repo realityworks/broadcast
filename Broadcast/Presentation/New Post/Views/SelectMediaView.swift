@@ -12,9 +12,7 @@ class SelectMediaView: UIView {
 
     // MARK: - UI Components
     let dashedBorderView    = CustomBorderView()
-    let centralStackView    = UIStackView()
-    let selectMediaButton   = UIButton()
-    let selectMediaLabel    = UILabel.body(LocalizedString.addMedia)
+    let selectMediaButton   = TopImageButton()
     let imageMediaOverlay   = UIImageView()
     let videoMediaOverlay   = VideoPlayerView()
     
@@ -31,10 +29,11 @@ class SelectMediaView: UIView {
     
     private func configureViews() {
         selectMediaButton.backgroundColor = .clear
-        selectMediaButton.setImage(.iconPlusCircle, for: .normal)
-        
-        centralStackView.axis = .vertical
-        centralStackView.alignment = .center
+        selectMediaButton.setImage(UIImage.iconPlusCircle?.withRenderingMode(.alwaysTemplate), for: .normal)
+        selectMediaButton.imageView?.tintColor = UIColor.primaryRed
+        selectMediaButton.setTitle(LocalizedString.addMedia, for: .normal)
+        selectMediaButton.titleLabel?.font = UIFont.smallBodyBold
+        selectMediaButton.setTitleColor(UIColor.secondaryBlack, for: .normal)
         
         clipsToBounds = false
         backgroundColor = .newPostBackground
@@ -45,13 +44,11 @@ class SelectMediaView: UIView {
     
     private func configureLayout() {
         addSubview(dashedBorderView)
-        addSubview(centralStackView)
+        addSubview(selectMediaButton)
         
         dashedBorderView.edgesToSuperview()
         
-        centralStackView.centerInSuperview()
-        centralStackView.widthToSuperview()
-        centralStackView.addArrangedSubview(selectMediaButton)
-        centralStackView.addArrangedSubview(selectMediaLabel)
+        selectMediaButton.centerInSuperview()
+        selectMediaButton.widthToSuperview()
     }
 }
