@@ -43,6 +43,8 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
     private let testUserName: String = "Angela84@hotmail.com"
     private let testPassword: String = "Pass123$"
     
+    // MARK: UI Functions
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -57,10 +59,19 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         errorPopup.edgesToSuperview()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        scrollView.contentSize = contentStackView.frame.size
+    }
+    
     /// Setup the UI component layout
     private func configureViews() {
         view.addGestureRecognizer(dismissKeyboardGestureRecognizer)
+        dismissKeyboardGestureRecognizer.delaysTouchesEnded = false
         dismissKeyboardGestureRecognizer.addTarget(self, action: #selector(dismissKeyboard))
+        
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.showsVerticalScrollIndicator = false
         
         logoImageView.tintColor = .primaryBlack
         logoImageView.contentMode = .scaleAspectFit
@@ -71,6 +82,7 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         contentStackView.axis = .vertical
         contentStackView.alignment = .center
         contentStackView.distribution = .equalSpacing
+        contentStackView.translatesAutoresizingMaskIntoConstraints = false
         
         applyHereTextView.isScrollEnabled = false
         forgotPasswordTextView.isScrollEnabled = false
