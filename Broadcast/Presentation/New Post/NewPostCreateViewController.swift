@@ -42,6 +42,10 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     }
     
     private func configureViews() {
+        view.addGestureRecognizer(dismissKeyboardGestureRecognizer)
+        dismissKeyboardGestureRecognizer.delaysTouchesEnded = false
+        dismissKeyboardGestureRecognizer.addTarget(self, action: #selector(dismissKeyboard))
+        
         tipsButton.setImage(UIImage.iconHelpCircle?.withRenderingMode(.alwaysTemplate), for: .normal)
         tipsButton.setTitleColor(.secondaryBlack, for: .normal)
         tipsButton.imageView?.contentMode = .scaleAspectFit
@@ -170,8 +174,11 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
                 
             })
             .disposed(by: disposeBag)
-        
-        
+    }
+    
+    @objc func dismissKeyboard() {
+        editPostView.captionTextView.resignFirstResponder()
+        editPostView.titleTextField.resignFirstResponder()
     }
 }
 
