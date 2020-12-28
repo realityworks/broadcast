@@ -141,27 +141,35 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
             .disposed(by: disposeBag)
         
         viewModel.showingImage
-            .map { print("SHOWING IMAGE:\($0)"); return !$0 }
+            .map { !$0 }
             .bind(to: selectMediaView.imageMediaOverlay.rx.isHidden)
             .disposed(by: disposeBag)
         
         viewModel.showingVideo
-            .map { print("SHOWING VIDEO:\($0)"); return !$0 }
+            .map { !$0 }
             .bind(to: selectMediaView.videoMediaOverlay.rx.isHidden)
             .disposed(by: disposeBag)
         
+        viewModel.showingMedia
+            .map { !$0 }
+            .bind(to: selectMediaView.dashedBorderView.rx.isHidden)
+            .disposed(by: disposeBag)
+        
         viewModel.selectedMedia
-            .map { media -> URL? in
-                if case let .video(url) = media {
-                    return url
-                }
-                return nil
-            }
             .compactMap { $0 }
-            .subscribe(onNext: { url in
-                self.selectMediaView.videoMediaOverlay.playVideo(withURL: url, autoplay: false)
+            .subscribe(onNext: { media in
+                print ("Media : \(media) selected")
+                switch media {
+                case .video(let url):
+                    self.selectMediaView.videoMediaOverlay.playVideo(withURL: url, autoplay: false)
+                case .image(let url):
+                    self.selectMediaView.imageMediaOverlay.image = UIImage(contentsOfFile: url.path)
+                }
+                
             })
             .disposed(by: disposeBag)
+        
+        
     }
 }
 

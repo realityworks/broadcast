@@ -40,8 +40,12 @@ class SelectMediaView: UIView {
         layer.cornerRadius = 25
         
         dashedBorderView.layer.cornerRadius = 25
+        
         videoMediaOverlay.layer.cornerRadius = 25
+        videoMediaOverlay.clipsToBounds = true
+        
         imageMediaOverlay.layer.cornerRadius = 25
+        imageMediaOverlay.clipsToBounds = true
     }
     
     private func configureLayout() {

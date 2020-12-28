@@ -30,6 +30,7 @@ class NewPostCreateViewModel : ViewModel {
     let selectedMedia: Observable<Media>
     let showingImage: Observable<Bool>
     let showingVideo: Observable<Bool>
+    let showingMedia: Observable<Bool>
     
     init(dependencies: Dependencies = .standard) {
         self.postContentUseCase = dependencies.postContentUseCase
@@ -65,13 +66,15 @@ class NewPostCreateViewModel : ViewModel {
             case .image: return true
             }
         }
-        
+    
         showingVideo = selectedMediaSubject.map {
             switch $0 {
             case .image, .none: return false
             case .video: return true
             }
         }
+        
+        showingMedia = Observable.combineLatest(showingImage, showingVideo) { $0 || $1 }
         
         super.init(stateController: dependencies.stateController)
         
