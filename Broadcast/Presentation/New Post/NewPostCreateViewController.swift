@@ -21,9 +21,12 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     private let scrollView = UIScrollView()
 
     private let selectMediaView = SelectMediaView()
+    
     private let selectMediaInfoStackView = UIStackView()
+    private let runTimeLabel = UILabel()
     private let selectedMediaTitleLabel = UILabel.largeTitle(.noMedia, textColor: .lightGrey)
     private let tipsButton = UIButton.smallText(withTitle: LocalizedString.tips)
+    
     private let editPostView = EditPostView()
     private let progressView = UIProgressView()
     internal var picker = UIImagePickerController()
@@ -40,7 +43,14 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     }
     
     private func configureViews() {
-        tipsButton.setImage(.iconHelpCircle, for: .normal)
+        tipsButton.setImage(UIImage.iconHelpCircle?.withRenderingMode(.alwaysTemplate), for: .normal)
+        tipsButton.setTitleColor(.secondaryBlack, for: .normal)
+        tipsButton.imageView?.contentMode = .scaleAspectFit
+        tipsButton.imageView?.tintColor = .secondaryBlack
+        
+        selectMediaInfoStackView.axis = .vertical
+        selectMediaInfoStackView.alignment = .leading
+        selectMediaInfoStackView.spacing = 4
     }
     
     private func configureLayout() {
@@ -51,20 +61,30 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         scrollView.bottomToSuperview()
         scrollView.clipsToBounds = false
         
+        /// Layout the selectMediaView
+        
         scrollView.addSubview(selectMediaView)
         selectMediaView.leftToSuperview()
         selectMediaView.topToSuperview()
-        selectMediaView.width(220)
-        selectMediaView.height(220)
+        selectMediaView.width(200)
+        selectMediaView.height(200)
         
-        scrollView.addSubview(selectedMediaTitleLabel)
-        scrollView.addSubview(tipsButton)
+        /// Layout the selectMediaInfoView
         
-        selectedMediaTitleLabel.leftToRight(of: selectMediaView)
-        selectedMediaTitleLabel.width(100)
+        scrollView.addSubview(selectMediaInfoStackView)
+        selectMediaInfoStackView.addSpace(24)
+        selectMediaInfoStackView.addArrangedSubview(selectedMediaTitleLabel)
+        selectMediaInfoStackView.addArrangedSubview(runTimeLabel)
+        selectMediaInfoStackView.addArrangedSubview(tipsButton)
         
-        tipsButton.leftToRight(of: selectMediaView)
+        runTimeLabel.height(18)
+        tipsButton.height(16)
         
+        selectMediaInfoStackView.leftToRight(of: selectMediaView, offset: 16)
+        selectMediaInfoStackView.top(to: selectMediaView)
+        selectMediaInfoStackView.width(100)
+        
+        /// Layout the editPostView
         
         scrollView.addSubview(editPostView)
         editPostView.topToBottom(of: selectMediaView)

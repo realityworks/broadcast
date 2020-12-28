@@ -32,8 +32,8 @@ extension UIButton {
     static func smallText(withTitle title: String?) -> UIButton {
         let button = UIButton()
         
-        button.setTitleColor(.blue, for: .normal)
-        button.setTitleColor(.black, for: .highlighted)
+        button.setTitleColor(.primaryBlack, for: .normal)
+        button.setTitleColor(.primaryGrey, for: .highlighted)
         button.setTitle(title, for: .normal)
         button.titleLabel?.font = UIFont.body
         
