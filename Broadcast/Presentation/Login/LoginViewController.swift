@@ -121,12 +121,13 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         view.addSubview(scrollView)
         
         /// Setup scroll view
-        scrollView.edgesToSuperview(insets: TinyEdgeInsets(top: 0, left: 24, bottom: 0, right: 24), usingSafeArea: true)
+        scrollView.edgesToSuperview(usingSafeArea: true)
         scrollView.addSubview(contentStackView)
         
         /// Setup content stack view
         contentStackView.topToSuperview()
-        contentStackView.widthToSuperview()
+        contentStackView.leading(to: view, offset: 24)
+        contentStackView.trailing(to: view, offset: -24)
         contentStackView.addArrangedSubview(logoImageView)
         
         /// Add arranged views to stack
