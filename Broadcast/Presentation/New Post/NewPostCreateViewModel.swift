@@ -28,6 +28,8 @@ class NewPostCreateViewModel : ViewModel {
     let isUploading: Observable<Bool>
     let progress: Observable<Float>
     let selectedMedia: Observable<Media>
+    let showingImage: Observable<Bool>
+    let showingVideo: Observable<Bool>
     
     init(dependencies: Dependencies = .standard) {
         self.postContentUseCase = dependencies.postContentUseCase
@@ -42,7 +44,7 @@ class NewPostCreateViewModel : ViewModel {
             switch media {
             case .video:
                 return LocalizedString.duration.localized.set(style: Style.smallBodyGrey) +
-                    media.duration.set(style: Style.smallBody)
+                    (" " + media.duration).set(style: Style.smallBody)
             case .image:
                 return NSAttributedString(string: "")
             }
@@ -54,6 +56,20 @@ class NewPostCreateViewModel : ViewModel {
                 return LocalizedString.video.localized
             case .image:
                 return LocalizedString.image.localized
+            }
+        }
+        
+        showingImage = selectedMediaSubject.map {
+            switch $0 {
+            case .video, .none: return false
+            case .image: return true
+            }
+        }
+        
+        showingVideo = selectedMediaSubject.map {
+            switch $0 {
+            case .image, .none: return false
+            case .video: return true
             }
         }
         

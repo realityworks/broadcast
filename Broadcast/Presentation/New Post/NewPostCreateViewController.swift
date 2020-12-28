@@ -11,7 +11,6 @@ import RxCocoa
 import AVFoundation
 import TinyConstraints
 
-
 class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     var dismissKeyboardGestureRecognizer: UIGestureRecognizer = UITapGestureRecognizer()
     
@@ -131,6 +130,24 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
             .subscribe(onNext: { [unowned self] _ in
                 self.showMediaOptionsMenu()
             })
+            .disposed(by: disposeBag)
+        
+        viewModel.mediaTypeTitle
+            .bind(to: selectedMediaTitleLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        viewModel.viewTimeTitle
+            .bind(to: runTimeLabel.rx.attributedText)
+            .disposed(by: disposeBag)
+        
+        viewModel.showingImage
+            .map { !$0 }
+            .bind(to: selectMediaView.imageMediaOverlay.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        viewModel.showingVideo
+            .map { !$0 }
+            .bind(to: selectMediaView.imageMediaOverlay.rx.isHidden)
             .disposed(by: disposeBag)
     }
 }

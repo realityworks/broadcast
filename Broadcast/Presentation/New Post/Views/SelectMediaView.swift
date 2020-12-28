@@ -45,6 +45,8 @@ class SelectMediaView: UIView {
     private func configureLayout() {
         addSubview(dashedBorderView)
         addSubview(selectMediaButton)
+        addSubview(imageMediaOverlay)
+        addSubview(videoMediaOverlay)
         
         dashedBorderView.edgesToSuperview()
         
