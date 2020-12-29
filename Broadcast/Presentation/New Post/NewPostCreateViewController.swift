@@ -22,7 +22,7 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     private let selectMediaView = SelectMediaView()
     private let selectMediaInfoStackView = UIStackView()
     private let runTimeLabel = UILabel()
-    private let selectedMediaTitleLabel = UILabel.largeTitle(.noMedia, textColor: .lightGrey)
+    private let selectedMediaTitleLabel = UILabel.largeTitle(.noMedia, textColor: .primaryLightGrey)
     private let tipsButton = UIButton.text(withTitle: LocalizedString.tips)
     private let removeButton = UIButton.textDestructive(withTitle: LocalizedString.remove)
     
@@ -105,7 +105,7 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         editPostView.height(to: editPostView.verticalStackView)
         
         scrollView.addSubview(progressView)
-        progressView.topToBottom(of: editPostView.uploadButton, offset: 20)
+        progressView.topToBottom(of: editPostView.submitButton, offset: 20)
         progressView.centerXToSuperview()
         progressView.width(150)
         progressView.height(25)
@@ -120,9 +120,8 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
             .bind(to: progressView.rx.progress)
             .disposed(by: disposeBag)
         
-        viewModel.isUploading
-            .map { !$0 }
-            .bind(to: editPostView.uploadButton.rx.isEnabled)
+        viewModel.canUpload
+            .bind(to: editPostView.submitButton.rx.isEnabled)
             .disposed(by: disposeBag)
         
         viewModel.mediaTypeTitle
@@ -188,7 +187,7 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     }
     
     private func configureButtonBindings() {
-        editPostView.uploadButton.rx.tap
+        editPostView.submitButton.rx.tap
             .subscribe(onNext: { _ in
                 self.viewModel.uploadPost()
             })

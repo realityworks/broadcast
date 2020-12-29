@@ -13,7 +13,7 @@ class EditPostView: UIView {
     let verticalStackView = UIStackView()
     let titleTextField = UITextField.standard(withPlaceholder: LocalizedString.postDescription)
     let captionTextView = UITextView.standard()
-    let uploadButton = UIButton.standard(withTitle: LocalizedString.submitPost)
+    let submitButton = UIButton.standard(withTitle: LocalizedString.submitPost)
     
     private let titleHeading = UILabel.bodyBold(LocalizedString.postTitle)
     private let captionHeading = UILabel.bodyBold(LocalizedString.captionTitle)
@@ -35,9 +35,9 @@ class EditPostView: UIView {
         verticalStackView.alignment = .leading
         verticalStackView.distribution = .equalSpacing
         
-        uploadButton.setImage(UIImage.iconRadio?.withRenderingMode(.alwaysTemplate), for: .normal)
-        uploadButton.imageEdgeInsets = .right(10)
-        uploadButton.imageView?.tintColor = .white
+        submitButton.setImage(UIImage.iconRadio?.withRenderingMode(.alwaysTemplate), for: .normal)
+        submitButton.imageEdgeInsets = .right(10)
+        submitButton.imageView?.tintColor = .white
     }
     
     private func configureLayout() {
@@ -52,18 +52,16 @@ class EditPostView: UIView {
         verticalStackView.addArrangedSubview(captionHeading)
         verticalStackView.addArrangedSubview(captionTextView)
         
-        addSubview(uploadButton)
+        verticalStackView.addArrangedSubview(submitButton)
         
-        uploadButton.topToBottom(of: verticalStackView, offset: 20)
-        uploadButton.widthToSuperview()
-        
-        titleTextField.width(200)
+        submitButton.widthToSuperview()
+        titleTextField.widthToSuperview()
         
         captionTextView.height(100)
-        captionTextView.width(200)
+        captionTextView.widthToSuperview()
     }
     
     func configure(withUploadTitle buttonTitle: LocalizedString) {
-        uploadButton.setTitle(buttonTitle.localized, for: .normal)
+        submitButton.setTitle(buttonTitle.localized, for: .normal)
     }
 }

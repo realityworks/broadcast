@@ -25,6 +25,7 @@ class NewPostCreateViewModel : ViewModel {
     let viewTimeTitle: Observable<NSAttributedString>
     let mediaTypeTitle: Observable<String>
     
+    let canUpload: Observable<Bool>
     let isUploading: Observable<Bool>
     let progress: Observable<Float>
     let selectedMedia: Observable<Media>
@@ -75,6 +76,15 @@ class NewPostCreateViewModel : ViewModel {
         }
         
         showingMedia = Observable.combineLatest(showingImage, showingVideo) { $0 || $1 }
+        
+        canUpload = Observable.combineLatest(
+            isUploading,
+            showingMedia,
+            title.asObservable(),
+            caption.asObservable()) {
+            print ("Is Uploading : \($0), showingMedia: \($1), title empty: \($2.isEmpty), caption empty: \($3.isEmpty)")
+                return !$0 && $1 && !$2.isEmpty && !$3.isEmpty
+        }
         
         super.init(stateController: dependencies.stateController)
         

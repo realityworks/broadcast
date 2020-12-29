@@ -38,7 +38,7 @@ extension Style {
     
     static let smallBodyGrey = Style {
         $0.font = UIFont.smallBody
-        $0.color = UIColor.lightGrey
+        $0.color = UIColor.primaryLightGrey
     }
     
     static let smallBody = Style {
