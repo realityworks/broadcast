@@ -31,6 +31,8 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     private let progressContainerView = UIView()
     private let progressView = UIProgressView()
     private let progressLabel = UILabel.tinyBody()
+    private let tipsView = TipsView()
+    
     internal var picker = UIImagePickerController()
     
     // MARK: UIKit overrides
@@ -163,6 +165,10 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         progressLabel.topToBottom(of: progressContainerView)
         progressLabel.widthToSuperview()
         progressLabel.height(16)
+        
+        /// Layout tips view
+        view.addSubview(tipsView)
+        tipsView.edgesToSuperview()
     }
     
     private func configureBindings() {
@@ -230,6 +236,23 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
                     self.selectMediaView.imageMediaOverlay.image = UIImage(contentsOfFile: url.path)
                 }
                 
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.showTips
+            .map { $0 }
+            .bind(to: tipsView.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        tipsView.closeButton.rx.tap
+            .subscribe(onNext: { _ in
+                self.viewModel.showTips(false)
+            })
+            .disposed(by: disposeBag)
+        
+        tipsButton.rx.tap
+            .subscribe(onNext: { _ in
+                self.viewModel.showTips(true)
             })
             .disposed(by: disposeBag)
     }

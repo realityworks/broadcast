@@ -18,6 +18,7 @@ class NewPostCreateViewModel : ViewModel {
     
     private let selectedMediaSubject = BehaviorRelay<Media?>(value: nil)
     private let isUploadingSubject = BehaviorSubject<Bool>(value: false)
+    private let showTipsSubject = BehaviorRelay<Bool>(value: false)
     
     let title = BehaviorRelay<String>(value: "")
     let caption = BehaviorRelay<String>(value: "")
@@ -34,6 +35,7 @@ class NewPostCreateViewModel : ViewModel {
     let showingVideo: Observable<Bool>
     let showingMedia: Observable<Bool>
     let hideUploadingBar: Observable<Bool>
+    let showTips: Observable<Bool>
     
     init(dependencies: Dependencies = .standard) {
         self.postContentUseCase = dependencies.postContentUseCase
@@ -100,6 +102,8 @@ class NewPostCreateViewModel : ViewModel {
             title.asObservable(),
             caption.asObservable()) { !$0 && $1 && !$2.isEmpty && !$3.isEmpty }
         
+        showTips = showTipsSubject.asObservable()
+        
         super.init(stateController: dependencies.stateController)
         
         uploadingProgressObservable
@@ -146,4 +150,9 @@ extension NewPostCreateViewModel {
     func removeMedia() {
         selectedMediaSubject.accept(nil)
     }
+    
+    func showTips(_ show: Bool) {
+        showTipsSubject.accept(show)
+    }
+    
 }

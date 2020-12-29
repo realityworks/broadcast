@@ -53,9 +53,6 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         configureLayout()
         configureBindings()
         style()
-        
-        view.addSubview(errorPopup)
-        errorPopup.edgesToSuperview()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -186,6 +183,10 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         forgotPasswordTextView.rightToSuperview()
         
         forgotPasswordTextView.height(30)
+        
+        /// Layout error view
+        view.addSubview(errorPopup)
+        errorPopup.edgesToSuperview()
     }
     
     /// Configure the bindings between the view model and

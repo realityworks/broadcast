@@ -16,8 +16,8 @@ class TipsView : UIView {
     private let verticalStackView = UIStackView()
     private let subTitleLabel = UILabel.bodyBold(LocalizedString.hotTips, textColor: UIColor.white)
     private let titleLabel = UILabel.extraLargeTitle(LocalizedString.greatContent, textColor: UIColor.white)
-    private let closeButton = UIButton.text(withTitle: LocalizedString.close)
     private let containerView = UIView()
+    let closeButton = UIButton.text(withTitle: LocalizedString.close)
     
     struct TipData {
         let image: UIImage?
@@ -90,5 +90,3 @@ class TipsView : UIView {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
-
