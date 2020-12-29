@@ -27,7 +27,9 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     private let removeButton = UIButton.textDestructive(withTitle: LocalizedString.remove)
     
     private let editPostView = EditPostView()
+    private let progressContainerView = UIView()
     private let progressView = UIProgressView()
+    private let progressLabel = UILabel.tinyBody()
     internal var picker = UIImagePickerController()
         
     override func viewDidLoad() {
@@ -60,6 +62,18 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         picker.delegate = self
         picker.videoExportPreset = AVAssetExportPresetPassthrough
         picker.videoQuality = .typeHigh
+        
+        progressContainerView.backgroundColor = .clear
+        progressContainerView.layer.cornerRadius = 8
+        progressContainerView.layer.borderWidth = 1
+        progressContainerView.layer.borderColor = UIColor.secondaryLightGrey.cgColor
+        
+        progressView.progressViewStyle = .bar
+        progressView.progress = 0.0
+        progressView.trackTintColor = .clear
+        progressView.progressTintColor = .progressBarColor
+        progressView.layer.cornerRadius = 4
+        progressView.clipsToBounds = true
     }
     
     private func configureLayout() {
@@ -104,7 +118,6 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         editPostView.widthToSuperview()
         editPostView.height(to: editPostView.verticalStackView)
         
-        let progressContainerView = UIView()
         scrollView.addSubview(progressContainerView)
         progressContainerView.addSubview(progressView)
         
@@ -112,20 +125,8 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         progressContainerView.centerXToSuperview()
         progressContainerView.widthToSuperview()
         progressContainerView.height(16)
-        progressContainerView.backgroundColor = .clear
-        progressContainerView.layer.cornerRadius = 8
-        progressContainerView.layer.borderWidth = 1
-        progressContainerView.layer.borderColor = UIColor.secondaryLightGrey.cgColor
         
         progressView.edgesToSuperview(insets: TinyEdgeInsets(top: 4, left: 5, bottom: 5, right: 5))
-        progressView.progressViewStyle = .bar
-        progressView.progress = 1.0
-        progressView.trackTintColor = .clear
-        progressView.progressTintColor = .progressBarColor
-        progressView.layer.cornerRadius = 4
-        progressView.clipsToBounds = true
-        
-//        progressView.layer.borderWidth = 1
     }
     
     private func configureBindings() {
@@ -168,6 +169,10 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         viewModel.showingMedia
             .map { !$0 }
             .bind(to: removeButton.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        viewModel.hideUploadingBar
+            .bind(to: progressContainerView.rx.isHidden)
             .disposed(by: disposeBag)
         
         viewModel.selectedMedia

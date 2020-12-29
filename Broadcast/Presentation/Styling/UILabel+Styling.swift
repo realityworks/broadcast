@@ -10,7 +10,7 @@ import UIKit
 extension UILabel {
     private static func text(_ text: String? = nil,
                              font: UIFont = .body,
-                             textColor: UIColor = .black) -> UILabel {
+                             textColor: UIColor = .secondaryBlack) -> UILabel {
         let label = UILabel()
         label.text = text
         label.font = font
@@ -32,5 +32,9 @@ extension UILabel {
     
     static func lightGreySmallBody(_ text: LocalizedString = .none) -> UILabel {
         return Self.text(text.localized, font: .smallBody, textColor: .primaryLightGrey)
+    }
+    
+    static func tinyBody(_ text: LocalizedString = .none) -> UILabel {
+        return Self.text(text.localized, font: .tinyBody)
     }
 }

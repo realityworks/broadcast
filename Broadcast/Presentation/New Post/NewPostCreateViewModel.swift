@@ -28,6 +28,7 @@ class NewPostCreateViewModel : ViewModel {
     let canUpload: Observable<Bool>
     let isUploading: Observable<Bool>
     let progress: Observable<Float>
+    let progressString: Observable<String>
     let selectedMedia: Observable<Media>
     let showingImage: Observable<Bool>
     let showingVideo: Observable<Bool>
@@ -39,6 +40,16 @@ class NewPostCreateViewModel : ViewModel {
         let uploadingProgressObservable = dependencies.uploadProgressObservable.compactMap { $0 }
         
         progress = uploadingProgressObservable.map { $0.totalProgress }
+        progressString = uploadingProgressObservable.map { uploadProgress in
+            if uploadProgress.completed {
+                return LocalizedString.uploadCompleted.localized
+            } else if uploadProgress.failed {
+                return "\(LocalizedString.uploadFailed.localized) \(uploadProgress.errorDescription ?? "")"
+            }
+            
+            return String(format: "\(LocalizedString.uploading)%2.0f%%", uploadProgress.totalProgress * 100)
+        }
+        
         isUploading = uploadingSubject.asObservable()
         selectedMedia = selectedMediaSubject.compactMap { $0 }
         

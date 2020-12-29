@@ -57,6 +57,9 @@
 "video" = "Video";
 "image" = "Image";
 "remove" = "Remove";
+"uploadCompleted" = "Upload successful!";
+"uploadFailed" = "Upload failed!";
+"uploading" = "Uploading media - ";
 
 // MARK: Error Strings
 "unknownError" = "An unknown error occured";

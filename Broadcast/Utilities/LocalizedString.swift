@@ -65,6 +65,9 @@ enum LocalizedString : String {
     case video
     case image
     case remove
+    case uploadCompleted
+    case uploadFailed
+    case uploading
     
     var localized: String {
         return Bundle.main.localizedString(forKey: self.rawValue, value: nil, table: nil)

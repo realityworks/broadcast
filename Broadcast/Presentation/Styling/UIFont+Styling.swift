@@ -75,6 +75,7 @@ extension UIFont {
     static var title: UIFont { .customFont(ofSize: 15, weight: InterFontWeight.regular ) }
     static var titleBold: UIFont { .customFont(ofSize: 15, weight: InterFontWeight.bold ) }
     static var smallBody: UIFont { .customFont(ofSize: 12, weight: InterFontWeight.medium ) }
+    static var tinyBody: UIFont { .customFont(ofSize: 11, weight: InterFontWeight.medium ) }
     static var smallBodyBold: UIFont { .customFont(ofSize: 12, weight: InterFontWeight.bold ) }
     static var body: UIFont { .customFont(ofSize: 14, weight: InterFontWeight.regular ) }
     static var bodyBold: UIFont { .customFont(ofSize: 14, weight: InterFontWeight.bold ) }

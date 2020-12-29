@@ -58,6 +58,13 @@ extension PostContentUseCase {
             .subscribe(onNext: { uploadProgress in
                 Logger.log(level: .info, topic: .api, message: "Upload progress : \(uploadProgress.progress)")
                 self.stateController.state.currentUploadProgress = uploadProgress
+            }, onError: { error in
+                self.stateController.state.currentUploadProgress?.failed = true
+                if let boomDayError = error as? BoomdayError {
+                    self.stateController.state.currentUploadProgress?.errorDescription = boomDayError.localizedDescription
+                } else {
+                    self.stateController.state.currentUploadProgress?.errorDescription = error.localizedDescription
+                }
             }, onCompleted: {
                 Logger.log(level: .info, topic: .api, message: "Post content complete!")
                 self.stateController.state.currentUploadProgress?.completed = true
