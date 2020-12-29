@@ -55,12 +55,15 @@ class ViewController : UIViewController {
         switch style {
         case .dark(let titleString):
             title = titleString.localized
-            navigationController?.navigationBar.backgroundColor = UIColor.darkGrey
+            navigationController?.navigationBar.setBackgroundImage(UIImage(color: UIColor.darkGrey), for: .default)
             
             let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
             navigationController?.navigationBar.titleTextAttributes = textAttributes
-
-        default: break
+            
+        case .darkLogo:
+            navigationController?.navigationBar.setBackgroundImage(UIImage(color: UIColor.darkGrey), for: .default)
+            
+            #warning("TODO : Add broadcasting logo image")
         }
     }
 }
