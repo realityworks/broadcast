@@ -72,8 +72,11 @@ extension KeyboardEventsAdapter where Self: UIViewController {
         let keyboardHeight = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.height
         let animationDuration = (userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
         let animationCurve = (userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as! NSNumber).uintValue
-
-        additionalSafeAreaInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
+        
+        let offsetHeight = tabBarController?.tabBar.frame.height ?? 0
+        let edgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight - offsetHeight, right: 0)
+        additionalSafeAreaInsets = edgeInsets
+        
         UIView.animate(withDuration: animationDuration, delay: 0, options: UIView.AnimationOptions(rawValue: animationCurve), animations: {
             self.view.layoutIfNeeded()
             return
@@ -89,7 +92,9 @@ extension KeyboardEventsAdapter where Self: UIViewController {
         let animationDuration = (userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
         let animationCurve = (userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as! NSNumber).uintValue
 
-        additionalSafeAreaInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        let edgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        additionalSafeAreaInsets = edgeInsets
+        
         UIView.animate(withDuration: animationDuration, delay: 0, options: UIView.AnimationOptions(rawValue: animationCurve), animations: {
             self.view.layoutIfNeeded()
             return

@@ -43,7 +43,7 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
     private let testUserName: String = "Angela84@hotmail.com"
     private let testPassword: String = "Pass123$"
     
-    // MARK: UI Functions
+    // MARK: UIKit overrides
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,16 +53,27 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         configureLayout()
         configureBindings()
         style()
-        registerForKeyboardEvents()
         
         view.addSubview(errorPopup)
         errorPopup.edgesToSuperview()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        registerForKeyboardEvents()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        unregisterForKeyboardEvents()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         scrollView.contentSize = contentStackView.frame.size
     }
+    
+    // MARK: Internal configuration functions
     
     /// Setup the UI component layout
     private func configureViews() {

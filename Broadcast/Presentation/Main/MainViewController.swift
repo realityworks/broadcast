@@ -27,7 +27,11 @@ class MainViewController: UITabBarController {
         myPostsViewController           = Route.myPosts.viewControllerInstance()
         newPostViewController           = Route.newPostCreate.viewControllerInstance()
         profileViewController           = Route.profile.viewControllerInstance()
-
+        
+        addChild(myPostsViewController)
+        addChild(newPostViewController)
+        addChild(profileViewController)
+        
         // Do any additional setup after loading the view.
         configureViews()
         styleView()

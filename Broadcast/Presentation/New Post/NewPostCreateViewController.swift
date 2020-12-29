@@ -18,6 +18,7 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     
     // MARK: UI Components
     private let scrollView = UIScrollView()
+    private let contentView = UIView()
     
     private let selectMediaView = SelectMediaView()
     private let selectMediaInfoStackView = UIStackView()
@@ -31,6 +32,8 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     private let progressView = UIProgressView()
     private let progressLabel = UILabel.tinyBody()
     internal var picker = UIImagePickerController()
+    
+    // MARK: UIKit overrides
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,10 +46,30 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         configureBindings()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        registerForKeyboardEvents()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        unregisterForKeyboardEvents()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        scrollView.contentSize = contentView.frame.size
+    }
+    
+    // MARK: Internal configuration functions
+    
     private func configureViews() {
         view.addGestureRecognizer(dismissKeyboardGestureRecognizer)
         dismissKeyboardGestureRecognizer.delaysTouchesEnded = false
         dismissKeyboardGestureRecognizer.addTarget(self, action: #selector(dismissKeyboard))
+        
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.translatesAutoresizingMaskIntoConstraints = false
         
         tipsButton.setImage(UIImage.iconHelpCircle?.withRenderingMode(.alwaysTemplate), for: .normal)
         tipsButton.setTitleColor(.secondaryBlack, for: .normal)
@@ -80,15 +103,19 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     
     private func configureLayout() {
         view.addSubview(scrollView)
-        scrollView.topToSuperview(offset: 24, usingSafeArea: true)
-        scrollView.leftToSuperview(offset: 24)
-        scrollView.rightToSuperview(offset: -24)
-        scrollView.bottomToSuperview()
-        scrollView.clipsToBounds = false
+        scrollView.edgesToSuperview(usingSafeArea: true)
+        scrollView.automaticallyAdjustsScrollIndicatorInsets = true
+        
+        /// ContentView
+        scrollView.addSubview(contentView)
+        contentView.topToSuperview(offset: 24)
+        contentView.left(to: view, offset: 24)
+        contentView.right(to: view, offset: -24)
+        contentView.height(550)
         
         /// Layout the selectMediaView
         
-        scrollView.addSubview(selectMediaView)
+        contentView.addSubview(selectMediaView)
         selectMediaView.leftToSuperview()
         selectMediaView.topToSuperview()
         selectMediaView.width(200)
@@ -96,7 +123,7 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         
         /// Layout the selectMediaInfoView
         
-        scrollView.addSubview(selectMediaInfoStackView)
+        contentView.addSubview(selectMediaInfoStackView)
         selectMediaInfoStackView.addSpace(24)
         selectMediaInfoStackView.addArrangedSubview(selectedMediaTitleLabel)
         selectMediaInfoStackView.addArrangedSubview(runTimeLabel)
@@ -109,20 +136,20 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         selectMediaInfoStackView.top(to: selectMediaView)
         selectMediaInfoStackView.width(100)
         
-        scrollView.addSubview(removeButton)
+        contentView.addSubview(removeButton)
         removeButton.leftToRight(of: selectMediaView, offset: 16)
         removeButton.bottom(to: selectMediaView, offset: -16)
         
         /// Layout the editPostView
         
-        scrollView.addSubview(editPostView)
+        contentView.addSubview(editPostView)
         editPostView.topToBottom(of: selectMediaView, offset: 24)
         editPostView.widthToSuperview()
         editPostView.height(to: editPostView.verticalStackView)
         
         /// Layout progress and progress label views
         
-        scrollView.addSubview(progressContainerView)
+        contentView.addSubview(progressContainerView)
         progressContainerView.addSubview(progressView)
         
         progressContainerView.topToBottom(of: editPostView.submitButton, offset: 20)
@@ -132,7 +159,7 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         
         progressView.edgesToSuperview(insets: TinyEdgeInsets(top: 4, left: 5, bottom: 5, right: 5))
         
-        scrollView.addSubview(progressLabel)
+        contentView.addSubview(progressLabel)
         progressLabel.topToBottom(of: progressContainerView)
         progressLabel.widthToSuperview()
         progressLabel.height(16)
@@ -148,6 +175,7 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
             .disposed(by: disposeBag)
         
         viewModel.isUploading
+            .map { !$0 }
             .bind(to: editPostView.titleTextField.rx.isEnabled, editPostView.captionTextView.rx.isUserInteractionEnabled)
             .disposed(by: disposeBag)
         
@@ -210,6 +238,12 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         editPostView.titleTextField.rx.controlEvent(.editingChanged)
             .map { [unowned self] in self.editPostView.titleTextField.text ?? "" }
             .bind(to: viewModel.title)
+            .disposed(by: disposeBag)
+        
+        editPostView.titleTextField.rx.controlEvent([.editingDidEndOnExit])
+            .subscribe(onNext: { [unowned self] _ in
+                self.editPostView.titleTextField.resignFirstResponder()
+            })
             .disposed(by: disposeBag)
                 
         editPostView.captionTextView.rx.text
