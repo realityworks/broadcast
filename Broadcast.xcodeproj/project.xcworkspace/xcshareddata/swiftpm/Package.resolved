@@ -38,6 +38,15 @@
         }
       },
       {
+        "package": "RSKPlaceholderTextView",
+        "repositoryURL": "https://github.com/ruslanskorb/RSKPlaceholderTextView.git",
+        "state": {
+          "branch": null,
+          "revision": "ec315b21080e47b127285413914ad0b4bdf2e36d",
+          "version": "6.0.3"
+        }
+      },
+      {
         "package": "RxAlamofire",
         "repositoryURL": "https://github.com/RxSwiftCommunity/RxAlamofire.git",
         "state": {

@@ -12,8 +12,8 @@ import SwiftRichString
 
 class EditPostView: UIView {
     let verticalStackView = UIStackView()
-    let titleTextField = UITextField.standard(insets: .left(16))
-    let captionTextView = UITextView.standard()
+    let titleTextField = UITextField.standard(withPlaceholder: LocalizedString.postDescription, insets: .left(16))
+    let captionTextView = UITextView.standard(withPlaceholder: LocalizedString.captionDescription)
     let submitButton = UIButton.standard(withTitle: LocalizedString.submitPost)
     
     private let titleHeading = UILabel.lightGreySmallBody(LocalizedString.postTitle)
@@ -39,11 +39,6 @@ class EditPostView: UIView {
         submitButton.setImage(UIImage.iconRadio?.withRenderingMode(.alwaysTemplate), for: .normal)
         submitButton.imageEdgeInsets = .right(10)
         submitButton.imageView?.tintColor = .white
-        
-        titleTextField.attributedPlaceholder = LocalizedString.postDescription
-            .localized
-            .set(style: Style.body)
-            .set(style: Style.lightGrey)
     }
     
     private func configureLayout() {

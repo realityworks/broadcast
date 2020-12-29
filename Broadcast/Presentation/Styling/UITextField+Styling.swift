@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftRichString
 
 extension UITextField {
     static func standard(withPlaceholder placeholder: LocalizedString = .none, insets: UIEdgeInsets? = nil) -> UITextField {
@@ -23,7 +24,7 @@ extension UITextField {
         textField.layer.borderColor = UIColor.textFieldBorder.cgColor
         textField.layer.cornerRadius = 5
         
-        textField.placeholder = placeholder.localized
+        textField.attributedPlaceholder = placeholder.localized.set(style: Style.body).set(style: Style.lightGrey)
         textField.height(50)
         textField.font = .body
         return textField

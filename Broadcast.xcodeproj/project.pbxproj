@@ -99,6 +99,7 @@
 		1D79C14A2594BFDF00AC271B /* Inter-V.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1D79C1252594B36100AC271B /* Inter-V.otf */; };
 		1D7C49432599F61F0089EA6B /* TopImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7C49422599F61F0089EA6B /* TopImageButton.swift */; };
 		1D7C4949259B2FB70089EA6B /* InsetTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7C4948259B2FB70089EA6B /* InsetTextField.swift */; };
+		1D7C4950259B38A70089EA6B /* RSKPlaceholderTextView in Frameworks */ = {isa = PBXBuildFile; productRef = 1D7C494F259B38A70089EA6B /* RSKPlaceholderTextView */; };
 		1D87DF4925683535000652D6 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF4825683535000652D6 /* EditProfileViewController.swift */; };
 		1D87DF4E2568353F000652D6 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF4D2568353F000652D6 /* EditProfileViewModel.swift */; };
 		1D87DF532568367E000652D6 /* MyPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF522568367E000652D6 /* MyPostsViewController.swift */; };
@@ -332,6 +333,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D916D9E25640C430059E549 /* SDWebImage in Frameworks */,
+				1D7C4950259B38A70089EA6B /* RSKPlaceholderTextView in Frameworks */,
 				1D916D202562A1180059E549 /* Alamofire in Frameworks */,
 				1DD1FE17256CE2E000C598CE /* SwiftRichString in Frameworks */,
 				1D916D1A25629EBF0059E549 /* RxCocoa in Frameworks */,
@@ -867,6 +869,7 @@
 				1D3F71EC2571516600DE7F05 /* RxDataSources */,
 				1D3F71EE2571516600DE7F05 /* Differentiator */,
 				1D79C105259446F300AC271B /* Lottie */,
+				1D7C494F259B38A70089EA6B /* RSKPlaceholderTextView */,
 			);
 			productName = Broadcast;
 			productReference = 1D3433F725624B4400886245 /* Broadcast.app */;
@@ -927,6 +930,7 @@
 				1DD1FE21256DF4B700C598CE /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 				1D3F71EB2571516600DE7F05 /* XCRemoteSwiftPackageReference "RxDataSources" */,
 				1D79C104259446F300AC271B /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				1D7C494E259B38A70089EA6B /* XCRemoteSwiftPackageReference "RSKPlaceholderTextView" */,
 			);
 			productRefGroup = 1D3433F825624B4400886245 /* Products */;
 			projectDirPath = "";
@@ -1400,6 +1404,14 @@
 				minimumVersion = 3.1.9;
 			};
 		};
+		1D7C494E259B38A70089EA6B /* XCRemoteSwiftPackageReference "RSKPlaceholderTextView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ruslanskorb/RSKPlaceholderTextView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.3;
+			};
+		};
 		1D916D1625629EBF0059E549 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
@@ -1473,6 +1485,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1D79C104259446F300AC271B /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		1D7C494F259B38A70089EA6B /* RSKPlaceholderTextView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1D7C494E259B38A70089EA6B /* XCRemoteSwiftPackageReference "RSKPlaceholderTextView" */;
+			productName = RSKPlaceholderTextView;
 		};
 		1D916D1725629EBF0059E549 /* RxSwift */ = {
 			isa = XCSwiftPackageProductDependency;

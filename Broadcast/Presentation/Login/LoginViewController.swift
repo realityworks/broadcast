@@ -23,10 +23,10 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
     private let broadcasterImageView = UIImageView(image: .broadcasterLogo)
     private let activityIndicator = UIActivityIndicatorView()
     
-    private let usernameTextField = LoginTextField.username(
+    private let usernameTextField = LoginTextField.standard(
         withPlaceholder: LocalizedString.usernamePlaceholder)
     
-    private let passwordTextField = LoginTextField.password(
+    private let passwordTextField = LoginTextField.secure(
         withPlaceholder: LocalizedString.passwordPlaceholder)
     
     private let loginButton = UIButton.standard(
