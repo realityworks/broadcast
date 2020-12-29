@@ -91,6 +91,11 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         selectMediaInfoStackView.top(to: selectMediaView)
         selectMediaInfoStackView.width(100)
         
+        scrollView.addSubview(removeButton)
+        removeButton.leftToRight(of: selectMediaView, offset: 16)
+        removeButton.width(to: selectMediaInfoStackView)
+        removeButton.bottom(to: selectMediaView, offset: -16)
+        
         /// Layout the editPostView
         
         scrollView.addSubview(editPostView)
