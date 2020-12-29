@@ -16,6 +16,9 @@ extension UIColor {
     static let darkGrey = UIColor(hex: "#1B1B23")
     static let primaryLightGrey = UIColor(hex: "#7B87A1")
     static let secondaryLightGrey = UIColor(hex: "#CBCFDA")
+    static let tertiaryLightGrey = UIColor(hex: "#EFF0F5")
+    
+    static let textFieldBorder = tertiaryLightGrey
     static let dashedBorder = UIColor(hex: "#C4C9D6")
     static let newPostBackground = UIColor(hex: "#F6F7FA")
     

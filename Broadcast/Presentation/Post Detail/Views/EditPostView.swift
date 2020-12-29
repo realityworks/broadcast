@@ -12,7 +12,7 @@ import SwiftRichString
 
 class EditPostView: UIView {
     let verticalStackView = UIStackView()
-    let titleTextField = UITextField.standard()
+    let titleTextField = UITextField.standard(insets: .left(16))
     let captionTextView = UITextView.standard()
     let submitButton = UIButton.standard(withTitle: LocalizedString.submitPost)
     

@@ -98,6 +98,7 @@
 		1D79C1492594BFDF00AC271B /* Inter-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1D79C1202594B36000AC271B /* Inter-ThinItalic.otf */; };
 		1D79C14A2594BFDF00AC271B /* Inter-V.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1D79C1252594B36100AC271B /* Inter-V.otf */; };
 		1D7C49432599F61F0089EA6B /* TopImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7C49422599F61F0089EA6B /* TopImageButton.swift */; };
+		1D7C4949259B2FB70089EA6B /* InsetTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7C4948259B2FB70089EA6B /* InsetTextField.swift */; };
 		1D87DF4925683535000652D6 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF4825683535000652D6 /* EditProfileViewController.swift */; };
 		1D87DF4E2568353F000652D6 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF4D2568353F000652D6 /* EditProfileViewModel.swift */; };
 		1D87DF532568367E000652D6 /* MyPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF522568367E000652D6 /* MyPostsViewController.swift */; };
@@ -267,6 +268,7 @@
 		1D79C12F2594B36200AC271B /* Inter-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Black.otf"; sourceTree = "<group>"; };
 		1D79C1322594BE7500AC271B /* LoginTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextField.swift; sourceTree = "<group>"; };
 		1D7C49422599F61F0089EA6B /* TopImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopImageButton.swift; sourceTree = "<group>"; };
+		1D7C4948259B2FB70089EA6B /* InsetTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetTextField.swift; sourceTree = "<group>"; };
 		1D87DF4825683535000652D6 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		1D87DF4D2568353F000652D6 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		1D87DF522568367E000652D6 /* MyPostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsViewController.swift; sourceTree = "<group>"; };
@@ -727,6 +729,7 @@
 				1D216A4F25987CA7007FA845 /* CustomBorderView.swift */,
 				1D216A3A2595ED4F007FA845 /* TextPopup.swift */,
 				1D91A0D1256C1DD60043A943 /* DismissableLabel.swift */,
+				1D7C4948259B2FB70089EA6B /* InsetTextField.swift */,
 				1D79C1322594BE7500AC271B /* LoginTextField.swift */,
 				1D3F71C5257006D100DE7F05 /* PostSummaryView.swift */,
 				1D3F71C92570082800DE7F05 /* PostStatsView.swift */,
@@ -1018,6 +1021,7 @@
 				1D216A3B2595ED4F007FA845 /* TextPopup.swift in Sources */,
 				1D3B2A432564F22F001874FD /* LocalAPIService.swift in Sources */,
 				1D3B2A392564F0D5001874FD /* PersistanceService.swift in Sources */,
+				1D7C4949259B2FB70089EA6B /* InsetTextField.swift in Sources */,
 				1DD1FE1D256D6F7300C598CE /* AuthenticateResponse.swift in Sources */,
 				1D916D8D256404ED0059E549 /* Profile.swift in Sources */,
 				1D87DF9B25683B53000652D6 /* ProfileViewModel.swift in Sources */,
