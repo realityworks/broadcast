@@ -40,7 +40,7 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = LocalizedString.newPost.localized
+        navigationBar(styleAs: .dark(title: LocalizedString.newPost))
 
         // Do any additional setup after loading the view.
         configureViews()

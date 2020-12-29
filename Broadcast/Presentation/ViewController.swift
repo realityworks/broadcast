@@ -59,8 +59,7 @@ class ViewController : UIViewController {
             
             let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
             navigationController?.navigationBar.titleTextAttributes = textAttributes
-            
-        
+
         default: break
         }
     }
