@@ -68,6 +68,15 @@ enum LocalizedString : String {
     case uploadCompleted
     case uploadFailed
     case uploading
+    case hotTips
+    case greatContent
+    case tip1Title
+    case tip1SubTitle
+    case tip2Title
+    case tip2SubTitle
+    case tip3Title
+    case tip3SubTitle
+    case close
     
     var localized: String {
         return Bundle.main.localizedString(forKey: self.rawValue, value: nil, table: nil)

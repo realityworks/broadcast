@@ -16,4 +16,7 @@ extension UIImage {
     static let iconPlusCircle = UIImage(named: "icon-plus-circle")
     static let iconHelpCircle = UIImage(named: "icon-help-circle")
     static let iconRadio = UIImage(named: "icon-radio")
+    static let iconCustomPortraitMode = UIImage(named: "icon-custom-portrait-mode")
+    static let iconCustomTimer = UIImage(named: "icon-custom-timer")
+    static let iconCustomBrightness = UIImage(named: "icon-custom-brightness")
 }

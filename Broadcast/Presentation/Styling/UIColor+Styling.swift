@@ -22,7 +22,7 @@ extension UIColor {
     static let dashedBorder = UIColor(hex: "#C4C9D6")
     static let newPostBackground = UIColor(hex: "#F6F7FA")
     
-    static let largeTitle = UIColor.secondaryBlack
+    static let text = UIColor.secondaryBlack
     static let progressBarColor = UIColor.green
 }
 

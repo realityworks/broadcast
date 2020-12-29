@@ -60,7 +60,16 @@
 "uploadCompleted" = "Upload successful!";
 "uploadFailed" = "Upload failed!";
 "uploading" = "Uploading media - ";
-
+"hotTips" = "HOT TIPS FOR";
+"greatContent" = "GREAT CONTENT";
+"tip1Title" = "Record in portrait mode";
+"tip1SubTitle" = "This works great for Boomday videos";
+"tip2Title" = "Short and simple";
+"tip2SubTitle" = "Like a good HIIT session — keep it snappy";
+"tip3Title" = "Lights. Sound. Action!";
+"tip3SubTitle" = "Good sound and lighting make great videos";
+"close" = "Close";
+ 
 // MARK: Error Strings
 "unknownError" = "An unknown error occured";
 "unsupportedError" = "This functionality is not currently supported";

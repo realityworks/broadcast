@@ -18,16 +18,24 @@ extension UILabel {
         return label
     }
     
-    static func body(_ text: LocalizedString = .none) -> UILabel {
-        return Self.text(text.localized)
+    static func body(_ text: LocalizedString = .none, textColor: UIColor = .text) -> UILabel {
+        return Self.text(text.localized, textColor: textColor)
     }
     
-    static func largeTitle(_ text: LocalizedString = .none, textColor: UIColor = .largeTitle) -> UILabel {
+    static func largeTitle(_ text: LocalizedString = .none, textColor: UIColor = .text) -> UILabel {
         return Self.text(text.localized, font: .largeTitle, textColor: textColor)
     }
     
-    static func bodyBold(_ text: LocalizedString = .none) -> UILabel {
-        return Self.text(text.localized, font: .bodyBold)
+    static func extraLargeTitle(_ text: LocalizedString = .none, textColor: UIColor = .text) -> UILabel {
+        return Self.text(text.localized, font: .extraLargeTitle, textColor: textColor)
+    }
+    
+    static func subTitle(_ text: LocalizedString = .none, textColor: UIColor = .text) -> UILabel {
+        return Self.text(text.localized, font: .largeTitle, textColor: textColor)
+    }
+    
+    static func bodyBold(_ text: LocalizedString = .none, textColor: UIColor = .text) -> UILabel {
+        return Self.text(text.localized, font: .bodyBold, textColor: textColor)
     }
     
     static func lightGreySmallBody(_ text: LocalizedString = .none) -> UILabel {
@@ -36,5 +44,13 @@ extension UILabel {
     
     static func tinyBody(_ text: LocalizedString = .none) -> UILabel {
         return Self.text(text.localized, font: .tinyBody)
+    }
+    
+    static func largeBodyBold(_ text: LocalizedString = .none) -> UILabel {
+        return Self.text(text.localized, font: .largeBodyBold)
+    }
+    
+    static func smallBody(_ text: LocalizedString = .none) -> UILabel {
+        return Self.text(text.localized, font: .smallBody)
     }
 }
