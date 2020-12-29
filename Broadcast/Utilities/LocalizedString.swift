@@ -44,7 +44,7 @@ enum LocalizedString : String {
     case postDescription
     case captionTitle
     case captionDescription
-    case publish
+    case submitPost
     case notABroadcaster
     case learnMore
     case forgotPassword

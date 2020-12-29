@@ -15,4 +15,5 @@ extension UIImage {
     static let iconLock = UIImage(named: "icon-lock")
     static let iconPlusCircle = UIImage(named: "icon-plus-circle")
     static let iconHelpCircle = UIImage(named: "icon-help-circle")
+    static let iconRadio = UIImage(named: "icon-radio")
 }

@@ -13,7 +13,7 @@ class EditPostView: UIView {
     let verticalStackView = UIStackView()
     let titleTextField = UITextField.standard(withPlaceholder: LocalizedString.postDescription)
     let captionTextView = UITextView.standard()
-    let uploadButton = UIButton.standard(withTitle: LocalizedString.publish)
+    let uploadButton = UIButton.standard(withTitle: LocalizedString.submitPost)
     
     private let titleHeading = UILabel.bodyBold(LocalizedString.postTitle)
     private let captionHeading = UILabel.bodyBold(LocalizedString.captionTitle)
@@ -34,6 +34,10 @@ class EditPostView: UIView {
         verticalStackView.spacing = 10
         verticalStackView.alignment = .leading
         verticalStackView.distribution = .equalSpacing
+        
+        uploadButton.setImage(UIImage.iconRadio?.withRenderingMode(.alwaysTemplate), for: .normal)
+        uploadButton.imageEdgeInsets = .right(10)
+        uploadButton.imageView?.tintColor = .white
     }
     
     private func configureLayout() {

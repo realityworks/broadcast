@@ -42,7 +42,7 @@
 "postDescription" = "Add a descriptive title";
 "captionTitle" = "CAPTION";
 "captionDescription" = "Say something inspiring about this post";
-"publish" = "PUBLISH POST";
+"submitPost" = "Submit Post";
 "notABroadcaster" = "Not a Broadcaster?";
 "learnMore" = "Learn more";
 "forgotPassword" = "Forgot your password?";
