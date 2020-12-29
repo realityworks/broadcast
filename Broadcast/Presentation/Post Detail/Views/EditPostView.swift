@@ -8,15 +8,16 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import SwiftRichString
 
 class EditPostView: UIView {
     let verticalStackView = UIStackView()
-    let titleTextField = UITextField.standard(withPlaceholder: LocalizedString.postDescription)
+    let titleTextField = UITextField.standard()
     let captionTextView = UITextView.standard()
     let submitButton = UIButton.standard(withTitle: LocalizedString.submitPost)
     
-    private let titleHeading = UILabel.bodyBold(LocalizedString.postTitle)
-    private let captionHeading = UILabel.bodyBold(LocalizedString.captionTitle)
+    private let titleHeading = UILabel.lightGreySmallBody(LocalizedString.postTitle)
+    private let captionHeading = UILabel.lightGreySmallBody(LocalizedString.captionTitle)
     
     init() {
         super.init(frame: .zero)
@@ -38,6 +39,11 @@ class EditPostView: UIView {
         submitButton.setImage(UIImage.iconRadio?.withRenderingMode(.alwaysTemplate), for: .normal)
         submitButton.imageEdgeInsets = .right(10)
         submitButton.imageView?.tintColor = .white
+        
+        titleTextField.attributedPlaceholder = LocalizedString.postDescription
+            .localized
+            .set(style: Style.body)
+            .set(style: Style.lightGrey)
     }
     
     private func configureLayout() {

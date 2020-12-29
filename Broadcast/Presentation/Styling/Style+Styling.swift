@@ -24,6 +24,11 @@ extension Style {
     
     static let body = Style {
         $0.font = UIFont.body
+        $0.color = UIColor.secondaryBlack
+    }
+    
+    static let lightGrey = Style {
+        $0.color = UIColor.primaryLightGrey
     }
     
     static let bodyBold = Style {
@@ -34,11 +39,6 @@ extension Style {
         $0.font = UIFont.body
         $0.color = UIColor.primaryBlack
         $0.alignment = .center
-    }
-    
-    static let smallBodyGrey = Style {
-        $0.font = UIFont.smallBody
-        $0.color = UIColor.primaryLightGrey
     }
     
     static let smallBody = Style {

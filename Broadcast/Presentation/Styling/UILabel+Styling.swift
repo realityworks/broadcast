@@ -29,4 +29,8 @@ extension UILabel {
     static func bodyBold(_ text: LocalizedString = .none) -> UILabel {
         return Self.text(text.localized, font: .bodyBold)
     }
+    
+    static func lightGreySmallBody(_ text: LocalizedString = .none) -> UILabel {
+        return Self.text(text.localized, font: .smallBody, textColor: .primaryLightGrey)
+    }
 }

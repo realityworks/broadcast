@@ -94,7 +94,6 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         usernameTextField.leftView = usernameIcon
         usernameTextField.leftViewMode = .always
         usernameTextField.translatesAutoresizingMaskIntoConstraints = false
-        usernameTextField.font = .body
         
         let passwordIcon = UIImageView(image: UIImage.iconLock?.withRenderingMode(.alwaysTemplate))
         passwordIcon.contentMode = .scaleAspectFit
@@ -102,7 +101,6 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         passwordTextField.leftView = passwordIcon
         passwordTextField.leftViewMode = .always
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
-        passwordTextField.font = .body
         
         activityIndicator.hidesWhenStopped = true
         

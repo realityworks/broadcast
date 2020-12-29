@@ -45,7 +45,7 @@ class NewPostCreateViewModel : ViewModel {
         viewTimeTitle = selectedMedia.map { media in
             switch media {
             case .video:
-                return LocalizedString.duration.localized.set(style: Style.smallBodyGrey) +
+                return LocalizedString.duration.localized.set(style: Style.smallBody).set(style: Style.lightGrey) +
                     (" " + media.duration).set(style: Style.smallBody)
             case .image:
                 return NSAttributedString(string: "")
