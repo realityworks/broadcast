@@ -17,7 +17,7 @@ class NewPostCreateViewModel : ViewModel {
     let postContentUseCase: PostContentUseCase
     
     private let selectedMediaSubject = BehaviorRelay<Media?>(value: nil)
-    private let uploadingSubject = BehaviorSubject<Bool>(value: false)
+    private let isUploadingSubject = BehaviorSubject<Bool>(value: false)
     
     let title = BehaviorRelay<String>(value: "")
     let caption = BehaviorRelay<String>(value: "")
@@ -33,6 +33,7 @@ class NewPostCreateViewModel : ViewModel {
     let showingImage: Observable<Bool>
     let showingVideo: Observable<Bool>
     let showingMedia: Observable<Bool>
+    let hideUploadingBar: Observable<Bool>
     
     init(dependencies: Dependencies = .standard) {
         self.postContentUseCase = dependencies.postContentUseCase
@@ -50,8 +51,11 @@ class NewPostCreateViewModel : ViewModel {
             return String(format: "\(LocalizedString.uploading)%2.0f%%", uploadProgress.totalProgress * 100)
         }
         
-        isUploading = uploadingSubject.asObservable()
+        isUploading = isUploadingSubject.asObservable()
         selectedMedia = selectedMediaSubject.compactMap { $0 }
+        hideUploadingBar = Observable.combineLatest(isUploading, dependencies.uploadProgressObservable) { isUploading, uploadProgress in
+            return !(isUploading || (uploadProgress?.completed ?? false) || (uploadProgress?.failed ?? false))
+        }
         
         viewTimeTitle = selectedMedia.map { media in
             switch media {
@@ -99,7 +103,7 @@ class NewPostCreateViewModel : ViewModel {
         uploadingProgressObservable
             .map { !$0.completed }
             .distinctUntilChanged()
-            .bind(to: self.uploadingSubject)
+            .bind(to: self.isUploadingSubject)
             .disposed(by: disposeBag)
     }
 }
@@ -127,7 +131,7 @@ extension NewPostCreateViewModel {
         guard let media = selectedMediaSubject.value else { return }
         
         // Compose post and upload
-        uploadingSubject.onNext(true)
+        isUploadingSubject.onNext(true)
         
         let newPost = PostContent(title: title.value, caption: caption.value)
         postContentUseCase.upload(content: newPost, media: media)
