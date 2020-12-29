@@ -100,7 +100,7 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         /// Layout the editPostView
         
         scrollView.addSubview(editPostView)
-        editPostView.topToBottom(of: selectMediaView)
+        editPostView.topToBottom(of: selectMediaView, offset: 24)
         editPostView.widthToSuperview()
         editPostView.height(to: editPostView.verticalStackView)
         
