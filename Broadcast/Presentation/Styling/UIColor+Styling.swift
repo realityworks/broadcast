@@ -23,5 +23,6 @@ extension UIColor {
     static let newPostBackground = UIColor(hex: "#F6F7FA")
     
     static let largeTitle = UIColor.secondaryBlack
+    static let progressBarColor = UIColor.green
 }
 

@@ -38,12 +38,8 @@ class EditPostView: UIView {
         
         submitButton.setImage(UIImage.iconRadio?.withTintColor(.white), for: .normal)
         submitButton.setImage(UIImage.iconRadio?.withTintColor(.secondaryBlack), for: .disabled)
-        
-        submitButton.setTitleColor(.white, for: .normal)
-        submitButton.setTitleColor(.secondaryBlack, for: .disabled)
-        
+                
         submitButton.imageEdgeInsets = .right(10)
-        //submitButton.imageView?.tintColor = .white
     }
     
     private func configureLayout() {

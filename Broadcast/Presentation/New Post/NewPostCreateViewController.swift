@@ -104,11 +104,28 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         editPostView.widthToSuperview()
         editPostView.height(to: editPostView.verticalStackView)
         
-        scrollView.addSubview(progressView)
-        progressView.topToBottom(of: editPostView.submitButton, offset: 20)
-        progressView.centerXToSuperview()
-        progressView.width(150)
-        progressView.height(25)
+        let progressContainerView = UIView()
+        scrollView.addSubview(progressContainerView)
+        progressContainerView.addSubview(progressView)
+        
+        progressContainerView.topToBottom(of: editPostView.submitButton, offset: 20)
+        progressContainerView.centerXToSuperview()
+        progressContainerView.widthToSuperview()
+        progressContainerView.height(16)
+        progressContainerView.backgroundColor = .clear
+        progressContainerView.layer.cornerRadius = 8
+        progressContainerView.layer.borderWidth = 1
+        progressContainerView.layer.borderColor = UIColor.secondaryLightGrey.cgColor
+        
+        progressView.edgesToSuperview(insets: TinyEdgeInsets(top: 4, left: 5, bottom: 5, right: 5))
+        progressView.progressViewStyle = .bar
+        progressView.progress = 1.0
+        progressView.trackTintColor = .clear
+        progressView.progressTintColor = .progressBarColor
+        progressView.layer.cornerRadius = 4
+        progressView.clipsToBounds = true
+        
+//        progressView.layer.borderWidth = 1
     }
     
     private func configureBindings() {

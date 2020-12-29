@@ -81,10 +81,7 @@ class NewPostCreateViewModel : ViewModel {
             isUploading,
             showingMedia,
             title.asObservable(),
-            caption.asObservable()) {
-            print ("Is Uploading : \($0), showingMedia: \($1), title empty: \($2.isEmpty), caption empty: \($3.isEmpty)")
-                return !$0 && $1 && !$2.isEmpty && !$3.isEmpty
-        }
+            caption.asObservable()) { !$0 && $1 && !$2.isEmpty && !$3.isEmpty }
         
         super.init(stateController: dependencies.stateController)
         

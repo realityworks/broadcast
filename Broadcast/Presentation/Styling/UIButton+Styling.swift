@@ -15,7 +15,10 @@ extension UIButton {
         
         button.setBackgroundColor(.primaryRed, for: .normal)
         button.setBackgroundColor(UIColor.secondaryLightGrey.withAlphaComponent(0.56), for: .disabled)
+        
         button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.secondaryBlack, for: .disabled)
+        
         button.layer.cornerRadius = 24
         button.height(48)
         button.titleLabel?.font = UIFont.bodyBold
