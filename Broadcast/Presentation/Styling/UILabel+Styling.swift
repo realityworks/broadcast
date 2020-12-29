@@ -42,15 +42,15 @@ extension UILabel {
         return Self.text(text.localized, font: .smallBody, textColor: .primaryLightGrey)
     }
     
-    static func tinyBody(_ text: LocalizedString = .none) -> UILabel {
-        return Self.text(text.localized, font: .tinyBody)
+    static func tinyBody(_ text: LocalizedString = .none, textColor: UIColor = .text) -> UILabel {
+        return Self.text(text.localized, font: .tinyBody, textColor: textColor)
     }
     
-    static func largeBodyBold(_ text: LocalizedString = .none) -> UILabel {
-        return Self.text(text.localized, font: .largeBodyBold)
+    static func largeBodyBold(_ text: LocalizedString = .none, textColor: UIColor = .text) -> UILabel {
+        return Self.text(text.localized, font: .largeBodyBold, textColor: textColor)
     }
     
-    static func smallBody(_ text: LocalizedString = .none) -> UILabel {
-        return Self.text(text.localized, font: .smallBody)
+    static func smallBody(_ text: LocalizedString = .none, textColor: UIColor = .text) -> UILabel {
+        return Self.text(text.localized, font: .smallBody, textColor: textColor)
     }
 }

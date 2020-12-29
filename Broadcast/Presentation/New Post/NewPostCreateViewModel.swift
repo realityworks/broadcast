@@ -18,7 +18,7 @@ class NewPostCreateViewModel : ViewModel {
     
     private let selectedMediaSubject = BehaviorRelay<Media?>(value: nil)
     private let isUploadingSubject = BehaviorSubject<Bool>(value: false)
-    private let showTipsSubject = BehaviorRelay<Bool>(value: false)
+    private let showTipsSubject = BehaviorRelay<Bool>(value: true)
     
     let title = BehaviorRelay<String>(value: "")
     let caption = BehaviorRelay<String>(value: "")

@@ -71,9 +71,12 @@ class TipsView : UIView {
         tipData.forEach { tipData in
             verticalStackView.addSpace(40)
             verticalStackView.addArrangedSubview(UIImageView(image: tipData.image))
-            verticalStackView.addArrangedSubview(UILabel.largeBodyBold(tipData.title))
+            verticalStackView.addSpace(4)
+            let titleLabel = UILabel.largeBodyBold(tipData.title, textColor: .white)
+            titleLabel.height(24)
+            verticalStackView.addArrangedSubview(titleLabel)
             
-            let descriptionLabel = UILabel.smallBody(tipData.description)
+            let descriptionLabel = UILabel.smallBody(tipData.description, textColor: .white)
             descriptionLabel.numberOfLines = 0
             descriptionLabel.lineBreakMode = .byWordWrapping
             

@@ -240,7 +240,7 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
             .disposed(by: disposeBag)
         
         viewModel.showTips
-            .map { $0 }
+            .map { !$0 }
             .bind(to: tipsView.rx.isHidden)
             .disposed(by: disposeBag)
         
