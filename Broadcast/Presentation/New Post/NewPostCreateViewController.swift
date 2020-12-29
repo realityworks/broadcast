@@ -55,6 +55,8 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         selectMediaInfoStackView.alignment = .leading
         selectMediaInfoStackView.spacing = 4
         
+        removeButton.contentHorizontalAlignment = .leading
+        
         picker.delegate = self
         picker.videoExportPreset = AVAssetExportPresetPassthrough
         picker.videoQuality = .typeHigh
@@ -93,7 +95,6 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         
         scrollView.addSubview(removeButton)
         removeButton.leftToRight(of: selectMediaView, offset: 16)
-        removeButton.width(to: selectMediaInfoStackView)
         removeButton.bottom(to: selectMediaView, offset: -16)
         
         /// Layout the editPostView
@@ -111,22 +112,10 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     }
     
     private func configureBindings() {
-        editPostView.uploadButton.rx.tap
-            .subscribe(onNext: { _ in
-                self.viewModel.uploadPost()
-            })
-            .disposed(by: disposeBag)
         
-        editPostView.titleTextField.rx.controlEvent(.editingChanged)
-            .map { [unowned self] in self.editPostView.titleTextField.text ?? "" }
-            .bind(to: viewModel.title)
-            .disposed(by: disposeBag)
-                
-        editPostView.captionTextView.rx.text
-            .compactMap { $0 }
-            .bind(to: viewModel.caption)
-            .disposed(by: disposeBag)
-                
+        configureTextFieldBindings()
+        configureButtonBindings()
+                        
         viewModel.progress
             .bind(to: progressView.rx.progress)
             .disposed(by: disposeBag)
@@ -134,12 +123,6 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         viewModel.isUploading
             .map { !$0 }
             .bind(to: editPostView.uploadButton.rx.isEnabled)
-            .disposed(by: disposeBag)
-        
-        selectMediaView.selectMediaButton.rx.tap
-            .subscribe(onNext: { [unowned self] _ in
-                self.showMediaOptionsMenu()
-            })
             .disposed(by: disposeBag)
         
         viewModel.mediaTypeTitle
@@ -166,6 +149,11 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
                   selectMediaView.selectMediaButton.rx.isHidden)
             .disposed(by: disposeBag)
         
+        viewModel.showingMedia
+            .map { !$0 }
+            .bind(to: removeButton.rx.isHidden)
+            .disposed(by: disposeBag)
+        
         viewModel.selectedMedia
             .compactMap { $0 }
             .subscribe(onNext: { media in
@@ -177,6 +165,32 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
                     self.selectMediaView.imageMediaOverlay.image = UIImage(contentsOfFile: url.path)
                 }
                 
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func configureTextFieldBindings() {
+        editPostView.titleTextField.rx.controlEvent(.editingChanged)
+            .map { [unowned self] in self.editPostView.titleTextField.text ?? "" }
+            .bind(to: viewModel.title)
+            .disposed(by: disposeBag)
+                
+        editPostView.captionTextView.rx.text
+            .compactMap { $0 }
+            .bind(to: viewModel.caption)
+            .disposed(by: disposeBag)
+    }
+    
+    private func configureButtonBindings() {
+        editPostView.uploadButton.rx.tap
+            .subscribe(onNext: { _ in
+                self.viewModel.uploadPost()
+            })
+            .disposed(by: disposeBag)
+        
+        selectMediaView.selectMediaButton.rx.tap
+            .subscribe(onNext: { [unowned self] _ in
+                self.showMediaOptionsMenu()
             })
             .disposed(by: disposeBag)
     }
