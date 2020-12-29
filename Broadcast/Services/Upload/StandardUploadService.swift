@@ -98,7 +98,6 @@ extension StandardUploadService : UploadService {
                 apiService.uploadVideo(from: sourceUrl,
                                        to: destinationUrl)
                         .subscribe { response, progress in
-                            print("Progress - progress.bytes written - \(progress.bytesWritten)")
                             let progressFloat = Float(progress.bytesWritten) / Float(progress.totalBytes)
                             observer.onNext(
                                 UploadEvent.uploadMedia(progress: progressFloat))
