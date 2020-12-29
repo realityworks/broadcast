@@ -118,4 +118,8 @@ extension NewPostCreateViewModel {
     func selectMedia(_ media: Media) {
         selectedMediaSubject.accept(media)
     }
+    
+    func removeMedia() {
+        selectedMediaSubject.accept(nil)
+    }
 }

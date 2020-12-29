@@ -179,6 +179,12 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
             .compactMap { $0 }
             .bind(to: viewModel.caption)
             .disposed(by: disposeBag)
+        
+        removeButton.rx.tap
+            .subscribe(onNext: {
+                self.viewModel.removeMedia()
+            })
+            .disposed(by: disposeBag)
     }
     
     private func configureButtonBindings() {
