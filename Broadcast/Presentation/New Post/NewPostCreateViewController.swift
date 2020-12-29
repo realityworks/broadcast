@@ -18,13 +18,13 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     
     // MARK: UI Components
     private let scrollView = UIScrollView()
-
-    private let selectMediaView = SelectMediaView()
     
+    private let selectMediaView = SelectMediaView()
     private let selectMediaInfoStackView = UIStackView()
     private let runTimeLabel = UILabel()
     private let selectedMediaTitleLabel = UILabel.largeTitle(.noMedia, textColor: .lightGrey)
-    private let tipsButton = UIButton.smallText(withTitle: LocalizedString.tips)
+    private let tipsButton = UIButton.text(withTitle: LocalizedString.tips)
+    private let removeButton = UIButton.textDestructive(withTitle: LocalizedString.remove)
     
     private let editPostView = EditPostView()
     private let progressView = UIProgressView()

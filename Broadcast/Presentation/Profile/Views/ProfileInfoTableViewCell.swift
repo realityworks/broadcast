@@ -15,7 +15,7 @@ class ProfileInfoTableViewCell: UITableViewCell {
     let containerStackView = UIStackView()
     let thumbnailContainerStackView = UIStackView()
     let thumbnailImageView = UIImageView()
-    let changeThumbnailButton = UIButton.smallText(withTitle: LocalizedString.change)
+    let changeThumbnailButton = UIButton.text(withTitle: LocalizedString.change)
     
     let subscribersContainerStackView = UIStackView()
     let subscribersCountLabel = UILabel.largeTitle()

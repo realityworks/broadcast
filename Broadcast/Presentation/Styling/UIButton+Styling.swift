@@ -29,7 +29,7 @@ extension UIButton {
         return UIButton.standard(withTitle: title?.localized)
     }
     
-    static func smallText(withTitle title: String?) -> UIButton {
+    static func text(withTitle title: String?) -> UIButton {
         let button = UIButton()
         
         button.setTitleColor(.primaryBlack, for: .normal)
@@ -40,8 +40,15 @@ extension UIButton {
         return button
     }
     
-    static func smallText(withTitle title: LocalizedString? = nil) -> UIButton {
-        return UIButton.smallText(withTitle: title?.localized)
+    static func text(withTitle title: LocalizedString? = nil) -> UIButton {
+        return UIButton.text(withTitle: title?.localized)
+    }
+    
+    static func textDestructive(withTitle title: LocalizedString? = nil) -> UIButton {
+        let button = UIButton.text(withTitle: title?.localized)
+        button.setTitleColor(.primaryRed, for: .normal)
+        button.titleLabel?.font = UIFont.bodyBold
+        return button
     }
 }
 

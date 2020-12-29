@@ -56,7 +56,7 @@
 "duration" = "Run Time";
 "video" = "Video";
 "image" = "Image";
-
+"remove" = "Remove";
 
 // MARK: Error Strings
 "unknownError" = "An unknown error occured";
