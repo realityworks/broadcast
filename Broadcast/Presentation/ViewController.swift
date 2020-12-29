@@ -12,6 +12,11 @@ import RxSwift
 /// used in the the Broadcast app.
 class ViewController : UIViewController {
     
+    enum NavigationBarStyle {
+        case dark(title: LocalizedString)
+        case darkLogo
+    }
+    
     var disposeBag = DisposeBag()
     
     // MARK: View Controller overrides
@@ -45,4 +50,18 @@ class ViewController : UIViewController {
     }
     
     // MARK: Configuration
+    
+    func navigationBar(styleAs style: NavigationBarStyle) {
+        switch style {
+        case .dark(let titleString):
+            title = titleString.localized
+            navigationController?.navigationBar.backgroundColor = UIColor.darkGrey
+            
+            let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+            navigationController?.navigationBar.titleTextAttributes = textAttributes
+            
+        
+        default: break
+        }
+    }
 }
