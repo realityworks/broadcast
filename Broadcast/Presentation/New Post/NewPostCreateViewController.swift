@@ -74,6 +74,8 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         progressView.progressTintColor = .progressBarColor
         progressView.layer.cornerRadius = 4
         progressView.clipsToBounds = true
+        
+        progressLabel.textAlignment = .center
     }
     
     private func configureLayout() {
@@ -118,6 +120,8 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         editPostView.widthToSuperview()
         editPostView.height(to: editPostView.verticalStackView)
         
+        /// Layout progress and progress label views
+        
         scrollView.addSubview(progressContainerView)
         progressContainerView.addSubview(progressView)
         
@@ -127,6 +131,11 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         progressContainerView.height(16)
         
         progressView.edgesToSuperview(insets: TinyEdgeInsets(top: 4, left: 5, bottom: 5, right: 5))
+        
+        scrollView.addSubview(progressLabel)
+        progressLabel.topToBottom(of: progressContainerView)
+        progressLabel.widthToSuperview()
+        progressLabel.height(16)
     }
     
     private func configureBindings() {
@@ -136,6 +145,10 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
                         
         viewModel.progress
             .bind(to: progressView.rx.progress)
+            .disposed(by: disposeBag)
+        
+        viewModel.isUploading
+            .bind(to: editPostView.titleTextField.rx.isEnabled, editPostView.captionTextView.rx.isUserInteractionEnabled)
             .disposed(by: disposeBag)
         
         viewModel.canUpload
@@ -172,13 +185,16 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
             .disposed(by: disposeBag)
         
         viewModel.hideUploadingBar
-            .bind(to: progressContainerView.rx.isHidden)
+            .bind(to: progressContainerView.rx.isHidden, progressLabel.rx.isHidden)
             .disposed(by: disposeBag)
         
+        viewModel.progressString
+            .bind(to: progressLabel.rx.text)
+            .disposed(by: disposeBag)
+            
         viewModel.selectedMedia
             .compactMap { $0 }
             .subscribe(onNext: { media in
-                print ("Media : \(media) selected")
                 switch media {
                 case .video(let url):
                     self.selectMediaView.videoMediaOverlay.playVideo(withURL: url, autoplay: false)
@@ -211,6 +227,7 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     private func configureButtonBindings() {
         editPostView.submitButton.rx.tap
             .subscribe(onNext: { _ in
+                self.dismissKeyboard()
                 self.viewModel.uploadPost()
             })
             .disposed(by: disposeBag)

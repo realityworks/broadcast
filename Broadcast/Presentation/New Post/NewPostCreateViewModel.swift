@@ -41,14 +41,16 @@ class NewPostCreateViewModel : ViewModel {
         let uploadingProgressObservable = dependencies.uploadProgressObservable.compactMap { $0 }
         
         progress = uploadingProgressObservable.map { $0.totalProgress }
-        progressString = uploadingProgressObservable.map { uploadProgress in
+        progressString = dependencies.uploadProgressObservable.map { uploadProgress in
+            guard let uploadProgress = uploadProgress else { return "\(LocalizedString.uploading.localized) - 0%" }
+            
             if uploadProgress.completed {
                 return LocalizedString.uploadCompleted.localized
             } else if uploadProgress.failed {
                 return "\(LocalizedString.uploadFailed.localized) \(uploadProgress.errorDescription ?? "")"
             }
             
-            return String(format: "\(LocalizedString.uploading)%2.0f%%", uploadProgress.totalProgress * 100)
+            return String(format: "\(LocalizedString.uploading.localized)%2.0f%%", uploadProgress.totalProgress * 100)
         }
         
         isUploading = isUploadingSubject.asObservable()
@@ -101,7 +103,7 @@ class NewPostCreateViewModel : ViewModel {
         super.init(stateController: dependencies.stateController)
         
         uploadingProgressObservable
-            .map { !$0.completed }
+            .map { !($0.completed || $0.failed) }
             .distinctUntilChanged()
             .bind(to: self.isUploadingSubject)
             .disposed(by: disposeBag)
