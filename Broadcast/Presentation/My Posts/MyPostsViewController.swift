@@ -24,7 +24,7 @@ class MyPostsViewController: ViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        title = "My Posts"
+        navigationBar(styleAs: .darkLogo)
         
         configureViews()
         configureBindings()

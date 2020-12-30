@@ -61,7 +61,13 @@ class ViewController : UIViewController {
             navigationController?.navigationBar.titleTextAttributes = textAttributes
             
         case .darkLogo:
+            title = ""
             navigationController?.navigationBar.setBackgroundImage(UIImage(color: UIColor.darkGrey), for: .default)
+            
+            let backgroundImageView = UIImageView(image: .logoBoomdayBroadcaster)
+            backgroundImageView.contentMode = .scaleAspectFit
+            navigationController?.navigationBar.addSubview(backgroundImageView)
+            backgroundImageView.centerInSuperview()
             
             #warning("TODO : Add broadcasting logo image")
         }

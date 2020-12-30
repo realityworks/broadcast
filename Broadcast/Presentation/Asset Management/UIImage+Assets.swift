@@ -19,4 +19,5 @@ extension UIImage {
     static let iconCustomPortraitMode = UIImage(named: "icon-custom-portrait-mode")
     static let iconCustomTimer = UIImage(named: "icon-custom-timer")
     static let iconCustomBrightness = UIImage(named: "icon-custom-brightness")
+    static let logoBoomdayBroadcaster = UIImage(named: "logo-boomday-broadcaster")
 }
