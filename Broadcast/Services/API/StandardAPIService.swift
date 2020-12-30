@@ -156,10 +156,6 @@ extension StandardAPIService : APIService {
     }
     
     func uploadVideo(from fromUrl: URL, to toUrl: URL) -> Observable<(HTTPURLResponse, RxProgress)> {
-//        let fileSize = FileManager.default.sizeOfFile(atPath: file.path)!
-//
-//        request.addValue("BlockBlob", forHTTPHeaderField: "x-ms-blob-type")
-//        request.addValue("\(fileSize)", forHTTPHeaderField: "Content-Length")
         
         let fileSize = fromUrl.fileSize()!
         
