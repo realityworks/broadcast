@@ -9,7 +9,7 @@
 // https://help.apple.com/xcode/#/dev745c5c974
 
 // Service URL
-SERVICE_ROOT_URL = https:/$()/api.boomday.dev/
+SERVICE_ROOT_URL = https:/$()/localhost:5001/
 
 // Notifications Connection String
 NOTIFICATIONS_CONNECTION_STRING = Endpoint=sb:/$()/boom-dev-notifications.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=Ob1SCxP74lKRQtFdgvYylM3FXqWFkj8l8H1MN9WtUQ8=

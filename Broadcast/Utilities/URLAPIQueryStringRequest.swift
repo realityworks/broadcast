@@ -17,7 +17,9 @@ class URLAPIQueryStringRequest : URLRequestConvertible {
     let url: URL
     let queryString: String
     
-    init(_ method: HTTPMethod, _ url: URL, parameters: Dictionary<String, String>) {
+    init(_ method: HTTPMethod,
+         _ url: URL,
+         parameters: Dictionary<String, String>) {
         self.queryString = parameters.queryString
         self.method = method
         self.url = url
