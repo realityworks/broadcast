@@ -27,6 +27,7 @@ class MyPostsViewController: ViewController {
         navigationBar(styleAs: .darkLogo)
         
         configureViews()
+        configureLayout()
         configureBindings()
         style()
         
@@ -40,26 +41,27 @@ class MyPostsViewController: ViewController {
                            forCellReuseIdentifier: MyPostsTableViewCell.identifier)
         
         tableView.separatorStyle = .none
-        
+
+        /// Configure pull to refresh
+        tableView.refreshControl = refreshControl
+    }
+    
+    private func configureLayout() {
         /// Layout the views
         view.addSubview(tableView)
         tableView.edgesToSuperview()
 
-        /// Configure pull to refresh
-        tableView.refreshControl = refreshControl
         
         /// Configure the table view header
         let titleLabel = UILabel.largeTitle(.myPostsHeading)
         let titleHeaderView = UIView()
-        
+
+        titleHeaderView.frame = CGRect(x: 0, y: 0, width: 200, height: 50)
+        tableView.tableHeaderView = titleHeaderView
+
         titleHeaderView.addSubview(titleLabel)
         titleLabel.edgesToSuperview(excluding: [.left, .right])
         titleLabel.leftToSuperview(offset: 20)
-        titleLabel.rightToSuperview(offset: -20)
-        
-        titleHeaderView.frame = CGRect(x: 0, y: 0, width: 200, height: 50)
-        tableView.tableHeaderView = titleHeaderView
-        
     }
         
     private func configureBindings() {        
