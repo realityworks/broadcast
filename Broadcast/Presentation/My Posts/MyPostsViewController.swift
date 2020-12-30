@@ -41,6 +41,8 @@ class MyPostsViewController: ViewController {
                            forCellReuseIdentifier: MyPostsTableViewCell.identifier)
         
         tableView.separatorStyle = .none
+        tableView.backgroundColor = .clear
+        view.backgroundColor = UIColor.secondaryWhite
 
         /// Configure pull to refresh
         tableView.refreshControl = refreshControl
@@ -51,9 +53,11 @@ class MyPostsViewController: ViewController {
         view.addSubview(tableView)
         tableView.edgesToSuperview()
 
-        
         /// Configure the table view header
-        let titleLabel = UILabel.largeTitle(.myPostsHeading)
+        let titleLabelFont = UIFont.customFont(ofSize: 24, weight: UIFont.InterFontWeight.medium)
+        let titleLabel = UILabel.text(.myPostsHeading,
+                                      font: titleLabelFont,
+                                      textColor: .primaryLightGrey)
         let titleHeaderView = UIView()
 
         titleHeaderView.frame = CGRect(x: 0, y: 0, width: 200, height: 50)

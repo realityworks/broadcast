@@ -148,14 +148,9 @@ class PostSummaryView : UIView {
         // Order of view additions is important
         containerTopView.addSubview(thumbnailImageView)
         containerTopView.addSubview(pressPlayOverlayView)
-        //containerTopView.addSubview(blurredEffectView)
-        //containerTopView.addSubview(processingView)
-        
+
         thumbnailImageView.edgesToSuperview()
-        //blurredEffectView.edgesToSuperview()
         pressPlayOverlayView.centerInSuperview()
-        //processingView.edgesToSuperview()
-        
         
         postStatsView.height(15)
         verticalStackView.addSpace(10)
@@ -230,6 +225,6 @@ extension Reactive where Base: PostSummaryView {
         return Binder(base) {
             $0.configure(withPostSummaryViewModel: $1)
         }
-    }    
+    }
 }
 

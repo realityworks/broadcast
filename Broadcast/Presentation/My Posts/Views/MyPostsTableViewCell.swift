@@ -27,11 +27,15 @@ class MyPostsTableViewCell : UITableViewCell {
     
     func configureView() {
         contentView.addSubview(postSummaryView)
-        postSummaryView.edgesToSuperview()
+        postSummaryView.backgroundColor = .white
+        postSummaryView.edgesToSuperview(excluding: [.left, .right])
+        postSummaryView.leftToSuperview(offset: 24)
+        postSummaryView.rightToSuperview(offset: -24)
     }
     
     func styleView() {
-        contentView.backgroundColor = .white
+        backgroundColor = .clear
+        contentView.backgroundColor = .clear
     }
     
     required init?(coder: NSCoder) {
@@ -51,6 +55,5 @@ class MyPostsTableViewCell : UITableViewCell {
             showVideoPlayer: false)
         
         postSummaryView.configure(withPostSummaryViewModel: postSummaryViewModel)
-        
     }
 }

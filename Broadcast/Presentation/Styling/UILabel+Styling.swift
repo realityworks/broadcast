@@ -18,6 +18,12 @@ extension UILabel {
         return label
     }
     
+    static func text(_ text: LocalizedString? = nil,
+                             font: UIFont = .body,
+                             textColor: UIColor = .secondaryBlack) -> UILabel {
+        return Self.text(text?.localized, font: font, textColor: textColor)
+    }
+    
     static func body(_ text: LocalizedString = .none, textColor: UIColor = .text) -> UILabel {
         return Self.text(text.localized, textColor: textColor)
     }

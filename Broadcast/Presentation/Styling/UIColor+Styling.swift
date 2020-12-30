@@ -13,6 +13,7 @@ extension UIColor {
     static let secondaryBlack = UIColor(hex: "#040F23")
     static let primaryGrey = UIColor(hex: "#4C576F")
     static let primaryWhite = UIColor(hex: "#F9F9FB")
+    static let secondaryWhite = UIColor(hex: "#EFF0F5")
     static let darkGrey = UIColor(hex: "#1B1B23")
     static let primaryLightGrey = UIColor(hex: "#7B87A1")
     static let secondaryLightGrey = UIColor(hex: "#CBCFDA")
