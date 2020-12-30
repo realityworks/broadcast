@@ -20,16 +20,16 @@ class PostSummaryView : UIView {
     let containerTopView = UIView()
 
     let postTitleContainer = UIView()
-    let postTitleLabel = UILabel.largeTitle()
+    let postTitleLabel = UILabel.text(font: .postCaptionTitle)
     
     let postCaptionContainer = UIView()
-    let postCaptionLabel = UILabel.body()
+    let postCaptionLabel = UILabel.smallBody()
     
     let postStatsContainer = UIView()
     let postStatsView = PostStatsView()
     
     let dateCreatedContainer = UIView()
-    let dateCreatedLabel = UILabel.body()
+    let dateCreatedLabel = UILabel.smallBody(textColor: .primaryLightGrey)
     
     let blurEffect = UIBlurEffect(style: .light)
     let blurredEffectView: UIVisualEffectView!
@@ -123,9 +123,13 @@ class PostSummaryView : UIView {
     }
     
     private func configureListStyle() {
+        verticalStackView.addSpace(20)
         verticalStackView.addArrangedSubview(dateCreatedContainer)
-        verticalStackView.addSeparator(withColor: .separator)
+        verticalStackView.addSpace(10)
+        verticalStackView.addSeparator()
+        verticalStackView.addSpace(8)
         verticalStackView.addArrangedSubview(postTitleContainer)
+        verticalStackView.addSpace(8)
         verticalStackView.addArrangedSubview(postCaptionContainer)
         verticalStackView.addArrangedSubview(containerTopView)
         
@@ -135,6 +139,9 @@ class PostSummaryView : UIView {
         postCaptionContainer.height(30)
         postStatsContainer.height(15)
         dateCreatedContainer.height(15)
+        
+        postTitleLabel.numberOfLines = 0
+        postTitleLabel.lineBreakMode = .byWordWrapping
         
         postCaptionLabel.numberOfLines = 2
         postCaptionLabel.lineBreakMode = .byTruncatingTail
@@ -152,7 +159,7 @@ class PostSummaryView : UIView {
         thumbnailImageView.edgesToSuperview()
         pressPlayOverlayView.centerInSuperview()
         
-        postStatsView.height(15)
+        postStatsView.height(23)
         verticalStackView.addSpace(10)
         
         let containedViews = [postTitleLabel,
@@ -161,8 +168,8 @@ class PostSummaryView : UIView {
                               dateCreatedLabel]
         
         containedViews.forEach {
-            $0.leftToSuperview()
-            $0.rightToSuperview()
+            $0.leftToSuperview(offset: 16)
+            $0.rightToSuperview(offset: -16)
         }
         
         verticalStackView.leftToSuperview()

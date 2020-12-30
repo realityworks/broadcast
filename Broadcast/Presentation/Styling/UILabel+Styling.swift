@@ -28,14 +28,14 @@ extension UILabel {
         return Self.text(text.localized, textColor: textColor)
     }
     
-    static func largeTitle(_ text: LocalizedString = .none, textColor: UIColor = .text) -> UILabel {
-        return Self.text(text.localized, font: .largeTitle, textColor: textColor)
-    }
-    
     static func extraLargeTitle(_ text: LocalizedString = .none, textColor: UIColor = .text) -> UILabel {
         return Self.text(text.localized, font: .extraLargeTitle, textColor: textColor)
     }
     
+    static func largeTitle(_ text: LocalizedString = .none, textColor: UIColor = .text) -> UILabel {
+        return Self.text(text.localized, font: .largeTitle, textColor: textColor)
+    }
+        
     static func subTitle(_ text: LocalizedString = .none, textColor: UIColor = .text) -> UILabel {
         return Self.text(text.localized, font: .largeTitle, textColor: textColor)
     }

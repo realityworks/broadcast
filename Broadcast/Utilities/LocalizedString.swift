@@ -77,6 +77,9 @@ enum LocalizedString : String {
     case tip3Title
     case tip3SubTitle
     case close
+    case myLocker
+    case comments
+    case ago
     
     var localized: String {
         return Bundle.main.localizedString(forKey: self.rawValue, value: nil, table: nil)

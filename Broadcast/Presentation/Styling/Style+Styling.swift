@@ -45,4 +45,9 @@ extension Style {
         $0.font = UIFont.smallBody
         $0.color = UIColor.secondaryBlack
     }
+    
+    static let smallBodyBold = Style {
+        $0.font = UIFont.smallBodyBold
+        $0.color = UIColor.secondaryBlack
+    }
 }

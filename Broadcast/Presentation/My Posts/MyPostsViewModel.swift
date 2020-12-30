@@ -37,7 +37,7 @@ class MyPostsViewModel : ViewModel {
                         thumbnailUrl: thumbnailUrl,
                         media: $0.contentMedia,
                         isEncoding: !$0.finishedProcessing,
-                        dateCreated: "Created \($0.created.timeAgo()) ago",
+                        dateCreated: "\($0.created.timeAgo()) \(LocalizedString.ago)",
                         commentCount: $0.commentCount,
                         lockerCount: $0.lockerCount)
                     return viewModel

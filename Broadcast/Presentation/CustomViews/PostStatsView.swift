@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftRichString
 
 class PostStatsView : UIView {
     let commentImageView = UIImageView()
@@ -31,14 +32,14 @@ class PostStatsView : UIView {
     
     private func configureViews() {
         commentImageView.contentMode = .scaleAspectFit
-        commentImageView.image = UIImage(systemName: "bubble.right")?.withRenderingMode(.alwaysTemplate)
-        commentImageView.tintColor = .black
+        commentImageView.image = UIImage.iconMessage?.withRenderingMode(.alwaysTemplate)
+        commentImageView.tintColor = .primaryLightGrey
         
         commentImageView.aspectRatio(1)
         
         lockerImageView.contentMode = .scaleAspectFit
-        lockerImageView.image = UIImage(systemName: "bookmark")?.withRenderingMode(.alwaysTemplate)
-        lockerImageView.tintColor = .black
+        lockerImageView.image = UIImage.iconBookMarkOff?.withRenderingMode(.alwaysTemplate)
+        lockerImageView.tintColor = .primaryLightGrey
         
         lockerImageView.aspectRatio(1)
         
@@ -50,19 +51,19 @@ class PostStatsView : UIView {
     private func layoutViews() {
         addSubview(horizontalStackView)
         
-        commentStackView.addArrangedSubview(commentImageView)
-        commentStackView.addSpace(2)
-        commentStackView.addArrangedSubview(commentCountLabel)
-        
         lockerStackView.addArrangedSubview(lockerImageView)
-        lockerStackView.addSpace(2)
+        lockerStackView.addSpace(8)
         lockerStackView.addArrangedSubview(lockerCountLabel)
         
-        horizontalStackView.edgesToSuperview(excluding: [.left, .right])
-        horizontalStackView.width(177)
+        commentStackView.addArrangedSubview(commentImageView)
+        commentStackView.addSpace(8)
+        commentStackView.addArrangedSubview(commentCountLabel)
         
-        horizontalStackView.addArrangedSubview(commentStackView)
+        horizontalStackView.edgesToSuperview(excluding: [.left, .right])
+        horizontalStackView.width(300)
+        
         horizontalStackView.addArrangedSubview(lockerStackView)
+        horizontalStackView.addArrangedSubview(commentStackView)
     }
     
     /// Configure the view content with view model data
@@ -70,7 +71,11 @@ class PostStatsView : UIView {
     ///   - commentCount: Number of comments
     ///   - lockerCount: Number of lockers this post is in
     func configure(withCommentCount commentCount: Int, lockerCount: Int) {
-        commentCountLabel.text = "\(commentCount)"
-        lockerCountLabel.text = "\(lockerCount)"
+        commentCountLabel.attributedText =
+            "\(commentCount) ".set(style: Style.smallBodyBold) +
+            LocalizedString.myLocker.localized.set(style: Style.smallBody).set(style: Style.lightGrey)
+        lockerCountLabel.attributedText =
+            "\(lockerCount) ".set(style: Style.smallBodyBold) +
+            LocalizedString.comments.localized.set(style: Style.smallBody).set(style: Style.lightGrey)
     }
 }

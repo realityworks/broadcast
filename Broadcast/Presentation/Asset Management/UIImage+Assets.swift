@@ -20,4 +20,6 @@ extension UIImage {
     static let iconCustomTimer = UIImage(named: "icon-custom-timer")
     static let iconCustomBrightness = UIImage(named: "icon-custom-brightness")
     static let logoBoomdayBroadcaster = UIImage(named: "logo-boomday-broadcaster")
+    static let iconBookMarkOff = UIImage(named: "icon-bookmark-off")
+    static let iconMessage = UIImage(named: "icon-message")
 }

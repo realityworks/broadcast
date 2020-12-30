@@ -69,6 +69,9 @@
 "tip3Title" = "Lights. Sound. Action!";
 "tip3SubTitle" = "Good sound and lighting make great videos";
 "close" = "Close";
+"myLocker" = "My Locker";
+"comments" = "Comments";
+"ago" = "ago";
  
 // MARK: Error Strings
 "unknownError" = "An unknown error occured";
