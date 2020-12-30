@@ -61,7 +61,6 @@ class ViewController : UIViewController {
             navigationController?.navigationBar.titleTextAttributes = textAttributes
             
         case .darkLogo:
-            title = ""
             navigationController?.navigationBar.setBackgroundImage(UIImage(color: UIColor.primaryBlack), for: .default)
             
             let backgroundImageView = UIImageView(image: .logoBoomdayBroadcaster)
