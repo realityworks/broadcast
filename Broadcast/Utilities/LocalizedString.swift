@@ -80,6 +80,10 @@ enum LocalizedString : String {
     case myLocker
     case comments
     case ago
+    case yes
+    case no
+    case cancelChanges
+    case cancelChangesDescription
     
     var localized: String {
         return Bundle.main.localizedString(forKey: self.rawValue, value: nil, table: nil)

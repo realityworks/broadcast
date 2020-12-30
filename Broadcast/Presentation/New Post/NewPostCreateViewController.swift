@@ -41,7 +41,10 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         super.viewDidLoad()
         
         navigationBar(styleAs: .dark(title: LocalizedString.newPost))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelTapped))
+        
+        let cancelBarButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelTapped))
+        cancelBarButton.tintColor = .white
+        navigationItem.leftBarButtonItem = cancelBarButton
         
         // Do any additional setup after loading the view.
         configureViews()
@@ -269,7 +272,19 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
                 self.editPostView.titleTextField.resignFirstResponder()
             })
             .disposed(by: disposeBag)
-                
+
+        viewModel.title
+            .subscribe(onNext: { text in
+                self.editPostView.titleTextField.text = text
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.caption
+            .subscribe(onNext: { text in
+                self.editPostView.captionTextView.text = text
+            })
+            .disposed(by: disposeBag)
+        
         editPostView.captionTextView.rx.text
             .compactMap { $0 }
             .bind(to: viewModel.caption)
@@ -303,7 +318,30 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     }
     
     @objc func cancelTapped() {
-        viewModel.clearContent()
+        showCancelOptions()
+    }
+    
+    func showCancelOptions() {
+        let alert = UIAlertController(
+            title: LocalizedString.cancelChanges.localized,
+            message: LocalizedString.cancelChangesDescription.localized,
+            preferredStyle: .actionSheet)
+
+        let actCancel = UIAlertAction(
+            title: LocalizedString.no.localized,
+            style: .default,
+            handler: nil)
+        alert.addAction(actCancel)
+
+        let actClear = UIAlertAction(
+            title: LocalizedString.yes.localized,
+            style: .destructive,
+            handler: { [weak self] action in
+                self?.viewModel.clearContent()
+            })
+        alert.addAction(actClear)
+
+        present(alert, animated: true, completion: nil)
     }
 }
 

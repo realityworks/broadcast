@@ -72,6 +72,11 @@
 "myLocker" = "My Locker";
 "comments" = "Comments";
 "ago" = "ago";
+"yes" = "Yes";
+"no" = "No";
+"cancelChanges" = "Cancel Changes";
+"cancelChangesDescription" = "This will remove draft content";
+
  
 // MARK: Error Strings
 "unknownError" = "An unknown error occured";
