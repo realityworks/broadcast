@@ -55,14 +55,14 @@ class ViewController : UIViewController {
         switch style {
         case .dark(let titleString):
             title = titleString.localized
-            navigationController?.navigationBar.setBackgroundImage(UIImage(color: UIColor.darkGrey), for: .default)
+            navigationController?.navigationBar.setBackgroundImage(UIImage(color: UIColor.primaryBlack), for: .default)
             
             let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
             navigationController?.navigationBar.titleTextAttributes = textAttributes
             
         case .darkLogo:
             title = ""
-            navigationController?.navigationBar.setBackgroundImage(UIImage(color: UIColor.darkGrey), for: .default)
+            navigationController?.navigationBar.setBackgroundImage(UIImage(color: UIColor.primaryBlack), for: .default)
             
             let backgroundImageView = UIImageView(image: .logoBoomdayBroadcaster)
             backgroundImageView.contentMode = .scaleAspectFit
