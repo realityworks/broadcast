@@ -165,11 +165,11 @@ class PostSummaryView : UIView {
             $0.rightToSuperview()
         }
         
-        verticalStackView.leftToSuperview(offset: 20)
-        verticalStackView.rightToSuperview(offset: -20)
+        verticalStackView.leftToSuperview()
+        verticalStackView.rightToSuperview()
         verticalStackView.topToSuperview(usingSafeArea: true)
         verticalStackView.bottomToSuperview()
-        containerTopView.layer.cornerRadius = 20
+        layer.cornerRadius = 20
     }
     
     func style() {
