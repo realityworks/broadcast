@@ -57,30 +57,34 @@ class MainViewController: UITabBarController {
     /// Style the contentviews
     private func styleView() {
         view.backgroundColor = .white
+        UITabBar.appearance().tintColor = .primaryRed
+        UITabBarItem.appearance().setTitleTextAttributes(
+            [NSAttributedString.Key.font: UIFont.smallBody],
+            for: .normal)
     }
     
     private func configureViews() {
         /// Create the MyPosts Tab bar item
         let myPostsTabBarItem = UITabBarItem(
             title: "My Posts",
-            image: UIImage(systemName: "person"),
-            selectedImage: UIImage(systemName: "person.fill"))
-        
+            image: UIImage.iconRadio,
+            selectedImage: UIImage.iconRadio)
+
         myPostsViewController.tabBarItem = myPostsTabBarItem
         
         /// Create the New Post Tab bar item
         let newPostTabBarItem = UITabBarItem(
             title: "New Post",
-            image: UIImage(systemName: "plus.circle"),
-            selectedImage: UIImage(systemName: "plus.circle.fill"))
+            image: UIImage.iconPlusCircle,
+            selectedImage: UIImage.iconPlusCircle)
         
         newPostViewController.tabBarItem = newPostTabBarItem
         
         /// Create the Profile Tab bar item
         let profileTabBarItem = UITabBarItem(
             title: "Profile",
-            image: UIImage(systemName: "rectangle.stack.person.crop"),
-            selectedImage: UIImage(systemName: "rectangle.stack.person.crop.fill"))
+            image: UIImage.iconProfile,
+            selectedImage: UIImage.iconProfile)
         
         profileViewController.tabBarItem = profileTabBarItem
         
