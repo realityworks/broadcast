@@ -123,7 +123,7 @@ class PostSummaryView : UIView {
     }
     
     private func configureListStyle() {
-        verticalStackView.addSpace(20)
+        verticalStackView.addSpace(18)
         verticalStackView.addArrangedSubview(dateCreatedContainer)
         verticalStackView.addSpace(10)
         verticalStackView.addSeparator()
@@ -132,8 +132,9 @@ class PostSummaryView : UIView {
         verticalStackView.addSpace(8)
         verticalStackView.addArrangedSubview(postCaptionContainer)
         verticalStackView.addArrangedSubview(containerTopView)
-        
+        verticalStackView.addSpace(10)
         verticalStackView.addArrangedSubview(postStatsContainer)
+        verticalStackView.addSpace(8)
         
         postTitleContainer.height(15)
         postCaptionContainer.height(30)
@@ -159,7 +160,7 @@ class PostSummaryView : UIView {
         thumbnailImageView.edgesToSuperview()
         pressPlayOverlayView.centerInSuperview()
         
-        postStatsView.height(23)
+        postStatsView.height(22)
         verticalStackView.addSpace(10)
         
         let containedViews = [postTitleLabel,

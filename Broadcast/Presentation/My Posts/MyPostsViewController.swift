@@ -54,18 +54,17 @@ class MyPostsViewController: ViewController {
         tableView.edgesToSuperview()
 
         /// Configure the table view header
-        let titleLabelFont = UIFont.customFont(ofSize: 24, weight: UIFont.InterFontWeight.medium)
         let titleLabel = UILabel.text(.myPostsHeading,
-                                      font: titleLabelFont,
+                                      font: .myPostTableTitle,
                                       textColor: .primaryLightGrey)
         let titleHeaderView = UIView()
 
-        titleHeaderView.frame = CGRect(x: 0, y: 0, width: 200, height: 50)
+        titleHeaderView.frame = CGRect(x: 0, y: 0, width: 200, height: 96)
         tableView.tableHeaderView = titleHeaderView
 
         titleHeaderView.addSubview(titleLabel)
         titleLabel.edgesToSuperview(excluding: [.left, .right])
-        titleLabel.leftToSuperview(offset: 20)
+        titleLabel.leftToSuperview(offset: 22)
     }
         
     private func configureBindings() {        

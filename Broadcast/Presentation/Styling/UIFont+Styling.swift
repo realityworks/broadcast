@@ -82,5 +82,6 @@ extension UIFont {
     static var body: UIFont { .customFont(ofSize: 14, weight: InterFontWeight.regular ) }
     static var bodyBold: UIFont { .customFont(ofSize: 14, weight: InterFontWeight.bold ) }
     
+    static var myPostTableTitle: UIFont { .customFont(ofSize: 24, weight: UIFont.InterFontWeight.medium ) }
     static var postCaptionTitle: UIFont { .customFont(ofSize: 20, weight: InterFontWeight.bold ) }
 }
