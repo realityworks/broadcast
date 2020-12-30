@@ -155,4 +155,9 @@ extension NewPostCreateViewModel {
         showTipsSubject.accept(show)
     }
     
+    func clearContent() {
+        title.accept("")
+        caption.accept("")
+        removeMedia()
+    }
 }

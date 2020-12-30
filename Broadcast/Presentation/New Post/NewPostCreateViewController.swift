@@ -41,7 +41,8 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         super.viewDidLoad()
         
         navigationBar(styleAs: .dark(title: LocalizedString.newPost))
-
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelTapped))
+        
         // Do any additional setup after loading the view.
         configureViews()
         configureLayout()
@@ -299,6 +300,10 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     @objc func dismissKeyboard() {
         editPostView.captionTextView.resignFirstResponder()
         editPostView.titleTextField.resignFirstResponder()
+    }
+    
+    @objc func cancelTapped() {
+        viewModel.clearContent()
     }
 }
 
