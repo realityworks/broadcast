@@ -18,7 +18,7 @@ class PostDetailViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationBar(styleAs: .dark(title: LocalizedString.post))
+        navigationBar(styleAs: .dark(title: LocalizedString.post))        
         postSummaryView = PostSummaryView(withStyling: .detail)
 
         // Do any additional setup after loading the view.

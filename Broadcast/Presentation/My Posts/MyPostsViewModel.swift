@@ -32,7 +32,7 @@ class MyPostsViewModel : ViewModel {
                     
                     let viewModel = MyPostsCellViewModel(
                         postId: $0.id,
-                        title: $0.title,
+                        title: "This ias asd asd really long super title two lines",//$0.title,
                         caption: $0.caption,
                         thumbnailUrl: thumbnailUrl,
                         media: $0.contentMedia,

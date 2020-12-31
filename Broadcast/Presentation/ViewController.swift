@@ -37,6 +37,7 @@ class ViewController : UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         Logger.verbose(topic: .appState, message: "viewDidAppear")
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -54,29 +55,20 @@ class ViewController : UIViewController {
     func navigationBar(styleAs style: NavigationBarStyle) {
         switch style {
         case .dark(let titleString):
-            /// Remove the background image view if one exists
-//            if let imageView = navigationController?.navigationBar.subviews.first(where: { $0 is UIImageView }) {
-//                imageView.removeFromSuperview()
-//            }
-            
             title = titleString.localized
             navigationController?.navigationBar.setBackgroundImage(UIImage(color: UIColor.primaryBlack), for: .default)
             
             let textAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
             navigationController?.navigationBar.titleTextAttributes = textAttributes
+            navigationController?.navigationBar.tintColor = .white
+            navigationItem.backBarButtonItem?.tintColor = .white
             
         case .darkLogo:
-            /// Remove a background image if one exists
-//            if let imageView = navigationController?.navigationBar.subviews.first(where: { $0 is UIImageView }) {
-//                imageView.removeFromSuperview()
-//            }
-            
             navigationController?.navigationBar.setBackgroundImage(UIImage(color: UIColor.primaryBlack), for: .default)
-            
             navigationItem.titleView = UIImageView(image: .logoBoomdayBroadcaster)
-//            backgroundImageView.contentMode = .scaleAspectFit
-//            navigationController?.navigationBar.addSubview(backgroundImageView)
-//            backgroundImageView.centerInSuperview()
+            navigationController?.navigationBar.tintColor = .white
+            navigationItem.backBarButtonItem?.tintColor = .white
+            
         }
     }
 }

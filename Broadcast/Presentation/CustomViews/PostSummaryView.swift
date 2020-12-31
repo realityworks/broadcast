@@ -84,13 +84,26 @@ class PostSummaryView : UIView {
     
     private func configureDetailStyle() {
         verticalStackView.addArrangedSubview(containerTopView)
-        verticalStackView.addArrangedSubview(postTitleContainer)
-        verticalStackView.addArrangedSubview(postStatsContainer)
+        verticalStackView.addSpace(18)
         verticalStackView.addArrangedSubview(dateCreatedContainer)
+        verticalStackView.addSpace(10)
+        verticalStackView.addSeparator()
+        verticalStackView.addSpace(8)
+        verticalStackView.addArrangedSubview(postTitleContainer)
+        verticalStackView.addSpace(8)
+        verticalStackView.addArrangedSubview(postCaptionContainer)
+        verticalStackView.addSpace(10)
+        verticalStackView.addArrangedSubview(postStatsContainer)
+        verticalStackView.addSpace(8)
         
-        postTitleContainer.height(15)
         postStatsContainer.height(15)
         dateCreatedContainer.height(15)
+        
+        postTitleLabel.numberOfLines = 0
+        postTitleLabel.lineBreakMode = .byWordWrapping
+        
+        postCaptionLabel.numberOfLines = 0
+        postCaptionLabel.lineBreakMode = .byWordWrapping
         
         // Layout container top view
         containerTopView.edgesToSuperview(excluding: [.bottom])
@@ -107,8 +120,7 @@ class PostSummaryView : UIView {
         processingView.edgesToSuperview()
         thumbnailImageView.edgesToSuperview()
         
-        postStatsView.height(15)
-        verticalStackView.addSpace(10)
+        postStatsContainer.height(15)
         
         let containedViews = [postTitleLabel,
                               postStatsView,
@@ -118,6 +130,9 @@ class PostSummaryView : UIView {
             $0.leftToSuperview(offset: 20)
             $0.rightToSuperview(offset: -20)
         }
+        
+        postTitleLabel.topToSuperview()
+        postTitleLabel.bottomToSuperview()
         
         verticalStackView.edgesToSuperview()
     }
@@ -136,7 +151,6 @@ class PostSummaryView : UIView {
         verticalStackView.addArrangedSubview(postStatsContainer)
         verticalStackView.addSpace(8)
         
-        postTitleContainer.height(15)
         postCaptionContainer.height(30)
         postStatsContainer.height(15)
         dateCreatedContainer.height(15)
@@ -172,6 +186,9 @@ class PostSummaryView : UIView {
             $0.leftToSuperview(offset: 16)
             $0.rightToSuperview(offset: -16)
         }
+        
+        postTitleLabel.topToSuperview()
+        postTitleLabel.bottomToSuperview()
         
         verticalStackView.leftToSuperview()
         verticalStackView.rightToSuperview()
