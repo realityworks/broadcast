@@ -40,8 +40,8 @@ extension ProfileUseCase : StateControllerInjector {
 extension ProfileUseCase {
     static let standard = {
         return ProfileUseCase(
-            apiService: Services.local.apiService,
-            uploadService: Services.local.uploadService)
+            apiService: Services.standard.apiService,
+            uploadService: Services.standard.uploadService)
     }()
 }
 

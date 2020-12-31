@@ -100,6 +100,8 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         usernameIcon.contentMode = .scaleAspectFit
         usernameIcon.tintColor = .lightGray
         usernameTextField.leftView = usernameIcon
+        usernameTextField.autocapitalizationType = .none
+        usernameTextField.autocorrectionType = .no
         usernameTextField.leftViewMode = .always
         usernameTextField.translatesAutoresizingMaskIntoConstraints = false
         
