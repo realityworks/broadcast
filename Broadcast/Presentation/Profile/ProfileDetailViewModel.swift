@@ -59,7 +59,6 @@ class ProfileDetailViewModel : ViewModel {
         
         _ = profileObservable.map { $0.displayName }
             .subscribe(onNext: {
-                print ("Update DisplayName : \($0)")
                 return self.displayNameSubject.accept($0)
             })
             .disposed(by: disposeBag)

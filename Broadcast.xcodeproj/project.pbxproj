@@ -102,8 +102,6 @@
 		1D7C4949259B2FB70089EA6B /* InsetTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7C4948259B2FB70089EA6B /* InsetTextField.swift */; };
 		1D7C4950259B38A70089EA6B /* RSKPlaceholderTextView in Frameworks */ = {isa = PBXBuildFile; productRef = 1D7C494F259B38A70089EA6B /* RSKPlaceholderTextView */; };
 		1D7C4956259B795E0089EA6B /* TipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7C4955259B795E0089EA6B /* TipsView.swift */; };
-		1D87DF4925683535000652D6 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF4825683535000652D6 /* EditProfileViewController.swift */; };
-		1D87DF4E2568353F000652D6 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF4D2568353F000652D6 /* EditProfileViewModel.swift */; };
 		1D87DF532568367E000652D6 /* MyPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF522568367E000652D6 /* MyPostsViewController.swift */; };
 		1D87DF582568368A000652D6 /* MyPostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF572568368A000652D6 /* MyPostsViewModel.swift */; };
 		1D87DF84256839C9000652D6 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF83256839C9000652D6 /* PostDetailViewController.swift */; };
@@ -274,8 +272,6 @@
 		1D7C49422599F61F0089EA6B /* TopImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopImageButton.swift; sourceTree = "<group>"; };
 		1D7C4948259B2FB70089EA6B /* InsetTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetTextField.swift; sourceTree = "<group>"; };
 		1D7C4955259B795E0089EA6B /* TipsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipsView.swift; sourceTree = "<group>"; };
-		1D87DF4825683535000652D6 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
-		1D87DF4D2568353F000652D6 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		1D87DF522568367E000652D6 /* MyPostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsViewController.swift; sourceTree = "<group>"; };
 		1D87DF572568368A000652D6 /* MyPostsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsViewModel.swift; sourceTree = "<group>"; };
 		1D87DF83256839C9000652D6 /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
@@ -519,15 +515,6 @@
 			path = "My Posts";
 			sourceTree = "<group>";
 		};
-		1D87DF3B25683330000652D6 /* Edit Profile */ = {
-			isa = PBXGroup;
-			children = (
-				1D87DF4825683535000652D6 /* EditProfileViewController.swift */,
-				1D87DF4D2568353F000652D6 /* EditProfileViewModel.swift */,
-			);
-			path = "Edit Profile";
-			sourceTree = "<group>";
-		};
 		1D87DF3C25683347000652D6 /* Post Detail */ = {
 			isa = PBXGroup;
 			children = (
@@ -555,7 +542,6 @@
 				1D916D1125629C1E0059E549 /* ViewController.swift */,
 				1DD1FE51256E985D00C598CE /* Asset Management */,
 				1D91A0D0256C1DBD0043A943 /* CustomViews */,
-				1D87DF3B25683330000652D6 /* Edit Profile */,
 				1D916D7E256400530059E549 /* Login */,
 				1D916D7F2564006C0059E549 /* Main */,
 				1D87DF3A2568313E000652D6 /* My Posts */,
@@ -1021,7 +1007,6 @@
 				1DA3E44625874ADD00F1825F /* GetUploadUrlResponse.swift in Sources */,
 				1D9256D7257F517700E988B2 /* NewPostCreateViewController.swift in Sources */,
 				1D3B2A0D2564D0EA001874FD /* LocalAuthenticationService.swift in Sources */,
-				1D87DF4E2568353F000652D6 /* EditProfileViewModel.swift in Sources */,
 				1D14AD6B257A0CFD00CB2C82 /* ProfileTextFieldTableViewCell.swift in Sources */,
 				1D3ED60425663AAD004236BB /* UINavigationController+Routing.swift in Sources */,
 				1DDEC77B256F5D1D00D65023 /* LoadMyPostsResponse.swift in Sources */,
@@ -1108,7 +1093,6 @@
 				1D3B2A212564D76C001874FD /* StandardCredentialsService.swift in Sources */,
 				1D3B29FB25641C3A001874FD /* MainViewModel.swift in Sources */,
 				1D216A5025987CA7007FA845 /* CustomBorderView.swift in Sources */,
-				1D87DF4925683535000652D6 /* EditProfileViewController.swift in Sources */,
 				1D14AD7B257AA8E900CB2C82 /* ProfileTextViewTableViewCell.swift in Sources */,
 				1D14AD672579E41E00CB2C82 /* LoadProfileResponse.swift in Sources */,
 				1D2A03E525655BB1008CE2D4 /* AuthenticationUseCase.swift in Sources */,

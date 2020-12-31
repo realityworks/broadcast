@@ -75,12 +75,13 @@ class ProfileDetailViewController: ViewController {
 //                    .asObservable()
 //                    .bind(to: cell.rx.text)
 //                    .disposed(by: self.disposeBag)
-                
+                print("Display Name Cell with Text: \(displayName)")
                 cell.configure(withText: displayName,
                                icon: UIImage(systemName: "pencil")?.withRenderingMode(.alwaysTemplate))
                 
                 cell.rx.text
                     .compactMap { $0 }
+                    .distinctUntilChanged()
                     .bind(to: self.viewModel.displayNameSubject)
                     .disposed(by: self.disposeBag)
                 
@@ -97,6 +98,7 @@ class ProfileDetailViewController: ViewController {
                 
                 cell.rx.text
                     .compactMap { $0 }
+                    .distinctUntilChanged()
                     .bind(to: self.viewModel.biographySubject)
                     .disposed(by: self.disposeBag)
                 
