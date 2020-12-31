@@ -22,9 +22,6 @@ class MyPostsViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        navigationBar(styleAs: .darkLogo)
         
         configureViews()
         configureLayout()
@@ -33,6 +30,13 @@ class MyPostsViewController: ViewController {
         
         #warning("Need to move this on account finished loading...")
         viewModel.refreshMyPostsList()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Do any additional setup after loading the view.
+        navigationBar(styleAs: .darkLogo)
     }
     
     private func configureViews() {

@@ -54,6 +54,11 @@ class ViewController : UIViewController {
     func navigationBar(styleAs style: NavigationBarStyle) {
         switch style {
         case .dark(let titleString):
+            /// Remove the background image view if one exists
+//            if let imageView = navigationController?.navigationBar.subviews.first(where: { $0 is UIImageView }) {
+//                imageView.removeFromSuperview()
+//            }
+            
             title = titleString.localized
             navigationController?.navigationBar.setBackgroundImage(UIImage(color: UIColor.primaryBlack), for: .default)
             
@@ -61,14 +66,17 @@ class ViewController : UIViewController {
             navigationController?.navigationBar.titleTextAttributes = textAttributes
             
         case .darkLogo:
+            /// Remove a background image if one exists
+//            if let imageView = navigationController?.navigationBar.subviews.first(where: { $0 is UIImageView }) {
+//                imageView.removeFromSuperview()
+//            }
+            
             navigationController?.navigationBar.setBackgroundImage(UIImage(color: UIColor.primaryBlack), for: .default)
             
-            let backgroundImageView = UIImageView(image: .logoBoomdayBroadcaster)
-            backgroundImageView.contentMode = .scaleAspectFit
-            navigationController?.navigationBar.addSubview(backgroundImageView)
-            backgroundImageView.centerInSuperview()
-            
-            #warning("TODO : Add broadcasting logo image")
+            navigationItem.titleView = UIImageView(image: .logoBoomdayBroadcaster)
+//            backgroundImageView.contentMode = .scaleAspectFit
+//            navigationController?.navigationBar.addSubview(backgroundImageView)
+//            backgroundImageView.centerInSuperview()
         }
     }
 }
