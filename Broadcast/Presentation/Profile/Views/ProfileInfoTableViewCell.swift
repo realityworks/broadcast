@@ -60,8 +60,8 @@ class ProfileInfoTableViewCell: UITableViewCell {
         thumbnailImageView.contentMode = .scaleAspectFit
     }
     
-    func configure(withThumbnailUrl thumbnailUrl: URL?, subscribers: Int) {
-        thumbnailImageView.sd_setImage(with: thumbnailUrl)
+    func configure(withProfileImageUrl profileImageUrl: URL?, subscribers: Int) {
+        thumbnailImageView.sd_setImage(with: profileImageUrl)
         subscribersCountLabel.text = "\(subscribers)"
     }
 }

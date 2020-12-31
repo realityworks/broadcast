@@ -7,6 +7,4 @@
 
 import Foundation
 
-struct LoadProfileResponse {
-    let profile: Profile
-}
+typealias LoadProfileResponse = Profile

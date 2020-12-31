@@ -64,9 +64,9 @@ class ProfileDetailViewController: ViewController {
         let datasource = ReactiveTableViewModelSource<ProfileDetailSectionModel>(configureCell: { _, tableView, indexPath, row -> UITableViewCell in
             
             switch row {
-            case let .profileInfo(thumbnail, subscribers):
+            case let .profileInfo(profileImageUrl, subscribers):
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileInfoTableViewCell.identifier, for: indexPath) as! ProfileInfoTableViewCell
-                cell.configure(withThumbnailUrl: thumbnail, subscribers: subscribers)
+                cell.configure(withProfileImageUrl: profileImageUrl, subscribers: subscribers)
                 return cell
             case .displayName:
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextFieldTableViewCell.identifier, for: indexPath) as! ProfileTextFieldTableViewCell
@@ -99,10 +99,10 @@ class ProfileDetailViewController: ViewController {
                     .disposed(by: self.disposeBag)
                 
                 return cell
-            case let .trailerVideo(thumbnailUrl):
+            case let .trailerVideo(trailerVideoUrl):
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTrailerTableViewCell.identifier, for: indexPath) as! ProfileTrailerTableViewCell
                 
-                cell.configure(thumbnailUrl: thumbnailUrl)
+                cell.configure(trailerVideoUrl: trailerVideoUrl)
                 cell.selectButton.rx.tap
                     .subscribe(onNext: { [unowned self] _ in
                         self.showMediaOptionsMenu()
@@ -143,20 +143,20 @@ class ProfileDetailViewController: ViewController {
             viewModel.biography,
             viewModel.displayName,
             viewModel.subscribers,
-            viewModel.thumbnail,
-            viewModel.trailer) {
+            viewModel.profileImageUrl,
+            viewModel.trailerVideoUrl) {
             
-            biography, displayName, subscribers, thumbnail, trailer -> [ProfileDetailSectionModel] in
+            biography, displayName, subscribers, profileImageUrl, trailerUrl -> [ProfileDetailSectionModel] in
             
             return [
                 SectionModel(model: nil, items: [
-                                ProfileDetailViewModel.Row.profileInfo(thumbnail: thumbnail, subscribers: subscribers)]),
+                                ProfileDetailViewModel.Row.profileInfo(profileImageUrl: profileImageUrl, subscribers: subscribers)]),
                 SectionModel(model: LocalizedString.displayName, items: [
                                 ProfileDetailViewModel.Row.displayName(text: displayName)]),
                 SectionModel(model: LocalizedString.displayBio, items: [
                                 ProfileDetailViewModel.Row.biography(text: biography)]),
                 SectionModel(model: LocalizedString.trailerVideo, items: [
-                                ProfileDetailViewModel.Row.trailerVideo(trailer: trailer)])
+                                ProfileDetailViewModel.Row.trailerVideo(trailerUrl: trailerUrl)])
             ]
         }
                 

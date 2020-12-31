@@ -39,13 +39,13 @@ class ProfileTrailerTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(thumbnailUrl: URL?) {
-        if let thumbnailUrl = thumbnailUrl {
+    func configure(trailerVideoUrl: URL?) {
+        if let trailerVideoUrl = trailerVideoUrl {
             verticalStack.addArrangedSubview(videoPlayerView)
             videoPlayerView.widthToSuperview()
             videoPlayerView.height(300)
 
-            videoPlayerView.playVideo(withURL: thumbnailUrl)
+            videoPlayerView.playVideo(withURL: trailerVideoUrl)
         }
         
         verticalStack.addArrangedSubview(selectButton)

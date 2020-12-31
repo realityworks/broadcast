@@ -225,11 +225,12 @@ extension StandardAPIService : APIService {
     }
     
     func loadProfile() -> Single<LoadProfileResponse> {
-        let single = Single<LoadProfileResponse>.create { observer in
-            observer(.error(BoomdayError.unsupported))
-            return Disposables.create { }
-        }
-        return single
+        let url = baseUrl
+            .appendingPathComponent("broadcaster")
+            .appendingPathComponent("profile")
+        
+        return authenticatedRequest(method: .get, url: url, encoding: URLEncoding.default)
+            .decode(type: LoadProfileResponse.self)
     }
     
     func updateProfile(withDisplayName displayName: String, biography: String) -> Completable {

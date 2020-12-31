@@ -12,10 +12,10 @@ import RxCocoa
 class ProfileDetailViewModel : ViewModel {
     
     enum Row {
-        case profileInfo(thumbnail: URL?, subscribers: Int)
+        case profileInfo(profileImageUrl: URL?, subscribers: Int)
         case displayName(text: String)
         case biography(text: String)
-        case trailerVideo(trailer: URL?)
+        case trailerVideo(trailerUrl: URL?)
         
         var row: Int {
             switch self {

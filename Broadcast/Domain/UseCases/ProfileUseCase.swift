@@ -51,14 +51,10 @@ extension ProfileUseCase {
     func loadProfile() {
         apiService.loadProfile()
             .subscribe(onSuccess: { [self] profileResponse in
-                stateController.state.profile = profileResponse.profile
+                stateController.state.profile = profileResponse
             }, onError: { [self] error in
-                #warning("TODO - Add error handling")
-//                if case BoomdayError.notAuthenticated = error {
-//                    stateController.state.sendError(.notAuthenticated)
-//                } else {
-//                    Logger.log(level: .warning, topic: .authentication, message: "Unable to load account details")
-//                }
+                stateController.sendError(error)
+                Logger.log(level: .warning, topic: .authentication, message: "Unable to load account details")
             })
             .disposed(by: disposeBag)
     }

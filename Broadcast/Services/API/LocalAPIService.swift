@@ -88,14 +88,15 @@ class LocalAPIService {
         handle: "FirstSuwara",
         subscribers: 2311,
         profileImageUrl: LocalAPIService.mockPortraitUrl,
-        trailerUrl: LocalAPIService.mockVideoUrl,
+        trailerThumbnailUrl: LocalAPIService.mockThumbnailUrl1,
+        trailerVideoUrl: LocalAPIService.mockVideoUrl,
         stripeAccount: Profile.StripeAccount(
-            name: "stripeaccount@stripe.com",
-            id: "prod_iUmEPMQJFjaLs6",
+            accountId: "stripeaccount@stripe.com",
+            productId: "prod_iUmEPMQJFjaLs6",
             currencyCode: CurrencyCode.gdp,
-            pricing: 10,
-            balance: 80,
-            totalVolume: 100,
+            price: 10,
+            balance: 100,
+            totalVolume: 1000,
             paymentsEnabled: false,
             payoutsEnabled: false))
 }
@@ -162,7 +163,7 @@ extension LocalAPIService : APIService {
     
     func loadProfile() -> Single<LoadProfileResponse> {
         let single = Single<LoadProfileResponse>.create { [unowned self] observer in
-            observer(.success(LoadProfileResponse(profile: self.mockProfileData)))
+            observer(.success(self.mockProfileData))
             return Disposables.create { }
         }
         return single
