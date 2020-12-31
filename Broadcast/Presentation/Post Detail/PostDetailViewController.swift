@@ -13,7 +13,6 @@ class PostDetailViewController: ViewController {
     // MARK: - UI Components
     let verticalStackView = UIStackView()
     var postSummaryView: PostSummaryView!
-    let postCaptionLabel = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,20 +31,11 @@ class PostDetailViewController: ViewController {
         verticalStackView.axis = .vertical
         verticalStackView.distribution = .equalSpacing
         
-        postCaptionLabel.font = .body
-        postCaptionLabel.numberOfLines = 0
-        
         // Layout the subviews
-        view.addSubview(verticalStackView)
-        view.addSubview(postCaptionLabel)
-        
+        view.addSubview(verticalStackView)        
         verticalStackView.addArrangedSubview(postSummaryView)
         
         verticalStackView.edgesToSuperview(excluding: [.bottom], usingSafeArea: true)
-        
-        postCaptionLabel.topToBottom(of: verticalStackView)
-        postCaptionLabel.leftToSuperview(offset: 20)
-        postCaptionLabel.rightToSuperview()
     }
     
     private func configureBindings() {
@@ -53,10 +43,6 @@ class PostDetailViewController: ViewController {
             .subscribe(onNext: { [weak self] summaryViewModel in
                 self?.postSummaryView.configure(withPostSummaryViewModel: summaryViewModel)
             })
-            .disposed(by: disposeBag)
-        
-        viewModel.postCaption
-            .bind(to: postCaptionLabel.rx.text)
             .disposed(by: disposeBag)
     }
     

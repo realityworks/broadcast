@@ -87,7 +87,8 @@ class PostSummaryView : UIView {
         verticalStackView.addSpace(18)
         verticalStackView.addArrangedSubview(dateCreatedContainer)
         verticalStackView.addSpace(10)
-        verticalStackView.addSeparator()
+
+        let separatorView = verticalStackView.addSeparator()
         verticalStackView.addSpace(8)
         verticalStackView.addArrangedSubview(postTitleContainer)
         verticalStackView.addSpace(8)
@@ -111,30 +112,30 @@ class PostSummaryView : UIView {
         
         // Order of view additions is important
         containerTopView.addSubview(videoPlayerView)
-        containerTopView.addSubview(thumbnailImageView)
         containerTopView.addSubview(blurredEffectView)
         containerTopView.addSubview(processingView)
         
         videoPlayerView.edgesToSuperview()
         blurredEffectView.edgesToSuperview()
         processingView.edgesToSuperview()
-        thumbnailImageView.edgesToSuperview()
         
         postStatsContainer.height(15)
         
         let containedViews = [postTitleLabel,
+                              postCaptionLabel,
                               postStatsView,
-                              dateCreatedLabel]
+                              dateCreatedLabel,
+                              separatorView]
         
         containedViews.forEach {
             $0.leftToSuperview(offset: 20)
             $0.rightToSuperview(offset: -20)
         }
         
-        postTitleLabel.topToSuperview()
-        postTitleLabel.bottomToSuperview()
+        postTitleLabel.edgesToSuperview(excluding: [.left, .right])
+        postCaptionLabel.edgesToSuperview(excluding: [.left, .right])
         
-        verticalStackView.edgesToSuperview()
+        verticalStackView.edgesToSuperview(usingSafeArea: true)
     }
     
     private func configureListStyle() {
@@ -170,6 +171,8 @@ class PostSummaryView : UIView {
         // Order of view additions is important
         containerTopView.addSubview(thumbnailImageView)
         containerTopView.addSubview(pressPlayOverlayView)
+        containerTopView.addSubview(blurredEffectView)
+        containerTopView.addSubview(processingView)
 
         thumbnailImageView.edgesToSuperview()
         pressPlayOverlayView.centerInSuperview()
@@ -187,8 +190,7 @@ class PostSummaryView : UIView {
             $0.rightToSuperview(offset: -16)
         }
         
-        postTitleLabel.topToSuperview()
-        postTitleLabel.bottomToSuperview()
+        postTitleLabel.edgesToSuperview(excluding: [.left, .right])
         
         verticalStackView.leftToSuperview()
         verticalStackView.rightToSuperview()

@@ -14,7 +14,6 @@ class PostDetailViewModel : ViewModel {
     private let isEditingSubject = BehaviorRelay<Bool>(value: false)
     
     let postSummary: Observable<PostSummaryViewModel>
-    let postCaption: Observable<String>
     
     init(dependencies: Dependencies = .standard) {
         let postObservable = Observable.combineLatest(
@@ -36,7 +35,6 @@ class PostDetailViewModel : ViewModel {
                 isEncoding: !$0.finishedProcessing,
                 showVideoPlayer: true)
         }
-        postCaption = postObservable.map { $0.caption }
         
         super.init(stateController: dependencies.stateController)
     }
