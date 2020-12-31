@@ -54,7 +54,7 @@ extension ProfileUseCase {
                 stateController.state.profile = profileResponse
             }, onError: { [self] error in
                 stateController.sendError(error)
-                Logger.log(level: .warning, topic: .authentication, message: "Unable to load account details")
+                Logger.log(level: .warning, topic: .authentication, message: "Unable to load account details with error: \(error)")
             })
             .disposed(by: disposeBag)
     }

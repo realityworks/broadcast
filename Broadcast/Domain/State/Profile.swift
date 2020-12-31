@@ -17,7 +17,7 @@ enum CurrencyCode: String, Codable {
 struct Profile : Equatable, Codable {
     let firstName: String?
     let lastName: String?
-    let biography: String
+    let biography: String?
     let displayName: String
     let handle: String
     let subscribers: Int

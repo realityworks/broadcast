@@ -11,4 +11,8 @@ extension String {
     init(_ localizedString: LocalizedString) {
         self = localizedString.localized
     }
+    
+    static var empty: String {
+        return ""
+    }
 }

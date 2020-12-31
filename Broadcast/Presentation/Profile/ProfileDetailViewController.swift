@@ -71,7 +71,8 @@ class ProfileDetailViewController: ViewController {
             case .displayName:
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextFieldTableViewCell.identifier, for: indexPath) as! ProfileTextFieldTableViewCell
                 
-                self.viewModel.displayName
+                self.viewModel.displayNameSubject
+                    .asObservable()
                     .bind(to: cell.rx.text)
                     .disposed(by: self.disposeBag)
                 
@@ -84,13 +85,8 @@ class ProfileDetailViewController: ViewController {
             case .biography:
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextViewTableViewCell.identifier, for: indexPath) as! ProfileTextViewTableViewCell
                 
-                self.viewModel.biography
+                self.viewModel.biographySubject
                     .bind(to: cell.rx.text)
-                    .disposed(by: self.disposeBag)
-                
-                cell.rx.text
-                    .compactMap { $0 }
-                    .bind(to: self.viewModel.biographySubject)
                     .disposed(by: self.disposeBag)
                 
                 cell.rx.text

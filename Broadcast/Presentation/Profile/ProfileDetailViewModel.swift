@@ -30,8 +30,6 @@ class ProfileDetailViewModel : ViewModel {
     let schedulers: Schedulers
     let profileUseCase: ProfileUseCase
 
-    let displayName: Observable<String>
-    let biography: Observable<String>
     let subscribers: Observable<Int>
     let profileImageUrl: Observable<URL?>
     let trailerVideoUrl: Observable<URL?>
@@ -46,13 +44,24 @@ class ProfileDetailViewModel : ViewModel {
         
         let profileObservable = dependencies.profileObservable.compactMap { $0 }
         
-        self.displayName = profileObservable.map { $0.displayName }
-        self.biography = profileObservable.map { $0.biography }
         self.subscribers = profileObservable.map { $0.subscribers }
         self.profileImageUrl = profileObservable.map { URL(string: $0.profileImageUrl) }
         self.trailerVideoUrl = profileObservable.map { URL(string: $0.trailerVideoUrl) }
         
         super.init(stateController: dependencies.stateController)
+        
+        // Biography subject should be updated by the stored biography info
+        _ = profileObservable.map { $0.biography ?? String.empty }
+            .subscribe(onNext: {
+                self.biographySubject.accept($0)
+            })
+            .disposed(by: disposeBag)
+        
+        _ = profileObservable.map { $0.displayName }
+            .subscribe(onNext: {
+                self.displayNameSubject.accept($0)
+            })
+            .disposed(by: disposeBag)
     }
 }
 
@@ -64,7 +73,6 @@ extension ProfileDetailViewModel {
         let schedulers: Schedulers
         let profileUseCase: ProfileUseCase
         let profileObservable: Observable<Profile?>
-        
         
         static let standard = Dependencies(
             stateController: Domain.standard.stateController,
