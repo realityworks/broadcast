@@ -33,8 +33,8 @@ class ProfileDetailViewModel : ViewModel {
     let displayName: Observable<String>
     let biography: Observable<String>
     let subscribers: Observable<Int>
-    let thumbnail: Observable<URL?>
-    let trailer: Observable<URL?>
+    let profileImageUrl: Observable<URL?>
+    let trailerVideoUrl: Observable<URL?>
     
     let displayNameSubject = BehaviorRelay<String?>(value: nil)
     let biographySubject = BehaviorRelay<String?>(value: nil)
@@ -49,8 +49,8 @@ class ProfileDetailViewModel : ViewModel {
         self.displayName = profileObservable.map { $0.displayName }
         self.biography = profileObservable.map { $0.biography }
         self.subscribers = profileObservable.map { $0.subscribers }
-        self.thumbnail = profileObservable.map { URL(string: $0.thumbnailUrl) }
-        self.trailer = profileObservable.map { URL(string: $0.trailerUrl) }
+        self.profileImageUrl = profileObservable.map { URL(string: $0.profileImageUrl) }
+        self.trailerVideoUrl = profileObservable.map { URL(string: $0.trailerVideoUrl) }
         
         super.init(stateController: dependencies.stateController)
     }

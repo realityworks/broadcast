@@ -33,23 +33,29 @@ class ProfileStripeAccountViewModel : ViewModel {
         let stripeAccountObservable = dependencies.profileObservable
             .compactMap { $0?.stripeAccount }
         
-        self.nameObservable = stripeAccountObservable.map { $0.name }
-        self.identifierObservable = stripeAccountObservable.map { $0.id }
-        self.paymentsObservable = stripeAccountObservable.map { $0.paymentsDisabled ? "Disabled" : "Enabled" }
-        
-        self.pricingObservable = stripeAccountObservable.map {
-            $0.pricing.asCurrencyString(withCurrencyCode: $0.currencyCode)
+        self.nameObservable = stripeAccountObservable.map { $0.accountId ?? LocalizedString.nonExistant.localized }
+        self.identifierObservable = stripeAccountObservable.map { $0.productId ?? LocalizedString.nonExistant.localized }
+        self.paymentsObservable = stripeAccountObservable.map {
+            $0.paymentsEnabled ? LocalizedString.enabled.localized : LocalizedString.disabled.localized
         }
         
-        self.payoutsObservable = stripeAccountObservable.map { $0.payoutsDisabled ? LocalizedString.disabled.localized : LocalizedString.enabled.localized
+        self.pricingObservable = stripeAccountObservable.map {
+            guard let currencyCode = $0.currencyCode else { return LocalizedString.nonExistant.localized }
+            return $0.price?.asCurrencyString(withCurrencyCode: currencyCode) ?? LocalizedString.nonExistant.localized
+        }
+        
+        self.payoutsObservable = stripeAccountObservable.map {
+            $0.payoutsEnabled ? LocalizedString.enabled.localized : LocalizedString.disabled.localized
         }
         
         self.totalBalanceObservable = stripeAccountObservable.map {
-            $0.balance.asCurrencyString(withCurrencyCode: $0.currencyCode)
+            guard let currencyCode = $0.currencyCode else { return LocalizedString.nonExistant.localized }
+            return $0.balance?.asCurrencyString(withCurrencyCode: currencyCode) ?? LocalizedString.nonExistant.localized
         }
         
         self.lifetimeTotalVolumeObservable = stripeAccountObservable.map {
-            $0.totalVolume.asCurrencyString(withCurrencyCode: $0.currencyCode)
+            guard let currencyCode = $0.currencyCode else { return LocalizedString.nonExistant.localized }
+            return $0.totalVolume?.asCurrencyString(withCurrencyCode: currencyCode) ?? LocalizedString.nonExistant.localized
         }
 
         super.init(stateController: dependencies.stateController)

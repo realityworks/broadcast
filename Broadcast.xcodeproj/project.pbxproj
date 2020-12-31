@@ -14,6 +14,7 @@
 		1D14AD73257A16AC00CB2C82 /* ProfileInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D14AD72257A16AB00CB2C82 /* ProfileInfoTableViewCell.swift */; };
 		1D14AD77257A16BC00CB2C82 /* ProfileTrailerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D14AD76257A16BC00CB2C82 /* ProfileTrailerTableViewCell.swift */; };
 		1D14AD7B257AA8E900CB2C82 /* ProfileTextViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D14AD7A257AA8E800CB2C82 /* ProfileTextViewTableViewCell.swift */; };
+		1D18E53E259D934800F6B071 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D18E53D259D934800F6B071 /* Int.swift */; };
 		1D216A3B2595ED4F007FA845 /* TextPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D216A3A2595ED4F007FA845 /* TextPopup.swift */; };
 		1D216A4A259870CC007FA845 /* SelectMediaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D216A49259870CC007FA845 /* SelectMediaView.swift */; };
 		1D216A5025987CA7007FA845 /* CustomBorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D216A4F25987CA7007FA845 /* CustomBorderView.swift */; };
@@ -183,6 +184,7 @@
 		1D14AD72257A16AB00CB2C82 /* ProfileInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoTableViewCell.swift; sourceTree = "<group>"; };
 		1D14AD76257A16BC00CB2C82 /* ProfileTrailerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTrailerTableViewCell.swift; sourceTree = "<group>"; };
 		1D14AD7A257AA8E800CB2C82 /* ProfileTextViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTextViewTableViewCell.swift; sourceTree = "<group>"; };
+		1D18E53D259D934800F6B071 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		1D216A3A2595ED4F007FA845 /* TextPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPopup.swift; sourceTree = "<group>"; };
 		1D216A49259870CC007FA845 /* SelectMediaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMediaView.swift; sourceTree = "<group>"; };
 		1D216A4F25987CA7007FA845 /* CustomBorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBorderView.swift; sourceTree = "<group>"; };
@@ -824,6 +826,7 @@
 				1DB3438D2589DC3300486676 /* URL+Extensions.swift */,
 				1D79C10025924C8600AC271B /* UIColor+Extensions.swift */,
 				1D79C112259451D400AC271B /* AnimationView+Extensions.swift */,
+				1D18E53D259D934800F6B071 /* Int.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1080,6 +1083,7 @@
 				1D87DF8925683AC1000652D6 /* PostDetailViewModel.swift in Sources */,
 				1DD1FE05256CA55F00C598CE /* UITextField+Styling.swift in Sources */,
 				1D3B2A342564E7AF001874FD /* StandardUploadService.swift in Sources */,
+				1D18E53E259D934800F6B071 /* Int.swift in Sources */,
 				1DE3DA2E25751F0E00A7A1F7 /* Date+Extensions.swift in Sources */,
 				1D14AD6F257A0F5100CB2C82 /* UITextField+Extensions.swift in Sources */,
 				1D87DF582568368A000652D6 /* MyPostsViewModel.swift in Sources */,

@@ -9,6 +9,7 @@ import Foundation
 
 enum LocalizedString : String {
     case none
+    case nonExistant
     case loginButton
     case usernamePlaceholder
     case passwordPlaceholder
