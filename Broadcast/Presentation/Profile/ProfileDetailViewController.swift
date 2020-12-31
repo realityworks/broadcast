@@ -71,35 +71,19 @@ class ProfileDetailViewController: ViewController {
             case .displayName(let displayName):
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextFieldTableViewCell.identifier, for: indexPath) as! ProfileTextFieldTableViewCell
                 
-//                self.viewModel.displayNameSubject
-//                    .asObservable()
-//                    .bind(to: cell.rx.text)
-//                    .disposed(by: self.disposeBag)
-                print("Display Name Cell with Text: \(displayName)")
                 cell.configure(withText: displayName,
                                icon: UIImage(systemName: "pencil")?.withRenderingMode(.alwaysTemplate))
-                cell.textField.rx.controlEvent(.editingChanged)
-                    .withLatestFrom(cell.textField.rx.text)
-                    .compactMap { $0 }
-                    .bind(to: self.viewModel.displayNameSubject)
-                    .disposed(by: self.disposeBag)
-                
-//                cell.rx.text
-//                    .compactMap { $0 }
-//                    .distinctUntilChanged()
-//                    .bind(to: self.viewModel.displayNameSubject)
-//                    .disposed(by: self.disposeBag)
                 
                 return cell
             case .biography(let biography):
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextViewTableViewCell.identifier, for: indexPath) as! ProfileTextViewTableViewCell
                 
-                self.viewModel.biographySubject
-                    .bind(to: cell.rx.text)
-                    .disposed(by: self.disposeBag)
-                
                 cell.configure(withText: biography,
                                icon: UIImage(systemName: "pencil")?.withRenderingMode(.alwaysTemplate))
+                
+                cell.rx.text
+                    .bind(to: self.viewModel.biographySubject)
+                    .disposed(by: self.disposeBag)
                 
                 return cell
             case let .trailerVideo(trailerVideoUrl):
