@@ -87,7 +87,6 @@ class PostSummaryView : UIView {
         verticalStackView.addSpace(18)
         verticalStackView.addArrangedSubview(dateCreatedContainer)
         verticalStackView.addSpace(10)
-
         let separatorView = verticalStackView.addSeparator()
         verticalStackView.addSpace(8)
         verticalStackView.addArrangedSubview(postTitleContainer)
@@ -95,7 +94,7 @@ class PostSummaryView : UIView {
         verticalStackView.addArrangedSubview(postCaptionContainer)
         verticalStackView.addSpace(10)
         verticalStackView.addArrangedSubview(postStatsContainer)
-        verticalStackView.addSpace(8)
+        verticalStackView.addSpace(24)
         
         postStatsContainer.height(15)
         dateCreatedContainer.height(15)

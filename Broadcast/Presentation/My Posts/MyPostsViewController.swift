@@ -26,7 +26,6 @@ class MyPostsViewController: ViewController {
         configureViews()
         configureLayout()
         configureBindings()
-        style()
         
         #warning("Need to move this on account finished loading...")
         viewModel.refreshMyPostsList()
@@ -40,13 +39,14 @@ class MyPostsViewController: ViewController {
     }
     
     private func configureViews() {
+        view.backgroundColor = UIColor.secondaryWhite
+        
         /// Register the cells used in the tableview
         tableView.register(MyPostsTableViewCell.self,
                            forCellReuseIdentifier: MyPostsTableViewCell.identifier)
         
         tableView.separatorStyle = .none
         tableView.backgroundColor = .clear
-        view.backgroundColor = UIColor.secondaryWhite
 
         /// Configure pull to refresh
         tableView.refreshControl = refreshControl
@@ -76,6 +76,7 @@ class MyPostsViewController: ViewController {
         viewModel.myPostsObservable
             .bind(to: tableView.rx.items(cellIdentifier: MyPostsTableViewCell.identifier, cellType: MyPostsTableViewCell.self)) { _, model, cell in
                 Logger.log(level: .verbose, topic: .debug, message: "Init cell : \(model.title)")
+                cell.selectionStyle = .none
                 cell.configure(withViewModel: model)
             }
             .disposed(by: disposeBag)
@@ -107,10 +108,4 @@ class MyPostsViewController: ViewController {
             })
             .disposed(by: disposeBag)
     }
-    
-    private func style() {
-        
-    }
-    
-    
 }

@@ -22,17 +22,22 @@ class PostDetailViewController: ViewController {
 
         // Do any additional setup after loading the view.
         configureViews()
+        configureLayout()
         configureBindings()
-        style()
     }
     
     private func configureViews() {
+        view.backgroundColor = UIColor.secondaryWhite
+        postSummaryView.backgroundColor = .white
+        
         // Configure the view settings
         verticalStackView.axis = .vertical
         verticalStackView.distribution = .equalSpacing
-        
+    }
+    
+    private func configureLayout() {
         // Layout the subviews
-        view.addSubview(verticalStackView)        
+        view.addSubview(verticalStackView)
         verticalStackView.addArrangedSubview(postSummaryView)
         
         verticalStackView.edgesToSuperview(excluding: [.bottom], usingSafeArea: true)
@@ -44,9 +49,5 @@ class PostDetailViewController: ViewController {
                 self?.postSummaryView.configure(withPostSummaryViewModel: summaryViewModel)
             })
             .disposed(by: disposeBag)
-    }
-    
-    private func style() {
-        view.backgroundColor = .white
     }
 }
