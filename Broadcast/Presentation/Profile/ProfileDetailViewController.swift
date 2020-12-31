@@ -68,13 +68,16 @@ class ProfileDetailViewController: ViewController {
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileInfoTableViewCell.identifier, for: indexPath) as! ProfileInfoTableViewCell
                 cell.configure(withProfileImageUrl: profileImageUrl, subscribers: subscribers)
                 return cell
-            case .displayName:
+            case .displayName(let displayName):
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextFieldTableViewCell.identifier, for: indexPath) as! ProfileTextFieldTableViewCell
                 
-                self.viewModel.displayNameSubject
-                    .asObservable()
-                    .bind(to: cell.rx.text)
-                    .disposed(by: self.disposeBag)
+//                self.viewModel.displayNameSubject
+//                    .asObservable()
+//                    .bind(to: cell.rx.text)
+//                    .disposed(by: self.disposeBag)
+                
+                cell.configure(withText: displayName,
+                               icon: UIImage(systemName: "pencil")?.withRenderingMode(.alwaysTemplate))
                 
                 cell.rx.text
                     .compactMap { $0 }
@@ -82,12 +85,15 @@ class ProfileDetailViewController: ViewController {
                     .disposed(by: self.disposeBag)
                 
                 return cell
-            case .biography:
+            case .biography(let biography):
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextViewTableViewCell.identifier, for: indexPath) as! ProfileTextViewTableViewCell
                 
-                self.viewModel.biographySubject
-                    .bind(to: cell.rx.text)
-                    .disposed(by: self.disposeBag)
+//                self.viewModel.biographySubject
+//                    .bind(to: cell.rx.text)
+//                    .disposed(by: self.disposeBag)
+                
+                cell.configure(withText: biography,
+                               icon: UIImage(systemName: "pencil")?.withRenderingMode(.alwaysTemplate))
                 
                 cell.rx.text
                     .compactMap { $0 }
@@ -136,9 +142,9 @@ class ProfileDetailViewController: ViewController {
         }
         
         let items = Observable.combineLatest(
-            viewModel.biography,
-            viewModel.displayName,
-            viewModel.subscribers,
+            viewModel.biographySubject,
+            viewModel.displayNameSubject,
+            viewModel.subscriberCount,
             viewModel.profileImageUrl,
             viewModel.trailerVideoUrl) {
             
@@ -148,9 +154,9 @@ class ProfileDetailViewController: ViewController {
                 SectionModel(model: nil, items: [
                                 ProfileDetailViewModel.Row.profileInfo(profileImageUrl: profileImageUrl, subscribers: subscribers)]),
                 SectionModel(model: LocalizedString.displayName, items: [
-                                ProfileDetailViewModel.Row.displayName(text: displayName)]),
+                                ProfileDetailViewModel.Row.displayName(text: displayName ?? String.empty)]),
                 SectionModel(model: LocalizedString.displayBio, items: [
-                                ProfileDetailViewModel.Row.biography(text: biography)]),
+                                ProfileDetailViewModel.Row.biography(text: biography ?? String.empty)]),
                 SectionModel(model: LocalizedString.trailerVideo, items: [
                                 ProfileDetailViewModel.Row.trailerVideo(trailerUrl: trailerUrl)])
             ]

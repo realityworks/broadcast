@@ -12,8 +12,8 @@ import RxCocoa
 class ProfileTextViewTableViewCell: UITableViewCell {
     static let identifier: String = "ProfileTextViewTableViewCell"
 
-    let textView = UITextView()
-    let iconImageView = UIImageView()
+    fileprivate let textView = UITextView()
+    fileprivate let iconImageView = UIImageView()
     
     private let disposeBag = DisposeBag()
     
@@ -40,12 +40,16 @@ class ProfileTextViewTableViewCell: UITableViewCell {
         iconImageView.topToSuperview(offset: -8)
         iconImageView.width(30)
         iconImageView.aspectRatio(1)
-        iconImageView.image = UIImage(systemName: "pencil")?.withRenderingMode(.alwaysTemplate)
         iconImageView.tintColor = .darkGray
     }
 
     private func styleView() {
         
+    }
+    
+    func configure(withText text: String, icon: UIImage?) {
+        textView.text = text
+        iconImageView.image = icon
     }
 }
 

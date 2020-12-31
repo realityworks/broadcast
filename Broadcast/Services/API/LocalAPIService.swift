@@ -86,7 +86,7 @@ class LocalAPIService {
         biography: "This is a big hope",
         displayName: "DisplayName@display.com",
         handle: "FirstSuwara",
-        subscribers: 2311,
+        subscriberCount: 2311,
         profileImageUrl: LocalAPIService.mockPortraitUrl,
         trailerThumbnailUrl: LocalAPIService.mockThumbnailUrl1,
         trailerVideoUrl: LocalAPIService.mockVideoUrl,

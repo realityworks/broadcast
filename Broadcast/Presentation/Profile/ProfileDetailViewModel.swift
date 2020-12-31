@@ -30,7 +30,7 @@ class ProfileDetailViewModel : ViewModel {
     let schedulers: Schedulers
     let profileUseCase: ProfileUseCase
 
-    let subscribers: Observable<Int>
+    let subscriberCount: Observable<Int>
     let profileImageUrl: Observable<URL?>
     let trailerVideoUrl: Observable<URL?>
     
@@ -44,7 +44,7 @@ class ProfileDetailViewModel : ViewModel {
         
         let profileObservable = dependencies.profileObservable.compactMap { $0 }
         
-        self.subscribers = profileObservable.map { $0.subscribers }
+        self.subscriberCount = profileObservable.map { $0.subscriberCount }
         self.profileImageUrl = profileObservable.map { URL(string: $0.profileImageUrl) }
         self.trailerVideoUrl = profileObservable.map { URL(string: $0.trailerVideoUrl) }
         
@@ -59,7 +59,8 @@ class ProfileDetailViewModel : ViewModel {
         
         _ = profileObservable.map { $0.displayName }
             .subscribe(onNext: {
-                self.displayNameSubject.accept($0)
+                print ("Update DisplayName : \($0)")
+                return self.displayNameSubject.accept($0)
             })
             .disposed(by: disposeBag)
     }
