@@ -85,18 +85,19 @@ class LocalAPIService {
         lastName: "Suwara",
         biography: "This is a big hope",
         displayName: "DisplayName@display.com",
+        handle: "FirstSuwara",
         subscribers: 2311,
-        thumbnailUrl: LocalAPIService.mockPortraitUrl,
+        profileImageUrl: LocalAPIService.mockPortraitUrl,
         trailerUrl: LocalAPIService.mockVideoUrl,
         stripeAccount: Profile.StripeAccount(
             name: "stripeaccount@stripe.com",
             id: "prod_iUmEPMQJFjaLs6",
             currencyCode: CurrencyCode.gdp,
-            pricing: 10.0,
-            balance: 80.0,
-            totalVolume: 100.0,
-            paymentsDisabled: false,
-            payoutsDisabled: false))
+            pricing: 10,
+            balance: 80,
+            totalVolume: 100,
+            paymentsEnabled: false,
+            payoutsEnabled: false))
 }
 
 // MARK: - Instance
