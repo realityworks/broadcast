@@ -78,29 +78,28 @@ class ProfileDetailViewController: ViewController {
                 print("Display Name Cell with Text: \(displayName)")
                 cell.configure(withText: displayName,
                                icon: UIImage(systemName: "pencil")?.withRenderingMode(.alwaysTemplate))
-                
-                cell.rx.text
+                cell.textField.rx.controlEvent(.editingChanged)
+                    .withLatestFrom(cell.textField.rx.text)
                     .compactMap { $0 }
-                    .distinctUntilChanged()
                     .bind(to: self.viewModel.displayNameSubject)
                     .disposed(by: self.disposeBag)
+                
+//                cell.rx.text
+//                    .compactMap { $0 }
+//                    .distinctUntilChanged()
+//                    .bind(to: self.viewModel.displayNameSubject)
+//                    .disposed(by: self.disposeBag)
                 
                 return cell
             case .biography(let biography):
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextViewTableViewCell.identifier, for: indexPath) as! ProfileTextViewTableViewCell
                 
-//                self.viewModel.biographySubject
-//                    .bind(to: cell.rx.text)
-//                    .disposed(by: self.disposeBag)
+                self.viewModel.biographySubject
+                    .bind(to: cell.rx.text)
+                    .disposed(by: self.disposeBag)
                 
                 cell.configure(withText: biography,
                                icon: UIImage(systemName: "pencil")?.withRenderingMode(.alwaysTemplate))
-                
-                cell.rx.text
-                    .compactMap { $0 }
-                    .distinctUntilChanged()
-                    .bind(to: self.viewModel.biographySubject)
-                    .disposed(by: self.disposeBag)
                 
                 return cell
             case let .trailerVideo(trailerVideoUrl):
@@ -144,8 +143,8 @@ class ProfileDetailViewController: ViewController {
         }
         
         let items = Observable.combineLatest(
-            viewModel.biographySubject,
-            viewModel.displayNameSubject,
+            viewModel.biographyObservable,
+            viewModel.displayNameObservable,
             viewModel.subscriberCount,
             viewModel.profileImageUrl,
             viewModel.trailerVideoUrl) {

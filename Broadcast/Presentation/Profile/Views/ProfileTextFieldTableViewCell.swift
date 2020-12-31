@@ -12,7 +12,7 @@ import RxCocoa
 class ProfileTextFieldTableViewCell: UITableViewCell {
     static let identifier: String = "ProfileTextFieldTableViewCell"
 
-    fileprivate let textField = UITextField()
+    let textField = UITextField()
     fileprivate let iconImageView = UIImageView()
     
     private let disposeBag = DisposeBag()

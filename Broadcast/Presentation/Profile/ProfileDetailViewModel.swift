@@ -34,7 +34,9 @@ class ProfileDetailViewModel : ViewModel {
     let profileImageUrl: Observable<URL?>
     let trailerVideoUrl: Observable<URL?>
     
+    let displayNameObservable: Observable<String?>
     let displayNameSubject = BehaviorRelay<String?>(value: nil)
+    let biographyObservable: Observable<String?>
     let biographySubject = BehaviorRelay<String?>(value: nil)
     
     init(dependencies: Dependencies = .standard) {
@@ -43,6 +45,8 @@ class ProfileDetailViewModel : ViewModel {
         self.profileUseCase = dependencies.profileUseCase
         
         let profileObservable = dependencies.profileObservable.compactMap { $0 }
+        displayNameObservable = profileObservable.map { $0.displayName ?? String.empty }
+        biographyObservable = profileObservable.map { $0.biography ?? String.empty }
         
         self.subscriberCount = profileObservable.map { $0.subscriberCount }
         self.profileImageUrl = profileObservable.map { URL(string: $0.profileImageUrl) }
@@ -50,17 +54,12 @@ class ProfileDetailViewModel : ViewModel {
         
         super.init(stateController: dependencies.stateController)
         
-        // Biography subject should be updated by the stored biography info
-        _ = profileObservable.map { $0.biography ?? String.empty }
-            .subscribe(onNext: {
-                self.biographySubject.accept($0)
-            })
+        displayNameObservable
+            .subscribe(onNext: { self.displayNameSubject.accept($0) })
             .disposed(by: disposeBag)
         
-        _ = profileObservable.map { $0.displayName }
-            .subscribe(onNext: {
-                return self.displayNameSubject.accept($0)
-            })
+        biographyObservable
+            .subscribe(onNext: { self.biographySubject.accept($0) })
             .disposed(by: disposeBag)
     }
 }
