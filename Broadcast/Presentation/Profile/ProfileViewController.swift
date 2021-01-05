@@ -19,7 +19,7 @@ class ProfileViewController: ViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        navigationBar(styleAs: .dark(title: LocalizedString.profile))
+        navigationBar(styleAs: .dark(title: LocalizedString.myProfile))
         
         configureViews()
         configureLayout()
@@ -53,10 +53,10 @@ class ProfileViewController: ViewController {
             switch row {
             case .detail:
                 cell.configure(withTitle: LocalizedString.profileInformation,
-                               icon: UIImage(systemName: "person.fill"))
+                               icon: UIImage.iconProfile)
             case .stripeAccount:
                 cell.configure(withTitle:  LocalizedString.subscription,
-                               icon: UIImage(systemName: "creditcard.fill"))
+                               icon: UIImage(UIImage.iconCreditCard))
             case .frequentlyAskedQuestions:
                 cell.configure(withTitle: LocalizedString.frequentlyAskedQuestions,
                                icon: UIImage(systemName: "questionmark"))

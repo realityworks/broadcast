@@ -22,4 +22,9 @@ extension UIImage {
     static let logoBoomdayBroadcaster = UIImage(named: "logo-boomday-broadcaster")
     static let iconBookMarkOff = UIImage(named: "icon-bookmark-off")
     static let iconMessage = UIImage(named: "icon-message")
+    static let iconCreditCard = UIImage(named: "icon-credit-card")
+    static let iconShare = UIImage(named: "icon-share")
+    static let iconHelp = UIImage(named: "icon-help-circle")
+    static let iconEye = UIImage(named: "icon-eye")
+    static let iconDocument = UIImage(named: "icon-file-text")
 }
