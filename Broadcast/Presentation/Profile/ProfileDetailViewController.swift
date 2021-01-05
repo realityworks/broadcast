@@ -73,6 +73,9 @@ class ProfileDetailViewController: ViewController {
                 
                 cell.configure(withText: displayName,
                                icon: UIImage(systemName: "pencil")?.withRenderingMode(.alwaysTemplate))
+                cell.rx.text
+                    .bind(to: self.viewModel.displayNameSubject)
+                    .disposed(by: self.disposeBag)
                 
                 return cell
             case .biography(let biography):
