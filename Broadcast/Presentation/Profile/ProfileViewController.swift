@@ -113,8 +113,6 @@ class ProfileViewController: ViewController {
             case .version:
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileVersionTableViewCell.identifier, for: indexPath) as! ProfileVersionTableViewCell
                 
-                cell.label.text = "\(Configuration.versionString) (\(Configuration.buildString)))"
-                
                 return cell
             }
         })
@@ -124,6 +122,8 @@ class ProfileViewController: ViewController {
             switch row {
             case .logout:
                 return ProfileSignOutTableViewCell.cellHeight
+            case .version:
+                return ProfileVersionTableViewCell.cellHeight
             default:
                 return ProfileTableViewCell.cellHeight
             }
@@ -190,8 +190,8 @@ class ProfileViewController: ViewController {
                 case .share:
                     #warning("TODO - Setup sharing")
                     break
-                case .logout:
-                    self?.viewModel.logout()
+                case .logout, .version:
+                    break /// Do nothing
                 }
             })
             .disposed(by: disposeBag)

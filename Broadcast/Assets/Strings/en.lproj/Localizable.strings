@@ -79,6 +79,7 @@
 "cancelChangesDescription" = "This will remove draft content";
 "post" = "Post";
 "myProfile" = "My Profile";
+"version" = "Version";
  
 // MARK: Error Strings
 "unknownError" = "An unknown error occured";

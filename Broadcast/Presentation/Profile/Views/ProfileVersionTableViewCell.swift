@@ -9,7 +9,7 @@ import UIKit
 
 class ProfileVersionTableViewCell: UITableViewCell {
     static let identifier: String = "ProfileVersionTableViewCell"
-    static let cellHeight: CGFloat = 60
+    static let cellHeight: CGFloat = 40
     
     let label = UILabel.lightGreySmallBody()
     
@@ -28,6 +28,8 @@ class ProfileVersionTableViewCell: UITableViewCell {
         contentView.backgroundColor = .clear
         contentView.addSubview(label)
         label.centerInSuperview()
+        
+        label.text = "\(LocalizedString.version) \(Configuration.versionString) (\(Configuration.buildString))"
     }
 }
 
