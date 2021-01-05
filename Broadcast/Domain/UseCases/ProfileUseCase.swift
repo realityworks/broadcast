@@ -59,8 +59,8 @@ extension ProfileUseCase {
             .disposed(by: disposeBag)
     }
     
-    func updateProfile(displayName: String, biography: String) {
-        
+    func updateProfile(displayName: String, biography: String) -> Completable {
+        return apiService.updateProfile(withDisplayName: displayName, biography: biography)
     }
     
     func uploadTrailer(withUrl url: URL) {

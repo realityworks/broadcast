@@ -234,7 +234,16 @@ extension StandardAPIService : APIService {
     }
     
     func updateProfile(withDisplayName displayName: String, biography: String) -> Completable {
-        return Completable.empty()
+        let url = baseUrl
+            .appendingPathComponent("broadcaster")
+            .appendingPathComponent("profile")
+        
+        let parameters = [
+            "displayName": displayName,
+            "biography": biography]
+        
+        return authenticatedRequest(method: .put, url: url, parameters: parameters)
+            .emptyResponseBody()
     }
     
     func uploadProfileImage(withData: Data) -> Completable {

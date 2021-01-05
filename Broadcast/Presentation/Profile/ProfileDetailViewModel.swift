@@ -90,6 +90,13 @@ extension ProfileDetailViewModel {
         
         profileUseCase.updateProfile(displayName: displayName,
                                      biography: biography)
+            .subscribe(onCompleted: {
+                // Mark as update complete (loader)
+            }, onError: { [unowned self] error in
+                self.stateController.sendError(error)
+                Logger.log(level: .warning, topic: .authentication, message: "Unable to update the broadcaster profile: \(error)")
+            })
+            .disposed(by: disposeBag)
     }
     
     func trailerSelected(withUrl url: URL) {
