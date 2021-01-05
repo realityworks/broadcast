@@ -45,7 +45,7 @@ class ProfileDetailViewModel : ViewModel {
         self.profileUseCase = dependencies.profileUseCase
         
         let profileObservable = dependencies.profileObservable.compactMap { $0 }
-        displayNameObservable = profileObservable.map { $0.displayName ?? String.empty }
+        displayNameObservable = profileObservable.map { $0.displayName }
         biographyObservable = profileObservable.map { $0.biography ?? String.empty }
         
         self.subscriberCount = profileObservable.map { $0.subscriberCount }
@@ -92,6 +92,7 @@ extension ProfileDetailViewModel {
                                      biography: biography)
             .subscribe(onCompleted: {
                 // Mark as update complete (loader)
+                print("Profile update returned success!")
             }, onError: { [unowned self] error in
                 self.stateController.sendError(error)
                 Logger.log(level: .warning, topic: .authentication, message: "Unable to update the broadcaster profile: \(error)")
