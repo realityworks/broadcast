@@ -20,9 +20,9 @@
 "privacyPolicy" = "Privacy Policy";
 "termsAndConditions" = "Terms & Conditions";
 "shareProfile" = "Share Boomday profile";
-"logout" = "Log out";
-"accountSettings" = "ACCOUNT SETTINGS";
-"support" = "SUPPORT";
+"logout" = "Sign Out";
+"accountSettings" = "Account settings";
+"support" = "Help & Support";
 "legal" = "LEGAL";
 "displayName" = "Display Name";
 "displayBio" = "Display Bio";

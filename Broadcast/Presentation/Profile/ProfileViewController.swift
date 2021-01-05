@@ -31,6 +31,8 @@ class ProfileViewController: ViewController {
     private func configureViews() {
         tableView.register(ProfileTableViewCell.self,
                            forCellReuseIdentifier: ProfileTableViewCell.identifier)
+        tableView.register(ProfileSignOutTableViewCell.self,
+                           forCellReuseIdentifier: ProfileSignOutTableViewCell.identifier)
         tableView.register(ProfileSectionHeaderCell.self,
                            forCellReuseIdentifier: ProfileSectionHeaderCell.identifier)
         
@@ -43,6 +45,9 @@ class ProfileViewController: ViewController {
         tableView.contentInsetAdjustmentBehavior = .never
         tableView.contentInset = .zero
         tableView.separatorStyle = .none
+        tableView.backgroundColor = .clear
+        
+        view.backgroundColor = UIColor.secondaryWhite
     }
     
     private func configureLayout() {
@@ -58,32 +63,49 @@ class ProfileViewController: ViewController {
     private func setupDatasourceBindings() {
         let datasource = ReactiveTableViewModelSource<SectionModel<LocalizedString, ProfileViewModel.Row>>(configureCell: { _, tableView, indexPath, row -> UITableViewCell in
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTableViewCell.identifier, for: indexPath) as! ProfileTableViewCell
-            
             switch row {
             case .detail:
+                let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTableViewCell.identifier, for: indexPath) as! ProfileTableViewCell
                 cell.configure(withTitle: LocalizedString.profileInformation,
                                icon: UIImage.iconProfile)
+                return cell
             case .stripeAccount:
+                let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTableViewCell.identifier, for: indexPath) as! ProfileTableViewCell
                 cell.configure(withTitle:  LocalizedString.subscription,
                                icon: UIImage.iconCreditCard)
+                return cell
             case .frequentlyAskedQuestions:
+                let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTableViewCell.identifier, for: indexPath) as! ProfileTableViewCell
                 cell.configure(withTitle: LocalizedString.frequentlyAskedQuestions,
                                icon: UIImage.iconHelp)
+                return cell
             case .privacyPolicy:
+                let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTableViewCell.identifier, for: indexPath) as! ProfileTableViewCell
                 cell.configure(withTitle: LocalizedString.privacyPolicy,
                                icon: UIImage.iconEye)
+                return cell
             case .termsAndConditions:
+                let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTableViewCell.identifier, for: indexPath) as! ProfileTableViewCell
                 cell.configure(withTitle: LocalizedString.termsAndConditions,
-                               icon: UIImage.iconDocument)
+                               icon: UIImage.iconDocument,
+                               leftInset: 0)
+                return cell
             case .share:
+                let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTableViewCell.identifier, for: indexPath) as! ProfileTableViewCell
                 cell.configure(withTitle: LocalizedString.shareProfile,
-                               icon: UIImage.iconShare)
+                               icon: UIImage.iconShare,
+                               leftInset: 0)
+                return cell
             case .logout:
-                cell.configure(withTitle: LocalizedString.logout,
-                               titleColor: .red)
+                let cell = tableView.dequeueReusableCell(withIdentifier: ProfileSignOutTableViewCell.identifier, for: indexPath) as! ProfileSignOutTableViewCell
+                
+                cell.button.rx.tap
+                    .subscribe(onNext: { _ in
+                        self.viewModel.logout()
+                    })
+                
+                return cell
             }
-            return cell
         })
 
         datasource.heightForRowAtIndexPath = { _, _ -> CGFloat in
@@ -106,13 +128,12 @@ class ProfileViewController: ViewController {
             [
                 SectionModel(model: LocalizedString.accountSettings, items: [
                                 ProfileViewModel.Row.detail,
-                                ProfileViewModel.Row.stripeAccount]),
+                                ProfileViewModel.Row.stripeAccount,
+                                ProfileViewModel.Row.share]),
                 SectionModel(model: LocalizedString.support, items: [
-                                ProfileViewModel.Row.frequentlyAskedQuestions]),
-                SectionModel(model: LocalizedString.legal, items: [
+                                ProfileViewModel.Row.frequentlyAskedQuestions,
                                 ProfileViewModel.Row.privacyPolicy,
                                 ProfileViewModel.Row.termsAndConditions,
-                                ProfileViewModel.Row.share,
                                 ProfileViewModel.Row.logout]),
             ])
         

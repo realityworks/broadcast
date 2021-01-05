@@ -30,7 +30,7 @@ extension UIStackView {
     }
     
     @discardableResult
-    func addSeparator(withColor color: UIColor = .separatorColor) -> UIView {
+    func addSeparator(withColor color: UIColor = .customSeparator) -> UIView {
         return addSpace(1, color: color)
     }
 }
