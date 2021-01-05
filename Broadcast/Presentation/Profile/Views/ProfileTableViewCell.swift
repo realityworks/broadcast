@@ -15,7 +15,7 @@ class ProfileTableViewCell : UITableViewCell {
     private let titleLabel = UILabel.text(font: UIFont.profileCellTitle, textColor: .secondaryBlack)
     private let leftIconImageView = UIImageView()
     private let disclosureImageView = UIImageView(
-        image: UIImage.iconChevronLeft?.withTintColor(.secondaryLightGrey))
+        image: UIImage.iconChevronLeft?.withTintColor(.primaryLightGrey))
     private let separator = UIView()
         
     override init(style: UITableViewCell.CellStyle,

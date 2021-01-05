@@ -105,13 +105,20 @@ class ProfileViewController: ViewController {
                     .subscribe(onNext: { _ in
                         self.viewModel.logout()
                     })
+                    .disposed(by: self.disposeBag)
                 
                 return cell
             }
         })
 
-        datasource.heightForRowAtIndexPath = { _, _ -> CGFloat in
-            ProfileTableViewCell.cellHeight
+        datasource.heightForRowAtIndexPath = { datasource, indexPath -> CGFloat in
+            let row = datasource[indexPath]
+            switch row {
+            case .logout:
+                return ProfileSignOutTableViewCell.cellHeight
+            default:
+                return ProfileTableViewCell.cellHeight
+            }
         }
         datasource.heightForHeaderInSection = { _, _ -> CGFloat in
             ProfileSectionHeaderCell.cellHeight

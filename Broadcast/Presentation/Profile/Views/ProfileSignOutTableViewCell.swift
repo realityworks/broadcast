@@ -10,7 +10,7 @@ import RxSwift
 
 class ProfileSignOutTableViewCell: UITableViewCell {
     static let identifier: String = "ProfileSignOutTableViewCell"
-    static let cellHeight: CGFloat = 120
+    static let cellHeight: CGFloat = 80
     
     let button = UIButton.textDestructive(withTitle: LocalizedString.logout)
     
