@@ -33,6 +33,8 @@ class ProfileViewController: ViewController {
                            forCellReuseIdentifier: ProfileTableViewCell.identifier)
         tableView.register(ProfileSignOutTableViewCell.self,
                            forCellReuseIdentifier: ProfileSignOutTableViewCell.identifier)
+        tableView.register(ProfileVersionTableViewCell.self,
+                           forCellReuseIdentifier: ProfileVersionTableViewCell.identifier)
         tableView.register(ProfileSectionHeaderCell.self,
                            forCellReuseIdentifier: ProfileSectionHeaderCell.identifier)
         
@@ -108,6 +110,12 @@ class ProfileViewController: ViewController {
                     .disposed(by: self.disposeBag)
                 
                 return cell
+            case .version:
+                let cell = tableView.dequeueReusableCell(withIdentifier: ProfileVersionTableViewCell.identifier, for: indexPath) as! ProfileVersionTableViewCell
+                
+                cell.label.text = "\(Configuration.versionString) (\(Configuration.buildString)))"
+                
+                return cell
             }
         })
 
@@ -143,7 +151,8 @@ class ProfileViewController: ViewController {
                                 ProfileViewModel.Row.frequentlyAskedQuestions,
                                 ProfileViewModel.Row.privacyPolicy,
                                 ProfileViewModel.Row.termsAndConditions,
-                                ProfileViewModel.Row.logout]),
+                                ProfileViewModel.Row.logout,
+                                ProfileViewModel.Row.version]),
             ])
         
         items

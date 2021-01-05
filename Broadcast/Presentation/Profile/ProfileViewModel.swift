@@ -17,6 +17,7 @@ class ProfileViewModel : ViewModel {
         case termsAndConditions
         case share
         case logout
+        case version
     }
     
     private let profileUseCase: ProfileUseCase

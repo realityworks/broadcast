@@ -147,6 +147,7 @@
 		1DA3E44625874ADD00F1825F /* GetUploadUrlResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA3E44525874ADD00F1825F /* GetUploadUrlResponse.swift */; };
 		1DB3438E2589DC3300486676 /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB3438D2589DC3300486676 /* URL+Extensions.swift */; };
 		1DC97C8125A4180200EBF667 /* ProfileSignOutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC97C8025A4180100EBF667 /* ProfileSignOutTableViewCell.swift */; };
+		1DC97C8525A4524F00EBF667 /* ProfileVersionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC97C8425A4524F00EBF667 /* ProfileVersionTableViewCell.swift */; };
 		1DD1FE05256CA55F00C598CE /* UITextField+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD1FE04256CA55F00C598CE /* UITextField+Styling.swift */; };
 		1DD1FE17256CE2E000C598CE /* SwiftRichString in Frameworks */ = {isa = PBXBuildFile; productRef = 1DD1FE16256CE2E000C598CE /* SwiftRichString */; };
 		1DD1FE1D256D6F7300C598CE /* AuthenticateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD1FE1C256D6F7300C598CE /* AuthenticateResponse.swift */; };
@@ -314,6 +315,7 @@
 		1DB3438D2589DC3300486676 /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
 		1DC97C6B25A2F77600EBF667 /* Broadcast.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Broadcast.entitlements; sourceTree = "<group>"; };
 		1DC97C8025A4180100EBF667 /* ProfileSignOutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSignOutTableViewCell.swift; sourceTree = "<group>"; };
+		1DC97C8425A4524F00EBF667 /* ProfileVersionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVersionTableViewCell.swift; sourceTree = "<group>"; };
 		1DD1FE04256CA55F00C598CE /* UITextField+Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Styling.swift"; sourceTree = "<group>"; };
 		1DD1FE1C256D6F7300C598CE /* AuthenticateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateResponse.swift; sourceTree = "<group>"; };
 		1DD1FE27256E16B600C598CE /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
@@ -780,6 +782,7 @@
 				1D14AD7A257AA8E800CB2C82 /* ProfileTextViewTableViewCell.swift */,
 				1D14AD72257A16AB00CB2C82 /* ProfileInfoTableViewCell.swift */,
 				1DC97C8025A4180100EBF667 /* ProfileSignOutTableViewCell.swift */,
+				1DC97C8425A4524F00EBF667 /* ProfileVersionTableViewCell.swift */,
 				1D14AD76257A16BC00CB2C82 /* ProfileTrailerTableViewCell.swift */,
 				1D9256C4257E6A3200E988B2 /* AccountInfoTableViewCell.swift */,
 			);
@@ -1103,6 +1106,7 @@
 				1D14AD672579E41E00CB2C82 /* LoadProfileResponse.swift in Sources */,
 				1D2A03E525655BB1008CE2D4 /* AuthenticationUseCase.swift in Sources */,
 				1DDEC785256F6BA800D65023 /* MyPostsCellViewModel.swift in Sources */,
+				1DC97C8525A4524F00EBF667 /* ProfileVersionTableViewCell.swift in Sources */,
 				1D6FCD7F2581B8490062FF54 /* Single+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
