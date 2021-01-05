@@ -56,19 +56,19 @@ class ProfileViewController: ViewController {
                                icon: UIImage.iconProfile)
             case .stripeAccount:
                 cell.configure(withTitle:  LocalizedString.subscription,
-                               icon: UIImage(UIImage.iconCreditCard))
+                               icon: UIImage.iconCreditCard)
             case .frequentlyAskedQuestions:
                 cell.configure(withTitle: LocalizedString.frequentlyAskedQuestions,
-                               icon: UIImage(systemName: "questionmark"))
+                               icon: UIImage.iconHelp)
             case .privacyPolicy:
                 cell.configure(withTitle: LocalizedString.privacyPolicy,
-                               icon: nil)
+                               icon: UIImage.iconEye)
             case .termsAndConditions:
                 cell.configure(withTitle: LocalizedString.termsAndConditions,
-                               icon: nil)
+                               icon: UIImage.iconDocument)
             case .share:
                 cell.configure(withTitle: LocalizedString.shareProfile,
-                               icon: UIImage(systemName: "square.and.arrow.up"))
+                               icon: UIImage.iconShare)
             case .logout:
                 cell.configure(withTitle: LocalizedString.logout,
                                titleColor: .red)
