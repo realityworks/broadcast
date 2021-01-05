@@ -29,7 +29,7 @@ class ProfileVersionTableViewCell: UITableViewCell {
         contentView.addSubview(label)
         label.centerInSuperview()
         
-        label.text = "\(LocalizedString.version) \(Configuration.versionString) (\(Configuration.buildString))"
+        label.text = "\(LocalizedString.version.localized) \(Configuration.versionString) (\(Configuration.buildString))"
     }
 }
 
