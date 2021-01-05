@@ -146,6 +146,7 @@
 		1DA3E442258748EF00F1825F /* CreatePostResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA3E441258748EE00F1825F /* CreatePostResponse.swift */; };
 		1DA3E44625874ADD00F1825F /* GetUploadUrlResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA3E44525874ADD00F1825F /* GetUploadUrlResponse.swift */; };
 		1DB3438E2589DC3300486676 /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB3438D2589DC3300486676 /* URL+Extensions.swift */; };
+		1DC97C8125A4180200EBF667 /* ProfileSignOutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC97C8025A4180100EBF667 /* ProfileSignOutTableViewCell.swift */; };
 		1DD1FE05256CA55F00C598CE /* UITextField+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD1FE04256CA55F00C598CE /* UITextField+Styling.swift */; };
 		1DD1FE17256CE2E000C598CE /* SwiftRichString in Frameworks */ = {isa = PBXBuildFile; productRef = 1DD1FE16256CE2E000C598CE /* SwiftRichString */; };
 		1DD1FE1D256D6F7300C598CE /* AuthenticateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD1FE1C256D6F7300C598CE /* AuthenticateResponse.swift */; };
@@ -312,6 +313,7 @@
 		1DA3E44525874ADD00F1825F /* GetUploadUrlResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUploadUrlResponse.swift; sourceTree = "<group>"; };
 		1DB3438D2589DC3300486676 /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
 		1DC97C6B25A2F77600EBF667 /* Broadcast.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Broadcast.entitlements; sourceTree = "<group>"; };
+		1DC97C8025A4180100EBF667 /* ProfileSignOutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSignOutTableViewCell.swift; sourceTree = "<group>"; };
 		1DD1FE04256CA55F00C598CE /* UITextField+Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Styling.swift"; sourceTree = "<group>"; };
 		1DD1FE1C256D6F7300C598CE /* AuthenticateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateResponse.swift; sourceTree = "<group>"; };
 		1DD1FE27256E16B600C598CE /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
@@ -777,6 +779,7 @@
 				1D14AD6A257A0CFD00CB2C82 /* ProfileTextFieldTableViewCell.swift */,
 				1D14AD7A257AA8E800CB2C82 /* ProfileTextViewTableViewCell.swift */,
 				1D14AD72257A16AB00CB2C82 /* ProfileInfoTableViewCell.swift */,
+				1DC97C8025A4180100EBF667 /* ProfileSignOutTableViewCell.swift */,
 				1D14AD76257A16BC00CB2C82 /* ProfileTrailerTableViewCell.swift */,
 				1D9256C4257E6A3200E988B2 /* AccountInfoTableViewCell.swift */,
 			);
@@ -1050,6 +1053,7 @@
 				1D3433FB25624B4400886245 /* AppDelegate.swift in Sources */,
 				1D3B2A482564F238001874FD /* StandardAPIService.swift in Sources */,
 				1D916D442562A7180059E549 /* UseCases.swift in Sources */,
+				1DC97C8125A4180200EBF667 /* ProfileSignOutTableViewCell.swift in Sources */,
 				1D216A4A259870CC007FA845 /* SelectMediaView.swift in Sources */,
 				1D916D0A25629C080059E549 /* ViewModel.swift in Sources */,
 				1D916D1225629C1E0059E549 /* ViewController.swift in Sources */,
