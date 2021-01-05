@@ -12,15 +12,15 @@ class ProfileTableViewCell : UITableViewCell {
     static let identifier = "ProfileTableViewCell"
     static let cellHeight:CGFloat = 50
     
-    let titleLabel = UILabel()
-    let iconImageView = UIImageView()
+    let titleLabel = UILabel.text(font: UIFont.profileCellTitle, textColor: .secondaryBlack)
+    let leftIconImageView = UIImageView()
+    let disclosureImageView = UIImageView()
         
     override init(style: UITableViewCell.CellStyle,
                   reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         configureView()
-        styleView()
     }
     
     required init?(coder: NSCoder) {
@@ -29,34 +29,25 @@ class ProfileTableViewCell : UITableViewCell {
 
     // MARK: Configuration and Styling
     func configure(withTitle titleText: LocalizedString,
-                   icon: UIImage? = nil,
-                   titleColor: UIColor = .darkGray) {
-        let titleRed = Style { $0.color = titleColor }
-        
-        titleLabel.attributedText = titleText.localized
-            .set(style: Style.title)
-            .add(style: titleRed)
-        
-        iconImageView.image = icon?.withRenderingMode(.alwaysTemplate)
-        iconImageView.tintColor = .darkGray
+                   icon: UIImage? = nil) {
+        titleLabel.text = titleText.localized        
+        leftIconImageView.image = icon?.withRenderingMode(.alwaysTemplate)
+        leftIconImageView.tintColor = .secondaryLightGrey
     }
     
     private func configureView() {
         contentView.addSubview(titleLabel)
-        contentView.addSubview(iconImageView)
+        contentView.addSubview(leftIconImageView)
+        contentView.addSubview(disclosureImageView)
         
-        titleLabel.edgesToSuperview(excluding: [.right], insets: UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0))
-        titleLabel.rightToLeft(of: iconImageView)
+        leftIconImageView.leftToSuperview(offset: 20)
+        leftIconImageView.centerYToSuperview()
+        leftIconImageView.height(20)
+        leftIconImageView.aspectRatio(1)
+        leftIconImageView.contentMode = .scaleAspectFit
         
-        iconImageView.rightToSuperview(offset: -20)
-        iconImageView.centerYToSuperview()
-        iconImageView.height(20)
-        iconImageView.aspectRatio(1)
-        iconImageView.contentMode = .scaleAspectFit
-    }
-    
-    private func styleView() {
-        
+        titleLabel.edgesToSuperview(excluding: [.left], insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
+        titleLabel.leftToRight(of: leftIconImageView, offset: 10)
     }
 }
 

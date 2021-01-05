@@ -20,7 +20,6 @@ class ReactiveTableViewModelSource<S: SectionModelType>: RxTableViewSectionedRel
     typealias HeightForFooterInSection = (TableViewSectionedDataSource<S>, Int) -> CGFloat
 
     var heightForRowAtIndexPath: HeightForCellAtIndexPath = { _, _ in UITableView.automaticDimension }
-
     var viewForHeaderInSection: ViewForHeaderInSection = { _, _, _ in nil }
     var heightForHeaderInSection: HeightForHeaderInSection = { _, _ in 0 }
 

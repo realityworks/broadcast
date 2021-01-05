@@ -9,7 +9,7 @@ import UIKit
 
 
 class ProfileSectionHeaderCell: UITableViewCell {
-    let label = UILabel.bodyBold()
+    let label = UILabel.lightGreySmallBody()
 
     static let cellHeight: CGFloat = 33
     static let identifier: String = "ProfileSectionHeaderCell"

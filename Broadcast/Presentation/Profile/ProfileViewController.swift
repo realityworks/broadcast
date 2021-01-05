@@ -33,11 +33,21 @@ class ProfileViewController: ViewController {
                            forCellReuseIdentifier: ProfileTableViewCell.identifier)
         tableView.register(ProfileSectionHeaderCell.self,
                            forCellReuseIdentifier: ProfileSectionHeaderCell.identifier)
+        
+        /// Header view for a grouped table view needs to have a frame with the smallest possible value,
+        /// otherwise the grouped table view automatically sets up a header.
+        var frame = CGRect.zero
+        frame.size.height = .leastNormalMagnitude
+        tableView.tableHeaderView = UIView(frame: frame)
+
+        tableView.contentInsetAdjustmentBehavior = .never
+        tableView.contentInset = .zero
+        tableView.separatorStyle = .none
     }
     
     private func configureLayout() {
         view.addSubview(tableView)
-        tableView.edgesToSuperview()
+        tableView.edgesToSuperview(usingSafeArea: false)
     }
     
     private func configureBindings() {
