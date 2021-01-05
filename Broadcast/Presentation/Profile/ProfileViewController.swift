@@ -19,7 +19,7 @@ class ProfileViewController: ViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        title = "Profile"
+        navigationBar(styleAs: .dark(title: LocalizedString.profile))
         
         configureViews()
         configureLayout()
