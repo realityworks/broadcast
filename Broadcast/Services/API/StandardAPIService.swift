@@ -233,6 +233,8 @@ extension StandardAPIService : APIService {
             .decode(type: LoadProfileResponse.self)
     }
     
+    // MARK: Update the user profile
+    
     func updateProfile(withDisplayName displayName: String, biography: String) -> Completable {
         let url = baseUrl
             .appendingPathComponent("broadcaster")

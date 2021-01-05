@@ -69,6 +69,8 @@ class ProfileTableViewCell : UITableViewCell {
         titleLabel.rightToLeft(of: disclosureImageView)
         
         separator.backgroundColor = .customSeparator
+        
+        selectionStyle = .none
     }
 }
 

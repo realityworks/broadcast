@@ -29,6 +29,8 @@ class ProfileSignOutTableViewCell: UITableViewCell {
         contentView.backgroundColor = .clear
         contentView.addSubview(button)
         button.centerInSuperview()
+        
+        selectionStyle = .none
     }    
 }
 
