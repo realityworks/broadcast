@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Access to photo library is required to upload new content</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Camera Access is required to </string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -22,12 +18,43 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
-	<key>SERVICE_ROOT_URL</key>
-	<string>$(SERVICE_ROOT_URL)</string>
 	<key>DEBUG_UI_ENABLED</key>
 	<string>$(DEBUG_UI_ENABLED)</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsLocalNetworking</key>
+		<true/>
+	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera Access is required to </string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Access to photo library is required to upload new content</string>
+	<key>SERVICE_ROOT_URL</key>
+	<string>$(SERVICE_ROOT_URL)</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Inter-Black.otf</string>
+		<string>Inter-BlackItalic.otf</string>
+		<string>Inter-Bold.otf</string>
+		<string>Inter-BoldItalic.otf</string>
+		<string>Inter-ExtraBold.otf</string>
+		<string>Inter-ExtraBoldItalic.otf</string>
+		<string>Inter-ExtraLight.otf</string>
+		<string>Inter-ExtraLightItalic.otf</string>
+		<string>Inter-Italic.otf</string>
+		<string>Inter-Light.otf</string>
+		<string>Inter-LightItalic.otf</string>
+		<string>Inter-Medium.otf</string>
+		<string>Inter-MediumItalic.otf</string>
+		<string>Inter-Regular.otf</string>
+		<string>Inter-SemiBold.otf</string>
+		<string>Inter-SemiBoldItalic.otf</string>
+		<string>Inter-Thin.otf</string>
+		<string>Inter-ThinItalic.otf</string>
+		<string>Inter-V.otf</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -69,33 +96,6 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Inter-Black.otf</string>
-		<string>Inter-BlackItalic.otf</string>
-		<string>Inter-Bold.otf</string>
-		<string>Inter-BoldItalic.otf</string>
-		<string>Inter-ExtraBold.otf</string>
-		<string>Inter-ExtraBoldItalic.otf</string>
-		<string>Inter-ExtraLight.otf</string>
-		<string>Inter-ExtraLightItalic.otf</string>
-		<string>Inter-Italic.otf</string>
-		<string>Inter-Light.otf</string>
-		<string>Inter-LightItalic.otf</string>
-		<string>Inter-Medium.otf</string>
-		<string>Inter-MediumItalic.otf</string>
-		<string>Inter-Regular.otf</string>
-		<string>Inter-SemiBold.otf</string>
-		<string>Inter-SemiBoldItalic.otf</string>
-		<string>Inter-Thin.otf</string>
-		<string>Inter-ThinItalic.otf</string>
-		<string>Inter-V.otf</string>
-	</array>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsLocalNetworking</key>
-		<true/>
-	</dict>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
 </dict>
