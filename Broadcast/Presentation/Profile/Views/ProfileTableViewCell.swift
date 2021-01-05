@@ -14,7 +14,7 @@ class ProfileTableViewCell : UITableViewCell {
     
     private let titleLabel = UILabel.text(font: UIFont.profileCellTitle, textColor: .secondaryBlack)
     private let leftIconImageView = UIImageView()
-    private let disclosureImageView = UIImageView()
+    private let disclosureImageView = UIImageView(image: <#T##UIImage?#>)
     private let separator = UIView()
         
     override init(style: UITableViewCell.CellStyle,
@@ -31,8 +31,9 @@ class ProfileTableViewCell : UITableViewCell {
     // MARK: Configuration and Styling
     func configure(withTitle titleText: LocalizedString,
                    icon: UIImage? = nil,
+                   showDisclosure = false,
                    leftInset: CGFloat = 20) {
-        titleLabel.text = titleText.localized        
+        titleLabel.text = titleText.localized
         leftIconImageView.image = icon?.withRenderingMode(.alwaysTemplate)
         leftIconImageView.tintColor = .primaryGrey
         
