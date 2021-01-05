@@ -14,7 +14,7 @@ class ProfileTableViewCell : UITableViewCell {
     
     private let titleLabel = UILabel.text(font: UIFont.profileCellTitle, textColor: .secondaryBlack)
     private let leftIconImageView = UIImageView()
-    private let disclosureImageView = UIImageView(image: <#T##UIImage?#>)
+    private let disclosureImageView = UIImageView(image: UIImage.iconChevronLeft?.withTintColor(.primaryGrey))
     private let separator = UIView()
         
     override init(style: UITableViewCell.CellStyle,
@@ -31,16 +31,17 @@ class ProfileTableViewCell : UITableViewCell {
     // MARK: Configuration and Styling
     func configure(withTitle titleText: LocalizedString,
                    icon: UIImage? = nil,
-                   showDisclosure = false,
+                   showDisclosure: Bool = false,
                    leftInset: CGFloat = 20) {
         titleLabel.text = titleText.localized
-        leftIconImageView.image = icon?.withRenderingMode(.alwaysTemplate)
-        leftIconImageView.tintColor = .primaryGrey
+        leftIconImageView.image = icon?.withTintColor(.primaryGrey)
         
         separator.removeConstraints(separator.constraints)
         separator.edgesToSuperview(excluding: [.top, .left])
         separator.leftToSuperview(offset: leftInset)
         separator.height(1)
+        
+        disclosureImageView.isHidden = !showDisclosure
     }
     
     private func configureView() {
@@ -55,9 +56,16 @@ class ProfileTableViewCell : UITableViewCell {
         leftIconImageView.aspectRatio(1)
         leftIconImageView.contentMode = .scaleAspectFit
         
-        titleLabel.edgesToSuperview(excluding: [.left],
+        disclosureImageView.rightToSuperview(offset: -20)
+        disclosureImageView.centerYToSuperview()
+        disclosureImageView.height(20)
+        disclosureImageView.aspectRatio(1)
+        disclosureImageView.contentMode = .scaleAspectFit
+        
+        titleLabel.edgesToSuperview(excluding: [.left, .right],
                                     insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         titleLabel.leftToRight(of: leftIconImageView, offset: 10)
+        titleLabel.rightToLeft(of: disclosureImageView)
         
         separator.backgroundColor = .customSeparator
     }

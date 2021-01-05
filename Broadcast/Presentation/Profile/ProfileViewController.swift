@@ -67,12 +67,14 @@ class ProfileViewController: ViewController {
             case .detail:
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTableViewCell.identifier, for: indexPath) as! ProfileTableViewCell
                 cell.configure(withTitle: LocalizedString.profileInformation,
-                               icon: UIImage.iconProfile)
+                               icon: UIImage.iconProfile,
+                               showDisclosure: true)
                 return cell
             case .stripeAccount:
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTableViewCell.identifier, for: indexPath) as! ProfileTableViewCell
                 cell.configure(withTitle:  LocalizedString.subscription,
-                               icon: UIImage.iconCreditCard)
+                               icon: UIImage.iconCreditCard,
+                               showDisclosure: true)
                 return cell
             case .frequentlyAskedQuestions:
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTableViewCell.identifier, for: indexPath) as! ProfileTableViewCell
