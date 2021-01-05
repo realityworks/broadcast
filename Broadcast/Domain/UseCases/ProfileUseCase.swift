@@ -51,7 +51,6 @@ extension ProfileUseCase {
     func loadProfile() {
         apiService.loadProfile()
             .subscribe(onSuccess: { [self] profileResponse in
-                print ("Successfully loaded profile : \(profileResponse)")
                 stateController.state.profile = profileResponse
             }, onError: { [self] error in
                 stateController.sendError(error)
