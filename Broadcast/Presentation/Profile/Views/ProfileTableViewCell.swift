@@ -14,7 +14,8 @@ class ProfileTableViewCell : UITableViewCell {
     
     private let titleLabel = UILabel.text(font: UIFont.profileCellTitle, textColor: .secondaryBlack)
     private let leftIconImageView = UIImageView()
-    private let disclosureImageView = UIImageView(image: UIImage.iconChevronLeft?.withTintColor(.primaryGrey))
+    private let disclosureImageView = UIImageView(
+        image: UIImage.iconChevronLeft?.withTintColor(.secondaryLightGrey))
     private let separator = UIView()
         
     override init(style: UITableViewCell.CellStyle,
@@ -34,7 +35,7 @@ class ProfileTableViewCell : UITableViewCell {
                    showDisclosure: Bool = false,
                    leftInset: CGFloat = 20) {
         titleLabel.text = titleText.localized
-        leftIconImageView.image = icon?.withTintColor(.primaryGrey)
+        leftIconImageView.image = icon?.withTintColor(.primaryLightGrey)
         
         separator.removeConstraints(separator.constraints)
         separator.edgesToSuperview(excluding: [.top, .left])
@@ -52,7 +53,7 @@ class ProfileTableViewCell : UITableViewCell {
         
         leftIconImageView.leftToSuperview(offset: 20)
         leftIconImageView.centerYToSuperview()
-        leftIconImageView.height(20)
+        leftIconImageView.height(25)
         leftIconImageView.aspectRatio(1)
         leftIconImageView.contentMode = .scaleAspectFit
         
