@@ -42,6 +42,8 @@ class ProfileDetailViewController: ViewController {
     
     private func configureViews() {
         // Configure Views
+        
+        // Register the required cells for the view
         tableView.register(ProfileInfoTableViewCell.self,
                            forCellReuseIdentifier: ProfileInfoTableViewCell.identifier)
         tableView.register(ProfileTextFieldTableViewCell.self,
@@ -53,6 +55,7 @@ class ProfileDetailViewController: ViewController {
         tableView.register(ProfileSectionHeaderCell.self,
                            forCellReuseIdentifier: ProfileSectionHeaderCell.identifier)
         
+        // Setup the tableview styling
         tableView.allowsSelection = false
         tableView.backgroundColor = .clear
         tableView.backgroundView = nil
@@ -60,6 +63,13 @@ class ProfileDetailViewController: ViewController {
         
         // Configure Bar button item
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(savePressed))
+        
+        //Setup the pickers
+        pickers.forEach { picker in
+            picker.delegate = self
+            picker.videoExportPreset = AVAssetExportPresetPassthrough
+            picker.videoQuality = .typeHigh
+        }
     }
     
     private func configureLayout() {
@@ -76,7 +86,7 @@ class ProfileDetailViewController: ViewController {
                 cell.configure(withProfileImageUrl: profileImageUrl, subscribers: subscribers)
                 cell.changeThumbnailButton.rx.tap
                     .subscribe(onNext: {
-                        self.viewModel.updateProfile()
+                        self.showMediaOptionsMenu(forTag: PickerTags.profileImage.rawValue)
                     })
                     .disposed(by: self.disposeBag)
                 return cell
@@ -107,7 +117,7 @@ class ProfileDetailViewController: ViewController {
                 cell.configure(trailerVideoUrl: trailerVideoUrl)
                 cell.selectButton.rx.tap
                     .subscribe(onNext: { [unowned self] _ in
-                        self.showMediaOptionsMenu()
+                        self.showMediaOptionsMenu(forTag: PickerTags.trailer.rawValue)
                     })
                     .disposed(by: self.disposeBag)
                 

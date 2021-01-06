@@ -105,6 +105,7 @@ extension ProfileDetailViewModel {
             .subscribe { progress in
                 print("PROGRESS: \(progress)")
             } onError: { error in
+                print("ERROR: \(error)")
                 self.stateController.sendError(error)
             } onCompleted: {
                 print("COMPLETED")

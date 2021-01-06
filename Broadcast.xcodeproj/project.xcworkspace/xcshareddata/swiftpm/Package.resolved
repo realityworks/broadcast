@@ -29,30 +29,12 @@
         }
       },
       {
-        "package": "OHHTTPStubs",
-        "repositoryURL": "https://github.com/AliSoftware/OHHTTPStubs.git",
-        "state": {
-          "branch": null,
-          "revision": "e92b5a5746ef16add2a1424f1fc19529d9a75cde",
-          "version": "9.0.0"
-        }
-      },
-      {
         "package": "RSKPlaceholderTextView",
         "repositoryURL": "https://github.com/ruslanskorb/RSKPlaceholderTextView.git",
         "state": {
           "branch": null,
           "revision": "ec315b21080e47b127285413914ad0b4bdf2e36d",
           "version": "6.0.3"
-        }
-      },
-      {
-        "package": "RxAlamofire",
-        "repositoryURL": "https://github.com/RxSwiftCommunity/RxAlamofire.git",
-        "state": {
-          "branch": null,
-          "revision": "de9b20619da181931b32d6b15d5c8dc8cfa4c16b",
-          "version": "5.6.2"
         }
       },
       {
