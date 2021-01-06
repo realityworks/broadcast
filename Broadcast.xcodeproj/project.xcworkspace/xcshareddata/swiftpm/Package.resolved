@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
         "state": {
           "branch": null,
-          "revision": "9e0328127dfb801cefe8ac53a13c0c90a7770448",
-          "version": "5.4.0"
+          "revision": "eaf6e622dd41b07b251d8f01752eab31bc811493",
+          "version": "5.4.1"
         }
       },
       {
@@ -29,6 +29,15 @@
         }
       },
       {
+        "package": "OHHTTPStubs",
+        "repositoryURL": "https://github.com/AliSoftware/OHHTTPStubs.git",
+        "state": {
+          "branch": null,
+          "revision": "12f19662426d0434d6c330c6974d53e2eb10ecd9",
+          "version": "9.1.0"
+        }
+      },
+      {
         "package": "RSKPlaceholderTextView",
         "repositoryURL": "https://github.com/ruslanskorb/RSKPlaceholderTextView.git",
         "state": {
@@ -38,12 +47,21 @@
         }
       },
       {
+        "package": "RxAlamofire",
+        "repositoryURL": "https://github.com/realityworks/RxAlamofire",
+        "state": {
+          "branch": null,
+          "revision": "8e2b77b1e8693c29e31d5817cf645aca670a2ff5",
+          "version": "6.1.1"
+        }
+      },
+      {
         "package": "RxDataSources",
         "repositoryURL": "https://github.com/RxSwiftCommunity/RxDataSources.git",
         "state": {
           "branch": null,
-          "revision": "a18cee01c9ee55f04d0c7eb15c77a96c3648c88e",
-          "version": "4.0.1"
+          "revision": "241c62e7b578b2346c8b60efdf31b4eb2eab2966",
+          "version": "5.0.0"
         }
       },
       {
@@ -51,8 +69,8 @@
         "repositoryURL": "https://github.com/ReactiveX/RxSwift.git",
         "state": {
           "branch": null,
-          "revision": "002d325b0bdee94e7882e1114af5ff4fe1e96afa",
-          "version": "5.1.1"
+          "revision": "c8742ed97fc2f0c015a5ea5eddefb064cd7532d2",
+          "version": "6.0.0"
         }
       },
       {
