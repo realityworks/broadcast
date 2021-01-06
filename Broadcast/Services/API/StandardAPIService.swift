@@ -249,7 +249,41 @@ extension StandardAPIService : APIService {
     }
     
     func uploadProfileImage(withData: Data) -> Completable {
-        return Completable.empty()
+        let url = baseUrl
+            .appendingPathComponent("broadcaster")
+            .appendingPathComponent("profile")
+            .appendingPathComponent("image")
+        
+        //let fileSize = fromUrl.fileSize()!
+        //let headers = HTTPHeaders(["x-ms-blob-type": "BlockBlob",
+        //                           "Content-Length": "\(fileSize)"])
+        return self.session.rx
+            .upload(multipartFormData: { multipartFormData in
+                <#code#>
+            }, to: url, method: .put)
+            .flatMapCompletable { response, data -> Completable in
+                if successCode.contains(response.statusCode) {
+                    return .empty()
+                } else {
+                    return .error(self.error(from: response.statusCode, data: data))
+                }
+            }
+            .catchError { error in
+                throw error
+            }
+            .flatMap { (uploadRequest: UploadRequest) -> Observable<(HTTPURLResponse, RxProgress)> in
+                
+                let progressPart = uploadRequest.rx.progress()
+                let responsePart = uploadRequest.rx.response()
+                
+                return Observable.combineLatest(responsePart, progressPart) {
+                    if !Array(200 ..< 300).contains($0.statusCode) {
+                        throw BoomdayError.apiStatusCode(code: $0.statusCode)
+                    }
+                    return ($0, $1)
+                }
+            }
+        
     }
 }
 
