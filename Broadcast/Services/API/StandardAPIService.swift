@@ -248,7 +248,7 @@ extension StandardAPIService : APIService {
             .emptyResponseBody()
     }
     
-    func uploadProfileImage(withData: Data) -> Completable {
+    func uploadProfileImage(withData data: Data) -> Observable<RxProgress> {
         let url = baseUrl
             .appendingPathComponent("broadcaster")
             .appendingPathComponent("profile")
@@ -259,19 +259,9 @@ extension StandardAPIService : APIService {
         //                           "Content-Length": "\(fileSize)"])
         return self.session.rx
             .upload(multipartFormData: { multipartFormData in
-                <#code#>
+                multipartFormData.append(data, withName: "profileImage")
             }, to: url, method: .put)
-            .flatMapCompletable { response, data -> Completable in
-                if successCode.contains(response.statusCode) {
-                    return .empty()
-                } else {
-                    return .error(self.error(from: response.statusCode, data: data))
-                }
-            }
-            .catchError { error in
-                throw error
-            }
-            .flatMap { (uploadRequest: UploadRequest) -> Observable<(HTTPURLResponse, RxProgress)> in
+            .flatMap { (uploadRequest: UploadRequest) -> Observable<RxProgress> in
                 
                 let progressPart = uploadRequest.rx.progress()
                 let responsePart = uploadRequest.rx.response()
@@ -280,10 +270,9 @@ extension StandardAPIService : APIService {
                     if !Array(200 ..< 300).contains($0.statusCode) {
                         throw BoomdayError.apiStatusCode(code: $0.statusCode)
                     }
-                    return ($0, $1)
+                    return $1
                 }
-            }
-        
+            }        
     }
 }
 

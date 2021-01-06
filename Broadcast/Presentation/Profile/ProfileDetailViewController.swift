@@ -67,6 +67,11 @@ class ProfileDetailViewController: ViewController {
             case let .profileInfo(profileImageUrl, subscribers):
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileInfoTableViewCell.identifier, for: indexPath) as! ProfileInfoTableViewCell
                 cell.configure(withProfileImageUrl: profileImageUrl, subscribers: subscribers)
+                cell.changeThumbnailButton.rx.tap
+                    .subscribe(onNext: {
+                        self.viewModel.updateProfile()
+                    })
+                    .disposed(by: self.disposeBag)
                 return cell
             case .displayName(let displayName):
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextFieldTableViewCell.identifier, for: indexPath) as! ProfileTextFieldTableViewCell
@@ -202,7 +207,7 @@ extension ProfileDetailViewController : MediaPickerAdapter {
     }
     
     func selected(imageUrl url: URL) {
-        // DO NOTHING, Image not supported
+        viewModel.profileImageSelected(withUrl: url)
     }
     
     func selected(videoUrl url: URL) {

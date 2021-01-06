@@ -100,6 +100,10 @@ extension ProfileDetailViewModel {
             .disposed(by: disposeBag)
     }
     
+    func profileImageSelected(withUrl url: URL) {
+        profileUseCase.(withUrl: url)
+    }
+    
     func trailerSelected(withUrl url: URL) {
         profileUseCase.uploadTrailer(withUrl: url)
     }

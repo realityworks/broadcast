@@ -23,5 +23,5 @@ protocol APIService {
     func loadMyPosts() -> Single<LoadMyPostsResponse>
     func loadProfile() -> Single<LoadProfileResponse>
     func updateProfile(withDisplayName displayName: String, biography: String) -> Completable
-    func uploadProfileImage(withData: Data) -> Completable
+    func uploadProfileImage(withData: Data) -> Observable<RxProgress>
 }

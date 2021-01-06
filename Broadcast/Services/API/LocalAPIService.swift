@@ -173,8 +173,16 @@ extension LocalAPIService : APIService {
         return .empty()
     }
     
-    func uploadProfileImage(withData: Data) -> Completable {
-        return .empty()
+    func uploadProfileImage(withData: Data) -> Observable<RxProgress> {
+        return Observable<(HTTPURLResponse, RxProgress)>.create { observer in
+            
+            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 10, execute: {
+                observer.onNext(RxProgress(bytesWritten: 1, totalBytes: 1))
+                observer.onCompleted()
+              })
+            
+            return Disposables.create()
+        }
     }
     
     func inject(credentialsService: CredentialsService) {

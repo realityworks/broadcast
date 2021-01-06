@@ -7,6 +7,8 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
+import RxAlamofire
 
 class ProfileUseCase {
     typealias T = ProfileUseCase
@@ -66,5 +68,16 @@ extension ProfileUseCase {
     func uploadTrailer(withUrl url: URL) {
         #warning("TODO")
         //uploadService.upload(media: .video(fileUrl: url))
+    }
+    
+    func uploadProfileImage(withUrl url: URL) -> Observable<RxProgress> {
+        do {
+            let data = try Data(contentsOf: url)
+            return apiService.uploadProfileImage(withData: data)
+        } catch {
+            stateController.sendError(error)
+            Logger.log(level: .warning, topic: .authentication, message: "Cannot get image data: \(error)")
+            return .error(error)
+        }
     }
 }
