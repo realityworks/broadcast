@@ -20,7 +20,14 @@ class ProfileDetailViewController: ViewController {
     let tableView = UITableView(frame: .zero, style: .grouped)
     
     // MARK: UIPickerController
-    var picker = UIImagePickerController()
+    enum PickerTags: PickerTag {
+        case profileImage   = 0
+        case trailer        = 1
+    }
+    
+    var pickers: [UIImagePickerController] = [
+        UIImagePickerController(),
+        UIImagePickerController()]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -196,14 +203,31 @@ extension ProfileDetailViewController: UIImagePickerControllerDelegate,
 // MARK: MediaPickerAdapter
 
 extension ProfileDetailViewController : MediaPickerAdapter {
-    func supportedAlbumModes() -> [String] {
-        // Trailer only supports video
-        return [kUTTypeMovie as String]
+    func supportedAlbumModes(forTag tag: PickerTag) -> [String] {
+        switch tag {
+        case PickerTags.profileImage.rawValue:
+            // Profile image supports
+            return [kUTTypeImage as String]
+        case PickerTags.trailer.rawValue:
+            // Trailer only supports video
+            return [kUTTypeMovie as String]
+        default:
+            return []
+        }
     }
     
-    func supportedCameraModes() -> [String] {
-        // Trailer only supports video
-        return [kUTTypeMovie as String]
+    func supportedCameraModes(forTag tag: PickerTag) -> [String] {
+        
+        switch tag {
+        case PickerTags.profileImage.rawValue:
+            // Profile image supports
+            return [kUTTypeImage as String]
+        case PickerTags.trailer.rawValue:
+            // Trailer only supports video
+            return [kUTTypeMovie as String]
+        default:
+            return []
+        }
     }
     
     func selected(imageUrl url: URL) {
@@ -213,6 +237,10 @@ extension ProfileDetailViewController : MediaPickerAdapter {
     func selected(videoUrl url: URL) {
         // Video Selected
         viewModel.trailerSelected(withUrl: url)
+    }
+    
+    func picker(forTag tag: PickerTag) -> UIImagePickerController {
+        return pickers[tag]
     }
 }
 

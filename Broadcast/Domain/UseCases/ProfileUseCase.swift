@@ -70,12 +70,11 @@ extension ProfileUseCase {
         //uploadService.upload(media: .video(fileUrl: url))
     }
     
-    func uploadProfileImage(withUrl url: URL) -> Observable<RxProgress> {
+    func updateProfile(image url: URL) -> Observable<RxProgress> {
         do {
             let data = try Data(contentsOf: url)
             return apiService.uploadProfileImage(withData: data)
         } catch {
-            stateController.sendError(error)
             Logger.log(level: .warning, topic: .authentication, message: "Cannot get image data: \(error)")
             return .error(error)
         }

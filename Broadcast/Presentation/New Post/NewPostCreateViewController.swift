@@ -379,4 +379,8 @@ extension NewPostCreateViewController : MediaPickerAdapter {
         // Video Selected
         viewModel.selectMedia(.video(url: url))
     }
+    
+    func picker(forTag tag: PickerTag = 0) -> UIImagePickerController {
+        return picker
+    }
 }

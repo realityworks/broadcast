@@ -7,25 +7,27 @@
 
 import UIKit
 
+typealias PickerTag = Int
+
 /// Protocol that defines the functionality related to selecting
 /// media from the phone
 protocol MediaPickerAdapter: NSObject {
-    func supportedAlbumModes() -> [String]
-    func supportedCameraModes() -> [String]
-    func mediaFromLibrary()
-    func mediaFromCamera()
-    func showMediaOptionsMenu()
+    func supportedAlbumModes(forTag tag: PickerTag) -> [String]
+    func supportedCameraModes(forTag tag: PickerTag) -> [String]
+    func mediaFromLibrary(forTag tag: PickerTag)
+    func mediaFromCamera(forTag tag: PickerTag)
+    func showMediaOptionsMenu(forTag tag: PickerTag)
     func selected(imageUrl: URL)
     func selected(videoUrl: URL)
-    var picker: UIImagePickerController { get }
+    func picker(forTag tag: PickerTag) -> UIImagePickerController
 }
 
 extension MediaPickerAdapter {
-    func supportedAlbumModes() -> [String] {
+    func supportedAlbumModes(forTag tag: PickerTag) -> [String] {
         return UIImagePickerController.availableMediaTypes(for: .photoLibrary) ?? []
     }
     
-    func supportedCameraModes() -> [String] {
+    func supportedCameraModes(forTag tag: PickerTag) -> [String] {
         return UIImagePickerController.availableMediaTypes(for: .camera) ?? []
     }
 }
@@ -38,20 +40,22 @@ extension MediaPickerAdapter where Self: UIViewController {
     // MARK: MediaPickerAdapter protocol
     
     /// Function to create an image picker controller that allows media selection
-    func mediaFromLibrary() {
-        picker.sourceType = .savedPhotosAlbum
-        picker.mediaTypes = supportedAlbumModes()
-        present(picker, animated: true, completion: nil)
+    func mediaFromLibrary(forTag tag: PickerTag = 0) {
+        let selectedPicker = picker(forTag: tag)
+        selectedPicker.sourceType = .savedPhotosAlbum
+        selectedPicker.mediaTypes = supportedAlbumModes(forTag: tag)
+        present(selectedPicker, animated: true, completion: nil)
     }
     
     /// Function to create an image picker controller that allows media selection
-    func mediaFromCamera() {
-        picker.sourceType = .camera
-        picker.mediaTypes = supportedCameraModes()
-        present(picker, animated: true, completion: nil)
+    func mediaFromCamera(forTag tag: PickerTag = 0) {
+        let selectedPicker = picker(forTag: tag)
+        selectedPicker.sourceType = .camera
+        selectedPicker.mediaTypes = supportedCameraModes(forTag: tag)
+        present(selectedPicker, animated: true, completion: nil)
     }
     
-    func showMediaOptionsMenu() {
+    func showMediaOptionsMenu(forTag tag: PickerTag = 0) {
         let alert = UIAlertController(
             title: nil,
             message: nil,
@@ -67,7 +71,7 @@ extension MediaPickerAdapter where Self: UIViewController {
             title: "Camera",
             style: .default,
             handler: { [weak self] action in
-                self?.mediaFromCamera()
+                self?.mediaFromCamera(forTag: tag)
             })
         alert.addAction(actPhoto)
 
@@ -75,7 +79,7 @@ extension MediaPickerAdapter where Self: UIViewController {
             title: "Library",
             style: .default,
             handler: { [weak self] action in
-                self?.mediaFromLibrary()
+                self?.mediaFromLibrary(forTag: tag)
             })
         alert.addAction(actLibrary)
 

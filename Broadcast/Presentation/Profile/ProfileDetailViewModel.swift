@@ -101,7 +101,16 @@ extension ProfileDetailViewModel {
     }
     
     func profileImageSelected(withUrl url: URL) {
-        profileUseCase.(withUrl: url)
+        profileUseCase.updateProfile(image: url)
+            .subscribe { progress in
+                print("PROGRESS: \(progress)")
+            } onError: { error in
+                self.stateController.sendError(error)
+            } onCompleted: {
+                print("COMPLETED")
+            }
+            .disposed(by: disposeBag)
+
     }
     
     func trailerSelected(withUrl url: URL) {

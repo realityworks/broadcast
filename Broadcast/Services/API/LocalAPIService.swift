@@ -174,8 +174,7 @@ extension LocalAPIService : APIService {
     }
     
     func uploadProfileImage(withData: Data) -> Observable<RxProgress> {
-        return Observable<(HTTPURLResponse, RxProgress)>.create { observer in
-            
+        return Observable<RxProgress>.create { observer in
             DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 10, execute: {
                 observer.onNext(RxProgress(bytesWritten: 1, totalBytes: 1))
                 observer.onCompleted()
