@@ -254,25 +254,26 @@ extension StandardAPIService : APIService {
             .appendingPathComponent("profile")
             .appendingPathComponent("image")
         
-        //let fileSize = fromUrl.fileSize()!
-        //let headers = HTTPHeaders(["x-ms-blob-type": "BlockBlob",
-        //                           "Content-Length": "\(fileSize)"])
-        return self.session.rx
-            .upload(multipartFormData: { multipartFormData in
-                multipartFormData.append(data, withName: "profileImage")
-            }, to: url, method: .put)
-            .flatMap { (uploadRequest: UploadRequest) -> Observable<RxProgress> in
-                
-                let progressPart = uploadRequest.rx.progress()
-                let responsePart = uploadRequest.rx.response()
-                
-                return Observable.combineLatest(responsePart, progressPart) {
-                    if !Array(200 ..< 300).contains($0.statusCode) {
-                        throw BoomdayError.apiStatusCode(code: $0.statusCode)
+        return getHeaders()
+            .asObservable()
+            .flatMap { [unowned self] headers -> Observable<RxProgress> in
+                return self.session.rx
+                    .upload(multipartFormData: { multipartFormData in
+                        multipartFormData.append(data, withName: "profileImage")
+                    }, to: url, method: .put, interceptor: self)
+                    .flatMap { (uploadRequest: UploadRequest) -> Observable<RxProgress> in
+                        
+                        let progressPart = uploadRequest.rx.progress()
+                        let responsePart = uploadRequest.rx.response()
+                        
+                        return Observable.combineLatest(responsePart, progressPart) {
+                            if !Array(200 ..< 300).contains($0.statusCode) {
+                                throw BoomdayError.apiStatusCode(code: $0.statusCode)
+                            }
+                            return $1
+                        }
                     }
-                    return $1
-                }
-            }        
+            }
     }
 }
 

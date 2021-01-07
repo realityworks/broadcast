@@ -153,6 +153,7 @@
 		1DDEC77B256F5D1D00D65023 /* LoadMyPostsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DDEC77A256F5D1D00D65023 /* LoadMyPostsResponse.swift */; };
 		1DDEC781256F6AC300D65023 /* MyPostsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DDEC780256F6AC300D65023 /* MyPostsTableViewCell.swift */; };
 		1DDEC785256F6BA800D65023 /* MyPostsCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DDEC784256F6BA800D65023 /* MyPostsCellViewModel.swift */; };
+		1DE0B57125A6C3CC00BC3CEF /* RxAlamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 1DE0B57025A6C3CC00BC3CEF /* RxAlamofire */; };
 		1DE3DA2E25751F0E00A7A1F7 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE3DA2D25751F0E00A7A1F7 /* Date+Extensions.swift */; };
 		1DE3DA3225751FE500A7A1F7 /* DateFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE3DA3125751FE500A7A1F7 /* DateFormatter+Extensions.swift */; };
 		1DE3DA382575506100A7A1F7 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE3DA372575506100A7A1F7 /* UIViewController+Extensions.swift */; };
@@ -163,7 +164,6 @@
 		1DF1E26225A630AC0093A162 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 1DF1E26125A630AC0093A162 /* RxRelay */; };
 		1DF1E26725A630FA0093A162 /* Differentiator in Frameworks */ = {isa = PBXBuildFile; productRef = 1DF1E26625A630FA0093A162 /* Differentiator */; };
 		1DF1E26925A630FA0093A162 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 1DF1E26825A630FA0093A162 /* RxDataSources */; };
-		1DF1E27725A6325B0093A162 /* RxAlamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 1DF1E27625A6325B0093A162 /* RxAlamofire */; };
 		1DF58F502574CB9300563EC2 /* PostSummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF58F4F2574CB9200563EC2 /* PostSummaryViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -343,7 +343,7 @@
 				1DF1E26725A630FA0093A162 /* Differentiator in Frameworks */,
 				1D916D9E25640C430059E549 /* SDWebImage in Frameworks */,
 				1D7C4950259B38A70089EA6B /* RSKPlaceholderTextView in Frameworks */,
-				1DF1E27725A6325B0093A162 /* RxAlamofire in Frameworks */,
+				1DE0B57125A6C3CC00BC3CEF /* RxAlamofire in Frameworks */,
 				1D916D202562A1180059E549 /* Alamofire in Frameworks */,
 				1DD1FE17256CE2E000C598CE /* SwiftRichString in Frameworks */,
 				1DD1FE23256DF4B700C598CE /* KeychainAccess in Frameworks */,
@@ -872,7 +872,7 @@
 				1DF1E26125A630AC0093A162 /* RxRelay */,
 				1DF1E26625A630FA0093A162 /* Differentiator */,
 				1DF1E26825A630FA0093A162 /* RxDataSources */,
-				1DF1E27625A6325B0093A162 /* RxAlamofire */,
+				1DE0B57025A6C3CC00BC3CEF /* RxAlamofire */,
 			);
 			productName = Broadcast;
 			productReference = 1D3433F725624B4400886245 /* Broadcast.app */;
@@ -933,7 +933,7 @@
 				1D7C494E259B38A70089EA6B /* XCRemoteSwiftPackageReference "RSKPlaceholderTextView" */,
 				1DF1E25C25A630AC0093A162 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				1DF1E26525A630F90093A162 /* XCRemoteSwiftPackageReference "RxDataSources" */,
-				1DF1E27525A6325B0093A162 /* XCRemoteSwiftPackageReference "RxAlamofire" */,
+				1DE0B56F25A6C3CC00BC3CEF /* XCRemoteSwiftPackageReference "RxAlamofire" */,
 			);
 			productRefGroup = 1D3433F825624B4400886245 /* Products */;
 			projectDirPath = "";
@@ -1455,6 +1455,14 @@
 				minimumVersion = 4.2.1;
 			};
 		};
+		1DE0B56F25A6C3CC00BC3CEF /* XCRemoteSwiftPackageReference "RxAlamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realityworks/RxAlamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.1.2;
+			};
+		};
 		1DF1E25C25A630AC0093A162 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
@@ -1469,14 +1477,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 5.0.0;
-			};
-		};
-		1DF1E27525A6325B0093A162 /* XCRemoteSwiftPackageReference "RxAlamofire" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realityworks/RxAlamofire";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.1.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1517,6 +1517,11 @@
 			package = 1DD1FE21256DF4B700C598CE /* XCRemoteSwiftPackageReference "KeychainAccess" */;
 			productName = KeychainAccess;
 		};
+		1DE0B57025A6C3CC00BC3CEF /* RxAlamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1DE0B56F25A6C3CC00BC3CEF /* XCRemoteSwiftPackageReference "RxAlamofire" */;
+			productName = RxAlamofire;
+		};
 		1DF1E25D25A630AC0093A162 /* RxSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1DF1E25C25A630AC0093A162 /* XCRemoteSwiftPackageReference "RxSwift" */;
@@ -1541,11 +1546,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1DF1E26525A630F90093A162 /* XCRemoteSwiftPackageReference "RxDataSources" */;
 			productName = RxDataSources;
-		};
-		1DF1E27625A6325B0093A162 /* RxAlamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1DF1E27525A6325B0093A162 /* XCRemoteSwiftPackageReference "RxAlamofire" */;
-			productName = RxAlamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -51,8 +51,8 @@
         "repositoryURL": "https://github.com/realityworks/RxAlamofire",
         "state": {
           "branch": null,
-          "revision": "8e2b77b1e8693c29e31d5817cf645aca670a2ff5",
-          "version": "6.1.1"
+          "revision": "023289596000c623ed4d4657d20d6fee84ed1adf",
+          "version": "6.1.2"
         }
       },
       {
@@ -78,8 +78,8 @@
         "repositoryURL": "https://github.com/SDWebImage/SDWebImage.git",
         "state": {
           "branch": null,
-          "revision": "2c8ed9a2f3ad537dbe9e58e2ec18be361da112aa",
-          "version": "5.9.5"
+          "revision": "564d238f8814c4a82502336fd80b28a9d321ff47",
+          "version": "5.10.2"
         }
       },
       {
