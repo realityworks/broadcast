@@ -111,7 +111,7 @@ class StandardAPIService : Interceptor {
                                                            refreshToken: response.refreshToken)
                 
                 completion(.retryWithDelay(1.0))
-            }, onError: { error in
+            }, onFailure: { error in
                 Logger.log(level: .verbose,
                            topic: .api,
                            message: "Error retrieving accessToken when retrying failed request")
@@ -257,10 +257,15 @@ extension StandardAPIService : APIService {
         return getHeaders()
             .asObservable()
             .flatMap { [unowned self] headers -> Observable<RxProgress> in
+                var extendedHeaders = headers
+                
+                extendedHeaders["Content-type"] = "multipart/form-data"
+                extendedHeaders["Content-Disposition"] = "form-data"
+                
                 return self.session.rx
                     .upload(multipartFormData: { multipartFormData in
                         multipartFormData.append(data, withName: "profileImage")
-                    }, to: url, method: .put, interceptor: self)
+                    }, to: url, method: .put, headers: HTTPHeaders(extendedHeaders), interceptor: self)
                     .flatMap { (uploadRequest: UploadRequest) -> Observable<RxProgress> in
                         
                         let progressPart = uploadRequest.rx.progress()

@@ -154,6 +154,7 @@
 		1DDEC781256F6AC300D65023 /* MyPostsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DDEC780256F6AC300D65023 /* MyPostsTableViewCell.swift */; };
 		1DDEC785256F6BA800D65023 /* MyPostsCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DDEC784256F6BA800D65023 /* MyPostsCellViewModel.swift */; };
 		1DE0B57125A6C3CC00BC3CEF /* RxAlamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 1DE0B57025A6C3CC00BC3CEF /* RxAlamofire */; };
+		1DE0B57525A6D16800BC3CEF /* RxAlamofire+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE0B57425A6D16800BC3CEF /* RxAlamofire+Extensions.swift */; };
 		1DE3DA2E25751F0E00A7A1F7 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE3DA2D25751F0E00A7A1F7 /* Date+Extensions.swift */; };
 		1DE3DA3225751FE500A7A1F7 /* DateFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE3DA3125751FE500A7A1F7 /* DateFormatter+Extensions.swift */; };
 		1DE3DA382575506100A7A1F7 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE3DA372575506100A7A1F7 /* UIViewController+Extensions.swift */; };
@@ -325,6 +326,7 @@
 		1DDEC77A256F5D1D00D65023 /* LoadMyPostsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMyPostsResponse.swift; sourceTree = "<group>"; };
 		1DDEC780256F6AC300D65023 /* MyPostsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsTableViewCell.swift; sourceTree = "<group>"; };
 		1DDEC784256F6BA800D65023 /* MyPostsCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsCellViewModel.swift; sourceTree = "<group>"; };
+		1DE0B57425A6D16800BC3CEF /* RxAlamofire+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RxAlamofire+Extensions.swift"; sourceTree = "<group>"; };
 		1DE3DA2D25751F0E00A7A1F7 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		1DE3DA3125751FE500A7A1F7 /* DateFormatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extensions.swift"; sourceTree = "<group>"; };
 		1DE3DA372575506100A7A1F7 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
@@ -823,6 +825,7 @@
 				1D79C10025924C8600AC271B /* UIColor+Extensions.swift */,
 				1D79C112259451D400AC271B /* AnimationView+Extensions.swift */,
 				1D18E53D259D934800F6B071 /* Int+Extensions.swift */,
+				1DE0B57425A6D16800BC3CEF /* RxAlamofire+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1102,6 +1105,7 @@
 				1D9256C9257E70AF00E988B2 /* Locale+Extension.swift in Sources */,
 				1D91A0D2256C1DD60043A943 /* DismissableLabel.swift in Sources */,
 				1D916D342562A4CF0059E549 /* State.swift in Sources */,
+				1DE0B57525A6D16800BC3CEF /* RxAlamofire+Extensions.swift in Sources */,
 				1D3B2A212564D76C001874FD /* StandardCredentialsService.swift in Sources */,
 				1D3B29FB25641C3A001874FD /* MainViewModel.swift in Sources */,
 				1D216A5025987CA7007FA845 /* CustomBorderView.swift in Sources */,
