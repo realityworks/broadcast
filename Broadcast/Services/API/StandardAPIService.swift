@@ -258,14 +258,13 @@ extension StandardAPIService : APIService {
             .asObservable()
             .flatMap { [unowned self] headers -> Observable<RxProgress> in
                 var extendedHeaders = headers
-                
                 extendedHeaders["Content-type"] = "multipart/form-data"
-                extendedHeaders["Content-Disposition"] = "form-data"
                 
                 return self.session.rx
                     .upload(multipartFormData: { multipartFormData in
-                        multipartFormData.append(data, withName: "profileImage")
+                        multipartFormData.append(data, withName: "profileImage", fileName: "profileImage.jpeg", mimeType: "image/jpeg")
                     }, to: url, method: .put, headers: HTTPHeaders(extendedHeaders), interceptor: self)
+                    .validate(statusCode: validStatusCodes)
                     .flatMap { (uploadRequest: UploadRequest) -> Observable<RxProgress> in
                         
                         let progressPart = uploadRequest.rx.progress()
