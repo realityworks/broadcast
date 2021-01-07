@@ -6,13 +6,14 @@
 //
 
 import Foundation
+import UIKit
 import RxSwift
 import RxCocoa
 
 class ProfileDetailViewModel : ViewModel {
     
     enum Row {
-        case profileInfo(profileImageUrl: URL?, subscribers: Int)
+        case profileInfo(profileImage: UIImage, subscribers: Int)
         case displayName(text: String)
         case biography(text: String)
         case trailerVideo(trailerUrl: URL?)
@@ -31,7 +32,7 @@ class ProfileDetailViewModel : ViewModel {
     let profileUseCase: ProfileUseCase
 
     let subscriberCount: Observable<Int>
-    let profileImageUrl: Observable<URL?>
+    let profileImage: Observable<UIImage>
     let trailerVideoUrl: Observable<URL?>
     
     let displayNameObservable: Observable<String?>
@@ -49,7 +50,8 @@ class ProfileDetailViewModel : ViewModel {
         biographyObservable = profileObservable.map { $0.biography ?? String.empty }
         
         self.subscriberCount = profileObservable.map { $0.subscriberCount }
-        self.profileImageUrl = profileObservable.map { URL(string: $0.profileImageUrl) }
+        self.profileImage = dependencies.profileImage.compactMap { $0 ?? UIImage(color: UIColor.primaryRed) }
+        
         self.trailerVideoUrl = profileObservable.map { URL(string: $0.trailerVideoUrl) }
         
         super.init(stateController: dependencies.stateController)
@@ -71,12 +73,14 @@ extension ProfileDetailViewModel {
         let stateController: StateController
         let schedulers: Schedulers
         let profileUseCase: ProfileUseCase
+        let profileImage: Observable<UIImage?>
         let profileObservable: Observable<Profile?>
         
         static let standard = Dependencies(
             stateController: Domain.standard.stateController,
             schedulers: Schedulers.standard,
             profileUseCase: Domain.standard.useCases.profileUseCase,
+            profileImage: Domain.standard.stateController.stateObservable(of: \.profileImage),
             profileObservable: Domain.standard.stateController.stateObservable(of: \.profile))
     }
 }

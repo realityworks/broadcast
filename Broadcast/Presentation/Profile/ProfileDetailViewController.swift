@@ -81,9 +81,9 @@ class ProfileDetailViewController: ViewController {
         let datasource = ReactiveTableViewModelSource<ProfileDetailSectionModel>(configureCell: { _, tableView, indexPath, row -> UITableViewCell in
             
             switch row {
-            case let .profileInfo(profileImageUrl, subscribers):
+            case let .profileInfo(profileImage, subscribers):
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileInfoTableViewCell.identifier, for: indexPath) as! ProfileInfoTableViewCell
-                cell.configure(withProfileImageUrl: profileImageUrl, subscribers: subscribers)
+                cell.configure(withProfileImage: profileImage, subscribers: subscribers)
                 cell.changeThumbnailButton.rx.tap
                     .subscribe(onNext: {
                         self.showMediaOptionsMenu(forTag: PickerTags.profileImage.rawValue)
@@ -155,14 +155,14 @@ class ProfileDetailViewController: ViewController {
             viewModel.biographyObservable,
             viewModel.displayNameObservable,
             viewModel.subscriberCount,
-            viewModel.profileImageUrl,
+            viewModel.profileImage,
             viewModel.trailerVideoUrl) {
             
-            biography, displayName, subscribers, profileImageUrl, trailerUrl -> [ProfileDetailSectionModel] in
+            biography, displayName, subscribers, profileImage, trailerUrl -> [ProfileDetailSectionModel] in
             
             return [
                 SectionModel(model: nil, items: [
-                                ProfileDetailViewModel.Row.profileInfo(profileImageUrl: profileImageUrl, subscribers: subscribers)]),
+                                ProfileDetailViewModel.Row.profileInfo(profileImage: profileImage, subscribers: subscribers)]),
                 SectionModel(model: LocalizedString.displayName, items: [
                                 ProfileDetailViewModel.Row.displayName(text: displayName ?? String.empty)]),
                 SectionModel(model: LocalizedString.displayBio, items: [

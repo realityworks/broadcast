@@ -27,7 +27,6 @@ class MyPostsViewController: ViewController {
         configureLayout()
         configureBindings()
         
-        #warning("Need to move this on account finished loading...")
         viewModel.refreshMyPostsList()
     }
     

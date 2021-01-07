@@ -11,6 +11,8 @@ import RxSwift
 
 class LoginViewModel : ViewModel {
     private let authenticationUseCase: AuthenticationUseCase
+    private let profileUseCase: ProfileUseCase
+    private let postContentUseCase: PostContentUseCase
     
     let username = BehaviorRelay<String?>(value: nil)
     let password = BehaviorRelay<String?>(value: nil)
@@ -25,6 +27,8 @@ class LoginViewModel : ViewModel {
     
     init(dependencies: Dependencies = .standard) {
         self.authenticationUseCase = dependencies.authenticationUseCase
+        self.postContentUseCase = dependencies.postContentUseCase
+        self.profileUseCase = dependencies.profileUseCase
         
         isLoginEnabled = Observable.combineLatest(username, password) { username, password in
             guard let username = username,
@@ -48,10 +52,14 @@ extension LoginViewModel {
         
         let stateController: StateController
         let authenticationUseCase: AuthenticationUseCase
+        let profileUseCase: ProfileUseCase
+        let postContentUseCase: PostContentUseCase
         
         static let standard = Dependencies(
             stateController: Domain.standard.stateController,
-            authenticationUseCase: Domain.standard.useCases.authenticationUseCase)
+            authenticationUseCase: Domain.standard.useCases.authenticationUseCase,
+            profileUseCase: Domain.standard.useCases.profileUseCase,
+            postContentUseCase: Domain.standard.useCases.postContentUseCase)
     }
 }
 
@@ -66,6 +74,10 @@ extension LoginViewModel {
                                     password: password.value ?? "")
             .subscribe {
                 // Handle a successful login
+                self.postContentUseCase.retrieveMyPosts()
+                
+                #warning("We should only be able to login once load profile has finished loading...")
+                self.profileUseCase.loadProfile()
             } onError: { error in
                 Logger.log(level: .warning, topic: .debug, message: "Error during login: \(error)")
                 self.stateController.sendError(error)

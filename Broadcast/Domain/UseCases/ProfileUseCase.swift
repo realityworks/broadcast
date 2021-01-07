@@ -9,6 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 import RxAlamofire
+import SDWebImage
 
 class ProfileUseCase {
     typealias T = ProfileUseCase
@@ -50,11 +51,28 @@ extension ProfileUseCase {
 // MARK: - Functions
 
 extension ProfileUseCase {
+    private func loadProfileImage(fromUrl url: URL?) {
+        guard let url = url else { return }
+        SDWebImageManager.shared.loadImage(with: url, options: [.allowInvalidSSLCertificates, .continueInBackground], progress: nil) { (image, data, error, cacheType, finished, _) in
+            self.stateController.state.profileImage = image
+        }
+//        SDWebImageManager.shared().loadImage(with: NSURL.init(string: individualCellData["cover_image"] as! String ) as URL?, options: .continueInBackground, progress: { (recieved, expected, nil) in
+//                    print(recieved,expected)
+//                }, completed: { (downloadedImage, data, error, SDImageCacheType, true, imageUrlString) in
+//                    DispatchQueue.main.async {
+//                        if downloadedImage != nil{
+//                            self.yourImageView.image = downloadedImage
+//                        }
+//                    }
+//                })
+    }
+    
     func loadProfile() {
         apiService.loadProfile()
             .subscribe(onSuccess: { [self] profileResponse in
                 stateController.state.profile = profileResponse
-            }, onError: { [self] error in
+                loadProfileImage(fromUrl: URL(string: profileResponse.profileImageUrl))
+            }, onFailure: { [self] error in
                 stateController.sendError(error)
                 Logger.log(level: .warning, topic: .authentication, message: "Unable to load account details with error: \(error)")
             })
