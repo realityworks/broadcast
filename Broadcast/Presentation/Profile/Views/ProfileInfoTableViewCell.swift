@@ -10,7 +10,7 @@ import RxSwift
 
 class ProfileInfoTableViewCell: UITableViewCell {
     static let identifier: String = "ProfileInfoTableViewCell"
-    static let cellHeight: CGFloat = 100
+    static let cellHeight: CGFloat = 120
     
     let containerStackView = UIStackView()
     let thumbnailContainerStackView = UIStackView()
@@ -36,9 +36,9 @@ class ProfileInfoTableViewCell: UITableViewCell {
         containerStackView.distribution = .fillEqually
         containerStackView.spacing = 5
         
-        thumbnailContainerStackView.axis = .horizontal
+        thumbnailContainerStackView.axis = .vertical
         thumbnailContainerStackView.spacing = 10
-        thumbnailContainerStackView.alignment = .leading
+        thumbnailContainerStackView.alignment = .center
         
         subscribersContainerStackView.axis = .vertical
         subscribersContainerStackView.spacing = 5
@@ -58,6 +58,7 @@ class ProfileInfoTableViewCell: UITableViewCell {
         subscribersContainerStackView.addArrangedSubview(subscribersTitleLabel)
         
         thumbnailImageView.contentMode = .scaleAspectFit
+        thumbnailImageView.height(100)
     }
     
     func configure(withProfileImage profileImage: UIImage, subscribers: Int) {

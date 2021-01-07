@@ -50,7 +50,7 @@ class ProfileDetailViewModel : ViewModel {
         biographyObservable = profileObservable.map { $0.biography ?? String.empty }
         
         self.subscriberCount = profileObservable.map { $0.subscriberCount }
-        self.profileImage = dependencies.profileImage.compactMap { $0 ?? UIImage(color: UIColor.primaryRed) }
+        self.profileImage = dependencies.profileImage.compactMap { $0 ?? UIImage.profileImage }
         
         self.trailerVideoUrl = profileObservable.map { URL(string: $0.trailerVideoUrl) }
         
