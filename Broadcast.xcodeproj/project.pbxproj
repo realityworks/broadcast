@@ -1158,7 +1158,7 @@
 /* Begin XCBuildConfiguration section */
 		1D34341F25624B4C00886245 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1D916DA325640C810059E549 /* Development.xcconfig */;
+			baseConfigurationReference = 1D916DA525640C810059E549 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1276,7 +1276,7 @@
 		};
 		1D34342225624B4C00886245 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1D916DA325640C810059E549 /* Development.xcconfig */;
+			baseConfigurationReference = 1D916DA525640C810059E549 /* Staging.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1326,7 +1326,7 @@
 		};
 		1D34342525624B4C00886245 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1D916DA325640C810059E549 /* Development.xcconfig */;
+			baseConfigurationReference = 1D916DA525640C810059E549 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
