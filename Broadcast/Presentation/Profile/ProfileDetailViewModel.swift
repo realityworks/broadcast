@@ -110,13 +110,10 @@ extension ProfileDetailViewModel {
         }
         
         profileUseCase.updateProfile(image: url)
-            .subscribe { progress in
-                print("PROGRESS: \(progress)")
+            .subscribe { _ in
             } onError: { error in
-                print("ERROR: \(error)")
                 self.stateController.sendError(error)
             } onCompleted: {
-                print("COMPLETED")
             }
             .disposed(by: disposeBag)
 
