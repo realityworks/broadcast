@@ -54,8 +54,11 @@ extension ProfileUseCase {
     private func loadProfileImage(fromUrl url: URL?) {
         guard let url = url else { return }
         SDWebImageManager.shared.loadImage(with: url, options: [.allowInvalidSSLCertificates, .continueInBackground], progress: nil) { (image, data, error, cacheType, finished, _) in
-            self.stateController.state.profileImage = image
+            /// Write the image to local data so we can refer to it when required
+            guard let image = image else { return }
+            self.updateLocalProfile(image: image)
         }
+        
 //        SDWebImageManager.shared().loadImage(with: NSURL.init(string: individualCellData["cover_image"] as! String ) as URL?, options: .continueInBackground, progress: { (recieved, expected, nil) in
 //                    print(recieved,expected)
 //                }, completed: { (downloadedImage, data, error, SDImageCacheType, true, imageUrlString) in
@@ -86,6 +89,11 @@ extension ProfileUseCase {
     func uploadTrailer(withUrl url: URL) {
         #warning("TODO")
         //uploadService.upload(media: .video(fileUrl: url))
+    }
+    
+    func updateLocalProfile(image: UIImage) {
+        image.write(toKey: UIImage.profileImageKey)
+        stateController.state.profileImage = image
     }
     
     func updateProfile(image url: URL) -> Observable<RxProgress> {

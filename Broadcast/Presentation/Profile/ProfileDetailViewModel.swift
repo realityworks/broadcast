@@ -105,6 +105,10 @@ extension ProfileDetailViewModel {
     }
     
     func profileImageSelected(withUrl url: URL) {
+        if let image = UIImage(contentsOfFile: url.path) {
+            profileUseCase.updateLocalProfile(image: image)
+        }
+        
         profileUseCase.updateProfile(image: url)
             .subscribe { progress in
                 print("PROGRESS: \(progress)")

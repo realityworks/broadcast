@@ -27,7 +27,7 @@ extension UIImage {
         self.init(cgImage: cgImage)
     }
     
-    public convenience init?(asThumbnailFromUrl url: URL) {
+    public convenience init?(asThumbnailFromVideoUrl url: URL) {
         do
         {
             let asset = AVURLAsset(url: url)
@@ -40,6 +40,17 @@ extension UIImage {
         {
             Logger.log(level: .warning, topic: .other, message: "Error generating thumbnail: \(error)")
             return nil
+        }
+    }
+    
+    public convenience init?(contentsOfKey key: String) {
+        guard let imageData = UserDefaults.standard.object(forKey: key) as? Data else { return nil }
+        self.init(data: imageData)
+    }
+    
+    public func write(toKey key: String) {
+        if let pngRepresentation = pngData() {
+            UserDefaults.standard.set(pngRepresentation, forKey: key)
         }
     }
 }
