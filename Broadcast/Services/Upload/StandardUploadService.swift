@@ -225,8 +225,7 @@ extension StandardUploadService : UploadService {
                     observer.onNext(UploadEvent.requestTrailerUploadUrl(uploadUrl: URL(string: response.uploadUrl)))
                     observer.onCompleted()
                 }, onFailure: { error in
-                    observer.onError(
-                        BoomdayError.uploadFailed(UploadEvent.requestTrailerUploadUrl(uploadUrl: nil)))
+                    observer.onError(error)
                 })
                 .disposed(by: self.disposeBag)
 

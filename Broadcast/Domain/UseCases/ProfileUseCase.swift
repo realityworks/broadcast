@@ -83,6 +83,7 @@ extension ProfileUseCase {
                 Logger.log(level: .info, topic: .api, message: "Upload progress : \(uploadProgress.progress)")
                 self.stateController.state.currentTrailerUploadProgress = uploadProgress
             }, onError: { error in
+                print(error)
                 self.stateController.state.currentTrailerUploadProgress?.failed = true
                 if let boomDayError = error as? BoomdayError {
                     self.stateController.state.currentTrailerUploadProgress?.errorDescription = boomDayError.localizedDescription
