@@ -62,7 +62,7 @@ extension StandardUploadService : UploadService {
                 .subscribe(onSuccess: { response in
                     observer.onNext(UploadEvent.createPost(postId: response.postId))
                     observer.onCompleted()
-                }, onError: { error in
+                }, onFailure: { error in
                     observer.onError(BoomdayError.uploadFailed(UploadEvent.createPost(postId: nil)))
                 })
                 .disposed(by: self.disposeBag)
@@ -78,7 +78,7 @@ extension StandardUploadService : UploadService {
                     .subscribe(onSuccess: { response in
                         observer.onNext(UploadEvent.requestUploadUrl(uploadUrl: URL(string: response.uploadUrl), mediaId: response.mediaId))
                         observer.onCompleted()
-                    }, onError: { error in
+                    }, onFailure: { error in
                         observer.onError(
                             BoomdayError.uploadFailed(UploadEvent.requestUploadUrl(uploadUrl: nil, mediaId: nil)))
                     })
