@@ -24,6 +24,15 @@ enum Media : Equatable {
         }
     }
     
+    var url: URL {
+        switch self {
+        case .video(let url):
+            return url
+        case .image(let url):
+            return url
+        }
+    }
+    
     var duration: String {
         switch self {
         case .video(let url):

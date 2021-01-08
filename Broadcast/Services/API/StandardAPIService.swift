@@ -141,7 +141,7 @@ extension StandardAPIService : APIService {
             .decode(type: CreatePostResponse.self)
     }
     
-    func getUploadUrl(forPostID postID: PostID, for media: Media) -> Single<GetUploadUrlResponse> {
+    func getMediaUploadUrl(forPostID postID: PostID, for media: Media) -> Single<GetMediaUploadUrlResponse> {
         let url = baseUrl
             .appendingPathComponent("broadcaster")
             .appendingPathComponent("posts")
@@ -151,7 +151,19 @@ extension StandardAPIService : APIService {
         let parameters = ["contentType": media.contentType]
         
         return authenticatedRequest(method: .post, url: url, parameters: parameters)
-            .decode(type: GetUploadUrlResponse.self)
+            .decode(type: GetMediaUploadUrlResponse.self)
+    }
+    
+    func getTrailerUploadUrl() -> Single<GetTrailerUploadUrlResponse> {
+        let url = baseUrl
+            .appendingPathComponent("broadcaster")
+            .appendingPathComponent("trailer")
+            .appendingPathComponent("media")
+        
+        let parameters = ["contentType": "video/mp4"]
+        
+        return authenticatedRequest(method: .post, url: url, parameters: parameters)
+            .decode(type: GetTrailerUploadUrlResponse.self)
     }
     
     func uploadMedia(from fromUrl: URL, to toUrl: URL) -> Observable<(HTTPURLResponse, RxProgress)> {

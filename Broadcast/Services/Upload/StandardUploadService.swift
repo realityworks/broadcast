@@ -48,13 +48,12 @@ extension StandardUploadService : UploadService {
     
     func upload(media: Media, content: PostContent) -> Observable<UploadProgress> {
         guard let apiService = apiService else { return .error(BoomdayError.unknown) }
-        guard case Media.video(let sourceUrl) = media else { return .error(BoomdayError.unknown)}
 
         self.media = media
         self.content = content
         
         uploadProgress = UploadProgress()
-        uploadProgress.sourceUrl = sourceUrl
+        uploadProgress.sourceUrl = media.url
         
         // Setup the Create Post observable
         let createPostObservable = Observable<UploadEvent>.create { [unowned self] observer in
@@ -71,10 +70,10 @@ extension StandardUploadService : UploadService {
         }
         
         // Get the upload URL
-        let getUploadUrlObservable = Observable<UploadEvent>.create { [unowned self] observer in
+        let getMediaUploadUrlObservable = Observable<UploadEvent>.create { [unowned self] observer in
             if let postId = self.uploadProgress.postId,
                let media = self.media {
-                apiService.getUploadUrl(forPostID: postId, for: media)
+                apiService.getMediaUploadUrl(forPostID: postId, for: media)
                     .subscribe(onSuccess: { response in
                         observer.onNext(UploadEvent.requestPostUploadUrl(uploadUrl: URL(string: response.uploadUrl), mediaId: response.mediaId))
                         observer.onCompleted()
@@ -95,7 +94,7 @@ extension StandardUploadService : UploadService {
         let uploadMediaObservable = Observable<UploadEvent>.create { [unowned self] observer in
             if let sourceUrl = self.uploadProgress.sourceUrl,
                let destinationUrl = self.uploadProgress.destinationURL {
-                apiService.uploadVideo(from: sourceUrl,
+                apiService.uploadMedia(from: sourceUrl,
                                        to: destinationUrl)
                         .subscribe { response, progress in
                             let progressFloat = Float(progress.bytesWritten) / Float(progress.totalBytes)
@@ -178,7 +177,7 @@ extension StandardUploadService : UploadService {
         }
         
         return Observable.concat(createPostObservable,
-                                 getUploadUrlObservable,
+                                 getMediaUploadUrlObservable,
                                  uploadMediaObservable,
                                  completeUploadObservable,
                                  setContentObservable,
@@ -222,21 +221,15 @@ extension StandardUploadService : UploadService {
         
         // Get the upload URL
         let getUploadUrlObservable = Observable<UploadEvent>.create { [unowned self] observer in
-            if let postId = self.uploadProgress.postId,
-               let media = self.media {
-                apiService.getTrailerUploadUrl(forPostID: postId)
-                    .subscribe(onSuccess: { response in
-                        observer.onNext(UploadEvent.requestTrailerUploadUrl(uploadUrl: URL(string: response.uploadUrl))
-                        observer.onCompleted()
-                    }, onFailure: { error in
-                        observer.onError(
-                            BoomdayError.uploadFailed(UploadEvent.requestTrailerUploadUrl(uploadUrl: nil)))
-                    })
-                    .disposed(by: self.disposeBag)
-            } else {
-                observer.onError(
-                    BoomdayError.uploadFailed(UploadEvent.requestTrailerUploadUrl(uploadUrl: nil)))
-            }
+            apiService.getTrailerUploadUrl()
+                .subscribe(onSuccess: { response in
+                    observer.onNext(UploadEvent.requestTrailerUploadUrl(uploadUrl: URL(string: response.uploadUrl)))
+                    observer.onCompleted()
+                }, onFailure: { error in
+                    observer.onError(
+                        BoomdayError.uploadFailed(UploadEvent.requestTrailerUploadUrl(uploadUrl: nil)))
+                })
+                .disposed(by: self.disposeBag)
 
             return Disposables.create()
         }
@@ -245,7 +238,7 @@ extension StandardUploadService : UploadService {
         let uploadMediaObservable = Observable<UploadEvent>.create { [unowned self] observer in
             if let sourceUrl = self.uploadProgress.sourceUrl,
                let destinationUrl = self.uploadProgress.destinationURL {
-                apiService.uploadVideo(from: sourceUrl,
+                apiService.uploadMedia(from: sourceUrl,
                                        to: destinationUrl)
                         .subscribe { response, progress in
                             let progressFloat = Float(progress.bytesWritten) / Float(progress.totalBytes)

@@ -121,15 +121,23 @@ extension LocalAPIService : APIService {
         return single
     }
     
-    func getUploadUrl(forPostID postID: PostID, for media: Media) -> Single<GetUploadUrlResponse> {
-        let single = Single<GetUploadUrlResponse>.create { observer in
-            observer(.success(GetUploadUrlResponse(uploadUrl: "", mediaId: "")))
+    func getMediaUploadUrl(forPostID postID: PostID, for media: Media) -> Single<GetMediaUploadUrlResponse> {
+        let single = Single<GetMediaUploadUrlResponse>.create { observer in
+            observer(.success(GetMediaUploadUrlResponse(uploadUrl: "", mediaId: "")))
             return Disposables.create { }
         }
         return single
     }
     
-    func uploadVideo(from fromUrl: URL, to toUrl: URL) -> Observable<(HTTPURLResponse, RxProgress)> {
+    func getTrailerUploadUrl() -> Single<GetTrailerUploadUrlResponse> {
+        let single = Single<GetTrailerUploadUrlResponse>.create { observer in
+            observer(.success(GetTrailerUploadUrlResponse(uploadUrl: "")))
+            return Disposables.create { }
+        }
+        return single
+    }
+    
+    func uploadMedia(from fromUrl: URL, to toUrl: URL) -> Observable<(HTTPURLResponse, RxProgress)> {
         return Observable<(HTTPURLResponse, RxProgress)>.create { observer in
             
             DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 10, execute: {
