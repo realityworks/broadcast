@@ -126,7 +126,7 @@ extension NewPostCreateViewModel {
         static let standard = Dependencies(
             stateController: Domain.standard.stateController,
             postContentUseCase: Domain.standard.useCases.postContentUseCase,
-            uploadProgressObservable: Domain.standard.stateController.stateObservable(of: \.currentUploadProgress))
+            uploadProgressObservable: Domain.standard.stateController.stateObservable(of: \.currentMediaUploadProgress))
     }
 }
 

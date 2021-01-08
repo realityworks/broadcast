@@ -54,23 +54,23 @@ extension PostContentUseCase {
         
     func upload(content: PostContent, media: Media) {
         /// Set the initial upload progress to be simply default values
-        stateController.state.currentUploadProgress = UploadProgress()
+        stateController.state.currentMediaUploadProgress = UploadProgress()
         
         uploadService.upload(media: media,
                              content: content)
             .subscribe(onNext: { uploadProgress in
                 Logger.log(level: .info, topic: .api, message: "Upload progress : \(uploadProgress.progress)")
-                self.stateController.state.currentUploadProgress = uploadProgress
+                self.stateController.state.currentMediaUploadProgress = uploadProgress
             }, onError: { error in
-                self.stateController.state.currentUploadProgress?.failed = true
+                self.stateController.state.currentMediaUploadProgress?.failed = true
                 if let boomDayError = error as? BoomdayError {
-                    self.stateController.state.currentUploadProgress?.errorDescription = boomDayError.localizedDescription
+                    self.stateController.state.currentMediaUploadProgress?.errorDescription = boomDayError.localizedDescription
                 } else {
-                    self.stateController.state.currentUploadProgress?.errorDescription = error.localizedDescription
+                    self.stateController.state.currentMediaUploadProgress?.errorDescription = error.localizedDescription
                 }
             }, onCompleted: {
                 Logger.log(level: .info, topic: .api, message: "Post content complete!")
-                self.stateController.state.currentUploadProgress?.completed = true
+                self.stateController.state.currentMediaUploadProgress?.completed = true
             })
             .disposed(by: disposeBag)
     }

@@ -129,14 +129,6 @@ extension LocalAPIService : APIService {
         return single
     }
     
-    func getTrailerUploadUrl() -> Single<GetTrailerUploadUrlResponse> {
-        let single = Single<GetTrailerUploadUrlResponse>.create { observer in
-            observer(.success(GetTrailerUploadUrlResponse(uploadUrl: "")))
-            return Disposables.create { }
-        }
-        return single
-    }
-    
     func uploadMedia(from fromUrl: URL, to toUrl: URL) -> Observable<(HTTPURLResponse, RxProgress)> {
         return Observable<(HTTPURLResponse, RxProgress)>.create { observer in
             
@@ -149,7 +141,19 @@ extension LocalAPIService : APIService {
         }
     }
     
-    func mediaComplete(for postId: PostID, _ mediaId: MediaID) -> Completable {
+    func uploadMediaComplete(for postId: PostID, _ mediaId: MediaID) -> Completable {
+        return Completable.empty()
+    }
+    
+    func getTrailerUploadUrl() -> Single<GetTrailerUploadUrlResponse> {
+        let single = Single<GetTrailerUploadUrlResponse>.create { observer in
+            observer(.success(GetTrailerUploadUrlResponse(uploadUrl: "")))
+            return Disposables.create { }
+        }
+        return single
+    }
+    
+    func uploadTrailerComplete() -> Completable {
         return Completable.empty()
     }
     

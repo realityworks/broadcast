@@ -166,6 +166,17 @@ extension StandardAPIService : APIService {
             .decode(type: GetTrailerUploadUrlResponse.self)
     }
     
+    func uploadTrailerComplete() -> Completable {
+        let url = baseUrl
+            .appendingPathComponent("broadcaster")
+            .appendingPathComponent("trailer")
+            .appendingPathComponent("media")
+            .appendingPathComponent("complete")
+                
+        return authenticatedRequest(method: .post, url: url)
+            .emptyResponseBody()
+    }
+    
     func uploadMedia(from fromUrl: URL, to toUrl: URL) -> Observable<(HTTPURLResponse, RxProgress)> {
         let fileSize = fromUrl.fileSize()!
         let headers = HTTPHeaders(["x-ms-blob-type": "BlockBlob",
@@ -186,7 +197,7 @@ extension StandardAPIService : APIService {
             }
     }
     
-    func mediaComplete(for postId: PostID, _ mediaId: MediaID) -> Completable {
+    func uploadMediaComplete(for postId: PostID, _ mediaId: MediaID) -> Completable {
         let url = baseUrl
             .appendingPathComponent("broadcaster")
             .appendingPathComponent("posts")

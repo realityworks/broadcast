@@ -118,8 +118,7 @@ extension StandardUploadService : UploadService {
         let completeUploadObservable = Observable<UploadEvent>.create { [unowned self] observer in
             if let postId = self.uploadProgress.postId,
                let mediaId = self.uploadProgress.mediaId {
-                apiService.mediaComplete(for: postId,
-                                         mediaId)
+                apiService.uploadMediaComplete(for: postId, mediaId)
                         .subscribe {
                             Logger.log(level: .verbose, topic: .debug, message:  "FINALIZED MEDIA UPLOAD COMPLETE")
                             observer.onNext(UploadEvent.completeUpload)
@@ -260,22 +259,16 @@ extension StandardUploadService : UploadService {
         
         // Trigger complete upload
         let completeUploadObservable = Observable<UploadEvent>.create { [unowned self] observer in
-            if let postId = self.uploadProgress.postId,
-               let mediaId = self.uploadProgress.mediaId {
-                apiService.mediaComplete(for: postId,
-                                         mediaId)
-                        .subscribe {
-                            Logger.log(level: .verbose, topic: .debug, message:  "FINALIZED MEDIA UPLOAD COMPLETE")
-                            observer.onNext(UploadEvent.completeUpload)
-                            observer.onCompleted()
-                        } onError: { error in
-                            print (error)
-                            observer.onError(BoomdayError.unknown)
-                        }
-                        .disposed(by: disposeBag)
-            } else {
-                observer.onError(BoomdayError.unknown)
-            }
+            apiService.uploadTrailerComplete()
+                    .subscribe {
+                        Logger.log(level: .verbose, topic: .debug, message:  "FINALIZED MEDIA UPLOAD COMPLETE")
+                        observer.onNext(UploadEvent.completeUpload)
+                        observer.onCompleted()
+                    } onError: { error in
+                        print (error)
+                        observer.onError(BoomdayError.unknown)
+                    }
+                    .disposed(by: disposeBag)
             
             return Disposables.create()
         }

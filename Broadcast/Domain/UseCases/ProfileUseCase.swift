@@ -77,8 +77,24 @@ extension ProfileUseCase {
     }
     
     func uploadTrailer(withUrl url: URL) {
-        #warning("TODO")
-        //uploadService.upload(media: .video(fileUrl: url))
+        stateController.state.currentTrailerUploadProgress = UploadProgress()
+        uploadService.uploadTrailer(from: url)
+            .subscribe(onNext: { uploadProgress in
+                Logger.log(level: .info, topic: .api, message: "Upload progress : \(uploadProgress.progress)")
+                self.stateController.state.currentTrailerUploadProgress = uploadProgress
+            }, onError: { error in
+                self.stateController.state.currentTrailerUploadProgress?.failed = true
+                if let boomDayError = error as? BoomdayError {
+                    self.stateController.state.currentTrailerUploadProgress?.errorDescription = boomDayError.localizedDescription
+                } else {
+                    self.stateController.state.currentTrailerUploadProgress?.errorDescription = error.localizedDescription
+                }
+            }, onCompleted: {
+                Logger.log(level: .info, topic: .api, message: "Trailer upload complete!")
+                self.stateController.state.currentTrailerUploadProgress?.completed = true
+            })
+            .disposed(by: disposeBag)
+        
     }
     
     func updateLocalProfile(image: UIImage) {
@@ -95,24 +111,4 @@ extension ProfileUseCase {
             return .error(error)
         }
     }
-    
-    func updateProfileTrailer(from url: URL) {
-        uploadService.uploadTrailer(from: url)
-            .subscribe(onNext: { uploadProgress in
-                Logger.log(level: .info, topic: .api, message: "Upload progress : \(uploadProgress.progress)")
-                self.stateController.state.currentUploadProgress = uploadProgress
-            }, onError: { error in
-                self.stateController.state.currentUploadProgress?.failed = true
-                if let boomDayError = error as? BoomdayError {
-                    self.stateController.state.currentUploadProgress?.errorDescription = boomDayError.localizedDescription
-                } else {
-                    self.stateController.state.currentUploadProgress?.errorDescription = error.localizedDescription
-                }
-            }, onCompleted: {
-                Logger.log(level: .info, topic: .api, message: "Post content complete!")
-                self.stateController.state.currentUploadProgress?.completed = true
-            })
-            .disposed(by: disposeBag)
-    }
-    
 }

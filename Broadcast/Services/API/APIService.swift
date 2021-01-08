@@ -15,11 +15,13 @@ protocol APIService {
     
     func createPost() -> Single<CreatePostResponse>
     func getMediaUploadUrl(forPostID postID: PostID, for media: Media) -> Single<GetMediaUploadUrlResponse>
-    func getTrailerUploadUrl() -> Single<GetTrailerUploadUrlResponse>
     func uploadMedia(from fromUrl: URL, to toUrl: URL) -> Observable<(HTTPURLResponse, RxProgress)>
-    func mediaComplete(for postId: PostID, _ mediaId: MediaID) -> Completable
+    func uploadMediaComplete(for postId: PostID, _ mediaId: MediaID) -> Completable
     func updatePostContent(postId: PostID, newContent: PostContent) -> Completable
     func publish(postId: PostID) -> Completable
+    
+    func getTrailerUploadUrl() -> Single<GetTrailerUploadUrlResponse>
+    func uploadTrailerComplete() -> Completable
     
     func loadMyPosts() -> Single<LoadMyPostsResponse>
     func loadProfile() -> Single<LoadProfileResponse>
