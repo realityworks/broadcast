@@ -216,7 +216,7 @@ extension StandardUploadService : UploadService {
             }
     }
     
-    func uploadTrailer(videoFileUrl: URL) -> Observable<UploadProgress> {
+    func uploadTrailer(from url: URL) -> Observable<UploadProgress> {
         guard let apiService = apiService else { return .error(BoomdayError.unknown) }
         
         // Get the upload URL

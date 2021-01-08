@@ -58,16 +58,6 @@ extension ProfileUseCase {
             guard let image = image else { return }
             self.updateLocalProfile(image: image)
         }
-        
-//        SDWebImageManager.shared().loadImage(with: NSURL.init(string: individualCellData["cover_image"] as! String ) as URL?, options: .continueInBackground, progress: { (recieved, expected, nil) in
-//                    print(recieved,expected)
-//                }, completed: { (downloadedImage, data, error, SDImageCacheType, true, imageUrlString) in
-//                    DispatchQueue.main.async {
-//                        if downloadedImage != nil{
-//                            self.yourImageView.image = downloadedImage
-//                        }
-//                    }
-//                })
     }
     
     func loadProfile() {
@@ -105,4 +95,24 @@ extension ProfileUseCase {
             return .error(error)
         }
     }
+    
+    func updateProfileTrailer(from url: URL) -> Observable<UploadProgress> {
+        uploadService.uploadTrailer(from: url)
+            .subscribe(onNext: { uploadProgress in
+                Logger.log(level: .info, topic: .api, message: "Upload progress : \(uploadProgress.progress)")
+                self.stateController.state.currentUploadProgress = uploadProgress
+            }, onError: { error in
+                self.stateController.state.currentUploadProgress?.failed = true
+                if let boomDayError = error as? BoomdayError {
+                    self.stateController.state.currentUploadProgress?.errorDescription = boomDayError.localizedDescription
+                } else {
+                    self.stateController.state.currentUploadProgress?.errorDescription = error.localizedDescription
+                }
+            }, onCompleted: {
+                Logger.log(level: .info, topic: .api, message: "Post content complete!")
+                self.stateController.state.currentUploadProgress?.completed = true
+            })
+            .disposed(by: disposeBag)
+    }
+    
 }

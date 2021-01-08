@@ -53,6 +53,9 @@ extension PostContentUseCase {
     }
         
     func upload(content: PostContent, media: Media) {
+        /// Set the initial upload progress to be simply default values
+        stateController.state.currentUploadProgress = UploadProgress()
+        
         uploadService.upload(media: media,
                              content: content)
             .subscribe(onNext: { uploadProgress in
@@ -77,7 +80,7 @@ extension PostContentUseCase {
         apiService.loadMyPosts()
             .subscribe(onSuccess: { [unowned self] response in
                 self.stateController.state.myPosts = response
-            }, onError: { [unowned self] error in
+            }, onFailure: { [unowned self] error in
                 Logger.log(level: .warning, topic: .api, message: "Failed to load posts \(error)")
                 if let error = error as? BoomdayError {
                     self.stateController.sendError(error)
