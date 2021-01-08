@@ -9,7 +9,9 @@ import Foundation
 
 enum UploadEvent {
     case createPost(postId: PostID?)
-    case requestUploadUrl(uploadUrl: URL?, mediaId: MediaID?)
+    case createTrailer
+    case requestPostUploadUrl(uploadUrl: URL?, mediaId: MediaID?)
+    case requestTrailerUploadUrl(uploadUrl: URL?)
     case uploadMedia(progress: Float) /// 0-1
     case completeUpload
     case postContent

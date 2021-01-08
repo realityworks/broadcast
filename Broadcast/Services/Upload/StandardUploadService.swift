@@ -76,16 +76,16 @@ extension StandardUploadService : UploadService {
                let media = self.media {
                 apiService.getUploadUrl(forPostID: postId, for: media)
                     .subscribe(onSuccess: { response in
-                        observer.onNext(UploadEvent.requestUploadUrl(uploadUrl: URL(string: response.uploadUrl), mediaId: response.mediaId))
+                        observer.onNext(UploadEvent.requestPostUploadUrl(uploadUrl: URL(string: response.uploadUrl), mediaId: response.mediaId))
                         observer.onCompleted()
                     }, onFailure: { error in
                         observer.onError(
-                            BoomdayError.uploadFailed(UploadEvent.requestUploadUrl(uploadUrl: nil, mediaId: nil)))
+                            BoomdayError.uploadFailed(UploadEvent.requestPostUploadUrl(uploadUrl: nil, mediaId: nil)))
                     })
                     .disposed(by: self.disposeBag)
             } else {
                 observer.onError(
-                    BoomdayError.uploadFailed(UploadEvent.requestUploadUrl(uploadUrl: nil, mediaId: nil)))
+                    BoomdayError.uploadFailed(UploadEvent.requestPostUploadUrl(uploadUrl: nil, mediaId: nil)))
             }
 
             return Disposables.create()
@@ -190,7 +190,7 @@ extension StandardUploadService : UploadService {
                     self.uploadProgress.progress += 0.05
                     self.uploadProgress.totalProgress += 0.05
                     
-                case .requestUploadUrl(let uploadUrl, let mediaId):
+                case .requestPostUploadUrl(let uploadUrl, let mediaId):
                     self.uploadProgress.mediaId = mediaId
                     self.uploadProgress.destinationURL = uploadUrl
                     self.uploadProgress.progress += 0.05
@@ -209,11 +209,108 @@ extension StandardUploadService : UploadService {
                 case .publish:
                     self.uploadProgress.progress += 0.05
                     self.uploadProgress.totalProgress += 0.05
+                default:
+                    throw BoomdayError.unknown
                 }
                 
                 return self.uploadProgress
             }
+    }
+    
+    func uploadTrailer(videoFileUrl: URL) -> Observable<UploadProgress> {
+        guard let apiService = apiService else { return .error(BoomdayError.unknown) }
+        
+        // Get the upload URL
+        let getUploadUrlObservable = Observable<UploadEvent>.create { [unowned self] observer in
+            if let postId = self.uploadProgress.postId,
+               let media = self.media {
+                apiService.getUploadUrl(forPostID: postId, for: media)
+                    .subscribe(onSuccess: { response in
+                        observer.onNext(UploadEvent.requestUploadUrl(uploadUrl: URL(string: response.uploadUrl), mediaId: response.mediaId))
+                        observer.onCompleted()
+                    }, onFailure: { error in
+                        observer.onError(
+                            BoomdayError.uploadFailed(UploadEvent.requestUploadUrl(uploadUrl: nil, mediaId: nil)))
+                    })
+                    .disposed(by: self.disposeBag)
+            } else {
+                observer.onError(
+                    BoomdayError.uploadFailed(UploadEvent.requestUploadUrl(uploadUrl: nil, mediaId: nil)))
+            }
+
+            return Disposables.create()
         }
+        
+        // Upload the media to the blob
+        let uploadMediaObservable = Observable<UploadEvent>.create { [unowned self] observer in
+            if let sourceUrl = self.uploadProgress.sourceUrl,
+               let destinationUrl = self.uploadProgress.destinationURL {
+                apiService.uploadVideo(from: sourceUrl,
+                                       to: destinationUrl)
+                        .subscribe { response, progress in
+                            let progressFloat = Float(progress.bytesWritten) / Float(progress.totalBytes)
+                            observer.onNext(
+                                UploadEvent.uploadMedia(progress: progressFloat))
+                        } onError: { error in
+                            observer.onError(BoomdayError.unknown)
+                        } onCompleted: {
+                            observer.onCompleted()
+                        } onDisposed: {
+                        }
+                        .disposed(by: disposeBag)
+            } else {
+                observer.onError(BoomdayError.unknown)
+            }
+
+            return Disposables.create()
+        }
+        
+        // Trigger complete upload
+        let completeUploadObservable = Observable<UploadEvent>.create { [unowned self] observer in
+            if let postId = self.uploadProgress.postId,
+               let mediaId = self.uploadProgress.mediaId {
+                apiService.mediaComplete(for: postId,
+                                         mediaId)
+                        .subscribe {
+                            Logger.log(level: .verbose, topic: .debug, message:  "FINALIZED MEDIA UPLOAD COMPLETE")
+                            observer.onNext(UploadEvent.completeUpload)
+                            observer.onCompleted()
+                        } onError: { error in
+                            print (error)
+                            observer.onError(BoomdayError.unknown)
+                        }
+                        .disposed(by: disposeBag)
+            } else {
+                observer.onError(BoomdayError.unknown)
+            }
+            
+            return Disposables.create()
+        }
+        
+        return Observable.concat(getUploadUrlObservable,
+                                 uploadMediaObservable,
+                                 completeUploadObservable)
+            .map { event -> UploadProgress in
+                switch event {
+                case .requestTrailerUploadUrl(let uploadUrl):
+                    self.uploadProgress.destinationURL = uploadUrl
+                    self.uploadProgress.progress += 0.05
+                    self.uploadProgress.totalProgress += 0.05
+                
+                case .uploadMedia(let progress):
+                    self.uploadProgress.uploadProgress = progress
+                    self.uploadProgress.totalProgress =
+                        self.uploadProgress.progress + (progress * 0.9)
+                case .completeUpload:
+                    self.uploadProgress.progress += 0.05
+                    self.uploadProgress.totalProgress += 0.05
+                default:
+                    throw BoomdayError.unknown
+                }
+                
+                return self.uploadProgress
+            }
+    }
 }
 
 // MARK: Instance Dependencies
