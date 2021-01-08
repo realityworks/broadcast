@@ -96,7 +96,7 @@ extension ProfileUseCase {
         }
     }
     
-    func updateProfileTrailer(from url: URL) -> Observable<UploadProgress> {
+    func updateProfileTrailer(from url: URL) {
         uploadService.uploadTrailer(from: url)
             .subscribe(onNext: { uploadProgress in
                 Logger.log(level: .info, topic: .api, message: "Upload progress : \(uploadProgress.progress)")
