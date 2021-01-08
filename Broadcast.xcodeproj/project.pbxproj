@@ -139,7 +139,8 @@
 		1D93143E2577DBDF001C85C1 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D93143D2577DBDF001C85C1 /* Media.swift */; };
 		1D9E1938257897AE001960AF /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9E1937257897AE001960AF /* ProfileTableViewCell.swift */; };
 		1DA3E442258748EF00F1825F /* CreatePostResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA3E441258748EE00F1825F /* CreatePostResponse.swift */; };
-		1DA3E44625874ADD00F1825F /* GetUploadUrlResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA3E44525874ADD00F1825F /* GetUploadUrlResponse.swift */; };
+		1DA3E44625874ADD00F1825F /* GetMediaUploadUrlResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA3E44525874ADD00F1825F /* GetMediaUploadUrlResponse.swift */; };
+		1DA63D1D25A8419A0029A509 /* GetTrailerUploadUrlResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA63D1C25A8419A0029A509 /* GetTrailerUploadUrlResponse.swift */; };
 		1DB3438E2589DC3300486676 /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB3438D2589DC3300486676 /* URL+Extensions.swift */; };
 		1DC97C8125A4180200EBF667 /* ProfileSignOutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC97C8025A4180100EBF667 /* ProfileSignOutTableViewCell.swift */; };
 		1DC97C8525A4524F00EBF667 /* ProfileVersionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC97C8425A4524F00EBF667 /* ProfileVersionTableViewCell.swift */; };
@@ -313,7 +314,8 @@
 		1D9314442577E991001C85C1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		1D9E1937257897AE001960AF /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		1DA3E441258748EE00F1825F /* CreatePostResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostResponse.swift; sourceTree = "<group>"; };
-		1DA3E44525874ADD00F1825F /* GetUploadUrlResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUploadUrlResponse.swift; sourceTree = "<group>"; };
+		1DA3E44525874ADD00F1825F /* GetMediaUploadUrlResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMediaUploadUrlResponse.swift; sourceTree = "<group>"; };
+		1DA63D1C25A8419A0029A509 /* GetTrailerUploadUrlResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTrailerUploadUrlResponse.swift; sourceTree = "<group>"; };
 		1DB3438D2589DC3300486676 /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
 		1DC97C6B25A2F77600EBF667 /* Broadcast.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Broadcast.entitlements; sourceTree = "<group>"; };
 		1DC97C8025A4180100EBF667 /* ProfileSignOutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSignOutTableViewCell.swift; sourceTree = "<group>"; };
@@ -800,7 +802,8 @@
 				1DDEC77A256F5D1D00D65023 /* LoadMyPostsResponse.swift */,
 				1D14AD662579E41E00CB2C82 /* LoadProfileResponse.swift */,
 				1DA3E441258748EE00F1825F /* CreatePostResponse.swift */,
-				1DA3E44525874ADD00F1825F /* GetUploadUrlResponse.swift */,
+				1DA3E44525874ADD00F1825F /* GetMediaUploadUrlResponse.swift */,
+				1DA63D1C25A8419A0029A509 /* GetTrailerUploadUrlResponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -1006,6 +1009,7 @@
 				1D63169B258B99DB0009A4E1 /* UploadProgress.swift in Sources */,
 				1D712804257890450065B8EA /* ProfileStripeAccountViewController.swift in Sources */,
 				1D2A03F9256562A1008CE2D4 /* ConnectivityUseCase.swift in Sources */,
+				1DA63D1D25A8419A0029A509 /* GetTrailerUploadUrlResponse.swift in Sources */,
 				1D916D6F2563F5250059E549 /* KeyboardEventsAdapter.swift in Sources */,
 				1D7127FF257890100065B8EA /* ProfileDetailViewModel.swift in Sources */,
 				1DD1FE2E256E16D100C598CE /* UIImage+Extensions.swift in Sources */,
@@ -1018,7 +1022,7 @@
 				1DE3DA3E2575F49500A7A1F7 /* VideoPlayerView.swift in Sources */,
 				1D3F71CA2570082800DE7F05 /* PostStatsView.swift in Sources */,
 				1DE3DA3225751FE500A7A1F7 /* DateFormatter+Extensions.swift in Sources */,
-				1DA3E44625874ADD00F1825F /* GetUploadUrlResponse.swift in Sources */,
+				1DA3E44625874ADD00F1825F /* GetMediaUploadUrlResponse.swift in Sources */,
 				1D9256D7257F517700E988B2 /* NewPostCreateViewController.swift in Sources */,
 				1D3B2A0D2564D0EA001874FD /* LocalAuthenticationService.swift in Sources */,
 				1D14AD6B257A0CFD00CB2C82 /* ProfileTextFieldTableViewCell.swift in Sources */,

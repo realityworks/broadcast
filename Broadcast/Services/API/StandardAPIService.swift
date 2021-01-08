@@ -154,7 +154,7 @@ extension StandardAPIService : APIService {
             .decode(type: GetUploadUrlResponse.self)
     }
     
-    func uploadVideo(from fromUrl: URL, to toUrl: URL) -> Observable<(HTTPURLResponse, RxProgress)> {
+    func uploadMedia(from fromUrl: URL, to toUrl: URL) -> Observable<(HTTPURLResponse, RxProgress)> {
         let fileSize = fromUrl.fileSize()!
         let headers = HTTPHeaders(["x-ms-blob-type": "BlockBlob",
                                    "Content-Length": "\(fileSize)"])

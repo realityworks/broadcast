@@ -224,18 +224,18 @@ extension StandardUploadService : UploadService {
         let getUploadUrlObservable = Observable<UploadEvent>.create { [unowned self] observer in
             if let postId = self.uploadProgress.postId,
                let media = self.media {
-                apiService.getUploadUrl(forPostID: postId, for: media)
+                apiService.getTrailerUploadUrl(forPostID: postId)
                     .subscribe(onSuccess: { response in
-                        observer.onNext(UploadEvent.requestUploadUrl(uploadUrl: URL(string: response.uploadUrl), mediaId: response.mediaId))
+                        observer.onNext(UploadEvent.requestTrailerUploadUrl(uploadUrl: URL(string: response.uploadUrl))
                         observer.onCompleted()
                     }, onFailure: { error in
                         observer.onError(
-                            BoomdayError.uploadFailed(UploadEvent.requestUploadUrl(uploadUrl: nil, mediaId: nil)))
+                            BoomdayError.uploadFailed(UploadEvent.requestTrailerUploadUrl(uploadUrl: nil)))
                     })
                     .disposed(by: self.disposeBag)
             } else {
                 observer.onError(
-                    BoomdayError.uploadFailed(UploadEvent.requestUploadUrl(uploadUrl: nil, mediaId: nil)))
+                    BoomdayError.uploadFailed(UploadEvent.requestTrailerUploadUrl(uploadUrl: nil)))
             }
 
             return Disposables.create()

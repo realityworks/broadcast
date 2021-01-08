@@ -1,5 +1,5 @@
 //
-//  GetUploadUrlResponse.swift
+//  GetMediaUploadUrlResponse.swift
 //  Broadcast
 //
 //  Created by Piotr Suwara on 14/12/20.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GetUploadUrlResponse : Decodable {
+struct GetMediaUploadUrlResponse : Decodable {
     let uploadUrl: String
     let mediaId: String
 }
