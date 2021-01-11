@@ -21,14 +21,32 @@ class ProgressView : UIView, Progress {
 
     var progressText: String {
         set {
-            progressLabel.text = progressText
+            progressLabel.text = newValue
+        }
+        get {
+            return progressLabel.text ?? ""
         }
     }
     
     var totalProgress: Float {
-    
+        set {
+            return progressView.progress = newValue
+        }
+        get {
+            return progressView.progress
+        }
     }
 
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        configureViews()
+        layoutViews()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     private func configureViews() {
         progressContainerView.backgroundColor = .clear
