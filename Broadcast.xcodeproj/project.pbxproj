@@ -167,6 +167,7 @@
 		1DF1E26725A630FA0093A162 /* Differentiator in Frameworks */ = {isa = PBXBuildFile; productRef = 1DF1E26625A630FA0093A162 /* Differentiator */; };
 		1DF1E26925A630FA0093A162 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 1DF1E26825A630FA0093A162 /* RxDataSources */; };
 		1DF58F502574CB9300563EC2 /* PostSummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF58F4F2574CB9200563EC2 /* PostSummaryViewModel.swift */; };
+		1DF5DD4C25ABF2FD009B0B30 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF5DD4B25ABF2FD009B0B30 /* ProgressView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -335,6 +336,7 @@
 		1DE3DA3D2575F49500A7A1F7 /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
 		1DF0972F258114D8007FEE3C /* URLAPIQueryStringRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLAPIQueryStringRequest.swift; sourceTree = "<group>"; };
 		1DF58F4F2574CB9200563EC2 /* PostSummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSummaryViewModel.swift; sourceTree = "<group>"; };
+		1DF5DD4B25ABF2FD009B0B30 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -743,6 +745,7 @@
 				1D7C49422599F61F0089EA6B /* TopImageButton.swift */,
 				1DE3DA3D2575F49500A7A1F7 /* VideoPlayerView.swift */,
 				1DF58F4E2574CA6600563EC2 /* Models */,
+				1DF5DD4B25ABF2FD009B0B30 /* ProgressView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -1064,6 +1067,7 @@
 				1D9256DB257F518D00E988B2 /* NewPostCreateViewModel.swift in Sources */,
 				1D3B2A122564D1F0001874FD /* Services.swift in Sources */,
 				1D3433FB25624B4400886245 /* AppDelegate.swift in Sources */,
+				1DF5DD4C25ABF2FD009B0B30 /* ProgressView.swift in Sources */,
 				1D3B2A482564F238001874FD /* StandardAPIService.swift in Sources */,
 				1D916D442562A7180059E549 /* UseCases.swift in Sources */,
 				1DC97C8125A4180200EBF667 /* ProfileSignOutTableViewCell.swift in Sources */,
