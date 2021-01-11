@@ -40,6 +40,8 @@ class ProfileDetailViewModel : ViewModel {
     let biographyObservable: Observable<String?>
     let biographySubject = BehaviorRelay<String?>(value: nil)
     
+    let trailerUploadProgress: Observable<UploadProgress>
+    
     init(dependencies: Dependencies = .standard) {
         
         self.schedulers = dependencies.schedulers
@@ -53,6 +55,8 @@ class ProfileDetailViewModel : ViewModel {
         self.profileImage = dependencies.profileImage.compactMap { $0 ?? UIImage.profileImage }
         
         self.trailerVideoUrl = profileObservable.map { URL(string: $0.trailerVideoUrl) }
+        
+        self.trailerUploadProgress = dependencies.trailerUploadProgress.compactMap { $0 }
         
         super.init(stateController: dependencies.stateController)
         
@@ -75,13 +79,15 @@ extension ProfileDetailViewModel {
         let profileUseCase: ProfileUseCase
         let profileImage: Observable<UIImage?>
         let profileObservable: Observable<Profile?>
+        let trailerUploadProgress: Observable<UploadProgress?>
         
         static let standard = Dependencies(
             stateController: Domain.standard.stateController,
             schedulers: Schedulers.standard,
             profileUseCase: Domain.standard.useCases.profileUseCase,
             profileImage: Domain.standard.stateController.stateObservable(of: \.profileImage),
-            profileObservable: Domain.standard.stateController.stateObservable(of: \.profile))
+            profileObservable: Domain.standard.stateController.stateObservable(of: \.profile),
+            trailerUploadProgress: Domain.standard.stateController.stateObservable(of: \.currentTrailerUploadProgress))
     }
 }
 

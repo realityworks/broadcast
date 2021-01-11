@@ -171,7 +171,7 @@ class ProfileViewController: ViewController {
             .disposed(by: disposeBag)
         
         tableView.rx.modelSelected(ProfileViewModel.Row.self)
-            .observeOn(Schedulers.standard.main)
+            .observe(on: Schedulers.standard.main)
             .subscribe(onNext: { [weak self] row in
                 switch row {
                 case .detail:

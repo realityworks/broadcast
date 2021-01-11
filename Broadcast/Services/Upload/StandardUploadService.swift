@@ -22,7 +22,8 @@ class StandardUploadService {
     var media: Media?
     var content: PostContent?
 
-    var uploadProgress = UploadProgress()
+    var uploadMediaProgress = UploadProgress()
+    var uploadTrailerProgress = UploadProgress()
     
     let disposeBag = DisposeBag()
     
@@ -52,8 +53,8 @@ extension StandardUploadService : UploadService {
         self.media = media
         self.content = content
         
-        uploadProgress = UploadProgress()
-        uploadProgress.sourceUrl = media.url
+        uploadMediaProgress = UploadProgress()
+        uploadMediaProgress.sourceUrl = media.url
         
         // Setup the Create Post observable
         let createPostObservable = Observable<UploadEvent>.create { [unowned self] observer in
@@ -71,7 +72,7 @@ extension StandardUploadService : UploadService {
         
         // Get the upload URL
         let getMediaUploadUrlObservable = Observable<UploadEvent>.create { [unowned self] observer in
-            if let postId = self.uploadProgress.postId,
+            if let postId = self.uploadMediaProgress.postId,
                let media = self.media {
                 apiService.getMediaUploadUrl(forPostID: postId, for: media)
                     .subscribe(onSuccess: { response in
@@ -92,8 +93,8 @@ extension StandardUploadService : UploadService {
         
         // Upload the media to the blob
         let uploadMediaObservable = Observable<UploadEvent>.create { [unowned self] observer in
-            if let sourceUrl = self.uploadProgress.sourceUrl,
-               let destinationUrl = self.uploadProgress.destinationURL {
+            if let sourceUrl = self.uploadMediaProgress.sourceUrl,
+               let destinationUrl = self.uploadMediaProgress.destinationURL {
                 apiService.uploadMedia(from: sourceUrl,
                                        to: destinationUrl)
                         .subscribe { response, progress in
@@ -116,8 +117,8 @@ extension StandardUploadService : UploadService {
         
         // Trigger complete upload
         let completeUploadObservable = Observable<UploadEvent>.create { [unowned self] observer in
-            if let postId = self.uploadProgress.postId,
-               let mediaId = self.uploadProgress.mediaId {
+            if let postId = self.uploadMediaProgress.postId,
+               let mediaId = self.uploadMediaProgress.mediaId {
                 apiService.uploadMediaComplete(for: postId, mediaId)
                         .subscribe {
                             Logger.log(level: .verbose, topic: .debug, message:  "FINALIZED MEDIA UPLOAD COMPLETE")
@@ -137,7 +138,7 @@ extension StandardUploadService : UploadService {
         
         // Set the post content
         let setContentObservable = Observable<UploadEvent>.create { [unowned self] observer in
-            if let postId = self.uploadProgress.postId {
+            if let postId = self.uploadMediaProgress.postId {
                 apiService.updatePostContent(
                     postId: postId,
                     newContent: content)
@@ -158,7 +159,7 @@ extension StandardUploadService : UploadService {
         
         // Set the post content
         let publishContentObservable = Observable<UploadEvent>.create { [unowned self] observer in
-            if let postId = self.uploadProgress.postId {
+            if let postId = self.uploadMediaProgress.postId {
                 apiService.publish(postId: postId)
                     .subscribe {
                         Logger.log(level: .verbose, topic: .debug, message: "PUBLISHED")
@@ -184,39 +185,43 @@ extension StandardUploadService : UploadService {
             .map { event -> UploadProgress in
                 switch event {
                 case .createPost(let postId):
-                    self.uploadProgress.postId = postId
-                    self.uploadProgress.progress += 0.05
-                    self.uploadProgress.totalProgress += 0.05
+                    self.uploadMediaProgress.postId = postId
+                    self.uploadMediaProgress.progress += 0.05
+                    self.uploadMediaProgress.totalProgress += 0.05
                     
                 case .requestPostUploadUrl(let uploadUrl, let mediaId):
-                    self.uploadProgress.mediaId = mediaId
-                    self.uploadProgress.destinationURL = uploadUrl
-                    self.uploadProgress.progress += 0.05
-                    self.uploadProgress.totalProgress += 0.05
+                    self.uploadMediaProgress.mediaId = mediaId
+                    self.uploadMediaProgress.destinationURL = uploadUrl
+                    self.uploadMediaProgress.progress += 0.05
+                    self.uploadMediaProgress.totalProgress += 0.05
                 
                 case .uploadMedia(let progress):
-                    self.uploadProgress.uploadProgress = progress
-                    self.uploadProgress.totalProgress =
-                        self.uploadProgress.progress + (progress * 0.75)
+                    self.uploadMediaProgress.uploadProgress = progress
+                    self.uploadMediaProgress.totalProgress =
+                        self.uploadMediaProgress.progress + (progress * 0.75)
                 case .completeUpload:
-                    self.uploadProgress.progress += 0.05
-                    self.uploadProgress.totalProgress += 0.05
+                    self.uploadMediaProgress.progress += 0.05
+                    self.uploadMediaProgress.totalProgress += 0.05
                 case .postContent:
-                    self.uploadProgress.progress += 0.05
-                    self.uploadProgress.totalProgress += 0.05
+                    self.uploadMediaProgress.progress += 0.05
+                    self.uploadMediaProgress.totalProgress += 0.05
                 case .publish:
-                    self.uploadProgress.progress += 0.05
-                    self.uploadProgress.totalProgress += 0.05
+                    self.uploadMediaProgress.progress += 0.05
+                    self.uploadMediaProgress.totalProgress += 0.05
                 default:
                     throw BoomdayError.unknown
                 }
                 
-                return self.uploadProgress
+                return self.uploadMediaProgress
             }
     }
     
     func uploadTrailer(from url: URL) -> Observable<UploadProgress> {
         guard let apiService = apiService else { return .error(BoomdayError.unknown) }
+        
+        uploadTrailerProgress = UploadProgress()
+        uploadTrailerProgress.sourceUrl = url
+
         
         // Get the upload URL
         let getUploadUrlObservable = Observable<UploadEvent>.create { [unowned self] observer in
@@ -233,9 +238,9 @@ extension StandardUploadService : UploadService {
         }
         
         // Upload the media to the blob
-        let uploadMediaObservable = Observable<UploadEvent>.create { [unowned self] observer in
-            if let sourceUrl = self.uploadProgress.sourceUrl,
-               let destinationUrl = self.uploadProgress.destinationURL {
+        let uploadTrailerObservable = Observable<UploadEvent>.create { [unowned self] observer in
+            if let sourceUrl = self.uploadTrailerProgress.sourceUrl,
+               let destinationUrl = self.uploadTrailerProgress.destinationURL {
                 apiService.uploadMedia(from: sourceUrl,
                                        to: destinationUrl)
                         .subscribe { response, progress in
@@ -273,27 +278,27 @@ extension StandardUploadService : UploadService {
         }
         
         return Observable.concat(getUploadUrlObservable,
-                                 uploadMediaObservable,
+                                 uploadTrailerObservable,
                                  completeUploadObservable)
             .map { event -> UploadProgress in
                 switch event {
                 case .requestTrailerUploadUrl(let uploadUrl):
-                    self.uploadProgress.destinationURL = uploadUrl
-                    self.uploadProgress.progress += 0.05
-                    self.uploadProgress.totalProgress += 0.05
+                    self.uploadTrailerProgress.destinationURL = uploadUrl
+                    self.uploadTrailerProgress.progress += 0.05
+                    self.uploadTrailerProgress.totalProgress += 0.05
                 
                 case .uploadMedia(let progress):
-                    self.uploadProgress.uploadProgress = progress
-                    self.uploadProgress.totalProgress =
-                        self.uploadProgress.progress + (progress * 0.9)
+                    self.uploadTrailerProgress.uploadProgress = progress
+                    self.uploadTrailerProgress.totalProgress =
+                        self.uploadTrailerProgress.progress + (progress * 0.9)
                 case .completeUpload:
-                    self.uploadProgress.progress += 0.05
-                    self.uploadProgress.totalProgress += 0.05
+                    self.uploadTrailerProgress.progress += 0.05
+                    self.uploadTrailerProgress.totalProgress += 0.05
                 default:
                     throw BoomdayError.unknown
                 }
                 
-                return self.uploadProgress
+                return self.uploadTrailerProgress
             }
     }
 }
