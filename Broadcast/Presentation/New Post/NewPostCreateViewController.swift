@@ -27,10 +27,8 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     private let tipsButton = UIButton.text(withTitle: LocalizedString.tips)
     private let removeButton = UIButton.textDestructive(withTitle: LocalizedString.remove)
     
+    private let progressView = ProgressView()
     private let editPostView = EditPostView()
-    private let progressContainerView = UIView()
-    private let progressView = UIProgressView()
-    private let progressLabel = UILabel.tinyBody()
     private let tipsView = TipsView()
     
     internal var picker = UIImagePickerController()
@@ -92,19 +90,6 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         picker.videoExportPreset = AVAssetExportPresetPassthrough
         picker.videoQuality = .typeHigh
         
-        progressContainerView.backgroundColor = .clear
-        progressContainerView.layer.cornerRadius = 8
-        progressContainerView.layer.borderWidth = 1
-        progressContainerView.layer.borderColor = UIColor.secondaryLightGrey.cgColor
-        
-        progressView.progressViewStyle = .bar
-        progressView.progress = 0.0
-        progressView.trackTintColor = .clear
-        progressView.progressTintColor = .progressBarColor
-        progressView.layer.cornerRadius = 4
-        progressView.clipsToBounds = true
-        
-        progressLabel.textAlignment = .center
     }
     
     private func configureLayout() {
@@ -155,20 +140,9 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         
         /// Layout progress and progress label views
         
-        contentView.addSubview(progressContainerView)
-        progressContainerView.addSubview(progressView)
+        contentView.addSubview(progressView)
         
-        progressContainerView.topToBottom(of: editPostView.submitButton, offset: 20)
-        progressContainerView.centerXToSuperview()
-        progressContainerView.widthToSuperview()
-        progressContainerView.height(16)
-        
-        progressView.edgesToSuperview(insets: TinyEdgeInsets(top: 4, left: 5, bottom: 5, right: 5))
-        
-        contentView.addSubview(progressLabel)
-        progressLabel.topToBottom(of: progressContainerView)
-        progressLabel.widthToSuperview()
-        progressLabel.height(16)
+        progressView.topToBottom(of: editPostView.submitButton, offset: 20)
         
         /// Layout tips view
         view.addSubview(tipsView)
