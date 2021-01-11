@@ -78,7 +78,7 @@ extension AuthenticationUseCase {
                 }, afterError: { error in
                     self.stateController.state.authenticationState = AuthenticationState.loggedOut
                 })
-            .observeOn(schedulers.main)
+            .observe(on: schedulers.main)
             .asCompletable()
     }
     

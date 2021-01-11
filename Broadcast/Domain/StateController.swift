@@ -52,7 +52,7 @@ extension StateController {
         
         let observable = stateSubject
             .map { $0[keyPath: path] }
-            .observeOn(schedulers.main)
+            .observe(on: schedulers.main)
         
         return distinct ? observable.distinctUntilChanged() : observable
     }
@@ -62,7 +62,7 @@ extension StateController {
     func errorObservable() -> Observable<Error> {
         return errorSubject
             .asObservable()
-            .observeOn(schedulers.main)
+            .observe(on: schedulers.main)
     }
     
     /// Get an observable on any errors that are propagated
@@ -77,7 +77,7 @@ extension StateController {
                 
                 return $0.localizedDescription
             }
-            .observeOn(schedulers.main)
+            .observe(on: schedulers.main)
     }
     
     func sendError(_ error: Error) {

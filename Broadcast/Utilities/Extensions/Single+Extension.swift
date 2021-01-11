@@ -35,7 +35,7 @@ extension Single where Element == (HTTPURLResponse, Data), Trait == SingleTrait 
                 return .error(self.error(from: response.statusCode, data: data))
             }
         }
-        .catchError { error in
+        .catch { error in
             throw error
         }
     }
