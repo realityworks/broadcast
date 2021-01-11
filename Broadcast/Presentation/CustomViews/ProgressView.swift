@@ -39,7 +39,7 @@ class ProgressView : UIView, Progress {
         }
     }
 
-    override init(frame: CGRect) {
+    override init(frame: CGRect = .zero) {
         super.init(frame: frame)
         configureViews()
         layoutViews()
@@ -82,6 +82,7 @@ class ProgressView : UIView, Progress {
     }
 }
 
+// MARK: RxSwift Extensions
 
 extension Reactive where Base : ProgressView {
     /// Reactive wrapper for `Title Text` property.

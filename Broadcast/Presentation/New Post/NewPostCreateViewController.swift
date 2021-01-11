@@ -155,7 +155,7 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         configureButtonBindings()
                         
         viewModel.progress
-            .bind(to: progressView.rx.progress)
+            .bind(to: progressView.rx.totalProgress)
             .disposed(by: disposeBag)
         
         viewModel.isUploading
@@ -197,11 +197,11 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
             .disposed(by: disposeBag)
         
         viewModel.hideUploadingBar
-            .bind(to: progressContainerView.rx.isHidden, progressLabel.rx.isHidden)
+            .bind(to: progressView.rx.isHidden)
             .disposed(by: disposeBag)
         
         viewModel.progressString
-            .bind(to: progressLabel.rx.text)
+            .bind(to: progressView.rx.text)
             .disposed(by: disposeBag)
             
         viewModel.selectedMedia
