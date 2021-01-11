@@ -16,16 +16,7 @@ class ProfileDetailViewModel : ViewModel {
         case profileInfo(profileImage: UIImage, subscribers: Int)
         case displayName(text: String)
         case biography(text: String)
-        case trailerVideo(trailerUrl: URL?)
-        
-        var row: Int {
-            switch self {
-            case .profileInfo: return 0
-            case .displayName: return 1
-            case .biography: return 2
-            case .trailerVideo: return 3
-            }
-        }
+        case trailerVideo(trailerUrl: URL?, uploadProgress: UploadProgress)        
     }
         
     let schedulers: Schedulers

@@ -15,6 +15,7 @@ class ProfileTrailerTableViewCell: UITableViewCell {
     let verticalStack = UIStackView()
     let videoPlayerView = VideoPlayerView()
     let selectButton = UIButton.standard(withTitle: LocalizedString.select)
+    let progressView = ProgressView()
     
     let disposeBag = DisposeBag()
 
@@ -39,7 +40,7 @@ class ProfileTrailerTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(trailerVideoUrl: URL?) {
+    func configure(trailerVideoUrl: URL?, uploadProgress: UploadProgress?) {
         if let trailerVideoUrl = trailerVideoUrl {
             verticalStack.addArrangedSubview(videoPlayerView)
             videoPlayerView.widthToSuperview()
@@ -51,5 +52,16 @@ class ProfileTrailerTableViewCell: UITableViewCell {
         verticalStack.addArrangedSubview(selectButton)
         selectButton.height(25)
         selectButton.width(100)
+        
+        verticalStack.addArrangedSubview(progressView)
+        progressView.widthToSuperview()
+        
+        progressView.isHidden = uploadProgress == nil
+        
+        #warning("If this is used else where, how about using an extension to update from UploadProgress?")
+        if let uploadProgress = uploadProgress {
+            progressView.progressText = uploadProgress.progressText
+            progressView.totalProgress = uploadProgress.totalProgress
+        }
     }
 }

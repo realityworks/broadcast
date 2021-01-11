@@ -111,10 +111,10 @@ class ProfileDetailViewController: ViewController {
                     .disposed(by: self.disposeBag)
                 
                 return cell
-            case let .trailerVideo(trailerVideoUrl):
+            case let .trailerVideo(trailerVideoUrl, uploadProgress):
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTrailerTableViewCell.identifier, for: indexPath) as! ProfileTrailerTableViewCell
                 
-                cell.configure(trailerVideoUrl: trailerVideoUrl)
+                cell.configure(trailerVideoUrl: trailerVideoUrl, uploadProgress: uploadProgress)
                 cell.selectButton.rx.tap
                     .subscribe(onNext: { [unowned self] _ in
                         self.showMediaOptionsMenu(forTag: PickerTags.trailer.rawValue)
@@ -156,9 +156,10 @@ class ProfileDetailViewController: ViewController {
             viewModel.displayNameObservable,
             viewModel.subscriberCount,
             viewModel.profileImage,
-            viewModel.trailerVideoUrl) {
+            viewModel.trailerVideoUrl,
+            viewModel.trailerUploadProgress) {
             
-            biography, displayName, subscribers, profileImage, trailerUrl -> [ProfileDetailSectionModel] in
+            biography, displayName, subscribers, profileImage, trailerUrl, trailerUploadProgress -> [ProfileDetailSectionModel] in
             
             return [
                 SectionModel(model: nil, items: [
@@ -168,7 +169,7 @@ class ProfileDetailViewController: ViewController {
                 SectionModel(model: LocalizedString.displayBio, items: [
                                 ProfileDetailViewModel.Row.biography(text: biography ?? String.empty)]),
                 SectionModel(model: LocalizedString.trailerVideo, items: [
-                                ProfileDetailViewModel.Row.trailerVideo(trailerUrl: trailerUrl)])
+                                ProfileDetailViewModel.Row.trailerVideo(trailerUrl: trailerUrl, uploadProgress: trailerUploadProgress)])
             ]
         }
                 

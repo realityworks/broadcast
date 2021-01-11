@@ -168,6 +168,7 @@
 		1DF1E26925A630FA0093A162 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 1DF1E26825A630FA0093A162 /* RxDataSources */; };
 		1DF58F502574CB9300563EC2 /* PostSummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF58F4F2574CB9200563EC2 /* PostSummaryViewModel.swift */; };
 		1DF5DD4C25ABF2FD009B0B30 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF5DD4B25ABF2FD009B0B30 /* ProgressView.swift */; };
+		1DF5DD5025AC8BB5009B0B30 /* UploadProgress+TextDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF5DD4F25AC8BB5009B0B30 /* UploadProgress+TextDescription.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -337,6 +338,7 @@
 		1DF0972F258114D8007FEE3C /* URLAPIQueryStringRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLAPIQueryStringRequest.swift; sourceTree = "<group>"; };
 		1DF58F4F2574CB9200563EC2 /* PostSummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSummaryViewModel.swift; sourceTree = "<group>"; };
 		1DF5DD4B25ABF2FD009B0B30 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		1DF5DD4F25AC8BB5009B0B30 /* UploadProgress+TextDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadProgress+TextDescription.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -636,6 +638,7 @@
 				1D9256EC257F635000E988B2 /* NewPost.swift */,
 				1D63169A258B99DB0009A4E1 /* UploadProgress.swift */,
 				1D6316AA258C679D0009A4E1 /* UploadEvent.swift */,
+				1DF5DD4F25AC8BB5009B0B30 /* UploadProgress+TextDescription.swift */,
 			);
 			path = State;
 			sourceTree = "<group>";
@@ -1039,6 +1042,7 @@
 				1D3B2A392564F0D5001874FD /* PersistanceService.swift in Sources */,
 				1D7C4949259B2FB70089EA6B /* InsetTextField.swift in Sources */,
 				1DD1FE1D256D6F7300C598CE /* AuthenticateResponse.swift in Sources */,
+				1DF5DD5025AC8BB5009B0B30 /* UploadProgress+TextDescription.swift in Sources */,
 				1D916D8D256404ED0059E549 /* Profile.swift in Sources */,
 				1D87DF9B25683B53000652D6 /* ProfileViewModel.swift in Sources */,
 				1DE3DA382575506100A7A1F7 /* UIViewController+Extensions.swift in Sources */,

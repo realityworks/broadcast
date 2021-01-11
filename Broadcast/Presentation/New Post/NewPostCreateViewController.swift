@@ -201,7 +201,7 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
             .bind(to: progressView.rx.isHidden)
             .disposed(by: disposeBag)
         
-        viewModel.progressString
+        viewModel.progressText
             .bind(to: progressView.rx.text)
             .disposed(by: disposeBag)
             
