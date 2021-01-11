@@ -7,6 +7,8 @@
 
 import UIKit
 import TinyConstraints
+import RxSwift
+import RxCocoa
 
 protocol Progress {
     var progressText: String { get set }
@@ -15,9 +17,9 @@ protocol Progress {
 
 
 class ProgressView : UIView, Progress {
-    private let progressContainerView = UIView()
-    private let progressView = UIProgressView()
-    private let progressLabel = UILabel.tinyBody()
+    fileprivate let progressContainerView = UIView()
+    fileprivate let progressView = UIProgressView()
+    fileprivate let progressLabel = UILabel.tinyBody()
 
     var progressText: String {
         set {
@@ -77,5 +79,21 @@ class ProgressView : UIView, Progress {
         progressLabel.topToBottom(of: progressContainerView)
         progressLabel.widthToSuperview()
         progressLabel.height(16)
+    }
+}
+
+
+extension Reactive where Base : ProgressView {
+    /// Reactive wrapper for `Title Text` property.
+    var text: Binder<String> {
+        Binder(base) { progress, text in
+            progress.progressText = text
+        }
+    }
+
+    var totalProgress: Binder<Float> {
+        Binder(base) { progress, totalProgress in
+            progress.totalProgress = totalProgress
+        }
     }
 }
