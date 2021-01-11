@@ -40,7 +40,7 @@ class ProfileTrailerTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(trailerVideoUrl: URL?, uploadProgress: UploadProgress?) {
+    func configure(trailerVideoUrl: URL?) {
         if let trailerVideoUrl = trailerVideoUrl {
             verticalStack.addArrangedSubview(videoPlayerView)
             videoPlayerView.widthToSuperview()
@@ -50,18 +50,13 @@ class ProfileTrailerTableViewCell: UITableViewCell {
         }
         
         verticalStack.addArrangedSubview(selectButton)
-        selectButton.height(25)
+        selectButton.height(50)
         selectButton.width(100)
+        verticalStack.addSpace(16)
         
         verticalStack.addArrangedSubview(progressView)
+        
         progressView.widthToSuperview()
-        
-        progressView.isHidden = uploadProgress == nil
-        
-        #warning("If this is used else where, how about using an extension to update from UploadProgress?")
-        if let uploadProgress = uploadProgress {
-            progressView.progressText = uploadProgress.progressText
-            progressView.totalProgress = uploadProgress.totalProgress
-        }
+        progressView.height(32)
     }
 }

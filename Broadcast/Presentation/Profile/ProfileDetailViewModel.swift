@@ -16,7 +16,7 @@ class ProfileDetailViewModel : ViewModel {
         case profileInfo(profileImage: UIImage, subscribers: Int)
         case displayName(text: String)
         case biography(text: String)
-        case trailerVideo(trailerUrl: URL?, uploadProgress: UploadProgress)        
+        case trailerVideo(trailerUrl: URL?)
     }
         
     let schedulers: Schedulers
@@ -31,13 +31,18 @@ class ProfileDetailViewModel : ViewModel {
     let biographyObservable: Observable<String?>
     let biographySubject = BehaviorRelay<String?>(value: nil)
     
-    let trailerUploadProgress: Observable<UploadProgress>
+    private let isUploadingSubject = BehaviorSubject<Bool>(value: false)
+    let isUploading: Observable<Bool>
+    let progress: Observable<Float>
+    let progressText: Observable<String>
+    let hideUploadingBar: Observable<Bool>
     
     init(dependencies: Dependencies = .standard) {
         
         self.schedulers = dependencies.schedulers
         self.profileUseCase = dependencies.profileUseCase
         
+        let uploadingProgressObservable = dependencies.trailerUploadProgress.compactMap { $0 }
         let profileObservable = dependencies.profileObservable.compactMap { $0 }
         displayNameObservable = profileObservable.map { $0.displayName }
         biographyObservable = profileObservable.map { $0.biography ?? String.empty }
@@ -47,7 +52,18 @@ class ProfileDetailViewModel : ViewModel {
         
         self.trailerVideoUrl = profileObservable.map { URL(string: $0.trailerVideoUrl) }
         
-        self.trailerUploadProgress = dependencies.trailerUploadProgress.compactMap { $0 }
+        isUploading = isUploadingSubject.asObservable()
+        hideUploadingBar = Observable.combineLatest(isUploading, dependencies.trailerUploadProgress) { isUploading, uploadProgress in
+            return !(isUploading || (uploadProgress?.completed ?? false) || (uploadProgress?.failed ?? false))
+        }
+
+        progress = uploadingProgressObservable.map { $0.totalProgress }
+        
+        /// We don't want the compact map version, handle different case upload progress
+        progressText = dependencies.trailerUploadProgress.map { uploadProgress in
+            guard let uploadProgress = uploadProgress else { return UploadProgress.initialProgressText }
+            return uploadProgress.progressText
+        }
         
         super.init(stateController: dependencies.stateController)
         
@@ -57,6 +73,12 @@ class ProfileDetailViewModel : ViewModel {
         
         biographyObservable
             .subscribe(onNext: { self.biographySubject.accept($0) })
+            .disposed(by: disposeBag)
+        
+        uploadingProgressObservable
+            .map { !($0.completed || $0.failed) }
+            .distinctUntilChanged()
+            .bind(to: self.isUploadingSubject)
             .disposed(by: disposeBag)
     }
 }
@@ -117,6 +139,7 @@ extension ProfileDetailViewModel {
     }
     
     func trailerSelected(withUrl url: URL) {
+        isUploadingSubject.onNext(true)
         profileUseCase.uploadTrailer(withUrl: url)
     }
 }
