@@ -18,6 +18,11 @@ class ProfileDetailViewController: ViewController {
     private let viewModel = ProfileDetailViewModel()
     
     let tableView = UITableView(frame: .zero, style: .grouped)
+    let titleHeaderView = UIView()
+    let titleLabel = UILabel.text(.profileDetailHeading,
+                                  font: .tableTitle,
+                                  textColor: .primaryLightGrey)
+    let headingSeparator = UIView()
     
     // MARK: UIPickerController
     enum PickerTags: PickerTag {
@@ -32,15 +37,26 @@ class ProfileDetailViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        title = "Profile Detail"
-        
         configureViews()
         configureLayout()
         configureBindings()
     }
     
     private func configureViews() {
+        view.backgroundColor = UIColor.secondaryWhite
+        
+        // Setup table view the header
+        titleHeaderView.frame = CGRect(x: 0, y: 0, width: 200, height: 96)
+        tableView.tableHeaderView = titleHeaderView
+
+        titleHeaderView.addSubview(titleLabel)
+        titleLabel.edgesToSuperview(excluding: [.left, .right])
+        titleLabel.leftToSuperview(offset: 22)
+        
+        titleHeaderView.addSubview(headingSeparator)
+        headingSeparator.edgesToSuperview(excluding: [.top])
+        headingSeparator.height(1)
+        
         // Configure Views
         
         // Register the required cells for the view
@@ -152,17 +168,30 @@ class ProfileDetailViewController: ViewController {
                 return UITableView.automaticDimension
             }
         }
-        datasource.heightForHeaderInSection = { _, _ -> CGFloat in
-            ProfileSectionHeaderCell.cellHeight
+        
+        datasource.heightForHeaderInSection = { datasource, section -> CGFloat in
+            switch section {
+            /// The first cell (No header)
+            case 0:
+                return 0
+            default:
+                return ProfileSectionHeaderCell.cellHeight
+            }
         }
         
         datasource.viewForHeaderInSection = { datasource, tableView, section in
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: ProfileSectionHeaderCell.identifier) as? ProfileSectionHeaderCell else { return nil }
-            
-            let sectionTitle = datasource.sectionModels[section].model
-            cell.label.text = sectionTitle?.localized
-            
-            return cell
+            switch section {
+            /// The first cell (No header)
+            case 0:
+                return nil
+            default:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: ProfileSectionHeaderCell.identifier) as? ProfileSectionHeaderCell else { return nil }
+                
+                let sectionTitle = datasource.sectionModels[section].model
+                cell.label.text = sectionTitle?.localized
+                
+                return cell
+            }
         }
         
         let items = Observable.combineLatest(
