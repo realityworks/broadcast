@@ -65,22 +65,25 @@ extension StateController {
             .observe(on: schedulers.main)
     }
     
+    private func errorString(from error: Error) -> String {
+        if let boomDayError = error as? BoomdayError {
+            return boomDayError.localizedDescription
+        }
+        
+        return error.localizedDescription
+    }
+    
     /// Get an observable on any errors that are propagated
     /// - Returns: An observable on errors in the app.
     func errorStringObservable() -> Observable<String> {
         return errorSubject
             .asObservable()
-            .map {
-                if let boomDayError = $0 as? BoomdayError {
-                    return boomDayError.localizedDescription
-                }
-                
-                return $0.localizedDescription
-            }
+            .map { self.errorString(from: $0) }
             .observe(on: schedulers.main)
     }
     
     func sendError(_ error: Error) {
+        Logger.log(level: .warning, topic: .debug, message: errorString(from: error))
         errorSubject.accept(error)
     }
     

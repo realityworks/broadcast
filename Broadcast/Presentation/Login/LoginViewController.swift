@@ -86,6 +86,7 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         
         activityIndicator.style = .medium
         activityIndicator.color = .primaryBlack
+        activityIndicator.hidesWhenStopped = true
         
         contentStackView.axis = .vertical
         contentStackView.alignment = .center
@@ -111,8 +112,6 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         passwordTextField.leftView = passwordIcon
         passwordTextField.leftViewMode = .always
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
-        
-        activityIndicator.hidesWhenStopped = true
         
         if Configuration.debugUIEnabled {
             usernameTextField.text = testUserName

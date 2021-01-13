@@ -11,6 +11,8 @@ import RxCocoa
 
 class PostDetailViewModel : ViewModel {
     
+    
+    let schedulers: Schedulers
     private let postContentUseCase: PostContentUseCase
     private let isEditingSubject = BehaviorRelay<Bool>(value: false)
     
@@ -23,6 +25,9 @@ class PostDetailViewModel : ViewModel {
     let isDeleting: Observable<Bool>
     
     init(dependencies: Dependencies = .standard) {
+        
+        self.schedulers = dependencies.schedulers
+        
         let postObservable = Observable.combineLatest(
             dependencies.myPosts,
             dependencies.selectedPostId) { myPosts, selectedPostId in
@@ -44,6 +49,7 @@ class PostDetailViewModel : ViewModel {
         }
         
         self.postContentUseCase = dependencies.postContentUseCase
+        self.isDeleting = isDeletingRelay.asObservable()
         
         super.init(stateController: dependencies.stateController)
         
@@ -61,11 +67,15 @@ extension PostDetailViewModel {
     
     func deletePost() {
         guard let postId = postIdRelay.value else { return }
+        isDeletingRelay.accept(true)
         postContentUseCase.deletePost(with: postId)
-            .subscribe {
-                // TODO - This will need to set off push back to the previous screen on the stack
+            .subscribe(onCompleted: {
+                self.postContentUseCase.retrieveMyPosts()
+                self.isDeletingRelay.accept(false)
                 self.deletedSubject.onNext(())
-            }
+            }, onError: { _ in
+                self.isDeletingRelay.accept(false)
+            })
             .disposed(by: disposeBag)
 
     }
@@ -76,12 +86,14 @@ extension PostDetailViewModel {
     struct Dependencies {
         
         let stateController: StateController
+        let schedulers: Schedulers
         let postContentUseCase: PostContentUseCase
         let myPosts: Observable<[Post]>
         let selectedPostId: Observable<PostID?>
         
         static let standard = Dependencies(
             stateController: StateController.standard,
+            schedulers: Schedulers.standard,
             postContentUseCase: Domain.standard.useCases.postContentUseCase,
             myPosts: Domain.standard.stateController.stateObservable(of: \.myPosts),
             selectedPostId: Domain.standard.stateController.stateObservable(of: \.selectedPostId))

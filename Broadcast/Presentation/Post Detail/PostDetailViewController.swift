@@ -38,6 +38,10 @@ class PostDetailViewController: ViewController {
         deleteButtonContainer.backgroundColor = .clear
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
+        
+        activityIndicator.style = .medium
+        activityIndicator.color = .primaryBlack
+        activityIndicator.hidesWhenStopped = false
     }
     
     private func configureLayout() {
@@ -59,6 +63,10 @@ class PostDetailViewController: ViewController {
         
         deleteButtonContainer.addSubview(deleteButton)
         deleteButton.centerInSuperview()
+        
+        deleteButtonContainer.addSubview(activityIndicator)
+        activityIndicator.leftToRight(of: deleteButton, offset: 10)
+        activityIndicator.centerYToSuperview()
     }
     
     private func configureBindings() {
@@ -70,7 +78,23 @@ class PostDetailViewController: ViewController {
         
         deleteButton.rx.tap
             .subscribe(onNext: { _ in
-                
+                self.viewModel.deletePost()
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.isDeleting
+            .bind(to: activityIndicator.rx.isAnimating)
+            .disposed(by: disposeBag)
+        
+        viewModel.isDeleting
+            .map { !$0 }
+            .bind(to: deleteButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        viewModel.deletedSubject
+            .delay(.milliseconds(10), scheduler: viewModel.schedulers.main)
+            .subscribe(onNext: { _ in
+                self.navigationController?.popViewController(animated: true)
             })
             .disposed(by: disposeBag)
     }

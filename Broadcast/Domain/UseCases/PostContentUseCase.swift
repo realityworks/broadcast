@@ -93,11 +93,14 @@ extension PostContentUseCase {
     
     func retrieveMyPosts() {
         // Load posts into the app state
+        stateController.state.isLoadingPosts = true
         apiService.loadMyPosts()
             .subscribe(onSuccess: { [unowned self] response in
+                self.stateController.state.isLoadingPosts = false
                 self.stateController.state.myPosts = response
             }, onFailure: { [unowned self] error in
                 Logger.log(level: .warning, topic: .api, message: "Failed to load posts \(error)")
+                self.stateController.state.isLoadingPosts = false
                 self.stateController.sendError(error)
                 self.stateController.state.myPosts = []
             })

@@ -20,7 +20,8 @@ struct State : Equatable {
     
     var selectedPostId: PostID?
     
-    
+    // Managing the global loading state
+    var isLoadingPosts: Bool = false
     var currentMediaUploadProgress: UploadProgress?
     var currentTrailerUploadProgress: UploadProgress?
 }
