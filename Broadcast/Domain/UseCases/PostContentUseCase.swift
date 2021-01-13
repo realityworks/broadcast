@@ -108,10 +108,11 @@ extension PostContentUseCase {
     }
     
     func deletePost(with postId: PostID) -> Completable {
-        #warning("Add Remove post from local state!")
-        return apiService.deletePost(with: postId).do { error in
+        return apiService.deletePost(with: postId).do(onError: { error in
                 self.stateController.sendError(error)
-            }
+            }, onCompleted: {
+                self.stateController.state.myPosts.removeAll(where: { $0.id == postId })
+            })
             .observe(on: schedulers.main)
 
     }
