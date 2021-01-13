@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import SwiftRichString
 
 class ProfileInfoTableViewCell: UITableViewCell {
     static let identifier: String = "ProfileInfoTableViewCell"
@@ -21,6 +22,8 @@ class ProfileInfoTableViewCell: UITableViewCell {
     let displayNameLabel = UILabel.text(font: .tableTitle,
                                         textColor: .primaryLightGrey)
     let subscriberDetailContainerStackView = UIStackView()
+    
+    let subscribersImageContainer = UIView()
     let subscribersImage = UIImageView(image: .iconRadio)
     let subscribersLabel = UILabel()
 
@@ -41,12 +44,12 @@ class ProfileInfoTableViewCell: UITableViewCell {
         containerStackView.spacing = 0
         
         subscribersContainerStackView.axis = .vertical
-        subscribersContainerStackView.spacing = 5
+        subscribersContainerStackView.spacing = 10
         subscribersContainerStackView.alignment = .leading
         subscribersContainerStackView.distribution = .fillEqually
         
         subscriberDetailContainerStackView.axis = .horizontal
-        subscriberDetailContainerStackView.spacing = 4
+        subscriberDetailContainerStackView.spacing = 0
         subscriberDetailContainerStackView.distribution = .equalSpacing
         
         contentView.addSubview(containerStackView)
@@ -65,8 +68,13 @@ class ProfileInfoTableViewCell: UITableViewCell {
         subscribersContainerStackView.addArrangedSubview(displayNameLabel)
         subscribersContainerStackView.addArrangedSubview(subscriberDetailContainerStackView)
         
-        subscriberDetailContainerStackView.addArrangedSubview(subscribersImage)
+        subscriberDetailContainerStackView.addArrangedSubview(subscribersImageContainer)
         subscriberDetailContainerStackView.addArrangedSubview(subscribersLabel)
+        
+        subscribersImageContainer.addSubview(subscribersImage)
+        subscribersImage.height(20)
+        subscribersImage.edgesToSuperview()
+        subscribersImage.contentMode = .scaleAspectFit
         
         thumbnailImageView.contentMode = .scaleAspectFit
         thumbnailImageView.height(100)
@@ -83,6 +91,8 @@ class ProfileInfoTableViewCell: UITableViewCell {
     func configure(withProfileImage profileImage: UIImage, displayName: String, subscribers: Int) {
         thumbnailImageView.image = profileImage
         displayNameLabel.text = displayName
-        subscribersLabel.text = "\(subscribers) Subscribers"
+        subscribersLabel.attributedText =
+            (" \(subscribers) ").set(style: Style.smallBody) +
+            LocalizedString.subscribers.localized.set(style: Style.smallBody).set(style: Style.lightGrey)
     }
 }

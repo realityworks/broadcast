@@ -57,8 +57,6 @@ extension UIButton {
     static func with(image: UIImage?) -> UIButton {
         let button = UIButton()
         button.setImage(image, for: .normal)
-        button.setImage(image?.withRenderingMode(.alwaysTemplate).withTintColor(.primaryLightGrey), for: .disabled)
-        button.setImage(image?.withRenderingMode(.alwaysTemplate).withTintColor(.darkGrey), for: .highlighted)
         return button
     }
 }
