@@ -58,7 +58,6 @@ class ProfileDetailViewController: ViewController {
         headingSeparator.height(1)
         
         // Configure Views
-        
         // Register the required cells for the view
         tableView.register(ProfileInfoTableViewCell.self,
                            forCellReuseIdentifier: ProfileInfoTableViewCell.identifier)
@@ -97,9 +96,11 @@ class ProfileDetailViewController: ViewController {
         let datasource = ReactiveTableViewModelSource<ProfileDetailSectionModel>(configureCell: { _, tableView, indexPath, row -> UITableViewCell in
             
             switch row {
-            case let .profileInfo(profileImage, subscribers):
+            case let .profileInfo(profileImage, displayName, subscribers):
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileInfoTableViewCell.identifier, for: indexPath) as! ProfileInfoTableViewCell
-                cell.configure(withProfileImage: profileImage, subscribers: subscribers)
+                cell.configure(withProfileImage: profileImage,
+                               displayName: displayName,
+                               subscribers: subscribers)
                 cell.changeThumbnailButton.rx.tap
                     .subscribe(onNext: {
                         self.showMediaOptionsMenu(forTag: PickerTags.profileImage.rawValue)
@@ -143,7 +144,6 @@ class ProfileDetailViewController: ViewController {
                 self.viewModel.progress
                     .bind(to: cell.progressView.rx.totalProgress)
                     .disposed(by: cell.disposeBag)
-                
                 
                 cell.selectButton.rx.tap
                     .subscribe(onNext: { [unowned self] _ in
@@ -205,7 +205,9 @@ class ProfileDetailViewController: ViewController {
             
             return [
                 SectionModel(model: nil, items: [
-                                ProfileDetailViewModel.Row.profileInfo(profileImage: profileImage, subscribers: subscribers)]),
+                                ProfileDetailViewModel.Row.profileInfo(profileImage: profileImage,
+                                                                       displayName: displayName ?? String.empty,
+                                                                       subscribers: subscribers)]),
                 SectionModel(model: LocalizedString.displayName, items: [
                                 ProfileDetailViewModel.Row.displayName(text: displayName ?? String.empty)]),
                 SectionModel(model: LocalizedString.displayBio, items: [

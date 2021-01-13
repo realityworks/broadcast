@@ -17,6 +17,7 @@ extension UIImage {
     static let iconCustomBrightness = UIImage(named: "icon-custom-brightness")
     static let iconCustomPortraitMode = UIImage(named: "icon-custom-portrait-mode")
     static let iconCustomTimer = UIImage(named: "icon-custom-timer")
+    static let iconCustomCamera = UIImage(named: "icon-custom-camera")
     static let iconDocument = UIImage(named: "icon-file-text")
     static let iconEye = UIImage(named: "icon-eye")
     static let iconHelp = UIImage(named: "icon-help-circle")

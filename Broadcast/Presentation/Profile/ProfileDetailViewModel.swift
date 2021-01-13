@@ -13,7 +13,7 @@ import RxCocoa
 class ProfileDetailViewModel : ViewModel {
     
     enum Row {
-        case profileInfo(profileImage: UIImage, subscribers: Int)
+        case profileInfo(profileImage: UIImage, displayName: String, subscribers: Int)
         case displayName(text: String)
         case biography(text: String)
         case trailerVideo(trailerUrl: URL?)

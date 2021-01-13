@@ -10,16 +10,19 @@ import RxSwift
 
 class ProfileInfoTableViewCell: UITableViewCell {
     static let identifier: String = "ProfileInfoTableViewCell"
-    static let cellHeight: CGFloat = 120
+    static let cellHeight: CGFloat = 150
     
     let containerStackView = UIStackView()
-    let thumbnailContainerStackView = UIStackView()
+    let thumbnailImageContainer = UIView()
     let thumbnailImageView = UIImageView()
-    let changeThumbnailButton = UIButton.text(withTitle: LocalizedString.change)
+    let changeThumbnailButton = UIButton.with(image: .iconCustomCamera)
     
     let subscribersContainerStackView = UIStackView()
-    let subscribersCountLabel = UILabel.largeTitle()
-    let subscribersTitleLabel = UILabel.body(LocalizedString.subscribers)
+    let displayNameLabel = UILabel.text(font: .tableTitle,
+                                        textColor: .primaryLightGrey)
+    let subscriberDetailContainerStackView = UIStackView()
+    let subscribersImage = UIImageView(image: .iconRadio)
+    let subscribersLabel = UILabel()
 
     override init(style: UITableViewCell.CellStyle,
                   reuseIdentifier: String?) {
@@ -33,36 +36,53 @@ class ProfileInfoTableViewCell: UITableViewCell {
     
     private func configureViews() {
         containerStackView.axis = .horizontal
-        containerStackView.distribution = .fillEqually
-        containerStackView.spacing = 5
-        
-        thumbnailContainerStackView.axis = .vertical
-        thumbnailContainerStackView.spacing = 10
-        thumbnailContainerStackView.alignment = .center
+        containerStackView.alignment = .center
+        containerStackView.distribution = .fillProportionally
+        containerStackView.spacing = 0
         
         subscribersContainerStackView.axis = .vertical
         subscribersContainerStackView.spacing = 5
-        subscribersContainerStackView.alignment = .center
-        subscribersContainerStackView.distribution = .fillProportionally
+        subscribersContainerStackView.alignment = .leading
+        subscribersContainerStackView.distribution = .fillEqually
+        
+        subscriberDetailContainerStackView.axis = .horizontal
+        subscriberDetailContainerStackView.spacing = 4
+        subscriberDetailContainerStackView.distribution = .equalSpacing
         
         contentView.addSubview(containerStackView)
         containerStackView.edgesToSuperview()
         
-        containerStackView.addArrangedSubview(thumbnailContainerStackView)
+        containerStackView.addSpace(24)
+        containerStackView.addArrangedSubview(thumbnailImageContainer)
+        containerStackView.addSpace(16)
         containerStackView.addArrangedSubview(subscribersContainerStackView)
         
-        thumbnailContainerStackView.addArrangedSubview(thumbnailImageView)
-        thumbnailContainerStackView.addArrangedSubview(changeThumbnailButton)
+        thumbnailImageContainer.addSubview(thumbnailImageView)
+        thumbnailImageView.centerInSuperview()
+        thumbnailImageContainer.height(100)
+        thumbnailImageContainer.width(100)
         
-        subscribersContainerStackView.addArrangedSubview(subscribersCountLabel)
-        subscribersContainerStackView.addArrangedSubview(subscribersTitleLabel)
+        subscribersContainerStackView.addArrangedSubview(displayNameLabel)
+        subscribersContainerStackView.addArrangedSubview(subscriberDetailContainerStackView)
+        
+        subscriberDetailContainerStackView.addArrangedSubview(subscribersImage)
+        subscriberDetailContainerStackView.addArrangedSubview(subscribersLabel)
         
         thumbnailImageView.contentMode = .scaleAspectFit
         thumbnailImageView.height(100)
+        thumbnailImageView.width(100)
+        
+        thumbnailImageView.layer.cornerRadius = 50
+        thumbnailImageView.clipsToBounds = true
+        
+        contentView.addSubview(changeThumbnailButton)
+        changeThumbnailButton.right(to: thumbnailImageView)
+        changeThumbnailButton.bottom(to: thumbnailImageView)
     }
     
-    func configure(withProfileImage profileImage: UIImage, subscribers: Int) {
+    func configure(withProfileImage profileImage: UIImage, displayName: String, subscribers: Int) {
         thumbnailImageView.image = profileImage
-        subscribersCountLabel.text = "\(subscribers)"
+        displayNameLabel.text = displayName
+        subscribersLabel.text = "\(subscribers) Subscribers"
     }
 }
