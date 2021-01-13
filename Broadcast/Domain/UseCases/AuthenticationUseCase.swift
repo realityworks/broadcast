@@ -76,6 +76,8 @@ extension AuthenticationUseCase {
                         refreshToken: authenticationResponse.refreshToken)
                     self.stateController.state.authenticationState = AuthenticationState.loggedIn
                 }, afterError: { error in
+                    Logger.log(level: .warning, topic: .debug, message: "Error during login: \(error)")
+                    self.stateController.sendError(error)
                     self.stateController.state.authenticationState = AuthenticationState.loggedOut
                 })
             .observe(on: schedulers.main)

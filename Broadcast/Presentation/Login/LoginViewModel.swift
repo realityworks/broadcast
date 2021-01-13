@@ -79,8 +79,6 @@ extension LoginViewModel {
                 #warning("We should only be able to login once load profile has finished loading...")
                 self.profileUseCase.loadProfile()
             } onError: { error in
-                Logger.log(level: .warning, topic: .debug, message: "Error during login: \(error)")
-                self.stateController.sendError(error)
                 self.isLoadingSubject.accept(false)
                 self.isErrorHiddenSubject.accept(false)
             }
