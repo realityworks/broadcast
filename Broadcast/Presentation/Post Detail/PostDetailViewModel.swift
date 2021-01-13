@@ -24,6 +24,9 @@ class PostDetailViewModel : ViewModel {
     private let isDeletingRelay = BehaviorRelay<Bool>(value: false)
     let isDeleting: Observable<Bool>
     
+    private let deleteButtonEnabledRelay = BehaviorRelay<Bool>(value: true)
+    let deleteButtonEnabled: Observable<Bool>
+    
     init(dependencies: Dependencies = .standard) {
         
         self.schedulers = dependencies.schedulers
@@ -50,6 +53,7 @@ class PostDetailViewModel : ViewModel {
         
         self.postContentUseCase = dependencies.postContentUseCase
         self.isDeleting = isDeletingRelay.asObservable()
+        self.deleteButtonEnabled = deleteButtonEnabledRelay.asObservable()
         
         super.init(stateController: dependencies.stateController)
         
@@ -68,12 +72,14 @@ extension PostDetailViewModel {
     func deletePost() {
         guard let postId = postIdRelay.value else { return }
         isDeletingRelay.accept(true)
+        deleteButtonEnabledRelay.accept(false)
         postContentUseCase.deletePost(with: postId)
             .subscribe(onCompleted: {
                 self.postContentUseCase.retrieveMyPosts()
                 self.isDeletingRelay.accept(false)
                 self.deletedSubject.onNext(())
             }, onError: { _ in
+                self.deleteButtonEnabledRelay.accept(true)
                 self.isDeletingRelay.accept(false)
             })
             .disposed(by: disposeBag)

@@ -86,13 +86,11 @@ class PostDetailViewController: ViewController {
             .bind(to: activityIndicator.rx.isAnimating)
             .disposed(by: disposeBag)
         
-        viewModel.isDeleting
-            .map { !$0 }
+        viewModel.deleteButtonEnabled
             .bind(to: deleteButton.rx.isEnabled)
             .disposed(by: disposeBag)
         
         viewModel.deletedSubject
-            //.delay(.milliseconds(10), scheduler: viewModel.schedulers.main)
             .subscribe(onNext: { _ in
                 self.navigationController?.popViewController(animated: true)
             })
