@@ -50,6 +50,7 @@ extension UIButton {
     static func textDestructive(withTitle title: LocalizedString? = nil) -> UIButton {
         let button = UIButton.text(withTitle: title?.localized)
         button.setTitleColor(.primaryRed, for: .normal)
+        button.setTitleColor(.primaryLightGrey, for: .disabled)
         button.titleLabel?.font = UIFont.bodyBold
         return button
     }

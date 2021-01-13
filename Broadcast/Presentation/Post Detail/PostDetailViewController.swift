@@ -41,7 +41,7 @@ class PostDetailViewController: ViewController {
         
         activityIndicator.style = .medium
         activityIndicator.color = .primaryBlack
-        activityIndicator.hidesWhenStopped = false
+        activityIndicator.hidesWhenStopped = true
     }
     
     private func configureLayout() {
@@ -92,7 +92,7 @@ class PostDetailViewController: ViewController {
             .disposed(by: disposeBag)
         
         viewModel.deletedSubject
-            .delay(.milliseconds(10), scheduler: viewModel.schedulers.main)
+            //.delay(.milliseconds(10), scheduler: viewModel.schedulers.main)
             .subscribe(onNext: { _ in
                 self.navigationController?.popViewController(animated: true)
             })
