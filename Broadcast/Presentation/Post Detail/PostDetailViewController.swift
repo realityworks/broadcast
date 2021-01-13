@@ -12,6 +12,7 @@ class PostDetailViewController: ViewController {
     
     // MARK: - UI Components
     let verticalStackView = UIStackView()
+    let deleteButton = UIButton.textDestructive(withTitle: LocalizedString.deletePost)
     var postSummaryView: PostSummaryView!
     
     override func viewDidLoad() {

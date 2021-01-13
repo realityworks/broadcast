@@ -88,6 +88,7 @@ enum LocalizedString : String {
     case post
     case myProfile
     case version
+    case deletePost
     
     var localized: String {
         return Bundle.main.localizedString(forKey: self.rawValue, value: nil, table: nil)
