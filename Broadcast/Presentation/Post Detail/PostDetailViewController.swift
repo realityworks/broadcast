@@ -40,6 +40,7 @@ class PostDetailViewController: ViewController {
         // Layout the subviews
         view.addSubview(verticalStackView)
         verticalStackView.addArrangedSubview(postSummaryView)
+        verticalStackView.addSpace(40)
         verticalStackView.addArrangedSubview(deleteButton)
         
         verticalStackView.edgesToSuperview(excluding: [.bottom], usingSafeArea: true)
