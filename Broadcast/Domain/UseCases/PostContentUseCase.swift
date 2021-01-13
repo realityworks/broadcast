@@ -89,4 +89,18 @@ extension PostContentUseCase {
             })
             .disposed(by: disposeBag)
     }
+    
+    func deletePost(with postId: PostID) -> Completable {
+        apiService.deletePost(with: postId)
+            .subscribe(onSuccess: { [unowned self] response in
+                self.stateController.state.myPosts = response
+            }, onFailure: { [unowned self] error in
+                Logger.log(level: .warning, topic: .api, message: "Failed to load posts \(error)")
+                if let error = error as? BoomdayError {
+                    self.stateController.sendError(error)
+                }
+                self.stateController.state.myPosts = []
+            })
+            .disposed(by: disposeBag)
+    }
 }
