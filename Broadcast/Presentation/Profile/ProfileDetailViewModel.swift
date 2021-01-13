@@ -115,10 +115,10 @@ extension ProfileDetailViewModel {
                                      biography: biography)
             .subscribe(onCompleted: {
                 // Mark as update complete (loader)
-                print("Profile update returned success!")
+                Logger.log(level: .info, topic: .debug, message: "Updated profile sucessfully!")
             }, onError: { [unowned self] error in
                 self.stateController.sendError(error)
-                Logger.log(level: .warning, topic: .authentication, message: "Unable to update the broadcaster profile: \(error)")
+                Logger.log(level: .warning, topic: .debug, message: "Unable to update the broadcaster profile: \(error)")
             })
             .disposed(by: disposeBag)
     }
