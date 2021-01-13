@@ -24,6 +24,7 @@ protocol APIService {
     func uploadTrailerComplete() -> Completable
     
     func loadMyPosts() -> Single<LoadMyPostsResponse>
+    func deletePost(with postId: PostID) -> Completable
     func loadProfile() -> Single<LoadProfileResponse>
     func updateProfile(withDisplayName displayName: String, biography: String) -> Completable
     func uploadProfileImage(withData: Data) -> Observable<RxProgress>

@@ -235,7 +235,7 @@ extension StandardAPIService : APIService {
             .emptyResponseBody()
     }
     
-    // MARK: Content loading
+    // MARK: Content Management
     
     func loadMyPosts() -> Single<LoadMyPostsResponse> {
         let url = baseUrl
@@ -254,6 +254,16 @@ extension StandardAPIService : APIService {
         
         return authenticatedRequest(method: .get, url: url, encoding: URLEncoding.default)
             .decode(type: LoadProfileResponse.self)
+    }
+    
+    func deletePost(with postId: PostID) -> Completable {
+        let url = baseUrl
+            .appendingPathComponent("broadcaster")
+            .appendingPathComponent("posts")
+            .appendingPathComponent(postId)
+        
+        return authenticatedRequest(method: .delete, url: url, encoding: URLEncoding.default)
+            .emptyResponseBody()
     }
     
     // MARK: Update the user profile

@@ -18,10 +18,12 @@ class PostContentUseCase {
     
     let apiService: APIService
     private let uploadService: UploadService
+    private let schedulers: Schedulers
     
-    init(apiService: APIService, uploadService: UploadService) {
-        self.apiService = apiService
-        self.uploadService = uploadService
+    init(dependencies: Dependencies = .standard) {
+        self.apiService = dependencies.apiService
+        self.uploadService = dependencies.uploadService
+        self.schedulers = dependencies.schedulers
     }
 }
 
@@ -38,11 +40,16 @@ extension PostContentUseCase : StateControllerInjector {
 // MARK: - Instances
 
 extension PostContentUseCase {
-    static let standard = {
-        return PostContentUseCase(
+    struct Dependencies {
+        let apiService: APIService
+        let uploadService: UploadService
+        let schedulers: Schedulers
+        
+        static let standard = Dependencies(
             apiService: Services.standard.apiService,
-            uploadService: Services.standard.uploadService)
-    }()
+            uploadService: Services.standard.uploadService,
+            schedulers: Schedulers.standard)
+    }
 }
 
 // MARK: - Functions
@@ -82,25 +89,17 @@ extension PostContentUseCase {
                 self.stateController.state.myPosts = response
             }, onFailure: { [unowned self] error in
                 Logger.log(level: .warning, topic: .api, message: "Failed to load posts \(error)")
-                if let error = error as? BoomdayError {
-                    self.stateController.sendError(error)
-                }
+                self.stateController.sendError(error)
                 self.stateController.state.myPosts = []
             })
             .disposed(by: disposeBag)
     }
     
     func deletePost(with postId: PostID) -> Completable {
-        apiService.deletePost(with: postId)
-            .subscribe(onSuccess: { [unowned self] response in
-                self.stateController.state.myPosts = response
-            }, onFailure: { [unowned self] error in
-                Logger.log(level: .warning, topic: .api, message: "Failed to load posts \(error)")
-                if let error = error as? BoomdayError {
-                    self.stateController.sendError(error)
-                }
-                self.stateController.state.myPosts = []
-            })
-            .disposed(by: disposeBag)
+        return apiService.deletePost(with: postId).do { error in
+                self.stateController.sendError(error)
+            }
+            .observe(on: schedulers.main)
+
     }
 }

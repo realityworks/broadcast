@@ -75,7 +75,6 @@ extension LoginViewModel {
             .subscribe {
                 // Handle a successful login
                 self.postContentUseCase.retrieveMyPosts()
-                
                 #warning("We should only be able to login once load profile has finished loading...")
                 self.profileUseCase.loadProfile()
             } onError: { error in
