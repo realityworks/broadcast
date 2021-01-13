@@ -66,7 +66,7 @@ class MainViewController: UITabBarController {
     private func configureViews() {
         /// Create the MyPosts Tab bar item
         let myPostsTabBarItem = UITabBarItem(
-            title: "My Posts",
+            title: LocalizedString.myPostsHeading.localized,
             image: UIImage.iconRadio,
             selectedImage: UIImage.iconRadio)
 
@@ -74,7 +74,7 @@ class MainViewController: UITabBarController {
         
         /// Create the New Post Tab bar item
         let newPostTabBarItem = UITabBarItem(
-            title: "New Post",
+            title: LocalizedString.newPost.localized,
             image: UIImage.iconPlusCircle,
             selectedImage: UIImage.iconPlusCircle)
         
@@ -82,7 +82,7 @@ class MainViewController: UITabBarController {
         
         /// Create the Profile Tab bar item
         let profileTabBarItem = UITabBarItem(
-            title: "Profile",
+            title: LocalizedString.myProfile.localized,
             image: UIImage.iconProfile,
             selectedImage: UIImage.iconProfile)
         
