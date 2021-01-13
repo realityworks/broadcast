@@ -14,6 +14,7 @@ class PostDetailViewController: ViewController {
     //let verticalStackView = UIStackView()
     let deleteButtonContainer = UIView()
     let deleteButton = UIButton.textDestructive(withTitle: LocalizedString.deletePost)
+    let activityIndicator = UIActivityIndicatorView()
     
     let scrollView = UIScrollView()
     var postSummaryView: PostSummaryView!
@@ -31,25 +32,16 @@ class PostDetailViewController: ViewController {
     }
     
     private func configureViews() {
+        // Configure the view settings
         view.backgroundColor = UIColor.secondaryWhite
         postSummaryView.backgroundColor = .white
         deleteButtonContainer.backgroundColor = .clear
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        // Configure the view settings
-        //verticalStackView.axis = .vertical
-        //verticalStackView.distribution = .equalSpacing
     }
     
     private func configureLayout() {
         // Layout the subviews
-//        view.addSubview(verticalStackView)
-//        verticalStackView.addArrangedSubview(postSummaryView)
-//        verticalStackView.addSpace(40)
-//        verticalStackView.addArrangedSubview(deleteButton)
-//
-//        verticalStackView.edgesToSuperview(excluding: [.bottom], usingSafeArea: true)
-        
         view.addSubview(scrollView)
         view.addSubview(deleteButtonContainer)
         
@@ -58,7 +50,7 @@ class PostDetailViewController: ViewController {
                 
         deleteButtonContainer.edgesToSuperview(excluding: [.top, .bottom], usingSafeArea: true)
         deleteButtonContainer.bottomToSuperview(usingSafeArea: true)
-        deleteButtonContainer.height(80)
+        deleteButtonContainer.height(60)
                
         scrollView.addSubview(postSummaryView)
         postSummaryView.topToSuperview()
@@ -73,6 +65,12 @@ class PostDetailViewController: ViewController {
         viewModel.postSummary
             .subscribe(onNext: { [weak self] summaryViewModel in
                 self?.postSummaryView.configure(withPostSummaryViewModel: summaryViewModel)
+            })
+            .disposed(by: disposeBag)
+        
+        deleteButton.rx.tap
+            .subscribe(onNext: { _ in
+                
             })
             .disposed(by: disposeBag)
     }
