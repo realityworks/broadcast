@@ -153,6 +153,10 @@ extension LocalAPIService : APIService {
         return single
     }
     
+    func deletePost(with postId: PostID) -> Completable {
+        return Completable.empty()
+    }
+    
     func uploadTrailerComplete() -> Completable {
         return Completable.empty()
     }

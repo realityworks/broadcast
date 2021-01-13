@@ -40,6 +40,15 @@ extension PostContentUseCase : StateControllerInjector {
 // MARK: - Instances
 
 extension PostContentUseCase {
+    static let standard = {
+        return PostContentUseCase(dependencies: .standard)
+    }()
+}
+
+
+// MARK: - Dependencies
+
+extension PostContentUseCase {
     struct Dependencies {
         let apiService: APIService
         let uploadService: UploadService

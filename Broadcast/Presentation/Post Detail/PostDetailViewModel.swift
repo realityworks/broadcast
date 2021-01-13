@@ -15,7 +15,7 @@ class PostDetailViewModel : ViewModel {
     private let isEditingSubject = BehaviorRelay<Bool>(value: false)
     
     let postSummary: Observable<PostSummaryViewModel>
-    private let postIdRelay = BehaviorRelay<PostID?>()
+    private let postIdRelay = BehaviorRelay<PostID?>(value: nil)
     
     init(dependencies: Dependencies = .standard) {
         let postObservable = Observable.combineLatest(
@@ -55,7 +55,14 @@ extension PostDetailViewModel {
     }
     
     func deletePost() {
-        postContentUseCase.delete(post: postIdRelay.value)
+        guard let postId = postIdRelay.value else { return }
+        postContentUseCase.deletePost(with: postId)
+            .subscribe {
+                // TODO - This will need to set off push back to the previous screen on the stack
+                print ("POST DELETED")
+            }
+            .disposed(by: disposeBag)
+
     }
 }
 
