@@ -38,7 +38,7 @@ class ProfileTrailerTableViewCell: UITableViewCell {
         selectMediaInfoStackView.alignment = .leading
         selectMediaInfoStackView.spacing = 4
         
-        removeButton.contentHorizontalAlignment = .leading
+        changeButton.contentHorizontalAlignment = .leading
         
         contentView.addSubview(selectMediaContainerView)
         selectMediaContainerView.topToSuperview(offset:24)
@@ -68,6 +68,10 @@ class ProfileTrailerTableViewCell: UITableViewCell {
         uploadButton.leftToSuperview(offset: 24)
         uploadButton.rightToSuperview(offset: -24)
         uploadButton.bottomToSuperview(offset: -24)
+        
+        selectMediaContainerView.addSubview(changeButton)
+        changeButton.leftToRight(of: selectMediaView, offset: 16)
+        changeButton.bottom(to: selectMediaView, offset: -16)
     }
     
     required init?(coder: NSCoder) {
