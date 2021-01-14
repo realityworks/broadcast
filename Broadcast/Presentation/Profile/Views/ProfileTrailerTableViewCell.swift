@@ -73,26 +73,4 @@ class ProfileTrailerTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func configure(trailerVideoUrl: URL?) {
-//        selectMediaView.update(withMedia: .video(url: trailerVideoUrl))
-//
-//        if let trailerVideoUrl = trailerVideoUrl {
-//            verticalStack.addArrangedSubview(videoPlayerView)
-//            videoPlayerView.widthToSuperview()
-//            videoPlayerView.height(300)
-//
-//            videoPlayerView.playVideo(withURL: trailerVideoUrl, autoplay: false)
-//        }
-//
-//        verticalStack.addArrangedSubview(selectButton)
-//        selectButton.height(50)
-//        selectButton.width(100)
-//        verticalStack.addSpace(16)
-//
-//        verticalStack.addArrangedSubview(progressView)
-//
-//        progressView.widthToSuperview()
-//        progressView.height(32)
-    }
 }
