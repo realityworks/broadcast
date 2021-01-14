@@ -32,6 +32,10 @@ class ProfileDetailViewModel : ViewModel {
     let displayNameSubject = BehaviorRelay<String?>(value: nil)
     let biographyObservable: Observable<String?>
     let biographySubject = BehaviorRelay<String?>(value: nil)
+    let emailObservable: Observable<String?>
+    let emailSubject = BehaviorRelay<String?>(value: nil)
+    let handleObservable: Observable<String?>
+    let handleSubject = BehaviorRelay<String?>(value: nil)
     
     private let isUploadingSubject = BehaviorSubject<Bool>(value: false)
     let isUploading: Observable<Bool>
@@ -48,6 +52,8 @@ class ProfileDetailViewModel : ViewModel {
         let profileObservable = dependencies.profileObservable.compactMap { $0 }
         displayNameObservable = profileObservable.map { $0.displayName }
         biographyObservable = profileObservable.map { $0.biography ?? String.empty }
+        emailObservable = profileObservable.map { _ in "---" }
+        handleObservable = profileObservable.map { $0.handle }
         
         self.subscriberCount = profileObservable.map { $0.subscriberCount }
         self.profileImage = dependencies.profileImage.compactMap { $0 ?? UIImage.profileImage }
@@ -69,12 +75,21 @@ class ProfileDetailViewModel : ViewModel {
         
         super.init(stateController: dependencies.stateController)
         
+        #warning("Move subscribe to bind and then test")
         displayNameObservable
             .subscribe(onNext: { self.displayNameSubject.accept($0) })
             .disposed(by: disposeBag)
         
         biographyObservable
             .subscribe(onNext: { self.biographySubject.accept($0) })
+            .disposed(by: disposeBag)
+        
+        emailObservable
+            .subscribe(onNext: { self.emailSubject.accept($0) })
+            .disposed(by: disposeBag)
+        
+        handleObservable
+            .subscribe(onNext: { self.handleSubject.accept($0) })
             .disposed(by: disposeBag)
         
         uploadingProgressObservable

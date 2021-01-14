@@ -11,7 +11,7 @@ import RxCocoa
 
 class ProfileTextFieldTableViewCell: UITableViewCell {
     static let identifier: String = "ProfileTextFieldTableViewCell"
-    static let cellHeight: CGFloat = 80.0
+    static let cellHeight: CGFloat = 100.0
 
     fileprivate let verticalStackView = UIStackView()
     fileprivate let titleLabel = UILabel.lightGreySmallBody()
@@ -36,11 +36,11 @@ class ProfileTextFieldTableViewCell: UITableViewCell {
         verticalStackView.axis = .vertical
         verticalStackView.spacing = 10
         verticalStackView.alignment = .leading
-        verticalStackView.distribution = .equalSpacing
+        verticalStackView.distribution = .fill
         
         contentView.addSubview(verticalStackView)
         verticalStackView.topToSuperview(offset: 16)
-        verticalStackView.bottomToSuperview(offset: 8)
+        //verticalStackView.bottomToSuperview(offset: 8)
         verticalStackView.leftToSuperview(offset: 24)
         verticalStackView.rightToSuperview(offset: -24)
         

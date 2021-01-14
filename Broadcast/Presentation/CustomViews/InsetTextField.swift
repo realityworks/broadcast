@@ -31,6 +31,10 @@ final class InsetTextField: UITextField {
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
         return super.editingRect(forBounds: bounds.inset(by: insets))
     }
+    
+    override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
+        return CGRect(x: bounds.minX+10, y: 10, width: 25, height: bounds.height-20)
+    }
 }
 
 // MARK: - Factory instance methods

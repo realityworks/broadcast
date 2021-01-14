@@ -229,11 +229,13 @@ class ProfileDetailViewController: ViewController {
         let items = Observable.combineLatest(
             viewModel.biographyObservable,
             viewModel.displayNameObservable,
+            viewModel.emailObservable,
+            viewModel.handleObservable,
             viewModel.subscriberCount,
             viewModel.profileImage,
             viewModel.trailerVideoUrl) {
             
-            biography, displayName, subscribers, profileImage, trailerUrl -> [ProfileDetailSectionModel] in
+            biography, displayName, email, handle, subscribers, profileImage, trailerUrl -> [ProfileDetailSectionModel] in
             
             return [
                 SectionModel(model: nil, items: [
@@ -243,8 +245,8 @@ class ProfileDetailViewController: ViewController {
                 SectionModel(model: LocalizedString.accountSettings, items: [
                                 ProfileDetailViewModel.Row.displayName(text: displayName ?? String.empty),
                                 ProfileDetailViewModel.Row.biography(text: biography ?? String.empty),
-                                ProfileDetailViewModel.Row.email(text: String.empty),
-                                ProfileDetailViewModel.Row.handle(text: String.empty)]),
+                                ProfileDetailViewModel.Row.email(text: email ?? String.empty),
+                                ProfileDetailViewModel.Row.handle(text: handle ?? String.empty)]),
                 SectionModel(model: LocalizedString.trailerVideo, items: [
                                 ProfileDetailViewModel.Row.trailerVideo(trailerUrl: trailerUrl)])
             ]

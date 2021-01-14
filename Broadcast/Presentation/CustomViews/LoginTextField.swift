@@ -9,10 +9,6 @@ import UIKit
 import SwiftRichString
 
 class LoginTextField: UITextField {
-    override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
-        return CGRect(x: bounds.minX+10, y: 10, width: 25, height: bounds.height-20)
-    }
-
     static func standard(withPlaceholder placeholder: LocalizedString) -> LoginTextField {
         let textField = LoginTextField()
         textField.borderStyle = .roundedRect
