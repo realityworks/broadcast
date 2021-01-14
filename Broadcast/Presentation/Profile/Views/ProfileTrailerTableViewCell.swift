@@ -19,7 +19,7 @@ class ProfileTrailerTableViewCell: UITableViewCell {
     private let runTimeLabel = UILabel()
     private let selectedMediaTitleLabel = UILabel.largeTitle(.noMedia, textColor: .primaryLightGrey)
     
-    private let removeButton = UIButton.textDestructive(withTitle: LocalizedString.remove)
+    private let changeButton = UIButton.textDestructive(withTitle: LocalizedString.changeVideo)
     private let uploadButton = UIButton.standard(withTitle: LocalizedString.uploadTrailer)
     
     let progressView = ProgressView()

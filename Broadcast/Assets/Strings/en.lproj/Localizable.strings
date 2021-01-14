@@ -84,6 +84,7 @@
 "email" = "Email";
 "userHandle" = "User Handle";
 "uploadTrailer" = "Upload Trailer";
+"changeVideo" = "Change Video";
 
 // MARK: Error Strings
 "unknownError" = "An unknown error occured";
