@@ -63,6 +63,7 @@ class ProfileTextFieldTableViewCell: UITableViewCell {
             textField.leftView = nil
         } else {
             textField.backgroundColor = .tertiaryLightGrey
+            
             let lockedIcon = UIImageView(image: UIImage.iconLock?.withRenderingMode(.alwaysTemplate))
             lockedIcon.contentMode = .scaleAspectFit
             lockedIcon.tintColor = .lightGray

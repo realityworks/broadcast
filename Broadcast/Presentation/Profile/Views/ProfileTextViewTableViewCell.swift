@@ -37,10 +37,6 @@ class ProfileTextViewTableViewCell: UITableViewCell {
         textView.bottomToSuperview(offset: -8)
     }
 
-    private func styleView() {
-        
-    }
-    
     func configure(withTitle title: String, text: String) {
         titleLabel.text = title
         textView.text = text
