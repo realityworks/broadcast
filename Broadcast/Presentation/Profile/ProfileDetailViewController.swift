@@ -125,7 +125,8 @@ class ProfileDetailViewController: ViewController {
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextViewTableViewCell.identifier, for: indexPath) as! ProfileTextViewTableViewCell
                 
                 cell.configure(withTitle: LocalizedString.displayBio.localized.uppercased(),
-                               text: biography)
+                               text: biography,
+                               placeholder: LocalizedString.displayBio.localized)
                 
                 cell.rx.text
                     .bind(to: self.viewModel.biographySubject)

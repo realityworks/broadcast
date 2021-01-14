@@ -12,7 +12,7 @@ import SwiftRichString
 
 class ProfileTextViewTableViewCell: UITableViewCell {
     static let identifier: String = "ProfileTextViewTableViewCell"
-    static let cellHeight: CGFloat = 80.0
+    static let cellHeight: CGFloat = 150.0
 
     fileprivate let verticalStackView = UIStackView()
     fileprivate let titleLabel = UILabel.lightGreySmallBody()
