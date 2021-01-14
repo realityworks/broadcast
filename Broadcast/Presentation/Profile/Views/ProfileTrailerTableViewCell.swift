@@ -55,11 +55,13 @@ class ProfileTrailerTableViewCell: UITableViewCell {
         selectMediaContainerView.addSubview(selectMediaInfoStackView)
         selectMediaInfoStackView.addArrangedSubview(selectedMediaTitleLabel)
         selectMediaInfoStackView.addArrangedSubview(runTimeLabel)
+        selectMediaInfoStackView.addSpace(10)
+        selectMediaInfoStackView.addArrangedSubview(changeButton)
         
         runTimeLabel.height(18)
         
         selectMediaInfoStackView.leftToRight(of: selectMediaView, offset: 16)
-        selectMediaInfoStackView.top(to: selectMediaView)
+        selectMediaInfoStackView.top(to: selectMediaView, offset: 64)
         selectMediaInfoStackView.width(100)
 
         contentView.addSubview(uploadButton)
@@ -68,10 +70,6 @@ class ProfileTrailerTableViewCell: UITableViewCell {
         uploadButton.leftToSuperview(offset: 24)
         uploadButton.rightToSuperview(offset: -24)
         uploadButton.bottomToSuperview(offset: -24)
-        
-        selectMediaContainerView.addSubview(changeButton)
-        changeButton.leftToRight(of: selectMediaView, offset: 16)
-        changeButton.bottom(to: selectMediaView, offset: -16)
     }
     
     required init?(coder: NSCoder) {
