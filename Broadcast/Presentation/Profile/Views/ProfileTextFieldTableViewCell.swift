@@ -59,9 +59,15 @@ class ProfileTextFieldTableViewCell: UITableViewCell {
         textField.text = text
         
         if editingEnabled {
-            
+            textField.backgroundColor = .white
+            textField.leftView = nil
         } else {
-            
+            textField.backgroundColor = .tertiaryLightGrey
+            let lockedIcon = UIImageView(image: UIImage.iconLock?.withRenderingMode(.alwaysTemplate))
+            lockedIcon.contentMode = .scaleAspectFit
+            lockedIcon.tintColor = .lightGray
+            textField.leftView = lockedIcon
+            textField.leftViewMode = .always
         }
     }
 }
