@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import SwiftRichString
 
 class ProfileTextViewTableViewCell: UITableViewCell {
     static let identifier: String = "ProfileTextViewTableViewCell"
@@ -50,6 +51,8 @@ class ProfileTextViewTableViewCell: UITableViewCell {
     func configure(withTitle title: String, text: String, placeholder: String) {
         titleLabel.text = title
         textView.text = text
+        
+        textView.attributedPlaceholder = placeholder.set(style: Style.body).set(style: Style.lightGrey)
     }
 }
 
