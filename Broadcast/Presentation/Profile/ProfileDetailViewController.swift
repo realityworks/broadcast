@@ -160,7 +160,7 @@ class ProfileDetailViewController: ViewController {
                 
                 return cell
                 
-            case let .trailerVideo(trailerVideoUrl):
+            case let .trailerVideo:
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTrailerTableViewCell.identifier, for: indexPath) as! ProfileTrailerTableViewCell
                                 
                 self.configureBindings(forTrailerCell: cell)
@@ -214,10 +214,9 @@ class ProfileDetailViewController: ViewController {
             viewModel.emailObservable,
             viewModel.handleObservable,
             viewModel.subscriberCount,
-            viewModel.profileImage,
-            viewModel.trailerVideoUrl) {
+            viewModel.profileImage) {
             
-            biography, displayName, email, handle, subscribers, profileImage, trailerUrl -> [ProfileDetailSectionModel] in
+            biography, displayName, email, handle, subscribers, profileImage -> [ProfileDetailSectionModel] in
             
             return [
                 SectionModel(model: nil, items: [
@@ -230,7 +229,7 @@ class ProfileDetailViewController: ViewController {
                                 ProfileDetailViewModel.Row.email(text: email ?? String.empty),
                                 ProfileDetailViewModel.Row.handle(text: handle ?? String.empty)]),
                 SectionModel(model: LocalizedString.trailerVideo, items: [
-                                ProfileDetailViewModel.Row.trailerVideo(trailerUrl: trailerUrl)])
+                                ProfileDetailViewModel.Row.trailerVideo])
             ]
         }
                 
@@ -265,7 +264,14 @@ class ProfileDetailViewController: ViewController {
             
         viewModel.runTimeTitle
             .bind(to: cell.runTimeLabel.rx.attributedText)
-            .disposed(by: disposeBag)
+            .disposed(by: cell.disposeBag)
+        
+        viewModel.trailerVideoUrl
+            .compactMap { $0 }
+            .subscribe(onNext: { url in
+                cell.selectMediaView.videoMediaOverlay.playVideo(withURL: url, autoplay: false)
+            })
+            .disposed(by: cell.disposeBag)
         
         cell.changeButton.rx.tap
             .subscribe(onNext: { [unowned self] _ in

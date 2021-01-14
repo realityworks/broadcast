@@ -19,7 +19,7 @@ class ProfileDetailViewModel : ViewModel {
         case biography(text: String)
         case email(text: String)
         case handle(text: String)
-        case trailerVideo(trailerUrl: URL?)
+        case trailerVideo
     }
         
     let schedulers: Schedulers
