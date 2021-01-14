@@ -16,6 +16,8 @@ class ProfileDetailViewModel : ViewModel {
         case profileInfo(profileImage: UIImage, displayName: String, subscribers: Int)
         case displayName(text: String)
         case biography(text: String)
+        case email(text: String)
+        case handle(text: String)
         case trailerVideo(trailerUrl: URL?)
     }
         

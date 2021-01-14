@@ -107,27 +107,58 @@ class ProfileDetailViewController: ViewController {
                     })
                     .disposed(by: self.disposeBag)
                 return cell
+                
             case .displayName(let displayName):
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextFieldTableViewCell.identifier, for: indexPath) as! ProfileTextFieldTableViewCell
                 
-                cell.configure(withText: displayName,
-                               icon: UIImage(systemName: "pencil")?.withRenderingMode(.alwaysTemplate))
+                cell.configure(withTitle: LocalizedString.displayName.localized.uppercased(),
+                               placeholder: LocalizedString.displayName.localized,
+                               text: displayName,
+                               editingEnabled: true)
                 cell.rx.text
                     .bind(to: self.viewModel.displayNameSubject)
                     .disposed(by: self.disposeBag)
                 
                 return cell
+                
             case .biography(let biography):
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextViewTableViewCell.identifier, for: indexPath) as! ProfileTextViewTableViewCell
                 
-                cell.configure(withText: biography,
-                               icon: UIImage(systemName: "pencil")?.withRenderingMode(.alwaysTemplate))
+                cell.configure(withTitle: LocalizedString.displayBio.localized.uppercased(),
+                               text: biography)
                 
                 cell.rx.text
                     .bind(to: self.viewModel.biographySubject)
                     .disposed(by: self.disposeBag)
                 
                 return cell
+                
+            case .email(let email):
+                let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextFieldTableViewCell.identifier, for: indexPath) as! ProfileTextFieldTableViewCell
+                
+                cell.configure(withTitle: LocalizedString.email.localized.uppercased(),
+                               placeholder: LocalizedString.email.localized,
+                               text: email,
+                               editingEnabled: false)
+                cell.rx.text
+                    .bind(to: self.viewModel.displayNameSubject)
+                    .disposed(by: self.disposeBag)
+                
+                return cell
+                
+            case .handle(let handle):
+                let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextFieldTableViewCell.identifier, for: indexPath) as! ProfileTextFieldTableViewCell
+                
+                cell.configure(withTitle: LocalizedString.userHandle.localized.uppercased(),
+                               placeholder: LocalizedString.userHandle.localized,
+                               text: handle,
+                               editingEnabled: false)
+                cell.rx.text
+                    .bind(to: self.viewModel.displayNameSubject)
+                    .disposed(by: self.disposeBag)
+                
+                return cell
+                
             case let .trailerVideo(trailerVideoUrl):
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTrailerTableViewCell.identifier, for: indexPath) as! ProfileTrailerTableViewCell
                 
@@ -160,10 +191,10 @@ class ProfileDetailViewController: ViewController {
             switch row {
             case .profileInfo:
                 return ProfileInfoTableViewCell.cellHeight
-            case .displayName:
-                return 50
+            case .displayName, .email, .handle:
+                return ProfileTextFieldTableViewCell.cellHeight
             case .biography:
-                return 80
+                return ProfileTextViewTableViewCell.cellHeight
             case .trailerVideo:
                 return UITableView.automaticDimension
             }
@@ -208,10 +239,11 @@ class ProfileDetailViewController: ViewController {
                                 ProfileDetailViewModel.Row.profileInfo(profileImage: profileImage,
                                                                        displayName: displayName ?? String.empty,
                                                                        subscribers: subscribers)]),
-                SectionModel(model: LocalizedString.displayName, items: [
-                                ProfileDetailViewModel.Row.displayName(text: displayName ?? String.empty)]),
-                SectionModel(model: LocalizedString.displayBio, items: [
-                                ProfileDetailViewModel.Row.biography(text: biography ?? String.empty)]),
+                SectionModel(model: LocalizedString.accountSettings, items: [
+                                ProfileDetailViewModel.Row.displayName(text: displayName ?? String.empty),
+                                ProfileDetailViewModel.Row.biography(text: biography ?? String.empty),
+                                ProfileDetailViewModel.Row.email(text: String.empty),
+                                ProfileDetailViewModel.Row.handle(text: String.empty)]),
                 SectionModel(model: LocalizedString.trailerVideo, items: [
                                 ProfileDetailViewModel.Row.trailerVideo(trailerUrl: trailerUrl)])
             ]

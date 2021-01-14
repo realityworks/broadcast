@@ -11,9 +11,10 @@ import RxCocoa
 
 class ProfileTextViewTableViewCell: UITableViewCell {
     static let identifier: String = "ProfileTextViewTableViewCell"
+    static let cellHeight: CGFloat = 80.0
 
+    fileprivate let titleLabel = UILabel.lightGreySmallBody()
     fileprivate let textView = UITextView()
-    fileprivate let iconImageView = UIImageView()
     
     private let disposeBag = DisposeBag()
     
@@ -34,22 +35,15 @@ class ProfileTextViewTableViewCell: UITableViewCell {
         textView.rightToSuperview(offset: -8)
         textView.topToSuperview(offset: 8)
         textView.bottomToSuperview(offset: -8)
-        
-        contentView.addSubview(iconImageView)
-        iconImageView.rightToSuperview(offset: -8)
-        iconImageView.topToSuperview(offset: -8)
-        iconImageView.width(30)
-        iconImageView.aspectRatio(1)
-        iconImageView.tintColor = .darkGray
     }
 
     private func styleView() {
         
     }
     
-    func configure(withText text: String, icon: UIImage?) {
+    func configure(withTitle title: String, text: String) {
+        titleLabel.text = title
         textView.text = text
-        iconImageView.image = icon
     }
 }
 

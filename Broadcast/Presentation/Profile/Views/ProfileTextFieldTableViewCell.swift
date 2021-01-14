@@ -11,9 +11,12 @@ import RxCocoa
 
 class ProfileTextFieldTableViewCell: UITableViewCell {
     static let identifier: String = "ProfileTextFieldTableViewCell"
+    static let cellHeight: CGFloat = 80.0
 
-    fileprivate let textField = UITextField()
-    fileprivate let iconImageView = UIImageView()
+    fileprivate let verticalStackView = UIStackView()
+    fileprivate let titleLabel = UILabel.lightGreySmallBody()
+    fileprivate var editingEnabled: Bool = true
+    fileprivate let textField = UITextField.standard(insets: .left(16))
     
     private let disposeBag = DisposeBag()
     
@@ -21,7 +24,6 @@ class ProfileTextFieldTableViewCell: UITableViewCell {
                   reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureViews()
-        styleView()
         setupActions()
     }
     
@@ -30,31 +32,37 @@ class ProfileTextFieldTableViewCell: UITableViewCell {
     }
     
     private func configureViews() {
-        contentView.addSubview(textField)
-        textField.leftToSuperview(offset: 8)
-        textField.rightToSuperview(offset: -8)
-        textField.topToSuperview(offset: 8)
-        textField.bottomToSuperview(offset: -8)
         
-        contentView.addSubview(iconImageView)
-        iconImageView.rightToSuperview(offset: -8)
-        iconImageView.topToSuperview(offset: -8)
-        iconImageView.width(30)
-        iconImageView.aspectRatio(1)
-        iconImageView.tintColor = .darkGray
-    }
-
-    private func styleView() {
+        verticalStackView.axis = .vertical
+        verticalStackView.spacing = 10
+        verticalStackView.alignment = .leading
+        verticalStackView.distribution = .equalSpacing
         
+        contentView.addSubview(verticalStackView)
+        verticalStackView.topToSuperview(offset: 16)
+        verticalStackView.bottomToSuperview(offset: 8)
+        verticalStackView.leftToSuperview(offset: 24)
+        verticalStackView.rightToSuperview(offset: -24)
+        
+        verticalStackView.addArrangedSubview(titleLabel)
+        verticalStackView.addArrangedSubview(textField)
+        
+        textField.widthToSuperview()
     }
 
     private func setupActions() {
         textField.resignWhenFinished(disposeBag)
     }
     
-    func configure(withText text: String, icon: UIImage?) {
+    func configure(withTitle title: String, placeholder: String, text: String, editingEnabled: Bool) {
+        titleLabel.text = title
         textField.text = text
-        iconImageView.image = icon
+        
+        if editingEnabled {
+            
+        } else {
+            
+        }
     }
 }
 

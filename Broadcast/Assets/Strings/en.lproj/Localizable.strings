@@ -81,7 +81,9 @@
 "post" = "Post";
 "myProfile" = "My Profile";
 "version" = "Version";
- 
+"email" = "Email";
+"userHandle" = "User Handle";
+
 // MARK: Error Strings
 "unknownError" = "An unknown error occured";
 "unsupportedError" = "This functionality is not currently supported";
