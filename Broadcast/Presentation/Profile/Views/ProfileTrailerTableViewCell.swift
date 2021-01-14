@@ -59,7 +59,6 @@ class ProfileTrailerTableViewCell: UITableViewCell {
         selectMediaContainerView.addSubview(selectMediaInfoStackView)
         selectMediaInfoStackView.addArrangedSubview(selectedMediaTitleLabel)
         selectMediaInfoStackView.addArrangedSubview(runTimeLabel)
-        selectMediaInfoStackView.addSpace(10)
         selectMediaInfoStackView.addArrangedSubview(changeButton)
         
         runTimeLabel.height(18)
