@@ -186,6 +186,10 @@ extension ProfileDetailViewModel {
     }
     
     func trailerSelected(withUrl url: URL) {
+        selectedTrailerRelay.accept(url)
+    }
+    
+    func uploadTrailer(withUrl url: URL) {
         isUploadingSubject.onNext(true)
         profileUseCase.uploadTrailer(withUrl: url)
     }

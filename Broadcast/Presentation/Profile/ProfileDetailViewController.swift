@@ -160,7 +160,7 @@ class ProfileDetailViewController: ViewController {
                 
                 return cell
                 
-            case let .trailerVideo:
+            case .trailerVideo:
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTrailerTableViewCell.identifier, for: indexPath) as! ProfileTrailerTableViewCell
                                 
                 self.configureBindings(forTrailerCell: cell)

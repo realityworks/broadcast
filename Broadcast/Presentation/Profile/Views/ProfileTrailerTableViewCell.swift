@@ -24,13 +24,17 @@ class ProfileTrailerTableViewCell: UITableViewCell {
     
     let progressView = ProgressView()
     
-    let disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
 
     override init(style: UITableViewCell.CellStyle,
                   reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         configureViews()
+    }
+    
+    override func prepareForReuse() {
+        disposeBag = DisposeBag()
     }
     
     private func configureViews() {
