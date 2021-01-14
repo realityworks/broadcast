@@ -46,7 +46,7 @@ class ProfileDetailViewModel : ViewModel {
     let hideUploadingBar: Observable<Bool>
     
     // Trailer Management
-    let selectedTrailerRelay = BehaviorRelay<URL?>(value: nil)
+    let selectedTrailerRelay = PublishRelay<URL?>()
     let trailerVideoUrl: Observable<URL?>
     let runTimeTitle: Observable<NSAttributedString>
     let mediaTypeTitle: Observable<String>
@@ -79,7 +79,7 @@ class ProfileDetailViewModel : ViewModel {
                     (" " + media.duration).set(style: Style.smallBody)
             }
         
-        mediaTypeTitle = trailerVideoUrl.map { url in
+        mediaTypeTitle = self.trailerVideoUrl.map { url in
             switch url {
             case nil:
                 return LocalizedString.noMedia.localized
