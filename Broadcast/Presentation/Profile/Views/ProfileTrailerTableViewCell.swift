@@ -11,10 +11,17 @@ import RxCocoa
 
 class ProfileTrailerTableViewCell: UITableViewCell {
     static let identifier: String = "ProfileTrailerTableViewCell"
+    static let cellHeight: CGFloat = 320
     
-    let verticalStack = UIStackView()
-    let videoPlayerView = VideoPlayerView()
-    let selectButton = UIButton.standard(withTitle: LocalizedString.select)
+    private let selectMediaContainerView = UIView()
+    private let selectMediaView = SelectMediaView()
+    private let selectMediaInfoStackView = UIStackView()
+    private let runTimeLabel = UILabel()
+    private let selectedMediaTitleLabel = UILabel.largeTitle(.noMedia, textColor: .primaryLightGrey)
+    
+    private let removeButton = UIButton.textDestructive(withTitle: LocalizedString.remove)
+    private let uploadButton = UIButton.standard(withTitle: LocalizedString.uploadTrailer)
+    
     let progressView = ProgressView()
     
     let disposeBag = DisposeBag()
@@ -23,17 +30,44 @@ class ProfileTrailerTableViewCell: UITableViewCell {
                   reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        videoPlayerView.layer.cornerRadius = 10
-        videoPlayerView.clipsToBounds = true
+        configureViews()
+    }
+    
+    private func configureViews() {
+        selectMediaInfoStackView.axis = .vertical
+        selectMediaInfoStackView.alignment = .leading
+        selectMediaInfoStackView.spacing = 4
         
-        verticalStack.axis = .vertical
-        verticalStack.spacing = 5
-        verticalStack.alignment = .center
+        removeButton.contentHorizontalAlignment = .leading
         
-        contentView.addSubview(verticalStack)
-        verticalStack.edgesToSuperview(excluding: [.left, .right])
-        verticalStack.leadingToSuperview(offset: 16)
-        verticalStack.trailingToSuperview(offset: 16)
+        contentView.addSubview(selectMediaContainerView)
+        selectMediaContainerView.topToSuperview(offset:24)
+        selectMediaContainerView.height(200)
+        selectMediaContainerView.leftToSuperview(offset: 24)
+        selectMediaContainerView.rightToSuperview()
+        
+        selectMediaContainerView.addSubview(selectMediaView)
+        selectMediaView.leftToSuperview()
+        selectMediaView.topToSuperview()
+        selectMediaView.width(200)
+        selectMediaView.height(200)
+        
+        selectMediaContainerView.addSubview(selectMediaInfoStackView)
+        selectMediaInfoStackView.addArrangedSubview(selectedMediaTitleLabel)
+        selectMediaInfoStackView.addArrangedSubview(runTimeLabel)
+        
+        runTimeLabel.height(18)
+        
+        selectMediaInfoStackView.leftToRight(of: selectMediaView, offset: 16)
+        selectMediaInfoStackView.top(to: selectMediaView)
+        selectMediaInfoStackView.width(100)
+
+        contentView.addSubview(uploadButton)
+        selectMediaContainerView.bottomToTop(of: uploadButton, offset: 24)
+        
+        uploadButton.leftToSuperview(offset: 24)
+        uploadButton.rightToSuperview(offset: -24)
+        uploadButton.bottomToSuperview(offset: -24)
     }
     
     required init?(coder: NSCoder) {
@@ -41,22 +75,24 @@ class ProfileTrailerTableViewCell: UITableViewCell {
     }
     
     func configure(trailerVideoUrl: URL?) {
-        if let trailerVideoUrl = trailerVideoUrl {
-            verticalStack.addArrangedSubview(videoPlayerView)
-            videoPlayerView.widthToSuperview()
-            videoPlayerView.height(300)
-
-            videoPlayerView.playVideo(withURL: trailerVideoUrl, autoplay: false)
-        }
-        
-        verticalStack.addArrangedSubview(selectButton)
-        selectButton.height(50)
-        selectButton.width(100)
-        verticalStack.addSpace(16)
-        
-        verticalStack.addArrangedSubview(progressView)
-        
-        progressView.widthToSuperview()
-        progressView.height(32)
+//        selectMediaView.update(withMedia: .video(url: trailerVideoUrl))
+//
+//        if let trailerVideoUrl = trailerVideoUrl {
+//            verticalStack.addArrangedSubview(videoPlayerView)
+//            videoPlayerView.widthToSuperview()
+//            videoPlayerView.height(300)
+//
+//            videoPlayerView.playVideo(withURL: trailerVideoUrl, autoplay: false)
+//        }
+//
+//        verticalStack.addArrangedSubview(selectButton)
+//        selectButton.height(50)
+//        selectButton.width(100)
+//        verticalStack.addSpace(16)
+//
+//        verticalStack.addArrangedSubview(progressView)
+//
+//        progressView.widthToSuperview()
+//        progressView.height(32)
     }
 }

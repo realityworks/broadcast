@@ -177,11 +177,11 @@ class ProfileDetailViewController: ViewController {
                     .bind(to: cell.progressView.rx.totalProgress)
                     .disposed(by: cell.disposeBag)
                 
-                cell.selectButton.rx.tap
-                    .subscribe(onNext: { [unowned self] _ in
-                        self.showMediaOptionsMenu(forTag: PickerTags.trailer.rawValue)
-                    })
-                    .disposed(by: self.disposeBag)
+//                cell.selectButton.rx.tap
+//                    .subscribe(onNext: { [unowned self] _ in
+//                        self.showMediaOptionsMenu(forTag: PickerTags.trailer.rawValue)
+//                    })
+//                    .disposed(by: self.disposeBag)
                 
                 return cell
             }
@@ -197,7 +197,7 @@ class ProfileDetailViewController: ViewController {
             case .biography:
                 return ProfileTextViewTableViewCell.cellHeight
             case .trailerVideo:
-                return UITableView.automaticDimension
+                return ProfileTrailerTableViewCell.cellHeight
             }
         }
         

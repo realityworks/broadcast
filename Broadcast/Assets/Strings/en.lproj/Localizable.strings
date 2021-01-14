@@ -83,6 +83,7 @@
 "version" = "Version";
 "email" = "Email";
 "userHandle" = "User Handle";
+"uploadTrailer" = "Upload Trailer";
 
 // MARK: Error Strings
 "unknownError" = "An unknown error occured";

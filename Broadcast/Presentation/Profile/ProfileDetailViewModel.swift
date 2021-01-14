@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import RxSwift
 import RxCocoa
+import SwiftRichString
 
 class ProfileDetailViewModel : ViewModel {
     
@@ -26,7 +27,7 @@ class ProfileDetailViewModel : ViewModel {
 
     let subscriberCount: Observable<Int>
     let profileImage: Observable<UIImage>
-    let trailerVideoUrl: Observable<URL?>
+
     
     let displayNameObservable: Observable<String?>
     let displayNameSubject = BehaviorRelay<String?>(value: nil)
@@ -37,11 +38,19 @@ class ProfileDetailViewModel : ViewModel {
     let handleObservable: Observable<String?>
     let handleSubject = BehaviorRelay<String?>(value: nil)
     
+    // Uploading new trailer management
     private let isUploadingSubject = BehaviorSubject<Bool>(value: false)
     let isUploading: Observable<Bool>
     let progress: Observable<Float>
     let progressText: Observable<String>
     let hideUploadingBar: Observable<Bool>
+    
+    // Trailer Management
+    let selectedTrailerRelay = BehaviorRelay<URL?>(value: nil)
+    let trailerVideoUrl: Observable<URL?>
+    let viewTimeTitle: Observable<NSAttributedString>
+    let mediaTypeTitle: Observable<String>
+    let showingTrailer: Observable<Bool>
     
     init(dependencies: Dependencies = .standard) {
         
@@ -58,7 +67,28 @@ class ProfileDetailViewModel : ViewModel {
         self.subscriberCount = profileObservable.map { $0.subscriberCount }
         self.profileImage = dependencies.profileImage.compactMap { $0 ?? UIImage.profileImage }
         
-        self.trailerVideoUrl = profileObservable.map { URL(string: $0.trailerVideoUrl) }
+        self.trailerVideoUrl = Observable.merge(
+            profileObservable.map { URL(string: $0.trailerVideoUrl) },
+            selectedTrailerRelay.asObservable())
+        
+        viewTimeTitle = self.trailerVideoUrl
+            .compactMap { $0 }
+            .map { url in
+                let media = Media.video(url: url)
+                return LocalizedString.duration.localized.set(style: Style.smallBody).set(style: Style.lightGrey) +
+                    (" " + media.duration).set(style: Style.smallBody)
+            }
+        
+        mediaTypeTitle = trailerVideoUrl.map { url in
+            switch url {
+            case nil:
+                return LocalizedString.noMedia.localized
+            default:
+                return LocalizedString.video.localized
+            }
+        }
+        
+        showingTrailer = trailerVideoUrl.map { $0 != nil }
         
         isUploading = isUploadingSubject.asObservable()
         hideUploadingBar = Observable.combineLatest(isUploading, dependencies.trailerUploadProgress) { isUploading, uploadProgress in
