@@ -48,7 +48,7 @@ class ProfileDetailViewModel : ViewModel {
     // Trailer Management
     let selectedTrailerRelay = BehaviorRelay<URL?>(value: nil)
     let trailerVideoUrl: Observable<URL?>
-    let viewTimeTitle: Observable<NSAttributedString>
+    let runTimeTitle: Observable<NSAttributedString>
     let mediaTypeTitle: Observable<String>
     let showingTrailer: Observable<Bool>
     
@@ -71,7 +71,7 @@ class ProfileDetailViewModel : ViewModel {
             profileObservable.map { URL(string: $0.trailerVideoUrl) },
             selectedTrailerRelay.asObservable())
         
-        viewTimeTitle = self.trailerVideoUrl
+        runTimeTitle = self.trailerVideoUrl
             .compactMap { $0 }
             .map { url in
                 let media = Media.video(url: url)

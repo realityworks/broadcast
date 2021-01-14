@@ -13,14 +13,14 @@ class ProfileTrailerTableViewCell: UITableViewCell {
     static let identifier: String = "ProfileTrailerTableViewCell"
     static let cellHeight: CGFloat = 320
     
-    private let selectMediaContainerView = UIView()
-    private let selectMediaView = SelectMediaView()
-    private let selectMediaInfoStackView = UIStackView()
-    private let runTimeLabel = UILabel()
-    private let selectedMediaTitleLabel = UILabel.largeTitle(.noMedia, textColor: .primaryLightGrey)
+    let selectMediaContainerView = UIView()
+    let selectMediaInfoStackView = UIStackView()
+    let runTimeLabel = UILabel()
+    let selectedMediaTitleLabel = UILabel.largeTitle(.noMedia, textColor: .primaryLightGrey)
     
-    private let changeButton = UIButton.textDestructive(withTitle: LocalizedString.changeVideo)
-    private let uploadButton = UIButton.standard(withTitle: LocalizedString.uploadTrailer)
+    let selectMediaView = SelectMediaView()
+    let changeButton = UIButton.textDestructive(withTitle: LocalizedString.changeVideo)
+    let uploadButton = UIButton.standard(withTitle: LocalizedString.uploadTrailer)
     
     let progressView = ProgressView()
     

@@ -162,26 +162,8 @@ class ProfileDetailViewController: ViewController {
                 
             case let .trailerVideo(trailerVideoUrl):
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTrailerTableViewCell.identifier, for: indexPath) as! ProfileTrailerTableViewCell
-                
-                cell.configure(trailerVideoUrl: trailerVideoUrl)
-                
-                self.viewModel.hideUploadingBar
-                    .bind(to: cell.progressView.rx.isHidden)
-                    .disposed(by: cell.disposeBag)
-                
-                self.viewModel.progressText
-                    .bind(to: cell.progressView.rx.text)
-                    .disposed(by: cell.disposeBag)
-                
-                self.viewModel.progress
-                    .bind(to: cell.progressView.rx.totalProgress)
-                    .disposed(by: cell.disposeBag)
-                
-//                cell.selectButton.rx.tap
-//                    .subscribe(onNext: { [unowned self] _ in
-//                        self.showMediaOptionsMenu(forTag: PickerTags.trailer.rawValue)
-//                    })
-//                    .disposed(by: self.disposeBag)
+                                
+                configureBindings(forTrailerCell: cell)
                 
                 return cell
             }
@@ -257,6 +239,39 @@ class ProfileDetailViewController: ViewController {
             .disposed(by: disposeBag)
         
         tableView.delegate = datasource
+    }
+    
+    private func configureBindings(forTrailerCell cell: ProfileTrailerTableViewCell) {
+        viewModel.hideUploadingBar
+            .bind(to: cell.progressView.rx.isHidden)
+            .disposed(by: cell.disposeBag)
+            
+        viewModel.progressText
+            .bind(to: cell.progressView.rx.text)
+            .disposed(by: cell.disposeBag)
+        
+        viewModel.progress
+            .bind(to: cell.progressView.rx.totalProgress)
+            .disposed(by: cell.disposeBag)
+        
+        viewModel.showingTrailer
+            .map { !$0 }
+            .bind(to: cell.selectMediaView.videoMediaOverlay.rx.isHidden)
+            .disposed(by: cell.disposeBag)
+        
+        viewModel.mediaTypeTitle
+            .bind(to: cell.selectedMediaTitleLabel.rx.text)
+            .disposed(by: cell.disposeBag)
+            
+        viewModel.runTimeTitle
+            .bind(to: cell.runTimeLabel.rx.attributedText)
+            .disposed(by: disposeBag)
+        
+        cell.changeButton.rx.tap
+            .subscribe(onNext: { [unowned self] _ in
+                self.showMediaOptionsMenu(forTag: PickerTags.trailer.rawValue)
+            })
+            .disposed(by: self.disposeBag)
     }
 }
 
