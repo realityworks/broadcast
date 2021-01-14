@@ -15,7 +15,7 @@ class ProfileTextViewTableViewCell: UITableViewCell {
 
     fileprivate let verticalStackView = UIStackView()
     fileprivate let titleLabel = UILabel.lightGreySmallBody()
-    fileprivate let textView = UITextView()
+    fileprivate let textView = UITextView.standard()
     
     private let disposeBag = DisposeBag()
     
@@ -42,12 +42,12 @@ class ProfileTextViewTableViewCell: UITableViewCell {
         verticalStackView.rightToSuperview(offset: -24)
         
         verticalStackView.addArrangedSubview(titleLabel)
-        verticalStackView.addArrangedSubview(textField)
+        verticalStackView.addArrangedSubview(textView)
         
-        textField.widthToSuperview()
+        textView.widthToSuperview()
     }
 
-    func configure(withTitle title: String, text: String) {
+    func configure(withTitle title: String, text: String, placeholder: String) {
         titleLabel.text = title
         textView.text = text
     }
