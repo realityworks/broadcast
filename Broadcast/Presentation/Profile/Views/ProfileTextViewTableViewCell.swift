@@ -13,6 +13,7 @@ class ProfileTextViewTableViewCell: UITableViewCell {
     static let identifier: String = "ProfileTextViewTableViewCell"
     static let cellHeight: CGFloat = 80.0
 
+    fileprivate let verticalStackView = UIStackView()
     fileprivate let titleLabel = UILabel.lightGreySmallBody()
     fileprivate let textView = UITextView()
     
@@ -22,7 +23,6 @@ class ProfileTextViewTableViewCell: UITableViewCell {
                   reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureViews()
-        styleView()
     }
     
     required init?(coder: NSCoder) {
@@ -30,11 +30,21 @@ class ProfileTextViewTableViewCell: UITableViewCell {
     }
     
     private func configureViews() {
-        contentView.addSubview(textView)
-        textView.leftToSuperview(offset: 8)
-        textView.rightToSuperview(offset: -8)
-        textView.topToSuperview(offset: 8)
-        textView.bottomToSuperview(offset: -8)
+        verticalStackView.axis = .vertical
+        verticalStackView.spacing = 10
+        verticalStackView.alignment = .leading
+        verticalStackView.distribution = .equalSpacing
+        
+        contentView.addSubview(verticalStackView)
+        verticalStackView.topToSuperview(offset: 16)
+        verticalStackView.bottomToSuperview(offset: 8)
+        verticalStackView.leftToSuperview(offset: 24)
+        verticalStackView.rightToSuperview(offset: -24)
+        
+        verticalStackView.addArrangedSubview(titleLabel)
+        verticalStackView.addArrangedSubview(textField)
+        
+        textField.widthToSuperview()
     }
 
     func configure(withTitle title: String, text: String) {
