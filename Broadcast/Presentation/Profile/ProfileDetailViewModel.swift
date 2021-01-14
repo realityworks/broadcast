@@ -182,7 +182,6 @@ extension ProfileDetailViewModel {
             } onCompleted: {
             }
             .disposed(by: disposeBag)
-
     }
     
     func trailerSelected(withUrl url: URL) {

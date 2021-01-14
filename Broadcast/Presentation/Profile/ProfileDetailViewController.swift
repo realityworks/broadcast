@@ -277,7 +277,7 @@ class ProfileDetailViewController: ViewController {
             .subscribe(onNext: { [unowned self] _ in
                 self.showMediaOptionsMenu(forTag: PickerTags.trailer.rawValue)
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: cell.disposeBag)
     }
 }
 
