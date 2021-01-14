@@ -52,7 +52,7 @@ class ProfileTextViewTableViewCell: UITableViewCell {
         titleLabel.text = title
         textView.text = text
         
-        textView.attributedPlaceholder = placeholder.set(style: Style.body).set(style: Style.lightGrey)
+        textView.placeholder = placeholder
     }
 }
 
