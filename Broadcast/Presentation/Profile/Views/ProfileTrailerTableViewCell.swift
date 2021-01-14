@@ -46,7 +46,7 @@ class ProfileTrailerTableViewCell: UITableViewCell {
             videoPlayerView.widthToSuperview()
             videoPlayerView.height(300)
 
-            videoPlayerView.playVideo(withURL: trailerVideoUrl)
+            videoPlayerView.playVideo(withURL: trailerVideoUrl, autoplay: false)
         }
         
         verticalStack.addArrangedSubview(selectButton)

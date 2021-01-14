@@ -58,9 +58,11 @@ class ProfileTextFieldTableViewCell: UITableViewCell {
         titleLabel.text = title
         textField.text = text
         
+        #warning("Refactor this into a universal textfield, spread across too many extensions/custom classes")
         if editingEnabled {
             textField.backgroundColor = .white
             textField.leftView = nil
+            textField.textInsets = .left(16)
         } else {
             textField.backgroundColor = .tertiaryLightGrey
             
@@ -69,6 +71,7 @@ class ProfileTextFieldTableViewCell: UITableViewCell {
             lockedIcon.tintColor = .lightGray
             textField.leftView = lockedIcon
             textField.leftViewMode = .always
+            textField.textInsets = .left(4)
         }
     }
 }

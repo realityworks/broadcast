@@ -43,4 +43,19 @@ extension UITextField {
     static func textFieldWith(insets: UIEdgeInsets) -> UITextField {
         return InsetTextField(insets: insets)
     }
+    
+    var textInsets: UIEdgeInsets {
+        get {
+            if let textField = self as? InsetTextField {
+                return textField.insets
+            }
+            return .zero
+        }
+        
+        set {
+            if let textField = self as? InsetTextField {
+                return textField.insets = newValue
+            }
+        }
+    }
 }

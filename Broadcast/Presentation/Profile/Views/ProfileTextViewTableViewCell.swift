@@ -38,7 +38,6 @@ class ProfileTextViewTableViewCell: UITableViewCell {
         
         contentView.addSubview(verticalStackView)
         verticalStackView.topToSuperview(offset: 16)
-        verticalStackView.bottomToSuperview(offset: 8)
         verticalStackView.leftToSuperview(offset: 24)
         verticalStackView.rightToSuperview(offset: -24)
         
@@ -46,6 +45,7 @@ class ProfileTextViewTableViewCell: UITableViewCell {
         verticalStackView.addArrangedSubview(textView)
         
         textView.widthToSuperview()
+        textView.height(130)
     }
 
     func configure(withTitle title: String, text: String, placeholder: String) {
