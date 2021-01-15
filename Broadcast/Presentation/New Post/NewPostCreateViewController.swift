@@ -118,18 +118,13 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         selectMediaInfoStackView.addSpace(24)
         selectMediaInfoStackView.addArrangedSubview(selectedMediaTitleLabel)
         selectMediaInfoStackView.addArrangedSubview(runTimeLabel)
-        //selectMediaInfoStackView.addArrangedSubview(tipsButton)
+        selectMediaInfoStackView.addArrangedSubview(changeButton)
         
         runTimeLabel.height(18)
-        //tipsButton.height(16)
         
         selectMediaInfoStackView.leftToRight(of: selectMediaView, offset: 16)
         selectMediaInfoStackView.top(to: selectMediaView)
         selectMediaInfoStackView.width(100)
-        
-        contentView.addSubview(changeButton)
-        changeButton.leftToRight(of: selectMediaView, offset: 16)
-        changeButton.bottom(to: selectMediaView, offset: -16)
         
         /// Layout the editPostView
         
