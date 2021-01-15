@@ -81,11 +81,6 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
         
-//        tipsButton.setImage(UIImage.iconHelp?.withRenderingMode(.alwaysTemplate), for: .normal)
-//        tipsButton.setTitleColor(.secondaryBlack, for: .normal)
-//        tipsButton.imageView?.contentMode = .scaleAspectFit
-//        tipsButton.imageView?.tintColor = .secondaryBlack
-        
         selectMediaInfoStackView.axis = .vertical
         selectMediaInfoStackView.alignment = .leading
         selectMediaInfoStackView.spacing = 4
