@@ -53,7 +53,7 @@ class ProfileDetailViewModel : ViewModel {
     
     let showProgressView: Observable<Bool>
     let showUploadButton: Observable<Bool>
-    let selectedNewTrailerRelay = BehaviorRelay<Bool>(value: false)
+    let selectedNewTrailerRelay = PublishRelay<Bool>()
     
     init(dependencies: Dependencies = .standard) {
         
@@ -104,17 +104,21 @@ class ProfileDetailViewModel : ViewModel {
             return uploadProgress.progressText
         }
         
-        uploadComplete = dependencies.trailerUploadProgress.map { $0?.completed ?? false}
+        #warning("Maybe distinct until changed?")
         
-        let isProgressViewActive = Observable.combineLatest(uploadComplete, isUploading) { uploadComplete, isUploading in
+        uploadComplete = dependencies.trailerUploadProgress
+            .map { $0?.completed ?? false }
+        
+        let isProgressViewActive: Observable<Bool> = Observable.combineLatest(uploadComplete, isUploading) { uploadComplete, isUploading in
                 return (uploadComplete || isUploading)
             }
         
-        let selectedNewTrailerAfterUpload = Observable.combineLatest(uploadComplete, selectedNewTrailerRelay) { uploadComplete, selectedNewTrailer in
-                return uploadComplete && selectedNewTrailer
-            }
+        let hasSelectedNewTrailerAfterUpload = selectedNewTrailerRelay
+            .withLatestFrom(uploadComplete)
+            .filter { $0 == true }
+            .map { _ in () }
         
-        showProgressView = Observable.merge(isProgressViewActive, selectedNewTrailerAfterUpload.map { !$0 })
+        showProgressView = Observable.merge(isProgressViewActive, hasSelectedNewTrailerAfterUpload.map { _ in false })
         
         showUploadButton = showProgressView.map { !$0 }
         
@@ -136,6 +140,34 @@ class ProfileDetailViewModel : ViewModel {
         handleObservable
             .subscribe(onNext: { self.handleSubject.accept($0) })
             .disposed(by: disposeBag)
+        
+        #warning("Check whats happening here (Observe the full upload progess, likely isUploadingSubject is incorrect")
+        
+        uploadingProgressObservable
+            .subscribe(onNext: { progress in
+                print ("Progress: \(progress)")
+            })
+            .disposed(by: disposeBag)
+        
+        uploadComplete
+            .subscribe(onNext: { complete in
+                print ("Upload complete = \(complete)")
+            })
+            .disposed(by: disposeBag)
+
+        isProgressViewActive
+            .subscribe(onNext: { progressViewActive in
+                print ("Result Active: \(progressViewActive)")
+            })
+            .disposed(by: disposeBag)
+        
+        hasSelectedNewTrailerAfterUpload
+            .subscribe(onNext: { _ in
+                print ("Has selected trailer after!")
+            })
+            .disposed(by: disposeBag)
+        
+        // #ENDTEST
         
         uploadingProgressObservable
             .map { !($0.completed || $0.failed) }

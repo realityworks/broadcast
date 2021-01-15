@@ -46,10 +46,10 @@ class ProgressView : UIView, Progress {
     
     var progressCompleteSuccess: Bool = false {
         didSet {
-            progressSuccessContainerView.isHidden = progressCompleteSuccess
+            progressSuccessContainerView.isHidden = !progressCompleteSuccess
             progressSuccessAnimation.play()
-            progressView.isHidden = !progressCompleteSuccess
-            progressLabel.isHidden = !progressCompleteSuccess
+            progressView.isHidden = progressCompleteSuccess
+            progressLabel.isHidden = progressCompleteSuccess
         }
     }
 
