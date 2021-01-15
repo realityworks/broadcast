@@ -44,7 +44,7 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         navigationItem.leftBarButtonItem = cancelBarButton
         
         let tipsBarButton = UIBarButtonItem(image: UIImage.iconHelpCricle, style: UIBarButtonItem.Style.plain, target: self, action: #selector(tipsTapped))
-        cancelBarButton.tintColor = .white
+        tipsBarButton.tintColor = .white
         navigationItem.rightBarButtonItem = tipsBarButton
         
         // Do any additional setup after loading the view.

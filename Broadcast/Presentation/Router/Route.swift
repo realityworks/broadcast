@@ -41,9 +41,7 @@ extension Route {
         case .postDetail:
             return PostDetailViewController()
         case .newPostCreate:
-            let newPostCreateViewController = NewPostCreateViewController()
-            let navigationController = UINavigationController(rootViewController: newPostCreateViewController)
-            return navigationController
+            return NewPostCreateViewController()
         case .profileDetail:
             return ProfileDetailViewController()
         case .stripeAccount:

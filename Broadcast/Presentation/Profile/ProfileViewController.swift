@@ -172,12 +172,12 @@ class ProfileViewController: ViewController {
         
         tableView.rx.modelSelected(ProfileViewModel.Row.self)
             .observe(on: Schedulers.standard.main)
-            .subscribe(onNext: { [weak self] row in
+            .subscribe(onNext: { [self] row in
                 switch row {
                 case .detail:
-                    self?.navigationController?.push(with: .profileDetail)
+                    navigationController?.push(with: .profileDetail)
                 case .stripeAccount:
-                    self?.navigationController?.push(with: .stripeAccount)
+                    navigationController?.push(with: .stripeAccount)
                 case .frequentlyAskedQuestions:
                     #warning("TODO - Link out to a webpage")
                     break

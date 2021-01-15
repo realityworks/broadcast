@@ -49,6 +49,13 @@ class MyPostsViewController: ViewController {
 
         /// Configure pull to refresh
         tableView.refreshControl = refreshControl
+        
+        let createPostButton = UIBarButtonItem(image: UIImage.iconPlusCircle,
+                                               style: UIBarButtonItem.Style.plain,
+                                               target: self,
+                                               action: #selector(createPostTapped))
+        createPostButton.tintColor = .white
+        navigationItem.rightBarButtonItem = createPostButton
     }
     
     private func configureLayout() {
@@ -107,5 +114,15 @@ class MyPostsViewController: ViewController {
                 self.refreshControl.endRefreshing()
             })
             .disposed(by: disposeBag)
+        
+        viewModel.createPostSignal
+            .subscribe(onNext: { [self] _ in
+                navigationController?.push(with: .newPostCreate)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    @objc func createPostTapped() {
+        viewModel.createPost()
     }
 }

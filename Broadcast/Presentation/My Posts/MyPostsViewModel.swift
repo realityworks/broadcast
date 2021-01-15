@@ -20,6 +20,9 @@ class MyPostsViewModel : ViewModel {
     private let newPostsLoadedSubject = PublishSubject<()>()
     let newPostsLoadedSignal: Observable<()>
     
+    private let createPostSubject = PublishRelay<()>()
+    let createPostSignal: Observable<()>
+    
     init(dependencies: Dependencies = .standard) {
         
         self.postContentUseCase = dependencies.postContentUseCase
@@ -29,8 +32,6 @@ class MyPostsViewModel : ViewModel {
             .map { posts in
                 return posts.map {
                     let thumbnailUrl = URL(string: $0.postMedia.thumbnailUrl)
-                    print ("Title : \($0.title)")
-                    print ("Caption : \($0.caption)")
                     let viewModel = MyPostsCellViewModel(
                         postId: $0.id,
                         title: $0.title,
@@ -44,6 +45,8 @@ class MyPostsViewModel : ViewModel {
                     return viewModel
                 }
             }
+        
+        self.createPostSignal = createPostSubject.asObservable()
         
         super.init(stateController: dependencies.stateController)
         
@@ -61,6 +64,10 @@ class MyPostsViewModel : ViewModel {
     func selectPost(with postId: PostID) {
         postContentUseCase.selectPost(with: postId)
         selectedSubject.accept(())
+    }
+    
+    func createPost() {
+        createPostSubject.accept(())
     }
 }
 
