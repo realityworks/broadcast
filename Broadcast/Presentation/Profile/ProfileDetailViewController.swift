@@ -273,6 +273,15 @@ class ProfileDetailViewController: ViewController {
             })
             .disposed(by: cell.disposeBag)
         
+        viewModel.isUploading
+            .map { !$0 }
+            .bind(to: cell.progressView.rx.isHidden)
+            .disposed(by: cell.disposeBag)
+        
+        viewModel.isUploading
+            .bind(to: cell.uploadButton.rx.isHidden)
+            .disposed(by: cell.disposeBag)
+        
         cell.changeButton.rx.tap
             .subscribe(onNext: { [unowned self] _ in
                 self.showMediaOptionsMenu(forTag: PickerTags.trailer.rawValue)
