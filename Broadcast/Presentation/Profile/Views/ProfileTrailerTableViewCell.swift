@@ -44,6 +44,8 @@ class ProfileTrailerTableViewCell: UITableViewCell {
         
         changeButton.contentHorizontalAlignment = .leading
         
+        uploadButton.isEnabled = false
+        
         contentView.addSubview(selectMediaContainerView)
         selectMediaContainerView.topToSuperview(offset:24)
         selectMediaContainerView.height(200)

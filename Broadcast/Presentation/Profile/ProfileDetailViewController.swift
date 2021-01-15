@@ -287,6 +287,19 @@ class ProfileDetailViewController: ViewController {
                 self.showMediaOptionsMenu(forTag: PickerTags.trailer.rawValue)
             })
             .disposed(by: cell.disposeBag)
+        
+        viewModel.selectedTrailerRelay
+            .map { _ in true }
+            .bind(to: cell.uploadButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        cell.uploadButton.rx.tap
+            .withLatestFrom(viewModel.selectedTrailerRelay.asObservable())
+            .compactMap { $0 }
+            .subscribe(onNext: { [unowned self] url in
+                self.viewModel.uploadTrailer(withUrl: url)
+            })
+            .disposed(by: cell.disposeBag)
     }
 }
 
