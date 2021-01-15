@@ -152,6 +152,10 @@ extension NewPostCreateViewModel {
         selectedMediaSubject.accept(media)
     }
     
+    func removeMedia() {
+        selectedMediaSubject.accept(nil)
+    }
+    
     func showTips(_ show: Bool) {
         showTipsSubject.accept(show)
     }

@@ -29,7 +29,8 @@ class MyPostsViewModel : ViewModel {
             .map { posts in
                 return posts.map {
                     let thumbnailUrl = URL(string: $0.postMedia.thumbnailUrl)
-                    
+                    print ("Title : \($0.title)")
+                    print ("Caption : \($0.caption)")
                     let viewModel = MyPostsCellViewModel(
                         postId: $0.id,
                         title: $0.title,

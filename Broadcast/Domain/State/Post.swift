@@ -62,7 +62,7 @@ struct Post: Equatable, Codable {
         let container = try decoder.container(keyedBy: PostCodingKeys.self)
         self.id = try container.decode(String.self, forKey: .id)
         self.title = try container.decode(String.self, forKey: .title)
-        self.caption = try container.decode(String.self, forKey: .title)
+        self.caption = try container.decode(String.self, forKey: .caption)
         self.commentCount = try container.decode(Int.self, forKey: .commentCount)
         self.lockerCount = try container.decode(Int.self, forKey: .lockerCount)
         self.finishedProcessing = try container.decode(Bool.self, forKey: .finishedProcessing)
