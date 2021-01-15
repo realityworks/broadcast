@@ -25,7 +25,6 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     private let runTimeLabel = UILabel()
     private let selectedMediaTitleLabel = UILabel.largeTitle(.none, textColor: .primaryLightGrey)
     private let removeButton = UIButton.textDestructive(withTitle: LocalizedString.remove)
-    //private let tipsButton = UIBarButtonItem(
     
     private let progressView = ProgressView()
     private let editPostView = EditPostView()
