@@ -18,7 +18,11 @@ protocol Progress {
 
 class ProgressView : UIView, Progress {
     fileprivate let progressContainerView = UIView()
-    fileprivate let progressSuccessView = UIView()
+    
+    fileprivate let progressSuccessContainerView = UIView()
+    fileprivate let progressSuccessImage = UIImageView(image: UIImage.iconEye)
+    fileprivate let progressSuccessLabel = UILabel.tinyBody(LocalizedString.
+    
     fileprivate let progressView = UIProgressView()
     fileprivate let progressLabel = UILabel.tinyBody()
 
@@ -40,14 +44,17 @@ class ProgressView : UIView, Progress {
         }
     }
     
-    var progressComplete: Bool {
+    var progressCompleteSuccess: Bool = false {
         didSet {
-            
+            progressSuccessView.isHidden = progressCompleteSuccess
+            progressView.isHidden = !progressCompleteSuccess
+            progressLabel.isHidden = !progressCompleteSuccess
         }
     }
 
     override init(frame: CGRect = .zero) {
         super.init(frame: frame)
+        
         configureViews()
         layoutViews()
     }
@@ -58,6 +65,7 @@ class ProgressView : UIView, Progress {
     
     
     private func configureViews() {
+        
         progressContainerView.backgroundColor = .clear
         progressContainerView.layer.cornerRadius = 8
         progressContainerView.layer.borderWidth = 1
@@ -74,6 +82,7 @@ class ProgressView : UIView, Progress {
     }
     
     private func layoutViews() {
+        /// Progress Container view wraps a simple border around the progress bar
         addSubview(progressContainerView)
         progressContainerView.addSubview(progressView)
         progressContainerView.centerXToSuperview()
@@ -86,6 +95,9 @@ class ProgressView : UIView, Progress {
         progressLabel.topToBottom(of: progressContainerView)
         progressLabel.widthToSuperview()
         progressLabel.height(16)
+        
+        addSubview(progressSuccessView)
+        progressSuccessView.addSubview(<#T##view: UIView##UIView#>)
     }
 }
 
