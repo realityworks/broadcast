@@ -18,6 +18,7 @@ protocol Progress {
 
 class ProgressView : UIView, Progress {
     fileprivate let progressContainerView = UIView()
+    fileprivate let progressSuccessView = UIView()
     fileprivate let progressView = UIProgressView()
     fileprivate let progressLabel = UILabel.tinyBody()
 
@@ -36,6 +37,12 @@ class ProgressView : UIView, Progress {
         }
         get {
             return progressView.progress
+        }
+    }
+    
+    var progressComplete: Bool {
+        didSet {
+            
         }
     }
 

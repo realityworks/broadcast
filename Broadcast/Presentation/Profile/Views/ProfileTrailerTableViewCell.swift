@@ -79,7 +79,7 @@ class ProfileTrailerTableViewCell: UITableViewCell {
         contentView.addSubview(progressView)
         progressView.leftToSuperview(offset: 24)
         progressView.rightToSuperview(offset: -24)
-        progressView.bottomToSuperview(offset: -24)
+        progressView.bottomToSuperview(offset: -48)
     }
     
     required init?(coder: NSCoder) {
