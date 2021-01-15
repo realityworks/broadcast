@@ -70,16 +70,15 @@ class ProfileTrailerTableViewCell: UITableViewCell {
         selectMediaInfoStackView.width(100)
 
         contentView.addSubview(uploadButton)
-        selectMediaContainerView.bottomToTop(of: uploadButton, offset: 24)
-        
         uploadButton.leftToSuperview(offset: 24)
         uploadButton.rightToSuperview(offset: -24)
         uploadButton.bottomToSuperview(offset: -24)
         
         contentView.addSubview(progressView)
+        //selectMediaContainerView.bottomToTop(of: progressView, offset: -32)
         progressView.leftToSuperview(offset: 24)
         progressView.rightToSuperview(offset: -24)
-        progressView.bottomToSuperview(offset: -48)
+        progressView.centerY(to: uploadButton)
     }
     
     required init?(coder: NSCoder) {

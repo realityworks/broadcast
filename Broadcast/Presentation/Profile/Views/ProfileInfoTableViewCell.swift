@@ -62,7 +62,7 @@ class ProfileInfoTableViewCell: UITableViewCell {
     
     private func layoutViews() {
         contentView.addSubview(containerStackView)
-        containerStackView.edgesToSuperview()
+        containerStackView.edgesToSuperview(excluding: [.right])
         
         containerStackView.addSpace(24)
         containerStackView.addArrangedSubview(thumbnailImageContainer)
@@ -76,7 +76,7 @@ class ProfileInfoTableViewCell: UITableViewCell {
         
         subscribersContainerStackView.addArrangedSubview(displayNameLabel)
         subscribersContainerStackView.addArrangedSubview(subscriberDetailContainerStackView)
-        displayNameLabel.width(80)
+        displayNameLabel.right(to: contentView, offset: -24)
         
         subscriberDetailContainerStackView.addArrangedSubview(subscribersImageContainer)
         subscriberDetailContainerStackView.addArrangedSubview(subscribersLabel)
