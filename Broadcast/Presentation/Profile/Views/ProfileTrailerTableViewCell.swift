@@ -75,6 +75,11 @@ class ProfileTrailerTableViewCell: UITableViewCell {
         uploadButton.leftToSuperview(offset: 24)
         uploadButton.rightToSuperview(offset: -24)
         uploadButton.bottomToSuperview(offset: -24)
+        
+        contentView.addSubview(progressView)
+        progressView.leftToSuperview(offset: 24)
+        progressView.rightToSuperview(offset: -24)
+        progressView.bottomToSuperview(offset: -24)
     }
     
     required init?(coder: NSCoder) {
