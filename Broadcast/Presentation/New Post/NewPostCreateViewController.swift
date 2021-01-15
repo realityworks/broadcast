@@ -24,8 +24,8 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     private let selectMediaInfoStackView = UIStackView()
     private let runTimeLabel = UILabel()
     private let selectedMediaTitleLabel = UILabel.largeTitle(.noMedia, textColor: .primaryLightGrey)
-    private let tipsButton = UIButton.text(withTitle: LocalizedString.tips)
     private let removeButton = UIButton.textDestructive(withTitle: LocalizedString.remove)
+    //private let tipsButton = UIBarButtonItem(
     
     private let progressView = ProgressView()
     private let editPostView = EditPostView()
@@ -43,6 +43,10 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         let cancelBarButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelTapped))
         cancelBarButton.tintColor = .white
         navigationItem.leftBarButtonItem = cancelBarButton
+        
+        let tipsBarButton = UIBarButtonItem(image: UIImage.iconHelpCricle, style: UIBarButtonItem.Style.plain, target: self, action: #selector(tipsTapped))
+        cancelBarButton.tintColor = .white
+        navigationItem.rightBarButtonItem = tipsBarButton
         
         // Do any additional setup after loading the view.
         configureViews()
@@ -68,6 +72,8 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     // MARK: Internal configuration functions
     
     private func configureViews() {
+        view.backgroundColor = UIColor.primaryWhite
+        
         view.addGestureRecognizer(dismissKeyboardGestureRecognizer)
         dismissKeyboardGestureRecognizer.delaysTouchesEnded = false
         dismissKeyboardGestureRecognizer.addTarget(self, action: #selector(dismissKeyboard))
@@ -75,10 +81,10 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
         
-        tipsButton.setImage(UIImage.iconHelp?.withRenderingMode(.alwaysTemplate), for: .normal)
-        tipsButton.setTitleColor(.secondaryBlack, for: .normal)
-        tipsButton.imageView?.contentMode = .scaleAspectFit
-        tipsButton.imageView?.tintColor = .secondaryBlack
+//        tipsButton.setImage(UIImage.iconHelp?.withRenderingMode(.alwaysTemplate), for: .normal)
+//        tipsButton.setTitleColor(.secondaryBlack, for: .normal)
+//        tipsButton.imageView?.contentMode = .scaleAspectFit
+//        tipsButton.imageView?.tintColor = .secondaryBlack
         
         selectMediaInfoStackView.axis = .vertical
         selectMediaInfoStackView.alignment = .leading
@@ -118,10 +124,10 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         selectMediaInfoStackView.addSpace(24)
         selectMediaInfoStackView.addArrangedSubview(selectedMediaTitleLabel)
         selectMediaInfoStackView.addArrangedSubview(runTimeLabel)
-        selectMediaInfoStackView.addArrangedSubview(tipsButton)
+        //selectMediaInfoStackView.addArrangedSubview(tipsButton)
         
         runTimeLabel.height(18)
-        tipsButton.height(16)
+        //tipsButton.height(16)
         
         selectMediaInfoStackView.leftToRight(of: selectMediaView, offset: 16)
         selectMediaInfoStackView.top(to: selectMediaView)
@@ -228,12 +234,6 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
                 self.viewModel.showTips(false)
             })
             .disposed(by: disposeBag)
-        
-        tipsButton.rx.tap
-            .subscribe(onNext: { _ in
-                self.viewModel.showTips(true)
-            })
-            .disposed(by: disposeBag)
     }
     
     private func configureTextFieldBindings() {
@@ -294,6 +294,10 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     
     @objc func cancelTapped() {
         showCancelOptions()
+    }
+    
+    @objc func tipsTapped() {
+        viewModel.showTips(true)
     }
     
     func showCancelOptions() {

@@ -68,7 +68,7 @@ class ProfileTextFieldTableViewCell: UITableViewCell {
             textField.textInsets = .left(16)
             textField.isUserInteractionEnabled = true
         } else {
-            textField.backgroundColor = .tertiaryLightGrey
+            textField.backgroundColor = .secondaryWhite
             
             let lockedIcon = UIImageView(image: UIImage.iconLock?.withRenderingMode(.alwaysTemplate))
             lockedIcon.contentMode = .scaleAspectFit

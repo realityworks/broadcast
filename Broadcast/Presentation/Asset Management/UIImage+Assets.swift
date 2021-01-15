@@ -29,6 +29,7 @@ extension UIImage {
     static let iconShare = UIImage(named: "icon-share")
     static let logoBoomdayBroadcaster = UIImage(named: "logo-boomday-broadcaster")
     static let iconChevronLeft = UIImage(named: "icon-chevron-right")
+    static let iconHelpCricle = UIImage(named: "icon-help-circle")
     
     static var profileImage: UIImage? {
         return UIImage(contentsOfKey: Self.profileImageKey) ?? UIImage(color: .primaryRed)
