@@ -54,5 +54,11 @@ extension UIButton {
         button.titleLabel?.font = UIFont.bodyBold
         return button
     }
+    
+    static func with(image: UIImage?) -> UIButton {
+        let button = UIButton()
+        button.setImage(image, for: .normal)
+        return button
+    }
 }
 

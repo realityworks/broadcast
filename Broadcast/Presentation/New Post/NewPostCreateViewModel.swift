@@ -47,7 +47,6 @@ class NewPostCreateViewModel : ViewModel {
             guard let uploadProgress = uploadProgress else { return UploadProgress.initialProgressText }
             return uploadProgress.progressText
         }
-            
         
         isUploading = isUploadingSubject.asObservable()
         selectedMedia = selectedMediaSubject.compactMap { $0 }

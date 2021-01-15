@@ -20,6 +20,7 @@ extension UITextField {
         
         textField.borderStyle = .none
         
+        textField.backgroundColor = .white
         textField.layer.borderWidth = 1
         textField.layer.borderColor = UIColor.textFieldBorder.cgColor
         textField.layer.cornerRadius = 5

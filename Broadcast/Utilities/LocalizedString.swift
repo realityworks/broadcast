@@ -14,6 +14,7 @@ enum LocalizedString : String {
     case usernamePlaceholder
     case passwordPlaceholder
     case myPostsHeading
+    case profileDetailHeading
     case newPostTipsTitle
     case select
     case profileInformation
@@ -89,6 +90,11 @@ enum LocalizedString : String {
     case myProfile
     case version
     case deletePost
+    case email
+    case userHandle
+    case uploadTrailer
+    case changeVideo
+    case emailUserNotModifiableInfo
     
     var localized: String {
         return Bundle.main.localizedString(forKey: self.rawValue, value: nil, table: nil)

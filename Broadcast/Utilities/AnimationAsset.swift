@@ -8,9 +8,6 @@
 import Foundation
 
 enum AnimationAsset: String {
-    case playAnimation = "ios-play-button-pulse"
+    case playVideo = "ios-play-button-pulse"
+    case success = "web-success-load"
 }
-
-//enum ImageAsset: String {
-//
-//}

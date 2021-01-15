@@ -23,4 +23,19 @@ extension UITextView {
         
         return textView
     }
+    
+    var placeholder: String? {
+        get {
+            if let textView = self as? RSKPlaceholderTextView {
+                return textView.attributedPlaceholder?.string
+            }
+            return nil
+        }
+        
+        set {
+            if let textView = self as? RSKPlaceholderTextView {
+                textView.attributedPlaceholder = newValue?.set(style: Style.body).set(style: Style.lightGrey)
+            }
+        }
+    }
 }

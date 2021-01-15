@@ -18,6 +18,11 @@ class ProfileDetailViewController: ViewController {
     private let viewModel = ProfileDetailViewModel()
     
     let tableView = UITableView(frame: .zero, style: .grouped)
+    let titleHeaderView = UIView()
+    let titleLabel = UILabel.text(.profileDetailHeading,
+                                  font: .tableTitle,
+                                  textColor: .primaryLightGrey)
+    let headingSeparator = UIView()
     
     // MARK: UIPickerController
     enum PickerTags: PickerTag {
@@ -32,17 +37,27 @@ class ProfileDetailViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        title = "Profile Detail"
-        
         configureViews()
         configureLayout()
         configureBindings()
     }
     
     private func configureViews() {
-        // Configure Views
+        view.backgroundColor = UIColor.secondaryWhite
         
+        // Setup table view the header
+        titleHeaderView.frame = CGRect(x: 0, y: 0, width: 200, height: 96)
+        tableView.tableHeaderView = titleHeaderView
+
+        titleHeaderView.addSubview(titleLabel)
+        titleLabel.edgesToSuperview(excluding: [.left, .right])
+        titleLabel.leftToSuperview(offset: 22)
+        
+        titleHeaderView.addSubview(headingSeparator)
+        headingSeparator.edgesToSuperview(excluding: [.top])
+        headingSeparator.height(1)
+        
+        // Configure Views
         // Register the required cells for the view
         tableView.register(ProfileInfoTableViewCell.self,
                            forCellReuseIdentifier: ProfileInfoTableViewCell.identifier)
@@ -54,6 +69,8 @@ class ProfileDetailViewController: ViewController {
                            forCellReuseIdentifier: ProfileTrailerTableViewCell.identifier)
         tableView.register(ProfileSectionHeaderCell.self,
                            forCellReuseIdentifier: ProfileSectionHeaderCell.identifier)
+        tableView.register(ProfileSimpleInfoTableViewCell.self,
+                           forCellReuseIdentifier: ProfileSimpleInfoTableViewCell.identifier)
         
         // Setup the tableview styling
         tableView.allowsSelection = false
@@ -81,60 +98,87 @@ class ProfileDetailViewController: ViewController {
         let datasource = ReactiveTableViewModelSource<ProfileDetailSectionModel>(configureCell: { _, tableView, indexPath, row -> UITableViewCell in
             
             switch row {
-            case let .profileInfo(profileImage, subscribers):
+            case let .profileInfo(profileImage, displayName, subscribers):
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileInfoTableViewCell.identifier, for: indexPath) as! ProfileInfoTableViewCell
-                cell.configure(withProfileImage: profileImage, subscribers: subscribers)
+                cell.configure(withProfileImage: profileImage,
+                               displayName: displayName,
+                               subscribers: subscribers)
                 cell.changeThumbnailButton.rx.tap
                     .subscribe(onNext: {
                         self.showMediaOptionsMenu(forTag: PickerTags.profileImage.rawValue)
                     })
-                    .disposed(by: self.disposeBag)
+                    .disposed(by: cell.disposeBag)
                 return cell
+                
             case .displayName(let displayName):
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextFieldTableViewCell.identifier, for: indexPath) as! ProfileTextFieldTableViewCell
                 
-                cell.configure(withText: displayName,
-                               icon: UIImage(systemName: "pencil")?.withRenderingMode(.alwaysTemplate))
+                cell.configure(withTitle: LocalizedString.displayName.localized.uppercased(),
+                               placeholder: LocalizedString.displayName.localized,
+                               text: displayName,
+                               editingEnabled: true)
                 cell.rx.text
                     .bind(to: self.viewModel.displayNameSubject)
                     .disposed(by: self.disposeBag)
                 
                 return cell
+                
             case .biography(let biography):
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextViewTableViewCell.identifier, for: indexPath) as! ProfileTextViewTableViewCell
                 
-                cell.configure(withText: biography,
-                               icon: UIImage(systemName: "pencil")?.withRenderingMode(.alwaysTemplate))
+                cell.configure(withTitle: LocalizedString.displayBio.localized.uppercased(),
+                               text: biography,
+                               placeholder: LocalizedString.displayBio.localized)
                 
                 cell.rx.text
                     .bind(to: self.viewModel.biographySubject)
-                    .disposed(by: self.disposeBag)
+                    .disposed(by: cell.disposeBag)
                 
                 return cell
-            case let .trailerVideo(trailerVideoUrl):
+                
+            case .email(let email):
+                let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextFieldTableViewCell.identifier, for: indexPath) as! ProfileTextFieldTableViewCell
+                
+                cell.configure(withTitle: LocalizedString.email.localized.uppercased(),
+                               placeholder: LocalizedString.email.localized,
+                               text: email,
+                               editingEnabled: false)
+                cell.rx.text
+                    .bind(to: self.viewModel.displayNameSubject)
+                    .disposed(by: cell.disposeBag)
+                
+                return cell
+                
+            case .handle(let handle):
+                let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextFieldTableViewCell.identifier, for: indexPath) as! ProfileTextFieldTableViewCell
+                
+                cell.configure(withTitle: LocalizedString.userHandle.localized.uppercased(),
+                               placeholder: LocalizedString.userHandle.localized,
+                               text: handle,
+                               editingEnabled: false)
+                cell.rx.text
+                    .bind(to: self.viewModel.displayNameSubject)
+                    .disposed(by: cell.disposeBag)
+                
+                return cell
+                
+            case .trailerVideo:
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTrailerTableViewCell.identifier, for: indexPath) as! ProfileTrailerTableViewCell
+                                
+                self.configureBindings(forTrailerCell: cell)
                 
-                cell.configure(trailerVideoUrl: trailerVideoUrl)
+                return cell
                 
-                self.viewModel.hideUploadingBar
-                    .bind(to: cell.progressView.rx.isHidden)
-                    .disposed(by: cell.disposeBag)
+            case .simpleInfo(let text):
+                let cell = tableView.dequeueReusableCell(withIdentifier: ProfileSimpleInfoTableViewCell.identifier, for: indexPath) as! ProfileSimpleInfoTableViewCell
                 
-                self.viewModel.progressText
-                    .bind(to: cell.progressView.rx.text)
-                    .disposed(by: cell.disposeBag)
+                cell.configure(withText: text)
                 
-                self.viewModel.progress
-                    .bind(to: cell.progressView.rx.totalProgress)
-                    .disposed(by: cell.disposeBag)
+                return cell
                 
-                
-                cell.selectButton.rx.tap
-                    .subscribe(onNext: { [unowned self] _ in
-                        self.showMediaOptionsMenu(forTag: PickerTags.trailer.rawValue)
-                    })
-                    .disposed(by: self.disposeBag)
-                
+            case .spacer:
+                let cell = UITableViewCell()
+                cell.backgroundColor = .white
                 return cell
             }
         })
@@ -144,45 +188,68 @@ class ProfileDetailViewController: ViewController {
             switch row {
             case .profileInfo:
                 return ProfileInfoTableViewCell.cellHeight
-            case .displayName:
-                return 50
+            case .displayName, .email, .handle:
+                return ProfileTextFieldTableViewCell.cellHeight
             case .biography:
-                return 80
+                return ProfileTextViewTableViewCell.cellHeight
             case .trailerVideo:
-                return UITableView.automaticDimension
+                return ProfileTrailerTableViewCell.cellHeight
+            case .simpleInfo:
+                return ProfileSimpleInfoTableViewCell.cellHeight
+            case .spacer(let height):
+                return height
             }
         }
-        datasource.heightForHeaderInSection = { _, _ -> CGFloat in
-            ProfileSectionHeaderCell.cellHeight
+        
+        datasource.heightForHeaderInSection = { datasource, section -> CGFloat in
+            switch section {
+            /// The first cell (No header)
+            case 0:
+                return 0
+            default:
+                return ProfileSectionHeaderCell.cellHeight
+            }
         }
         
         datasource.viewForHeaderInSection = { datasource, tableView, section in
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: ProfileSectionHeaderCell.identifier) as? ProfileSectionHeaderCell else { return nil }
-            
-            let sectionTitle = datasource.sectionModels[section].model
-            cell.label.text = sectionTitle?.localized
-            
-            return cell
+            switch section {
+            /// The first cell (No header)
+            case 0:
+                return nil
+            default:
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: ProfileSectionHeaderCell.identifier) as? ProfileSectionHeaderCell else { return nil }
+                
+                let sectionTitle = datasource.sectionModels[section].model
+                cell.label.text = sectionTitle?.localized
+                
+                return cell
+            }
         }
         
         let items = Observable.combineLatest(
             viewModel.biographyObservable,
             viewModel.displayNameObservable,
+            viewModel.emailObservable,
+            viewModel.handleObservable,
             viewModel.subscriberCount,
-            viewModel.profileImage,
-            viewModel.trailerVideoUrl) {
+            viewModel.profileImage) {
             
-            biography, displayName, subscribers, profileImage, trailerUrl -> [ProfileDetailSectionModel] in
+            biography, displayName, email, handle, subscribers, profileImage -> [ProfileDetailSectionModel] in
             
             return [
                 SectionModel(model: nil, items: [
-                                ProfileDetailViewModel.Row.profileInfo(profileImage: profileImage, subscribers: subscribers)]),
-                SectionModel(model: LocalizedString.displayName, items: [
-                                ProfileDetailViewModel.Row.displayName(text: displayName ?? String.empty)]),
-                SectionModel(model: LocalizedString.displayBio, items: [
-                                ProfileDetailViewModel.Row.biography(text: biography ?? String.empty)]),
+                                ProfileDetailViewModel.Row.profileInfo(profileImage: profileImage,
+                                                                       displayName: displayName ?? String.empty,
+                                                                       subscribers: subscribers)]),
+                SectionModel(model: LocalizedString.accountSettings, items: [
+                                ProfileDetailViewModel.Row.displayName(text: displayName ?? String.empty),
+                                ProfileDetailViewModel.Row.biography(text: biography ?? String.empty),
+                                ProfileDetailViewModel.Row.email(text: email ?? String.empty),
+                                ProfileDetailViewModel.Row.handle(text: handle ?? String.empty),
+                                ProfileDetailViewModel.Row.spacer(height: 16),
+                                ProfileDetailViewModel.Row.simpleInfo(text: LocalizedString.emailUserNotModifiableInfo)]),
                 SectionModel(model: LocalizedString.trailerVideo, items: [
-                                ProfileDetailViewModel.Row.trailerVideo(trailerUrl: trailerUrl)])
+                                ProfileDetailViewModel.Row.trailerVideo])
             ]
         }
                 
@@ -191,6 +258,74 @@ class ProfileDetailViewController: ViewController {
             .disposed(by: disposeBag)
         
         tableView.delegate = datasource
+    }
+    
+    private func configureBindings(forTrailerCell cell: ProfileTrailerTableViewCell) {
+        viewModel.progressText
+            .bind(to: cell.progressView.rx.text)
+            .disposed(by: cell.disposeBag)
+        
+        viewModel.progress
+            .bind(to: cell.progressView.rx.totalProgress)
+            .disposed(by: cell.disposeBag)
+        
+        viewModel.showingTrailer
+            .map { !$0 }
+            .bind(to: cell.selectMediaView.videoMediaOverlay.rx.isHidden)
+            .disposed(by: cell.disposeBag)
+        
+        viewModel.mediaTypeTitle
+            .bind(to: cell.selectedMediaTitleLabel.rx.text)
+            .disposed(by: cell.disposeBag)
+            
+        viewModel.runTimeTitle
+            .bind(to: cell.runTimeLabel.rx.attributedText)
+            .disposed(by: cell.disposeBag)
+        
+        viewModel.trailerVideoUrl
+            .compactMap { $0 }
+            .subscribe(onNext: { url in
+                cell.selectMediaView.videoMediaOverlay.playVideo(withURL: url, autoplay: false)
+            })
+            .disposed(by: cell.disposeBag)
+        
+        viewModel.isUploading
+            .map { !$0 }
+            .bind(to: cell.changeButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        viewModel.showProgressView
+            .map { !$0 }
+            .bind(to: cell.progressView.rx.isHidden)
+            .disposed(by: cell.disposeBag)
+        
+        viewModel.showUploadButton
+            .map { !$0 }
+            .bind(to: cell.uploadButton.rx.isHidden)
+            .disposed(by: cell.disposeBag)
+        
+        viewModel.uploadComplete
+            .bind(to: cell.progressView.rx.uploadSuccess)
+            .disposed(by: cell.disposeBag)
+        
+        cell.changeButton.rx.tap
+            .subscribe(onNext: { [unowned self] _ in
+                self.showMediaOptionsMenu(forTag: PickerTags.trailer.rawValue)
+            })
+            .disposed(by: cell.disposeBag)
+        
+        viewModel.selectedTrailerRelay
+            .map { _ in true }
+            .bind(to: cell.uploadButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        cell.uploadButton.rx.tap
+            .withLatestFrom(viewModel.selectedTrailerRelay.asObservable())
+            .compactMap { $0 }
+            .subscribe(onNext: { [unowned self] url in
+                self.viewModel.uploadTrailer(withUrl: url)
+            })
+            .disposed(by: cell.disposeBag)
     }
 }
 

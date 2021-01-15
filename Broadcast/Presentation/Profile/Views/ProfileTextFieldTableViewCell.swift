@@ -11,17 +11,19 @@ import RxCocoa
 
 class ProfileTextFieldTableViewCell: UITableViewCell {
     static let identifier: String = "ProfileTextFieldTableViewCell"
+    static let cellHeight: CGFloat = 100.0
 
-    fileprivate let textField = UITextField()
-    fileprivate let iconImageView = UIImageView()
+    fileprivate let verticalStackView = UIStackView()
+    fileprivate let titleLabel = UILabel.lightGreySmallBody()
+    fileprivate var editingEnabled: Bool = true
+    fileprivate let textField = UITextField.standard(insets: .left(16))
     
-    private let disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
     
     override init(style: UITableViewCell.CellStyle,
                   reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureViews()
-        styleView()
         setupActions()
     }
     
@@ -29,32 +31,53 @@ class ProfileTextFieldTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configureViews() {
-        contentView.addSubview(textField)
-        textField.leftToSuperview(offset: 8)
-        textField.rightToSuperview(offset: -8)
-        textField.topToSuperview(offset: 8)
-        textField.bottomToSuperview(offset: -8)
-        
-        contentView.addSubview(iconImageView)
-        iconImageView.rightToSuperview(offset: -8)
-        iconImageView.topToSuperview(offset: -8)
-        iconImageView.width(30)
-        iconImageView.aspectRatio(1)
-        iconImageView.tintColor = .darkGray
+    override func prepareForReuse() {
+        disposeBag = DisposeBag()
     }
-
-    private func styleView() {
+    
+    private func configureViews() {
         
+        verticalStackView.axis = .vertical
+        verticalStackView.spacing = 10
+        verticalStackView.alignment = .leading
+        verticalStackView.distribution = .fill
+        
+        contentView.addSubview(verticalStackView)
+        verticalStackView.topToSuperview(offset: 16)
+        verticalStackView.leftToSuperview(offset: 24)
+        verticalStackView.rightToSuperview(offset: -24)
+        
+        verticalStackView.addArrangedSubview(titleLabel)
+        verticalStackView.addArrangedSubview(textField)
+        
+        textField.widthToSuperview()
     }
 
     private func setupActions() {
         textField.resignWhenFinished(disposeBag)
     }
     
-    func configure(withText text: String, icon: UIImage?) {
+    func configure(withTitle title: String, placeholder: String, text: String, editingEnabled: Bool) {
+        titleLabel.text = title
         textField.text = text
-        iconImageView.image = icon
+        
+        #warning("Refactor this into a universal textfield, spread across too many extensions/custom classes")
+        if editingEnabled {
+            textField.backgroundColor = .white
+            textField.leftView = nil
+            textField.textInsets = .left(16)
+            textField.isUserInteractionEnabled = true
+        } else {
+            textField.backgroundColor = .tertiaryLightGrey
+            
+            let lockedIcon = UIImageView(image: UIImage.iconLock?.withRenderingMode(.alwaysTemplate))
+            lockedIcon.contentMode = .scaleAspectFit
+            lockedIcon.tintColor = .lightGray
+            textField.isUserInteractionEnabled = false
+            textField.leftView = lockedIcon
+            textField.leftViewMode = .always
+            textField.textInsets = .left(4)
+        }
     }
 }
 

@@ -16,7 +16,7 @@ class PostSummaryView : UIView {
     let thumbnailImageView = UIImageView()
     let processingView = ProcessingView()
     let videoPlayerView = VideoPlayerView()
-    let pressPlayOverlayView = AnimationView(animationAsset: .playAnimation)
+    let pressPlayOverlayView = AnimationView(animationAsset: .playVideo)
     let containerTopView = UIView()
 
     let postTitleContainer = UIView()

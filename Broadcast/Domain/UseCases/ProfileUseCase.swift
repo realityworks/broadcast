@@ -98,6 +98,11 @@ extension ProfileUseCase {
         
     }
     
+    func updateLocalProfile(displayName: String, biography: String) {
+        stateController.state.profile?.displayName = displayName
+        stateController.state.profile?.biography = biography
+    }
+    
     func updateLocalProfile(image: UIImage) {
         image.write(toKey: UIImage.profileImageKey)
         stateController.state.profileImage = image

@@ -56,9 +56,10 @@ class MyPostsViewController: ViewController {
         view.addSubview(tableView)
         tableView.edgesToSuperview()
 
-        /// Configure the table view header
+        /// Configure the table view header (Will be changed)
+        #warning("This will change - Move title label to properties")
         let titleLabel = UILabel.text(.myPostsHeading,
-                                      font: .myPostTableTitle,
+                                      font: .tableTitle,
                                       textColor: .primaryLightGrey)
         let titleHeaderView = UIView()
 

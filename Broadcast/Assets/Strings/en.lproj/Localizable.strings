@@ -12,6 +12,7 @@
 "usernamePlaceholder" = "Username";
 "passwordPlaceholder" = "Password";
 "myPostsHeading" = "My Posts";
+"profileDetailHeading" = "Profile Information";
 "newPostTipsTitle" = "HOT TIPS FOR GREAT CONTENT";
 "select" = "Select";
 "profileInformation" = "Profile Information";
@@ -81,6 +82,11 @@
 "myProfile" = "My Profile";
 "version" = "Version";
 "deletePost" = "Delete Post";
+"email" = "Email";
+"userHandle" = "User Handle";
+"uploadTrailer" = "Upload Trailer";
+"changeVideo" = "Change Video";
+"emailUserNotModifiableInfo" = "Email and User Handle cannot be modified.";
 
 // MARK: Error Strings
 "unknownError" = "An unknown error occured";
