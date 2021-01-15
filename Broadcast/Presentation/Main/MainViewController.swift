@@ -16,7 +16,6 @@ class MainViewController: UITabBarController {
     }
     
     private (set) var myPostsViewController: UIViewController!
-    private (set) var newPostViewController: UIViewController!
     private (set) var profileViewController: UIViewController!
     
     override func viewDidLoad() {
@@ -25,11 +24,9 @@ class MainViewController: UITabBarController {
         self.delegate = self
         
         myPostsViewController           = Route.myPosts.viewControllerInstance()
-        newPostViewController           = Route.newPostCreate.viewControllerInstance()
         profileViewController           = Route.profile.viewControllerInstance()
         
         addChild(myPostsViewController)
-        addChild(newPostViewController)
         addChild(profileViewController)
         
         // Do any additional setup after loading the view.
@@ -43,8 +40,6 @@ class MainViewController: UITabBarController {
         switch route {
         case .myPosts:
             selectedIndex = TabBarItems.myPosts.rawValue
-        case .newPostCreate:
-            selectedIndex = TabBarItems.upload.rawValue
         case .profile:
             selectedIndex = TabBarItems.profile.rawValue
             
@@ -72,14 +67,6 @@ class MainViewController: UITabBarController {
 
         myPostsViewController.tabBarItem = myPostsTabBarItem
         
-        /// Create the New Post Tab bar item
-        let newPostTabBarItem = UITabBarItem(
-            title: LocalizedString.newPost.localized,
-            image: UIImage.iconPlusCircle,
-            selectedImage: UIImage.iconPlusCircle)
-        
-        newPostViewController.tabBarItem = newPostTabBarItem
-        
         /// Create the Profile Tab bar item
         let profileTabBarItem = UITabBarItem(
             title: LocalizedString.myProfile.localized,
@@ -88,7 +75,7 @@ class MainViewController: UITabBarController {
         
         profileViewController.tabBarItem = profileTabBarItem
         
-        viewControllers = [myPostsViewController, newPostViewController, profileViewController]
+        viewControllers = [myPostsViewController, profileViewController]
         
     }
 }

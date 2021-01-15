@@ -89,7 +89,6 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         picker.delegate = self
         picker.videoExportPreset = AVAssetExportPresetPassthrough
         picker.videoQuality = .typeHigh
-        
     }
     
     private func configureLayout() {
