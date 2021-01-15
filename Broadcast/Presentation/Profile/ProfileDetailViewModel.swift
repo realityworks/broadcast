@@ -181,6 +181,8 @@ extension ProfileDetailViewModel {
         guard let displayName = displayNameSubject.value,
               let biography = biographySubject.value else { return }
         
+        profileUseCase.updateLocalProfile(displayName: displayName, biography: biography)
+        
         profileUseCase.updateProfile(displayName: displayName,
                                      biography: biography)
             .subscribe(onCompleted: {
