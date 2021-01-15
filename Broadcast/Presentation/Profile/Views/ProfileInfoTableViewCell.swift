@@ -26,6 +26,8 @@ class ProfileInfoTableViewCell: UITableViewCell {
     let subscribersImageContainer = UIView()
     let subscribersImage = UIImageView(image: .iconRadio)
     let subscribersLabel = UILabel()
+    
+    var disposeBag = DisposeBag()
 
     override init(style: UITableViewCell.CellStyle,
                   reuseIdentifier: String?) {
@@ -36,6 +38,10 @@ class ProfileInfoTableViewCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+        disposeBag = DisposeBag()
     }
     
     private func configureViews() {
@@ -86,7 +92,7 @@ class ProfileInfoTableViewCell: UITableViewCell {
         subscribersImage.edgesToSuperview()
         subscribersImage.contentMode = .scaleAspectFit
         
-        thumbnailImageView.contentMode = .scaleAspectFit
+        thumbnailImageView.contentMode = .scaleAspectFill
         thumbnailImageView.height(100)
         thumbnailImageView.width(100)
         

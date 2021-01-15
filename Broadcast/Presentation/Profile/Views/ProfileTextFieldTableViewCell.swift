@@ -18,7 +18,7 @@ class ProfileTextFieldTableViewCell: UITableViewCell {
     fileprivate var editingEnabled: Bool = true
     fileprivate let textField = UITextField.standard(insets: .left(16))
     
-    private let disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
     
     override init(style: UITableViewCell.CellStyle,
                   reuseIdentifier: String?) {
@@ -29,6 +29,10 @@ class ProfileTextFieldTableViewCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+        disposeBag = DisposeBag()
     }
     
     private func configureViews() {

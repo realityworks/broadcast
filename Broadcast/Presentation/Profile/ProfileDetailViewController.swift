@@ -107,7 +107,7 @@ class ProfileDetailViewController: ViewController {
                     .subscribe(onNext: {
                         self.showMediaOptionsMenu(forTag: PickerTags.profileImage.rawValue)
                     })
-                    .disposed(by: self.disposeBag)
+                    .disposed(by: cell.disposeBag)
                 return cell
                 
             case .displayName(let displayName):
@@ -132,7 +132,7 @@ class ProfileDetailViewController: ViewController {
                 
                 cell.rx.text
                     .bind(to: self.viewModel.biographySubject)
-                    .disposed(by: self.disposeBag)
+                    .disposed(by: cell.disposeBag)
                 
                 return cell
                 
@@ -145,7 +145,7 @@ class ProfileDetailViewController: ViewController {
                                editingEnabled: false)
                 cell.rx.text
                     .bind(to: self.viewModel.displayNameSubject)
-                    .disposed(by: self.disposeBag)
+                    .disposed(by: cell.disposeBag)
                 
                 return cell
                 
@@ -158,7 +158,7 @@ class ProfileDetailViewController: ViewController {
                                editingEnabled: false)
                 cell.rx.text
                     .bind(to: self.viewModel.displayNameSubject)
-                    .disposed(by: self.disposeBag)
+                    .disposed(by: cell.disposeBag)
                 
                 return cell
                 
