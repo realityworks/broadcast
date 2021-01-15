@@ -20,6 +20,7 @@ class ProfileDetailViewModel : ViewModel {
         case email(text: String)
         case handle(text: String)
         case trailerVideo
+        case simpleInfo(text: LocalizedString)
     }
         
     let schedulers: Schedulers

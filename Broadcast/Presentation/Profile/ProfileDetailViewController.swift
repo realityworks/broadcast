@@ -166,6 +166,13 @@ class ProfileDetailViewController: ViewController {
                 self.configureBindings(forTrailerCell: cell)
                 
                 return cell
+                
+            case .simpleInfo(let text):
+                let cell = tableView.dequeueReusableCell(withIdentifier: ProfileSimpleInfoTableViewCell.identifier, for: indexPath) as! ProfileSimpleInfoTableViewCell
+                
+                cell.configure(withText: text)
+                
+                return cell
             }
         })
 
@@ -180,6 +187,8 @@ class ProfileDetailViewController: ViewController {
                 return ProfileTextViewTableViewCell.cellHeight
             case .trailerVideo:
                 return ProfileTrailerTableViewCell.cellHeight
+            case .simpleInfo:
+                return ProfileSimpleInfoTableViewCell.cellHeight
             }
         }
         
@@ -227,7 +236,8 @@ class ProfileDetailViewController: ViewController {
                                 ProfileDetailViewModel.Row.displayName(text: displayName ?? String.empty),
                                 ProfileDetailViewModel.Row.biography(text: biography ?? String.empty),
                                 ProfileDetailViewModel.Row.email(text: email ?? String.empty),
-                                ProfileDetailViewModel.Row.handle(text: handle ?? String.empty)]),
+                                ProfileDetailViewModel.Row.handle(text: handle ?? String.empty),
+                                ProfileDetailViewModel.Row.simpleInfo(text: LocalizedString.emailUserNotModifiableInfo)]),
                 SectionModel(model: LocalizedString.trailerVideo, items: [
                                 ProfileDetailViewModel.Row.trailerVideo])
             ]
