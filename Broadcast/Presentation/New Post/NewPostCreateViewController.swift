@@ -142,7 +142,7 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         
         contentView.addSubview(progressView)
         
-        progressView.topToBottom(of: editPostView.submitButton, offset: 20)
+        progressView.centerY(to: editPostView.submitButton)
         progressView.widthToSuperview()
         
         /// Layout tips view
