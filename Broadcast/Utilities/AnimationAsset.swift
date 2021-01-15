@@ -9,5 +9,5 @@ import Foundation
 
 enum AnimationAsset: String {
     case playVideo = "ios-play-button-pulse"
-    case success = "ios-play-button-pulse"
+    case success = "web-success-load"
 }

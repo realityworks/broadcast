@@ -43,14 +43,17 @@ class ProfileDetailViewModel : ViewModel {
     let isUploading: Observable<Bool>
     let progress: Observable<Float>
     let progressText: Observable<String>
-    let hideUploadingBar: Observable<Bool>
     
-    // Trailer Management
     let selectedTrailerRelay = PublishRelay<URL?>()
     let trailerVideoUrl: Observable<URL?>
     let runTimeTitle: Observable<NSAttributedString>
     let mediaTypeTitle: Observable<String>
     let showingTrailer: Observable<Bool>
+    let uploadComplete: Observable<Bool>
+    
+    let showProgressView: Observable<Bool>
+    let showUploadButton: Observable<Bool>
+    let selectedNewTrailerRelay = BehaviorRelay<Bool>(value: false)
     
     init(dependencies: Dependencies = .standard) {
         
@@ -59,15 +62,16 @@ class ProfileDetailViewModel : ViewModel {
         
         let uploadingProgressObservable = dependencies.trailerUploadProgress.compactMap { $0 }
         let profileObservable = dependencies.profileObservable.compactMap { $0 }
+        
         displayNameObservable = profileObservable.map { $0.displayName }
         biographyObservable = profileObservable.map { $0.biography ?? String.empty }
         emailObservable = profileObservable.map { _ in "---" }
         handleObservable = profileObservable.map { $0.handle }
         
-        self.subscriberCount = profileObservable.map { $0.subscriberCount }
-        self.profileImage = dependencies.profileImage.compactMap { $0 ?? UIImage.profileImage }
+        subscriberCount = profileObservable.map { $0.subscriberCount }
+        profileImage = dependencies.profileImage.compactMap { $0 ?? UIImage.profileImage }
         
-        self.trailerVideoUrl = Observable.merge(
+        trailerVideoUrl = Observable.merge(
             profileObservable.map { URL(string: $0.trailerVideoUrl) },
             selectedTrailerRelay.asObservable())
         
@@ -91,9 +95,6 @@ class ProfileDetailViewModel : ViewModel {
         showingTrailer = trailerVideoUrl.map { $0 != nil }
         
         isUploading = isUploadingSubject.asObservable()
-        hideUploadingBar = Observable.combineLatest(isUploading, dependencies.trailerUploadProgress) { isUploading, uploadProgress in
-            return !(isUploading || (uploadProgress?.completed ?? false) || (uploadProgress?.failed ?? false))
-        }
 
         progress = uploadingProgressObservable.map { $0.totalProgress }
         
@@ -102,6 +103,14 @@ class ProfileDetailViewModel : ViewModel {
             guard let uploadProgress = uploadProgress else { return UploadProgress.initialProgressText }
             return uploadProgress.progressText
         }
+        
+        uploadComplete = dependencies.trailerUploadProgress.compactMap { $0?.completed }
+        
+        showProgressView = Observable.combineLatest(uploadComplete, isUploading, selectedNewTrailerRelay.asObservable()) { uploadComplete, isUploading, selectedNewTrailer in
+            return (uploadComplete || isUploading) && !selectedNewTrailer
+        }
+        
+        showUploadButton = showProgressView.map { !$0 }
         
         super.init(stateController: dependencies.stateController)
         
@@ -127,6 +136,12 @@ class ProfileDetailViewModel : ViewModel {
             .distinctUntilChanged()
             .bind(to: self.isUploadingSubject)
             .disposed(by: disposeBag)
+        
+        Observable.combineLatest(selectedTrailerRelay.compactMap { _ in true }, isUploading.distinctUntilChanged())
+            .map { $0 || $1 }
+            .bind(to: selectedNewTrailerRelay)
+            .disposed(by: disposeBag)
+        
     }
 }
 

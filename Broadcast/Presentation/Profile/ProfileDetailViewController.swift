@@ -273,13 +273,17 @@ class ProfileDetailViewController: ViewController {
             })
             .disposed(by: cell.disposeBag)
         
-        viewModel.isUploading
+        viewModel.showUploadProgress
             .map { !$0 }
             .bind(to: cell.progressView.rx.isHidden)
             .disposed(by: cell.disposeBag)
         
-        viewModel.isUploading
+        viewModel.showUploadButton
             .bind(to: cell.uploadButton.rx.isHidden)
+            .disposed(by: cell.disposeBag)
+        
+        viewModel.uploadComplete
+            .bind(to: cell.progressView.rx.uploadSuccess)
             .disposed(by: cell.disposeBag)
         
         cell.changeButton.rx.tap

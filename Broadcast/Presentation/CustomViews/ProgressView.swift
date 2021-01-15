@@ -9,19 +9,19 @@ import UIKit
 import TinyConstraints
 import RxSwift
 import RxCocoa
+import Lottie
 
 protocol Progress {
     var progressText: String { get set }
     var totalProgress: Float { get set }// 0-1
 }
 
-
 class ProgressView : UIView, Progress {
     fileprivate let progressContainerView = UIView()
     
-    fileprivate let progressSuccessContainerView = UIView()
-    fileprivate let progressSuccessImage = UIImageView(image: UIImage.iconEye)
-    fileprivate let progressSuccessLabel = UILabel.tinyBody(LocalizedString.
+    fileprivate let progressSuccessContainerView = UIStackView()
+    fileprivate let progressSuccessAnimation = AnimationView(animationAsset: .success)
+    fileprivate let progressSuccessLabel = UILabel.tinyBody(LocalizedString.uploadCompleted)
     
     fileprivate let progressView = UIProgressView()
     fileprivate let progressLabel = UILabel.tinyBody()
@@ -46,7 +46,8 @@ class ProgressView : UIView, Progress {
     
     var progressCompleteSuccess: Bool = false {
         didSet {
-            progressSuccessView.isHidden = progressCompleteSuccess
+            progressSuccessContainerView.isHidden = progressCompleteSuccess
+            progressSuccessAnimation.play()
             progressView.isHidden = !progressCompleteSuccess
             progressLabel.isHidden = !progressCompleteSuccess
         }
@@ -79,6 +80,12 @@ class ProgressView : UIView, Progress {
         progressView.clipsToBounds = true
         
         progressLabel.textAlignment = .center
+        
+        progressSuccessContainerView.axis = .vertical
+        progressSuccessContainerView.alignment = .center
+        progressSuccessContainerView.distribution = .fill
+        
+        progressSuccessAnimation.loopMode = .playOnce
     }
     
     private func layoutViews() {
@@ -96,8 +103,9 @@ class ProgressView : UIView, Progress {
         progressLabel.widthToSuperview()
         progressLabel.height(16)
         
-        addSubview(progressSuccessView)
-        progressSuccessView.addSubview(<#T##view: UIView##UIView#>)
+        addSubview(progressSuccessContainerView)
+        progressSuccessContainerView.addArrangedSubview(progressSuccessAnimation)
+        progressSuccessContainerView.addArrangedSubview(progressSuccessLabel)
     }
 }
 
@@ -114,6 +122,12 @@ extension Reactive where Base : ProgressView {
     var totalProgress: Binder<Float> {
         Binder(base) { progress, totalProgress in
             progress.totalProgress = totalProgress
+        }
+    }
+    
+    var uploadSuccess: Binder<Bool> {
+        Binder(base) { progress, uploadSuccess in
+            progress.progressCompleteSuccess = uploadSuccess
         }
     }
 }
