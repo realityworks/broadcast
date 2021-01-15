@@ -13,7 +13,7 @@ class MyPostsTableViewCell : UITableViewCell {
     static let identifier = "MyPostTableViewCell"
     
     let postSummaryView: PostSummaryView!
-    private let animationView = AnimationView(animationAsset: .playAnimation)
+    private let animationView = AnimationView(animationAsset: .playVideo)
 
         
     override init(style: UITableViewCell.CellStyle,

@@ -104,11 +104,17 @@ class ProfileDetailViewModel : ViewModel {
             return uploadProgress.progressText
         }
         
-        uploadComplete = dependencies.trailerUploadProgress.compactMap { $0?.completed }
+        uploadComplete = dependencies.trailerUploadProgress.map { $0?.completed ?? false}
         
-        showProgressView = Observable.combineLatest(uploadComplete, isUploading, selectedNewTrailerRelay.asObservable()) { uploadComplete, isUploading, selectedNewTrailer in
-            return (uploadComplete || isUploading) && !selectedNewTrailer
-        }
+        let isProgressViewActive = Observable.combineLatest(uploadComplete, isUploading) { uploadComplete, isUploading in
+                return (uploadComplete || isUploading)
+            }
+        
+        let selectedNewTrailerAfterUpload = Observable.combineLatest(uploadComplete, selectedNewTrailerRelay) { uploadComplete, selectedNewTrailer in
+                return uploadComplete && selectedNewTrailer
+            }
+        
+        showProgressView = Observable.merge(isProgressViewActive, selectedNewTrailerAfterUpload.map { !$0 })
         
         showUploadButton = showProgressView.map { !$0 }
         
@@ -137,8 +143,7 @@ class ProfileDetailViewModel : ViewModel {
             .bind(to: self.isUploadingSubject)
             .disposed(by: disposeBag)
         
-        Observable.combineLatest(selectedTrailerRelay.compactMap { _ in true }, isUploading.distinctUntilChanged())
-            .map { $0 || $1 }
+        selectedTrailerRelay.compactMap { _ in true }
             .bind(to: selectedNewTrailerRelay)
             .disposed(by: disposeBag)
         

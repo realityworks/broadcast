@@ -241,10 +241,6 @@ class ProfileDetailViewController: ViewController {
     }
     
     private func configureBindings(forTrailerCell cell: ProfileTrailerTableViewCell) {
-        viewModel.hideUploadingBar
-            .bind(to: cell.progressView.rx.isHidden)
-            .disposed(by: cell.disposeBag)
-            
         viewModel.progressText
             .bind(to: cell.progressView.rx.text)
             .disposed(by: cell.disposeBag)
@@ -273,12 +269,18 @@ class ProfileDetailViewController: ViewController {
             })
             .disposed(by: cell.disposeBag)
         
-        viewModel.showUploadProgress
+        viewModel.isUploading
+            .map { !$0 }
+            .bind(to: cell.changeButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        viewModel.showProgressView
             .map { !$0 }
             .bind(to: cell.progressView.rx.isHidden)
             .disposed(by: cell.disposeBag)
         
         viewModel.showUploadButton
+            .map { !$0 }
             .bind(to: cell.uploadButton.rx.isHidden)
             .disposed(by: cell.disposeBag)
         
