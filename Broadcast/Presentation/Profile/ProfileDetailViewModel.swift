@@ -138,34 +138,6 @@ class ProfileDetailViewModel : ViewModel {
             .subscribe(onNext: { self.handleSubject.accept($0) })
             .disposed(by: disposeBag)
         
-        #warning("Check whats happening here (Observe the full upload progess, likely isUploadingSubject is incorrect")
-        
-        uploadingProgressObservable
-            .subscribe(onNext: { progress in
-                print ("Progress: \(progress)")
-            })
-            .disposed(by: disposeBag)
-        
-        uploadComplete
-            .subscribe(onNext: { complete in
-                print ("Upload complete = \(complete)")
-            })
-            .disposed(by: disposeBag)
-
-        isProgressViewActive
-            .subscribe(onNext: { progressViewActive in
-                print ("Result Active: \(progressViewActive)")
-            })
-            .disposed(by: disposeBag)
-        
-        hasSelectedNewTrailerAfterUpload
-            .subscribe(onNext: { _ in
-                print ("Has selected trailer after!")
-            })
-            .disposed(by: disposeBag)
-        
-        // #ENDTEST
-        
         uploadingProgressObservable
             .map { !($0.completed || $0.failed) }
             .distinctUntilChanged()
