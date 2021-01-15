@@ -123,7 +123,7 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         runTimeLabel.height(18)
         
         selectMediaInfoStackView.leftToRight(of: selectMediaView, offset: 16)
-        selectMediaInfoStackView.top(to: selectMediaView)
+        selectMediaInfoStackView.top(to: selectMediaView, offset: 32)
         selectMediaInfoStackView.width(100)
         
         /// Layout the editPostView
