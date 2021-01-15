@@ -103,9 +103,7 @@ class ProfileDetailViewModel : ViewModel {
             guard let uploadProgress = uploadProgress else { return UploadProgress.initialProgressText }
             return uploadProgress.progressText
         }
-        
-        #warning("Maybe distinct until changed?")
-        
+                
         uploadComplete = dependencies.trailerUploadProgress
             .map { $0?.completed ?? false }
         
@@ -119,7 +117,6 @@ class ProfileDetailViewModel : ViewModel {
             .map { _ in () }
         
         showProgressView = Observable.merge(isProgressViewActive, hasSelectedNewTrailerAfterUpload.map { _ in false })
-        
         showUploadButton = showProgressView.map { !$0 }
         
         super.init(stateController: dependencies.stateController)

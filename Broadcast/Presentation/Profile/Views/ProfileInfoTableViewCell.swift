@@ -31,6 +31,7 @@ class ProfileInfoTableViewCell: UITableViewCell {
                   reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureViews()
+        layoutViews()
     }
     
     required init?(coder: NSCoder) {
@@ -52,6 +53,14 @@ class ProfileInfoTableViewCell: UITableViewCell {
         subscriberDetailContainerStackView.spacing = 0
         subscriberDetailContainerStackView.distribution = .equalSpacing
         
+        displayNameLabel.numberOfLines = 1
+        displayNameLabel.minimumScaleFactor = 0.5
+        displayNameLabel.allowsDefaultTighteningForTruncation = true
+        displayNameLabel.lineBreakMode = .byTruncatingTail
+        displayNameLabel.adjustsFontSizeToFitWidth = true
+    }
+    
+    private func layoutViews() {
         contentView.addSubview(containerStackView)
         containerStackView.edgesToSuperview()
         
@@ -67,6 +76,7 @@ class ProfileInfoTableViewCell: UITableViewCell {
         
         subscribersContainerStackView.addArrangedSubview(displayNameLabel)
         subscribersContainerStackView.addArrangedSubview(subscriberDetailContainerStackView)
+        displayNameLabel.width(80)
         
         subscriberDetailContainerStackView.addArrangedSubview(subscribersImageContainer)
         subscriberDetailContainerStackView.addArrangedSubview(subscribersLabel)

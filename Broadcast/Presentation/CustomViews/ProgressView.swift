@@ -17,30 +17,30 @@ protocol Progress {
 }
 
 class ProgressView : UIView, Progress {
-    fileprivate let progressContainerView = UIView()
     
     fileprivate let progressSuccessContainerView = UIStackView()
     fileprivate let progressSuccessAnimation = AnimationView(animationAsset: .success)
     fileprivate let progressSuccessLabel = UILabel.tinyBody(LocalizedString.uploadCompleted)
     
-    fileprivate let progressView = UIProgressView()
-    fileprivate let progressLabel = UILabel.tinyBody()
+    fileprivate let progressBarContainerView = UIView()
+    fileprivate let progressBarView = UIProgressView()
+    fileprivate let progressBarLabel = UILabel.tinyBody()
 
     var progressText: String {
         set {
-            progressLabel.text = newValue
+            progressBarLabel.text = newValue
         }
         get {
-            return progressLabel.text ?? ""
+            return progressBarLabel.text ?? ""
         }
     }
     
     var totalProgress: Float {
         set {
-            return progressView.progress = newValue
+            return progressBarView.progress = newValue
         }
         get {
-            return progressView.progress
+            return progressBarView.progress
         }
     }
     
@@ -48,8 +48,8 @@ class ProgressView : UIView, Progress {
         didSet {
             progressSuccessContainerView.isHidden = !progressCompleteSuccess
             progressSuccessAnimation.play()
-            progressView.isHidden = progressCompleteSuccess
-            progressLabel.isHidden = progressCompleteSuccess
+            progressBarContainerView.isHidden = progressCompleteSuccess
+            progressBarLabel.isHidden = progressCompleteSuccess
         }
     }
 
@@ -67,19 +67,19 @@ class ProgressView : UIView, Progress {
     
     private func configureViews() {
         
-        progressContainerView.backgroundColor = .clear
-        progressContainerView.layer.cornerRadius = 8
-        progressContainerView.layer.borderWidth = 1
-        progressContainerView.layer.borderColor = UIColor.secondaryLightGrey.cgColor
+        progressBarContainerView.backgroundColor = .clear
+        progressBarContainerView.layer.cornerRadius = 8
+        progressBarContainerView.layer.borderWidth = 1
+        progressBarContainerView.layer.borderColor = UIColor.secondaryLightGrey.cgColor
         
-        progressView.progressViewStyle = .bar
-        progressView.progress = 0.0
-        progressView.trackTintColor = .clear
-        progressView.progressTintColor = .progressBarColor
-        progressView.layer.cornerRadius = 4
-        progressView.clipsToBounds = true
+        progressBarView.progressViewStyle = .bar
+        progressBarView.progress = 0.0
+        progressBarView.trackTintColor = .clear
+        progressBarView.progressTintColor = .progressBarColor
+        progressBarView.layer.cornerRadius = 4
+        progressBarView.clipsToBounds = true
         
-        progressLabel.textAlignment = .center
+        progressBarLabel.textAlignment = .center
         
         progressSuccessContainerView.axis = .vertical
         progressSuccessContainerView.alignment = .center
@@ -90,22 +90,31 @@ class ProgressView : UIView, Progress {
     
     private func layoutViews() {
         /// Progress Container view wraps a simple border around the progress bar
-        addSubview(progressContainerView)
-        progressContainerView.addSubview(progressView)
-        progressContainerView.centerXToSuperview()
-        progressContainerView.widthToSuperview()
-        progressContainerView.height(16)
+        addSubview(progressBarContainerView)
+        progressBarContainerView.addSubview(progressBarView)
+        progressBarContainerView.centerXToSuperview()
+        progressBarContainerView.widthToSuperview()
+        progressBarContainerView.height(16)
         
-        progressView.edgesToSuperview(insets: TinyEdgeInsets(top: 4, left: 5, bottom: 5, right: 5))
+        progressBarView.edgesToSuperview(insets: TinyEdgeInsets(top: 4, left: 5, bottom: 5, right: 5))
         
-        addSubview(progressLabel)
-        progressLabel.topToBottom(of: progressContainerView)
-        progressLabel.widthToSuperview()
-        progressLabel.height(16)
+        addSubview(progressBarLabel)
+        progressBarLabel.topToBottom(of: progressBarContainerView)
+        progressBarLabel.widthToSuperview()
+        progressBarLabel.height(16)
         
         addSubview(progressSuccessContainerView)
-        progressSuccessContainerView.addArrangedSubview(progressSuccessAnimation)
+        
+        let successAnimationContainer = UIView()
+        progressSuccessContainerView.addArrangedSubview(successAnimationContainer)
         progressSuccessContainerView.addArrangedSubview(progressSuccessLabel)
+        
+        successAnimationContainer.height(50)
+        successAnimationContainer.aspectRatio(1)
+        successAnimationContainer.addSubview(progressSuccessAnimation)
+        progressSuccessAnimation.edgesToSuperview()
+        
+        progressSuccessContainerView.centerInSuperview()
     }
 }
 
