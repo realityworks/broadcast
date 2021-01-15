@@ -53,7 +53,7 @@ class EditPostView: UIView {
         
         verticalStackView.addArrangedSubview(captionHeading)
         verticalStackView.addArrangedSubview(captionTextView)
-        
+        verticalStackView.addSpace(10)
         verticalStackView.addArrangedSubview(submitButton)
         
         submitButton.widthToSuperview()
