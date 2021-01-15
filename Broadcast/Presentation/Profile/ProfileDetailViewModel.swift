@@ -51,8 +51,8 @@ class ProfileDetailViewModel : ViewModel {
     let runTimeTitle: Observable<NSAttributedString>
     let mediaTypeTitle: Observable<String>
     let showingTrailer: Observable<Bool>
-    let uploadComplete: Observable<Bool>
     
+    let uploadComplete: Observable<Bool>
     let showProgressView: Observable<Bool>
     let showUploadButton: Observable<Bool>
     let selectedNewTrailerRelay = PublishRelay<Bool>()

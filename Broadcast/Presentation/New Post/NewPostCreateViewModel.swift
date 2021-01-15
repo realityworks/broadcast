@@ -17,15 +17,16 @@ class NewPostCreateViewModel : ViewModel {
     let postContentUseCase: PostContentUseCase
     
     private let selectedMediaSubject = BehaviorRelay<Media?>(value: nil)
-    private let isUploadingSubject = BehaviorSubject<Bool>(value: false)
     private let showTipsSubject = BehaviorRelay<Bool>(value: true)
     
     let title = BehaviorRelay<String>(value: "")
     let caption = BehaviorRelay<String>(value: "")
     
-    let viewTimeTitle: Observable<NSAttributedString>
+    // MARK: Media Selection Properties
+    let runTimeTitle: Observable<NSAttributedString>
     let mediaTypeTitle: Observable<String>
     
+    private let isUploadingSubject = BehaviorSubject<Bool>(value: false)
     let canUpload: Observable<Bool>
     let isUploading: Observable<Bool>
     let progress: Observable<Float>
@@ -34,7 +35,11 @@ class NewPostCreateViewModel : ViewModel {
     let showingImage: Observable<Bool>
     let showingVideo: Observable<Bool>
     let showingMedia: Observable<Bool>
-    let hideUploadingBar: Observable<Bool>
+    
+    let uploadComplete: Observable<Bool>
+    let showProgressView: Observable<Bool>
+    let showUploadButton: Observable<Bool>
+        
     let showTips: Observable<Bool>
     
     init(dependencies: Dependencies = .standard) {
@@ -48,13 +53,9 @@ class NewPostCreateViewModel : ViewModel {
             return uploadProgress.progressText
         }
         
-        isUploading = isUploadingSubject.asObservable()
         selectedMedia = selectedMediaSubject.compactMap { $0 }
-        hideUploadingBar = Observable.combineLatest(isUploading, dependencies.uploadProgressObservable) { isUploading, uploadProgress in
-            return !(isUploading || (uploadProgress?.completed ?? false) || (uploadProgress?.failed ?? false))
-        }
         
-        viewTimeTitle = selectedMedia.map { media in
+        runTimeTitle = selectedMedia.map { media in
             switch media {
             case .video:
                 return LocalizedString.duration.localized.set(style: Style.smallBody).set(style: Style.lightGrey) +
@@ -89,6 +90,10 @@ class NewPostCreateViewModel : ViewModel {
         
         showingMedia = Observable.combineLatest(showingImage, showingVideo) { $0 || $1 }
         
+        isUploading = isUploadingSubject.asObservable()
+        uploadComplete = dependencies.uploadProgressObservable
+            .map { $0?.completed ?? false }
+        
         canUpload = Observable.combineLatest(
             isUploading,
             showingMedia,
@@ -97,8 +102,15 @@ class NewPostCreateViewModel : ViewModel {
         
         showTips = showTipsSubject.asObservable()
         
+        showProgressView = Observable.combineLatest(uploadComplete, isUploading) { uploadComplete, isUploading in
+                return (uploadComplete || isUploading)
+            }
+        
+        showUploadButton = showProgressView.map { !$0 }
+        
         super.init(stateController: dependencies.stateController)
         
+        /// Bind when uploading progress observable changes and completed/failed are both false to correctly update the isUploadingSubject
         uploadingProgressObservable
             .map { !($0.completed || $0.failed) }
             .distinctUntilChanged()
@@ -138,10 +150,6 @@ extension NewPostCreateViewModel {
     
     func selectMedia(_ media: Media) {
         selectedMediaSubject.accept(media)
-    }
-    
-    func removeMedia() {
-        selectedMediaSubject.accept(nil)
     }
     
     func showTips(_ show: Bool) {

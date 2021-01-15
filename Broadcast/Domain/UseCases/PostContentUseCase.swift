@@ -84,6 +84,7 @@ extension PostContentUseCase {
                 } else {
                     self.stateController.state.currentMediaUploadProgress?.errorDescription = error.localizedDescription
                 }
+                self.stateController.sendError(error)
             }, onCompleted: {
                 Logger.log(level: .info, topic: .api, message: "Post content complete!")
                 self.stateController.state.currentMediaUploadProgress?.completed = true

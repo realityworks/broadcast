@@ -24,7 +24,7 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     private let selectMediaInfoStackView = UIStackView()
     private let runTimeLabel = UILabel()
     private let selectedMediaTitleLabel = UILabel.largeTitle(.none, textColor: .primaryLightGrey)
-    private let removeButton = UIButton.textDestructive(withTitle: LocalizedString.remove)
+    private let changeButton = UIButton.textDestructive(withTitle: LocalizedString.change)
     
     private let progressView = ProgressView()
     private let editPostView = EditPostView()
@@ -84,7 +84,7 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         selectMediaInfoStackView.alignment = .leading
         selectMediaInfoStackView.spacing = 4
         
-        removeButton.contentHorizontalAlignment = .leading
+        changeButton.contentHorizontalAlignment = .leading
         
         picker.delegate = self
         picker.videoExportPreset = AVAssetExportPresetPassthrough
@@ -127,9 +127,9 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         selectMediaInfoStackView.top(to: selectMediaView)
         selectMediaInfoStackView.width(100)
         
-        contentView.addSubview(removeButton)
-        removeButton.leftToRight(of: selectMediaView, offset: 16)
-        removeButton.bottom(to: selectMediaView, offset: -16)
+        contentView.addSubview(changeButton)
+        changeButton.leftToRight(of: selectMediaView, offset: 16)
+        changeButton.bottom(to: selectMediaView, offset: -16)
         
         /// Layout the editPostView
         
@@ -172,7 +172,7 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
             .bind(to: selectedMediaTitleLabel.rx.text)
             .disposed(by: disposeBag)
         
-        viewModel.viewTimeTitle
+        viewModel.runTimeTitle
             .bind(to: runTimeLabel.rx.attributedText)
             .disposed(by: disposeBag)
         
@@ -194,11 +194,21 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         
         viewModel.showingMedia
             .map { !$0 }
-            .bind(to: removeButton.rx.isHidden)
+            .bind(to: changeButton.rx.isHidden)
             .disposed(by: disposeBag)
         
-        viewModel.hideUploadingBar
+        viewModel.showProgressView
+            .map { !$0 }
             .bind(to: progressView.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        viewModel.showUploadButton
+            .map { !$0 }
+            .bind(to: editPostView.submitButton.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        viewModel.uploadComplete
+            .bind(to: progressView.rx.uploadSuccess)
             .disposed(by: disposeBag)
         
         viewModel.progressText
@@ -259,9 +269,9 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
             .bind(to: viewModel.caption)
             .disposed(by: disposeBag)
         
-        removeButton.rx.tap
+        changeButton.rx.tap
             .subscribe(onNext: {
-                self.viewModel.removeMedia()
+                self.showMediaOptionsMenu()
             })
             .disposed(by: disposeBag)
     }
