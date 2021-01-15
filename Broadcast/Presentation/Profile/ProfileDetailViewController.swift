@@ -69,6 +69,8 @@ class ProfileDetailViewController: ViewController {
                            forCellReuseIdentifier: ProfileTrailerTableViewCell.identifier)
         tableView.register(ProfileSectionHeaderCell.self,
                            forCellReuseIdentifier: ProfileSectionHeaderCell.identifier)
+        tableView.register(ProfileSimpleInfoTableViewCell.self,
+                           forCellReuseIdentifier: ProfileSimpleInfoTableViewCell.identifier)
         
         // Setup the tableview styling
         tableView.allowsSelection = false
@@ -173,6 +175,11 @@ class ProfileDetailViewController: ViewController {
                 cell.configure(withText: text)
                 
                 return cell
+                
+            case .spacer:
+                let cell = UITableViewCell()
+                cell.backgroundColor = .white
+                return cell
             }
         })
 
@@ -189,6 +196,8 @@ class ProfileDetailViewController: ViewController {
                 return ProfileTrailerTableViewCell.cellHeight
             case .simpleInfo:
                 return ProfileSimpleInfoTableViewCell.cellHeight
+            case .spacer(let height):
+                return height
             }
         }
         
@@ -237,6 +246,7 @@ class ProfileDetailViewController: ViewController {
                                 ProfileDetailViewModel.Row.biography(text: biography ?? String.empty),
                                 ProfileDetailViewModel.Row.email(text: email ?? String.empty),
                                 ProfileDetailViewModel.Row.handle(text: handle ?? String.empty),
+                                ProfileDetailViewModel.Row.spacer(height: 16),
                                 ProfileDetailViewModel.Row.simpleInfo(text: LocalizedString.emailUserNotModifiableInfo)]),
                 SectionModel(model: LocalizedString.trailerVideo, items: [
                                 ProfileDetailViewModel.Row.trailerVideo])

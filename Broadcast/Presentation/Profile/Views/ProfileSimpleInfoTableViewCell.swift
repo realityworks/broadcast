@@ -27,6 +27,7 @@ class ProfileSimpleInfoTableViewCell: UITableViewCell {
         // This needs to be a solid colour since other rows can potentially scroll under it
         label.backgroundColor = .clear
         contentView.backgroundColor = .clear
+        backgroundColor = .clear
     }
     
     private func layoutViews() {

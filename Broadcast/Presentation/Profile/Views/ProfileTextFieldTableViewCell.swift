@@ -40,7 +40,6 @@ class ProfileTextFieldTableViewCell: UITableViewCell {
         
         contentView.addSubview(verticalStackView)
         verticalStackView.topToSuperview(offset: 16)
-        //verticalStackView.bottomToSuperview(offset: 8)
         verticalStackView.leftToSuperview(offset: 24)
         verticalStackView.rightToSuperview(offset: -24)
         

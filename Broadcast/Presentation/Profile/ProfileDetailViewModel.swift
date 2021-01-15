@@ -21,6 +21,7 @@ class ProfileDetailViewModel : ViewModel {
         case handle(text: String)
         case trailerVideo
         case simpleInfo(text: LocalizedString)
+        case spacer(height: CGFloat)
     }
         
     let schedulers: Schedulers
