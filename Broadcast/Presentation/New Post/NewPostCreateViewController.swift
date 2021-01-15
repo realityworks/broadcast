@@ -23,7 +23,7 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     private let selectMediaView = SelectMediaView()
     private let selectMediaInfoStackView = UIStackView()
     private let runTimeLabel = UILabel()
-    private let selectedMediaTitleLabel = UILabel.largeTitle(.noMedia, textColor: .primaryLightGrey)
+    private let selectedMediaTitleLabel = UILabel.largeTitle(.none, textColor: .primaryLightGrey)
     private let removeButton = UIButton.textDestructive(withTitle: LocalizedString.remove)
     //private let tipsButton = UIBarButtonItem(
     
