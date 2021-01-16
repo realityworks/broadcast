@@ -71,10 +71,10 @@ class PostStatsView : UIView {
     ///   - commentCount: Number of comments
     ///   - lockerCount: Number of lockers this post is in
     func configure(withCommentCount commentCount: Int, lockerCount: Int) {
-        commentCountLabel.attributedText =
+        lockerCountLabel.attributedText =
             "\(commentCount) ".set(style: Style.smallBodyBold) +
             LocalizedString.myLocker.localized.set(style: Style.smallBody).set(style: Style.lightGrey)
-        lockerCountLabel.attributedText =
+        commentCountLabel.attributedText =
             "\(lockerCount) ".set(style: Style.smallBodyBold) +
             LocalizedString.comments.localized.set(style: Style.smallBody).set(style: Style.lightGrey)
     }

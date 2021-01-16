@@ -125,7 +125,10 @@ class NewPostCreateViewModel : ViewModel {
         uploadComplete
             .distinctUntilChanged()
             .filter { $0 == true }
-            .delay(.milliseconds(10), scheduler: schedulers.main)
+            .do(onNext: { _ in
+                self.reloadPosts()
+            })
+            .delay(.seconds(2), scheduler: schedulers.main)
             .subscribe(onNext: { success in
                 self.popBackToMyPosts()
             })
@@ -180,6 +183,10 @@ extension NewPostCreateViewModel {
         title.accept("")
         caption.accept("")
         removeMedia()
+    }
+    
+    func reloadPosts() {
+        postContentUseCase.retrieveMyPosts()
     }
     
     func popBackToMyPosts() {
