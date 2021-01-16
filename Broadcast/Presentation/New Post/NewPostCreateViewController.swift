@@ -268,6 +268,12 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
                 self.showMediaOptionsMenu()
             })
             .disposed(by: disposeBag)
+        
+        viewModel.popBackToMyPostsSignal
+            .subscribe(onNext: {
+                self.navigationController?.popViewController(animated: true)
+            })
+            .disposed(by: disposeBag)
     }
     
     private func configureButtonBindings() {
@@ -314,7 +320,8 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
             title: LocalizedString.yes.localized,
             style: .destructive,
             handler: { [weak self] action in
-                self?.viewModel.clearContent()
+                self?.viewModel.cancel()
+                self?.viewModel.popBackToMyPosts()
             })
         alert.addAction(actClear)
 

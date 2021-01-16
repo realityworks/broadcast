@@ -22,6 +22,9 @@ class NewPostCreateViewModel : ViewModel {
     let title = BehaviorRelay<String>(value: "")
     let caption = BehaviorRelay<String>(value: "")
     
+    // MARK: Pop back to view controller
+    let popBackToMyPostsSignal = PublishRelay<()>()
+    
     // MARK: Media Selection Properties
     let runTimeTitle: Observable<NSAttributedString>
     let mediaTypeTitle: Observable<String>
@@ -160,9 +163,13 @@ extension NewPostCreateViewModel {
         showTipsSubject.accept(show)
     }
     
-    func clearContent() {
+    func cancel() {
         title.accept("")
         caption.accept("")
         removeMedia()
+    }
+    
+    func popBackToMyPosts() {
+        popBackToMyPostsSignal.accept(())
     }
 }
