@@ -14,6 +14,7 @@ import SwiftRichString
 
 class NewPostCreateViewModel : ViewModel {
     
+    let schedulers: Schedulers
     let postContentUseCase: PostContentUseCase
     
     private let selectedMediaSubject = BehaviorRelay<Media?>(value: nil)
@@ -46,6 +47,7 @@ class NewPostCreateViewModel : ViewModel {
     let showTips: Observable<Bool>
     
     init(dependencies: Dependencies = .standard) {
+        self.schedulers = dependencies.schedulers
         self.postContentUseCase = dependencies.postContentUseCase
         
         let uploadingProgressObservable = dependencies.uploadProgressObservable.compactMap { $0 }
@@ -119,6 +121,21 @@ class NewPostCreateViewModel : ViewModel {
             .distinctUntilChanged()
             .bind(to: self.isUploadingSubject)
             .disposed(by: disposeBag)
+        
+        uploadComplete
+            .distinctUntilChanged()
+            .filter { $0 == true }
+//            .delay(.milliseconds(10), scheduler: schedulers.main)
+            .asSingle()
+            .subscribe(onSuccess: { success in
+                print("SUCCESS")
+                self.popBackToMyPosts()
+            }, onFailure: { error in
+                print("FAILURE")
+            }, onDisposed: {
+                print("DISPOSED")
+            })
+            .disposed(by: disposeBag)
     }
 }
 
@@ -128,11 +145,13 @@ extension NewPostCreateViewModel {
     struct Dependencies {
         
         let stateController: StateController
+        let schedulers: Schedulers
         let postContentUseCase: PostContentUseCase
         let uploadProgressObservable: Observable<UploadProgress?>
         
         static let standard = Dependencies(
             stateController: Domain.standard.stateController,
+            schedulers: Schedulers.standard,
             postContentUseCase: Domain.standard.useCases.postContentUseCase,
             uploadProgressObservable: Domain.standard.stateController.stateObservable(of: \.currentMediaUploadProgress))
     }
