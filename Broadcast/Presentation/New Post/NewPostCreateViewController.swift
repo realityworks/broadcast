@@ -201,6 +201,10 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
             .bind(to: editPostView.submitButton.rx.isHidden)
             .disposed(by: disposeBag)
         
+        viewModel.showUploadButton
+            .bind(to: changeButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
         viewModel.uploadComplete
             .bind(to: progressView.rx.uploadSuccess)
             .disposed(by: disposeBag)

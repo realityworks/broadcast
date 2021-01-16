@@ -125,15 +125,9 @@ class NewPostCreateViewModel : ViewModel {
         uploadComplete
             .distinctUntilChanged()
             .filter { $0 == true }
-//            .delay(.milliseconds(10), scheduler: schedulers.main)
-            .asSingle()
-            .subscribe(onSuccess: { success in
-                print("SUCCESS")
+            .delay(.milliseconds(10), scheduler: schedulers.main)
+            .subscribe(onNext: { success in
                 self.popBackToMyPosts()
-            }, onFailure: { error in
-                print("FAILURE")
-            }, onDisposed: {
-                print("DISPOSED")
             })
             .disposed(by: disposeBag)
     }
