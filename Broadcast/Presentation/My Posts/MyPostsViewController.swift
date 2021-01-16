@@ -34,7 +34,7 @@ class MyPostsViewController: ViewController {
         super.viewWillAppear(animated)
         
         // Do any additional setup after loading the view.
-        navigationBar(styleAs: .darkLogo)
+        navigationBar(styleAs: .dark(title: LocalizedString.myPostsHeading))
     }
     
     private func configureViews() {
@@ -65,17 +65,16 @@ class MyPostsViewController: ViewController {
 
         /// Configure the table view header (Will be changed)
         #warning("This will change - Move title label to properties")
-        let titleLabel = UILabel.text(.myPostsHeading,
-                                      font: .tableTitle,
-                                      textColor: .primaryLightGrey)
+        let titleLabel = UIImageView(image: UIImage.logoBoomdayBroadcaster?.withTintColor(.primaryLightGrey))
         let titleHeaderView = UIView()
 
         titleHeaderView.frame = CGRect(x: 0, y: 0, width: 200, height: 96)
         tableView.tableHeaderView = titleHeaderView
+        titleHeaderView.width(to: view)
+        titleHeaderView.height(96)
 
         titleHeaderView.addSubview(titleLabel)
-        titleLabel.edgesToSuperview(excluding: [.left, .right])
-        titleLabel.leftToSuperview(offset: 22)
+        titleLabel.centerInSuperview()
     }
         
     private func configureBindings() {        
