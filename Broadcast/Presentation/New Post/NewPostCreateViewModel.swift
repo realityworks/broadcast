@@ -128,7 +128,7 @@ class NewPostCreateViewModel : ViewModel {
             .do(onNext: { _ in
                 self.reloadPosts()
             })
-            .delay(.seconds(2), scheduler: schedulers.main)
+            .delay(.milliseconds(1750), scheduler: schedulers.main)
             .subscribe(onNext: { success in
                 self.popBackToMyPosts()
             })
