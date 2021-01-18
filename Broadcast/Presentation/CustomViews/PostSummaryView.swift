@@ -162,6 +162,7 @@ class PostSummaryView : UIView {
         postCaptionLabel.lineBreakMode = .byTruncatingTail
         
         pressPlayOverlayView.loopMode = .loop
+        pressPlayOverlayView.backgroundBehavior = .pauseAndRestore
         
         // Layout container top view
         containerTopView.edgesToSuperview(excluding: [.top, .bottom])
@@ -226,15 +227,15 @@ class PostSummaryView : UIView {
             
         } else if let thumbnailUrl = postSummaryViewModel.thumbnailUrl {
             thumbnailImageView.sd_setImage(with: thumbnailUrl,
-                                           placeholderImage: UIImage(systemName: "paintbrush"))
+                                           placeholderImage: UIImage(color: .primaryGrey))
             pressPlayOverlayView.isHidden = false
             pressPlayOverlayView.play()
         }
         
         if !postSummaryViewModel.showVideoPlayer {
-            blurredEffectView.isHidden = false//!postSummaryViewModel.isEncoding
-            processingView.isHidden = false//!postSummaryViewModel.isEncoding
-            pressPlayOverlayView.isHidden = true//postSummaryViewModel.isEncoding
+            blurredEffectView.isHidden = !postSummaryViewModel.isEncoding
+            processingView.isHidden = !postSummaryViewModel.isEncoding
+            pressPlayOverlayView.isHidden = postSummaryViewModel.isEncoding
             processingView.startAnimating()
         }
         
