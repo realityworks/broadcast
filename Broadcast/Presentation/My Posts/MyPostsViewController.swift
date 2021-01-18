@@ -54,7 +54,7 @@ class MyPostsViewController: ViewController {
         /// Configure pull to refresh
         tableView.refreshControl = refreshControl
         
-        let createPostButton = UIBarButtonItem(image: UIImage.iconPlusCircle,
+        let createPostButton = UIBarButtonItem(image: UIImage.iconPlusSquare,
                                                style: UIBarButtonItem.Style.plain,
                                                target: self,
                                                action: #selector(createPostTapped))
