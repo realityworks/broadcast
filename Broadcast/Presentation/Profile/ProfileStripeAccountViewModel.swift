@@ -5,7 +5,7 @@
 //  Created by Piotr Suwara on 3/12/20.
 //
 
-import Foundation
+import UIKit
 import RxSwift
 import RxCocoa
 
@@ -17,6 +17,9 @@ class ProfileStripeAccountViewModel : ViewModel {
         /// This may be added back later
         case totalBalance(text: String)
         case lifetimeTotalVolume(text: String)
+        
+        case simpleInfo(text: LocalizedString)
+        case spacer(height: CGFloat)
     }
     
     let productIdObseravable: Observable<String>

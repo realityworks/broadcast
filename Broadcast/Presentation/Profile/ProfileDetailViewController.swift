@@ -43,8 +43,6 @@ class ProfileDetailViewController: ViewController {
     }
     
     private func configureViews() {
-        view.backgroundColor = UIColor.secondaryWhite
-        
         // Setup table view the header
         titleHeaderView.frame = CGRect(x: 0, y: 0, width: 200, height: 96)
         tableView.tableHeaderView = titleHeaderView

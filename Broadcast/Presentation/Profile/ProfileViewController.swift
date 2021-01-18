@@ -47,9 +47,7 @@ class ProfileViewController: ViewController {
         tableView.contentInsetAdjustmentBehavior = .never
         tableView.contentInset = .zero
         tableView.separatorStyle = .none
-        tableView.backgroundColor = .clear
-        
-        view.backgroundColor = UIColor.secondaryWhite
+        tableView.backgroundColor = .clear        
     }
     
     private func configureLayout() {

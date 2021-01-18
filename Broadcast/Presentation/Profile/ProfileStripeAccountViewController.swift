@@ -52,11 +52,11 @@ class ProfileStripeAccountViewController: ViewController {
         tableView.register(ProfileTextFieldTableViewCell.self,
                            forCellReuseIdentifier: ProfileTextFieldTableViewCell.identifier)
         
-        tableView.register(ProfileSectionHeaderCell.self,
-                           forCellReuseIdentifier: ProfileSectionHeaderCell.identifier)
+        tableView.register(ProfileSimpleInfoTableViewCell.self,
+                           forCellReuseIdentifier: ProfileSimpleInfoTableViewCell.identifier)
         
         tableView.allowsSelection = false
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .clear
         tableView.backgroundView = nil
         tableView.separatorStyle = .none
     }
@@ -69,50 +69,61 @@ class ProfileStripeAccountViewController: ViewController {
     private func configureBindings() {
         let datasource = ReactiveTableViewModelSource<ProfileStripeAccountSectionModel>(configureCell: { _, tableView, indexPath, row -> UITableViewCell in
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextFieldTableViewCell.identifier, for: indexPath) as! ProfileTextFieldTableViewCell
-            
-            let titleText: String
-            let detailText: String
-            
             switch row {
             case let .productId(text):
-                titleText = LocalizedString.id.localized
-                detailText = text
+                let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextFieldTableViewCell.identifier, for: indexPath) as! ProfileTextFieldTableViewCell
+                
+                cell.configure(withTitle: LocalizedString.id.localized,
+                               text: text,
+                               editingEnabled: false,
+                               showLockIcon: false)
+                return cell
+                
             case let .pricing(text):
-                titleText = LocalizedString.pricing.localized
-                detailText = text
+                let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextFieldTableViewCell.identifier, for: indexPath) as! ProfileTextFieldTableViewCell
+                
+                cell.configure(withTitle: LocalizedString.pricing.localized,
+                               text: text,
+                               editingEnabled: false,
+                               showLockIcon: false)
+                return cell
+                
             case let .totalBalance(text):
-                titleText = LocalizedString.totalBalance.localized
-                detailText = text
+                let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextFieldTableViewCell.identifier, for: indexPath) as! ProfileTextFieldTableViewCell
+                
+                cell.configure(withTitle: LocalizedString.totalBalance.localized,
+                               text: text,
+                               editingEnabled: false,
+                               showLockIcon: false)
+                return cell
+                
             case let .lifetimeTotalVolume(text):
-                titleText = LocalizedString.lifetimeTotalVolume.localized
-                detailText = text
+                let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextFieldTableViewCell.identifier, for: indexPath) as! ProfileTextFieldTableViewCell
+                
+                cell.configure(withTitle: LocalizedString.lifetimeTotalVolume.localized,
+                               text: text,
+                               editingEnabled: false,
+                               showLockIcon: false)
+                return cell
+                
+            case .simpleInfo(let text):
+                let cell = tableView.dequeueReusableCell(withIdentifier: ProfileSimpleInfoTableViewCell.identifier, for: indexPath) as! ProfileSimpleInfoTableViewCell
+                
+                cell.configure(withText: text)
+                
+                return cell
+                
+            case .spacer:
+                let cell = UITableViewCell()
+                cell.backgroundColor = .white
+                return cell
             }
-            
-            cell.configure(withTitle: titleText,
-                           text: detailText,
-                           editingEnabled: false,
-                           showLockIcon: false)
-            return cell
         })
 
         datasource.heightForRowAtIndexPath = { _, indexPath -> CGFloat in
-            AccountInfoTableViewCell.cellHeight
+            ProfileTextFieldTableViewCell.cellHeight
         }
-        
-        datasource.heightForHeaderInSection = { _, _ -> CGFloat in
-            ProfileSectionHeaderCell.cellHeight
-        }
-        
-        datasource.viewForHeaderInSection = { datasource, tableView, section in
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: ProfileSectionHeaderCell.identifier) as? ProfileSectionHeaderCell else { return nil }
-            
-            let sectionTitle = datasource.sectionModels[section].model
-            cell.label.text = sectionTitle.localized
-            
-            return cell
-        }
-        
+                
         let items = Observable.combineLatest(
             viewModel.productIdObseravable,
             viewModel.pricingObservable,

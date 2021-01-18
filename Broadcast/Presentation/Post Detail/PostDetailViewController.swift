@@ -33,7 +33,6 @@ class PostDetailViewController: ViewController {
     
     private func configureViews() {
         // Configure the view settings
-        view.backgroundColor = UIColor.secondaryWhite
         postSummaryView.backgroundColor = .white
         deleteButtonContainer.backgroundColor = .clear
         

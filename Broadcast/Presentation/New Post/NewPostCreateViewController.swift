@@ -70,9 +70,7 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     
     // MARK: Internal configuration functions
     
-    private func configureViews() {
-        view.backgroundColor = UIColor.primaryWhite
-        
+    private func configureViews() {        
         view.addGestureRecognizer(dismissKeyboardGestureRecognizer)
         dismissKeyboardGestureRecognizer.delaysTouchesEnded = false
         dismissKeyboardGestureRecognizer.addTarget(self, action: #selector(dismissKeyboard))

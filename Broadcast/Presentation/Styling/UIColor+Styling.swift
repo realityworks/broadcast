@@ -21,7 +21,7 @@ extension UIColor {
     static let customSeparator = secondaryLightGrey
     static let textFieldBorder = secondaryLightGrey
     static let dashedBorder = UIColor.primaryRed
-    static let newPostBackground = UIColor(hex: "#F6F7FA")
+    static let primaryBackground = UIColor(hex: "#F6F7FA")
     
     static let text = UIColor.secondaryBlack
     static let progressBarColor = UIColor.primaryRed

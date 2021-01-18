@@ -24,7 +24,7 @@ class ViewController : UIViewController {
         super.viewDidLoad()
         
         // Set the default background colour
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor.secondaryWhite
         
         Logger.verbose(topic: .appState, message: "viewDidLoad")
     }

@@ -41,9 +41,7 @@ class MyPostsViewController: ViewController {
         navigationBar(styleAs: .dark(title: LocalizedString.myPostsHeading))
     }
     
-    private func configureViews() {
-        view.backgroundColor = UIColor.secondaryWhite
-        
+    private func configureViews() {        
         /// Register the cells used in the tableview
         tableView.register(MyPostsTableViewCell.self,
                            forCellReuseIdentifier: MyPostsTableViewCell.identifier)
