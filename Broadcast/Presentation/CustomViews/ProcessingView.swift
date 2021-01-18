@@ -11,9 +11,20 @@ import Lottie
 /// Animating view that is displayed when something is processing.
 /// Processing circle and animation speed define how the processing works.
 class ProcessingView : UIView {
-    let verticalStackView = UIStackView()
-    let processingAnimation = AnimationView(animationAsset: .processing)
-    let processingLabel = UILabel.smallBody(LocalizedString.processing, textColor: .white)
+    
+    var animating: Bool = false {
+        didSet {
+            if animating {
+                processingAnimation.play()
+            } else {
+                processingAnimation.pause()
+            }
+        }
+    }
+    
+    private let verticalStackView = UIStackView()
+    private let processingAnimation = AnimationView(animationAsset: .processing)
+    private let processingLabel = UILabel.smallBody(LocalizedString.processing, textColor: .white)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -35,19 +46,20 @@ class ProcessingView : UIView {
         
         addSubview(verticalStackView)
         verticalStackView.width(200)
-        verticalStackView.height(150)
         verticalStackView.centerInSuperview()
         
         verticalStackView.addArrangedSubview(processingAnimation)
+        
+        processingAnimation.height(180)
+        processingAnimation.width(200)
+        processingAnimation.contentMode = .scaleAspectFill
+        //processingAnimation.layoutIfNeeded()
+        
         verticalStackView.addArrangedSubview(processingLabel)
         
         processingAnimation.loopMode = .loop
         processingAnimation.backgroundBehavior = .pauseAndRestore
         
         backgroundColor = .clear
-    }
-    
-    func startAnimating() {
-        processingAnimation.play()
     }
 }
