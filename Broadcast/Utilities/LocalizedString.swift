@@ -97,6 +97,7 @@ enum LocalizedString : String {
     case changeVideo
     case emailUserLockedInfo
     case stripeAccountLockedInfo
+    case processing
     
     var localized: String {
         return Bundle.main.localizedString(forKey: self.rawValue, value: nil, table: nil)

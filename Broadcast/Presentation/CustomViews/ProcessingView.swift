@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Lottie
 
 /// Animating view that is displayed when something is processing.
 /// Processing circle and animation speed define how the processing works.
@@ -13,8 +14,8 @@ class ProcessingView : UIView {
     #warning("TODO - Create a nice rotating view")
     
     let verticalStackView = UIStackView()
-    let activityIndicator = UIActivityIndicatorView()
-    let processingLabel = UILabel()
+    let processingAnimation = AnimationView(animationAsset: .processing)
+    let processingLabel = UILabel.extraLargeTitle(LocalizedString.processing, textColor: .white)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -35,19 +36,21 @@ class ProcessingView : UIView {
         verticalStackView.alignment = .center
         
         addSubview(verticalStackView)
+//        verticalStackView.edgesToSuperview()
         verticalStackView.width(200)
-        verticalStackView.height(100)
+        verticalStackView.height(150)
         verticalStackView.centerInSuperview()
         
-        verticalStackView.addArrangedSubview(activityIndicator)
+        verticalStackView.addArrangedSubview(processingAnimation)
         verticalStackView.addArrangedSubview(processingLabel)
+        
         processingLabel.text = "PROCESSING"
-        activityIndicator.hidesWhenStopped = false
+        processingAnimation.loopMode = .loop
         
         backgroundColor = .clear
     }
     
     func startAnimating() {
-        activityIndicator.startAnimating()
+        processingAnimation.play()
     }
 }

@@ -230,9 +230,9 @@ class PostSummaryView : UIView {
         }
         
         if !postSummaryViewModel.showVideoPlayer {
-            blurredEffectView.isHidden = !postSummaryViewModel.isEncoding
-            processingView.isHidden = !postSummaryViewModel.isEncoding
-            pressPlayOverlayView.isHidden = postSummaryViewModel.isEncoding
+            blurredEffectView.isHidden = false//!postSummaryViewModel.isEncoding
+            processingView.isHidden = false//!postSummaryViewModel.isEncoding
+            pressPlayOverlayView.isHidden = true//postSummaryViewModel.isEncoding
             processingView.startAnimating()
         }
         
