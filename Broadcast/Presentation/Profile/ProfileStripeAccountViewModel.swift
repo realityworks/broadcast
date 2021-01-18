@@ -10,7 +10,6 @@ import RxSwift
 import RxCocoa
 
 class ProfileStripeAccountViewModel : ViewModel {
-    
     enum Row {
         case productId(text: String)
         case pricing(text: String)

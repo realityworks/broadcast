@@ -55,17 +55,10 @@ class ProfileStripeAccountViewController: ViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: AccountInfoTableViewCell.identifier, for: indexPath) as! AccountInfoTableViewCell
             
             let cellDetailText: String
-            switch row {
-            
-            case let .name(text):
-                cellDetailText = text
-            case let .identifier(text):
+            switch row {            
+            case let .productId(text):
                 cellDetailText = text
             case let .pricing(text):
-                cellDetailText = text
-            case let .payments(text):
-                cellDetailText = text
-            case let .payouts(text):
                 cellDetailText = text
             case let .totalBalance(text):
                 cellDetailText = text
@@ -95,31 +88,18 @@ class ProfileStripeAccountViewController: ViewController {
         }
         
         let items = Observable.combineLatest(
-            viewModel.nameObservable,
-            viewModel.identifierObservable,
+            viewModel.productIdObseravable,
             viewModel.pricingObservable,
-            viewModel.paymentsObservable,
-            viewModel.payoutsObservable,
             viewModel.totalBalanceObservable,
             viewModel.lifetimeTotalVolumeObservable) {
             
-            name, identifier, pricing, payments, payouts, totalBalance, lifetimeTotalVolume -> [ProfileStripeAccountSectionModel] in
+            productId, pricing, _, _ -> [ProfileStripeAccountSectionModel] in
             
             return [
-                SectionModel(model: LocalizedString.name, items: [
-                                ProfileStripeAccountViewModel.Row.name(text: name)]),
                 SectionModel(model: LocalizedString.id, items: [
-                                ProfileStripeAccountViewModel.Row.identifier(text: identifier)]),
+                                ProfileStripeAccountViewModel.Row.productId(text: productId)]),
                 SectionModel(model: LocalizedString.pricing, items: [
-                                ProfileStripeAccountViewModel.Row.pricing(text: pricing)]),
-                SectionModel(model: LocalizedString.payments, items: [
-                                ProfileStripeAccountViewModel.Row.payments(text: payments)]),
-                SectionModel(model: LocalizedString.payouts, items: [
-                                ProfileStripeAccountViewModel.Row.payouts(text: payouts)]),
-                SectionModel(model: LocalizedString.totalBalance, items: [
-                                ProfileStripeAccountViewModel.Row.totalBalance(text: totalBalance)]),
-                SectionModel(model: LocalizedString.lifetimeTotalVolume, items: [
-                                ProfileStripeAccountViewModel.Row.lifetimeTotalVolume(text: lifetimeTotalVolume)]),
+                                ProfileStripeAccountViewModel.Row.pricing(text: pricing)])
             ]
         }
                 
