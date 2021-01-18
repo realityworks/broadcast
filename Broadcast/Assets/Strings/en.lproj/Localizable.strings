@@ -89,7 +89,7 @@
 "changeVideo" = "Change Video";
 "emailUserLockedInfo" = "Email and User Handle cannot be modified.";
 "stripeAccountLockedInfo" = "Connected Account details are locked on this screen.";
-"processing" = "Processing";
+"processing" = "Content is being processed";
 
 // MARK: Error Strings
 "unknownError" = "An unknown error occured";
