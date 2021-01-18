@@ -245,7 +245,7 @@ class ProfileDetailViewController: ViewController {
                                 ProfileDetailViewModel.Row.email(text: email ?? String.empty),
                                 ProfileDetailViewModel.Row.handle(text: handle ?? String.empty),
                                 ProfileDetailViewModel.Row.spacer(height: 16),
-                                ProfileDetailViewModel.Row.simpleInfo(text: LocalizedString.emailUserNotModifiableInfo)]),
+                                ProfileDetailViewModel.Row.simpleInfo(text: LocalizedString.emailUserLockedInfo)]),
                 SectionModel(model: LocalizedString.trailerVideo, items: [
                                 ProfileDetailViewModel.Row.trailerVideo])
             ]

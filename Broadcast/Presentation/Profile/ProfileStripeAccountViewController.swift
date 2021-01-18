@@ -119,9 +119,17 @@ class ProfileStripeAccountViewController: ViewController {
                 return cell
             }
         })
-
-        datasource.heightForRowAtIndexPath = { _, indexPath -> CGFloat in
-            ProfileTextFieldTableViewCell.cellHeight
+        
+        datasource.heightForRowAtIndexPath = { datasource, indexPath -> CGFloat in
+            let row = datasource[indexPath]
+            switch row {
+            case .simpleInfo:
+                return ProfileSimpleInfoTableViewCell.cellHeight
+            case .spacer(let height):
+                return height
+            default:
+                return ProfileTextFieldTableViewCell.cellHeight
+            }
         }
                 
         let items = Observable.combineLatest(
@@ -136,7 +144,8 @@ class ProfileStripeAccountViewController: ViewController {
                 SectionModel(model: LocalizedString.id, items: [
                                 ProfileStripeAccountViewModel.Row.productId(text: productId),
                                 ProfileStripeAccountViewModel.Row.pricing(text: pricing),
-                                ProfileStripeAccountViewModel.Row.spacer(height: 16)(text: pricing)]),
+                                ProfileStripeAccountViewModel.Row.spacer(height: 16),
+                                ProfileStripeAccountViewModel.Row.simpleInfo(text: LocalizedString.stripeAccountLockedInfo)]),
             ]
         }
                 
