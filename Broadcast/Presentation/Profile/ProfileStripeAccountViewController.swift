@@ -134,9 +134,9 @@ class ProfileStripeAccountViewController: ViewController {
             
             return [
                 SectionModel(model: LocalizedString.id, items: [
-                                ProfileStripeAccountViewModel.Row.productId(text: productId)]),
-                SectionModel(model: LocalizedString.pricing, items: [
-                                ProfileStripeAccountViewModel.Row.pricing(text: pricing)])
+                                ProfileStripeAccountViewModel.Row.productId(text: productId),
+                                ProfileStripeAccountViewModel.Row.pricing(text: pricing),
+                                ProfileStripeAccountViewModel.Row.spacer(height: 16)(text: pricing)]),
             ]
         }
                 

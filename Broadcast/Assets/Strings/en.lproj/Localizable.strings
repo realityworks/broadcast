@@ -87,7 +87,8 @@
 "userHandle" = "User Handle";
 "uploadTrailer" = "Upload Trailer";
 "changeVideo" = "Change Video";
-"emailUserNotModifiableInfo" = "Email and User Handle cannot be modified.";
+"emailUserLockedInfo" = "Email and User Handle cannot be modified.";
+"stripeAccountLockedInfo" = "Connected Account details are locked on this screen.";
 
 // MARK: Error Strings
 "unknownError" = "An unknown error occured";
