@@ -29,7 +29,6 @@ class ProfileStripeAccountViewController: ViewController {
         configureBindings()
     }
     
-    
     private func configureViews() {
         // Configure Views
         tableView.register(AccountInfoTableViewCell.self,
@@ -55,7 +54,7 @@ class ProfileStripeAccountViewController: ViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: AccountInfoTableViewCell.identifier, for: indexPath) as! AccountInfoTableViewCell
             
             let cellDetailText: String
-            switch row {            
+            switch row {
             case let .productId(text):
                 cellDetailText = text
             case let .pricing(text):
