@@ -33,17 +33,10 @@ class ProfileStripeAccountViewModel : ViewModel {
         
         self.nameObservable = stripeAccountObservable.map { $0.accountId ?? LocalizedString.nonExistant.localized }
         self.identifierObservable = stripeAccountObservable.map { $0.productId ?? LocalizedString.nonExistant.localized }
-        self.paymentsObservable = stripeAccountObservable.map {
-            $0.paymentsEnabled ? LocalizedString.enabled.localized : LocalizedString.disabled.localized
-        }
         
         self.pricingObservable = stripeAccountObservable.map {
             guard let currencyCode = $0.currencyCode else { return LocalizedString.nonExistant.localized }
             return $0.price?.asCurrencyString(withCurrencyCode: currencyCode) ?? LocalizedString.nonExistant.localized
-        }
-        
-        self.payoutsObservable = stripeAccountObservable.map {
-            $0.payoutsEnabled ? LocalizedString.enabled.localized : LocalizedString.disabled.localized
         }
         
         self.totalBalanceObservable = stripeAccountObservable.map {
