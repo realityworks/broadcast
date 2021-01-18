@@ -18,8 +18,8 @@ class ProfileDetailViewController: ViewController {
     private let viewModel = ProfileDetailViewModel()
     
     let tableView = UITableView(frame: .zero, style: .grouped)
-    let titleHeaderView = UIView()
-    let titleLabel = UILabel.text(.profileDetailHeading,
+    private let titleHeaderView = UIView()
+    private let titleLabel = UILabel.text(.profileDetailHeading,
                                   font: .tableTitle,
                                   textColor: .primaryLightGrey)
     let headingSeparator = UIView()

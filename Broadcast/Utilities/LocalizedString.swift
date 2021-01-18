@@ -15,6 +15,7 @@ enum LocalizedString : String {
     case passwordPlaceholder
     case myPostsHeading
     case profileDetailHeading
+    case profileStripeAccountHeading
     case newPostTipsTitle
     case select
     case profileInformation

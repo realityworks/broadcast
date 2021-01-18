@@ -57,7 +57,11 @@ class ProfileTextFieldTableViewCell: UITableViewCell {
         textField.resignWhenFinished(disposeBag)
     }
     
-    func configure(withTitle title: String, placeholder: String, text: String, editingEnabled: Bool) {
+    func configure(withTitle title: String,
+                   placeholder: String,
+                   text: String,
+                   editingEnabled: Bool,
+                   showLockIcon: Bool = true) {
         titleLabel.text = title
         textField.text = text
         

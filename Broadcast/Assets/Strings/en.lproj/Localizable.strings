@@ -13,6 +13,7 @@
 "passwordPlaceholder" = "Password";
 "myPostsHeading" = "My Posts";
 "profileDetailHeading" = "Profile Information";
+"profileStripeAccountHeading" = "Stripe Account";
 "newPostTipsTitle" = "HOT TIPS FOR GREAT CONTENT";
 "select" = "Select";
 "profileInformation" = "Profile Information";

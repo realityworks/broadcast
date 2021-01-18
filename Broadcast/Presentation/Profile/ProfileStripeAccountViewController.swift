@@ -16,13 +16,19 @@ class ProfileStripeAccountViewController: ViewController {
     
     private let viewModel = ProfileStripeAccountViewModel()
     
+    private let titleHeaderView = UIView()
+    private let titleLabel = UILabel.text(.profileStripeAccountHeading,
+                                  font: .tableTitle,
+                                  textColor: .primaryLightGrey)
+    private let headingSeparator = UIView()
+
+    
     let tableView = UITableView(frame: .zero, style: .grouped)
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        title = "Stripe Account"
         
         configureViews()
         configureLayout()
@@ -30,6 +36,18 @@ class ProfileStripeAccountViewController: ViewController {
     }
     
     private func configureViews() {
+        // Setup table view the header
+        titleHeaderView.frame = CGRect(x: 0, y: 0, width: 200, height: 96)
+        tableView.tableHeaderView = titleHeaderView
+
+        titleHeaderView.addSubview(titleLabel)
+        titleLabel.edgesToSuperview(excluding: [.left, .right])
+        titleLabel.leftToSuperview(offset: 22)
+        
+        titleHeaderView.addSubview(headingSeparator)
+        headingSeparator.edgesToSuperview(excluding: [.top])
+        headingSeparator.height(1)
+        
         // Configure Views
         tableView.register(AccountInfoTableViewCell.self,
                            forCellReuseIdentifier: AccountInfoTableViewCell.identifier)
