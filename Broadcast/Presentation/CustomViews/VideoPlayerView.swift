@@ -10,7 +10,6 @@ import AVKit
 import TinyConstraints
 
 class VideoPlayerView: UIView {
-    //let vwPlayer = UIView()
     let playerController = AVPlayerViewController()
     var player: AVPlayer?
     
@@ -55,6 +54,17 @@ class VideoPlayerView: UIView {
         if autoplay == true {
             player?.rate = 1 //auto play
         }
+    }
+    
+    /// Pause
+    func pause() {
+        guard let player = player else { return }
+        player.pause()
+    }
+    
+    func play() {
+        guard let player = player else { return }
+        player.play()
     }
 }
 

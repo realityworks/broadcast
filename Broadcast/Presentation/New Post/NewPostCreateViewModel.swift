@@ -50,6 +50,8 @@ class NewPostCreateViewModel : ViewModel {
         self.schedulers = dependencies.schedulers
         self.postContentUseCase = dependencies.postContentUseCase
         
+        postContentUseCase.prepareUploadMedia()
+        
         let uploadingProgressObservable = dependencies.uploadProgressObservable.compactMap { $0 }
         
         progress = uploadingProgressObservable.map { $0.totalProgress }

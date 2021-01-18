@@ -67,6 +67,10 @@ extension PostContentUseCase {
     func selectPost(with postId: PostID) {
         stateController.state.selectedPostId = postId
     }
+    
+    func prepareUploadMedia() {
+        stateController.state.currentMediaUploadProgress = nil
+    }
         
     func upload(content: PostContent, media: Media) {
         /// Set the initial upload progress to be simply default values

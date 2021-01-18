@@ -223,6 +223,9 @@ class PostSummaryView : UIView {
                                                placeholderImage: UIImage(systemName: "paintbrush"))
             case .video(let url):
                 videoPlayerView.playVideo(withURL: url)
+                if postSummaryViewModel.isEncoding {
+                    videoPlayerView.pause()
+                }
             }
             
         } else if let thumbnailUrl = postSummaryViewModel.thumbnailUrl {
@@ -232,12 +235,10 @@ class PostSummaryView : UIView {
             pressPlayOverlayView.play()
         }
         
-        if !postSummaryViewModel.showVideoPlayer {
-            blurredEffectView.isHidden = !postSummaryViewModel.isEncoding
-            processingView.isHidden = !postSummaryViewModel.isEncoding
-            pressPlayOverlayView.isHidden = postSummaryViewModel.isEncoding
-            processingView.animating = postSummaryViewModel.isEncoding            
-        }
+        blurredEffectView.isHidden = !postSummaryViewModel.isEncoding
+        processingView.isHidden = !postSummaryViewModel.isEncoding
+        pressPlayOverlayView.isHidden = postSummaryViewModel.isEncoding
+        processingView.animating = postSummaryViewModel.isEncoding
         
         postStatsView.configure(withCommentCount: postSummaryViewModel.commentCount,
                                 lockerCount: postSummaryViewModel.lockerCount)
