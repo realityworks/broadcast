@@ -111,10 +111,12 @@ class PostSummaryView : UIView {
         
         // Order of view additions is important
         containerTopView.addSubview(videoPlayerView)
+        containerTopView.addSubview(thumbnailImageView)
         containerTopView.addSubview(blurredEffectView)
         containerTopView.addSubview(processingView)
         
         videoPlayerView.edgesToSuperview()
+        thumbnailImageView.edgesToSuperview()
         blurredEffectView.edgesToSuperview()
         processingView.edgesToSuperview()
         
@@ -211,6 +213,7 @@ class PostSummaryView : UIView {
     
     func configure(withPostSummaryViewModel postSummaryViewModel: PostSummaryViewModel) {
         if postSummaryViewModel.showVideoPlayer,
+           !postSummaryViewModel.isEncoding,
            let media = postSummaryViewModel.media {
             thumbnailImageView.isHidden = true
             processingView.isHidden = true
@@ -223,9 +226,6 @@ class PostSummaryView : UIView {
                                                placeholderImage: UIImage(systemName: "paintbrush"))
             case .video(let url):
                 videoPlayerView.playVideo(withURL: url)
-                if postSummaryViewModel.isEncoding {
-                    videoPlayerView.pause()
-                }
             }
             
         } else if let thumbnailUrl = postSummaryViewModel.thumbnailUrl {
