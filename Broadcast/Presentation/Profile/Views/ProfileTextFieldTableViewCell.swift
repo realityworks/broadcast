@@ -68,19 +68,26 @@ class ProfileTextFieldTableViewCell: UITableViewCell {
         #warning("Refactor this into a universal textfield, spread across too many extensions/custom classes")
         if editingEnabled {
             textField.backgroundColor = .white
+            textField.layer.borderWidth = 1
             textField.leftView = nil
             textField.textInsets = .left(16)
             textField.isUserInteractionEnabled = true
+            textField.leftView = nil
         } else {
+            textField.layer.borderWidth = 0
             textField.backgroundColor = .secondaryWhite
             
-            let lockedIcon = UIImageView(image: UIImage.iconLock?.withRenderingMode(.alwaysTemplate))
-            lockedIcon.contentMode = .scaleAspectFit
-            lockedIcon.tintColor = .lightGray
-            textField.isUserInteractionEnabled = false
-            textField.leftView = lockedIcon
-            textField.leftViewMode = .always
-            textField.textInsets = .left(4)
+            if showLockIcon {
+                let lockedIcon = UIImageView(image: UIImage.iconLock?.withRenderingMode(.alwaysTemplate))
+                lockedIcon.contentMode = .scaleAspectFit
+                lockedIcon.tintColor = .lightGray
+                textField.isUserInteractionEnabled = false
+                textField.leftView = lockedIcon
+                textField.leftViewMode = .always
+                textField.textInsets = .left(4)
+            } else {
+                textField.textInsets = .left(16)
+            }
         }
     }
 }

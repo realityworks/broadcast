@@ -49,14 +49,14 @@ class ProfileStripeAccountViewController: ViewController {
         headingSeparator.height(1)
         
         // Configure Views
-        tableView.register(AccountInfoTableViewCell.self,
-                           forCellReuseIdentifier: AccountInfoTableViewCell.identifier)
+        tableView.register(ProfileTextFieldTableViewCell.self,
+                           forCellReuseIdentifier: ProfileTextFieldTableViewCell.identifier)
         
         tableView.register(ProfileSectionHeaderCell.self,
                            forCellReuseIdentifier: ProfileSectionHeaderCell.identifier)
         
         tableView.allowsSelection = false
-        tableView.backgroundColor = .clear
+        tableView.backgroundColor = .white
         tableView.backgroundView = nil
         tableView.separatorStyle = .none
     }
