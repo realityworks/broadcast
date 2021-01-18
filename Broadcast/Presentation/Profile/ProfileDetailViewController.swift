@@ -114,8 +114,8 @@ class ProfileDetailViewController: ViewController {
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextFieldTableViewCell.identifier, for: indexPath) as! ProfileTextFieldTableViewCell
                 
                 cell.configure(withTitle: LocalizedString.displayName.localized.uppercased(),
-                               placeholder: LocalizedString.displayName.localized,
                                text: displayName,
+                               placeholder: LocalizedString.displayName.localized,
                                editingEnabled: true)
                 cell.rx.text
                     .bind(to: self.viewModel.displayNameSubject)
@@ -140,8 +140,8 @@ class ProfileDetailViewController: ViewController {
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextFieldTableViewCell.identifier, for: indexPath) as! ProfileTextFieldTableViewCell
                 
                 cell.configure(withTitle: LocalizedString.email.localized.uppercased(),
-                               placeholder: LocalizedString.email.localized,
                                text: email,
+                               placeholder: LocalizedString.email.localized,
                                editingEnabled: false)
                 cell.rx.text
                     .bind(to: self.viewModel.displayNameSubject)
@@ -153,8 +153,8 @@ class ProfileDetailViewController: ViewController {
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextFieldTableViewCell.identifier, for: indexPath) as! ProfileTextFieldTableViewCell
                 
                 cell.configure(withTitle: LocalizedString.userHandle.localized.uppercased(),
-                               placeholder: LocalizedString.userHandle.localized,
                                text: handle,
+                               placeholder: LocalizedString.userHandle.localized,
                                editingEnabled: false)
                 cell.rx.text
                     .bind(to: self.viewModel.displayNameSubject)
