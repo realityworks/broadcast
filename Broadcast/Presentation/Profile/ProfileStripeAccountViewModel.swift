@@ -15,8 +15,8 @@ class ProfileStripeAccountViewModel : ViewModel {
         case name(text: String)
         case identifier(text: String)
         case pricing(text: String)
-        case payments(text: String)
-        case payouts(text: String)
+
+        /// This may be added back later
         case totalBalance(text: String)
         case lifetimeTotalVolume(text: String)
     }
@@ -24,8 +24,6 @@ class ProfileStripeAccountViewModel : ViewModel {
     let nameObservable: Observable<String>
     let identifierObservable: Observable<String>
     let pricingObservable: Observable<String>
-    let paymentsObservable: Observable<String>
-    let payoutsObservable: Observable<String>
     let totalBalanceObservable: Observable<String>
     let lifetimeTotalVolumeObservable: Observable<String>
     
