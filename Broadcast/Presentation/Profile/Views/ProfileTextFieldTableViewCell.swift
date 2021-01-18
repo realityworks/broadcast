@@ -58,9 +58,9 @@ class ProfileTextFieldTableViewCell: UITableViewCell {
     }
     
     func configure(withTitle title: String,
-                   placeholder: String,
                    text: String,
-                   editingEnabled: Bool,
+                   placeholder: String = "",
+                   editingEnabled: Bool = true,
                    showLockIcon: Bool = true) {
         titleLabel.text = title
         textField.text = text

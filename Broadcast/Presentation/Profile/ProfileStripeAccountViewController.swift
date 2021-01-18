@@ -69,21 +69,30 @@ class ProfileStripeAccountViewController: ViewController {
     private func configureBindings() {
         let datasource = ReactiveTableViewModelSource<ProfileStripeAccountSectionModel>(configureCell: { _, tableView, indexPath, row -> UITableViewCell in
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: AccountInfoTableViewCell.identifier, for: indexPath) as! AccountInfoTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextFieldTableViewCell.identifier, for: indexPath) as! ProfileTextFieldTableViewCell
             
-            let cellDetailText: String
+            let titleText: String
+            let detailText: String
+            
             switch row {
             case let .productId(text):
-                cellDetailText = text
+                titleText = LocalizedString.id.localized
+                detailText = text
             case let .pricing(text):
-                cellDetailText = text
+                titleText = LocalizedString.pricing.localized
+                detailText = text
             case let .totalBalance(text):
-                cellDetailText = text
+                titleText = LocalizedString.totalBalance.localized
+                detailText = text
             case let .lifetimeTotalVolume(text):
-                cellDetailText = text
+                titleText = LocalizedString.lifetimeTotalVolume.localized
+                detailText = text
             }
             
-            cell.configure(withTitle: cellDetailText)
+            cell.configure(withTitle: titleText,
+                           text: detailText,
+                           editingEnabled: false,
+                           showLockIcon: false)
             return cell
         })
 
