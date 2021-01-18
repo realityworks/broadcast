@@ -26,16 +26,11 @@ struct Profile : Equatable, Codable {
     let trailerVideoUrl: String?
     
     struct StripeAccount : Equatable, Codable {
-        let accountId: String?
         let productId: String?
         let currencyCode: CurrencyCode?
-        
         let price: Int?
         let balance: Int?
         let totalVolume: Int?
-        
-        let paymentsEnabled: Bool
-        let payoutsEnabled: Bool
     }
     
     let stripeAccount: StripeAccount

@@ -91,14 +91,11 @@ class LocalAPIService {
         trailerThumbnailUrl: LocalAPIService.mockThumbnailUrl1,
         trailerVideoUrl: LocalAPIService.mockVideoUrl,
         stripeAccount: Profile.StripeAccount(
-            accountId: "stripeaccount@stripe.com",
             productId: "prod_iUmEPMQJFjaLs6",
             currencyCode: CurrencyCode.gdp,
             price: 10,
             balance: 100,
-            totalVolume: 1000,
-            paymentsEnabled: false,
-            payoutsEnabled: false))
+            totalVolume: 1000))
 }
 
 // MARK: - Instance
