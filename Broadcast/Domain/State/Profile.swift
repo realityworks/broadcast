@@ -27,8 +27,10 @@ struct Profile : Equatable, Codable {
     
     struct StripeAccount : Equatable, Codable {
         let productId: String?
-        let currencyCode: CurrencyCode?        
+        let currencyCode: CurrencyCode?
         let price: Int?
+        let balance: Int?
+        let totalVolume: Int?
     }
     
     let stripeAccount: StripeAccount

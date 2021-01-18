@@ -20,7 +20,7 @@ class ProfileStripeAccountViewModel : ViewModel {
         case lifetimeTotalVolume(text: String)
     }
     
-    let productIdObservable: Observable<String>
+    let productIdObseravable: Observable<String>
     let pricingObservable: Observable<String>
     let totalBalanceObservable: Observable<String>
     let lifetimeTotalVolumeObservable: Observable<String>
@@ -29,11 +29,21 @@ class ProfileStripeAccountViewModel : ViewModel {
         let stripeAccountObservable = dependencies.profileObservable
             .compactMap { $0?.stripeAccount }
         
-        self.productIdObservable = stripeAccountObservable.map { $0.productId ?? LocalizedString.nonExistant.localized }
+        self.productIdObseravable = stripeAccountObservable.map { $0.productId ?? LocalizedString.nonExistant.localized }
         
         self.pricingObservable = stripeAccountObservable.map {
             guard let currencyCode = $0.currencyCode else { return LocalizedString.nonExistant.localized }
             return $0.price?.asCurrencyString(withCurrencyCode: currencyCode) ?? LocalizedString.nonExistant.localized
+        }
+        
+        self.totalBalanceObservable = stripeAccountObservable.map {
+            guard let currencyCode = $0.currencyCode else { return LocalizedString.nonExistant.localized }
+            return $0.balance?.asCurrencyString(withCurrencyCode: currencyCode) ?? LocalizedString.nonExistant.localized
+        }
+        
+        self.lifetimeTotalVolumeObservable = stripeAccountObservable.map {
+            guard let currencyCode = $0.currencyCode else { return LocalizedString.nonExistant.localized }
+            return $0.totalVolume?.asCurrencyString(withCurrencyCode: currencyCode) ?? LocalizedString.nonExistant.localized
         }
 
         super.init(stateController: dependencies.stateController)
