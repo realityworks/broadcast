@@ -12,8 +12,7 @@ import RxCocoa
 class ProfileStripeAccountViewModel : ViewModel {
     
     enum Row {
-        case name(text: String)
-        case identifier(text: String)
+        case productId(text: String)
         case pricing(text: String)
 
         /// This may be added back later
@@ -21,8 +20,7 @@ class ProfileStripeAccountViewModel : ViewModel {
         case lifetimeTotalVolume(text: String)
     }
     
-    let nameObservable: Observable<String>
-    let identifierObservable: Observable<String>
+    let productIdObservable: Observable<String>
     let pricingObservable: Observable<String>
     let totalBalanceObservable: Observable<String>
     let lifetimeTotalVolumeObservable: Observable<String>
@@ -37,16 +35,6 @@ class ProfileStripeAccountViewModel : ViewModel {
         self.pricingObservable = stripeAccountObservable.map {
             guard let currencyCode = $0.currencyCode else { return LocalizedString.nonExistant.localized }
             return $0.price?.asCurrencyString(withCurrencyCode: currencyCode) ?? LocalizedString.nonExistant.localized
-        }
-        
-        self.totalBalanceObservable = stripeAccountObservable.map {
-            guard let currencyCode = $0.currencyCode else { return LocalizedString.nonExistant.localized }
-            return $0.balance?.asCurrencyString(withCurrencyCode: currencyCode) ?? LocalizedString.nonExistant.localized
-        }
-        
-        self.lifetimeTotalVolumeObservable = stripeAccountObservable.map {
-            guard let currencyCode = $0.currencyCode else { return LocalizedString.nonExistant.localized }
-            return $0.totalVolume?.asCurrencyString(withCurrencyCode: currencyCode) ?? LocalizedString.nonExistant.localized
         }
 
         super.init(stateController: dependencies.stateController)
