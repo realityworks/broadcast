@@ -73,7 +73,7 @@ class ProfileStripeAccountViewController: ViewController {
             case let .productId(text):
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextFieldTableViewCell.identifier, for: indexPath) as! ProfileTextFieldTableViewCell
                 
-                cell.configure(withTitle: LocalizedString.id.localized,
+                cell.configure(withTitle: LocalizedString.id.localized.uppercased(),
                                text: text,
                                editingEnabled: false,
                                showLockIcon: false)
@@ -82,7 +82,7 @@ class ProfileStripeAccountViewController: ViewController {
             case let .pricing(text):
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextFieldTableViewCell.identifier, for: indexPath) as! ProfileTextFieldTableViewCell
                 
-                cell.configure(withTitle: LocalizedString.pricing.localized,
+                cell.configure(withTitle: LocalizedString.pricing.localized.uppercased(),
                                text: text,
                                editingEnabled: false,
                                showLockIcon: false)
@@ -91,7 +91,7 @@ class ProfileStripeAccountViewController: ViewController {
             case let .totalBalance(text):
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextFieldTableViewCell.identifier, for: indexPath) as! ProfileTextFieldTableViewCell
                 
-                cell.configure(withTitle: LocalizedString.totalBalance.localized,
+                cell.configure(withTitle: LocalizedString.totalBalance.localized.uppercased(),
                                text: text,
                                editingEnabled: false,
                                showLockIcon: false)
@@ -100,7 +100,7 @@ class ProfileStripeAccountViewController: ViewController {
             case let .lifetimeTotalVolume(text):
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextFieldTableViewCell.identifier, for: indexPath) as! ProfileTextFieldTableViewCell
                 
-                cell.configure(withTitle: LocalizedString.lifetimeTotalVolume.localized,
+                cell.configure(withTitle: LocalizedString.lifetimeTotalVolume.localized.uppercased(),
                                text: text,
                                editingEnabled: false,
                                showLockIcon: false)
