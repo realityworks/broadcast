@@ -22,7 +22,6 @@ class ProcessingView : UIView {
         }
     }
     
-    private let verticalStackView = UIStackView()
     private let processingAnimation = AnimationView(animationAsset: .processing)
     private let processingLabel = UILabel.smallBody(LocalizedString.processing, textColor: .white)
     
@@ -41,21 +40,14 @@ class ProcessingView : UIView {
     
     /// Place and layout views
     private func configureViews() {
-        verticalStackView.axis = .vertical
-        verticalStackView.alignment = .center
-        
-        addSubview(verticalStackView)
-        verticalStackView.width(200)
-        verticalStackView.centerInSuperview()
-        
-        verticalStackView.addArrangedSubview(processingAnimation)
-        
-        processingAnimation.height(180)
-        processingAnimation.width(200)
+        addSubview(processingAnimation)
+        processingAnimation.centerXToSuperview()
+        processingAnimation.centerYToSuperview(offset: -8)
         processingAnimation.contentMode = .scaleAspectFill
-        //processingAnimation.layoutIfNeeded()
         
-        verticalStackView.addArrangedSubview(processingLabel)
+        addSubview(processingLabel)
+        processingLabel.topToBottom(of: processingAnimation, offset: -16)
+        processingLabel.centerXToSuperview()
         
         processingAnimation.loopMode = .loop
         processingAnimation.backgroundBehavior = .pauseAndRestore
