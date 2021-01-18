@@ -29,8 +29,7 @@ class ProfileStripeAccountViewModel : ViewModel {
         let stripeAccountObservable = dependencies.profileObservable
             .compactMap { $0?.stripeAccount }
         
-        self.nameObservable = stripeAccountObservable.map { $0.accountId ?? LocalizedString.nonExistant.localized }
-        self.identifierObservable = stripeAccountObservable.map { $0.productId ?? LocalizedString.nonExistant.localized }
+        self.productIdObservable = stripeAccountObservable.map { $0.productId ?? LocalizedString.nonExistant.localized }
         
         self.pricingObservable = stripeAccountObservable.map {
             guard let currencyCode = $0.currencyCode else { return LocalizedString.nonExistant.localized }
