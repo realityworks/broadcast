@@ -175,6 +175,8 @@ class PostSummaryView : UIView {
 
         thumbnailImageView.edgesToSuperview()
         pressPlayOverlayView.centerInSuperview()
+        blurredEffectView.edgesToSuperview()
+        processingView.edgesToSuperview()
         
         postStatsView.height(22)
         verticalStackView.addSpace(10)
