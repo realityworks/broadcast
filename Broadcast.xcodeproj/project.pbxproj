@@ -168,6 +168,7 @@
 		1DF1E26225A630AC0093A162 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 1DF1E26125A630AC0093A162 /* RxRelay */; };
 		1DF1E26725A630FA0093A162 /* Differentiator in Frameworks */ = {isa = PBXBuildFile; productRef = 1DF1E26625A630FA0093A162 /* Differentiator */; };
 		1DF1E26925A630FA0093A162 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 1DF1E26825A630FA0093A162 /* RxDataSources */; };
+		1DF4D4CF25B5D63300408921 /* ios-processing-loop.json in Resources */ = {isa = PBXBuildFile; fileRef = 1DF4D4CE25B5D63300408921 /* ios-processing-loop.json */; };
 		1DF58F502574CB9300563EC2 /* PostSummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF58F4F2574CB9200563EC2 /* PostSummaryViewModel.swift */; };
 		1DF5DD4C25ABF2FD009B0B30 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF5DD4B25ABF2FD009B0B30 /* ProgressView.swift */; };
 		1DF5DD5025AC8BB5009B0B30 /* UploadProgress+TextDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF5DD4F25AC8BB5009B0B30 /* UploadProgress+TextDescription.swift */; };
@@ -340,6 +341,7 @@
 		1DE3DA372575506100A7A1F7 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		1DE3DA3D2575F49500A7A1F7 /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
 		1DF0972F258114D8007FEE3C /* URLAPIQueryStringRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLAPIQueryStringRequest.swift; sourceTree = "<group>"; };
+		1DF4D4CE25B5D63300408921 /* ios-processing-loop.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "ios-processing-loop.json"; sourceTree = "<group>"; };
 		1DF58F4F2574CB9200563EC2 /* PostSummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSummaryViewModel.swift; sourceTree = "<group>"; };
 		1DF5DD4B25ABF2FD009B0B30 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		1DF5DD4F25AC8BB5009B0B30 /* UploadProgress+TextDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadProgress+TextDescription.swift"; sourceTree = "<group>"; };
@@ -496,6 +498,7 @@
 			children = (
 				1D79C118259471B800AC271B /* ios-play-button-pulse.json */,
 				1D99AA6225B16C780069D7F0 /* web-success-load.json */,
+				1DF4D4CE25B5D63300408921 /* ios-processing-loop.json */,
 			);
 			path = Animations;
 			sourceTree = "<group>";
@@ -989,6 +992,7 @@
 				1D79C1492594BFDF00AC271B /* Inter-ThinItalic.otf in Resources */,
 				1D79C14A2594BFDF00AC271B /* Inter-V.otf in Resources */,
 				1D916DA625640C810059E549 /* Development.xcconfig in Resources */,
+				1DF4D4CF25B5D63300408921 /* ios-processing-loop.json in Resources */,
 				1D3F71E22571244900DE7F05 /* Localizable.strings in Resources */,
 				1D916DA725640C810059E549 /* Production.xcconfig in Resources */,
 				1D34340725624B4C00886245 /* LaunchScreen.storyboard in Resources */,
