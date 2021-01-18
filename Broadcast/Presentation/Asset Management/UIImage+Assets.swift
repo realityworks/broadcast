@@ -24,6 +24,7 @@ extension UIImage {
     static let iconLock = UIImage(named: "icon-lock")
     static let iconMessage = UIImage(named: "icon-message")
     static let iconPlusCircle = UIImage(named: "icon-plus-circle")
+    static let iconPlusSquare = UIImage(systemName: "plus.app")
     static let iconProfile = UIImage(named: "icon-profile")
     static let iconRadio = UIImage(named: "icon-radio")
     static let iconShare = UIImage(named: "icon-share")

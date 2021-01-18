@@ -18,6 +18,10 @@ class MyPostsViewController: ViewController {
     private let tableView = UITableView()
     private let refreshControl = UIRefreshControl()
     
+    private let titleLabel = UIImageView(image: UIImage.logoBoomdayBroadcaster?.withTintColor(.primaryLightGrey))
+    private let titleHeaderView = UIView()
+
+    
     // MARK: UI Lifecycle
     
     override func viewDidLoad() {
@@ -64,10 +68,6 @@ class MyPostsViewController: ViewController {
         tableView.edgesToSuperview()
 
         /// Configure the table view header (Will be changed)
-        #warning("This will change - Move title label to properties")
-        let titleLabel = UIImageView(image: UIImage.logoBoomdayBroadcaster?.withTintColor(.primaryLightGrey))
-        let titleHeaderView = UIView()
-
         titleHeaderView.frame = CGRect(x: 0, y: 0, width: 200, height: 96)
         tableView.tableHeaderView = titleHeaderView
         titleHeaderView.width(to: view)
