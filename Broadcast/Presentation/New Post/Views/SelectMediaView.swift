@@ -46,6 +46,7 @@ class SelectMediaView: UIView {
         
         imageMediaOverlay.layer.cornerRadius = 25
         imageMediaOverlay.clipsToBounds = true
+        imageMediaOverlay.contentMode = .scaleAspectFill
     }
     
     private func configureLayout() {
