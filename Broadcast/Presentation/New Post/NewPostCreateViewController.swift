@@ -338,12 +338,12 @@ extension NewPostCreateViewController: UIImagePickerControllerDelegate,
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage,
-           let data = image.pngData() {
+           let data = image.orientationRemoved().pngData() {
             let imageUrl = FileManager.default.documentsDirectory().appendingPathComponent("selected.png")
             try? data.write(to: imageUrl)
             selected(imageUrl: imageUrl)
         } else if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage,
-                  let data = image.pngData() {
+                  let data = image.orientationRemoved().pngData() {
             let imageUrl = FileManager.default.documentsDirectory().appendingPathComponent("selected.png")
             try? data.write(to: imageUrl)
             selected(imageUrl: imageUrl)

@@ -53,4 +53,12 @@ extension UIImage {
             UserDefaults.standard.set(pngRepresentation, forKey: key)
         }
     }
+    
+    public func orientationRemoved() -> UIImage {
+        UIGraphicsBeginImageContext(size)
+        draw(at: .zero)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage ?? self
+    }
 }
