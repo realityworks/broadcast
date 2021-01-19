@@ -213,12 +213,12 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
             
         viewModel.selectedMedia
             .compactMap { $0 }
-            .subscribe(onNext: { media in
+            .subscribe(onNext: { [weak self] media in
                 switch media {
                 case .video(let url):
-                    self.selectMediaView.videoMediaOverlay.playVideo(withURL: url, autoplay: false)
+                    self?.selectMediaView.videoMediaOverlay.playVideo(withURL: url, autoplay: false)
                 case .image(let url):
-                    self.selectMediaView.imageMediaOverlay.image = UIImage(contentsOfFile: url.path)
+                    self?.selectMediaView.imageMediaOverlay.image = UIImage(contentsOfFile: url.path)
                 }
                 
             })
@@ -230,33 +230,33 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
             .disposed(by: disposeBag)
         
         tipsView.closeButton.rx.tap
-            .subscribe(onNext: { _ in
-                self.viewModel.showTips(false)
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel.showTips(false)
             })
             .disposed(by: disposeBag)
     }
     
     private func configureTextFieldBindings() {
         editPostView.titleTextField.rx.controlEvent(.editingChanged)
-            .map { [unowned self] in self.editPostView.titleTextField.text ?? "" }
+            .map { [weak self] in self?.editPostView.titleTextField.text ?? "" }
             .bind(to: viewModel.title)
             .disposed(by: disposeBag)
         
         editPostView.titleTextField.rx.controlEvent([.editingDidEndOnExit])
-            .subscribe(onNext: { [unowned self] _ in
-                self.editPostView.titleTextField.resignFirstResponder()
+            .subscribe(onNext: { [weak self] _ in
+                self?.editPostView.titleTextField.resignFirstResponder()
             })
             .disposed(by: disposeBag)
 
         viewModel.title
-            .subscribe(onNext: { text in
-                self.editPostView.titleTextField.text = text
+            .subscribe(onNext: { [weak self] text in
+                self?.editPostView.titleTextField.text = text
             })
             .disposed(by: disposeBag)
         
         viewModel.caption
-            .subscribe(onNext: { text in
-                self.editPostView.captionTextView.text = text
+            .subscribe(onNext: { [weak self] text in
+                self?.editPostView.captionTextView.text = text
             })
             .disposed(by: disposeBag)
         
@@ -266,29 +266,29 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
             .disposed(by: disposeBag)
         
         changeButton.rx.tap
-            .subscribe(onNext: {
-                self.showMediaOptionsMenu()
+            .subscribe(onNext: { [weak self] _ in
+                self?.showMediaOptionsMenu()
             })
             .disposed(by: disposeBag)
         
         viewModel.popBackToMyPostsSignal
-            .subscribe(onNext: {
-                self.navigationController?.popViewController(animated: true)
+            .subscribe(onNext: { [weak self] _ in
+                self?.navigationController?.popViewController(animated: true)
             })
             .disposed(by: disposeBag)
     }
     
     private func configureButtonBindings() {
         editPostView.submitButton.rx.tap
-            .subscribe(onNext: { _ in
-                self.dismissKeyboard()
-                self.viewModel.uploadPost()
+            .subscribe(onNext: { [weak self] _ in
+                self?.dismissKeyboard()
+                self?.viewModel.uploadPost()
             })
             .disposed(by: disposeBag)
         
         selectMediaView.selectMediaButton.rx.tap
-            .subscribe(onNext: { [unowned self] _ in
-                self.showMediaOptionsMenu()
+            .subscribe(onNext: { [weak self] _ in
+                self?.showMediaOptionsMenu()
             })
             .disposed(by: disposeBag)
     }
