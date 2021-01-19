@@ -216,10 +216,12 @@ class PostSummaryView : UIView {
         
         thumbnailImageView.isHidden = !showThumbnail
         thumbnailImageView.sd_setImage(with: url,
-                                       placeholderImage: UIImage(color: .black))
+                                       placeholderImage: UIImage(color: .black),
+                                       options: [SDWebImageOptions.progressiveLoad])
     }
     
     private func configureAsImage(withPostSummaryViewModel postSummaryViewModel: PostSummaryViewModel) {
+        updateThumbnail(withImageUrl: postSummaryViewModel.media?.url)
     }
     
     private func configureAsVideo(withPostSummaryViewModel postSummaryViewModel: PostSummaryViewModel) {
