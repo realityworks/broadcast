@@ -216,8 +216,7 @@ class PostSummaryView : UIView {
         
         thumbnailImageView.isHidden = !showThumbnail
         thumbnailImageView.sd_setImage(with: url,
-                                       placeholderImage: UIImage(color: .black),
-                                       options: [SDWebImageOptions.progressiveLoad, SDWebImageOptions.retryFailed])
+                                       placeholderImage: UIImage(color: .black))
     }
     
     private func configureAsImage(withPostSummaryViewModel postSummaryViewModel: PostSummaryViewModel) {

@@ -22,6 +22,10 @@ class MyPostsViewController: ViewController {
     
     private let titleLabel = UIImageView(image: UIImage.logoBoomdayBroadcaster?.withTintColor(.primaryLightGrey))
     private let titleHeaderView = UIView()
+    
+    // No posts background view
+    private let noPostsStackView = UIStackView()
+    private let noPostsTitleView = UILabel.bodyBold(LocalizedString.noPosts, textColor: <#T##UIColor#>)
 
     
     // MARK: UI Lifecycle
