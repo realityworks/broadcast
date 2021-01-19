@@ -11,6 +11,7 @@ import Lottie
 
 class MyPostsTableViewCell : UITableViewCell {
     static let identifier = "MyPostTableViewCell"
+    static let bottomSpace: CGFloat = 32
     
     let postSummaryView: PostSummaryView!
     private let animationView = AnimationView(animationAsset: .playVideo)
@@ -37,7 +38,7 @@ class MyPostsTableViewCell : UITableViewCell {
         
         bottomSpaceView.topToBottom(of: postSummaryView)
         bottomSpaceView.edgesToSuperview(excluding: [.top])
-        bottomSpaceView.height(32)
+        bottomSpaceView.height(Self.bottomSpace)
     }
     
     func styleView() {

@@ -32,7 +32,7 @@ class PostDetailViewModel : ViewModel {
         self.schedulers = dependencies.schedulers
         
         let postObservable = Observable.combineLatest(
-            dependencies.myPosts,
+            dependencies.myPosts.compactMap { $0 },
             dependencies.selectedPostId) { myPosts, selectedPostId in
                 myPosts.first(where: { $0.id == selectedPostId })
             }
@@ -94,7 +94,7 @@ extension PostDetailViewModel {
         let stateController: StateController
         let schedulers: Schedulers
         let postContentUseCase: PostContentUseCase
-        let myPosts: Observable<[Post]>
+        let myPosts: Observable<[Post]?>
         let selectedPostId: Observable<PostID?>
         
         static let standard = Dependencies(

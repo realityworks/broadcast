@@ -13,7 +13,7 @@ struct State : Equatable {
     var authenticationState: AuthenticationState = .loggedOut
     var appState: AppState = .inactive
     var connectionState: ConnectionState = .connected
-    var myPosts: [Post] = []
+    var myPosts: [Post]? = nil
     
     var profile: Profile?
     var profileImage: UIImage?

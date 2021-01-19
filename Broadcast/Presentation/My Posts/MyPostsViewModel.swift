@@ -23,12 +23,25 @@ class MyPostsViewModel : ViewModel {
     private let createPostSubject = PublishRelay<()>()
     let createPostSignal: Observable<()>
     
+    let isLoadingPostsFirstTimeObservable: Observable<Bool>
+    let isPostListEmptyObservable: Observable<Bool>
+    
     init(dependencies: Dependencies = .standard) {
         
         self.postContentUseCase = dependencies.postContentUseCase
         self.newPostsLoadedSignal = newPostsLoadedSubject.asObservable()
         
-        self.myPostsObservable = dependencies.myPostsObservable
+        self.isLoadingPostsFirstTimeObservable = Observable.combineLatest(
+            dependencies.isLoadingPostsObservable,
+            dependencies.myPostsObservable.map { $0 == nil }) { isLoading, nilPosts in
+            return isLoading && nilPosts
+        }
+        
+        self.isPostListEmptyObservable = dependencies.myPostsObservable
+            .compactMap { $0 }
+            .map { $0.count == 0 }
+                
+        self.myPostsObservable = dependencies.myPostsObservable.compactMap { $0 }
             .map { posts in
                 return posts.map {
                     let thumbnailUrl = URL(string: $0.postMedia.thumbnailUrl)
@@ -77,13 +90,15 @@ extension MyPostsViewModel {
         
         let stateController: StateController
         let postContentUseCase: PostContentUseCase
-        let myPostsObservable: Observable<[Post]>
+        let myPostsObservable: Observable<[Post]?>
+        let isLoadingPostsObservable: Observable<Bool>
         
         static var standard: Dependencies {
             return Dependencies(
                 stateController: Domain.standard.stateController,
                 postContentUseCase: Domain.standard.useCases.postContentUseCase,
-                myPostsObservable: Domain.standard.stateController.stateObservable(of: \.myPosts, distinct: false))
+                myPostsObservable: Domain.standard.stateController.stateObservable(of: \.myPosts, distinct: false),
+                isLoadingPostsObservable: Domain.standard.stateController.stateObservable(of: \.isLoadingPosts))
         }
     }
 }

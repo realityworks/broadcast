@@ -116,7 +116,7 @@ extension PostContentUseCase {
         return apiService.deletePost(with: postId).do(onError: { error in
                 self.stateController.sendError(error)
             }, onCompleted: {
-                self.stateController.state.myPosts.removeAll(where: { $0.id == postId })
+                self.stateController.state.myPosts?.removeAll(where: { $0.id == postId })
             })
             .observe(on: schedulers.main)
 
