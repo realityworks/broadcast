@@ -136,15 +136,15 @@ class MyPostsViewController: ViewController {
             .bind(to: ghostLoadingAnimationView.rx.isHidden)
             .disposed(by: disposeBag)
         
-        #warning("Do we need this, review if there are performance issues")
-//        viewModel.isLoadingPostsFirstTimeObservable
-//            .delay(.milliseconds(5000), scheduler: Schedulers.standard.main)
-//            .subscribe( onNext: { isLoadingFirstTime in
-//                if !isLoadingFirstTime {
-//                    self.ghostLoadingAnimationView.stop()
-//                }
-//            })
-//            .disposed(by: disposeBag)
+        /// Need this to stop major performance impact
+        viewModel.isLoadingPostsFirstTimeObservable
+            .delay(.milliseconds(1000), scheduler: Schedulers.standard.main)
+            .subscribe( onNext: { isLoadingFirstTime in
+                if !isLoadingFirstTime {
+                    self.ghostLoadingAnimationView.stop()
+                }
+            })
+            .disposed(by: disposeBag)
     }
     
     @objc func createPostTapped() {
