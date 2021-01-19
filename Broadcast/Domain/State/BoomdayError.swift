@@ -14,6 +14,7 @@ enum BoomdayError : Error {
     case apiNotFound
     case apiStatusCode(code: Int)
     case uploadFailed(UploadEvent)
+    case publishFailed
     
     var localizedDescription: String {
         switch self {
@@ -26,9 +27,11 @@ enum BoomdayError : Error {
         case .apiNotFound:
             return LocalizedString.apiNotFoundError.localized
         case .apiStatusCode(let errorCode):
-            return "\(LocalizedString.apiStatusCodeError.localized) : \(errorCode)"
-        default:
-            return LocalizedString.invalidError.localized
+            return "Failed with error : \(errorCode)"
+        case .publishFailed:
+            return LocalizedString.publishError.localized
+        case .uploadFailed(let event):
+            return "\(LocalizedString.uploadFailed.localized) : \(event)"
         }
     }
 }

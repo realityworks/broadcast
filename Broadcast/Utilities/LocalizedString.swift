@@ -53,13 +53,6 @@ enum LocalizedString : String {
     case forgotPassword
     case welcome
     case tryAgain
-    case error
-    case unknownError
-    case unsupportedError
-    case decodingError
-    case apiNotFoundError
-    case apiStatusCodeError
-    case invalidError
     case addMedia
     case newPost
     case tips
@@ -98,6 +91,17 @@ enum LocalizedString : String {
     case emailUserLockedInfo
     case stripeAccountLockedInfo
     case processing
+    
+    // MARK: Error Strings
+    case error
+    case unknownError
+    case unsupportedError
+    case decodingError
+    case apiNotFoundError
+    case apiStatusCodeError
+    case invalidError
+    case publishError
+    case uploadEventError
     
     var localized: String {
         return Bundle.main.localizedString(forKey: self.rawValue, value: nil, table: nil)

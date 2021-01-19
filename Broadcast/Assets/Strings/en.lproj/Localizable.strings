@@ -98,3 +98,5 @@
 "apiNotFoundError" = "This call does not exist in the API";
 "apiStatusCodeError" = "The Web API returned an undefined error code";
 "invalidError" = "Invalid Error";
+"publishError" = "Pushing your post failed, try again later";
+"uploadEventError" = "An error occured attempting to upload and publish your post";

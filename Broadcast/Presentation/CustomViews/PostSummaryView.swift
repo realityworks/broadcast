@@ -212,8 +212,19 @@ class PostSummaryView : UIView {
     }
     
     func configure(withPostSummaryViewModel postSummaryViewModel: PostSummaryViewModel) {
-        if postSummaryViewModel.showVideoPlayer,
-           !postSummaryViewModel.isEncoding,
+        // Image View
+        switch postSummaryViewModel.media {
+        case .image(let url):
+            configureAsImage(withPostSummaryViewModel: postSummaryViewModel)
+        case .video(let url):
+            configureAsVideo(withPostSummaryViewModel: postSummaryViewModel)
+        }
+        
+        // Video View
+        
+        
+        
+        if !postSummaryViewModel.isEncoding,
            let media = postSummaryViewModel.media {
             thumbnailImageView.isHidden = true
             processingView.isHidden = true
@@ -226,13 +237,17 @@ class PostSummaryView : UIView {
                                                placeholderImage: UIImage(systemName: "paintbrush"))
             case .video(let url):
                 videoPlayerView.playVideo(withURL: url)
+                
+                if !postSummaryViewModel.showVideoPlayer {
+                    if let thumbnailUrl = postSummaryViewModel.thumbnailUrl {
+                        thumbnailImageView.sd_setImage(with: thumbnailUrl,
+                                                       placeholderImage: UIImage(color: .black))
+                    }
+                    pressPlayOverlayView.isHidden = false
+                    pressPlayOverlayView.play()
+                }
             }
             
-        } else if let thumbnailUrl = postSummaryViewModel.thumbnailUrl {
-            thumbnailImageView.sd_setImage(with: thumbnailUrl,
-                                           placeholderImage: UIImage(color: .primaryGrey))
-            pressPlayOverlayView.isHidden = false
-            pressPlayOverlayView.play()
         }
         
         blurredEffectView.isHidden = !postSummaryViewModel.isEncoding

@@ -125,7 +125,6 @@ extension StandardUploadService : UploadService {
                             observer.onNext(UploadEvent.completeUpload)
                             observer.onCompleted()
                         } onError: { error in
-                            print (error)
                             observer.onError(BoomdayError.unknown)
                         }
                         .disposed(by: disposeBag)
@@ -147,7 +146,7 @@ extension StandardUploadService : UploadService {
                         observer.onNext(UploadEvent.postContent)
                         observer.onCompleted()
                     } onError: { error in
-                        print (error)
+                        observer.onError(BoomdayError.publishFailed)
                     }
                     .disposed(by: disposeBag)
             } else {
@@ -166,7 +165,7 @@ extension StandardUploadService : UploadService {
                         observer.onNext(UploadEvent.publish)
                         observer.onCompleted()
                     } onError: { error in
-                        print (error)
+                        observer.onError(BoomdayError.publishFailed)
                     }
                     .disposed(by: disposeBag)
             } else {
