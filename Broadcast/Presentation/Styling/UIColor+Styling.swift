@@ -17,6 +17,7 @@ extension UIColor {
     static let darkGrey = UIColor(hex: "#1B1B23")
     static let primaryLightGrey = UIColor(hex: "#7B87A1")
     static let secondaryLightGrey = UIColor(hex: "#CBCFDA")
+    static let tertiaryLightGrey = UIColor(hex: "#9FA8BB")
     
     static let customSeparator = secondaryLightGrey
     static let textFieldBorder = secondaryLightGrey

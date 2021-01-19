@@ -28,7 +28,7 @@ class MyPostsViewController: ViewController {
     private let noPostsStackView = UIStackView()
     private let noPostsTitleView = UILabel.text(LocalizedString.noPosts,
                                                 font: UIFont.boldTableTitle,
-                                                textColor: .secondaryLightGrey)
+                                                textColor: .tertiaryLightGrey)
     private let noPostsDetailLabel = UILabel()
 
     
@@ -79,10 +79,10 @@ class MyPostsViewController: ViewController {
         
         let noPostDetailStyle = Style {
             $0.font = UIFont.largeBodyMedium
-            $0.color = UIColor.primaryLightGrey
+            $0.color = UIColor.tertiaryLightGrey
         }
         
-        let localImage = AttributedString(image: UIImage.iconPlusSquare?.withTintColor(.primaryLightGrey))
+        let localImage = AttributedString(image: UIImage.iconPlusSquare?.withTintColor(.tertiaryLightGrey))
         
         noPostsDetailLabel.attributedText =
             "TAP ".set(style: noPostDetailStyle) +
@@ -106,7 +106,8 @@ class MyPostsViewController: ViewController {
         titleLabel.centerInSuperview()
         
         view.addSubview(noPostsStackView)
-        noPostsStackView.centerInSuperview()
+        noPostsStackView.centerXToSuperview()
+        noPostsStackView.centerYToSuperview(offset: -16)
         
         noPostsStackView.addArrangedSubview(noPostsTitleView)
         noPostsStackView.addArrangedSubview(noPostsDetailLabel)
@@ -178,7 +179,10 @@ class MyPostsViewController: ViewController {
             })
             .disposed(by: disposeBag)
         
-        viewModel.
+        viewModel.isPostListEmptyObservable
+            .map { !$0 } // Negate
+            .bind(to: noPostsStackView.rx.isHidden)
+            .disposed(by: disposeBag)
     }
     
     @objc func createPostTapped() {
