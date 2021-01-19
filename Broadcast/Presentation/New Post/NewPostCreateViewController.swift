@@ -337,7 +337,17 @@ extension NewPostCreateViewController: UIImagePickerControllerDelegate,
     // MARK: UIImagePickerControllerDelegate
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let imageUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL {
+        if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage,
+           let data = image.pngData() {
+            let imageUrl = FileManager.default.documentsDirectory().appendingPathComponent("selected.png")
+            try? data.write(to: imageUrl)
+            selected(imageUrl: imageUrl)
+        } else if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage,
+                  let data = image.pngData() {
+            let imageUrl = FileManager.default.documentsDirectory().appendingPathComponent("selected.png")
+            try? data.write(to: imageUrl)
+            selected(imageUrl: imageUrl)
+        } else if let imageUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL {
             selected(imageUrl: imageUrl)
         } else if let videoUrl = info[UIImagePickerController.InfoKey.mediaURL] as? URL {
             selected(videoUrl: videoUrl)

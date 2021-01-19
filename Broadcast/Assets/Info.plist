@@ -28,9 +28,9 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Camera Access is required to </string>
+	<string>Camera Access is required to record footage for your videos</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Access to photo library is required to upload new content</string>
+	<string>Access to photo library is required to select photos for content</string>
 	<key>SERVICE_ROOT_URL</key>
 	<string>$(SERVICE_ROOT_URL)</string>
 	<key>UIAppFonts</key>
@@ -89,6 +89,8 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Camera Access is required to record audio for your videos.</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
