@@ -16,7 +16,6 @@ class MyPostsTableViewCell : UITableViewCell {
     let postSummaryView: PostSummaryView!
     private let animationView = AnimationView(animationAsset: .playVideo)
 
-        
     override init(style: UITableViewCell.CellStyle,
                   reuseIdentifier: String?) {
         postSummaryView = PostSummaryView(withStyling: .list)

@@ -83,7 +83,7 @@ class MyPostsViewController: ViewController {
         ghostLoadingAnimationView.topToSuperview(offset: 96)
         ghostLoadingAnimationView.leadingToSuperview(offset: 24)
         ghostLoadingAnimationView.trailingToSuperview(offset: 24)
-        ghostLoadingAnimationView.bottomToSuperview(offset: -MyPostsTableViewCell.bottomSpace, usingSafeArea: true)
+        ghostLoadingAnimationView.height(550)
         ghostLoadingAnimationView.contentMode = .scaleToFill
         ghostLoadingAnimationView.play()
     }
@@ -130,11 +130,22 @@ class MyPostsViewController: ViewController {
                 navigationController?.push(with: .newPostCreate)
             })
             .disposed(by: disposeBag)
-        
+
         viewModel.isLoadingPostsFirstTimeObservable
             .map { !$0 }
             .bind(to: ghostLoadingAnimationView.rx.isHidden)
             .disposed(by: disposeBag)
+        
+        viewModel.isLoadingPostsFirstTimeObservable
+            .subscribe( onNext: { isLoadingFirstTime in
+                if isLoadingFirstTime {
+                    self.ghostLoadingAnimationView.play()
+                } else {
+                    self.ghostLoadingAnimationView.stop()
+                }
+            })
+            .disposed(by: disposeBag)
+
     }
     
     @objc func createPostTapped() {
