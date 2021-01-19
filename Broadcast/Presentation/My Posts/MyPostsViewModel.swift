@@ -32,10 +32,10 @@ class MyPostsViewModel : ViewModel {
         self.newPostsLoadedSignal = newPostsLoadedSubject.asObservable()
         
         self.isLoadingPostsFirstTimeObservable = Observable.combineLatest(
-            dependencies.isLoadingPostsObservable,
-            dependencies.myPostsObservable.map { $0 == nil }) { isLoading, nilPosts in
-            return isLoading && nilPosts
-        }
+                dependencies.isLoadingPostsObservable,
+                dependencies.myPostsObservable.map { $0 == nil }) { isLoading, nilPosts in
+                return isLoading && nilPosts
+            }
         
         self.isPostListEmptyObservable = dependencies.myPostsObservable
             .compactMap { $0 }
