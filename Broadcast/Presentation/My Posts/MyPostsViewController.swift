@@ -67,20 +67,22 @@ class MyPostsViewController: ViewController {
     
     private func configureLayout() {
         /// Layout the views
-//        view.addSubview(tableView)
-//        tableView.edgesToSuperview()
-//
-//        /// Configure the table view header (Will be changed)
-//        titleHeaderView.frame = CGRect(x: 0, y: 0, width: 200, height: 96)
-//        tableView.tableHeaderView = titleHeaderView
-//        titleHeaderView.width(to: view)
-//        titleHeaderView.height(96)
-//
-//        titleHeaderView.addSubview(titleLabel)
-//        titleLabel.centerInSuperview()
+        view.addSubview(tableView)
+        tableView.edgesToSuperview()
+
+        /// Configure the table view header (Will be changed)
+        titleHeaderView.frame = CGRect(x: 0, y: 0, width: 200, height: 96)
+        tableView.tableHeaderView = titleHeaderView
+        titleHeaderView.width(to: view)
+        titleHeaderView.height(96)
+
+        titleHeaderView.addSubview(titleLabel)
+        titleLabel.centerInSuperview()
         
         view.addSubview(ghostLoadingAnimationView)
-        ghostLoadingAnimationView.edgesToSuperview()
+        ghostLoadingAnimationView.topToSuperview(offset: 96)
+        ghostLoadingAnimationView.leadingToSuperview(offset: 24)
+        ghostLoadingAnimationView.trailingToSuperview(offset: 24)
         ghostLoadingAnimationView.play()
     }
         
