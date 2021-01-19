@@ -75,11 +75,11 @@ class MyPostsViewController: ViewController {
         // Setup the no posts view
         noPostsStackView.axis = .vertical
         noPostsStackView.alignment = .center
-        noPostsStackView.spacing = 10
+        noPostsStackView.spacing = 24
         
         let noPostDetailStyle = Style {
             $0.font = UIFont.largeBodyMedium
-            $0.underline = (.single, UIColor.primaryLightGrey)
+            $0.color = UIColor.primaryLightGrey
         }
         
         let localImage = AttributedString(image: UIImage.iconPlusSquare?.withTintColor(.primaryLightGrey))
@@ -87,10 +87,11 @@ class MyPostsViewController: ViewController {
         noPostsDetailLabel.attributedText =
             "TAP ".set(style: noPostDetailStyle) +
             (localImage ?? AttributedString()) +
-            "TO ADD A NEW POST".set(style: noPostDetailStyle)
+            " TO ADD A NEW POST".set(style: noPostDetailStyle)
     }
     
     private func configureLayout() {
+        
         /// Layout the views
         view.addSubview(tableView)
         tableView.edgesToSuperview()
@@ -104,6 +105,12 @@ class MyPostsViewController: ViewController {
         titleHeaderView.addSubview(titleLabel)
         titleLabel.centerInSuperview()
         
+        view.addSubview(noPostsStackView)
+        noPostsStackView.centerInSuperview()
+        
+        noPostsStackView.addArrangedSubview(noPostsTitleView)
+        noPostsStackView.addArrangedSubview(noPostsDetailLabel)
+        
         view.addSubview(ghostLoadingAnimationView)
         ghostLoadingAnimationView.topToSuperview(offset: 96)
         ghostLoadingAnimationView.leadingToSuperview(offset: 24)
@@ -111,12 +118,6 @@ class MyPostsViewController: ViewController {
         ghostLoadingAnimationView.height(550)
         ghostLoadingAnimationView.contentMode = .scaleToFill
         ghostLoadingAnimationView.play()
-        
-        view.addSubview(noPostsStackView)
-        noPostsStackView.centerInSuperview()
-        
-        noPostsStackView.addArrangedSubview(noPostsTitleView)
-        noPostsStackView.addArrangedSubview(noPostsDetailLabel)
     }
         
     private func configureBindings() {        
@@ -176,6 +177,8 @@ class MyPostsViewController: ViewController {
                 }
             })
             .disposed(by: disposeBag)
+        
+        viewModel.
     }
     
     @objc func createPostTapped() {
