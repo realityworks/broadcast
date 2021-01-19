@@ -11,19 +11,17 @@ class PostDetailViewController: ViewController {
     private let viewModel: PostDetailViewModel = PostDetailViewModel()
     
     // MARK: - UI Components
-    //let verticalStackView = UIStackView()
     let deleteButtonContainer = UIView()
     let deleteButton = UIButton.textDestructive(withTitle: LocalizedString.deletePost)
     let activityIndicator = UIActivityIndicatorView()
     
     let scrollView = UIScrollView()
-    var postSummaryView: PostSummaryView!
+    var postSummaryView = PostSummaryView(withStyling: .detail)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationBar(styleAs: .dark(title: LocalizedString.post))        
-        postSummaryView = PostSummaryView(withStyling: .detail)
 
         // Do any additional setup after loading the view.
         configureViews()
@@ -76,8 +74,8 @@ class PostDetailViewController: ViewController {
             .disposed(by: disposeBag)
         
         deleteButton.rx.tap
-            .subscribe(onNext: { _ in
-                self.viewModel.deletePost()
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel.deletePost()
             })
             .disposed(by: disposeBag)
         
@@ -90,8 +88,8 @@ class PostDetailViewController: ViewController {
             .disposed(by: disposeBag)
         
         viewModel.deletedSubject
-            .subscribe(onNext: { _ in
-                self.navigationController?.popViewController(animated: true)
+            .subscribe(onNext: { [weak self] _ in
+                self?.navigationController?.popViewController(animated: true)
             })
             .disposed(by: disposeBag)
     }
