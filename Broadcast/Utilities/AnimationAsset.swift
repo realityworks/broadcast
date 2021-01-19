@@ -11,5 +11,5 @@ enum AnimationAsset: String {
     case playVideo = "ios-play-button-pulse"
     case processing = "ios-processing-loop"
     case success = "web-success-load"
-    case myPostsGhostLoad = "ios-ghost-feed-loading.json"
+    case myPostsGhostLoad = "ios-ghost-feed-loading"
 }

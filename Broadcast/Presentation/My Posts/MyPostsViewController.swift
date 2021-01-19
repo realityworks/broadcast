@@ -10,12 +10,14 @@ import TinyConstraints
 import RxSwift
 import RxCocoa
 import RxDataSources
+import Lottie
 
 class MyPostsViewController: ViewController {
     
     private let viewModel = MyPostsViewModel()
     
     private let tableView = UITableView()
+    private let ghostLoadingAnimationView = AnimationView(animationAsset: .myPostsGhostLoad)
     private let refreshControl = UIRefreshControl()
     
     private let titleLabel = UIImageView(image: UIImage.logoBoomdayBroadcaster?.withTintColor(.primaryLightGrey))
@@ -58,21 +60,28 @@ class MyPostsViewController: ViewController {
                                                action: #selector(createPostTapped))
         createPostButton.tintColor = .white
         navigationItem.rightBarButtonItem = createPostButton
+        
+        ghostLoadingAnimationView.loopMode = .loop
+        ghostLoadingAnimationView.backgroundBehavior = .pauseAndRestore
     }
     
     private func configureLayout() {
         /// Layout the views
-        view.addSubview(tableView)
-        tableView.edgesToSuperview()
-
-        /// Configure the table view header (Will be changed)
-        titleHeaderView.frame = CGRect(x: 0, y: 0, width: 200, height: 96)
-        tableView.tableHeaderView = titleHeaderView
-        titleHeaderView.width(to: view)
-        titleHeaderView.height(96)
-
-        titleHeaderView.addSubview(titleLabel)
-        titleLabel.centerInSuperview()
+//        view.addSubview(tableView)
+//        tableView.edgesToSuperview()
+//
+//        /// Configure the table view header (Will be changed)
+//        titleHeaderView.frame = CGRect(x: 0, y: 0, width: 200, height: 96)
+//        tableView.tableHeaderView = titleHeaderView
+//        titleHeaderView.width(to: view)
+//        titleHeaderView.height(96)
+//
+//        titleHeaderView.addSubview(titleLabel)
+//        titleLabel.centerInSuperview()
+        
+        view.addSubview(ghostLoadingAnimationView)
+        ghostLoadingAnimationView.edgesToSuperview()
+        ghostLoadingAnimationView.play()
     }
         
     private func configureBindings() {        
