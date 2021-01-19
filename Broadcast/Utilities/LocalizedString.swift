@@ -73,7 +73,7 @@ enum LocalizedString : String {
     case tip3Title
     case tip3SubTitle
     case close
-    case myLocker
+    case locker
     case comments
     case ago
     case yes
