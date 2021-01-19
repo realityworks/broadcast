@@ -211,13 +211,29 @@ class PostSummaryView : UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func configureAsImage(withPostSummaryViewModel postSummaryViewModel: PostSummaryViewModel) {
+        
+    }
+    
+    private func configureAsVideo(withPostSummaryViewModel postSummaryViewModel: PostSummaryViewModel) {
+        
+    }
+    
     func configure(withPostSummaryViewModel postSummaryViewModel: PostSummaryViewModel) {
+        
+        thumbnailImageView.isHidden = true
+        processingView.isHidden = true
+        blurredEffectView.isHidden = true
+        pressPlayOverlayView.isHidden = true
+        
         // Image View
         switch postSummaryViewModel.media {
-        case .image(let url):
+        case .image:
             configureAsImage(withPostSummaryViewModel: postSummaryViewModel)
-        case .video(let url):
+        case .video:
             configureAsVideo(withPostSummaryViewModel: postSummaryViewModel)
+        default:
+            break /// No media here to really do anything with
         }
         
         // Video View
@@ -226,10 +242,7 @@ class PostSummaryView : UIView {
         
         if !postSummaryViewModel.isEncoding,
            let media = postSummaryViewModel.media {
-            thumbnailImageView.isHidden = true
-            processingView.isHidden = true
-            blurredEffectView.isHidden = true
-            pressPlayOverlayView.isHidden = true
+            
             
             switch media {
             case .image(let url):
