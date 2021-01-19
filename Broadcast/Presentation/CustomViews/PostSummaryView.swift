@@ -212,55 +212,43 @@ class PostSummaryView : UIView {
     }
     
     private func configureAsImage(withPostSummaryViewModel postSummaryViewModel: PostSummaryViewModel) {
-        
     }
     
     private func configureAsVideo(withPostSummaryViewModel postSummaryViewModel: PostSummaryViewModel) {
-        
+        if postSummaryViewModel.showVideoPlayer {
+            if !postSummaryViewModel.isEncoding,
+                let url = postSummaryViewModel.media?.url {
+                videoPlayerView.isHidden = false
+                videoPlayerView.playVideo(withURL: url)
+            }
+        } else {
+            if let thumbnailUrl = postSummaryViewModel.thumbnailUrl {
+                thumbnailImageView.isHidden = false
+                thumbnailImageView.sd_setImage(with: thumbnailUrl,
+                                               placeholderImage: UIImage(color: .black))
+            }
+            
+            pressPlayOverlayView.isHidden = false
+            pressPlayOverlayView.play()
+        }
     }
     
     func configure(withPostSummaryViewModel postSummaryViewModel: PostSummaryViewModel) {
-        
+        videoPlayerView.isHidden = true
         thumbnailImageView.isHidden = true
         processingView.isHidden = true
         blurredEffectView.isHidden = true
         pressPlayOverlayView.isHidden = true
         
-        // Image View
         switch postSummaryViewModel.media {
         case .image:
+            // Image View
             configureAsImage(withPostSummaryViewModel: postSummaryViewModel)
         case .video:
+            // Video View
             configureAsVideo(withPostSummaryViewModel: postSummaryViewModel)
         default:
             break /// No media here to really do anything with
-        }
-        
-        // Video View
-        
-        
-        
-        if !postSummaryViewModel.isEncoding,
-           let media = postSummaryViewModel.media {
-            
-            
-            switch media {
-            case .image(let url):
-                thumbnailImageView.sd_setImage(with: url,
-                                               placeholderImage: UIImage(systemName: "paintbrush"))
-            case .video(let url):
-                videoPlayerView.playVideo(withURL: url)
-                
-                if !postSummaryViewModel.showVideoPlayer {
-                    if let thumbnailUrl = postSummaryViewModel.thumbnailUrl {
-                        thumbnailImageView.sd_setImage(with: thumbnailUrl,
-                                                       placeholderImage: UIImage(color: .black))
-                    }
-                    pressPlayOverlayView.isHidden = false
-                    pressPlayOverlayView.play()
-                }
-            }
-            
         }
         
         blurredEffectView.isHidden = !postSummaryViewModel.isEncoding
