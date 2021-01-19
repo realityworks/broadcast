@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 import Lottie
+import SwiftRichString
 
 class MyPostsViewController: ViewController {
     
@@ -25,7 +26,10 @@ class MyPostsViewController: ViewController {
     
     // No posts background view
     private let noPostsStackView = UIStackView()
-    private let noPostsTitleView = UILabel.bodyBold(LocalizedString.noPosts, textColor: <#T##UIColor#>)
+    private let noPostsTitleView = UILabel.text(LocalizedString.noPosts,
+                                                font: UIFont.boldTableTitle,
+                                                textColor: .secondaryLightGrey)
+    private let noPostsDetailLabel = UILabel()
 
     
     // MARK: UI Lifecycle
@@ -67,6 +71,23 @@ class MyPostsViewController: ViewController {
         
         ghostLoadingAnimationView.loopMode = .loop
         ghostLoadingAnimationView.backgroundBehavior = .pauseAndRestore
+        
+        // Setup the no posts view
+        noPostsStackView.axis = .vertical
+        noPostsStackView.alignment = .center
+        noPostsStackView.spacing = 10
+        
+        let noPostDetailStyle = Style {
+            $0.font = UIFont.largeBodyMedium
+            $0.underline = (.single, UIColor.primaryLightGrey)
+        }
+        
+        let localImage = AttributedString(image: UIImage.iconPlusSquare?.withTintColor(.primaryLightGrey))
+        
+        noPostsDetailLabel.attributedText =
+            "TAP ".set(style: noPostDetailStyle) +
+            (localImage ?? AttributedString()) +
+            "TO ADD A NEW POST".set(style: noPostDetailStyle)
     }
     
     private func configureLayout() {
@@ -90,6 +111,12 @@ class MyPostsViewController: ViewController {
         ghostLoadingAnimationView.height(550)
         ghostLoadingAnimationView.contentMode = .scaleToFill
         ghostLoadingAnimationView.play()
+        
+        view.addSubview(noPostsStackView)
+        noPostsStackView.centerInSuperview()
+        
+        noPostsStackView.addArrangedSubview(noPostsTitleView)
+        noPostsStackView.addArrangedSubview(noPostsDetailLabel)
     }
         
     private func configureBindings() {        
