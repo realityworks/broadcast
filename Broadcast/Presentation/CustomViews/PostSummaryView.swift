@@ -211,6 +211,14 @@ class PostSummaryView : UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func updateThumbnail(withImageUrl url: URL?, showThumbnail: Bool = true) {
+        guard let url = url else { return }
+        
+        thumbnailImageView.isHidden = !showThumbnail
+        thumbnailImageView.sd_setImage(with: url,
+                                       placeholderImage: UIImage(color: .black))
+    }
+    
     private func configureAsImage(withPostSummaryViewModel postSummaryViewModel: PostSummaryViewModel) {
     }
     
@@ -220,17 +228,20 @@ class PostSummaryView : UIView {
                 let url = postSummaryViewModel.media?.url {
                 videoPlayerView.isHidden = false
                 videoPlayerView.playVideo(withURL: url)
+            } else {
+                updateThumbnail(withImageUrl: postSummaryViewModel.thumbnailUrl)
             }
         } else {
-            if let thumbnailUrl = postSummaryViewModel.thumbnailUrl {
-                thumbnailImageView.isHidden = false
-                thumbnailImageView.sd_setImage(with: thumbnailUrl,
-                                               placeholderImage: UIImage(color: .black))
-            }
+            updateThumbnail(withImageUrl: postSummaryViewModel.thumbnailUrl)
             
             pressPlayOverlayView.isHidden = false
             pressPlayOverlayView.play()
         }
+        
+        blurredEffectView.isHidden = !postSummaryViewModel.isEncoding
+        processingView.isHidden = !postSummaryViewModel.isEncoding
+        pressPlayOverlayView.isHidden = postSummaryViewModel.isEncoding
+        processingView.animating = postSummaryViewModel.isEncoding
     }
     
     func configure(withPostSummaryViewModel postSummaryViewModel: PostSummaryViewModel) {
@@ -250,11 +261,6 @@ class PostSummaryView : UIView {
         default:
             break /// No media here to really do anything with
         }
-        
-        blurredEffectView.isHidden = !postSummaryViewModel.isEncoding
-        processingView.isHidden = !postSummaryViewModel.isEncoding
-        pressPlayOverlayView.isHidden = postSummaryViewModel.isEncoding
-        processingView.animating = postSummaryViewModel.isEncoding
         
         postStatsView.configure(withCommentCount: postSummaryViewModel.commentCount,
                                 lockerCount: postSummaryViewModel.lockerCount)
