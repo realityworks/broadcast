@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D01E17625B6AF8400A72F97 /* ios-ghost-feed-loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 1D01E17525B6AF8400A72F97 /* ios-ghost-feed-loading.json */; };
 		1D14AD5925790BA700CB2C82 /* ProfileSectionHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D14AD5825790BA700CB2C82 /* ProfileSectionHeaderCell.swift */; };
 		1D14AD672579E41E00CB2C82 /* LoadProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D14AD662579E41E00CB2C82 /* LoadProfileResponse.swift */; };
 		1D14AD6B257A0CFD00CB2C82 /* ProfileTextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D14AD6A257A0CFD00CB2C82 /* ProfileTextFieldTableViewCell.swift */; };
@@ -185,6 +186,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1D01E17525B6AF8400A72F97 /* ios-ghost-feed-loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "ios-ghost-feed-loading.json"; sourceTree = "<group>"; };
 		1D14AD5825790BA700CB2C82 /* ProfileSectionHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSectionHeaderCell.swift; sourceTree = "<group>"; };
 		1D14AD662579E41E00CB2C82 /* LoadProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadProfileResponse.swift; sourceTree = "<group>"; };
 		1D14AD6A257A0CFD00CB2C82 /* ProfileTextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTextFieldTableViewCell.swift; sourceTree = "<group>"; };
@@ -499,6 +501,7 @@
 				1D79C118259471B800AC271B /* ios-play-button-pulse.json */,
 				1D99AA6225B16C780069D7F0 /* web-success-load.json */,
 				1DF4D4CE25B5D63300408921 /* ios-processing-loop.json */,
+				1D01E17525B6AF8400A72F97 /* ios-ghost-feed-loading.json */,
 			);
 			path = Animations;
 			sourceTree = "<group>";
@@ -998,6 +1001,7 @@
 				1D34340725624B4C00886245 /* LaunchScreen.storyboard in Resources */,
 				1D916DA825640C810059E549 /* Staging.xcconfig in Resources */,
 				1D34340425624B4C00886245 /* Assets.xcassets in Resources */,
+				1D01E17625B6AF8400A72F97 /* ios-ghost-feed-loading.json in Resources */,
 				1D79C119259471B800AC271B /* ios-play-button-pulse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
