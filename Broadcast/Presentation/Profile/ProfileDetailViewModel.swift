@@ -67,7 +67,7 @@ class ProfileDetailViewModel : ViewModel {
         
         displayNameObservable = profileObservable.map { $0.displayName }
         biographyObservable = profileObservable.map { $0.biography ?? String.empty }
-        emailObservable = profileObservable.map { $0.email }
+        emailObservable = profileObservable.map { $0.email ?? String.empty }
         handleObservable = profileObservable.map { $0.handle }
         
         subscriberCount = profileObservable.map { $0.subscriberCount }
