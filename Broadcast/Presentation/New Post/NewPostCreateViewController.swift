@@ -347,7 +347,11 @@ extension NewPostCreateViewController: UIImagePickerControllerDelegate,
             let imageUrl = FileManager.default.documentsDirectory().appendingPathComponent("selected.png")
             try? data.write(to: imageUrl)
             selected(imageUrl: imageUrl)
-        } else if let imageUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL {
+        } else if let imageUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL,
+                  let srcData = try? Data(contentsOf: imageUrl),
+                  let data = UIImage(data: srcData)?.orientationRemoved().pngData() {
+            let imageUrl = FileManager.default.documentsDirectory().appendingPathComponent("selected.png")
+            try? data.write(to: imageUrl)
             selected(imageUrl: imageUrl)
         } else if let videoUrl = info[UIImagePickerController.InfoKey.mediaURL] as? URL {
             selected(videoUrl: videoUrl)
