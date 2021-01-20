@@ -51,19 +51,21 @@ class ProfileInfoTableViewCell: UITableViewCell {
         containerStackView.spacing = 0
         
         subscribersContainerStackView.axis = .vertical
-        subscribersContainerStackView.spacing = 10
+        subscribersContainerStackView.spacing = 0
         subscribersContainerStackView.alignment = .leading
-        subscribersContainerStackView.distribution = .fillEqually
+        subscribersContainerStackView.distribution = .fill
         
         subscriberDetailContainerStackView.axis = .horizontal
         subscriberDetailContainerStackView.spacing = 0
         subscriberDetailContainerStackView.distribution = .equalSpacing
         
-        displayNameLabel.numberOfLines = 1
-        displayNameLabel.minimumScaleFactor = 0.5
+        displayNameLabel.numberOfLines = 0
+        displayNameLabel.minimumScaleFactor = 0.7
+        displayNameLabel.baselineAdjustment = .alignCenters
         displayNameLabel.allowsDefaultTighteningForTruncation = true
         displayNameLabel.lineBreakMode = .byTruncatingTail
         displayNameLabel.adjustsFontSizeToFitWidth = true
+        displayNameLabel.clipsToBounds = false
     }
     
     private func layoutViews() {
@@ -83,6 +85,7 @@ class ProfileInfoTableViewCell: UITableViewCell {
         subscribersContainerStackView.addArrangedSubview(displayNameLabel)
         subscribersContainerStackView.addArrangedSubview(subscriberDetailContainerStackView)
         displayNameLabel.right(to: contentView, offset: -24)
+        displayNameLabel.height(50)
         
         subscriberDetailContainerStackView.addArrangedSubview(subscribersImageContainer)
         subscriberDetailContainerStackView.addArrangedSubview(subscribersLabel)
