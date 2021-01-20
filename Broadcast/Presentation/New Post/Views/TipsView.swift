@@ -63,13 +63,17 @@ class TipsView : UIView {
         containerView.width(315)
         containerView.centerInSuperview()
         
-        verticalStackView.edgesToSuperview(insets: TinyEdgeInsets(top: 32, left: 24, bottom: 32, right: 24))
+        verticalStackView.edgesToSuperview(insets:
+                                            TinyEdgeInsets(top: 32,
+                                                           left: 24,
+                                                           bottom: 32,
+                                                           right: 24))
         
         verticalStackView.addArrangedSubview(subTitleLabel)
         verticalStackView.addArrangedSubview(titleLabel)
         verticalStackView.addSpace(16)
         tipData.forEach { tipData in
-            verticalStackView.addSpace(40)
+            verticalStackView.addSpace(30)
             verticalStackView.addArrangedSubview(UIImageView(image: tipData.image))
             verticalStackView.addSpace(4)
             let titleLabel = UILabel.largeBodyBold(tipData.title, textColor: .white)

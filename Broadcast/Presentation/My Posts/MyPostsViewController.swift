@@ -171,7 +171,7 @@ class MyPostsViewController: ViewController {
         
         /// Need this to stop major performance impact
         viewModel.isLoadingPostsFirstTimeObservable
-            .delay(.milliseconds(1000), scheduler: Schedulers.standard.main)
+            .delay(.milliseconds(1000), scheduler: Schedulers.standard.utility)
             .subscribe( onNext: { isLoadingFirstTime in
                 if !isLoadingFirstTime {
                     self.ghostLoadingAnimationView.stop()
