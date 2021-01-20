@@ -17,9 +17,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow()
         
-        // The root view controller will need to be sorted via the router
-        window?.makeKeyAndVisible()
-        
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         
@@ -29,8 +26,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Set the window for the app delegate
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         appDelegate.window = window
-        
         Router.standard.setup()
+        
+        appDelegate.window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
