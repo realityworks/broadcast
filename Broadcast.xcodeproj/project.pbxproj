@@ -73,6 +73,7 @@
 		1D712804257890450065B8EA /* ProfileStripeAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D712803257890440065B8EA /* ProfileStripeAccountViewController.swift */; };
 		1D712805257890450065B8EA /* ProfileStripeAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D712802257890440065B8EA /* ProfileStripeAccountViewModel.swift */; };
 		1D77CADF25B73C4C0069A381 /* FileManager+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D77CADE25B73C4C0069A381 /* FileManager+Extensions.swift */; };
+		1D77CAE925B803F60069A381 /* StandardPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D77CAE825B803F60069A381 /* StandardPersistenceService.swift */; };
 		1D79C10125924C8600AC271B /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D79C10025924C8600AC271B /* UIColor+Extensions.swift */; };
 		1D79C106259446F300AC271B /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 1D79C105259446F300AC271B /* Lottie */; };
 		1D79C10F2594517500AC271B /* AnimationAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D79C10E2594517500AC271B /* AnimationAsset.swift */; };
@@ -259,6 +260,7 @@
 		1D712802257890440065B8EA /* ProfileStripeAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStripeAccountViewModel.swift; sourceTree = "<group>"; };
 		1D712803257890440065B8EA /* ProfileStripeAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStripeAccountViewController.swift; sourceTree = "<group>"; };
 		1D77CADE25B73C4C0069A381 /* FileManager+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extensions.swift"; sourceTree = "<group>"; };
+		1D77CAE825B803F60069A381 /* StandardPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardPersistenceService.swift; sourceTree = "<group>"; };
 		1D79C10025924C8600AC271B /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		1D79C10E2594517500AC271B /* AnimationAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationAsset.swift; sourceTree = "<group>"; };
 		1D79C112259451D400AC271B /* AnimationView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimationView+Extensions.swift"; sourceTree = "<group>"; };
@@ -467,6 +469,7 @@
 			isa = PBXGroup;
 			children = (
 				1D3B2A382564F0D4001874FD /* PersistanceService.swift */,
+				1D77CAE825B803F60069A381 /* StandardPersistenceService.swift */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -1146,6 +1149,7 @@
 				1D2A03E525655BB1008CE2D4 /* AuthenticationUseCase.swift in Sources */,
 				1DDEC785256F6BA800D65023 /* MyPostsCellViewModel.swift in Sources */,
 				1DC97C8525A4524F00EBF667 /* ProfileVersionTableViewCell.swift in Sources */,
+				1D77CAE925B803F60069A381 /* StandardPersistenceService.swift in Sources */,
 				1D6FCD7F2581B8490062FF54 /* Single+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

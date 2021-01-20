@@ -16,9 +16,10 @@ class NewPostCreateViewModel : ViewModel {
     
     let schedulers: Schedulers
     let postContentUseCase: PostContentUseCase
+    let persistenceService: PersistanceService
     
     private let selectedMediaSubject = BehaviorRelay<Media?>(value: nil)
-    private let showTipsSubject = BehaviorRelay<Bool>(value: true)
+    private let showTipsSubject = PublishRelay<Bool>()
     
     let title = BehaviorRelay<String>(value: "")
     let caption = BehaviorRelay<String>(value: "")
@@ -49,6 +50,7 @@ class NewPostCreateViewModel : ViewModel {
     init(dependencies: Dependencies = .standard) {
         self.schedulers = dependencies.schedulers
         self.postContentUseCase = dependencies.postContentUseCase
+        self.persistenceService = dependencies.persistenceService
         
         postContentUseCase.prepareUploadMedia()
         
@@ -135,6 +137,12 @@ class NewPostCreateViewModel : ViewModel {
                 self.popBackToMyPosts()
             })
             .disposed(by: disposeBag)
+        
+        if let tipsShown: Bool = self.persistenceService.read(key: PersistenceKeys.tipsShown) {
+            showTipsSubject.accept(!tipsShown)
+        } else {
+            showTipsSubject.accept(true)
+        }
     }
 }
 
@@ -145,12 +153,15 @@ extension NewPostCreateViewModel {
         
         let stateController: StateController
         let schedulers: Schedulers
+        let persistenceService: PersistanceService
+        
         let postContentUseCase: PostContentUseCase
         let uploadProgressObservable: Observable<UploadProgress?>
         
         static let standard = Dependencies(
             stateController: Domain.standard.stateController,
             schedulers: Schedulers.standard,
+            persistenceService: Services.standard.persistenceService,
             postContentUseCase: Domain.standard.useCases.postContentUseCase,
             uploadProgressObservable: Domain.standard.stateController.stateObservable(of: \.currentMediaUploadProgress))
     }
@@ -179,6 +190,7 @@ extension NewPostCreateViewModel {
     
     func showTips(_ show: Bool) {
         showTipsSubject.accept(show)
+        persistenceService.write(value: true, forKey: PersistenceKeys.tipsShown)
     }
     
     func cancel() {

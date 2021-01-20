@@ -13,16 +13,20 @@ class Services {
     private (set) var credentialsService: CredentialsService
     private (set) var uploadService: UploadService
     private (set) var apiService: APIService
+    private (set) var persistenceService: PersistanceService
     
-    init(authenticationService: AuthenticationService,
-         credentialsService: CredentialsService,
-         uploadService: UploadService,
-         apiService: APIService) {
+    init(
+        authenticationService: AuthenticationService,
+        credentialsService: CredentialsService,
+        uploadService: UploadService,
+        apiService: APIService,
+        persistenceService: PersistanceService) {
         
         self.authenticationService = authenticationService
         self.credentialsService = credentialsService
         self.uploadService = uploadService
         self.apiService = apiService
+        self.persistenceService = persistenceService
         
         apiService.inject(credentialsService: self.credentialsService)
         uploadService.inject(apiService: self.apiService)
@@ -37,7 +41,8 @@ extension Services {
             authenticationService: StandardAPIService.standard,
             credentialsService: StandardCredentialsService.standard,
             uploadService: StandardUploadService.standard,
-            apiService: StandardAPIService.standard)
+            apiService: StandardAPIService.standard,
+            persistenceService: StandardPersistenceService.standard)
     }()
     
     static let local = {
@@ -45,6 +50,7 @@ extension Services {
             authenticationService: LocalAuthenticationService.standard,
             credentialsService: StandardCredentialsService(),
             uploadService: StandardUploadService(),
-            apiService: LocalAPIService.standard)
+            apiService: LocalAPIService.standard,
+            persistenceService: StandardPersistenceService.standard)
     }()
 }

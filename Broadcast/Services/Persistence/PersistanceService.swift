@@ -8,6 +8,10 @@
 import Foundation
 
 protocol PersistanceService {
-    func write<T, U>(value: T, forKey: U)
-    func read<T, U>(key: U) -> T
+    func write<T>(value: T, forKey: String)
+    func read<T>(key: String) -> T?
+}
+
+struct PersistenceKeys {
+    static let tipsShown: String = "tipsShown"
 }
