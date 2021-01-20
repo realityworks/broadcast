@@ -20,6 +20,7 @@ struct Profile : Equatable, Codable {
     var biography: String?
     var displayName: String
     let handle: String
+    let email: String?
     let subscriberCount: Int
     let profileImageUrl: String?
     let trailerThumbnailUrl: String?
