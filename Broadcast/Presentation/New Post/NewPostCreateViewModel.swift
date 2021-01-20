@@ -19,7 +19,7 @@ class NewPostCreateViewModel : ViewModel {
     let persistenceService: PersistanceService
     
     private let selectedMediaSubject = BehaviorRelay<Media?>(value: nil)
-    private let showTipsSubject = PublishRelay<Bool>()
+    private let showTipsSubject = BehaviorRelay<Bool>(value: true)
     
     let title = BehaviorRelay<String>(value: "")
     let caption = BehaviorRelay<String>(value: "")
@@ -142,6 +142,7 @@ class NewPostCreateViewModel : ViewModel {
             showTipsSubject.accept(!tipsShown)
         } else {
             showTipsSubject.accept(true)
+            persistenceService.write(value: true, forKey: PersistenceKeys.tipsShown)
         }
     }
 }
@@ -190,7 +191,6 @@ extension NewPostCreateViewModel {
     
     func showTips(_ show: Bool) {
         showTipsSubject.accept(show)
-        persistenceService.write(value: true, forKey: PersistenceKeys.tipsShown)
     }
     
     func cancel() {
