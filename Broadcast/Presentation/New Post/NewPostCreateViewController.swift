@@ -139,7 +139,7 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         
         /// Layout tips view
         view.addSubview(tipsView)
-        tipsView.edgesToSuperview()
+        tipsView.edgesToSuperview(usingSafeArea: true)
     }
     
     private func configureBindings() {
@@ -225,10 +225,7 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
             .disposed(by: disposeBag)
         
         viewModel.showTips
-            .map { show in
-                print("SHOW TIPS: \(show)")
-                return !show
-            }
+            .map { !$0 }
             .bind(to: tipsView.rx.isHidden)
             .disposed(by: disposeBag)
         
