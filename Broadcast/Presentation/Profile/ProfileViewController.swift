@@ -61,11 +61,11 @@ class ProfileViewController: ViewController {
         
         viewModel.shareProfileSignal
             .withLatestFrom(viewModel.profileHandle)
-            .subscribe { [self] handle in
-                let items = [URL(string: "https://www.apple.com")!]
+            .subscribe(onNext: { [self] handle in
+                let items = [Configuration.siteURL.appendingPathComponent(handle)]
                 let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
                 self.present(ac, animated: true)
-            }
+            })
             .disposed(by: disposeBag)
 
     }
