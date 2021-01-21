@@ -27,6 +27,7 @@ class ProfileVersionTableViewCell: UITableViewCell {
         backgroundColor = .clear
         contentView.backgroundColor = .clear
         contentView.addSubview(label)
+        selectionStyle = .none
         label.centerInSuperview()
         
         label.text = "\(LocalizedString.version.localized) \(Configuration.versionString) (\(Configuration.buildString))"
