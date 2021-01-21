@@ -18,6 +18,8 @@ extension Configuration {
     
     static var siteURL: URL { castedURL(for: .siteURL)! }
     static var privacyPolicy: URL { Self.siteLinkURL(atPath: "privacy-policy")}
+    static var faq: URL { Self.siteLinkURL(atPath: "privacy-policy")}
+    static var termsAndConditions: URL { Self.siteLinkURL(atPath: "privacy-policy")}
     
     
     /// Utility function that builds a URL and initial query for ios
