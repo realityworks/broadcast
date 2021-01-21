@@ -15,6 +15,15 @@ extension Configuration {
     static var buildString: String { castedValue(for: .buildString, as: String.self)! }
     static var apiServiceURL: URL { castedURL(for: .apiServiceURL)! }
     static var debugUIEnabled: Bool { Bool(castedValue(for: .debugUIEnabled, as: String.self)!)! }
+    
+    static var siteURL: URL { castedURL(for: .siteURL)! }
+    static var privacyPolicy: URL { Self.siteLinkURL(atPath: "privacy-policy")}
+    
+    
+    /// Utility function that builds a URL and initial query for ios
+    private static func siteLinkURL(atPath: String) -> URL {
+        return Self.siteURL.appendingPathComponent(atPath)
+    }
 }
 
 // MARK: - Private
@@ -23,6 +32,7 @@ private enum ConfigKey: String, CaseIterable {
     case versionString = "CFBundleShortVersionString"
     case buildString = "CFBundleVersion"
     case apiServiceURL = "SERVICE_ROOT_URL"
+    case siteURL = "SERVICE_ROOT_URL"
     case debugUIEnabled = "DEBUG_UI_ENABLED"
 }
 

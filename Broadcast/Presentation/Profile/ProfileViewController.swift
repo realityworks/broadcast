@@ -177,13 +177,12 @@ class ProfileViewController: ViewController {
                 case .stripeAccount:
                     navigationController?.push(with: .stripeAccount)
                 case .frequentlyAskedQuestions:
-                    #warning("TODO - Link out to a webpage")
-                    break
+                    UIApplication.shared.open(Configuration.faq)
                 case .privacyPolicy:
-                    #warning("TODO - Link out to a webpage")
+                    UIApplication.shared.open(Configuration.privacyPolicy)
                     break
                 case .termsAndConditions:
-                    #warning("TODO - Link out to a webpage")
+                    UIApplication.shared.open(Configuration.termsAndConditions)
                     break
                 case .share:
                     #warning("TODO - Setup sharing")

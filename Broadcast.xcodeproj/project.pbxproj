@@ -187,6 +187,19 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		1DA0430325B92D4100E3DB8C /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		1D01E17525B6AF8400A72F97 /* ios-ghost-feed-loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "ios-ghost-feed-loading.json"; sourceTree = "<group>"; };
 		1D14AD5825790BA700CB2C82 /* ProfileSectionHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSectionHeaderCell.swift; sourceTree = "<group>"; };
@@ -883,6 +896,7 @@
 				1D3433F325624B4400886245 /* Sources */,
 				1D3433F425624B4400886245 /* Frameworks */,
 				1D3433F525624B4400886245 /* Resources */,
+				1DA0430325B92D4100E3DB8C /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
@@ -932,7 +946,7 @@
 		1D3433EF25624B4400886245 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1200;
+				LastSwiftUpdateCheck = 1220;
 				LastUpgradeCheck = 1200;
 				TargetAttributes = {
 					1D3433F625624B4400886245 = {
@@ -1314,6 +1328,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1D916DA525640C810059E549 /* Staging.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Broadcast/Broadcast.entitlements;
@@ -1340,6 +1355,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1D916DA525640C810059E549 /* Staging.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Broadcast/Broadcast.entitlements;
