@@ -16,7 +16,7 @@ extension Configuration {
     static var apiServiceURL: URL { castedURL(for: .apiServiceURL)! }
     static var debugUIEnabled: Bool { Bool(castedValue(for: .debugUIEnabled, as: String.self)!)! }
     
-    static var siteURL: URL { castedURL(for: .apiServiceURL)! }
+    static var siteURL: URL { castedURL(for: .siteURL)! }
     static var privacyPolicy: URL { Self.siteLinkURL(atPath: "privacy-policy")}
     static var faq: URL { Self.siteLinkURL(atPath: "help")}
     static var termsAndConditions: URL { Self.siteLinkURL(atPath: "terms-and-conditions")}
@@ -33,6 +33,7 @@ private enum ConfigKey: String, CaseIterable {
     case versionString = "CFBundleShortVersionString"
     case buildString = "CFBundleVersion"
     case apiServiceURL = "SERVICE_ROOT_URL"
+    case siteURL = "SITE_ROOT_URL"
     case debugUIEnabled = "DEBUG_UI_ENABLED"
 }
 
