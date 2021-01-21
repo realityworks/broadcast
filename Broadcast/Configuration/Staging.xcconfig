@@ -11,6 +11,9 @@
 // Service URL
 SERVICE_ROOT_URL = https:/$()/api.boomday.dev/
 
+// Site URL
+SITE_ROOT_URL = https:/$()/boomday.dev/
+
 // Notifications Connection String
 NOTIFICATIONS_CONNECTION_STRING = Endpoint=sb:/$()/boom-dev-notifications.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=Ob1SCxP74lKRQtFdgvYylM3FXqWFkj8l8H1MN9WtUQ8=
 

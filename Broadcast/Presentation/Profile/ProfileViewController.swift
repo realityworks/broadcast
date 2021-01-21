@@ -47,7 +47,7 @@ class ProfileViewController: ViewController {
         tableView.contentInsetAdjustmentBehavior = .never
         tableView.contentInset = .zero
         tableView.separatorStyle = .none
-        tableView.backgroundColor = .clear        
+        tableView.backgroundColor = .clear
     }
     
     private func configureLayout() {
@@ -58,6 +58,16 @@ class ProfileViewController: ViewController {
     private func configureBindings() {
         setupDatasourceBindings()
         setupTableViewBindings()
+        
+        viewModel.shareProfileSignal
+            .withLatestFrom(viewModel.profileHandle)
+            .subscribe { [self] handle in
+                let items = [URL(string: "https://www.apple.com")!]
+                let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+                self.present(ac, animated: true)
+            }
+            .disposed(by: disposeBag)
+
     }
     
     private func setupDatasourceBindings() {
@@ -185,7 +195,7 @@ class ProfileViewController: ViewController {
                     UIApplication.shared.open(Configuration.termsAndConditions)
                     break
                 case .share:
-                    #warning("TODO - Setup sharing")
+                    self.viewModel.shareProfile()
                     break
                 case .logout, .version:
                     break /// Do nothing
