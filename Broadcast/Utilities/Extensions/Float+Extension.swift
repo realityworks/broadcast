@@ -10,6 +10,7 @@ import Foundation
 extension Float {
     func asCurrencyString(withCurrencyCode currencyCode: CurrencyCode) -> String {
         let currencyAmount = String(format: "%.2f", self)
-        return "\(Locale.currencySymbol(from: currencyCode) ?? "") \(currencyAmount) \(currencyCode)"
+        let uppercasedCurrencyCode = currencyCode.rawValue.uppercased()
+        return "\(Locale.currencySymbol(from: currencyCode) ?? "") \(currencyAmount) \(uppercasedCurrencyCode)"
     }
 }
