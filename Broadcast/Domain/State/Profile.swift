@@ -11,7 +11,7 @@ enum CurrencyCode: String, Codable {
     case eur = "EUR"
     case usd = "USD"
     case cad = "CAD"
-    case gdp = "GDP"
+    case gbp = "GBP"
 }
 
 struct Profile : Equatable, Codable {

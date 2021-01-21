@@ -93,7 +93,7 @@ class LocalAPIService {
         trailerVideoUrl: LocalAPIService.mockVideoUrl,
         stripeAccount: Profile.StripeAccount(
             productId: "prod_iUmEPMQJFjaLs6",
-            currencyCode: CurrencyCode.gdp,
+            currencyCode: CurrencyCode.gbp,
             price: 10,
             balance: 100,
             totalVolume: 1000))
