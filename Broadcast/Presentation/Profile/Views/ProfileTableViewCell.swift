@@ -67,7 +67,7 @@ class ProfileTableViewCell : UITableViewCell {
                                     insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         titleLabel.leftToRight(of: leftIconImageView, offset: 10)
         titleLabel.rightToLeft(of: disclosureImageView)
-        titleLabel.highlightedTextColor = .secondaryLightGrey
+        titleLabel.highlightedTextColor = .primaryGrey
         
         separator.backgroundColor = .customSeparator
         
