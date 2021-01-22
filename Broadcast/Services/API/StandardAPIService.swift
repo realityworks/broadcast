@@ -20,7 +20,7 @@ class StandardAPIService : Interceptor {
     
     var credentialsService: CredentialsService?
     
-    private let validStatusCodes = [Int](200 ..< 300) + [400, 404, 409, 500, 503, 504]
+    private let validStatusCodes = [Int](200 ..< 300) + [400, 403, 404, 409, 500, 503, 504]
     
     init(dependencies: Dependencies = .standard) {
         self.baseUrl = dependencies.baseUrl

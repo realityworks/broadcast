@@ -20,7 +20,7 @@ extension UIApplication {
     ///   - withMesssage: Message for the error popup
     ///   - options: Button option selection
     ///   - completed: Callback handler when a specified button is pressed
-    fileprivate func showError(withMessage: String,
+    fileprivate func showError(withMessage message: String,
                    options: [TextPopup.Option] = [],// Todo
                    completed: ((Int)->())? = nil) {
         guard let appDelegate = self.delegate as? AppDelegate else { return }
@@ -29,11 +29,13 @@ extension UIApplication {
             let textPopup = TextPopup()
             
             textPopup.titleLabel.text = LocalizedString.error.localized
+            textPopup.descriptionLabel.text = message
         
             #warning("Temp until we implement the options correctly")
             textPopup.button.setTitle(LocalizedString.tryAgain, for: .normal)
             
             view.addSubview(textPopup)
+            textPopup.edgesToSuperview()
             
             // Close the button
             textPopup.button.addTarget(textPopup,

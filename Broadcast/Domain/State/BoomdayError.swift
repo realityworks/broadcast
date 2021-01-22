@@ -9,9 +9,11 @@ import Foundation
 
 enum BoomdayError : Error {
     case unknown
-    case unsupported // Currently not implemented
+    case unsupported
+    case refused
     case decoding(error: DecodingError)
     case apiNotFound
+    case authenticationFailed
     case apiStatusCode(code: Int)
     case uploadFailed(UploadEvent)
     case publishFailed
@@ -23,12 +25,16 @@ enum BoomdayError : Error {
             return LocalizedString.unknownError.localized
         case .unsupported:
             return LocalizedString.unsupportedError.localized
+        case .refused:
+            return LocalizedString.refusedError.localized
         case .decoding(let decodingError):
             return "\(LocalizedString.decodingError.localized) : \(decodingError)"
         case .apiNotFound:
             return LocalizedString.apiNotFoundError.localized
+        case .authenticationFailed:
+            return LocalizedString.authenticationFailedError.localized
         case .apiStatusCode(let errorCode):
-            return "Failed with error : \(errorCode)"
+            return "\(LocalizedString.apiStatusCodeError.localized) : \(errorCode)"
         case .publishFailed:
             return LocalizedString.publishError.localized
         case .uploadFailed(let event):

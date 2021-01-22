@@ -42,6 +42,10 @@ extension Single where Element == (HTTPURLResponse, Data), Trait == SingleTrait 
     
     private func error(from statusCode: Int, data: Data) -> Error {
         switch statusCode {
+        case 400:
+            return BoomdayError.authenticationFailed
+        case 403:
+            return BoomdayError.refused
         case 404:
             return BoomdayError.apiNotFound
         default:

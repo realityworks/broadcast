@@ -96,8 +96,10 @@ enum LocalizedString : String {
     case error
     case unknownError
     case unsupportedError
+    case refusedError
     case decodingError
     case apiNotFoundError
+    case authenticationFailedError
     case apiStatusCodeError
     case invalidError
     case publishError

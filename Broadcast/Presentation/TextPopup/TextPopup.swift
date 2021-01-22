@@ -74,7 +74,7 @@ class TextPopup : UIView {
     }
     
     @objc func textPopupButtonPressed(button: UIButton) {
-        print("POPUP BUTTON PRESSED!")
+        removeFromSuperview()
     }
 }
 

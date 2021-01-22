@@ -69,8 +69,20 @@ class Router {
             .disposed(by: disposeBag)
         
         errorObservable
-            .subscribe(onNext: { error in
-                UIApplication.shared.showError(error)
+            .compactMap { $0 as? BoomdayError }
+            .subscribe(onNext: { boomdayError in
+                switch boomdayError {
+                case .unknown,
+                     .unsupported,
+                     .decoding,
+                     .apiNotFound,
+                     .authenticationFailed,
+                     .apiStatusCode,
+                     .internalMemoryError:
+                    UIApplication.shared.showError(boomdayError)
+                default:
+                    break
+                }
             })
             .disposed(by: disposeBag)
         

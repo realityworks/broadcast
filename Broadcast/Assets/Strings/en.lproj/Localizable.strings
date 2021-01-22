@@ -95,8 +95,10 @@
 // MARK: Error Strings
 "unknownError" = "An unknown error occured";
 "unsupportedError" = "This functionality is not currently supported";
+"refusedError" = "Connection to the server is unreachable, please try a different network";
 "decodingError" = "Failed decoding response with error";
 "apiNotFoundError" = "This call does not exist in the API";
+"authenticationFailedError" = "Username and password combination are invalid. Please enter double check your username and password";
 "apiStatusCodeError" = "The Web API returned an undefined error code";
 "invalidError" = "Invalid Error";
 "publishError" = "Pushing your post failed, try again later";
