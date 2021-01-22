@@ -101,7 +101,7 @@ class StandardAPIService : Interceptor {
         guard let response = request.task?.response as? HTTPURLResponse,
               response.statusCode == 401,
               let refreshToken = credentialsService?.refreshToken else {
-            completion(.doNotRetryWithError(error))
+            completion(.doNotRetry)
             return
         }
         

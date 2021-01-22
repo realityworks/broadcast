@@ -69,25 +69,32 @@ class Router {
             .disposed(by: disposeBag)
         
         errorObservable
-            .compactMap { $0 as? BoomdayError }
-            .subscribe(onNext: { boomdayError in
-                switch boomdayError {
-                case .unknown,
-                     .unsupported,
-                     .refused,
-                     .decoding,
-                     .apiNotFound,
-                     .authenticationFailed,
-                     .apiStatusCode,
-                     .internalMemoryError:
-                    UIApplication.shared.showError(boomdayError)
-                default:
-                    break
+            .subscribe(onNext: { [unowned self] error in
+                if let boomdayError = error as? BoomdayError {
+                    self.show(boomdayError: boomdayError)
+                } else {
+                    UIApplication.shared.showError(error)
                 }
             })
             .disposed(by: disposeBag)
         
         stateController.state.authenticationState = authenticationUseCase.isLoggedIn ? .loggedIn : .loggedOut
+    }
+    
+    private func show(boomdayError error: BoomdayError) {
+        switch error {
+        case .unknown,
+             .unsupported,
+             .refused,
+             .decoding,
+             .apiNotFound,
+             .authenticationFailed,
+             .apiStatusCode,
+             .internalMemoryError:
+            UIApplication.shared.showError(error)
+        default:
+            break
+        }
     }
     
     private func authenticationStateChanged(

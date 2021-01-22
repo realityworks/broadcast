@@ -120,10 +120,6 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
             viewModel.username.accept(testUserName)
             viewModel.password.accept(testPassword)
         }
-        
-        #warning("Remove")
-//        errorPopup.titleLabel.text = LocalizedString.error.localized
-//        errorPopup.button.setTitle(LocalizedString.tryAgain, for: .normal)
     }
     
     private func configureLayout() {
@@ -238,20 +234,6 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
             .map { !$0 }
             .bind(to: loginButton.rx.isEnabled)
             .disposed(by: disposeBag)
-
-        #warning("Remove")
-//        viewModel.isErrorHidden
-//            .bind(to: errorPopup.rx.isHidden)
-//            .disposed(by: disposeBag)
-//        errorPopup.button.rx.tap
-//            .subscribe(onNext: { 
-//                self.viewModel.closeError()
-//            })
-//            .disposed(by: disposeBag)
-//        
-//        viewModel.errorText
-//            .bind(to: errorPopup.rx.descriptionText)
-//            .disposed(by: disposeBag)
     }
     
     /// Style the user interface and components
