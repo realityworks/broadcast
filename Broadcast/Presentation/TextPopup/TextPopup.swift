@@ -15,6 +15,10 @@ class TextPopup : UIView {
     struct Option {
         let text: LocalizedString
         let destructive: Bool
+        
+        static let close = {
+            return Option(text: LocalizedString.close, destructive: false)
+        }()
     }
     
     // MARK: UI Components
@@ -65,10 +69,12 @@ class TextPopup : UIView {
         button.edges(to: verticalStackView, excluding: [.bottom, .top])
     }
     
-    
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc func textPopupButtonPressed(button: UIButton) {
+        print("POPUP BUTTON PRESSED!")
     }
 }
 

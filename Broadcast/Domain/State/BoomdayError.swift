@@ -38,4 +38,12 @@ enum BoomdayError : Error {
             
         }
     }
+    
+    static func errorString(from error: Error) -> String {
+        if let boomDayError = error as? BoomdayError {
+            return boomDayError.localizedDescription
+        }
+        
+        return error.localizedDescription
+    }
 }

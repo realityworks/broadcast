@@ -68,6 +68,12 @@ class Router {
             })
             .disposed(by: disposeBag)
         
+        errorObservable
+            .subscribe(onNext: { error in
+                UIApplication.shared.showError(error)
+            })
+            .disposed(by: disposeBag)
+        
         stateController.state.authenticationState = authenticationUseCase.isLoggedIn ? .loggedIn : .loggedOut
     }
     

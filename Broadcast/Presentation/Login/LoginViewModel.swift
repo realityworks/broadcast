@@ -22,8 +22,8 @@ class LoginViewModel : ViewModel {
     
     let isLoginEnabled: Observable<Bool>
     let isLoading: Observable<Bool>
-    let isErrorHidden: Observable<Bool>
-    let errorText: Observable<String>
+//    let isErrorHidden: Observable<Bool>
+//    let errorText: Observable<String>
     
     init(dependencies: Dependencies = .standard) {
         self.authenticationUseCase = dependencies.authenticationUseCase
@@ -37,9 +37,8 @@ class LoginViewModel : ViewModel {
         }
         
         isLoading = isLoadingSubject.asObservable()
-        isErrorHidden = isErrorHiddenSubject.asObservable()
-        
-        errorText = dependencies.stateController.errorStringObservable()
+//        isErrorHidden = isErrorHiddenSubject.asObservable()        
+//        errorText = dependencies.stateController.errorStringObservable()
         
         super.init(stateController: dependencies.stateController)
     }
@@ -75,16 +74,10 @@ extension LoginViewModel {
             .subscribe {
                 // Handle a successful login
                 self.postContentUseCase.retrieveMyPosts()
-                #warning("We should only be able to login once load profile has finished loading...")
                 self.profileUseCase.loadProfile()
             } onError: { error in
                 self.isLoadingSubject.accept(false)
-                self.isErrorHiddenSubject.accept(false)
             }
             .disposed(by: disposeBag)
-    }
-    
-    func closeError() {
-        isErrorHiddenSubject.accept(true)
     }
 }

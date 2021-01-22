@@ -165,7 +165,6 @@
 		1DE0B57525A6D16800BC3CEF /* RxAlamofire+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE0B57425A6D16800BC3CEF /* RxAlamofire+Extensions.swift */; };
 		1DE3DA2E25751F0E00A7A1F7 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE3DA2D25751F0E00A7A1F7 /* Date+Extensions.swift */; };
 		1DE3DA3225751FE500A7A1F7 /* DateFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE3DA3125751FE500A7A1F7 /* DateFormatter+Extensions.swift */; };
-		1DE3DA382575506100A7A1F7 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE3DA372575506100A7A1F7 /* UIViewController+Extensions.swift */; };
 		1DE3DA3E2575F49500A7A1F7 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE3DA3D2575F49500A7A1F7 /* VideoPlayerView.swift */; };
 		1DF09730258114D8007FEE3C /* URLAPIQueryStringRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF0972F258114D8007FEE3C /* URLAPIQueryStringRequest.swift */; };
 		1DF1E25E25A630AC0093A162 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1DF1E25D25A630AC0093A162 /* RxSwift */; };
@@ -361,7 +360,6 @@
 		1DE0B57425A6D16800BC3CEF /* RxAlamofire+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RxAlamofire+Extensions.swift"; sourceTree = "<group>"; };
 		1DE3DA2D25751F0E00A7A1F7 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		1DE3DA3125751FE500A7A1F7 /* DateFormatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extensions.swift"; sourceTree = "<group>"; };
-		1DE3DA372575506100A7A1F7 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		1DE3DA3D2575F49500A7A1F7 /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
 		1DF0972F258114D8007FEE3C /* URLAPIQueryStringRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLAPIQueryStringRequest.swift; sourceTree = "<group>"; };
 		1DF4D4CE25B5D63300408921 /* ios-processing-loop.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "ios-processing-loop.json"; sourceTree = "<group>"; };
@@ -867,7 +865,6 @@
 				1D3F72252571634D00DE7F05 /* RxTableViewSectionedReloadDataSource+Extensions.swift */,
 				1DE3DA2D25751F0E00A7A1F7 /* Date+Extensions.swift */,
 				1DE3DA3125751FE500A7A1F7 /* DateFormatter+Extensions.swift */,
-				1DE3DA372575506100A7A1F7 /* UIViewController+Extensions.swift */,
 				1D14AD6E257A0F5100CB2C82 /* UITextField+Extensions.swift */,
 				1D9256C8257E70AF00E988B2 /* Locale+Extension.swift */,
 				1D9256CC257E818800E988B2 /* Float+Extension.swift */,
@@ -1095,7 +1092,6 @@
 				1DF5DD5025AC8BB5009B0B30 /* UploadProgress+TextDescription.swift in Sources */,
 				1D916D8D256404ED0059E549 /* Profile.swift in Sources */,
 				1D87DF9B25683B53000652D6 /* ProfileViewModel.swift in Sources */,
-				1DE3DA382575506100A7A1F7 /* UIViewController+Extensions.swift in Sources */,
 				1D87DF532568367E000652D6 /* MyPostsViewController.swift in Sources */,
 				1DB3438E2589DC3300486676 /* URL+Extensions.swift in Sources */,
 				1D9256C5257E6A3200E988B2 /* AccountInfoTableViewCell.swift in Sources */,

@@ -36,7 +36,8 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
     private let applyHereTextView = UITextView()
     private let forgotPasswordTextView = UITextView()
     
-    private let errorPopup = TextPopup()
+    #warning("Remove")
+    //private let errorPopup = TextPopup()
     
     // MARK: Test Items
     
@@ -120,8 +121,9 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
             viewModel.password.accept(testPassword)
         }
         
-        errorPopup.titleLabel.text = LocalizedString.error.localized
-        errorPopup.button.setTitle(LocalizedString.tryAgain, for: .normal)
+        #warning("Remove")
+//        errorPopup.titleLabel.text = LocalizedString.error.localized
+//        errorPopup.button.setTitle(LocalizedString.tryAgain, for: .normal)
     }
     
     private func configureLayout() {
@@ -186,8 +188,9 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         forgotPasswordTextView.height(30)
         
         /// Layout error view
-        view.addSubview(errorPopup)
-        errorPopup.edgesToSuperview()
+        #warning("Remove")
+//        view.addSubview(errorPopup)
+//        errorPopup.edgesToSuperview()
     }
     
     /// Configure the bindings between the view model and
@@ -235,20 +238,20 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
             .map { !$0 }
             .bind(to: loginButton.rx.isEnabled)
             .disposed(by: disposeBag)
-        
-        viewModel.isErrorHidden
-            .bind(to: errorPopup.rx.isHidden)
-            .disposed(by: disposeBag)
-        
-        errorPopup.button.rx.tap
-            .subscribe(onNext: { 
-                self.viewModel.closeError()
-            })
-            .disposed(by: disposeBag)
-        
-        viewModel.errorText
-            .bind(to: errorPopup.rx.descriptionText)
-            .disposed(by: disposeBag)
+
+        #warning("Remove")
+//        viewModel.isErrorHidden
+//            .bind(to: errorPopup.rx.isHidden)
+//            .disposed(by: disposeBag)
+//        errorPopup.button.rx.tap
+//            .subscribe(onNext: { 
+//                self.viewModel.closeError()
+//            })
+//            .disposed(by: disposeBag)
+//        
+//        viewModel.errorText
+//            .bind(to: errorPopup.rx.descriptionText)
+//            .disposed(by: disposeBag)
     }
     
     /// Style the user interface and components
