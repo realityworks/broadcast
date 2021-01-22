@@ -8,25 +8,18 @@
 import UIKit
 import RxSwift
 
-class TextPopupManager {
-    /// Private initializer to keep this class as a singleton class
-    init() {
-    }
-    
-    open class func show(_ message: String) {
-        
-    }
-}
-
-
-// MARK: Instance
-
-extension TextPopupManager {
-    static let shared = {
-        TextPopupManager()
-    }()
-}
-
-extension Reactive where Base : TextPopupManager {
-    
-}
+//class PopupOption {
+//    static let ok = {
+//        PopupOption()
+//    }()
+//}
+//
+//protocol TextPopupManager {
+//    func show(_ message: String, withOptions: [PopupOption])
+//}
+//
+//extension TextPopupManager where Self : UIViewController {
+//    func show(_ message: String, withOptions: [PopupOption] = [.ok]) {
+//        // Show a message in the view controller
+//    }
+//}

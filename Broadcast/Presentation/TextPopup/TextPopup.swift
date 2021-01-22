@@ -12,9 +12,15 @@ import TinyConstraints
 
 class TextPopup : UIView {
     
+    struct Option {
+        let text: LocalizedString
+        let destructive: Bool
+    }
+    
     // MARK: UI Components
     private let verticalStackView = UIStackView()
     private let containerView = UIView()
+    
     let button = UIButton.standard()
     let titleLabel = UILabel.largeTitle()
     let descriptionLabel = UILabel.body()
@@ -58,6 +64,8 @@ class TextPopup : UIView {
         verticalStackView.addArrangedSubview(button)
         button.edges(to: verticalStackView, excluding: [.bottom, .top])
     }
+    
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
