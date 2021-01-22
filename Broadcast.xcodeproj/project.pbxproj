@@ -143,6 +143,7 @@
 		1D93143E2577DBDF001C85C1 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D93143D2577DBDF001C85C1 /* Media.swift */; };
 		1D99AA6325B16C780069D7F0 /* web-success-load.json in Resources */ = {isa = PBXBuildFile; fileRef = 1D99AA6225B16C780069D7F0 /* web-success-load.json */; };
 		1D9E1938257897AE001960AF /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9E1937257897AE001960AF /* ProfileTableViewCell.swift */; };
+		1DA0431825BAA98D00E3DB8C /* TextPopupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA0431725BAA98D00E3DB8C /* TextPopupManager.swift */; };
 		1DA3E442258748EF00F1825F /* CreatePostResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA3E441258748EE00F1825F /* CreatePostResponse.swift */; };
 		1DA3E44625874ADD00F1825F /* GetMediaUploadUrlResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA3E44525874ADD00F1825F /* GetMediaUploadUrlResponse.swift */; };
 		1DA63D1D25A8419A0029A509 /* GetTrailerUploadUrlResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA63D1C25A8419A0029A509 /* GetTrailerUploadUrlResponse.swift */; };
@@ -339,6 +340,7 @@
 		1D9314442577E991001C85C1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		1D99AA6225B16C780069D7F0 /* web-success-load.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "web-success-load.json"; sourceTree = "<group>"; };
 		1D9E1937257897AE001960AF /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
+		1DA0431725BAA98D00E3DB8C /* TextPopupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPopupManager.swift; sourceTree = "<group>"; };
 		1DA3E441258748EE00F1825F /* CreatePostResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostResponse.swift; sourceTree = "<group>"; };
 		1DA3E44525874ADD00F1825F /* GetMediaUploadUrlResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMediaUploadUrlResponse.swift; sourceTree = "<group>"; };
 		1DA63D1C25A8419A0029A509 /* GetTrailerUploadUrlResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTrailerUploadUrlResponse.swift; sourceTree = "<group>"; };
@@ -583,6 +585,7 @@
 		1D916D0425629A800059E549 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				1DA0431625BAA95700E3DB8C /* TextPopup */,
 				1D916D0925629C080059E549 /* ViewModel.swift */,
 				1D916D1125629C1E0059E549 /* ViewController.swift */,
 				1DD1FE51256E985D00C598CE /* Asset Management */,
@@ -766,7 +769,6 @@
 			isa = PBXGroup;
 			children = (
 				1D216A4F25987CA7007FA845 /* CustomBorderView.swift */,
-				1D216A3A2595ED4F007FA845 /* TextPopup.swift */,
 				1D91A0D1256C1DD60043A943 /* DismissableLabel.swift */,
 				1D7C4948259B2FB70089EA6B /* InsetTextField.swift */,
 				1D79C1322594BE7500AC271B /* LoginTextField.swift */,
@@ -829,6 +831,15 @@
 				1D8F8E0E25B01768005944BF /* ProfileSimpleInfoTableViewCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		1DA0431625BAA95700E3DB8C /* TextPopup */ = {
+			isa = PBXGroup;
+			children = (
+				1D216A3A2595ED4F007FA845 /* TextPopup.swift */,
+				1DA0431725BAA98D00E3DB8C /* TextPopupManager.swift */,
+			);
+			path = TextPopup;
 			sourceTree = "<group>";
 		};
 		1DD1FE1B256D6F5500C598CE /* Responses */ = {
@@ -1121,6 +1132,7 @@
 				1D3ED5FA25663512004236BB /* UIFont+Styling.swift in Sources */,
 				1D916D592562C2920059E549 /* Schedulers.swift in Sources */,
 				1D14AD73257A16AC00CB2C82 /* ProfileInfoTableViewCell.swift in Sources */,
+				1DA0431825BAA98D00E3DB8C /* TextPopupManager.swift in Sources */,
 				1D2A042A256583E8008CE2D4 /* UIViewController+Routing.swift in Sources */,
 				1D93143E2577DBDF001C85C1 /* Media.swift in Sources */,
 				1D3B2A002564CF7F001874FD /* AuthenticationService.swift in Sources */,
