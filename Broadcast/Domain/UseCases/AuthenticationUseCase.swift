@@ -86,7 +86,7 @@ extension AuthenticationUseCase {
     
     func logout() {
         credentialsService.clearCredentials()
-        stateController.state.authenticationState = AuthenticationState.loggedOut
+        stateController.state = State.initial
     }
     
     var isLoggedIn: Bool {

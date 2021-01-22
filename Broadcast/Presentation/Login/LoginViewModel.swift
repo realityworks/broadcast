@@ -73,7 +73,6 @@ extension LoginViewModel {
                                     password: password.value ?? "")
             .subscribe {
                 // Handle a successful login
-                self.postContentUseCase.retrieveMyPosts()
                 self.profileUseCase.loadProfile()
             } onError: { error in
                 self.isLoadingSubject.accept(false)

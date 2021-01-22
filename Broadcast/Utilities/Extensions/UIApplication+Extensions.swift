@@ -8,7 +8,6 @@
 import UIKit
 
 extension UIApplication {
-    
     /// Present the error object in a text popup
     /// - Parameter error: An object conforming to the error protocol
     open func showError(_ error: Error) {
@@ -24,14 +23,15 @@ extension UIApplication {
                    options: [TextPopup.Option] = [],// Todo
                    completed: ((Int)->())? = nil) {
         guard let appDelegate = self.delegate as? AppDelegate else { return }
-        
         if let view = appDelegate.window?.rootViewController?.view {
+            // Don't allow multiple text popups
+            guard view.subviews.contains(where: { return !($0 is TextPopup) }) else { return }
+            
             let textPopup = TextPopup()
             
             textPopup.titleLabel.text = LocalizedString.error.localized
             textPopup.descriptionLabel.text = message
         
-            #warning("Temp until we implement the options correctly")
             textPopup.button.setTitle(LocalizedString.tryAgain, for: .normal)
             
             view.addSubview(textPopup)

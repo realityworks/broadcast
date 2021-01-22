@@ -15,13 +15,18 @@ struct State : Equatable {
     var connectionState: ConnectionState = .connected
     var myPosts: [Post]? = nil
     
-    var profile: Profile?
-    var profileImage: UIImage?
+    var profile: Profile? = nil
+    var profileImage: UIImage? = nil
     
-    var selectedPostId: PostID?
+    var selectedPostId: PostID? = nil
     
     // Managing the global loading state
     var isLoadingPosts: Bool = false
     var currentMediaUploadProgress: UploadProgress?
     var currentTrailerUploadProgress: UploadProgress?
+    
+    static let initial: State = {
+        let initialState = State()
+        return initialState
+    }()
 }
