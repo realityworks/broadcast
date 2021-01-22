@@ -8,10 +8,10 @@
 import Foundation
 
 enum CurrencyCode: String, Codable {
-    case eur = "EUR"
-    case usd = "USD"
-    case cad = "CAD"
-    case gbp = "GBP"
+    case eur = "eur"
+    case usd = "usd"
+    case cad = "cad"
+    case gbp = "gbp"
 }
 
 struct Profile : Equatable, Codable {
