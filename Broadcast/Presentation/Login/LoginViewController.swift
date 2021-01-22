@@ -36,9 +36,6 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
     private let applyHereTextView = UITextView()
     private let forgotPasswordTextView = UITextView()
     
-    #warning("Remove")
-    //private let errorPopup = TextPopup()
-    
     // MARK: Test Items
     
     private let testUserName: String = "Darrel.Turcotte@hotmail.com"
@@ -182,11 +179,6 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         forgotPasswordTextView.rightToSuperview()
         
         forgotPasswordTextView.height(30)
-        
-        /// Layout error view
-        #warning("Remove")
-//        view.addSubview(errorPopup)
-//        errorPopup.edgesToSuperview()
     }
     
     /// Configure the bindings between the view model and
