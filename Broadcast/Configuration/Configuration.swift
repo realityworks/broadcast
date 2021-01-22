@@ -20,6 +20,7 @@ extension Configuration {
     static var privacyPolicy: URL { Self.siteLinkURL(atPath: "privacy-policy")}
     static var faq: URL { Self.siteLinkURL(atPath: "help")}
     static var termsAndConditions: URL { Self.siteLinkURL(atPath: "terms-and-conditions")}
+    static var forgotPassword: URL { Self.siteLinkURL(atPath: "terms-and-conditions")}
     
     /// Utility function that builds a URL and initial query for ios
     private static func siteLinkURL(atPath: String) -> URL {

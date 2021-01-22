@@ -10,7 +10,9 @@ import Foundation
 extension Locale {
     static func locale(from currencyCode: CurrencyCode) -> Locale? {
         let allLocales = Locale.availableIdentifiers.map({ Locale.init(identifier: $0) })
-        return allLocales.filter({ $0.currencyCode == currencyCode.rawValue }).first
+        return allLocales.filter({
+                $0.currencyCode == currencyCode.rawValue.uppercased()
+            }).first
     }
     
     static func currencySymbol(from currencyCode: CurrencyCode) -> String? {

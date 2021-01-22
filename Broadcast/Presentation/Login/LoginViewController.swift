@@ -40,7 +40,7 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
     
     // MARK: Test Items
     
-    private let testUserName: String = "Alvah.Rath19@gmail.com"
+    private let testUserName: String = "Darrel.Turcotte@hotmail.com"
     private let testPassword: String = "Pass123$"
     
     // MARK: UIKit overrides
