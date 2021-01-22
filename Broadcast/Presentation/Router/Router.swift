@@ -74,6 +74,7 @@ class Router {
                 switch boomdayError {
                 case .unknown,
                      .unsupported,
+                     .refused,
                      .decoding,
                      .apiNotFound,
                      .authenticationFailed,
