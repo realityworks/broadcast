@@ -259,7 +259,7 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         let boomdayLinkStyle = Style {
             $0.font = UIFont.body
             $0.underline = (.single, UIColor.primaryGrey)
-            $0.linkURL = Configuration.siteURL
+            $0.linkURL = Configuration.learnMore
             $0.alignment = .center
         }
         

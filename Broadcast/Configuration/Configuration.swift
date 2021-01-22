@@ -21,6 +21,7 @@ extension Configuration {
     static var faq: URL { Self.siteLinkURL(atPath: "help")}
     static var termsAndConditions: URL { Self.siteLinkURL(atPath: "terms-and-conditions")}
     static var forgotPassword: URL { Self.siteLinkURL(atPath: "forgot-password")}
+    static var learnMore: URL { Self.siteLinkURL(atPath: "for-broadcasters")}
     
     /// Utility function that builds a URL and initial query for ios
     private static func siteLinkURL(atPath: String) -> URL {
