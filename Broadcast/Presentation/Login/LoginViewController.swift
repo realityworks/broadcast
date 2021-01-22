@@ -270,7 +270,7 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         let forgotPasswordStyle = Style {
             $0.font = UIFont.smallBody
             $0.alignment = .left
-            $0.linkURL = URL(string: "https://boomday.com")
+            $0.linkURL = Configuration.forgotPassword
         }
         
         forgotPasswordTextView.attributedText = LocalizedString
