@@ -29,6 +29,7 @@ extension UIImage {
     static let iconRadio = UIImage(named: "icon-radio")
     static let iconReload = UIImage(named: "icon-reload")
     static let iconShare = UIImage(named: "icon-share")
+    static let iconSlash = UIImage(named: "icon-slash")
     static let logoBoomdayBroadcaster = UIImage(named: "logo-boomday-broadcaster")
     static let iconChevronLeft = UIImage(named: "icon-chevron-right")
     static let iconHelpCricle = UIImage(named: "icon-help-circle")
