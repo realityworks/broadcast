@@ -67,3 +67,24 @@ class EditPostView: UIView {
         submitButton.setTitle(buttonTitle.localized, for: .normal)
     }
 }
+
+// MARK: Reactive Extensions
+
+extension Reactive where Base : EditPostView {
+    
+    var submitButtonTitle: Binder<String?> {
+        return base.submitButton.rx.title()
+    }
+    
+    var submitButtonEnabled: Binder<Bool> {
+        return base.submitButton.rx.isEnabled
+    }
+    
+    var submitButtonHidden: Binder<Bool> {
+        return base.submitButton.rx.isHidden
+    }
+
+    var titleTextFieldEnabled: Binder<Bool> {
+        return base.titleTextField.rx.isEnabled
+    }
+}
