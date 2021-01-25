@@ -46,7 +46,7 @@ class EditPostView: UIView {
         failedStackView.axis = .vertical
         failedStackView.spacing = 0
         failedStackView.alignment = .center
-        failedStackView.distribution = .fill
+        failedStackView.distribution = .fillProportionally
         
         submitButton.setImage(UIImage.iconRadio?.withTintColor(.white), for: .normal)
         submitButton.setImage(UIImage.iconRadio?.withTintColor(.secondaryBlack), for: .disabled)
@@ -81,10 +81,11 @@ class EditPostView: UIView {
         failedStackView.edgesToSuperview()
         
         failedContainerView.widthToSuperview()
-        failedContainerView.height(80)
+        failedContainerView.height(50)
         
         failedStackView.addArrangedSubview(failedIconView)
         failedStackView.addArrangedSubview(failedLabel)
+        failedStackView.addSpace(4)
     }
     
     func configure(withUploadTitle buttonTitle: LocalizedString) {
