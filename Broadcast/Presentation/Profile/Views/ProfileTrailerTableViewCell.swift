@@ -57,6 +57,11 @@ class ProfileTrailerTableViewCell: UITableViewCell {
         
         uploadButton.isEnabled = false
         
+        uploadButton.setImage(UIImage.iconRadio?.withTintColor(.white), for: .normal)
+        uploadButton.setImage(UIImage.iconRadio?.withTintColor(.secondaryBlack), for: .disabled)
+                
+        uploadButton.imageEdgeInsets = .right(10)
+        
         contentView.addSubview(selectMediaContainerView)
         selectMediaContainerView.topToSuperview(offset:24)
         selectMediaContainerView.height(200)
@@ -103,7 +108,7 @@ class ProfileTrailerTableViewCell: UITableViewCell {
         contentView.addSubview(progressView)
         progressView.leftToSuperview(offset: 24)
         progressView.rightToSuperview(offset: -24)
-        progressView.centerY(to: uploadButton)
+        progressView.centerY(to: uploadContainerStackView, offset: -24)
     }
     
     required init?(coder: NSCoder) {
