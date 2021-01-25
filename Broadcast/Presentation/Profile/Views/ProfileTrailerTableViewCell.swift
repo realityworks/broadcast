@@ -12,6 +12,7 @@ import RxCocoa
 class ProfileTrailerTableViewCell: UITableViewCell {
     static let identifier: String = "ProfileTrailerTableViewCell"
     static let cellHeight: CGFloat = 320
+    static let failedUploadCellHeight: CGFloat = 370
     
     let selectMediaContainerView = UIView()
     let selectMediaInfoStackView = UIStackView()
@@ -78,11 +79,26 @@ class ProfileTrailerTableViewCell: UITableViewCell {
         selectMediaInfoStackView.leftToRight(of: selectMediaView, offset: 16)
         selectMediaInfoStackView.top(to: selectMediaView, offset: 64)
         selectMediaInfoStackView.width(100)
-
-        contentView.addSubview(uploadButton)
-        uploadButton.leftToSuperview(offset: 24)
-        uploadButton.rightToSuperview(offset: -24)
-        uploadButton.bottomToSuperview(offset: -24)
+        
+        contentView.addSubview(uploadContainerStackView)
+        uploadContainerStackView.addArrangedSubview(failedContainerView)
+        uploadContainerStackView.addArrangedSubview(uploadButton)
+        
+        uploadContainerStackView.leftToSuperview(offset: 24)
+        uploadContainerStackView.rightToSuperview(offset: -24)
+        uploadContainerStackView.bottomToSuperview(offset: -24)
+        
+        uploadButton.widthToSuperview()
+        
+        failedContainerView.addSubview(failedStackView)
+        failedStackView.edgesToSuperview()
+        
+        failedContainerView.widthToSuperview()
+        failedContainerView.height(50)
+        
+        failedStackView.addArrangedSubview(failedIconView)
+        failedStackView.addArrangedSubview(failedLabel)
+        failedStackView.addSpace(4)
         
         contentView.addSubview(progressView)
         progressView.leftToSuperview(offset: 24)
@@ -92,5 +108,25 @@ class ProfileTrailerTableViewCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension Reactive where Base : ProfileTrailerTableViewCell {
+    var failed: Binder<Bool> {
+        return Binder(base) { target, failed in
+            let title = failed ?
+                LocalizedString.tryAgain.localized :
+                LocalizedString.submitPost.localized
+            
+            target.uploadButton.setTitle(title, for: .normal)
+            
+            let image = failed ?
+                UIImage.iconReload?.withTintColor(.white) :
+                UIImage.iconRadio?.withTintColor(.white)
+            
+            target.uploadButton.setImage(image, for: .normal)
+            
+            target.failedContainerView.isHidden = !failed
+        }
     }
 }

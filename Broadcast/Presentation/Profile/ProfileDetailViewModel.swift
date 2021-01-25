@@ -156,6 +156,7 @@ class ProfileDetailViewModel : ViewModel {
         
         dependencies.trailerUploadProgress
             .map { $0?.failed == true }
+            .distinctUntilChanged()
             .bind(to: showFailed)
             .disposed(by: disposeBag)
     }

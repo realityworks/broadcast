@@ -96,6 +96,17 @@ class ProfileDetailViewController: ViewController {
     }
     
     private func configureBindings() {
+        configureTableViewBindings()
+        
+        if let backButtonEnabledBinder = navigationController?.navigationItem.backBarButtonItem?.rx.isEnabled {
+            viewModel.isUploading
+                .map { !$0 }
+                .bind(to: backButtonEnabledBinder)
+                .disposed(by: disposeBag)
+        }
+    }
+    
+    private func configureTableViewBindings() {
         let datasource = ReactiveTableViewModelSource<ProfileDetailSectionModel>(configureCell: { _, tableView, indexPath, row -> UITableViewCell in
             
             switch row {
@@ -184,7 +195,9 @@ class ProfileDetailViewController: ViewController {
             }
         })
 
-        datasource.heightForRowAtIndexPath = { datasource, indexPath -> CGFloat in
+        datasource.heightForRowAtIndexPath = { [weak self] datasource, indexPath -> CGFloat in
+            guard let self = self else { return 0 }
+            
             let row = datasource[indexPath]
             switch row {
             case .profileInfo:
@@ -194,7 +207,9 @@ class ProfileDetailViewController: ViewController {
             case .biography:
                 return ProfileTextViewTableViewCell.cellHeight
             case .trailerVideo:
-                return ProfileTrailerTableViewCell.cellHeight
+                return self.viewModel.showFailed.value ?
+                    ProfileTrailerTableViewCell.failedUploadCellHeight :
+                    ProfileTrailerTableViewCell.cellHeight
             case .simpleInfo:
                 return ProfileSimpleInfoTableViewCell.cellHeight
             case .spacer(let height):
@@ -333,6 +348,10 @@ class ProfileDetailViewController: ViewController {
             .subscribe(onNext: { [unowned self] url in
                 self.viewModel.uploadTrailer(withUrl: url)
             })
+            .disposed(by: cell.disposeBag)
+        
+        viewModel.showFailed
+            .bind(to: cell.rx.failed)
             .disposed(by: cell.disposeBag)
     }
 }
