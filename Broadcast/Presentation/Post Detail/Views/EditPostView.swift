@@ -87,4 +87,20 @@ extension Reactive where Base : EditPostView {
     var titleTextFieldEnabled: Binder<Bool> {
         return base.titleTextField.rx.isEnabled
     }
+    
+    var titleChanged: ControlEvent<()> {
+        return base.titleTextField.rx.controlEvent(.editingChanged)
+    }
+    
+    var titleEditEnd: ControlEvent<()> {
+        return base.titleTextField.rx.controlEvent(.editingDidEndOnExit)
+    }
+    
+    var captionText: ControlProperty<String?> {
+        return base.captionTextView.rx.text
+    }
+    
+    var submitTapped: ControlEvent<Void> {
+        return base.submitButton.rx.tap
+    }
 }

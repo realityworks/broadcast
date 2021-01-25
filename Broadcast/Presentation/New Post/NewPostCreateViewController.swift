@@ -237,12 +237,12 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     }
     
     private func configureTextFieldBindings() {
-        editPostView.titleTextField.rx.controlEvent(.editingChanged)
+        editPostView.rx.titleChanged
             .map { [weak self] in self?.editPostView.titleTextField.text ?? "" }
             .bind(to: viewModel.title)
             .disposed(by: disposeBag)
         
-        editPostView.titleTextField.rx.controlEvent([.editingDidEndOnExit])
+        editPostView.rx.titleEditEnd
             .subscribe(onNext: { [weak self] _ in
                 self?.editPostView.titleTextField.resignFirstResponder()
             })
@@ -260,7 +260,7 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
             })
             .disposed(by: disposeBag)
         
-        editPostView.captionTextView.rx.text
+        editPostView.rx.captionText
             .compactMap { $0 }
             .bind(to: viewModel.caption)
             .disposed(by: disposeBag)
@@ -279,7 +279,7 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     }
     
     private func configureButtonBindings() {
-        editPostView.submitButton.rx.tap
+        editPostView.rx.submitTapped
             .subscribe(onNext: { [weak self] _ in
                 self?.dismissKeyboard()
                 self?.viewModel.uploadPost()
