@@ -118,6 +118,8 @@ class NewPostCreateViewModel : ViewModel {
         
         showUploadButton = showProgressView.map { !$0 }
         
+        showFailed = uploadingProgressObservable.map { $0.failed }
+        
         super.init(stateController: dependencies.stateController)
         
         /// Bind when uploading progress observable changes and completed/failed are both false to correctly update the isUploadingSubject
