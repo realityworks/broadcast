@@ -71,11 +71,6 @@ class EditPostView: UIView {
 // MARK: Reactive Extensions
 
 extension Reactive where Base : EditPostView {
-    
-    var submitButtonTitle: Binder<String?> {
-        return base.submitButton.rx.title()
-    }
-    
     var submitButtonEnabled: Binder<Bool> {
         return base.submitButton.rx.isEnabled
     }
@@ -102,5 +97,21 @@ extension Reactive where Base : EditPostView {
     
     var submitTapped: ControlEvent<Void> {
         return base.submitButton.rx.tap
+    }
+    
+    var failed: Binder<Bool> {
+        return Binder(base) { target, failed in
+            let title = failed ?
+                LocalizedString.tryAgain.localized :
+                LocalizedString.submitPost.localized
+            
+            target.submitButton.setTitle(title, for: .normal)
+            
+            let image = failed ?
+                UIImage.iconReload?.withTintColor(.white) :
+                UIImage.iconRadio?.withTintColor(.white)
+            
+            target.submitButton.setImage(image, for: .normal)
+        }
     }
 }

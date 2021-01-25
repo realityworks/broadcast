@@ -146,6 +146,7 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         
         configureTextFieldBindings()
         configureButtonBindings()
+        configureTitleBindings()
                         
         viewModel.progress
             .bind(to: progressView.rx.totalProgress)
@@ -158,14 +159,6 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         
         viewModel.canUpload
             .bind(to: editPostView.submitButton.rx.isEnabled)
-            .disposed(by: disposeBag)
-        
-        viewModel.mediaTypeTitle
-            .bind(to: selectedMediaTitleLabel.rx.text)
-            .disposed(by: disposeBag)
-        
-        viewModel.runTimeTitle
-            .bind(to: runTimeLabel.rx.attributedText)
             .disposed(by: disposeBag)
         
         viewModel.showingImage
@@ -234,6 +227,10 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
                 self?.viewModel.showTips(false)
             })
             .disposed(by: disposeBag)
+        
+        viewModel.showFailed
+            .bind(to: editPostView.rx.failed)
+            .disposed(by: disposeBag)
     }
     
     private func configureTextFieldBindings() {
@@ -290,6 +287,16 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
             .subscribe(onNext: { [weak self] _ in
                 self?.showMediaOptionsMenu()
             })
+            .disposed(by: disposeBag)
+    }
+    
+    private func configureTitleBindings() {
+        viewModel.mediaTypeTitle
+            .bind(to: selectedMediaTitleLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        viewModel.runTimeTitle
+            .bind(to: runTimeLabel.rx.attributedText)
             .disposed(by: disposeBag)
     }
     
