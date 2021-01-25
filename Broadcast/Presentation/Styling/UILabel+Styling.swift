@@ -39,6 +39,10 @@ extension UILabel {
     static func subTitle(_ text: LocalizedString = .none, textColor: UIColor = .text) -> UILabel {
         return Self.text(text.localized, font: .largeTitle, textColor: textColor)
     }
+
+    static func bodyMedium(_ text: LocalizedString = .none, textColor: UIColor = .text) -> UILabel {
+        return Self.text(text.localized, font: .bodyMedium, textColor: textColor)
+    }
     
     static func bodyBold(_ text: LocalizedString = .none, textColor: UIColor = .text) -> UILabel {
         return Self.text(text.localized, font: .bodyBold, textColor: textColor)

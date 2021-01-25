@@ -147,7 +147,7 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         configureTextFieldBindings()
         configureButtonBindings()
         configureTitleBindings()
-                        
+        
         viewModel.progress
             .bind(to: progressView.rx.totalProgress)
             .disposed(by: disposeBag)

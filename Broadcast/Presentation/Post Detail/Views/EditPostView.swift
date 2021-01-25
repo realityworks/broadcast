@@ -16,6 +16,12 @@ class EditPostView: UIView {
     let captionTextView = UITextView.standard(withPlaceholder: LocalizedString.captionDescription)
     let submitButton = UIButton.standard(withTitle: LocalizedString.submitPost)
     
+    let failedContainerView = UIView()
+    let failedStackView = UIStackView()
+    let failedIconView = UIImageView(image: UIImage.iconSlash?.withTintColor(.primaryRed))
+    let failedLabel = UILabel.bodyMedium(.uploadFailed,
+                                         textColor: .secondaryBlack)
+    
     private let titleHeading = UILabel.lightGreySmallBody(LocalizedString.postTitle)
     private let captionHeading = UILabel.lightGreySmallBody(LocalizedString.captionTitle)
     
@@ -36,6 +42,11 @@ class EditPostView: UIView {
         verticalStackView.alignment = .leading
         verticalStackView.distribution = .equalSpacing
         
+        failedStackView.axis = .vertical
+        failedStackView.spacing = 0
+        failedStackView.alignment = .center
+        failedStackView.distribution = .fill
+        
         submitButton.setImage(UIImage.iconRadio?.withTintColor(.white), for: .normal)
         submitButton.setImage(UIImage.iconRadio?.withTintColor(.secondaryBlack), for: .disabled)
                 
@@ -54,6 +65,7 @@ class EditPostView: UIView {
         verticalStackView.addArrangedSubview(captionHeading)
         verticalStackView.addArrangedSubview(captionTextView)
         verticalStackView.addSpace(10)
+        verticalStackView.addSubview(failedContainerView)
         verticalStackView.addArrangedSubview(submitButton)
         
         submitButton.widthToSuperview()
@@ -61,6 +73,15 @@ class EditPostView: UIView {
         
         captionTextView.height(100)
         captionTextView.widthToSuperview()
+        
+        failedContainerView.addSubview(failedStackView)
+        failedStackView.edgesToSuperview()
+        
+        failedContainerView.widthToSuperview()
+        failedContainerView.height(80)
+        
+        failedStackView.addArrangedSubview(failedIconView)
+        failedStackView.addArrangedSubview(failedLabel)
     }
     
     func configure(withUploadTitle buttonTitle: LocalizedString) {

@@ -81,10 +81,11 @@ extension UIFont {
     static var tinyBody: UIFont { .customFont(ofSize: 11, weight: InterFontWeight.medium ) }
     static var smallBodyBold: UIFont { .customFont(ofSize: 12, weight: InterFontWeight.bold ) }
     static var body: UIFont { .customFont(ofSize: 14, weight: InterFontWeight.regular ) }
+    static var bodyMedium: UIFont { .customFont(ofSize: 14, weight: InterFontWeight.medium ) }
     static var bodyBold: UIFont { .customFont(ofSize: 14, weight: InterFontWeight.bold ) }
     
     static var tableTitle: UIFont { .customFont(ofSize: 24, weight: UIFont.InterFontWeight.medium ) }
     static var boldTableTitle: UIFont { .customFont(ofSize: 24, weight: UIFont.InterFontWeight.bold ) }
     static var postCaptionTitle: UIFont { .customFont(ofSize: 20, weight: InterFontWeight.bold ) }
-    static var profileCellTitle: UIFont { .customFont(ofSize: 14, weight: InterFontWeight.medium ) }
+    
 }
