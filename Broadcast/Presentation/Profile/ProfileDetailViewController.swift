@@ -259,6 +259,12 @@ class ProfileDetailViewController: ViewController {
     }
     
     private func configureBindings(forTrailerCell cell: ProfileTrailerTableViewCell) {
+        
+        viewModel.showingTrailer
+            .map { $0 }
+            .bind(to: cell.selectMediaView.dashedBorderView.rx.isHidden)
+            .disposed(by: disposeBag)
+        
         viewModel.progressText
             .bind(to: cell.progressView.rx.text)
             .disposed(by: cell.disposeBag)
