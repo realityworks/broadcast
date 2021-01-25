@@ -52,6 +52,8 @@ class EditPostView: UIView {
         submitButton.setImage(UIImage.iconRadio?.withTintColor(.secondaryBlack), for: .disabled)
                 
         submitButton.imageEdgeInsets = .right(10)
+        
+        failedIconView.contentMode = .scaleAspectFit
     }
     
     private func configureLayout() {
@@ -66,7 +68,7 @@ class EditPostView: UIView {
         verticalStackView.addArrangedSubview(captionHeading)
         verticalStackView.addArrangedSubview(captionTextView)
         verticalStackView.addSpace(10)
-        verticalStackView.addSubview(failedContainerView)
+        verticalStackView.addArrangedSubview(failedContainerView)
         verticalStackView.addArrangedSubview(submitButton)
         
         submitButton.widthToSuperview()
