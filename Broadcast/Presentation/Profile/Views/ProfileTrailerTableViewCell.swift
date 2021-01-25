@@ -116,7 +116,7 @@ extension Reactive where Base : ProfileTrailerTableViewCell {
         return Binder(base) { target, failed in
             let title = failed ?
                 LocalizedString.tryAgain.localized :
-                LocalizedString.submitPost.localized
+                LocalizedString.uploadTrailer.localized
             
             target.uploadButton.setTitle(title, for: .normal)
             
