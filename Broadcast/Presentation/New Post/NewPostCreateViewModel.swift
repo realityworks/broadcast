@@ -44,6 +44,7 @@ class NewPostCreateViewModel : ViewModel {
     let uploadComplete: Observable<Bool>
     let showProgressView: Observable<Bool>
     let showUploadButton: Observable<Bool>
+    let showFailed: Observable<Bool>
         
     let showTips: Observable<Bool>
     
