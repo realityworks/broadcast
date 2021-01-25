@@ -45,6 +45,9 @@ class NewPostCreateViewModel : ViewModel {
     let showProgressView: Observable<Bool>
     let showUploadButton: Observable<Bool>
     let showFailed: Observable<Bool>
+    
+    let submitButtonTitle: Observable<String>
+    let submitButtonImage: Observable<UIImage>
         
     let showTips: Observable<Bool>
     
@@ -119,6 +122,11 @@ class NewPostCreateViewModel : ViewModel {
         showUploadButton = showProgressView.map { !$0 }
         
         showFailed = uploadingProgressObservable.map { $0.failed }
+        
+        submitButtonTitle = dependencies.uploadProgressObservable
+            .map { $0?.failed == true ?
+                LocalizedString.tryAgain.localized :
+                LocalizedString.submitPost.localized }
         
         super.init(stateController: dependencies.stateController)
         
