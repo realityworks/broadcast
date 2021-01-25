@@ -46,13 +46,14 @@ class ProfileDetailViewModel : ViewModel {
     let progress: Observable<Float>
     let progressText: Observable<String>
     
-    let selectedTrailerRelay = PublishRelay<URL?>()
+    let selectedTrailerUrl: Observable<URL?>
     let trailerVideoUrl: Observable<URL?>
     let runTimeTitle: Observable<NSAttributedString>
     let mediaTypeTitle: Observable<String>
     let showingTrailer: Observable<Bool>
     
     let uploadComplete: Observable<Bool>
+    let showFailed = BehaviorRelay<Bool>(value: false)
     let showProgressView: Observable<Bool>
     let showUploadButton: Observable<Bool>
     let selectedNewTrailerRelay = PublishRelay<Bool>()
@@ -73,9 +74,12 @@ class ProfileDetailViewModel : ViewModel {
         subscriberCount = profileObservable.map { $0.subscriberCount }
         profileImage = dependencies.profileImage.compactMap { $0 ?? UIImage.profileImage }
         
-        trailerVideoUrl = Observable.merge(
+        selectedTrailerUrl = dependencies.selectedTrailerUrlObservable
+        trailerVideoUrl = Observable.combineLatest(
             profileObservable.map { URL(string: $0.trailerVideoUrl) },
-            selectedTrailerRelay.asObservable())
+            selectedTrailerUrl) { profileTrailerUrl, selectedTrailerUrl in
+            return selectedTrailerUrl ?? profileTrailerUrl
+        }
         
         runTimeTitle = self.trailerVideoUrl
             .compactMap { $0 }
@@ -146,10 +150,14 @@ class ProfileDetailViewModel : ViewModel {
             .bind(to: self.isUploadingSubject)
             .disposed(by: disposeBag)
         
-        selectedTrailerRelay.compactMap { _ in true }
+        selectedTrailerUrl.compactMap { _ in true }
             .bind(to: selectedNewTrailerRelay)
             .disposed(by: disposeBag)
         
+        dependencies.trailerUploadProgress
+            .map { $0?.failed == true }
+            .bind(to: showFailed)
+            .disposed(by: disposeBag)
     }
 }
 
@@ -163,6 +171,7 @@ extension ProfileDetailViewModel {
         let profileImage: Observable<UIImage?>
         let profileObservable: Observable<Profile?>
         let trailerUploadProgress: Observable<UploadProgress?>
+        let selectedTrailerUrlObservable: Observable<URL?>
         
         static let standard = Dependencies(
             stateController: Domain.standard.stateController,
@@ -170,13 +179,18 @@ extension ProfileDetailViewModel {
             profileUseCase: Domain.standard.useCases.profileUseCase,
             profileImage: Domain.standard.stateController.stateObservable(of: \.profileImage),
             profileObservable: Domain.standard.stateController.stateObservable(of: \.profile),
-            trailerUploadProgress: Domain.standard.stateController.stateObservable(of: \.currentTrailerUploadProgress))
+            trailerUploadProgress: Domain.standard.stateController.stateObservable(of: \.currentTrailerUploadProgress),
+            selectedTrailerUrlObservable: Domain.standard.stateController.stateObservable(of: \.selectedTrailerUrl))
     }
 }
 
 // MARK: - Usecase functions
 
 extension ProfileDetailViewModel {
+    func prepareData() {
+        profileUseCase.clearTrailerForUpload()
+    }
+    
     func updateProfile() {
         guard let displayName = displayNameSubject.value,
               let biography = biographySubject.value else { return }
@@ -210,7 +224,7 @@ extension ProfileDetailViewModel {
     }
     
     func trailerSelected(withUrl url: URL) {
-        selectedTrailerRelay.accept(url)
+        profileUseCase.selectTrailerForUpload(withUrl: url)
     }
     
     func uploadTrailer(withUrl url: URL) {

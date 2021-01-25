@@ -20,7 +20,17 @@ class ProfileTrailerTableViewCell: UITableViewCell {
     
     let selectMediaView = SelectMediaView()
     let changeButton = UIButton.textDestructive(withTitle: LocalizedString.changeVideo)
+    
+    let uploadContainerStackView = UIStackView()
+    
+    let failedContainerView = UIView()
+    let failedStackView = UIStackView()
+    let failedIconView = UIImageView(image: UIImage.iconSlash?.withTintColor(.primaryRed))
+    let failedLabel = UILabel.bodyMedium(.uploadFailed,
+                                         textColor: .secondaryBlack)
+    
     let uploadButton = UIButton.standard(withTitle: LocalizedString.uploadTrailer)
+    
     
     let progressView = ProgressView()
     
@@ -75,7 +85,6 @@ class ProfileTrailerTableViewCell: UITableViewCell {
         uploadButton.bottomToSuperview(offset: -24)
         
         contentView.addSubview(progressView)
-        //selectMediaContainerView.bottomToTop(of: progressView, offset: -32)
         progressView.leftToSuperview(offset: 24)
         progressView.rightToSuperview(offset: -24)
         progressView.centerY(to: uploadButton)

@@ -18,7 +18,9 @@ struct State : Equatable {
     var profile: Profile? = nil
     var profileImage: UIImage? = nil
     
+    // Selection State
     var selectedPostId: PostID? = nil
+    var selectedTrailerUrl: URL? = nil
     
     // Managing the global loading state
     var isLoadingPosts: Bool = false

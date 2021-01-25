@@ -40,6 +40,9 @@ class ProfileDetailViewController: ViewController {
         configureViews()
         configureLayout()
         configureBindings()
+        
+        /// Prepare date for use in the model
+        viewModel.prepareData()
     }
     
     private func configureViews() {
@@ -230,9 +233,10 @@ class ProfileDetailViewController: ViewController {
             viewModel.emailObservable,
             viewModel.handleObservable,
             viewModel.subscriberCount,
-            viewModel.profileImage) {
+            viewModel.profileImage,
+            viewModel.showFailed) {
             
-            biography, displayName, email, handle, subscribers, profileImage -> [ProfileDetailSectionModel] in
+            biography, displayName, email, handle, subscribers, profileImage, showFailed -> [ProfileDetailSectionModel] in
             
             return [
                 SectionModel(model: nil, items: [
@@ -318,13 +322,13 @@ class ProfileDetailViewController: ViewController {
             })
             .disposed(by: cell.disposeBag)
         
-        viewModel.selectedTrailerRelay
-            .map { _ in true }
+        viewModel.selectedTrailerUrl
+            .map { $0 != nil }
             .bind(to: cell.uploadButton.rx.isEnabled)
             .disposed(by: disposeBag)
         
         cell.uploadButton.rx.tap
-            .withLatestFrom(viewModel.selectedTrailerRelay.asObservable())
+            .withLatestFrom(viewModel.selectedTrailerUrl)
             .compactMap { $0 }
             .subscribe(onNext: { [unowned self] url in
                 self.viewModel.uploadTrailer(withUrl: url)

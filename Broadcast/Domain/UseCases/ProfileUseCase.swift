@@ -117,4 +117,12 @@ extension ProfileUseCase {
             return .error(error)
         }
     }
+    
+    func selectTrailerForUpload(withUrl url: URL) {
+        stateController.state.selectedTrailerUrl = url
+    }
+    
+    func clearTrailerForUpload() {
+        stateController.state.selectedTrailerUrl = nil
+    }
 }
