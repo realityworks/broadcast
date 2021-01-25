@@ -12,7 +12,7 @@ class ProfileTableViewCell : UITableViewCell {
     static let identifier = "ProfileTableViewCell"
     static let cellHeight:CGFloat = 50
     
-    private let titleLabel = UILabel.text(font: UIFont.profileCellTitle, textColor: .secondaryBlack)
+    private let titleLabel = UILabel.text(font: UIFont.bodyMedium, textColor: .secondaryBlack)
     private let leftIconImageView = UIImageView()
     private let disclosureImageView = UIImageView(
         image: UIImage.iconChevronLeft?.withTintColor(.primaryLightGrey))

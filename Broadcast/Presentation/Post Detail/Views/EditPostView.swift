@@ -12,18 +12,19 @@ import SwiftRichString
 
 class EditPostView: UIView {
     let verticalStackView = UIStackView()
+    
     let titleTextField = UITextField.standard(withPlaceholder: LocalizedString.postDescription, insets: .left(16))
     let captionTextView = UITextView.standard(withPlaceholder: LocalizedString.captionDescription)
     let submitButton = UIButton.standard(withTitle: LocalizedString.submitPost)
     
-    let failedContainerView = UIView()
-    let failedStackView = UIStackView()
-    let failedIconView = UIImageView(image: UIImage.iconSlash?.withTintColor(.primaryRed))
-    let failedLabel = UILabel.bodyMedium(.uploadFailed,
+    fileprivate let failedContainerView = UIView()
+    fileprivate let failedStackView = UIStackView()
+    fileprivate let failedIconView = UIImageView(image: UIImage.iconSlash?.withTintColor(.primaryRed))
+    fileprivate let failedLabel = UILabel.bodyMedium(.uploadFailed,
                                          textColor: .secondaryBlack)
     
-    private let titleHeading = UILabel.lightGreySmallBody(LocalizedString.postTitle)
-    private let captionHeading = UILabel.lightGreySmallBody(LocalizedString.captionTitle)
+    fileprivate let titleHeading = UILabel.lightGreySmallBody(LocalizedString.postTitle)
+    fileprivate let captionHeading = UILabel.lightGreySmallBody(LocalizedString.captionTitle)
     
     init() {
         super.init(frame: .zero)
@@ -133,6 +134,8 @@ extension Reactive where Base : EditPostView {
                 UIImage.iconRadio?.withTintColor(.white)
             
             target.submitButton.setImage(image, for: .normal)
+            
+            target.failedContainerView.isHidden = !failed
         }
     }
 }
