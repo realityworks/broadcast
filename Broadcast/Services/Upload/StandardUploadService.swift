@@ -101,7 +101,7 @@ extension StandardUploadService : UploadService {
                 apiService.uploadMedia(from: sourceUrl,
                                        to: destinationUrl)
                         .subscribe { response, progress in
-                            let progressFloat = Float(progress.bytesWritten) / Float(progress.totalBytes)
+                            let progressFloat = progress.totalBytes > 0 ? Float(progress.bytesWritten) / Float(progress.totalBytes) : 0
                             observer.onNext(
                                 UploadEvent.uploadMedia(progress: progressFloat))
                         } onError: { error in
@@ -246,7 +246,7 @@ extension StandardUploadService : UploadService {
                 apiService.uploadMedia(from: sourceUrl,
                                        to: destinationUrl)
                         .subscribe { response, progress in
-                            let progressFloat = Float(progress.bytesWritten) / Float(progress.totalBytes)
+                            let progressFloat = progress.totalBytes > 0 ? Float(progress.bytesWritten) / Float(progress.totalBytes) : 0
                             observer.onNext(
                                 UploadEvent.uploadMedia(progress: progressFloat))
                         } onError: { error in

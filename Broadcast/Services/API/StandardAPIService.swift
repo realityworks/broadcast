@@ -60,15 +60,17 @@ class StandardAPIService : Interceptor {
         method: HTTPMethod,
         url: URL,
         parameters: APIParameters = [:],
-        encoding: ParameterEncoding = JSONEncoding.default) -> Single<(HTTPURLResponse, Data)> {
+        encoding: ParameterEncoding = JSONEncoding.default,
+        timeout: TimeInterval = 7.5) -> Single<(HTTPURLResponse, Data)> {
         return getHeaders()
             .flatMap { [unowned self] headers -> Single<(HTTPURLResponse, Data)> in
+                let request = session.request(url, method: method,
+                                              parameters: parameters,
+                                              encoding: encoding,
+                                              headers: HTTPHeaders(headers),
+                                              interceptor: self) { $0.timeoutInterval = timeout }
                 return self.session.rx
-                    .request(method, url,
-                             parameters: parameters,
-                             encoding: encoding,
-                             headers: HTTPHeaders(headers),
-                             interceptor: self)
+                    .request(urlRequest: request.convertible)
                     .validate(statusCode: validStatusCodes)
                     .responseData()
                     .asSingle()
@@ -177,22 +179,27 @@ extension StandardAPIService : APIService {
             .emptyResponseBody()
     }
     
-    func uploadMedia(from fromUrl: URL, to toUrl: URL) -> Observable<(HTTPURLResponse, RxProgress)> {
+    func uploadMedia(from fromUrl: URL, to toUrl: URL) -> Observable<(HTTPURLResponse?, RxProgress)> {
         let fileSize = fromUrl.fileSize()!
         let headers = HTTPHeaders(["x-ms-blob-type": "BlockBlob",
                                    "Content-Length": "\(fileSize)"])
         return self.session.rx
             .upload(fromUrl, to: toUrl, method: .put, headers: headers)
-            .flatMap { (uploadRequest: UploadRequest) -> Observable<(HTTPURLResponse, RxProgress)> in
-                
+            .flatMap { (uploadRequest: UploadRequest) -> Observable<(HTTPURLResponse?, RxProgress)> in
                 let progressPart = uploadRequest.rx.progress()
-                let responsePart = uploadRequest.rx.response()
                 
-                return Observable.combineLatest(responsePart, progressPart) {
-                    if !Array(200 ..< 300).contains($0.statusCode) {
-                        throw BoomdayError.apiStatusCode(code: $0.statusCode)
+                /// The uploadRequest.rx.response() will only push an observable when there is a response, so the combineLatest never gets the progress update until a response is sent at the end, so we need change it to an optional by starting with a nil and concatenating the next one.
+                let responsePart: Observable<HTTPURLResponse?> = Observable<HTTPURLResponse?>
+                    .just(nil)
+                    .concat(uploadRequest.rx.response().map { $0 })
+                
+                return Observable.combineLatest(responsePart, progressPart) { response, progress in
+                    print ("Upload progress: \(progress)")
+                    if let response = response,
+                       !Array(200 ..< 300).contains(response.statusCode) {
+                        throw BoomdayError.apiStatusCode(code: response.statusCode)
                     }
-                    return ($0, $1)
+                    return (response, progress)
                 }
             }
     }
@@ -206,7 +213,7 @@ extension StandardAPIService : APIService {
             .appendingPathComponent(mediaId)
             .appendingPathComponent("complete")
                 
-        return authenticatedRequest(method: .post, url: url)
+        return authenticatedRequest(method: .post, url: url, timeout: 60)
             .emptyResponseBody()
     }
     

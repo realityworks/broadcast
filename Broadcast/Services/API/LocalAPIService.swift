@@ -127,9 +127,8 @@ extension LocalAPIService : APIService {
         return single
     }
     
-    func uploadMedia(from fromUrl: URL, to toUrl: URL) -> Observable<(HTTPURLResponse, RxProgress)> {
-        return Observable<(HTTPURLResponse, RxProgress)>.create { observer in
-            
+    func uploadMedia(from fromUrl: URL, to toUrl: URL) -> Observable<(HTTPURLResponse?, RxProgress)> {
+        return Observable<(HTTPURLResponse?, RxProgress)>.create { observer in
             DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 10, execute: {
                 observer.onNext((HTTPURLResponse(), RxProgress(bytesWritten: 1, totalBytes: 1)))
                 observer.onCompleted()
