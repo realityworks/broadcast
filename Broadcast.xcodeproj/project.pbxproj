@@ -19,6 +19,7 @@
 		1D216A3B2595ED4F007FA845 /* TextPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D216A3A2595ED4F007FA845 /* TextPopup.swift */; };
 		1D216A4A259870CC007FA845 /* SelectMediaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D216A49259870CC007FA845 /* SelectMediaView.swift */; };
 		1D216A5025987CA7007FA845 /* CustomBorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D216A4F25987CA7007FA845 /* CustomBorderView.swift */; };
+		1D28BF8425C0237000036FA1 /* VideoUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D28BF8325C0237000036FA1 /* VideoUploader.swift */; };
 		1D2A03E525655BB1008CE2D4 /* AuthenticationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2A03E425655BB1008CE2D4 /* AuthenticationUseCase.swift */; };
 		1D2A03EA25655FFC008CE2D4 /* ProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2A03E925655FFC008CE2D4 /* ProfileUseCase.swift */; };
 		1D2A03EF256561BB008CE2D4 /* PostContentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2A03EE256561BB008CE2D4 /* PostContentUseCase.swift */; };
@@ -213,6 +214,7 @@
 		1D216A3A2595ED4F007FA845 /* TextPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPopup.swift; sourceTree = "<group>"; };
 		1D216A49259870CC007FA845 /* SelectMediaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMediaView.swift; sourceTree = "<group>"; };
 		1D216A4F25987CA7007FA845 /* CustomBorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBorderView.swift; sourceTree = "<group>"; };
+		1D28BF8325C0237000036FA1 /* VideoUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoUploader.swift; sourceTree = "<group>"; };
 		1D2A03E425655BB1008CE2D4 /* AuthenticationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationUseCase.swift; sourceTree = "<group>"; };
 		1D2A03E925655FFC008CE2D4 /* ProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUseCase.swift; sourceTree = "<group>"; };
 		1D2A03EE256561BB008CE2D4 /* PostContentUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostContentUseCase.swift; sourceTree = "<group>"; };
@@ -611,6 +613,7 @@
 				1D5CF0C22577CF50008F8C22 /* MediaPickerAdapter.swift */,
 				1DF0972F258114D8007FEE3C /* URLAPIQueryStringRequest.swift */,
 				1D79C10E2594517500AC271B /* AnimationAsset.swift */,
+				1D28BF8325C0237000036FA1 /* VideoUploader.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1117,6 +1120,7 @@
 				1DF5DD4C25ABF2FD009B0B30 /* ProgressView.swift in Sources */,
 				1D8F8E0F25B01768005944BF /* ProfileSimpleInfoTableViewCell.swift in Sources */,
 				1D3B2A482564F238001874FD /* StandardAPIService.swift in Sources */,
+				1D28BF8425C0237000036FA1 /* VideoUploader.swift in Sources */,
 				1D916D442562A7180059E549 /* UseCases.swift in Sources */,
 				1DC97C8125A4180200EBF667 /* ProfileSignOutTableViewCell.swift in Sources */,
 				1D216A4A259870CC007FA845 /* SelectMediaView.swift in Sources */,
