@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum VideoUploadError : Error {
     case networkError(String)
@@ -123,6 +124,7 @@ class VideoUploader : NSObject, URLSessionTaskDelegate, URLSessionDataDelegate, 
     @objc func urlSession(_ session: URLSession,
                           task: URLSessionTask,
                           didCompleteWithError error: Error?) {
+        
         Logger.log(level: .info,
                    topic: .debug,
                    message: "Task did complete with error : \(error?.localizedDescription ?? "No error provided")")
@@ -140,7 +142,9 @@ class VideoUploader : NSObject, URLSessionTaskDelegate, URLSessionDataDelegate, 
                           totalBytesSent: Int64,
                           totalBytesExpectedToSend: Int64) {
         
-        log(message: "Did send body data  BYTES SENT : \(bytesSent), TOTAL SENT : \(totalBytesSent), TOTAL EXPECTED TO SEND : \(totalBytesExpectedToSend)", .info)
+        Logger.log(level: .info,
+                   topic: .debug,
+                   message: "Did send body data  BYTES SENT : \(bytesSent), TOTAL SENT : \(totalBytesSent), TOTAL EXPECTED TO SEND : \(totalBytesExpectedToSend)")
         
         /// Call the update handler with the number of bytes sent and bytes expected to send.
         onProgressUpdate?(totalBytesSent, totalBytesExpectedToSend)
@@ -161,7 +165,10 @@ class VideoUploader : NSObject, URLSessionTaskDelegate, URLSessionDataDelegate, 
                           didReceive response: URLResponse,
                           completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
         
-        log (message: "Did receive reply from server for upload task!", .info)
+        Logger.log(level: .info,
+                   topic: .debug,
+                   message: "Did receive reply from server for upload task!")
+
         guard let httpResponse = response as? HTTPURLResponse else { return }
         
         if httpResponse.statusCode == 201 {
@@ -172,15 +179,13 @@ class VideoUploader : NSObject, URLSessionTaskDelegate, URLSessionDataDelegate, 
     }
     
     @objc func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
-        log (message: "Background session has finished!", .info)
+        Logger.log(level: .info,
+                   topic: .debug,
+                   message: "Background session has finished!")
         DispatchQueue.main.async { [unowned self] in
-            backgroundCompletionTaskIdentifier = UIApplication.shared.beginBackgroundTask {
-                /// We should cancel our request here
-                log (message: "Our background task expired!", .info)
-            }
-            
-            guard let appDelegate: AppDelegate = AppDelegate.shared else { return }
-            appDelegate.backgroundSessionCompletion?()
+            #warning("Fix the background session completion")
+//            guard let appDelegate: AppDelegate = AppDelegate.shared else { return }
+//            appDelegate.backgroundSessionCompletion?()
             
             self.uploadCompletionHandler()
         }
@@ -196,48 +201,49 @@ class VideoUploader : NSObject, URLSessionTaskDelegate, URLSessionDataDelegate, 
             return
         }
         
-        log(message: "Upload Completed! Confirming with API Service", .info)
+        Logger.log(level: .info, topic: .debug, message: "Upload Completed! Confirming with API Service")
         
         urlSession.flush {
-            log(message: "Flushed the background upload", .info)
+            Logger.log(level: .info, topic: .debug, message: "Flushed the background upload")
         }
         
         /// Confirm that the upload completed. Once this returns we are safe to say the video has completed the upload successfully.
-        apiService.confirmCompleteUpload(forUploadDetails: videoUploadDetails) { [weak self] result in
-            guard let self = self else { return }
-            log(message: "Confirm upload complete with result : \(result)", .info)
-            
-            switch result {
-            case .success:
-                self.onComplete?()
-            case .failure(let error):
-                self.onFailure?(error)
-            }
-            
-            /// Mark our background task completed if this was done in the background
-            if let backgroundCompletionTaskIdentifier = self.backgroundCompletionTaskIdentifier  {
-                UIApplication.shared.endBackgroundTask(backgroundCompletionTaskIdentifier)
-            }
-        }
+        #warning("Perhaps just use self.onComplete?() and remove this, along with any API Service calls, use this just for the upload")
+//        apiService.confirmCompleteUpload(forUploadDetails: videoUploadDetails) { [weak self] result in
+//            guard let self = self else { return }
+//            log(message: "Confirm upload complete with result : \(result)", .info)
+//
+//            switch result {
+//            case .success:
+//                self.onComplete?()
+//            case .failure(let error):
+//                self.onFailure?(error)
+//            }
+//
+//            /// Mark our background task completed if this was done in the background
+//            if let backgroundCompletionTaskIdentifier = self.backgroundCompletionTaskIdentifier  {
+//                UIApplication.shared.endBackgroundTask(backgroundCompletionTaskIdentifier)
+//            }
+//        }
     }
     
     /// Begins an upload task when the video details of our upload have been passed from the API.
     /// The upload task is prepared with the correct parameters required for the file upload and new sessions kicks of an upload task.
     /// - parameters: videoDetails contains the endpoint upload URL used to upload our video
     private func beginUpload(with videoUploadDetails: VideoUploadDetails) {
-        log (message: "Begin Upload with : \(videoUploadDetails)", .info)
+        Logger.log(level: .info, topic: .debug, message: "Begin Upload with : \(videoUploadDetails)")
         
         guard let file = file else {
             onFailure?(VideoUploadError.notSetup)
             return
         }
-        
+        #warning("Get the right info for this call when doing the uploadService")
         /// Use our global background session configuration since we only allow one
-        var request = URLRequest(URL(string: videoUploadDetails.blobUrl)!)
+        var request = URLRequest(url: URL(string: videoUploadDetails.blobUrl)!)
         request.httpMethod = "PUT"
         
         // Need to add custom http header fields?
-        let fileSize = FileManager.default.sizeOfFile(atPath: file.path)!
+        let fileSize = 0//FileManager.default.sizeOfFile(atPath: file.path)!
         
         request.addValue("BlockBlob", forHTTPHeaderField: "x-ms-blob-type")
         request.addValue("\(fileSize)", forHTTPHeaderField: "Content-Length")
