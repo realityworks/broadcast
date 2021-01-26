@@ -20,6 +20,7 @@ enum VideoUploadError : Error {
 /// to finalise the upload by calling an endpoint with our video id to close the upload.
 class VideoUploader : NSObject, URLSessionTaskDelegate, URLSessionDataDelegate, URLSessionDelegate {
     
+    #warning("Need to move this over to use existing models")
     struct VideoDetails: Codable {
         let title: String
         let caption: String
@@ -99,17 +100,18 @@ class VideoUploader : NSObject, URLSessionTaskDelegate, URLSessionDataDelegate, 
             return
         }
         
-        apiService.getVideoUploadDetails(forVideoDetails: videoDetails) { [weak self] result in
-            log (message: "Received Upload details", .info)
-            guard let self = self else { return }
-            switch result {
-            case .success(let videoUploadDetails):
-                self.videoUploadDetails = videoUploadDetails
-                self.beginUpload(with: videoUploadDetails)
-            case .failure(let error):
-                self.onFailure?(error)
-            }
-        }
+        #warning("Use the correct API service")
+//        apiService.getVideoUploadDetails(forVideoDetails: videoDetails) { [weak self] result in
+//            log (message: "Received Upload details", .info)
+//            guard let self = self else { return }
+//            switch result {
+//            case .success(let videoUploadDetails):
+//                self.videoUploadDetails = videoUploadDetails
+//                self.beginUpload(with: videoUploadDetails)
+//            case .failure(let error):
+//                self.onFailure?(error)
+//            }
+//        }
     }
     
     // MARK:- URLSessionDelegate
@@ -121,7 +123,10 @@ class VideoUploader : NSObject, URLSessionTaskDelegate, URLSessionDataDelegate, 
     @objc func urlSession(_ session: URLSession,
                           task: URLSessionTask,
                           didCompleteWithError error: Error?) {
-        log(message: "Task did complete with error : \(error?.localizedDescription ?? "No error provided")", .info)
+        Logger.log(level: .info,
+                   topic: .debug,
+                   message: "Task did complete with error : \(error?.localizedDescription ?? "No error provided")")
+
         if let error = error {
             onFailure?(VideoUploadError.networkError(error.localizedDescription))
         }
@@ -134,6 +139,7 @@ class VideoUploader : NSObject, URLSessionTaskDelegate, URLSessionDataDelegate, 
                           didSendBodyData bytesSent: Int64,
                           totalBytesSent: Int64,
                           totalBytesExpectedToSend: Int64) {
+        
         log(message: "Did send body data  BYTES SENT : \(bytesSent), TOTAL SENT : \(totalBytesSent), TOTAL EXPECTED TO SEND : \(totalBytesExpectedToSend)", .info)
         
         /// Call the update handler with the number of bytes sent and bytes expected to send.
