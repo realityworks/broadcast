@@ -68,8 +68,8 @@ class ProfileTrailerTableViewCell: UITableViewCell {
         
         uploadButton.isEnabled = false
         
-        uploadButton.setImage(UIImage.iconRadio?.withTintColor(.white), for: .normal)
-        uploadButton.setImage(UIImage.iconRadio?.withTintColor(.secondaryBlack), for: .disabled)
+        uploadButton.setImage(UIImage.iconRadio?.withTintColor(.buttonTitle), for: .normal)
+        uploadButton.setImage(UIImage.iconRadio?.withTintColor(.disabledButtonTitle), for: .disabled)
                 
         uploadButton.imageEdgeInsets = .right(10)
         
