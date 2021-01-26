@@ -17,6 +17,7 @@ class ViewController : UIViewController {
         case darkLogo
     }
     
+    // Internal properties
     var disposeBag = DisposeBag()
     
     // MARK: View Controller overrides
@@ -26,6 +27,8 @@ class ViewController : UIViewController {
         // Set the default background colour
         view.backgroundColor = UIColor.secondaryWhite
         
+        navigationController?.navigationBar.barStyle = .black
+                
         Logger.verbose(topic: .appState, message: "viewDidLoad")
     }
     
