@@ -93,7 +93,6 @@ class VideoUploader : NSObject, URLSessionTaskDelegate, URLSessionDataDelegate, 
     /// Initiate the uploader.
     func start() {
         Logger.log(level: .info, topic: .debug, message: "Starting upload")
-        log(message: , .info)
         
         guard let videoDetails = videoDetails else {
             self.onFailure?(VideoUploadError.notSetup)
