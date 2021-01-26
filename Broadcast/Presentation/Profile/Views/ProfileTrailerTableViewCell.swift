@@ -53,6 +53,10 @@ class ProfileTrailerTableViewCell: UITableViewCell {
         selectMediaInfoStackView.alignment = .leading
         selectMediaInfoStackView.spacing = 4
         
+        failedStackView.axis = .vertical
+        failedStackView.alignment = .center
+        failedStackView.spacing = 2
+        
         changeButton.contentHorizontalAlignment = .leading
         
         uploadButton.isEnabled = false
