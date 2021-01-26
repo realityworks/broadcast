@@ -1,5 +1,5 @@
 //
-//  VideoUploader.swift
+//  MediaUploadSession.swift
 //  Broadcast
 //
 //  Created by Piotr Suwara on 26/1/21.
@@ -19,7 +19,7 @@ enum VideoUploadError : Error {
 /// A request to upload the video is created from our meta data, which returns the URL where we will upload the video data to.
 /// Once the video data is uploaded, the session will receive a completion (one for background, one for foreground) and needs
 /// to finalise the upload by calling an endpoint with our video id to close the upload.
-class VideoUploader : NSObject, URLSessionTaskDelegate, URLSessionDataDelegate, URLSessionDelegate {
+class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDelegate, URLSessionDelegate {
     
     #warning("Need to move this over to use existing models")
     struct VideoDetails: Codable {
@@ -39,8 +39,8 @@ class VideoUploader : NSObject, URLSessionTaskDelegate, URLSessionDataDelegate, 
     var onFailure: ((Error) -> Void)?
     
     // MARK:- Internal properties
-    #warning("Change to use dependency injection")
-    private let apiService: APIService = Services.standard.apiService//DependencyInjection.defaultService
+    #warning("Change to use dependency injection or maybe we don't need it?")
+    //private let apiService: APIService = Services.standard.apiService//DependencyInjection.defaultService
     
     /// File URL referecing the video we are currently uploading
     private var file: URL?
