@@ -17,7 +17,7 @@ extension UIButton {
         button.setBackgroundColor(UIColor.secondaryLightGrey.withAlphaComponent(0.56), for: .disabled)
         
         button.setTitleColor(.white, for: .normal)
-        button.setTitleColor(.secondaryBlack, for: .disabled)
+        button.setTitleColor(.primaryLightGrey, for: .disabled)
         
         button.layer.cornerRadius = 24
         button.height(48)
