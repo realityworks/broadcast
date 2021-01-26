@@ -21,35 +21,18 @@ enum VideoUploadError : Error {
 /// to finalise the upload by calling an endpoint with our video id to close the upload.
 class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDelegate, URLSessionDelegate {
     
-    #warning("Need to move this over to use existing models")
-    struct VideoDetails: Codable {
-        let title: String
-        let caption: String
-        let videoCategoryIds: [String]
-    }
-    
-    struct VideoUploadDetails: Decodable {
-        let videoShortId: String
-        let blobUrl: String
-    }
-    
     // MARK:- Callback Handlers
-    var onProgressUpdate: ((Int64, Int64) -> Void)?
-    var onComplete: (() -> Void)?
-    var onFailure: ((Error) -> Void)?
+    private var onProgressUpdate: ((Int64, Int64) -> Void)?
+    private var onComplete: (() -> Void)?
+    private var onFailure: ((Error) -> Void)?
     
     // MARK:- Internal properties
     #warning("Change to use dependency injection or maybe we don't need it?")
     //private let apiService: APIService = Services.standard.apiService//DependencyInjection.defaultService
     
     /// File URL referecing the video we are currently uploading
-    private var file: URL?
-    
-    /// Contains the details of the video file we will be uploading.
-    private var videoDetails: VideoDetails?
-    
-    /// Structure returned to us to begin the streamed upload of a video to an endpoint
-    private var videoUploadDetails: VideoUploadDetails?
+    private var from: URL?
+    private var to: URL?
     
     // Indicator once our upload total bytes matches required bytes
     private var finishedUploading: Bool = false
@@ -74,40 +57,21 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
         urlSession = URLSession(configuration: urlSessionConfiguration, delegate: self, delegateQueue: OperationQueue.main)
     }
     
-    /// Setup uploader
-    /// - parameters:
-    ///  - file: A url referencing the file that will be uploaded
-    ///  - videoDetails: Contains meta data information about the video such as `Title` etc...
-    func setup(from file: URL,
-               videoDetails: VideoDetails) {
-        
-        Logger.log(level: .info, topic: .debug, message: "Setup upload")
-        
-        self.file = file
-        self.videoDetails = videoDetails
-    }
-    
     /// Initiate the uploader.
-    func start() {
+    func start(from: URL,
+               to: URL,
+               onProgressUpdate: ((Int64, Int64) -> Void)? = nil,
+               onComplete: (() -> Void)? = nil,
+               onFailure: ((Error) -> Void)? = nil) {
         Logger.log(level: .info, topic: .debug, message: "Starting upload")
         
-        guard let videoDetails = videoDetails else {
-            self.onFailure?(VideoUploadError.notSetup)
-            return
-        }
+        self.from = from
+        self.to = to
+        self.onProgressUpdate = onProgressUpdate
+        self.onComplete = onComplete
+        self.onFailure = onFailure
         
-        #warning("Use the correct API service")
-//        apiService.getVideoUploadDetails(forVideoDetails: videoDetails) { [weak self] result in
-//            log (message: "Received Upload details", .info)
-//            guard let self = self else { return }
-//            switch result {
-//            case .success(let videoUploadDetails):
-//                self.videoUploadDetails = videoUploadDetails
-//                self.beginUpload(with: videoUploadDetails)
-//            case .failure(let error):
-//                self.onFailure?(error)
-//            }
-//        }
+        beginUpload()
     }
     
     // MARK:- URLSessionDelegate
@@ -188,53 +152,32 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
     
     // MARK:- Utility Functions
     
-    func uploadCompletionHandler() {
-        /// Local check here, do we need to do anything special here?
-        guard let videoUploadDetails = videoUploadDetails else {
-            /// There were no video upload details set, we cannot close this upload
-            onFailure?(VideoUploadError.noUploadDetails)
-            return
-        }
-        
+    private func uploadCompletionHandler() {
         Logger.log(level: .info, topic: .debug, message: "Upload Completed! Confirming with API Service")
         
         urlSession.flush {
             Logger.log(level: .info, topic: .debug, message: "Flushed the background upload")
         }
         
-        /// Confirm that the upload completed. Once this returns we are safe to say the video has completed the upload successfully.
-        #warning("Perhaps just use self.onComplete?() and remove this, along with any API Service calls, use this just for the upload")
-//        apiService.confirmCompleteUpload(forUploadDetails: videoUploadDetails) { [weak self] result in
-//            guard let self = self else { return }
-//            log(message: "Confirm upload complete with result : \(result)", .info)
-//
-//            switch result {
-//            case .success:
-//                self.onComplete?()
-//            case .failure(let error):
-//                self.onFailure?(error)
-//            }
-//
-//            /// Mark our background task completed if this was done in the background
-//            if let backgroundCompletionTaskIdentifier = self.backgroundCompletionTaskIdentifier  {
-//                UIApplication.shared.endBackgroundTask(backgroundCompletionTaskIdentifier)
-//            }
-//        }
+        /// On complete and res
+        onComplete?()
     }
     
     /// Begins an upload task when the video details of our upload have been passed from the API.
     /// The upload task is prepared with the correct parameters required for the file upload and new sessions kicks of an upload task.
     /// - parameters: videoDetails contains the endpoint upload URL used to upload our video
-    private func beginUpload(with videoUploadDetails: VideoUploadDetails) {
-        Logger.log(level: .info, topic: .debug, message: "Begin Upload with : \(videoUploadDetails)")
+    private func beginUpload() {
+        Logger.log(level: .info, topic: .debug, message: "Begin Upload")
         
-        guard let file = file else {
-            onFailure?(VideoUploadError.notSetup)
+        #warning("Get the right info for this call when doing the uploadService")
+        guard let from = from,
+              let to = to else {
+            onFailure?(VideoUploadError.noUploadDetails)
             return
         }
-        #warning("Get the right info for this call when doing the uploadService")
+        
         /// Use our global background session configuration since we only allow one
-        var request = URLRequest(url: URL(string: videoUploadDetails.blobUrl)!)
+        var request = URLRequest(url: to)
         request.httpMethod = "PUT"
         
         // Need to add custom http header fields?
@@ -243,7 +186,7 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
         request.addValue("BlockBlob", forHTTPHeaderField: "x-ms-blob-type")
         request.addValue("\(fileSize)", forHTTPHeaderField: "Content-Length")
         
-        let uploadTask = urlSession.uploadTask(with: request, fromFile: file)
+        let uploadTask = urlSession.uploadTask(with: request, fromFile: from)
         uploadTask.resume()
     }
 }

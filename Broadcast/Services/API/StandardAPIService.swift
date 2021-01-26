@@ -64,13 +64,13 @@ class StandardAPIService : Interceptor {
         timeout: TimeInterval = 7.5) -> Single<(HTTPURLResponse, Data)> {
         return getHeaders()
             .flatMap { [unowned self] headers -> Single<(HTTPURLResponse, Data)> in
+                /// Setup request with session then use the URLRequestConvertible, otherwise no way to inject the timeout
                 let request = session.request(url, method: method,
                                               parameters: parameters,
                                               encoding: encoding,
-                                              headers: HTTPHeaders(headers),
-                                              interceptor: self) { $0.timeoutInterval = timeout }
+                                              headers: HTTPHeaders(headers)) { $0.timeoutInterval = timeout }
                 return self.session.rx
-                    .request(urlRequest: request.convertible)
+                    .request(urlRequest: request.convertible, interceptor: self)
                     .validate(statusCode: validStatusCodes)
                     .responseData()
                     .asSingle()

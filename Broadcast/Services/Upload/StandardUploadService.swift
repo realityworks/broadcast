@@ -98,19 +98,29 @@ extension StandardUploadService : UploadService {
         let uploadMediaObservable = Observable<UploadEvent>.create { [unowned self] observer in
             if let sourceUrl = self.uploadMediaProgress.sourceUrl,
                let destinationUrl = self.uploadMediaProgress.destinationURL {
-                apiService.uploadMedia(from: sourceUrl,
-                                       to: destinationUrl)
-                        .subscribe { response, progress in
-                            let progressFloat = progress.totalBytes > 0 ? Float(progress.bytesWritten) / Float(progress.totalBytes) : 0
-                            observer.onNext(
-                                UploadEvent.uploadMedia(progress: progressFloat))
-                        } onError: { error in
-                            observer.onError(BoomdayError.unknown)
-                        } onCompleted: {
-                            observer.onCompleted()
-                        } onDisposed: {
-                        }
-                        .disposed(by: disposeBag)
+//                apiService.uploadMedia(from: sourceUrl,
+//                                       to: destinationUrl)
+//                        .subscribe { response, progress in
+//                            let progressFloat = progress.totalBytes > 0 ? Float(progress.bytesWritten) / Float(progress.totalBytes) : 0
+//                            observer.onNext(
+//                                UploadEvent.uploadMedia(progress: progressFloat))
+//                        } onError: { error in
+//                            observer.onError(BoomdayError.unknown)
+//                        } onCompleted: {
+//                            observer.onCompleted()
+//                        } onDisposed: {
+//                        }
+//                        .disposed(by: disposeBag)
+                uploadMediaFileSession.start(from: sourceUrl,
+                                             to: destinationUrl)
+                { sent, total in
+                    let progressFloat = total > 0 ? Float(sent) / Float(total) : 0
+                    observer.onNext(UploadEvent.uploadMedia(progress: progressFloat))
+                } onComplete: {
+                    observer.onCompleted()
+                } onFailure: { error in
+                    observer.onError(error)
+                }
             } else {
                 observer.onError(BoomdayError.unknown)
             }
