@@ -48,9 +48,6 @@ class NewPostCreateViewModel : ViewModel {
             
     let showTips: Observable<Bool>
     
-    #warning("TODO: Setup the selected trailer URL outside the profile itself, reset this on init when the profile detail view controller is created. Use the selected trailer as the preferred trailer URL when loading the cell. ie. state.uploadTrailerURL or similar.")
-    
-    
     init(dependencies: Dependencies = .standard) {
         self.schedulers = dependencies.schedulers
         self.postContentUseCase = dependencies.postContentUseCase
