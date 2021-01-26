@@ -23,6 +23,8 @@ extension UIColor {
     static let textFieldBorder = secondaryLightGrey
     static let dashedBorder = UIColor.primaryRed
     static let primaryBackground = UIColor(hex: "#F6F7FA")
+    static let disabledButtonTitle = primaryLightGrey
+    static let buttonTitle = white
     
     static let text = UIColor.secondaryBlack
     static let progressBarColor = UIColor.primaryRed

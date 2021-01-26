@@ -48,8 +48,8 @@ class EditPostView: UIView {
         failedStackView.alignment = .center
         failedStackView.distribution = .fillProportionally
         
-        submitButton.setImage(UIImage.iconRadio?.withTintColor(.white), for: .normal)
-        submitButton.setImage(UIImage.iconRadio?.withTintColor(.secondaryBlack), for: .disabled)
+        submitButton.setImage(UIImage.iconRadio?.withTintColor(.buttonTitle), for: .normal)
+        submitButton.setImage(UIImage.iconRadio?.withTintColor(.disabledButtonTitle), for: .disabled)
                 
         submitButton.imageEdgeInsets = .right(10)
         
