@@ -42,6 +42,7 @@ class ProfileTrailerTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         configureViews()
+        layoutViews()
     }
     
     override func prepareForReuse() {
@@ -53,9 +54,15 @@ class ProfileTrailerTableViewCell: UITableViewCell {
         selectMediaInfoStackView.alignment = .leading
         selectMediaInfoStackView.spacing = 4
         
+        uploadContainerStackView.axis = .vertical
+        uploadContainerStackView.alignment = .center
+        uploadContainerStackView.spacing = 2
+        uploadContainerStackView.distribution = .fill
+        
         failedStackView.axis = .vertical
         failedStackView.alignment = .center
         failedStackView.spacing = 2
+        failedStackView.distribution = .fillProportionally
         
         changeButton.contentHorizontalAlignment = .leading
         
@@ -66,6 +73,10 @@ class ProfileTrailerTableViewCell: UITableViewCell {
                 
         uploadButton.imageEdgeInsets = .right(10)
         
+        failedIconView.contentMode = .scaleAspectFit
+    }
+    
+    private func layoutViews() {
         contentView.addSubview(selectMediaContainerView)
         selectMediaContainerView.topToSuperview(offset:24)
         selectMediaContainerView.height(200)
