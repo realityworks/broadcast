@@ -59,7 +59,7 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
     private let urlSessionConfiguration: URLSessionConfiguration
     private var urlSession: URLSession = URLSession(configuration: .default)
     
-    private init(withSessionIdentifier sessionIdentifier: String) {
+    init(withIdentifier sessionIdentifier: String) {
         
         /// Create our unique session configuration
         urlSessionConfiguration = .background(withIdentifier: sessionIdentifier)

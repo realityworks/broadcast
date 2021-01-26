@@ -21,6 +21,9 @@ class StandardUploadService {
     var apiService: APIService?
     var media: Media?
     var content: PostContent?
+    
+    let uploadTrailerFileSession = MediaUploadSession(withIdentifier: "trailer.background.session")
+    let uploadMediaFileSession = MediaUploadSession(withIdentifier: "media.background.session")
 
     var uploadMediaProgress = UploadProgress()
     var uploadTrailerProgress = UploadProgress()
