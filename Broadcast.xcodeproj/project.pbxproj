@@ -215,6 +215,7 @@
 		1D216A49259870CC007FA845 /* SelectMediaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMediaView.swift; sourceTree = "<group>"; };
 		1D216A4F25987CA7007FA845 /* CustomBorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBorderView.swift; sourceTree = "<group>"; };
 		1D28BF8325C0237000036FA1 /* MediaUploadSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaUploadSession.swift; sourceTree = "<group>"; };
+		1D28BF8925C06E9300036FA1 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		1D2A03E425655BB1008CE2D4 /* AuthenticationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationUseCase.swift; sourceTree = "<group>"; };
 		1D2A03E925655FFC008CE2D4 /* ProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUseCase.swift; sourceTree = "<group>"; };
 		1D2A03EE256561BB008CE2D4 /* PostContentUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostContentUseCase.swift; sourceTree = "<group>"; };
@@ -802,6 +803,7 @@
 		1D9314432577E990001C85C1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1D28BF8925C06E9300036FA1 /* CoreTelephony.framework */,
 				1D9314442577E991001C85C1 /* MobileCoreServices.framework */,
 			);
 			name = Frameworks;
@@ -1340,16 +1342,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1D916DA525640C810059E549 /* Staging.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Broadcast/Broadcast.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = KTKP5PRF82;
 				INFOPLIST_FILE = Broadcast/Assets/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1357,7 +1358,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.boomday.broadcast;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Boomday Broadcast App";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1367,7 +1368,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1D916DA525640C810059E549 /* Staging.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Broadcast/Broadcast.entitlements;
@@ -1376,7 +1376,7 @@
 				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = KTKP5PRF82;
 				INFOPLIST_FILE = Broadcast/Assets/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

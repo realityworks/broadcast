@@ -5,8 +5,8 @@
 //  Created by Piotr Suwara on 26/1/21.
 //
 
-import Foundation
 import UIKit
+import BackgroundTasks
 
 enum VideoUploadError : Error {
     case networkError(String)
@@ -21,14 +21,14 @@ enum VideoUploadError : Error {
 /// to finalise the upload by calling an endpoint with our video id to close the upload.
 class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDelegate, URLSessionDelegate {
     
+    static let `default` = MediaUploadSession()
+    
     // MARK:- Callback Handlers
     private var onProgressUpdate: ((Int64, Int64) -> Void)?
     private var onComplete: (() -> Void)?
     private var onFailure: ((Error) -> Void)?
     
     // MARK:- Internal properties
-    #warning("Change to use dependency injection or maybe we don't need it?")
-    //private let apiService: APIService = Services.standard.apiService//DependencyInjection.defaultService
     
     /// File URL referecing the video we are currently uploading
     private var from: URL?
@@ -39,22 +39,23 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
     
     /// You can only initialize a session once, in our video uploader case we need to make a singleton
     /// The URLSession itself behaves like a singleton.
-    private let urlSessionConfiguration: URLSessionConfiguration
-    private var urlSession: URLSession = URLSession(configuration: .default)
+    private var urlSession: URLSession!
     
-    init(withIdentifier sessionIdentifier: String) {
-        
+    private override init() {
         /// Create our unique session configuration
-        urlSessionConfiguration = .background(withIdentifier: sessionIdentifier)
-        urlSessionConfiguration.sessionSendsLaunchEvents = true
-        urlSessionConfiguration.shouldUseExtendedBackgroundIdleMode = true
         
         super.init()
+        
+        let urlSessionConfiguration = URLSessionConfiguration.background(withIdentifier: "background.session.upload")
+        urlSessionConfiguration.sessionSendsLaunchEvents = true
+        urlSessionConfiguration.shouldUseExtendedBackgroundIdleMode = true
         
         /// Not ideal, but in the private init, you cannot pass in a delegate to the initiliazer before all of self is initialized, hence the urlSession being initialized as a parameter
         /// Then initialized again here with a delegate.
         /// Here we create our base URLSession used for all video uploads in foreground and background.
-        urlSession = URLSession(configuration: urlSessionConfiguration, delegate: self, delegateQueue: OperationQueue.main)
+        urlSession = URLSession(configuration: urlSessionConfiguration,
+                                delegate: self,
+                                delegateQueue: nil)
     }
     
     /// Initiate the uploader.
@@ -181,7 +182,7 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
         request.httpMethod = "PUT"
         
         // Need to add custom http header fields?
-        let fileSize = 0//FileManager.default.sizeOfFile(atPath: file.path)!
+        let fileSize = from.fileSize()!
         
         request.addValue("BlockBlob", forHTTPHeaderField: "x-ms-blob-type")
         request.addValue("\(fileSize)", forHTTPHeaderField: "Content-Length")

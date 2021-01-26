@@ -22,8 +22,8 @@ class StandardUploadService {
     var media: Media?
     var content: PostContent?
     
-    let uploadTrailerFileSession = MediaUploadSession(withIdentifier: "trailer.background.session")
-    let uploadMediaFileSession = MediaUploadSession(withIdentifier: "media.background.session")
+    //let uploadTrailerFileSession: MediaUploadSession
+    //let uploadMediaFileSession: MediaUploadSession
 
     var uploadMediaProgress = UploadProgress()
     var uploadTrailerProgress = UploadProgress()
@@ -39,6 +39,8 @@ class StandardUploadService {
         self.baseUrl = dependencies.baseUrl
         self.schedulers = dependencies.schedulers
         self.uploadSession = Session.default
+        //self.uploadTrailerFileSession = MediaUploadSession(withIdentifier: "background.session.trailer")
+        //self.uploadMediaFileSession = MediaUploadSession(withIdentifier: "background.session.media")
     }
 }
 
@@ -111,8 +113,8 @@ extension StandardUploadService : UploadService {
 //                        } onDisposed: {
 //                        }
 //                        .disposed(by: disposeBag)
-                uploadMediaFileSession.start(from: sourceUrl,
-                                             to: destinationUrl)
+                MediaUploadSession.default.start(from: sourceUrl,
+                                                 to: destinationUrl)
                 { sent, total in
                     let progressFloat = total > 0 ? Float(sent) / Float(total) : 0
                     observer.onNext(UploadEvent.uploadMedia(progress: progressFloat))
@@ -194,6 +196,7 @@ extension StandardUploadService : UploadService {
                                  completeUploadObservable,
                                  setContentObservable,
                                  publishContentObservable)
+            .observe(on: Schedulers.standard.main)
             .map { event -> UploadProgress in
                 switch event {
                 case .createPost(let postId):
