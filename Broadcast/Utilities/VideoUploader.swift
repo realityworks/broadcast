@@ -33,11 +33,6 @@ class VideoUploader : NSObject, URLSessionTaskDelegate, URLSessionDataDelegate, 
         let blobUrl: String
     }
     
-    /// Only one video uploader can exist at a time as we manage a background session delegate here
-    static let backgroundSessionIdentifier = "upload.video.background"
-    static let instance = VideoUploader()
-    
-    
     // MARK:- Callback Handlers
     var onProgressUpdate: ((Int64, Int64) -> Void)?
     var onComplete: (() -> Void)?
@@ -64,10 +59,10 @@ class VideoUploader : NSObject, URLSessionTaskDelegate, URLSessionDataDelegate, 
     private let urlSessionConfiguration: URLSessionConfiguration
     private var urlSession: URLSession = URLSession(configuration: .default)
     
-    private override init() {
+    private init(withSessionIdentifier sessionIdentifier: String) {
         
         /// Create our unique session configuration
-        urlSessionConfiguration = .background(withIdentifier: Self.backgroundSessionIdentifier)
+        urlSessionConfiguration = .background(withIdentifier: sessionIdentifier)
         urlSessionConfiguration.sessionSendsLaunchEvents = true
         urlSessionConfiguration.shouldUseExtendedBackgroundIdleMode = true
         
