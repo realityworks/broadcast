@@ -64,7 +64,7 @@ class EditPostView: UIView {
 
         verticalStackView.addArrangedSubview(titleHeading)
         verticalStackView.addArrangedSubview(titleTextField)
-        verticalStackView.addSpace(8)
+        verticalStackView.addSpace(4)
         verticalStackView.addArrangedSubview(captionHeading)
         verticalStackView.addArrangedSubview(captionTextView)
         verticalStackView.addSpace(10)
