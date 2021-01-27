@@ -90,7 +90,7 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
                    message: "Task did complete with error : \(error?.localizedDescription ?? "No error provided")")
 
         if let error = error {
-            onFailure?(VideoUploadError.networkError(error.localizedDescription))
+            failureHandler(error: VideoUploadError.networkError(error.localizedDescription))
         }
     }
     
@@ -107,7 +107,9 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
                    message: "Did send body data  BYTES SENT : \(bytesSent), TOTAL SENT : \(totalBytesSent), TOTAL EXPECTED TO SEND : \(totalBytesExpectedToSend)")
         
         /// Call the update handler with the number of bytes sent and bytes expected to send.
-        onProgressUpdate?(totalBytesSent, totalBytesExpectedToSend)
+        DispatchQueue.main.async { [weak self] in
+            self?.onProgressUpdate?(totalBytesSent, totalBytesExpectedToSend)
+        }
         
         finishedUploading = totalBytesSent == totalBytesExpectedToSend
         if finishedUploading && UIApplication.shared.applicationState == .active {
@@ -134,7 +136,7 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
         if httpResponse.statusCode == 201 {
             uploadCompletionHandler()
         } else {
-            onFailure?(VideoUploadError.networkError("Error code : \(httpResponse.statusCode)"))
+            failureHandler(error: VideoUploadError.networkError("Error code : \(httpResponse.statusCode)"))
         }
     }
     
@@ -153,6 +155,14 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
     
     // MARK:- Utility Functions
     
+    private func failureHandler(error: Error) {
+        Logger.log(level: .warning, topic: .debug, message: error.localizedDescription)
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.onFailure?(error)
+        }
+    }
+    
     private func uploadCompletionHandler() {
         Logger.log(level: .info, topic: .debug, message: "Upload Completed! Confirming with API Service")
         
@@ -161,7 +171,9 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
         }
         
         /// On complete and res
-        onComplete?()
+        DispatchQueue.main.async { [weak self] in
+            self?.onComplete?()
+        }
     }
     
     /// Begins an upload task when the video details of our upload have been passed from the API.
@@ -173,7 +185,7 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
         #warning("Get the right info for this call when doing the uploadService")
         guard let from = from,
               let to = to else {
-            onFailure?(VideoUploadError.noUploadDetails)
+            failureHandler(error: VideoUploadError.noUploadDetails)
             return
         }
         
