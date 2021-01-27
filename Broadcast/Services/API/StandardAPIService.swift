@@ -175,7 +175,7 @@ extension StandardAPIService : APIService {
             .appendingPathComponent("media")
             .appendingPathComponent("complete")
                 
-        return authenticatedRequest(method: .post, url: url)
+        return authenticatedRequest(method: .post, url: url, timeout: 60)
             .emptyResponseBody()
     }
     
@@ -213,7 +213,7 @@ extension StandardAPIService : APIService {
             .appendingPathComponent(mediaId)
             .appendingPathComponent("complete")
                 
-        return authenticatedRequest(method: .post, url: url, timeout: 120)
+        return authenticatedRequest(method: .post, url: url, timeout: 60)
             .emptyResponseBody()
     }
     

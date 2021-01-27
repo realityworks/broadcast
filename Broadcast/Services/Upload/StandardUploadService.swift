@@ -268,19 +268,6 @@ extension StandardUploadService : UploadService {
                 } onFailure: { error in
                     observer.onError(error)
                 }
-//                apiService.uploadMedia(from: sourceUrl,
-//                                       to: destinationUrl)
-//                        .subscribe { response, progress in
-//                            let progressFloat = progress.totalBytes > 0 ? Float(progress.bytesWritten) / Float(progress.totalBytes) : 0
-//                            observer.onNext(
-//                                UploadEvent.uploadMedia(progress: progressFloat))
-//                        } onError: { error in
-//                            observer.onError(BoomdayError.unknown)
-//                        } onCompleted: {
-//                            observer.onCompleted()
-//                        } onDisposed: {
-//                        }
-//                        .disposed(by: disposeBag)
             } else {
                 observer.onError(BoomdayError.unknown)
             }
