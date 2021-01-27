@@ -72,6 +72,8 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
         self.onComplete = onComplete
         self.onFailure = onFailure
         
+        finishedUploading = false
+        
         beginUpload()
     }
     
@@ -112,8 +114,12 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
         }
         
         finishedUploading = totalBytesSent == totalBytesExpectedToSend
-        if finishedUploading && UIApplication.shared.applicationState == .active {
-            uploadCompletionHandler()
+        
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            if self.finishedUploading && UIApplication.shared.applicationState == .active {
+                self.uploadCompletionHandler()
+            }
         }
     }
     
