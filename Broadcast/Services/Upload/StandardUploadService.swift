@@ -39,7 +39,6 @@ class StandardUploadService {
         self.baseUrl = dependencies.baseUrl
         self.schedulers = dependencies.schedulers
         self.uploadSession = Session.default
-        //self.uploadTrailerFileSession = MediaUploadSession(withIdentifier: "background.session.trailer")
     }
 }
 

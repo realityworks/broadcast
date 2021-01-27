@@ -150,8 +150,8 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
                    message: "Background session has finished!")
         DispatchQueue.main.async { [unowned self] in
             #warning("Fix the background session completion")
-//            guard let appDelegate: AppDelegate = AppDelegate.shared else { return }
-//            appDelegate.backgroundSessionCompletion?()
+            guard let appDelegate: AppDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+            appDelegate.backgroundSessionCompletion?()
             
             self.uploadCompletionHandler()
         }
@@ -185,7 +185,6 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
     private func beginUpload() {
         Logger.log(level: .info, topic: .debug, message: "Begin Upload")
         
-        #warning("Get the right info for this call when doing the uploadService")
         guard let from = from,
               let to = to else {
             failureHandler(error: VideoUploadError.noUploadDetails)
