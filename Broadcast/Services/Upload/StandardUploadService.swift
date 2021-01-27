@@ -60,10 +60,18 @@ extension StandardUploadService : UploadService {
         case .image:
             self.media = uploadMedia
         case .video(let videoUrl):
-            guard let data = try? Data(contentsOf: videoUrl) else { return .error(BoomdayError.unknown) }
-            let savedVideoUrl = FileManager.default.documentsDirectory().appendingPathComponent("video")
-            try? data.write(to: videoUrl)
-            self.media = .video(url: savedVideoUrl)
+            //guard let data = try? Data(contentsOf: videoUrl) else { return .error(BoomdayError.unknown) }
+            do {
+                let destinationUrl = FileManager.default.documentsDirectory().appendingPathComponent("video")
+                if FileManager.default.fileExists(atPath: destinationUrl.path) {
+                    try FileManager.default.removeItem(at: destinationUrl)
+                }
+                
+                try FileManager.default.copyItem(at: videoUrl, to: destinationUrl)
+                self.media = .video(url: destinationUrl)
+            } catch {
+                return .error(error)
+            }
         }
         
         guard let media = media else { return .error(BoomdayError.unknown) }
