@@ -60,7 +60,6 @@ extension StandardUploadService : UploadService {
         case .image:
             self.media = uploadMedia
         case .video(let videoUrl):
-            //guard let data = try? Data(contentsOf: videoUrl) else { return .error(BoomdayError.unknown) }
             do {
                 let destinationUrl = FileManager.default.documentsDirectory().appendingPathComponent("video")
                 if FileManager.default.fileExists(atPath: destinationUrl.path) {
@@ -116,6 +115,7 @@ extension StandardUploadService : UploadService {
         
         // Upload the media to the blob
         let uploadMediaObservable = Observable<UploadEvent>.create { [unowned self] observer in
+            Logger.log(level: .verbose, topic: .debug, message:  "Begin upload media")
             if let sourceUrl = self.uploadMediaProgress.sourceUrl,
                let destinationUrl = self.uploadMediaProgress.destinationURL {
                 uploadMediaFileSession.start(from: sourceUrl,
@@ -124,6 +124,7 @@ extension StandardUploadService : UploadService {
                     let progressFloat = total > 0 ? Float(sent) / Float(total) : 0
                     observer.onNext(UploadEvent.uploadMedia(progress: progressFloat))
                 } onComplete: {
+                    Logger.log(level: .verbose, topic: .debug, message:  "Completed upload")
                     observer.onCompleted()
                 } onFailure: { error in
                     observer.onError(error)
@@ -137,15 +138,16 @@ extension StandardUploadService : UploadService {
         
         // Trigger complete upload
         let completeUploadObservable = Observable<UploadEvent>.create { [unowned self] observer in
+            Logger.log(level: .verbose, topic: .debug, message:  "Begin upload media completion")
             if let postId = self.uploadMediaProgress.postId,
                let mediaId = self.uploadMediaProgress.mediaId {
                 apiService.uploadMediaComplete(for: postId, mediaId)
                         .subscribe {
-                            Logger.log(level: .verbose, topic: .debug, message:  "FINALIZED MEDIA UPLOAD COMPLETE")
+                            Logger.log(level: .verbose, topic: .debug, message:  "Finalized media upload complete")
                             observer.onNext(UploadEvent.completeUpload)
                             observer.onCompleted()
                         } onError: { error in
-                            observer.onError(BoomdayError.unknown)
+                            observer.onError(error)
                         }
                         .disposed(by: disposeBag)
             } else {
