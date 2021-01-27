@@ -189,6 +189,7 @@ extension StandardUploadService : UploadService {
             
             return Disposables.create()
         }
+        #warning("Do we need to run on main???")
         
         return Observable.concat(createPostObservable,
                                  getMediaUploadUrlObservable,
@@ -196,7 +197,7 @@ extension StandardUploadService : UploadService {
                                  completeUploadObservable,
                                  setContentObservable,
                                  publishContentObservable)
-            .observe(on: Schedulers.standard.main)
+            //.observe(on: Schedulers.standard.main)
             .map { event -> UploadProgress in
                 switch event {
                 case .createPost(let postId):

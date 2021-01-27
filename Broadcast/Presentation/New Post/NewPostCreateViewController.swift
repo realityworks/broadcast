@@ -363,7 +363,7 @@ extension NewPostCreateViewController: UIImagePickerControllerDelegate,
             try? data.write(to: imageUrl)
             selected(imageUrl: imageUrl)
         } else if let videoUrl = info[UIImagePickerController.InfoKey.mediaURL] as? URL,
-                  let data = try? Data(contentsOf: srcVideoUrl) {
+                  let data = try? Data(contentsOf: videoUrl) {
             #warning("NEED TO WRITE TO DOCUMENTS BEFORE UPLOADING!!")
             let videoUrl = FileManager.default.documentsDirectory().appendingPathComponent("video.mov")
             try? data.write(to: videoUrl)
