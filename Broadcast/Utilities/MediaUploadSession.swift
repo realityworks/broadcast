@@ -21,8 +21,6 @@ enum VideoUploadError : Error {
 /// to finalise the upload by calling an endpoint with our video id to close the upload.
 class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDelegate, URLSessionDelegate {
     
-    static let `default` = MediaUploadSession()
-    
     // MARK:- Callback Handlers
     private var onProgressUpdate: ((Int64, Int64) -> Void)?
     private var onComplete: (() -> Void)?
@@ -41,12 +39,12 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
     /// The URLSession itself behaves like a singleton.
     private var urlSession: URLSession!
     
-    private override init() {
+    init(withIdentifier sessionIdentifier: String) {
         /// Create our unique session configuration
         
         super.init()
         
-        let urlSessionConfiguration = URLSessionConfiguration.background(withIdentifier: "background.session.upload")
+        let urlSessionConfiguration = URLSessionConfiguration.background(withIdentifier: sessionIdentifier)
         urlSessionConfiguration.sessionSendsLaunchEvents = true
         urlSessionConfiguration.shouldUseExtendedBackgroundIdleMode = true
         
