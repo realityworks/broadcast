@@ -22,7 +22,7 @@ class StandardUploadService {
     var media: Media?
     var content: PostContent?
     
-    //let uploadTrailerFileSession: MediaUploadSession
+    let uploadTrailerFileSession = MediaUploadSession(withIdentifier: "background.session.trailer")
     let uploadMediaFileSession = MediaUploadSession(withIdentifier: "background.session.media")
 
     var uploadMediaProgress = UploadProgress()
@@ -55,25 +55,15 @@ extension StandardUploadService : UploadService {
         guard let apiService = apiService else { return .error(BoomdayError.unknown) }
         
         /// Performing a check if image or video, if a video, we need to save out to a local file.
-        #warning("Need to look at possibly saving the image also in the future, currently assumes it's saved!")
-        switch uploadMedia {
-        case .image:
-            self.media = uploadMedia
-        case .video(let videoUrl):
-            do {
-                let destinationUrl = FileManager.default.documentsDirectory().appendingPathComponent("video")
-                if FileManager.default.fileExists(atPath: destinationUrl.path) {
-                    try FileManager.default.removeItem(at: destinationUrl)
-                }
-                
-                try FileManager.default.copyItem(at: videoUrl, to: destinationUrl)
-                self.media = .video(url: destinationUrl)
-            } catch {
-                return .error(error)
-            }
+        do {
+            media = try uploadMedia.localCopy()
+        } catch {
+            return .error(error)
         }
         
-        guard let media = media else { return .error(BoomdayError.unknown) }
+        guard let media = media else {
+            return .error(BoomdayError.internalMemoryError(text: "Internal failure for media, please reinstall app"))
+        }
         
         uploadMediaProgress = UploadProgress()
         uploadMediaProgress.sourceUrl = media.url
@@ -241,11 +231,15 @@ extension StandardUploadService : UploadService {
     
     func uploadTrailer(from url: URL) -> Observable<UploadProgress> {
         guard let apiService = apiService else { return .error(BoomdayError.unknown) }
-        
-        uploadTrailerProgress = UploadProgress()
-        uploadTrailerProgress.sourceUrl = url
 
+        uploadTrailerProgress = UploadProgress()
         
+        do {
+            uploadTrailerProgress.sourceUrl = try url.copiedToLocal(filename: "trailer")
+        } catch {
+            return .error(error)
+        }
+
         // Get the upload URL
         let getUploadUrlObservable = Observable<UploadEvent>.create { [unowned self] observer in
             apiService.getTrailerUploadUrl()

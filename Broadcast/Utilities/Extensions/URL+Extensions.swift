@@ -17,6 +17,16 @@ extension URL {
         return attrs[.size] as? Int64
     }
     
+    func copiedToLocal(filename: String) throws -> URL {
+        let destinationUrl = FileManager.default.documentsDirectory().appendingPathComponent(filename)
+        if FileManager.default.fileExists(atPath: destinationUrl.path) {
+            try FileManager.default.removeItem(at: destinationUrl)
+        }
+        
+        try FileManager.default.copyItem(at: self, to: destinationUrl)
+        return destinationUrl
+    }
+    
     var mimeType: String {
         let pathExtension = self.pathExtension
         if let uti = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, pathExtension as NSString, nil)?.takeRetainedValue() {

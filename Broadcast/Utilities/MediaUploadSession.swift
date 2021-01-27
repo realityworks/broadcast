@@ -161,7 +161,6 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
     
     private func failureHandler(error: Error) {
         Logger.log(level: .warning, topic: .debug, message: error.localizedDescription)
-        
         DispatchQueue.main.async { [weak self] in
             self?.onFailure?(error)
         }

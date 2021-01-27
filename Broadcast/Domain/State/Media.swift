@@ -45,4 +45,18 @@ enum Media : Equatable {
             return ""
         }
     }
+    
+    func localCopy() throws -> Media {
+        #warning("Need to look at possibly saving the image also in the future, currently assumes it's saved!")
+        switch self {
+        case .image:
+            return self
+        case .video(let videoUrl):
+            do {
+                return .video(url: try videoUrl.copiedToLocal(filename: "video"))
+            } catch {
+                throw error
+            }
+        }
+    }
 }
