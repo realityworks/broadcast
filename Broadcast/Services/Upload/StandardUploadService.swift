@@ -52,11 +52,22 @@ extension StandardUploadService : UploadService {
         self.apiService = apiService
     }
     
-    func upload(media: Media, content: PostContent) -> Observable<UploadProgress> {
+    func upload(media uploadMedia: Media, content: PostContent) -> Observable<UploadProgress> {
         guard let apiService = apiService else { return .error(BoomdayError.unknown) }
-
-        self.media = media
-        self.content = content
+        
+        /// Performing a check if image or video, if a video, we need to save out to a local file.
+        #warning("Need to look at possibly saving the image also in the future, currently assumes it's saved!")
+        switch uploadMedia {
+        case .image:
+            self.media = uploadMedia
+        case .video(let videoUrl):
+            guard let data = try? Data(contentsOf: videoUrl) else { return .error(BoomdayError.unknown) }
+            let savedVideoUrl = FileManager.default.documentsDirectory().appendingPathComponent("video")
+            try? data.write(to: videoUrl)
+            self.media = .video(url: savedVideoUrl)
+        }
+        
+        guard let media = media else { return .error(BoomdayError.unknown) }
         
         uploadMediaProgress = UploadProgress()
         uploadMediaProgress.sourceUrl = media.url
