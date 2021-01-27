@@ -186,7 +186,6 @@ extension StandardUploadService : UploadService {
             
             return Disposables.create()
         }
-        #warning("Do we need to run on main???")
         
         return Observable.concat(createPostObservable,
                                  getMediaUploadUrlObservable,
@@ -258,19 +257,30 @@ extension StandardUploadService : UploadService {
         let uploadTrailerObservable = Observable<UploadEvent>.create { [unowned self] observer in
             if let sourceUrl = self.uploadTrailerProgress.sourceUrl,
                let destinationUrl = self.uploadTrailerProgress.destinationURL {
-                apiService.uploadMedia(from: sourceUrl,
-                                       to: destinationUrl)
-                        .subscribe { response, progress in
-                            let progressFloat = progress.totalBytes > 0 ? Float(progress.bytesWritten) / Float(progress.totalBytes) : 0
-                            observer.onNext(
-                                UploadEvent.uploadMedia(progress: progressFloat))
-                        } onError: { error in
-                            observer.onError(BoomdayError.unknown)
-                        } onCompleted: {
-                            observer.onCompleted()
-                        } onDisposed: {
-                        }
-                        .disposed(by: disposeBag)
+                uploadTrailerFileSession.start(from: sourceUrl,
+                                             to: destinationUrl)
+                { sent, total in
+                    let progressFloat = total > 0 ? Float(sent) / Float(total) : 0
+                    observer.onNext(UploadEvent.uploadMedia(progress: progressFloat))
+                } onComplete: {
+                    Logger.log(level: .verbose, topic: .debug, message:  "Completed upload")
+                    observer.onCompleted()
+                } onFailure: { error in
+                    observer.onError(error)
+                }
+//                apiService.uploadMedia(from: sourceUrl,
+//                                       to: destinationUrl)
+//                        .subscribe { response, progress in
+//                            let progressFloat = progress.totalBytes > 0 ? Float(progress.bytesWritten) / Float(progress.totalBytes) : 0
+//                            observer.onNext(
+//                                UploadEvent.uploadMedia(progress: progressFloat))
+//                        } onError: { error in
+//                            observer.onError(BoomdayError.unknown)
+//                        } onCompleted: {
+//                            observer.onCompleted()
+//                        } onDisposed: {
+//                        }
+//                        .disposed(by: disposeBag)
             } else {
                 observer.onError(BoomdayError.unknown)
             }
