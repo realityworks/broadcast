@@ -82,14 +82,9 @@ class ProfileTrailerTableViewCell: UITableViewCell {
         
         failedIconView.contentMode = .scaleAspectFit
         
-        thumbnailImageView.layer.cornerRadius = 16
-        blurredEffectView.layer.cornerRadius = 16
-        //processingView.layer.cornerRadius = 16
-        
-        thumbnailImageView.clipsToBounds = true
-        blurredEffectView.clipsToBounds = true
-        //processingView.clipsToBounds = true
-        
+        #warning("Move standard corner radius of 16 into refactored standard value")
+        thumbnailImageView.roundedCorners()
+        blurredEffectView.roundedCorners()        
         processingView.animating = true
     }
     

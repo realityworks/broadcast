@@ -64,6 +64,8 @@
 		1D3F71E82571294F00DE7F05 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3F71E72571294F00DE7F05 /* String+Extensions.swift */; };
 		1D3F72262571634E00DE7F05 /* RxTableViewSectionedReloadDataSource+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3F72252571634D00DE7F05 /* RxTableViewSectionedReloadDataSource+Extensions.swift */; };
 		1D419B9F258083450096FBB7 /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D419B9E258083450096FBB7 /* Dictionary+Extensions.swift */; };
+		1D57416F25C3156100DEFF47 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D57416E25C3156100DEFF47 /* UIView+Extensions.swift */; };
+		1D57417325C3157F00DEFF47 /* UIView+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D57417225C3157F00DEFF47 /* UIView+Styling.swift */; };
 		1D5CF0C32577CF50008F8C22 /* MediaPickerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5CF0C22577CF50008F8C22 /* MediaPickerAdapter.swift */; };
 		1D63169B258B99DB0009A4E1 /* UploadProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D63169A258B99DB0009A4E1 /* UploadProgress.swift */; };
 		1D6316AB258C679D0009A4E1 /* UploadEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6316AA258C679D0009A4E1 /* UploadEvent.swift */; };
@@ -266,6 +268,8 @@
 		1D3F71E72571294F00DE7F05 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		1D3F72252571634D00DE7F05 /* RxTableViewSectionedReloadDataSource+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RxTableViewSectionedReloadDataSource+Extensions.swift"; sourceTree = "<group>"; };
 		1D419B9E258083450096FBB7 /* Dictionary+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extensions.swift"; sourceTree = "<group>"; };
+		1D57416E25C3156100DEFF47 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		1D57417225C3157F00DEFF47 /* UIView+Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Styling.swift"; sourceTree = "<group>"; };
 		1D5CF0C22577CF50008F8C22 /* MediaPickerAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPickerAdapter.swift; sourceTree = "<group>"; };
 		1D63169A258B99DB0009A4E1 /* UploadProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadProgress.swift; sourceTree = "<group>"; };
 		1D6316AA258C679D0009A4E1 /* UploadEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadEvent.swift; sourceTree = "<group>"; };
@@ -709,6 +713,7 @@
 				1D3F71C1256FFC0B00DE7F05 /* UILabel+Styling.swift */,
 				1D2CAA1A2577739700A54AE5 /* Style+Styling.swift */,
 				1D9256F0257FBB0600E988B2 /* UITextView+Styling.swift */,
+				1D57417225C3157F00DEFF47 /* UIView+Styling.swift */,
 			);
 			path = Styling;
 			sourceTree = "<group>";
@@ -879,6 +884,7 @@
 				1DE0B57425A6D16800BC3CEF /* RxAlamofire+Extensions.swift */,
 				1D77CADE25B73C4C0069A381 /* FileManager+Extensions.swift */,
 				1DA0431B25BB0D4D00E3DB8C /* UIApplication+Extensions.swift */,
+				1D57416E25C3156100DEFF47 /* UIView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1114,6 +1120,7 @@
 				1D3F71D82571205200DE7F05 /* LocalizedString.swift in Sources */,
 				1D916D98256408CC0059E549 /* Logger.swift in Sources */,
 				1D2A043425658484008CE2D4 /* LoginViewModel.swift in Sources */,
+				1D57417325C3157F00DEFF47 /* UIView+Styling.swift in Sources */,
 				1D9256E0257F5D5100E988B2 /* EditPostView.swift in Sources */,
 				1D6316AB258C679D0009A4E1 /* UploadEvent.swift in Sources */,
 				1D9256DB257F518D00E988B2 /* NewPostCreateViewModel.swift in Sources */,
@@ -1130,6 +1137,7 @@
 				1D916D1225629C1E0059E549 /* ViewController.swift in Sources */,
 				1D916D88256404190059E549 /* AuthenticationState.swift in Sources */,
 				1D2A0420256582A0008CE2D4 /* Router.swift in Sources */,
+				1D57416F25C3156100DEFF47 /* UIView+Extensions.swift in Sources */,
 				1DA3E442258748EF00F1825F /* CreatePostResponse.swift in Sources */,
 				1D3ED5FA25663512004236BB /* UIFont+Styling.swift in Sources */,
 				1D916D592562C2920059E549 /* Schedulers.swift in Sources */,
