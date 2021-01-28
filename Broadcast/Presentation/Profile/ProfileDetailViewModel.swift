@@ -48,6 +48,7 @@ class ProfileDetailViewModel : ViewModel {
     
     let selectedTrailerUrl: Observable<URL?>
     let trailerVideoUrl: Observable<URL?>
+    let trailerThumbnailUrl: Observable<URL?>
     let runTimeTitle: Observable<NSAttributedString>
     let mediaTypeTitle: Observable<String>
     let showingTrailer: Observable<Bool>
@@ -75,6 +76,8 @@ class ProfileDetailViewModel : ViewModel {
         profileImage = dependencies.profileImage.compactMap { $0 ?? UIImage.profileImage }
         
         selectedTrailerUrl = dependencies.selectedTrailerUrlObservable
+        trailerThumbnailUrl = profileObservable.map { URL(string: $0.trailerThumbnailUrl) }
+        
         trailerVideoUrl = Observable.combineLatest(
             profileObservable.map { URL(string: $0.trailerVideoUrl) },
             selectedTrailerUrl) { profileTrailerUrl, selectedTrailerUrl in

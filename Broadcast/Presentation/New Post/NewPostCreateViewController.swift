@@ -39,11 +39,15 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         
         navigationBar(styleAs: .dark(title: LocalizedString.newPost))
         
-        let cancelBarButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelTapped))
+        let cancelBarButton = UIBarButtonItem(barButtonSystemItem: .cancel,
+                                              target: self,
+                                              action: #selector(cancelTapped))
         cancelBarButton.tintColor = .white
         navigationItem.leftBarButtonItem = cancelBarButton
         
-        let tipsBarButton = UIBarButtonItem(image: UIImage.iconHelpCricle, style: UIBarButtonItem.Style.plain, target: self, action: #selector(tipsTapped))
+        let tipsBarButton = UIBarButtonItem(image: UIImage.iconHelpCricle,
+                                            style: UIBarButtonItem.Style.plain,
+                                            target: self, action: #selector(tipsTapped))
         tipsBarButton.tintColor = .white
         navigationItem.rightBarButtonItem = tipsBarButton
         

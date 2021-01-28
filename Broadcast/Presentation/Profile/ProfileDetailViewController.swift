@@ -354,6 +354,13 @@ class ProfileDetailViewController: ViewController {
         viewModel.showFailed
             .bind(to: cell.rx.failed)
             .disposed(by: cell.disposeBag)
+        
+        viewModel.trailerThumbnailUrl
+            .compactMap { $0 }
+            .subscribe(onNext: { url in
+                cell.thumbnailImageView.sd_setImage(with: url)
+            })
+            .disposed(by: cell.disposeBag)
     }
 }
 

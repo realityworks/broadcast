@@ -22,6 +22,11 @@ class ProfileTrailerTableViewCell: UITableViewCell {
     let selectMediaView = SelectMediaView()
     let changeButton = UIButton.textDestructive(withTitle: LocalizedString.changeVideo)
     
+    let blurEffect = UIBlurEffect(style: .light)
+    let blurredEffectView: UIVisualEffectView!
+    let thumbnailImageView = UIImageView()
+    let processingView = ProcessingView()
+    
     let uploadContainerStackView = UIStackView()
     
     let failedContainerView = UIView()
@@ -39,6 +44,8 @@ class ProfileTrailerTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle,
                   reuseIdentifier: String?) {
+        
+        self.blurredEffectView = UIVisualEffectView(effect: blurEffect)
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         configureViews()
@@ -74,6 +81,11 @@ class ProfileTrailerTableViewCell: UITableViewCell {
         uploadButton.imageEdgeInsets = .right(10)
         
         failedIconView.contentMode = .scaleAspectFit
+        
+        thumbnailImageView.layer.cornerRadius = 16
+        processingView.layer.cornerRadius = 16
+        
+        processingView.animating = true
     }
     
     private func layoutViews() {
@@ -88,6 +100,16 @@ class ProfileTrailerTableViewCell: UITableViewCell {
         selectMediaView.topToSuperview()
         selectMediaView.width(200)
         selectMediaView.height(200)
+        
+        /// Processing with thumbnail view (Order important)
+        #warning("Refactor this in future to make a universal image with thumbnail view and processing view")
+        selectMediaContainerView.addSubview(thumbnailImageView)
+        selectMediaContainerView.addSubview(blurredEffectView)
+        selectMediaContainerView.addSubview(processingView)
+        
+        blurredEffectView.edges(to: selectMediaView)
+        thumbnailImageView.edges(to: selectMediaView)
+        processingView.edges(to: selectMediaView)
         
         selectMediaContainerView.addSubview(selectMediaInfoStackView)
         selectMediaInfoStackView.addArrangedSubview(selectedMediaTitleLabel)
