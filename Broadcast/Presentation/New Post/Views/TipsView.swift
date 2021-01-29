@@ -51,7 +51,7 @@ class TipsView : UIView {
         verticalStackView.alignment = .center
         
         containerView.backgroundColor = .darkGrey
-        containerView.layer.cornerRadius = 16
+        containerView.roundedCorners()
         
         closeButton.setTitleColor(.primaryLightGrey, for: .normal)
     }

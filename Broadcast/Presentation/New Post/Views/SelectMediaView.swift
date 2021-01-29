@@ -30,7 +30,7 @@ class SelectMediaView: UIView {
     private func configureViews() {
         clipsToBounds = false
         backgroundColor = .white
-        layer.cornerRadius = 16
+        roundedCorners()
         
         selectMediaButton.backgroundColor = .clear
         selectMediaButton.setImage(UIImage.iconPlusCircle?.withRenderingMode(.alwaysTemplate), for: .normal)
@@ -39,13 +39,8 @@ class SelectMediaView: UIView {
         selectMediaButton.titleLabel?.font = UIFont.smallBodyBold
         selectMediaButton.setTitleColor(UIColor.secondaryBlack, for: .normal)
         
-        dashedBorderView.layer.cornerRadius = 16
+        dashedBorderView.roundedCorners()
         
-        videoMediaOverlay.layer.cornerRadius = 16
-        videoMediaOverlay.clipsToBounds = true
-        
-        imageMediaOverlay.layer.cornerRadius = 25
-        imageMediaOverlay.clipsToBounds = true
         imageMediaOverlay.contentMode = .scaleAspectFill
     }
     

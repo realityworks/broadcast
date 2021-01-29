@@ -43,7 +43,7 @@ class TextPopup : UIView {
         verticalStackView.alignment = .leading
         
         containerView.backgroundColor = .darkGrey
-        containerView.layer.cornerRadius = 16
+        containerView.roundedCorners()
                 
         titleLabel.textColor = .primaryWhite
         descriptionLabel.textColor = .primaryWhite

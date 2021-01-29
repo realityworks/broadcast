@@ -200,7 +200,8 @@ class PostSummaryView : UIView {
         verticalStackView.rightToSuperview()
         verticalStackView.topToSuperview(usingSafeArea: true)
         verticalStackView.bottomToSuperview()
-        layer.cornerRadius = 16
+        
+        roundedCorners()
     }
     
     func style() {
