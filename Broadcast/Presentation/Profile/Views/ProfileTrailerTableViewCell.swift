@@ -82,7 +82,6 @@ class ProfileTrailerTableViewCell: UITableViewCell {
         
         failedIconView.contentMode = .scaleAspectFit
         
-        #warning("Move standard corner radius of 16 into refactored standard value")
         thumbnailImageView.roundedCorners()
         blurredEffectView.roundedCorners()        
         processingView.animating = true
@@ -167,8 +166,16 @@ extension Reactive where Base : ProfileTrailerTableViewCell {
                 UIImage.iconRadio?.withTintColor(.white)
             
             target.uploadButton.setImage(image, for: .normal)
-            
             target.failedContainerView.isHidden = !failed
+        }
+    }
+    
+    var trailerVideoProcessed: Binder<Bool> {
+        return Binder(base) { target, trailerVideoProcessed in
+            target.thumbnailImageView.isHidden = trailerVideoProcessed
+            target.blurredEffectView.isHidden = trailerVideoProcessed
+            target.processingView.isHidden = trailerVideoProcessed
+            target.processingView.animating = !trailerVideoProcessed
         }
     }
 }

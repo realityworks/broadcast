@@ -361,6 +361,8 @@ class ProfileDetailViewController: ViewController {
                 cell.thumbnailImageView.sd_setImage(with: url)
             })
             .disposed(by: cell.disposeBag)
+        
+        viewModel.trailer
     }
 }
 

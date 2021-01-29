@@ -52,6 +52,7 @@ class ProfileDetailViewModel : ViewModel {
     let runTimeTitle: Observable<NSAttributedString>
     let mediaTypeTitle: Observable<String>
     let showingTrailer: Observable<Bool>
+    let trailerVideoProcessed: Observable<Bool>
     
     let uploadComplete: Observable<Bool>
     let showFailed = BehaviorRelay<Bool>(value: false)
@@ -109,14 +110,19 @@ class ProfileDetailViewModel : ViewModel {
         
         /// We don't want the compact map version, handle different case upload progress
         progressText = dependencies.trailerUploadProgress.map { uploadProgress in
-            guard let uploadProgress = uploadProgress else { return UploadProgress.initialProgressText }
+            guard let uploadProgress = uploadProgress else {
+                return UploadProgress.initialProgressText
+            }
+            
             return uploadProgress.progressText
         }
                 
         uploadComplete = dependencies.trailerUploadProgress
             .map { $0?.completed ?? false }
         
-        let isProgressViewActive: Observable<Bool> = Observable.combineLatest(uploadComplete, isUploading) { uploadComplete, isUploading in
+        let isProgressViewActive: Observable<Bool> = Observable.combineLatest(
+            uploadComplete,
+            isUploading) { uploadComplete, isUploading in
                 return (uploadComplete || isUploading)
             }
         
@@ -125,8 +131,13 @@ class ProfileDetailViewModel : ViewModel {
             .filter { $0 == true }
             .map { _ in () }
         
-        showProgressView = Observable.merge(isProgressViewActive, hasSelectedNewTrailerAfterUpload.map { _ in false })
+        showProgressView = Observable.merge(
+            isProgressViewActive,
+            hasSelectedNewTrailerAfterUpload.map { _ in false })
+        
         showUploadButton = showProgressView.map { !$0 }
+        
+        trailerVideoProcessed = profileObservable.map { $0.isTrailerProcessed }
         
         super.init(stateController: dependencies.stateController)
         
