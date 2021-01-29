@@ -29,6 +29,9 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     private let progressView = ProgressView()
     private let editPostView = EditPostView()
     private let tipsView = TipsView()
+    private let cancelBarButton = UIBarButtonItem(barButtonSystemItem: .cancel,
+                                                  target: self,
+                                                  action: #selector(cancelTapped))
     
     internal var picker = UIImagePickerController()
     
@@ -39,9 +42,6 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         
         navigationBar(styleAs: .dark(title: LocalizedString.newPost))
         
-        let cancelBarButton = UIBarButtonItem(barButtonSystemItem: .cancel,
-                                              target: self,
-                                              action: #selector(cancelTapped))
         cancelBarButton.tintColor = .white
         navigationItem.leftBarButtonItem = cancelBarButton
         
@@ -178,7 +178,8 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         viewModel.showingMedia
             .map { $0 }
             .bind(to: selectMediaView.dashedBorderView.rx.isHidden,
-                  selectMediaView.selectMediaButton.rx.isHidden)
+                  selectMediaView.selectMediaButton.rx.isHidden,
+                  cancelBarButton.rx.isEnabled)
             .disposed(by: disposeBag)
         
         viewModel.showingMedia
