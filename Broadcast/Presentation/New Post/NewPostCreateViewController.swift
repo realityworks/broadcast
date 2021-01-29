@@ -158,7 +158,9 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         
         viewModel.isUploading
             .map { !$0 }
-            .bind(to: editPostView.titleTextField.rx.isEnabled, editPostView.captionTextView.rx.isUserInteractionEnabled)
+            .bind(to: editPostView.titleTextField.rx.isEnabled,
+                editPostView.captionTextView.rx.isUserInteractionEnabled,
+                cancelBarButton.rx.isEnabled)
             .disposed(by: disposeBag)
         
         viewModel.canUpload
@@ -178,8 +180,7 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         viewModel.showingMedia
             .map { $0 }
             .bind(to: selectMediaView.dashedBorderView.rx.isHidden,
-                  selectMediaView.selectMediaButton.rx.isHidden,
-                  cancelBarButton.rx.isEnabled)
+                  selectMediaView.selectMediaButton.rx.isHidden)
             .disposed(by: disposeBag)
         
         viewModel.showingMedia
