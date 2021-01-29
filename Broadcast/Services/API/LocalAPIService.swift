@@ -91,6 +91,7 @@ class LocalAPIService {
         profileImageUrl: LocalAPIService.mockPortraitUrl,
         trailerThumbnailUrl: LocalAPIService.mockThumbnailUrl1,
         trailerVideoUrl: LocalAPIService.mockVideoUrl,
+        isTrailerProcessed: true,
         stripeAccount: Profile.StripeAccount(
             productId: "prod_iUmEPMQJFjaLs6",
             currencyCode: CurrencyCode.gbp,
