@@ -99,12 +99,12 @@ class ProfileDetailViewController: ViewController {
         configureTableViewBindings()
         
         /// Do not allow going back if you are uploading... (This could break in other ways need to revisit)
-//        if let backButtonEnabledBinder = navigationController?.navigationItem.backBarButtonItem?.rx.isEnabled {
-//            viewModel.isUploading
-//                .map { !$0 }
-//                .bind(to: backButtonEnabledBinder)
-//                .disposed(by: disposeBag)
-//        }
+        if let backButtonEnabledBinder = navigationController?.navigationItem.backBarButtonItem?.rx.isEnabled {
+            viewModel.isUploading
+                .map { !$0 }
+                .bind(to: backButtonEnabledBinder)
+                .disposed(by: disposeBag)
+        }
     }
     
     private func configureTableViewBindings() {
