@@ -362,7 +362,9 @@ class ProfileDetailViewController: ViewController {
             })
             .disposed(by: cell.disposeBag)
         
-        viewModel.trailer
+        viewModel.trailerVideoProcessed
+            .bind(to: cell.rx.trailerVideoProcessed)
+            .disposed(by: cell.disposeBag)
     }
 }
 
