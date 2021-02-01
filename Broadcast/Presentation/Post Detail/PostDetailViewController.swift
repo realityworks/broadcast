@@ -44,20 +44,20 @@ class PostDetailViewController: ViewController {
     private func configureLayout() {
         // Layout the subviews
         view.addSubview(scrollView)
-        view.addSubview(deleteButtonContainer)
         
         scrollView.edgesToSuperview(excluding: [.bottom], usingSafeArea: true)
         scrollView.bottomToTop(of: deleteButtonContainer)
-                
-        deleteButtonContainer.edgesToSuperview(excluding: [.top, .bottom], usingSafeArea: true)
-        deleteButtonContainer.bottomToSuperview(usingSafeArea: true)
-        deleteButtonContainer.height(60)
-               
+                               
         scrollView.addSubview(postSummaryView)
+        scrollView.addSubview(deleteButtonContainer)
         postSummaryView.topToSuperview()
         postSummaryView.bottomToSuperview()
         postSummaryView.widthToSuperview()
         
+        deleteButtonContainer.edgesToSuperview(excluding: [.top, .bottom], usingSafeArea: true)
+        deleteButtonContainer.topToBottom(of: postSummaryView)
+        deleteButtonContainer.height(60)
+
         deleteButtonContainer.addSubview(deleteButton)
         deleteButton.centerInSuperview()
         
