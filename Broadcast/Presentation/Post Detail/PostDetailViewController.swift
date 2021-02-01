@@ -45,19 +45,18 @@ class PostDetailViewController: ViewController {
         // Layout the subviews
         view.addSubview(scrollView)
         
-        scrollView.edgesToSuperview(excluding: [.bottom], usingSafeArea: true)
-        scrollView.bottomToTop(of: deleteButtonContainer)
+        scrollView.edgesToSuperview(usingSafeArea: true)
                                
         scrollView.addSubview(postSummaryView)
         scrollView.addSubview(deleteButtonContainer)
         postSummaryView.topToSuperview()
-        postSummaryView.bottomToSuperview()
         postSummaryView.widthToSuperview()
         
         deleteButtonContainer.edgesToSuperview(excluding: [.top, .bottom], usingSafeArea: true)
-        deleteButtonContainer.topToBottom(of: postSummaryView)
         deleteButtonContainer.height(60)
-
+        deleteButtonContainer.topToBottom(of: postSummaryView)
+        deleteButtonContainer.bottomToSuperview()
+        
         deleteButtonContainer.addSubview(deleteButton)
         deleteButton.centerInSuperview()
         
