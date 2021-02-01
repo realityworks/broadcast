@@ -92,14 +92,7 @@ extension MainViewController : UITabBarControllerDelegate {
     
     func tabBarController(_ tabBarController: UITabBarController,
                           shouldSelect viewController: UIViewController) -> Bool {
+        #warning("Do not pop back to the root view controller on double tap. Could possibly be fixed when we support multiple uploads.")
         return tabBarController.selectedViewController != viewController
     }
-    
-//    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-//        super.tabBar(tabBar, didSelect: item)
-//
-//        Logger.log(level: .info,
-//                   topic: .appState,
-//                   message: "ITEM: Selected \(item.title ?? "No title")")
-//    }
 }
