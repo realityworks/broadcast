@@ -60,6 +60,9 @@ class ProfileDetailViewModel : ViewModel {
     let showUploadButton: Observable<Bool>
     let selectedNewTrailerRelay = PublishRelay<Bool>()
     
+    private let savingProfileSubject = BehaviorRelay<Bool>(value: false)
+    let savingProfile: Observable<Bool>
+    
     init(dependencies: Dependencies = .standard) {
         
         self.schedulers = dependencies.schedulers
@@ -139,6 +142,8 @@ class ProfileDetailViewModel : ViewModel {
         
         trailerVideoProcessed = profileObservable.map { $0.isTrailerProcessed }
         
+        savingProfile = savingProfileSubject.asObservable()
+        
         super.init(stateController: dependencies.stateController)
         
         #warning("Move subscribe to bind and then test")
@@ -210,16 +215,19 @@ extension ProfileDetailViewModel {
         guard let displayName = displayNameSubject.value,
               let biography = biographySubject.value else { return }
         
-        profileUseCase.updateLocalProfile(displayName: displayName, biography: biography)
-        
+        savingProfileSubject.accept(true)
         profileUseCase.updateProfile(displayName: displayName,
                                      biography: biography)
-            .subscribe(onCompleted: {
+            .subscribe(onCompleted: { [weak self] in
                 // Mark as update complete (loader)
                 Logger.log(level: .info, topic: .debug, message: "Updated profile sucessfully!")
-            }, onError: { [unowned self] error in
-                self.stateController.sendError(error)
+                self?.profileUseCase.updateLocalProfile(displayName: displayName,
+                                                        biography: biography)
+                self?.savingProfileSubject.accept(false)
+            }, onError: { [weak self] error in
+                self?.stateController.sendError(error)
                 Logger.log(level: .warning, topic: .debug, message: "Unable to update the broadcaster profile: \(error)")
+                self?.savingProfileSubject.accept(false)
             })
             .disposed(by: disposeBag)
     }

@@ -43,7 +43,7 @@ class SavingView: UIView {
     
     private func layoutViews() {
         addSubview(containerStackView)
-        containerStackView.centerXToSuperview()//offset: -10)
+        containerStackView.centerXToSuperview()
         containerStackView.heightToSuperview()
         
         containerStackView.addArrangedSubview(processingAnimation)

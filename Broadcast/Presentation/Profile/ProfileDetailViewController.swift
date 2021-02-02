@@ -113,6 +113,11 @@ class ProfileDetailViewController: ViewController {
                 .bind(to: backButtonEnabledBinder)
                 .disposed(by: disposeBag)
         }
+        
+        viewModel.savingProfile
+            .map { !$0 }
+            .bind(to: savingView.rx.isHidden)
+            .disposed(by: disposeBag)
     }
     
     private func configureTableViewBindings() {
