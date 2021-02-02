@@ -71,10 +71,7 @@ class ProfileDetailViewModel : ViewModel {
         let uploadingProgressObservable = dependencies.trailerUploadProgress.compactMap { $0 }
         let profileObservable = dependencies.profileObservable.compactMap { $0 }
         
-        displayNameObservable = profileObservable.map {
-            print("DisplayName changed in profile to : \($0.displayName)")
-            return $0.displayName
-        }
+        displayNameObservable = profileObservable.map { $0.displayName }
         biographyObservable = profileObservable.map { $0.biography ?? String.empty }
         emailObservable = profileObservable.map { $0.email ?? String.empty }
         handleObservable = profileObservable.map { $0.handle }
@@ -148,11 +145,6 @@ class ProfileDetailViewModel : ViewModel {
         savingProfile = savingProfileSubject.asObservable()
         
         super.init(stateController: dependencies.stateController)
-        
-        displayNameSubject.subscribe(onNext: { displayName in
-                print("Display Name Subject : \(displayName)")
-            })
-            .disposed(by: disposeBag)
         
         #warning("Move subscribe to bind and then test")
         displayNameObservable
@@ -237,8 +229,15 @@ extension ProfileDetailViewModel {
             }, onError: { [weak self] error in
                 Logger.log(level: .warning, topic: .debug, message: "Unable to update the broadcaster profile: \(error)")
                 
-                self?.stateController.sendError(error)
-                self?.savingProfileSubject.accept(false)
+                guard let self = self else { return }
+                
+                // Revert display name and biography if save failed
+                self.profileUseCase.updateLocalProfile(
+                    displayName: self.stateController.state.profile?.displayName ?? "",
+                    biography: self.stateController.state.profile?.biography ?? "")
+                
+                self.stateController.sendError(error)
+                self.savingProfileSubject.accept(false)
             })
             .disposed(by: disposeBag)
     }

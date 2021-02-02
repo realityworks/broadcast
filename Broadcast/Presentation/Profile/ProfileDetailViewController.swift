@@ -116,6 +116,13 @@ class ProfileDetailViewController: ViewController {
             .map { !$0 }
             .bind(to: savingView.rx.isHidden)
             .disposed(by: disposeBag)
+        
+        if let saveButton = navigationItem.rightBarButtonItem {
+            viewModel.savingProfile
+                .map { !$0 }
+                .bind(to: saveButton.rx.isEnabled)
+                .disposed(by: disposeBag)
+        }
     }
     
     private func configureTableViewBindings() {
