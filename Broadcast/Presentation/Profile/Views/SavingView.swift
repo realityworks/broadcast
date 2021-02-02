@@ -26,11 +26,12 @@ class SavingView: UIView {
     }
     
     private func configureViews() {
-        roundedCorners(withCornerRadius: 8)
+        roundedCorners(withCornerRadius: 8, clipsToBounds: false)
+        dropShadow()
+        
         backgroundColor = .primaryRed
         
         containerStackView.axis = .horizontal
-        //containerStackView.alignment = .center
         containerStackView.distribution = .fill
         
         processingAnimation.loopMode = .loop

@@ -8,9 +8,17 @@
 import UIKit
 
 extension UIView {
-    func roundedCorners(withCornerRadius cornerRadius: CGFloat = 16) {
+    func roundedCorners(withCornerRadius cornerRadius: CGFloat = 16,
+                        clipsToBounds: Bool = false) {
         layer.cornerRadius = cornerRadius
-        clipsToBounds = true
+        self.clipsToBounds = clipsToBounds
+    }
+    
+    func dropShadow() {
+        layer.shadowOffset = CGSize(width: 0, height: 2.5)
+        layer.shadowRadius = 5
+        layer.shadowColor = UIColor.lightGray.cgColor
+        layer.shadowOpacity = 0.5
     }
 }
 
