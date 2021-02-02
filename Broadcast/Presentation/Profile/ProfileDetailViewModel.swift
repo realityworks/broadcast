@@ -219,14 +219,16 @@ extension ProfileDetailViewModel {
         profileUseCase.updateProfile(displayName: displayName,
                                      biography: biography)
             .subscribe(onCompleted: { [weak self] in
-                // Mark as update complete (loader)
                 Logger.log(level: .info, topic: .debug, message: "Updated profile sucessfully!")
+                
+                // Mark as update complete (loader)
                 self?.profileUseCase.updateLocalProfile(displayName: displayName,
                                                         biography: biography)
                 self?.savingProfileSubject.accept(false)
             }, onError: { [weak self] error in
-                self?.stateController.sendError(error)
                 Logger.log(level: .warning, topic: .debug, message: "Unable to update the broadcaster profile: \(error)")
+                
+                self?.stateController.sendError(error)
                 self?.savingProfileSubject.accept(false)
             })
             .disposed(by: disposeBag)
