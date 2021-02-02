@@ -82,7 +82,7 @@ struct Post: Equatable, Codable {
         
         let id: MediaID
         let thumbnailUrl: String?
-        let contentUrl: String
+        let contentUrl: String?
         let contentType: ContentType
     }
 }
