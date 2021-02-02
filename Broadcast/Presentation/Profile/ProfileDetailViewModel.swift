@@ -71,7 +71,10 @@ class ProfileDetailViewModel : ViewModel {
         let uploadingProgressObservable = dependencies.trailerUploadProgress.compactMap { $0 }
         let profileObservable = dependencies.profileObservable.compactMap { $0 }
         
-        displayNameObservable = profileObservable.map { $0.displayName }
+        displayNameObservable = profileObservable.map {
+            print("DisplayName changed in profile to : \($0.displayName)")
+            return $0.displayName
+        }
         biographyObservable = profileObservable.map { $0.biography ?? String.empty }
         emailObservable = profileObservable.map { $0.email ?? String.empty }
         handleObservable = profileObservable.map { $0.handle }
@@ -146,6 +149,11 @@ class ProfileDetailViewModel : ViewModel {
         
         super.init(stateController: dependencies.stateController)
         
+        displayNameSubject.subscribe(onNext: { displayName in
+                print("Display Name Subject : \(displayName)")
+            })
+            .disposed(by: disposeBag)
+        
         #warning("Move subscribe to bind and then test")
         displayNameObservable
             .subscribe(onNext: { self.displayNameSubject.accept($0) })
@@ -214,6 +222,7 @@ extension ProfileDetailViewModel {
     func updateProfile() {
         guard let displayName = displayNameSubject.value,
               let biography = biographySubject.value else { return }
+        Logger.log(level: .info, topic: .debug, message: "Saving:\nDisplayName: \(displayName)\nBiography: \(biography)")
         
         savingProfileSubject.accept(true)
         profileUseCase.updateProfile(displayName: displayName,

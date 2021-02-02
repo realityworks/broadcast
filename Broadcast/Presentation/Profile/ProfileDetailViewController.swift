@@ -99,8 +99,6 @@ class ProfileDetailViewController: ViewController {
         
         savingView.centerXToSuperview()
         savingView.topToSuperview(offset: 140, usingSafeArea: true)
-        savingView.width(172)
-        savingView.height(62)
     }
     
     private func configureBindings() {
@@ -169,9 +167,6 @@ class ProfileDetailViewController: ViewController {
                                text: email,
                                placeholder: LocalizedString.email.localized,
                                editingEnabled: false)
-                cell.rx.text
-                    .bind(to: self.viewModel.displayNameSubject)
-                    .disposed(by: cell.disposeBag)
                 
                 return cell
                 
@@ -182,10 +177,6 @@ class ProfileDetailViewController: ViewController {
                                text: handle,
                                placeholder: LocalizedString.userHandle.localized,
                                editingEnabled: false)
-                cell.rx.text
-                    .bind(to: self.viewModel.displayNameSubject)
-                    .disposed(by: cell.disposeBag)
-                
                 return cell
                 
             case .trailerVideo:

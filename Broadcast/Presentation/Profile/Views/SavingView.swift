@@ -42,6 +42,9 @@ class SavingView: UIView {
     }
     
     private func layoutViews() {
+        width(172)
+        height(62)
+        
         addSubview(containerStackView)
         containerStackView.centerXToSuperview()
         containerStackView.heightToSuperview()
