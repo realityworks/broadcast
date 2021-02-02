@@ -28,6 +28,10 @@ class SavingView: UIView {
         roundedCorners(withCornerRadius: 8)
         backgroundColor = .primaryRed
         
+        containerStackView.axis = .horizontal
+        containerStackView.alignment = .center
+        containerStackView.distribution = .equalCentering
+        
         processingAnimation.loopMode = .loop
         processingAnimation.play()
     }
@@ -39,13 +43,4 @@ class SavingView: UIView {
         containerStackView.addArrangedSubview(processingAnimation)
         containerStackView.addArrangedSubview(titleLabel)
     }
-    
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-
 }

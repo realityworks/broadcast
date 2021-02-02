@@ -17,7 +17,8 @@ class ProfileDetailViewController: ViewController {
     
     private let viewModel = ProfileDetailViewModel()
     
-    let tableView = UITableView(frame: .zero, style: .grouped)
+    private let tableView = UITableView(frame: .zero, style: .grouped)
+    private let savingView = SavingView()
     private let titleHeaderView = UIView()
     private let titleLabel = UILabel.text(.profileDetailHeading,
                                   font: .tableTitle,
@@ -92,7 +93,14 @@ class ProfileDetailViewController: ViewController {
     
     private func configureLayout() {
         view.addSubview(tableView)
+        view.addSubview(savingView)
+        
         tableView.edgesToSuperview()
+        
+        savingView.centerXToSuperview()
+        savingView.topToSuperview(offset: 140, usingSafeArea: true)
+        savingView.width(172)
+        savingView.height(62)
     }
     
     private func configureBindings() {
