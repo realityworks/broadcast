@@ -18,6 +18,7 @@ class SavingView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureViews()
+        layoutViews()
     }
     
     required init?(coder: NSCoder) {
@@ -29,18 +30,26 @@ class SavingView: UIView {
         backgroundColor = .primaryRed
         
         containerStackView.axis = .horizontal
-        containerStackView.alignment = .center
-        containerStackView.distribution = .equalCentering
+        //containerStackView.alignment = .center
+        containerStackView.distribution = .fill
         
         processingAnimation.loopMode = .loop
+        processingAnimation.contentMode = .scaleAspectFill
+        processingAnimation.contentScaleFactor = 4
         processingAnimation.play()
+        
+        titleLabel.textAlignment = .left
     }
     
     private func layoutViews() {
         addSubview(containerStackView)
-        containerStackView.edgesToSuperview()
+        containerStackView.centerXToSuperview()//offset: -10)
+        containerStackView.heightToSuperview()
         
         containerStackView.addArrangedSubview(processingAnimation)
+        processingAnimation.width(60)
+        
         containerStackView.addArrangedSubview(titleLabel)
+        titleLabel.width(80)
     }
 }

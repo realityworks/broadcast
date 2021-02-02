@@ -91,7 +91,7 @@
 "stripeAccountLockedInfo" = "Connected Account details are locked on this screen.";
 "processing" = "Content is being processed";
 "noPosts" = "NO POSTS";
-"Saving" = "Saving";
+"saving" = "Saving";
 
 // MARK: Error Strings
 "unknownError" = "An unknown error occured";
