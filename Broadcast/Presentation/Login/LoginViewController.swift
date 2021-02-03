@@ -276,10 +276,10 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
 //        textView.backgroundColor = .red
         alertController.view.addSubview(textView)
         
-        testView.topToSuperview(offset: 40)
-        testView.leftToSuperview()
-        testView.rightToSuperview()
-        testView.bottomToSuperview(offset: -110)
+        textView.topToSuperview(offset: 40)
+        textView.leftToSuperview()
+        textView.rightToSuperview()
+        textView.bottomToSuperview(offset: -110)
         
         let acceptAction = UIAlertAction(title: "Accept", style: .default) { [unowned self] action in
             self.viewModel.login()
