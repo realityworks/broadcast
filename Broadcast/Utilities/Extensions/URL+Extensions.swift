@@ -36,4 +36,10 @@ extension URL {
         }
         return "application/octet-stream"
     }
+    
+    func queryParametersRemoved() -> URL? {
+        var urlComponents = URLComponents(string: absoluteString)
+        urlComponents?.queryItems = []
+        return urlComponents?.url
+    }
 }

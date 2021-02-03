@@ -16,7 +16,6 @@ extension Single where Element == (HTTPURLResponse, Data), Trait == SingleTrait 
                 let statusCode = response.statusCode
                 switch statusCode {
                 case 200...299:
-                    print(String(data: data, encoding: .utf8)!)
                     let decodedValue = try decoder.decode(T.self, from: data)
                     Logger.log(level: .verbose, topic: .api, message: "Struct : \(T.self) - Decoded \(decodedValue)")
                     return .just(decodedValue)
