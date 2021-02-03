@@ -22,10 +22,10 @@ class ProfileUseCase {
     
     let disposeBag = DisposeBag()
     
-    init(dependencies:) {
-        self.apiService = apiService
-        self.uploadService = uploadService
-        
+    init(dependencies: Dependencies = .standard) {
+        self.apiService = dependencies.apiService
+        self.uploadService = dependencies.uploadService
+        self.persistanceService = dependencies.persistenceService
     }
 }
 
@@ -43,15 +43,36 @@ extension ProfileUseCase : StateControllerInjector {
 
 extension ProfileUseCase {
     static let standard = {
-        return ProfileUseCase(
-            apiService: Services.standard.apiService,
-            uploadService: Services.standard.uploadService)
+        return ProfileUseCase()
     }()
+}
+
+// MARK: - Dependencies
+
+extension ProfileUseCase {
+    struct Dependencies {
+        let apiService: APIService
+        let uploadService: UploadService
+        let persistenceService: PersistanceService
+        
+        static let standard = Dependencies(
+            apiService: Services.standard.apiService,
+            uploadService: Services.standard.uploadService,
+            persistenceService: Services.standard.persistenceService)
+    }
 }
 
 // MARK: - Functions
 
 extension ProfileUseCase {
+    func hasAcceptedTerms(forUser user: String) -> Bool {
+        return persistanceService.read(key: user + PersistenceKeys.termsAccepted) == true
+    }
+    
+    func acceptTerms(forUser user: String) -> Bool {
+        return persistanceService.read(key: user + PersistenceKeys.termsAccepted) == true
+    }
+    
     private func loadProfileImage(fromUrl url: URL?) {
         guard let url = url else { return }
         SDWebImageManager.shared.loadImage(with: url, options: [.allowInvalidSSLCertificates, .continueInBackground], progress: nil) { (image, data, error, cacheType, finished, _) in

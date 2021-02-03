@@ -47,7 +47,7 @@
 		1D3B2A212564D76C001874FD /* StandardCredentialsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3B2A202564D76C001874FD /* StandardCredentialsService.swift */; };
 		1D3B2A262564E6F1001874FD /* UploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3B2A252564E6F1001874FD /* UploadService.swift */; };
 		1D3B2A342564E7AF001874FD /* StandardUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3B2A332564E7AF001874FD /* StandardUploadService.swift */; };
-		1D3B2A392564F0D5001874FD /* PersistanceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3B2A382564F0D4001874FD /* PersistanceService.swift */; };
+		1D3B2A392564F0D5001874FD /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3B2A382564F0D4001874FD /* PersistenceService.swift */; };
 		1D3B2A3E2564F21E001874FD /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3B2A3D2564F21E001874FD /* APIService.swift */; };
 		1D3B2A432564F22F001874FD /* LocalAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3B2A422564F22F001874FD /* LocalAPIService.swift */; };
 		1D3B2A482564F238001874FD /* StandardAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3B2A472564F238001874FD /* StandardAPIService.swift */; };
@@ -252,7 +252,7 @@
 		1D3B2A202564D76C001874FD /* StandardCredentialsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardCredentialsService.swift; sourceTree = "<group>"; };
 		1D3B2A252564E6F1001874FD /* UploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadService.swift; sourceTree = "<group>"; };
 		1D3B2A332564E7AF001874FD /* StandardUploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardUploadService.swift; sourceTree = "<group>"; };
-		1D3B2A382564F0D4001874FD /* PersistanceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceService.swift; sourceTree = "<group>"; };
+		1D3B2A382564F0D4001874FD /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
 		1D3B2A3D2564F21E001874FD /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		1D3B2A422564F22F001874FD /* LocalAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAPIService.swift; sourceTree = "<group>"; };
 		1D3B2A472564F238001874FD /* StandardAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardAPIService.swift; sourceTree = "<group>"; };
@@ -490,7 +490,7 @@
 		1D3B2A062564CF99001874FD /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
-				1D3B2A382564F0D4001874FD /* PersistanceService.swift */,
+				1D3B2A382564F0D4001874FD /* PersistenceService.swift */,
 				1D77CAE825B803F60069A381 /* StandardPersistenceService.swift */,
 			);
 			path = Persistence;
@@ -1096,7 +1096,7 @@
 				1D916D672562C7500059E549 /* Domain.swift in Sources */,
 				1D216A3B2595ED4F007FA845 /* TextPopup.swift in Sources */,
 				1D3B2A432564F22F001874FD /* LocalAPIService.swift in Sources */,
-				1D3B2A392564F0D5001874FD /* PersistanceService.swift in Sources */,
+				1D3B2A392564F0D5001874FD /* PersistenceService.swift in Sources */,
 				1D7C4949259B2FB70089EA6B /* InsetTextField.swift in Sources */,
 				1DD1FE1D256D6F7300C598CE /* AuthenticateResponse.swift in Sources */,
 				1DF5DD5025AC8BB5009B0B30 /* UploadProgress+TextDescription.swift in Sources */,

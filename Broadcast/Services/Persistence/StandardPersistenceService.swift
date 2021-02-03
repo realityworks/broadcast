@@ -7,7 +7,7 @@
 
 import Foundation
 
-class StandardPersistenceService : PersistanceService {
+class StandardPersistenceService : PersistenceService {
     func write<T>(value: T, forKey key: String) {
         UserDefaults.standard.setValue(value, forKey: key)
     }
