@@ -266,5 +266,11 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         usernameTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
     }
+    
+    @objc func showAcceptTerms() {
+        let alertController = UIAlertController(title: "Accept terms", message: "By using this application you accept the terms and conditions", preferredStyle: .actionSheet)
+        
+        
+    }
 }
 
