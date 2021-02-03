@@ -10,6 +10,14 @@ import SwiftRichString
 import RSKPlaceholderTextView
 
 extension UITextView {
+    static func staticText() -> UITextView {
+        let textView = UITextView()
+        textView.tintColor = .primaryGrey
+        textView.isEditable = false
+        textView.isScrollEnabled = false
+        return textView
+    }
+    
     static func standard(withPlaceholder placeholder: LocalizedString? = nil) -> UITextView {
         let textView = RSKPlaceholderTextView()
         

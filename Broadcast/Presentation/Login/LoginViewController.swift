@@ -33,12 +33,12 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         withTitle: LocalizedString.loginButton)
     
     private let welcomeLabel = UILabel.largeTitle(LocalizedString.welcome)
-    private let applyHereTextView = UITextView()
-    private let forgotPasswordTextView = UITextView()
+    private let applyHereTextView = UITextView.staticText()
+    private let forgotPasswordTextView = UITextView.staticText()
     
     // MARK: Test Items
     
-    private let testUserName: String = "Darrel.Turcotte@hotmail.com"
+    private let testUserName: String = "Abraham29@yahoo.com"
     private let testPassword: String = "Pass123$"
     
     // MARK: UIKit overrides
@@ -91,8 +91,6 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         contentStackView.distribution = .equalSpacing
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        applyHereTextView.isScrollEnabled = false
-        forgotPasswordTextView.isScrollEnabled = false
         forgotPasswordTextView.textAlignment = .left
         
         let usernameIcon = UIImageView(image: UIImage.iconProfile?.withRenderingMode(.alwaysTemplate))
@@ -264,17 +262,15 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
     
     @objc func showAcceptTerms() {
         let alertController = UIAlertController(title: "Accept terms",
-                                                message: "\n",
+                                                message: "\n\n\n",
                                                 preferredStyle: .actionSheet)
         
-        let textView = UITextView()
+        let textView = UITextView.staticText()
         textView.backgroundColor = .clear
         textView.attributedText =
-            "\(LocalizedString.notABroadcaster.localized) ".set(style: Style.bodyCenter) +
-            LocalizedString.learnMore.localized.set(style: Style.link)
-//            "\(LocalizedString.notABroadcaster.localized) ".set(style: Style.bodyCenter) +
-//            LocalizedString.learnMore.localized.set(style: Style.link)
-//        textView.backgroundColor = .red
+            "\(LocalizedString.usingAppAccept.localized)\n\n".set(style: Style.bodyCenter) +
+            LocalizedString.termsAndConditions.localized.set(style: Style.link)
+        
         alertController.view.addSubview(textView)
         
         textView.topToSuperview(offset: 40)
@@ -286,16 +282,12 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
             self.viewModel.login()
         }
         
-        let declineAction = UIAlertAction(title: "Decline", style: .cancel) { action in
-            print("Decline")
-        }
+        let declineAction = UIAlertAction(title: "Decline", style: .cancel)
         
         alertController.addAction(acceptAction)
         alertController.addAction(declineAction)
         
-        present(alertController, animated: true) {
-            print("Compeleted!")
-        }
+        present(alertController, animated: true)
     }
 }
 

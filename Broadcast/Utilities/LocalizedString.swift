@@ -107,6 +107,7 @@ enum LocalizedString : String {
     case noPosts
     case internalMemoryError
     case saving
+    case usingAppAccept
     
     var localized: String {
         return Bundle.main.localizedString(forKey: self.rawValue, value: nil, table: nil)

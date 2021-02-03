@@ -216,8 +216,7 @@ class PostSummaryView : UIView {
         guard let url = url else { return }
         
         thumbnailImageView.isHidden = !showThumbnail
-        let noQueryUrl = url.queryParametersRemoved()
-        thumbnailImageView.sd_setImage(with: noQueryUrl,
+        thumbnailImageView.sd_setImage(with: url,
                                        placeholderImage: UIImage(color: .black))
     }
     
