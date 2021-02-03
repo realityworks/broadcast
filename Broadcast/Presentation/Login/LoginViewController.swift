@@ -199,7 +199,7 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         loginButton.rx.tap
             .subscribe(onNext: { [unowned self] _ in
                 self.dismissKeyboard()
-                self.viewModel.acceptTerms()
+                self.viewModel.checkTermsAccepted()
             })
             .disposed(by: disposeBag)
         
@@ -284,6 +284,7 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         textView.bottomToSuperview(offset: -110)
         
         let acceptAction = UIAlertAction(title: "Accept", style: .default) { [unowned self] action in
+            self.viewModel.acceptTerms()
             self.viewModel.login()
         }
         

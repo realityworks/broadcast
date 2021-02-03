@@ -13,14 +13,14 @@ class Services {
     private (set) var credentialsService: CredentialsService
     private (set) var uploadService: UploadService
     private (set) var apiService: APIService
-    private (set) var persistenceService: PersistanceService
+    private (set) var persistenceService: PersistenceService
     
     init(
         authenticationService: AuthenticationService,
         credentialsService: CredentialsService,
         uploadService: UploadService,
         apiService: APIService,
-        persistenceService: PersistanceService) {
+        persistenceService: PersistenceService) {
         
         self.authenticationService = authenticationService
         self.credentialsService = credentialsService

@@ -67,6 +67,11 @@ extension LoginViewModel {
 extension LoginViewModel {
     func acceptTerms() {
         guard let username = username.value else { return }
+        profileUseCase.acceptTerms(forUser: username)
+    }
+    
+    func checkTermsAccepted() {
+        guard let username = username.value else { return }
         if profileUseCase.hasAcceptedTerms(forUser: username) {
             login()
         } else {

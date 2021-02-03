@@ -16,7 +16,7 @@ class NewPostCreateViewModel : ViewModel {
     
     let schedulers: Schedulers
     let postContentUseCase: PostContentUseCase
-    let persistenceService: PersistanceService
+    let persistenceService: PersistenceService
     
     private let selectedMediaSubject = BehaviorRelay<Media?>(value: nil)
     private let showTipsSubject = BehaviorRelay<Bool>(value: true)
@@ -157,7 +157,7 @@ extension NewPostCreateViewModel {
         
         let stateController: StateController
         let schedulers: Schedulers
-        let persistenceService: PersistanceService
+        let persistenceService: PersistenceService
         
         let postContentUseCase: PostContentUseCase
         let uploadProgressObservable: Observable<UploadProgress?>
