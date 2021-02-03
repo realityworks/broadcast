@@ -28,9 +28,8 @@ class SelectMediaView: UIView {
     }
     
     private func configureViews() {
-        clipsToBounds = false
         backgroundColor = .white
-        roundedCorners()
+        roundedCorners(withCornerRadius: 16, clipsToBounds: false)
         
         selectMediaButton.backgroundColor = .clear
         selectMediaButton.setImage(UIImage.iconPlusCircle?.withRenderingMode(.alwaysTemplate), for: .normal)
