@@ -12,7 +12,7 @@ class ProfileSignOutTableViewCell: UITableViewCell {
     static let identifier: String = "ProfileSignOutTableViewCell"
     static let cellHeight: CGFloat = 80
     
-    let button = UIButton.textDestructive(withTitle: LocalizedString.logout)
+    let label = UILabel.body(LocalizedString.logout, textColor: .primaryGrey)
     
     override init(style: UITableViewCell.CellStyle,
                   reuseIdentifier: String?) {
@@ -25,12 +25,21 @@ class ProfileSignOutTableViewCell: UITableViewCell {
     }
     
     private func configureViews() {
-        backgroundColor = .clear
-        contentView.backgroundColor = .clear
-        contentView.addSubview(button)
-        button.centerInSuperview()
+        contentView.backgroundColor = .white
+        contentView.addSubview(label)
+        
+        contentView.addTopSeparator()
+        contentView.addBottomSeparator()
+        
+        label.leftToSuperview(offset: 24)
+        label.centerYToSuperview()
         
         selectionStyle = .none
-    }    
+    }
+    
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+        label.isHighlighted = highlighted
+    }
 }
 
