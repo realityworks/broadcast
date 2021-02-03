@@ -270,7 +270,9 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
     @objc func showAcceptTerms() {
         let alertController = UIAlertController(title: "Accept terms", message: "By using this application you accept the terms and conditions", preferredStyle: .actionSheet)
         
-        
+        let acceptAction = UIAlertAction(title: "Accept", style: .default) { action in
+            print ("Accepted")
+        }
     }
 }
 
