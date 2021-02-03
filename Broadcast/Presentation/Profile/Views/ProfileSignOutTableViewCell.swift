@@ -33,6 +33,7 @@ class ProfileSignOutTableViewCell: UITableViewCell {
         
         label.leftToSuperview(offset: 24)
         label.centerYToSuperview()
+        label.highlightedTextColor = .primaryGrey
         
         selectionStyle = .none
     }
