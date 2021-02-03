@@ -59,6 +59,7 @@ class PostSummaryView : UIView {
         
         thumbnailImageView.contentMode = .scaleAspectFill
         containerTopView.clipsToBounds = true
+        containerTopView.backgroundColor = .black
     }
     
     func configureLayout() {
@@ -221,13 +222,14 @@ class PostSummaryView : UIView {
     }
     
     private func configureAsImage(withPostSummaryViewModel postSummaryViewModel: PostSummaryViewModel) {
-        updateThumbnail(withImageUrl: postSummaryViewModel.media?.url)
+        updateThumbnail(withImageUrl: postSummaryViewModel.media.url)
     }
     
     private func configureAsVideo(withPostSummaryViewModel postSummaryViewModel: PostSummaryViewModel) {
+        print ("CONFIGURE AS VIDEO")
         if postSummaryViewModel.showVideoPlayer {
             if !postSummaryViewModel.isEncoding,
-                let url = postSummaryViewModel.media?.url {
+                let url = postSummaryViewModel.media.url {
                 videoPlayerView.isHidden = false
                 videoPlayerView.playVideo(withURL: url)
             } else {
@@ -240,6 +242,7 @@ class PostSummaryView : UIView {
             pressPlayOverlayView.play()
         }
         
+        print ("IS ENCODING : \(postSummaryViewModel.isEncoding)")
         blurredEffectView.isHidden = !postSummaryViewModel.isEncoding
         processingView.isHidden = !postSummaryViewModel.isEncoding
         pressPlayOverlayView.isHidden = postSummaryViewModel.isEncoding
@@ -260,8 +263,6 @@ class PostSummaryView : UIView {
         case .video:
             // Video View
             configureAsVideo(withPostSummaryViewModel: postSummaryViewModel)
-        default:
-            break /// No media here to really do anything with
         }
         
         postStatsView.configure(withCommentCount: postSummaryViewModel.commentCount,

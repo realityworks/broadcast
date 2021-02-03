@@ -12,7 +12,7 @@ struct MyPostsCellViewModel {
     let title: String
     let caption: String
     let thumbnailUrl: URL?
-    let media: Media?
+    let media: Media
     let isEncoding: Bool
     let dateCreated: String
     let commentCount: Int

@@ -224,6 +224,7 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
                 case .video(let url):
                     self?.selectMediaView.videoMediaOverlay.playVideo(withURL: url, autoplay: false)
                 case .image(let url):
+                    guard let url = url else { return }
                     self?.selectMediaView.imageMediaOverlay.image = UIImage(contentsOfFile: url.path)
                 }
                 

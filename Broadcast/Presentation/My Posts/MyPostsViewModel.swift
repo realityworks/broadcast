@@ -45,6 +45,7 @@ class MyPostsViewModel : ViewModel {
             .map { posts in
                 return posts.map {
                     let thumbnailUrl = URL(string: $0.postMedia.thumbnailUrl)
+                    print ("FINISHED PROCESSING : \($0.finishedProcessing)")
                     let viewModel = MyPostsCellViewModel(
                         postId: $0.id,
                         title: $0.title,

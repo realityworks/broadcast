@@ -12,19 +12,19 @@ typealias MediaID = String
 
 /// Enum definition of a type of media with an associated access URL
 enum Media : Equatable {
-    case video(url: URL)
-    case image(url: URL)
+    case video(url: URL?)
+    case image(url: URL?)
     
     var contentType: String {
         switch self {
         case .video:
             return "video/mp4"
         case .image:
-            return url.mimeType
+            return url?.mimeType ?? "image"
         }
     }
     
-    var url: URL {
+    var url: URL? {
         switch self {
         case .video(let url):
             return url
@@ -36,6 +36,7 @@ enum Media : Equatable {
     var duration: String {
         switch self {
         case .video(let url):
+            guard let url = url else { return .empty }
             let asset = AVAsset(url: url)
             let time = asset.duration
             let minutes = Int(CMTimeGetSeconds(time) / 60.0)
@@ -51,9 +52,14 @@ enum Media : Equatable {
         switch self {
         case .image:
             return self
-        case .video(let videoUrl):
+        case .video(let url):
             do {
-                return .video(url: try videoUrl.copiedToLocal(filename: "video"))
+                guard let url = url else {
+                    throw BoomdayError.internalMemoryError(text: "Internal file doesn't exist")
+                    return self
+                }
+                
+                return .video(url: try url.copiedToLocal(filename: "video"))
             } catch {
                 throw error
             }

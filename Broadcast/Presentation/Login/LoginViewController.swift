@@ -268,6 +268,7 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
                                                 preferredStyle: .actionSheet)
         
         let textView = UITextView()
+        textView.backgroundColor = .clear
         textView.attributedText =
             "\(LocalizedString.notABroadcaster.localized) ".set(style: Style.bodyCenter) +
             LocalizedString.learnMore.localized.set(style: Style.link)

@@ -22,8 +22,8 @@ struct Post: Equatable, Codable {
     
     let postMedia: PostMedia
     
-    var contentMedia: Media? {
-        guard let contentUrl = URL(string: postMedia.contentUrl) else { return nil }
+    var contentMedia: Media {
+        let contentUrl = URL(string: postMedia.contentUrl)
         return postMedia.contentType == .video
             ? Media.video(url: contentUrl)
             : Media.image(url: contentUrl)
