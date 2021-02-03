@@ -235,16 +235,9 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         view.backgroundColor = .white
         
         // Style attributed strings
-        let boomdayLinkStyle = Style {
-            $0.font = UIFont.body
-            $0.underline = (.single, UIColor.primaryGrey)
-            $0.linkURL = Configuration.learnMore
-            $0.alignment = .center
-        }
-        
         applyHereTextView.attributedText =
             "\(LocalizedString.notABroadcaster.localized) ".set(style: Style.bodyCenter) +
-            LocalizedString.learnMore.localized.set(style: boomdayLinkStyle)
+            LocalizedString.learnMore.localized.set(style: Style.link)
         
         let forgotPasswordStyle = Style {
             $0.font = UIFont.smallBody
@@ -271,12 +264,17 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
     
     @objc func showAcceptTerms() {
         let alertController = UIAlertController(title: "Accept terms",
-                                                message: "",
+                                                message: "\n",
                                                 preferredStyle: .actionSheet)
         
-        let testView = UIView()
-        testView.backgroundColor = .red
-        alertController.view.addSubview(testView)
+        let textView = UITextView()
+        textView.attributedText =
+            "\(LocalizedString.notABroadcaster.localized) ".set(style: Style.bodyCenter) +
+            LocalizedString.learnMore.localized.set(style: Style.link)
+//            "\(LocalizedString.notABroadcaster.localized) ".set(style: Style.bodyCenter) +
+//            LocalizedString.learnMore.localized.set(style: Style.link)
+//        textView.backgroundColor = .red
+        alertController.view.addSubview(textView)
         
         testView.topToSuperview(offset: 40)
         testView.leftToSuperview()
