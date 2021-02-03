@@ -42,7 +42,7 @@ class ProfileSectionHeaderCell: UITableViewCell {
     }
     
     private func layoutViews() {
-        verticalStackView.addSpace(32, color: .green)
+        verticalStackView.addSpace(32, color: .clear)
         verticalStackView.addSeparator()
         verticalStackView.addArrangedSubview(labelContainer)
         verticalStackView.addSeparator()

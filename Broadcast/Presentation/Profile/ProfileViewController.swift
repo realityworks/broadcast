@@ -111,12 +111,6 @@ class ProfileViewController: ViewController {
             case .logout:
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileSignOutTableViewCell.identifier, for: indexPath) as! ProfileSignOutTableViewCell
                 
-                cell.button.rx.tap
-                    .subscribe(onNext: { _ in
-                        self.viewModel.logout()
-                    })
-                    .disposed(by: self.disposeBag)
-                
                 return cell
             case .version:
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileVersionTableViewCell.identifier, for: indexPath) as! ProfileVersionTableViewCell
@@ -136,11 +130,15 @@ class ProfileViewController: ViewController {
                 return ProfileTableViewCell.cellHeight
             }
         }
-        datasource.heightForHeaderInSection = { _, _ -> CGFloat in
-            ProfileSectionHeaderCell.cellHeight
+        datasource.heightForHeaderInSection = { datasource, section -> CGFloat in
+            guard section != ProfileViewModel.Sections.logout.rawValue else { return 32 }
+            
+            return ProfileSectionHeaderCell.cellHeight
         }
         
         datasource.viewForHeaderInSection = { datasource, tableView, section in
+            guard section != ProfileViewModel.Sections.logout.rawValue else { return nil }
+            
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ProfileSectionHeaderCell.identifier) as? ProfileSectionHeaderCell else { return nil }
             
             let sectionTitle = datasource.sectionModels[section].model
@@ -158,9 +156,10 @@ class ProfileViewController: ViewController {
                 SectionModel(model: LocalizedString.support, items: [
                                 ProfileViewModel.Row.frequentlyAskedQuestions,
                                 ProfileViewModel.Row.privacyPolicy,
-                                ProfileViewModel.Row.termsAndConditions,
+                                ProfileViewModel.Row.termsAndConditions]),
+                SectionModel(model: LocalizedString.logout, items: [
                                 ProfileViewModel.Row.logout,
-                                ProfileViewModel.Row.version]),
+                                ProfileViewModel.Row.version])
             ])
         
         items
@@ -197,7 +196,9 @@ class ProfileViewController: ViewController {
                 case .share:
                     self.viewModel.shareProfile()
                     break
-                case .logout, .version:
+                case .logout:
+                    self.viewModel.logout()
+                case .version:
                     break /// Do nothing
                 }
             })

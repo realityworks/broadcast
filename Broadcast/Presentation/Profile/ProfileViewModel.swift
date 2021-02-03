@@ -11,6 +11,12 @@ import RxCocoa
 
 class ProfileViewModel : ViewModel {
     
+    enum Sections: Int {
+        case accountSettings = 0
+        case support = 1
+        case logout = 2
+    }
+    
     enum Row {
         case detail
         case stripeAccount

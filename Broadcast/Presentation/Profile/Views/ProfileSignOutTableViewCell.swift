@@ -10,9 +10,9 @@ import RxSwift
 
 class ProfileSignOutTableViewCell: UITableViewCell {
     static let identifier: String = "ProfileSignOutTableViewCell"
-    static let cellHeight: CGFloat = 80
+    static let cellHeight: CGFloat = 50
     
-    let label = UILabel.body(LocalizedString.logout, textColor: .primaryGrey)
+    let label = UILabel.body(LocalizedString.logout, textColor: .primaryRed)
     
     override init(style: UITableViewCell.CellStyle,
                   reuseIdentifier: String?) {
