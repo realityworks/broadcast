@@ -199,8 +199,7 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         loginButton.rx.tap
             .subscribe(onNext: { [unowned self] _ in
                 self.dismissKeyboard()
-                //self.viewModel.login()
-                self.showAcceptTerms()
+                self.viewModel.acceptTerms()
             })
             .disposed(by: disposeBag)
         
@@ -225,6 +224,12 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         viewModel.isLoading
             .map { !$0 }
             .bind(to: loginButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        viewModel.showAcceptTerms
+            .subscribe(onNext: {
+                self.showAcceptTerms()
+            })
             .disposed(by: disposeBag)
     }
     

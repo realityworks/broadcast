@@ -18,13 +18,14 @@ class ProfileUseCase {
     
     private let apiService: APIService
     private let uploadService: UploadService
+    private let persistanceService: PersistanceService
     
     let disposeBag = DisposeBag()
     
-    init(apiService: APIService,
-         uploadService: UploadService) {
+    init(dependencies:) {
         self.apiService = apiService
         self.uploadService = uploadService
+        
     }
 }
 

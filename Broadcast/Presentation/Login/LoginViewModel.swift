@@ -22,8 +22,9 @@ class LoginViewModel : ViewModel {
     
     let isLoginEnabled: Observable<Bool>
     let isLoading: Observable<Bool>
-//    let isErrorHidden: Observable<Bool>
-//    let errorText: Observable<String>
+    
+    private let showAcceptTermsSubject = PublishSubject<()>()
+    let showAcceptTerms: Observable<()>
     
     init(dependencies: Dependencies = .standard) {
         self.authenticationUseCase = dependencies.authenticationUseCase
@@ -37,8 +38,7 @@ class LoginViewModel : ViewModel {
         }
         
         isLoading = isLoadingSubject.asObservable()
-//        isErrorHidden = isErrorHiddenSubject.asObservable()        
-//        errorText = dependencies.stateController.errorStringObservable()
+        showAcceptTerms = showAcceptTermsSubject.asObservable()
         
         super.init(stateController: dependencies.stateController)
     }
@@ -65,6 +65,15 @@ extension LoginViewModel {
 // MARK: - Functions
 
 extension LoginViewModel {
+    func acceptTerms() {
+        guard let username = username.value else { return }
+        if profileUseCase.hasAcceptedTerms(forUser: username) {
+            login()
+        } else {
+            showAcceptTermsSubject.onNext(())
+        }
+    }
+    
     func login() {
         stateController.state.authenticationState = AuthenticationState.loggingIn
         isLoadingSubject.accept(true)
