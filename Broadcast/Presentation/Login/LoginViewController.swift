@@ -271,8 +271,19 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         let alertController = UIAlertController(title: "Accept terms", message: "By using this application you accept the terms and conditions", preferredStyle: .actionSheet)
         
         let acceptAction = UIAlertAction(title: "Accept", style: .default) { action in
-            print ("Accepted")
+            print("Accepted")
         }
+        
+        let readTermsAction = UIAlertAction(title: "Read Terms", style: .default) { action in
+            print("Read terms")
+        }
+        
+        let declineAction = UIAlertAction(title: "Decline", style: .cancel) { action in
+            print("Decline")
+        }
+        
+        alertController.addAction(acceptAction)
+        alertController.addAction(declineAction)
     }
 }
 
