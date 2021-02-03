@@ -193,14 +193,16 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         passwordTextField.rx.controlEvent([.editingDidEndOnExit])
             .subscribe(onNext: { [unowned self] _ in
                 self.passwordTextField.resignFirstResponder()
-                self.viewModel.login()
+                //self.viewModel.login()
+                self.showAcceptTerms()
             })
             .disposed(by: disposeBag)
         
         loginButton.rx.tap
             .subscribe(onNext: { [unowned self] _ in
                 self.dismissKeyboard()
-                self.viewModel.login()
+                //self.viewModel.login()
+                self.showAcceptTerms()
             })
             .disposed(by: disposeBag)
         
@@ -268,14 +270,21 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
     }
     
     @objc func showAcceptTerms() {
-        let alertController = UIAlertController(title: "Accept terms", message: "By using this application you accept the terms and conditions", preferredStyle: .actionSheet)
+        let alertController = UIAlertController(title: "Accept terms",
+                                                message: "",
+                                                preferredStyle: .actionSheet)
         
-        let acceptAction = UIAlertAction(title: "Accept", style: .default) { action in
-            print("Accepted")
-        }
+        let testView = UIView()
+        testView.backgroundColor = .red
+        alertController.view.addSubview(testView)
         
-        let readTermsAction = UIAlertAction(title: "Read Terms", style: .default) { action in
-            print("Read terms")
+        testView.topToSuperview(offset: 40)
+        testView.leftToSuperview()
+        testView.rightToSuperview()
+        testView.bottomToSuperview(offset: -110)
+        
+        let acceptAction = UIAlertAction(title: "Accept", style: .default) { [unowned self] action in
+            self.viewModel.login()
         }
         
         let declineAction = UIAlertAction(title: "Decline", style: .cancel) { action in
@@ -284,6 +293,10 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         
         alertController.addAction(acceptAction)
         alertController.addAction(declineAction)
+        
+        present(alertController, animated: true) {
+            print("Compeleted!")
+        }
     }
 }
 
