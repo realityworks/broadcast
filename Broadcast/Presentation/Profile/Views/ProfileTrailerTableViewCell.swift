@@ -17,7 +17,7 @@ class ProfileTrailerTableViewCell: UITableViewCell {
     let selectMediaContainerView = UIView()
     let selectMediaInfoStackView = UIStackView()
     let runTimeLabel = UILabel()
-    let selectedMediaTitleLabel = UILabel.largeTitle(.noMedia, textColor: .primaryLightGrey)
+    let selectedMediaTitleLabel = UILabel.largeTitle(.noMedia, textColor: .secondaryBlack)
     
     let selectMediaView = SelectMediaView()
     let changeButton = UIButton.textDestructive(withTitle: LocalizedString.change)

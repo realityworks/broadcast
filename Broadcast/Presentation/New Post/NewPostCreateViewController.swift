@@ -23,7 +23,7 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     private let selectMediaView = SelectMediaView()
     private let selectMediaInfoStackView = UIStackView()
     private let runTimeLabel = UILabel()
-    private let selectedMediaTitleLabel = UILabel.largeTitle(.none, textColor: .primaryLightGrey)
+    private let selectedMediaTitleLabel = UILabel.largeTitle(.none, textColor: .secondaryBlack)
     private let changeButton = UIButton.textDestructive(withTitle: LocalizedString.change)
     
     private let progressView = ProgressView()
