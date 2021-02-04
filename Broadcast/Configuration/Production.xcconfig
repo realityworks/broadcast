@@ -8,6 +8,13 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
+// Switch over when ready
+//// Service URL
+//SERVICE_ROOT_URL = https:/$()/api.boomday.com/
+//
+//// Site URL
+//SITE_ROOT_URL = https:/$()/frontend.boomday.com/
+
 // Service URL
 SERVICE_ROOT_URL = https:/$()/api.boomday.dev/
 
