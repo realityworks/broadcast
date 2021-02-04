@@ -87,7 +87,6 @@ enum LocalizedString : String {
     case email
     case userHandle
     case uploadTrailer
-    case changeVideo
     case emailUserLockedInfo
     case stripeAccountLockedInfo
     case processing

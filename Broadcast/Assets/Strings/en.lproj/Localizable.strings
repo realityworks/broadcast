@@ -86,7 +86,6 @@
 "email" = "Email";
 "userHandle" = "User Handle";
 "uploadTrailer" = "Upload Trailer";
-"changeVideo" = "Change Video";
 "emailUserLockedInfo" = "Email and User Handle cannot be modified.";
 "stripeAccountLockedInfo" = "Connected Account details are locked on this screen.";
 "processing" = "Content is being processed";

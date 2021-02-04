@@ -20,7 +20,7 @@ class ProfileInfoTableViewCell: UITableViewCell {
     
     let subscribersContainerStackView = UIStackView()
     let displayNameLabel = UILabel.text(font: .tableTitle,
-                                        textColor: .primaryLightGrey)
+                                        textColor: .secondaryBlack)
     let subscriberDetailContainerStackView = UIStackView()
     
     let subscribersImageContainer = UIView()
