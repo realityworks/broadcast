@@ -23,8 +23,8 @@ class EditPostView: UIView {
     fileprivate let failedLabel = UILabel.bodyMedium(.uploadFailed,
                                          textColor: .secondaryBlack)
     
-    fileprivate let titleHeading = UILabel.lightGreySmallBody(LocalizedString.postTitle)
-    fileprivate let captionHeading = UILabel.lightGreySmallBody(LocalizedString.captionTitle)
+    //fileprivate let titleHeading = UILabel.lightGreySmallBody(LocalizedString.postTitle)
+    //fileprivate let captionHeading = UILabel.lightGreySmallBody(LocalizedString.captionTitle)
     
     init() {
         super.init(frame: .zero)
@@ -62,10 +62,8 @@ class EditPostView: UIView {
         verticalStackView.topToSuperview()
         verticalStackView.widthToSuperview()
 
-        verticalStackView.addArrangedSubview(titleHeading)
         verticalStackView.addArrangedSubview(titleTextField)
         verticalStackView.addSpace(2)
-        verticalStackView.addArrangedSubview(captionHeading)
         verticalStackView.addArrangedSubview(captionTextView)
         verticalStackView.addSpace(10)
         verticalStackView.addArrangedSubview(failedContainerView)
