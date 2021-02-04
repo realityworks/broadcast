@@ -99,7 +99,7 @@ class ProfileDetailViewModel : ViewModel {
         mediaTypeTitle = self.trailerVideoUrl.map { url in
             switch url {
             case nil:
-                return LocalizedString.noMedia.localized
+                return LocalizedString.none.localized
             default:
                 return LocalizedString.video.localized
             }
