@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ios-background-image" translatesAutoresizingMaskIntoConstraints="NO" id="FMb-4l-Uk2">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch-bg" translatesAutoresizingMaskIntoConstraints="NO" id="F8s-Zh-L1u">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Chz-ws-Elh">
@@ -42,24 +42,24 @@
                         <viewLayoutGuide key="safeArea" id="TQV-TJ-pz7"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="TQV-TJ-pz7" firstAttribute="trailing" secondItem="FMb-4l-Uk2" secondAttribute="trailing" id="93O-UU-Du6"/>
-                            <constraint firstItem="FMb-4l-Uk2" firstAttribute="leading" secondItem="TQV-TJ-pz7" secondAttribute="leading" id="CCv-xa-Lav"/>
+                            <constraint firstItem="F8s-Zh-L1u" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="9Y1-HG-bbp"/>
                             <constraint firstItem="Chz-ws-Elh" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="ITv-Ak-ZZy"/>
+                            <constraint firstAttribute="bottom" secondItem="F8s-Zh-L1u" secondAttribute="bottom" id="ZPM-vh-QMs"/>
+                            <constraint firstItem="F8s-Zh-L1u" firstAttribute="trailing" secondItem="TQV-TJ-pz7" secondAttribute="trailing" id="elS-cV-vYd"/>
                             <constraint firstItem="Chz-ws-Elh" firstAttribute="leading" secondItem="TQV-TJ-pz7" secondAttribute="leading" constant="64" id="gdH-tR-pEN"/>
                             <constraint firstItem="TQV-TJ-pz7" firstAttribute="trailing" secondItem="Chz-ws-Elh" secondAttribute="trailing" constant="64" id="kMG-Hg-7ix"/>
                             <constraint firstItem="Chz-ws-Elh" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="mRT-SY-4w2"/>
-                            <constraint firstAttribute="bottom" secondItem="FMb-4l-Uk2" secondAttribute="bottom" id="o6j-4H-21s"/>
-                            <constraint firstItem="FMb-4l-Uk2" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="r34-r1-Ik5"/>
+                            <constraint firstItem="F8s-Zh-L1u" firstAttribute="leading" secondItem="TQV-TJ-pz7" secondAttribute="leading" id="tOC-ZO-Vqw"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.6305418719212"/>
         </scene>
     </scenes>
     <resources>
-        <image name="ios-background-image" width="414" height="896"/>
+        <image name="launch-bg" width="1380" height="2986"/>
         <image name="logo-boomday" width="260" height="40"/>
         <image name="logo-broadcaster" width="167" height="28"/>
         <systemColor name="systemBackgroundColor">
