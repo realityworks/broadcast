@@ -12,6 +12,7 @@ import RxAlamofire
 import Alamofire
 
 typealias APIParameters = Dictionary<String, String>
+typealias Headers = Dictionary<String, String>
 
 class StandardAPIService : Interceptor {
     let baseUrl: URL
@@ -27,6 +28,7 @@ class StandardAPIService : Interceptor {
         self.schedulers = dependencies.schedulers
         self.session = Session.default
         self.credentialsService = nil
+        
         super.init()
     }
     
@@ -46,10 +48,14 @@ class StandardAPIService : Interceptor {
         method: HTTPMethod,
         url: URL,
         parameters: APIParameters = [:],
+        headers: Headers = [:],
         encoding: ParameterEncoding = URLEncoding.httpBody) -> Single<(HTTPURLResponse, Data)> {
 
         return session.rx
-            .request(urlRequest: URLAPIQueryStringRequest(method, url, parameters: parameters),
+            .request(urlRequest: URLAPIQueryStringRequest(method,
+                                                          url,
+                                                          parameters: parameters,
+                                                          headers: headers),
                      interceptor: self)
             .validate(statusCode: validStatusCodes)
             .responseData()
@@ -330,10 +336,14 @@ extension StandardAPIService : AuthenticationService {
         let parameters = ["username": username,
                           "password": password,
                           "grant_type": "password",
-                          "scope": "offline_access",
-                          "":""]
+                          "scope": "offline_access"]
         
-        return queryStringBodyUnauthenticatedRequest(method: .post, url: url, parameters: parameters)
+        let headers = ["X-Client-Id": "broadcaster-app"]
+        
+        return queryStringBodyUnauthenticatedRequest(method: .post,
+                                                     url: url,
+                                                     parameters: parameters,
+                                                     headers: headers)
             .decode(type: AuthenticateResponse.self)
     }
     

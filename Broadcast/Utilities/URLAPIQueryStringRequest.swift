@@ -16,18 +16,22 @@ class URLAPIQueryStringRequest : URLRequestConvertible {
     let method: HTTPMethod
     let url: URL
     let queryString: String
+    let headers: Dictionary<String, String>
     
     init(_ method: HTTPMethod,
          _ url: URL,
-         parameters: Dictionary<String, String>) {
+         parameters: Dictionary<String, String>,
+         headers: Dictionary<String, String>) {
         self.queryString = parameters.queryString
         self.method = method
         self.url = url
+        self.headers = headers
     }
     
     func asURLRequest() throws -> URLRequest {
         var request = URLRequest(url: url)
         
+        request.headers = HTTPHeaders(headers)
         request.httpMethod = method.rawValue
         request.httpBody = queryString.data(using: .utf8)
         
