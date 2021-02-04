@@ -75,12 +75,14 @@ class ProfileTextFieldTableViewCell: UITableViewCell {
             textField.leftView = nil
         } else {
             textField.layer.borderWidth = 0
-            textField.backgroundColor = .secondaryWhite
+            textField.backgroundColor = .secondaryLightGrey
             
             if showLockIcon {
                 let lockedIcon = UIImageView(image: UIImage.iconLock?.withRenderingMode(.alwaysTemplate))
                 lockedIcon.contentMode = .scaleAspectFit
-                lockedIcon.tintColor = .lightGray
+                lockedIcon.tintColor = .primaryLightGrey
+                lockedIcon.contentScaleFactor = 0.9
+                
                 textField.isUserInteractionEnabled = false
                 textField.leftView = lockedIcon
                 textField.leftViewMode = .always
