@@ -140,18 +140,18 @@ class PostSummaryView : UIView {
     }
     
     private func configureListStyle() {
-        verticalStackView.addSpace(18)
-        verticalStackView.addArrangedSubview(dateCreatedContainer)
         verticalStackView.addSpace(10)
+        verticalStackView.addArrangedSubview(dateCreatedContainer)
+        verticalStackView.addSpace(2)
         verticalStackView.addSeparator()
-        verticalStackView.addSpace(8)
+        verticalStackView.addSpace(6)
         verticalStackView.addArrangedSubview(postTitleContainer)
-        verticalStackView.addSpace(8)
+        verticalStackView.addSpace(4)
         verticalStackView.addArrangedSubview(postCaptionContainer)
         verticalStackView.addArrangedSubview(containerTopView)
-        verticalStackView.addSpace(10)
+        verticalStackView.addSpace(2)
         verticalStackView.addArrangedSubview(postStatsContainer)
-        verticalStackView.addSpace(8)
+        verticalStackView.addSpace(1)
         
         postCaptionContainer.height(30)
         postStatsContainer.height(15)
@@ -201,7 +201,7 @@ class PostSummaryView : UIView {
         verticalStackView.topToSuperview(usingSafeArea: true)
         verticalStackView.bottomToSuperview()
         
-        roundedCorners()
+        roundedCorners(withCornerRadius: 12)
     }
     
     func style() {

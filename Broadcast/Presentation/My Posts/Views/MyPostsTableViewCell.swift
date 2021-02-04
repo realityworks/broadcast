@@ -29,8 +29,8 @@ class MyPostsTableViewCell : UITableViewCell {
         contentView.addSubview(postSummaryView)
         postSummaryView.backgroundColor = .white
         postSummaryView.topToSuperview()
-        postSummaryView.leftToSuperview(offset: 24)
-        postSummaryView.rightToSuperview(offset: -24)
+        postSummaryView.leftToSuperview(offset: 16)
+        postSummaryView.rightToSuperview(offset: -16)
         
         let bottomSpaceView = UIView()
         contentView.addSubview(bottomSpaceView)
