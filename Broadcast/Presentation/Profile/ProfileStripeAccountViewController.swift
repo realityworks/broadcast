@@ -76,7 +76,7 @@ class ProfileStripeAccountViewController: ViewController {
                 cell.configure(withTitle: LocalizedString.id.localized.uppercased(),
                                text: text,
                                editingEnabled: false,
-                               showLockIcon: false)
+                               showLockIcon: true)
                 return cell
                 
             case let .pricing(text):
@@ -85,7 +85,7 @@ class ProfileStripeAccountViewController: ViewController {
                 cell.configure(withTitle: LocalizedString.pricing.localized.uppercased(),
                                text: text,
                                editingEnabled: false,
-                               showLockIcon: false)
+                               showLockIcon: true)
                 return cell
                 
             case let .totalBalance(text):
@@ -94,7 +94,7 @@ class ProfileStripeAccountViewController: ViewController {
                 cell.configure(withTitle: LocalizedString.totalBalance.localized.uppercased(),
                                text: text,
                                editingEnabled: false,
-                               showLockIcon: false)
+                               showLockIcon: true)
                 return cell
                 
             case let .lifetimeTotalVolume(text):
@@ -103,7 +103,7 @@ class ProfileStripeAccountViewController: ViewController {
                 cell.configure(withTitle: LocalizedString.lifetimeTotalVolume.localized.uppercased(),
                                text: text,
                                editingEnabled: false,
-                               showLockIcon: false)
+                               showLockIcon: true)
                 return cell
                 
             case .simpleInfo(let text):
