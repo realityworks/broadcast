@@ -45,12 +45,13 @@ class PostDetailViewModel : ViewModel {
                 media: $0.contentMedia,
                 commentCount: $0.commentCount,
                 lockerCount: $0.lockerCount,
-                dateCreated: "\(LocalizedString.created.rawValue) \($0.created.timeAgo()) ",
+                dateCreated: String.localizedStringWithFormat(
+                    LocalizedString.createdAgo,
+                    $0.created.timeAgo()),
                 isEncoding: !$0.finishedProcessing,
                 showVideoPlayer: true)
         }
-        //NSLocalizedString(LocalizedString.created.rawValue, comment: <#T##String#>)
-        String.localizedStringWithFormat(<#T##format: String##String#>, <#T##arguments: CVarArg...##CVarArg#>)
+        
         self.postContentUseCase = dependencies.postContentUseCase
         self.isDeleting = isDeletingRelay.asObservable()
         self.deleteButtonEnabled = deleteButtonEnabledRelay.asObservable()
