@@ -90,6 +90,9 @@ enum LocalizedString : String {
     case emailUserLockedInfo
     case stripeAccountLockedInfo
     case processing
+    case saving
+    case usingAppAccept
+    case created
     
     // MARK: Error Strings
     case error
@@ -105,8 +108,6 @@ enum LocalizedString : String {
     case uploadEventError
     case noPosts
     case internalMemoryError
-    case saving
-    case usingAppAccept
     
     var localized: String {
         return Bundle.main.localizedString(forKey: self.rawValue, value: nil, table: nil)

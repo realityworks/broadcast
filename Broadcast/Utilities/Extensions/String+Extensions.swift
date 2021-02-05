@@ -8,6 +8,10 @@
 import Foundation
 
 extension String {
+    static func localizedStringWithFormat(_ format: LocalizedString, _ arguments: CVarArg...) -> String {
+        return localizedStringWithFormat(format.localized, arguments)
+    }
+    
     init(_ localizedString: LocalizedString) {
         self = localizedString.localized
     }
