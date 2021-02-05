@@ -52,7 +52,7 @@ class MyPostsViewModel : ViewModel {
                         thumbnailUrl: thumbnailUrl,
                         media: $0.contentMedia,
                         isEncoding: !$0.finishedProcessing,
-                        dateCreated: String.localizedStringWithFormat(
+                        dateCreated: String.localizedWithFormat(
                             LocalizedString.createdAgo,
                             $0.created.timeAgo()),
                         commentCount: $0.commentCount,

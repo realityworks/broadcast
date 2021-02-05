@@ -45,7 +45,7 @@ class PostDetailViewModel : ViewModel {
                 media: $0.contentMedia,
                 commentCount: $0.commentCount,
                 lockerCount: $0.lockerCount,
-                dateCreated: String.localizedStringWithFormat(
+                dateCreated: String.localizedWithFormat(
                     LocalizedString.createdAgo,
                     $0.created.timeAgo()),
                 isEncoding: !$0.finishedProcessing,
