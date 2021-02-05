@@ -92,7 +92,7 @@
 "noPosts" = "NO POSTS";
 "saving" = "Saving";
 "usingAppAccept" = "By using this app you accept the";
-"created" = "Created";
+"createdAgo" = "Created %@ ago";
 
 // MARK: Error Strings
 "unknownError" = "An unknown error occured";

@@ -9,7 +9,9 @@ import Foundation
 
 extension String {
     static func localizedStringWithFormat(_ format: LocalizedString, _ arguments: CVarArg...) -> String {
-        return localizedStringWithFormat(format.localized, arguments)
+        let formatString = format.localized
+        let localizedWithFormat = String(format: formatString, arguments)
+        return localizedWithFormat
     }
     
     init(_ localizedString: LocalizedString) {
