@@ -51,13 +51,14 @@ class PostDetailViewController: ViewController {
         scrollView.addSubview(deleteButtonContainer)
         postSummaryView.topToSuperview()
         postSummaryView.widthToSuperview()
+        postSummaryView.addBottomSeparator()
         
         deleteButtonContainer.addTopSeparator()
         deleteButtonContainer.addBottomSeparator()
         deleteButtonContainer.edgesToSuperview(excluding: [.top, .bottom], usingSafeArea: true)
         deleteButtonContainer.height(50)
         deleteButtonContainer.topToBottom(of: postSummaryView, offset: 32)
-        deleteButtonContainer.bottomToSuperview(offset: 32)
+        deleteButtonContainer.bottomToSuperview(offset: -32)
         
         deleteButtonContainer.addSubview(deleteButton)
         deleteButton.leftToSuperview(offset: 24)
