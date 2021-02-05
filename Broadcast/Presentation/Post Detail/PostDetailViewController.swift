@@ -74,7 +74,7 @@ class PostDetailViewController: ViewController {
         
         deleteButton.rx.tap
             .subscribe(onNext: { [weak self] _ in
-                self?.viewModel.deletePost()
+                self?.showDeleteConfirmation()
             })
             .disposed(by: disposeBag)
         
@@ -91,5 +91,20 @@ class PostDetailViewController: ViewController {
                 self?.navigationController?.popViewController(animated: true)
             })
             .disposed(by: disposeBag)
+    }
+    
+    @objc func showDeleteConfirmation() {
+        let alertController = UIAlertController(title: "Delete Post", message: "This action cannot be undone", preferredStyle: .actionSheet)
+        
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [unowned self] _ in
+            self.viewModel.deletePost()
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default)
+        
+        alertController.addAction(deleteAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true)
     }
 }

@@ -109,12 +109,12 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         passwordTextField.leftViewMode = .always
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         
-//        if Configuration.debugUIEnabled {
-//            usernameTextField.text = testUserName
-//            passwordTextField.text = testPassword
-//            viewModel.username.accept(testUserName)
-//            viewModel.password.accept(testPassword)
-//        }
+        if Configuration.debugUIEnabled {
+            usernameTextField.text = testUserName
+            passwordTextField.text = testPassword
+            viewModel.username.accept(testUserName)
+            viewModel.password.accept(testPassword)
+        }
     }
     
     private func configureLayout() {
