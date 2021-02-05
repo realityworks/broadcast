@@ -58,9 +58,10 @@ extension Date {
         formatter.allowedUnits = [.year, .month, .day, .hour, .minute, .second]
         
         let timeComponentsString = formatter.string(from: from, to: to)
-        return String(format: timeComponentsString?
-            .components(separatedBy: ",")
-            .first ?? "", locale: .current)
+        let finalString = String(format: timeComponentsString?
+           .components(separatedBy: ",")
+           .first ?? "", locale: .current)
+        return finalString
     }
     
     func timeAgo() -> String {

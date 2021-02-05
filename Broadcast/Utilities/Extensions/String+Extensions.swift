@@ -10,7 +10,12 @@ import Foundation
 extension String {
     static func localizedStringWithFormat(_ format: LocalizedString, _ arguments: CVarArg...) -> String {
         let formatString = format.localized
-        let localizedWithFormat = String(format: formatString, arguments)
+        let test = String(format: formatString, "test")
+        let localizedWithFormat:String = withVaList(arguments) { vaListPointer -> NSString in
+            return NSString(format: formatString, arguments: vaListPointer)
+        } as String
+        
+        //localizedStringWithFormat(formatString, arguments)//
         return localizedWithFormat
     }
     
