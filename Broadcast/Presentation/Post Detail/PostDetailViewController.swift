@@ -32,7 +32,7 @@ class PostDetailViewController: ViewController {
     private func configureViews() {
         // Configure the view settings
         postSummaryView.backgroundColor = .white
-        deleteButtonContainer.backgroundColor = .clear
+        deleteButtonContainer.backgroundColor = .white
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -52,13 +52,16 @@ class PostDetailViewController: ViewController {
         postSummaryView.topToSuperview()
         postSummaryView.widthToSuperview()
         
+        deleteButtonContainer.addTopSeparator()
+        deleteButtonContainer.addBottomSeparator()
         deleteButtonContainer.edgesToSuperview(excluding: [.top, .bottom], usingSafeArea: true)
-        deleteButtonContainer.height(60)
-        deleteButtonContainer.topToBottom(of: postSummaryView)
-        deleteButtonContainer.bottomToSuperview()
+        deleteButtonContainer.height(50)
+        deleteButtonContainer.topToBottom(of: postSummaryView, offset: 32)
+        deleteButtonContainer.bottomToSuperview(offset: 32)
         
         deleteButtonContainer.addSubview(deleteButton)
-        deleteButton.centerInSuperview()
+        deleteButton.leftToSuperview(offset: 24)
+        deleteButton.centerYToSuperview()
         
         deleteButtonContainer.addSubview(activityIndicator)
         activityIndicator.leftToRight(of: deleteButton, offset: 10)
