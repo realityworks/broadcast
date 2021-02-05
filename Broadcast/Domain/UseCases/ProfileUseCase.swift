@@ -116,6 +116,12 @@ extension ProfileUseCase {
             }, onCompleted: {
                 Logger.log(level: .info, topic: .api, message: "Trailer upload complete!")
                 self.stateController.state.currentTrailerUploadProgress?.completed = true
+                
+                self.stateController.state.profile?.isTrailerProcessed = false
+                self.stateController.state.profile?.trailerThumbnailUrl = nil
+                self.stateController.state.profile?.trailerVideoUrl = nil
+                
+                self.loadProfile()
             })
             .disposed(by: disposeBag)
         

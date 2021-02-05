@@ -30,7 +30,6 @@ class ProfileDetailViewModel : ViewModel {
     let subscriberCount: Observable<Int>
     let profileImage: Observable<UIImage>
 
-    
     let displayNameObservable: Observable<String?>
     let displayNameSubject = BehaviorRelay<String?>(value: nil)
     let biographyObservable: Observable<String?>
@@ -140,7 +139,13 @@ class ProfileDetailViewModel : ViewModel {
         
         showUploadButton = showProgressView.map { !$0 }
         
-        trailerVideoProcessed = profileObservable.map { $0.isTrailerProcessed }
+        let isTrailerVideoProcessed = profileObservable.map {
+            $0.isTrailerProcessed
+        }
+        
+        trailerVideoProcessed = Observable.combineLatest(isTrailerVideoProcessed, trailerVideoUrl, trailerThumbnailUrl) { processed, trailerVideoUrl, trailerThumbnailUrl in
+            return !((processed == false && trailerVideoUrl == nil && trailerThumbnailUrl == nil) || !processed)
+        }
         
         savingProfile = savingProfileSubject.asObservable()
         

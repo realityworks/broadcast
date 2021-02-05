@@ -23,9 +23,9 @@ struct Profile : Equatable, Codable {
     let email: String?
     let subscriberCount: Int
     let profileImageUrl: String?
-    let trailerThumbnailUrl: String?
-    let trailerVideoUrl: String?
-    let isTrailerProcessed: Bool
+    var trailerThumbnailUrl: String?
+    var trailerVideoUrl: String?
+    var isTrailerProcessed: Bool
     
     struct StripeAccount : Equatable, Codable {
         let productId: String?

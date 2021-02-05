@@ -24,6 +24,10 @@ class ProfileViewController: ViewController {
         configureViews()
         configureLayout()
         configureBindings()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         viewModel.loadProfile()
     }
