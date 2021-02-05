@@ -58,7 +58,10 @@ class PostSummaryView : UIView {
         verticalStackView.spacing = 5
         
         thumbnailImageView.contentMode = .scaleAspectFill
+        thumbnailImageView.backgroundColor = .black
+        
         containerTopView.clipsToBounds = true
+        containerTopView.backgroundColor = .black
     }
     
     func configureLayout() {
