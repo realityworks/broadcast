@@ -31,14 +31,14 @@ class LoginViewModel : ViewModel {
         self.postContentUseCase = dependencies.postContentUseCase
         self.profileUseCase = dependencies.profileUseCase
         
-        isLoginEnabled = Observable.combineLatest(username, password) { username, password in
-            guard let username = username,
-                  let password = password else { return false }
-            return !username.isEmpty && !password.isEmpty
-        }
-        
         isLoading = isLoadingSubject.asObservable()
         showAcceptTerms = showAcceptTermsSubject.asObservable()
+        
+        isLoginEnabled = Observable.combineLatest(username, password, isLoading) { username, password, isLoading in
+            guard let username = username,
+                  let password = password else { return false }
+            return !username.isEmpty && !password.isEmpty && !isLoading
+        }
         
         super.init(stateController: dependencies.stateController)
     }

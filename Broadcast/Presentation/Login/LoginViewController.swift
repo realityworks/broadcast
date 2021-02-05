@@ -109,12 +109,12 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         passwordTextField.leftViewMode = .always
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         
-        if Configuration.debugUIEnabled {
-            usernameTextField.text = testUserName
-            passwordTextField.text = testPassword
-            viewModel.username.accept(testUserName)
-            viewModel.password.accept(testPassword)
-        }
+//        if Configuration.debugUIEnabled {
+//            usernameTextField.text = testUserName
+//            passwordTextField.text = testPassword
+//            viewModel.username.accept(testUserName)
+//            viewModel.password.accept(testPassword)
+//        }
     }
     
     private func configureLayout() {
@@ -151,7 +151,6 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         contentStackView.addArrangedSubview(applyHereTextView)
         
         activityIndicatorContainerView.addSubview(activityIndicator)
-        //activityIndicatorContainerView.centerInSuperview()
         activityIndicatorContainerView.height(56)
         activityIndicatorContainerView.width(56)
         activityIndicator.edgesToSuperview()
@@ -191,7 +190,6 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         passwordTextField.rx.controlEvent([.editingDidEndOnExit])
             .subscribe(onNext: { [unowned self] _ in
                 self.passwordTextField.resignFirstResponder()
-                //self.viewModel.login()
                 self.showAcceptTerms()
             })
             .disposed(by: disposeBag)
@@ -220,12 +218,7 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         viewModel.isLoading
             .bind(to: activityIndicator.rx.isAnimating)
             .disposed(by: disposeBag)
-        
-        viewModel.isLoading
-            .map { !$0 }
-            .bind(to: loginButton.rx.isEnabled)
-            .disposed(by: disposeBag)
-        
+                
         viewModel.showAcceptTerms
             .subscribe(onNext: {
                 self.showAcceptTerms()
