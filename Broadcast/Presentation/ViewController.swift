@@ -19,7 +19,6 @@ class ViewController : UIViewController {
     
     // Internal properties
     var disposeBag = DisposeBag()
-    var backbarItem: UIBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     
     // MARK: View Controller overrides
     override func viewDidLoad() {
@@ -41,7 +40,7 @@ class ViewController : UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         Logger.verbose(topic: .appState, message: "viewDidAppear")
-        navigationItem.backBarButtonItem = backbarItem
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
