@@ -62,6 +62,9 @@ class ProfileDetailViewModel : ViewModel {
     private let savingProfileSubject = BehaviorRelay<Bool>(value: false)
     let savingProfile: Observable<Bool>
     
+    private let finishedReloadProfileSignal = PublishRelay<()>()
+    let finishedReloadProfile: Observable<()>
+    
     init(dependencies: Dependencies = .standard) {
         
         self.schedulers = dependencies.schedulers
@@ -148,6 +151,8 @@ class ProfileDetailViewModel : ViewModel {
         }
         
         savingProfile = savingProfileSubject.asObservable()
+        
+        finishedReloadProfile = finishedReloadProfileSignal.asObservable()
         
         super.init(stateController: dependencies.stateController)
         
@@ -268,5 +273,16 @@ extension ProfileDetailViewModel {
     func uploadTrailer(withUrl url: URL) {
         isUploadingSubject.onNext(true)
         profileUseCase.uploadTrailer(withUrl: url)
+    }
+    
+    func reloadProfile() {
+        profileUseCase.reloadProfile()
+            .subscribe(onSuccess: { [weak self] _ in
+                self?.finishedReloadProfileSignal.accept(())
+            }, onFailure: { [weak self] _ in
+                self?.finishedReloadProfileSignal.accept(())
+            })
+            .disposed(by: disposeBag)
+
     }
 }

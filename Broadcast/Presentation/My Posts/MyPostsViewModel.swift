@@ -93,7 +93,7 @@ extension MyPostsViewModel {
     }
 }
 
-// MARK: - View Model Functions
+// MARK: - ViewModel Functions
 
 extension MyPostsViewModel {
     func refreshMyPostsList() {

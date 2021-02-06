@@ -73,8 +73,18 @@ class ProfileDetailViewController: ViewController {
         tableView.backgroundView = nil
         tableView.separatorStyle = .none
         
-        // Configure Bar button item
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(savePressed))
+        // Configure Bar button items
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save",
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(savePressed))
+        
+        let backButton = UIBarButtonItem(image: UIImage.iconChevronLeft,
+                                         style: .plain,
+                                         target: self, action: #selector(backPressed))
+
+        backButton.tintColor = .white
+        navigationItem.leftBarButtonItem = backButton
         
         //Setup the pickers
         pickers.forEach { picker in
@@ -109,11 +119,10 @@ class ProfileDetailViewController: ViewController {
     private func configureBindings() {
         configureTableViewBindings()
         
-        /// Do not allow going back if you are uploading... (This could break in other ways need to revisit)
-        if let backButtonEnabledBinder = navigationController?.navigationItem.backBarButtonItem?.rx.isEnabled {
+        if let leftBarButtonItem = navigationItem.leftBarButtonItem {
             viewModel.isUploading
                 .map { !$0 }
-                .bind(to: backButtonEnabledBinder)
+                .bind(to: leftBarButtonItem.rx.isEnabled)
                 .disposed(by: disposeBag)
         }
         
@@ -133,6 +142,12 @@ class ProfileDetailViewController: ViewController {
         refreshControl.rx.controlEvent(.valueChanged)
             .subscribe(onNext: {
                 self.viewModel.reloadProfile()
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.finishedReloadProfile
+            .subscribe(onNext: {
+                self.refreshControl.endRefreshing()
             })
             .disposed(by: disposeBag)
     }
@@ -396,6 +411,10 @@ class ProfileDetailViewController: ViewController {
 extension ProfileDetailViewController {
     @objc func savePressed() {
         viewModel.updateProfile()
+    }
+    
+    @objc func backPressed() {
+        navigationController?.popViewController(animated: true)
     }
 }
 
