@@ -200,7 +200,6 @@ extension StandardAPIService : APIService {
                     .concat(uploadRequest.rx.response().map { $0 })
                 
                 return Observable.combineLatest(responsePart, progressPart) { response, progress in
-                    print ("Upload progress: \(progress)")
                     if let response = response,
                        !Array(200 ..< 300).contains(response.statusCode) {
                         throw BoomdayError.apiStatusCode(code: response.statusCode)

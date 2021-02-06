@@ -282,7 +282,6 @@ extension StandardUploadService : UploadService {
                         observer.onNext(UploadEvent.completeUpload)
                         observer.onCompleted()
                     } onError: { error in
-                        print (error)
                         observer.onError(BoomdayError.unknown)
                     }
                     .disposed(by: disposeBag)
