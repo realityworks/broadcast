@@ -17,6 +17,7 @@ class ProfileDetailViewController: ViewController {
     
     private let viewModel = ProfileDetailViewModel()
     
+    private let refreshControl = UIRefreshControl()
     private let tableView = UITableView(frame: .zero, style: .grouped)
     private let savingView = SavingView()
     private let titleHeaderView = UIView()
@@ -47,17 +48,9 @@ class ProfileDetailViewController: ViewController {
     }
     
     private func configureViews() {
-        // Setup table view the header
-        titleHeaderView.frame = CGRect(x: 0, y: 0, width: 200, height: 96)
-        tableView.tableHeaderView = titleHeaderView
-
-        titleHeaderView.addSubview(titleLabel)
-        titleLabel.edgesToSuperview(excluding: [.left, .right])
-        titleLabel.leftToSuperview(offset: 22)
         
-        titleHeaderView.addSubview(headingSeparator)
-        headingSeparator.edgesToSuperview(excluding: [.top])
-        headingSeparator.height(1)
+        /// Configure pull to refresh
+        tableView.refreshControl = refreshControl
         
         // Configure Views
         // Register the required cells for the view
@@ -95,6 +88,18 @@ class ProfileDetailViewController: ViewController {
         view.addSubview(tableView)
         view.addSubview(savingView)
         
+        // Setup table view the header
+        titleHeaderView.frame = CGRect(x: 0, y: 0, width: 200, height: 96)
+        tableView.tableHeaderView = titleHeaderView
+
+        titleHeaderView.addSubview(titleLabel)
+        titleLabel.edgesToSuperview(excluding: [.left, .right])
+        titleLabel.leftToSuperview(offset: 22)
+        
+        titleHeaderView.addSubview(headingSeparator)
+        headingSeparator.edgesToSuperview(excluding: [.top])
+        headingSeparator.height(1)
+        
         tableView.edgesToSuperview()
         
         savingView.centerXToSuperview()
@@ -123,6 +128,13 @@ class ProfileDetailViewController: ViewController {
                 .bind(to: saveButton.rx.isEnabled)
                 .disposed(by: disposeBag)
         }
+
+        /// Bind the refresh control to load posts lists
+        refreshControl.rx.controlEvent(.valueChanged)
+            .subscribe(onNext: {
+                self.viewModel.reloadProfile()
+            })
+            .disposed(by: disposeBag)
     }
     
     private func configureTableViewBindings() {

@@ -82,8 +82,8 @@ class ProfileTrailerTableViewCell: UITableViewCell {
         
         failedIconView.contentMode = .scaleAspectFit
         
-        thumbnailImageView.roundedCorners()
-        blurredEffectView.roundedCorners()        
+        thumbnailImageView.roundedCorners(clipsToBounds: true)
+        blurredEffectView.roundedCorners(clipsToBounds: true)
         processingView.animating = true
     }
     

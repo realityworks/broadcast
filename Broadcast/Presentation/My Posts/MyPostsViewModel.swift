@@ -71,22 +71,10 @@ class MyPostsViewModel : ViewModel {
             })
             .disposed(by: disposeBag)
     }
-
-    func refreshMyPostsList() {
-        postContentUseCase.retrieveMyPosts()
-    }
-    
-    func selectPost(with postId: PostID) {
-        postContentUseCase.selectPost(with: postId)
-        selectedSubject.accept(())
-    }
-    
-    func createPost() {
-        createPostSubject.accept(())
-    }
 }
 
-/// MainViewModel dependencies component
+// MARK: - Dependencies
+
 extension MyPostsViewModel {
     struct Dependencies {
         
@@ -102,5 +90,22 @@ extension MyPostsViewModel {
                 myPostsObservable: Domain.standard.stateController.stateObservable(of: \.myPosts, distinct: false),
                 isLoadingPostsObservable: Domain.standard.stateController.stateObservable(of: \.isLoadingPosts))
         }
+    }
+}
+
+// MARK: - View Model Functions
+
+extension MyPostsViewModel {
+    func refreshMyPostsList() {
+        postContentUseCase.retrieveMyPosts()
+    }
+    
+    func selectPost(with postId: PostID) {
+        postContentUseCase.selectPost(with: postId)
+        selectedSubject.accept(())
+    }
+    
+    func createPost() {
+        createPostSubject.accept(())
     }
 }

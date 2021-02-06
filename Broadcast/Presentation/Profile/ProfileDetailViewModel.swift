@@ -209,7 +209,7 @@ extension ProfileDetailViewModel {
     }
 }
 
-// MARK: - Usecase functions
+// MARK: - ViewModel functions
 
 extension ProfileDetailViewModel {
     func prepareData() {
