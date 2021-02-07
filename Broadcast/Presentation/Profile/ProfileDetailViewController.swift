@@ -50,7 +50,8 @@ class ProfileDetailViewController: ViewController {
     private func configureViews() {
         
         /// Configure pull to refresh
-        tableView.refreshControl = refreshControl
+        #warning("Pull to refresh causes many new edge cases, look at after launch")
+        //tableView.refreshControl = refreshControl
         
         // Configure Views
         // Register the required cells for the view
