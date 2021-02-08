@@ -427,8 +427,10 @@ extension ProfileDetailViewController: UIImagePickerControllerDelegate,
     // MARK: UIImagePickerControllerDelegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let imageUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL {
+            // TODO Need to make a copy
             selected(imageUrl: imageUrl)
         } else if let videoUrl = info[UIImagePickerController.InfoKey.mediaURL] as? URL {
+            // TODO Need to make a copy
             selected(videoUrl: videoUrl)
         }
         
