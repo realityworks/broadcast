@@ -443,7 +443,6 @@ extension ProfileDetailViewController: UIImagePickerControllerDelegate,
             try? data.write(to: imageUrl)
             selected(imageUrl: imageUrl)
         } else if let videoUrl = info[UIImagePickerController.InfoKey.mediaURL] as? URL {
-            // TODO Need to make a copy
             selected(videoUrl: videoUrl)
         }
         
