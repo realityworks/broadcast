@@ -65,12 +65,6 @@
 "uploading" = "Uploading media - ";
 "hotTips" = "HOT TIPS FOR";
 "greatContent" = "GREAT CONTENT";
-"tip1Title" = "Record in portrait mode";
-"tip1SubTitle" = "This works great for Boomday videos";
-"tip2Title" = "Short and simple";
-"tip2SubTitle" = "Like a good HIIT session — keep it snappy";
-"tip3Title" = "Lights. Sound. Action!";
-"tip3SubTitle" = "Good sound and lighting make great videos";
 "close" = "Close";
 "locker" = "Locker";
 "comments" = "Comments";
@@ -97,6 +91,29 @@
 "acceptTerms" = "Accept Terms";
 "accept" = "Accept";
 "decline" = "Decline";
+
+// MARK: Tips Strings
+"tip1Title" = "Record in portrait mode";
+"tip1SubTitle" = "This works great for Boomday videos";
+"tip2Title" = "Good sound and lighting";
+"tip2SubTitle" = "Helps to enhance quality";
+"tip3Title" = "Lights. Sound. Action!";
+"tip3SubTitle" = "Good sound and lighting make great videos";
+
+
+    
+
+Be genuine and engaging
+    People want to see the real you
+
+Upload with strong WiFi
+    Ensures your content reaches the platform
+
+Keep it clean
+    Stick to the content standards
+
+Get in touch
+    Contact us if you need any support
 
 
 // MARK: Error Strings

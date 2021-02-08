@@ -13,9 +13,11 @@ import TinyConstraints
 class TipsView : UIView {
     
     // MARK: UI Components
+    
     private let verticalStackView = UIStackView()
     private let subTitleLabel = UILabel.bodyBold(LocalizedString.hotTips, textColor: UIColor.white)
     private let titleLabel = UILabel.extraLargeTitle(LocalizedString.greatContent, textColor: UIColor.white)
+    private let scrollView = UIScrollView()
     private let containerView = UIView()
     let closeButton = UIButton.text(withTitle: LocalizedString.close)
     
@@ -33,8 +35,8 @@ class TipsView : UIView {
                 title: LocalizedString.tip2Title,
                 description: LocalizedString.tip2SubTitle),
         TipData(image: UIImage.iconCustomPortraitMode,
-                title: LocalizedString.tip2Title,
-                description: LocalizedString.tip2SubTitle)
+                title: LocalizedString.tip3Title,
+                description: LocalizedString.tip3SubTitle)
     ]
     
     init() {
@@ -58,11 +60,12 @@ class TipsView : UIView {
     
     private func configureLayout() {
         addSubview(containerView)
-        containerView.addSubview(verticalStackView)
+        containerView.addSubview(scrollView)
         
         containerView.width(315)
         containerView.centerInSuperview()
         
+        scrollView.edgesToSuperview()
         verticalStackView.edgesToSuperview(insets:
                                             TinyEdgeInsets(top: 32,
                                                            left: 24,
