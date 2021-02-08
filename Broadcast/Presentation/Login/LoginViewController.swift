@@ -259,7 +259,7 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
     }
     
     @objc func showAcceptTerms() {
-        let alertController = UIAlertController(title: LocalizedString.acceptTerms.rawValue,
+        let alertController = UIAlertController(title: LocalizedString.acceptTerms.localized,
                                                 message: "\n\n\n",
                                                 preferredStyle: .actionSheet)
         
@@ -278,12 +278,12 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         textView.rightToSuperview()
         textView.bottomToSuperview(offset: -110)
         
-        let acceptAction = UIAlertAction(title: LocalizedString.accept.rawValue, style: .default) { [unowned self] action in
+        let acceptAction = UIAlertAction(title: LocalizedString.accept.localized, style: .default) { [unowned self] action in
             self.viewModel.acceptTerms()
             self.viewModel.login()
         }
         
-        let declineAction = UIAlertAction(title: LocalizedString.decline.rawValue, style: .cancel)
+        let declineAction = UIAlertAction(title: LocalizedString.decline.localized, style: .cancel)
         
         alertController.addAction(acceptAction)
         alertController.addAction(declineAction)
