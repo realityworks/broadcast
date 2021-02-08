@@ -81,7 +81,7 @@ class TipsView : UIView {
         scrollView.edgesToSuperview(insets:
                                         TinyEdgeInsets(top: 32,
                                                        left: 24,
-                                                       bottom: 32,
+                                                       bottom: 62,
                                                        right: 24))
         verticalStackView.edgesToSuperview(excluding: .bottom)
         
@@ -104,7 +104,11 @@ class TipsView : UIView {
         }
         
         verticalStackView.addSpace(30)
-        verticalStackView.addArrangedSubview(closeButton)
+        
+        containerView.addSubview(closeButton)
+        
+        closeButton.centerXToSuperview()
+        closeButton.bottomToSuperview()
         closeButton.width(66)
         closeButton.height(30)
         
