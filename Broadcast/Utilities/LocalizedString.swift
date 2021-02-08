@@ -72,6 +72,12 @@ enum LocalizedString : String {
     case tip2SubTitle
     case tip3Title
     case tip3SubTitle
+    case tip4Title
+    case tip4SubTitle
+    case tip5Title
+    case tip5SubTitle
+    case tip6Title
+    case tip6SubTitle
     case close
     case locker
     case comments
