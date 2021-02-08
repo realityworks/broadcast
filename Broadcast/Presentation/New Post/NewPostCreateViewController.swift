@@ -359,7 +359,6 @@ extension NewPostCreateViewController: UIImagePickerControllerDelegate,
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-        #warning("Review before production release - Revert URLs to use original URL files")
         if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage,
            let data = image.orientationRemoved().pngData() {
             let imageUrl = FileManager.default.documentsDirectory().appendingPathComponent("selected.png")
