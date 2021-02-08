@@ -36,7 +36,17 @@ class TipsView : UIView {
                 description: LocalizedString.tip2SubTitle),
         TipData(image: UIImage.iconCustomPortraitMode,
                 title: LocalizedString.tip3Title,
-                description: LocalizedString.tip3SubTitle)
+                description: LocalizedString.tip3SubTitle),
+        TipData(image: UIImage.iconCustomPortraitMode,
+                title: LocalizedString.tip4Title,
+                description: LocalizedString.tip4SubTitle),
+        TipData(image: UIImage.iconCustomPortraitMode,
+                title: LocalizedString.tip5Title,
+                description: LocalizedString.tip5SubTitle),
+        TipData(image: UIImage.iconCustomPortraitMode,
+                title: LocalizedString.tip6Title,
+                description: LocalizedString.tip6SubTitle)
+
     ]
     
     init() {
