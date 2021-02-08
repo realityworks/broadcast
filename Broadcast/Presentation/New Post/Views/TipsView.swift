@@ -13,8 +13,8 @@ import TinyConstraints
 class TipsView : UIView {
     
     // MARK: UI Components
-    
-    private let verticalStackView = UIStackView()
+    private let topStackView = UIStackView()
+    private let tipsStackView = UIStackView()
     private let subTitleLabel = UILabel.bodyBold(LocalizedString.hotTips, textColor: UIColor.white)
     private let titleLabel = UILabel.extraLargeTitle(LocalizedString.greatContent, textColor: UIColor.white)
     private let scrollView = UIScrollView()
@@ -59,9 +59,13 @@ class TipsView : UIView {
     private func configureView() {
         backgroundColor = UIColor.darkGrey.withAlphaComponent(0.94)
         
-        verticalStackView.axis = .vertical
-        verticalStackView.alignment = .center
-        verticalStackView.translatesAutoresizingMaskIntoConstraints = false
+        topStackView.axis = .vertical
+        topStackView.alignment = .center
+        topStackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        tipsStackView.axis = .vertical
+        tipsStackView.alignment = .center
+        tipsStackView.translatesAutoresizingMaskIntoConstraints = false
         
         containerView.backgroundColor = .darkGrey
         containerView.roundedCorners()
@@ -74,47 +78,64 @@ class TipsView : UIView {
     private func configureLayout() {
         addSubview(containerView)
         containerView.addSubview(scrollView)
-        
-        containerView.width(315)
-        containerView.centerInSuperview()
-        
-        scrollView.edgesToSuperview(insets:
+        containerView.edgesToSuperview(insets:
+                                        TinyEdgeInsets(top: 32,
+                                                       left: 48,
+                                                       bottom: 32,
+                                                       right: 48))
+        containerView.addSubview(topStackView)
+        topStackView.topToSuperview(offset: 32)
+        topStackView.edgesToSuperview(excluding: [.top, .bottom])
+        scrollView.topToBottom(of: topStackView)
+        scrollView.edgesToSuperview(excluding: .top, insets:
                                         TinyEdgeInsets(top: 32,
                                                        left: 24,
                                                        bottom: 62,
                                                        right: 24))
-        verticalStackView.edgesToSuperview(excluding: .bottom)
+        scrollView.addSubview(tipsStackView)
         
-        verticalStackView.addArrangedSubview(subTitleLabel)
-        verticalStackView.addArrangedSubview(titleLabel)
-        verticalStackView.addSpace(16)
+        tipsStackView.topToSuperview()
+        tipsStackView.widthToSuperview()
+        
+        topStackView.addArrangedSubview(subTitleLabel)
+        topStackView.addArrangedSubview(titleLabel)
+        
+        tipsStackView.addSpace(16)
         tipData.forEach { tipData in
-            verticalStackView.addSpace(30)
-            verticalStackView.addArrangedSubview(UIImageView(image: tipData.image))
-            verticalStackView.addSpace(4)
+            tipsStackView.addSpace(30)
+            tipsStackView.addArrangedSubview(UIImageView(image: tipData.image))
+            tipsStackView.addSpace(4)
             let titleLabel = UILabel.largeBodyBold(tipData.title, textColor: .white)
             titleLabel.height(24)
-            verticalStackView.addArrangedSubview(titleLabel)
+            tipsStackView.addArrangedSubview(titleLabel)
             
             let descriptionLabel = UILabel.smallBody(tipData.description, textColor: .white)
             descriptionLabel.numberOfLines = 0
             descriptionLabel.lineBreakMode = .byWordWrapping
             
-            verticalStackView.addArrangedSubview(descriptionLabel)
+            tipsStackView.addArrangedSubview(descriptionLabel)
         }
         
-        verticalStackView.addSpace(30)
+        tipsStackView.addSpace(30)
         
         containerView.addSubview(closeButton)
         
         closeButton.centerXToSuperview()
-        closeButton.bottomToSuperview()
+        closeButton.bottomToSuperview(offset: -16)
         closeButton.width(66)
         closeButton.height(30)
         
-        //scrollView.contentSize = verticalStackView.frame.size
+        print("INIT STACK VIEW")
+        print(tipsStackView.frame.size)
+        print(tipsStackView.intrinsicContentSize)
+        setNeedsDisplay()
     }
     
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        scrollView.contentSize = tipsStackView.frame.size
+    }
+        
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
