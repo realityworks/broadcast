@@ -267,7 +267,7 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         textView.backgroundColor = .clear
         textView.attributedText =
             "\(LocalizedString.usingAppAccept.localized)\n\n".set(style: Style.bodyCenter) +
-            LocalizedString.termsAndConditions.localized.set(style: Style.link(Configuration.termsAndConditions)) +
+            LocalizedString.broadcasterTermsAndConditions.localized.set(style: Style.link(Configuration.termsAndConditions)) +
             " \(LocalizedString.and.localized) ".set(style: Style.bodyCenter) +
             LocalizedString.privacyPolicy.localized.set(style: Style.link(Configuration.learnMore))
         
