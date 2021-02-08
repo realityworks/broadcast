@@ -195,7 +195,7 @@ class ProfileViewController: ViewController {
                     UIApplication.shared.open(Configuration.privacyPolicy)
                     break
                 case .termsAndConditions:
-                    UIApplication.shared.open(Configuration.termsAndConditions)
+                    UIApplication.shared.open(Configuration.broadcasterTermsAndConditions)
                     break
                 case .share:
                     self.viewModel.shareProfile()

@@ -233,7 +233,7 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         // Style attributed strings
         applyHereTextView.attributedText =
             "\(LocalizedString.notABroadcaster.localized) ".set(style: Style.bodyCenter) +
-            LocalizedString.learnMore.localized.set(style: Style.link)
+            LocalizedString.learnMore.localized.set(style: Style.link(Configuration.learnMore))
         
         let forgotPasswordStyle = Style {
             $0.font = UIFont.smallBody
@@ -267,9 +267,9 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         textView.backgroundColor = .clear
         textView.attributedText =
             "\(LocalizedString.usingAppAccept.localized)\n\n".set(style: Style.bodyCenter) +
-            LocalizedString.broadcasterTermsAndConditions.localized.set(style: Style.link(Configuration.termsAndConditions)) +
+            LocalizedString.termsAndConditions.localized.set(style: Style.link(Configuration.broadcasterTermsAndConditions)) +
             " \(LocalizedString.and.localized) ".set(style: Style.bodyCenter) +
-            LocalizedString.privacyPolicy.localized.set(style: Style.link(Configuration.learnMore))
+            LocalizedString.privacyPolicy.localized.set(style: Style.link(Configuration.privacyPolicy))
         
         alertController.view.addSubview(textView)
         
