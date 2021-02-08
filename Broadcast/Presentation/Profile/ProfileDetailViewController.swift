@@ -426,8 +426,10 @@ extension ProfileDetailViewController: UIImagePickerControllerDelegate,
                                       UINavigationControllerDelegate {
     // MARK: UIImagePickerControllerDelegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let imageUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL {
-            // TODO Need to make a copy
+        if let imageUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL,
+           let data = image.orientationRemoved().pngData() {
+            let imageUrl = FileManager.default.documentsDirectory().appendingPathComponent("thumbnail.png")
+            try? data.write(to: imageUrl)
             selected(imageUrl: imageUrl)
         } else if let videoUrl = info[UIImagePickerController.InfoKey.mediaURL] as? URL {
             // TODO Need to make a copy
