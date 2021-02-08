@@ -51,10 +51,12 @@ extension Style {
         $0.color = UIColor.secondaryBlack
     }
     
-    static let link = Style {
-        $0.font = UIFont.body
-        $0.underline = (.single, UIColor.primaryGrey)
-        $0.linkURL = Configuration.learnMore
-        $0.alignment = .center
+    static func link(_ url: URL) -> Style {
+        return Style {
+            $0.font = UIFont.body
+            $0.underline = (.single, UIColor.primaryGrey)
+            $0.linkURL = url
+            $0.alignment = .center
+        }
     }
 }

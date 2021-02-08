@@ -77,6 +77,7 @@ enum LocalizedString : String {
     case comments
     case yes
     case no
+    case and
     case cancelChanges
     case cancelChangesDescription
     case post
@@ -92,6 +93,9 @@ enum LocalizedString : String {
     case saving
     case usingAppAccept
     case createdAgo
+    case acceptTerms
+    case accept
+    case decline
     
     // MARK: Error Strings
     case error

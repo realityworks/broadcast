@@ -259,7 +259,7 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
     }
     
     @objc func showAcceptTerms() {
-        let alertController = UIAlertController(title: "Accept terms",
+        let alertController = UIAlertController(title: LocalizedString.acceptTerms.rawValue,
                                                 message: "\n\n\n",
                                                 preferredStyle: .actionSheet)
         
@@ -267,7 +267,9 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         textView.backgroundColor = .clear
         textView.attributedText =
             "\(LocalizedString.usingAppAccept.localized)\n\n".set(style: Style.bodyCenter) +
-            LocalizedString.termsAndConditions.localized.set(style: Style.link)
+            LocalizedString.termsAndConditions.localized.set(style: Style.link(Configuration.termsAndConditions)) +
+            " \(LocalizedString.and.localized) ".set(style: Style.bodyCenter) +
+            LocalizedString.privacyPolicy.localized.set(style: Style.link(Configuration.learnMore))
         
         alertController.view.addSubview(textView)
         
@@ -276,12 +278,12 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         textView.rightToSuperview()
         textView.bottomToSuperview(offset: -110)
         
-        let acceptAction = UIAlertAction(title: "Accept", style: .default) { [unowned self] action in
+        let acceptAction = UIAlertAction(title: LocalizedString.accept.rawValue, style: .default) { [unowned self] action in
             self.viewModel.acceptTerms()
             self.viewModel.login()
         }
         
-        let declineAction = UIAlertAction(title: "Decline", style: .cancel)
+        let declineAction = UIAlertAction(title: LocalizedString.decline.rawValue, style: .cancel)
         
         alertController.addAction(acceptAction)
         alertController.addAction(declineAction)

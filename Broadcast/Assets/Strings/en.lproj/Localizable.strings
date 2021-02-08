@@ -77,6 +77,7 @@
 "ago" = "ago";
 "yes" = "Yes";
 "no" = "No";
+"and" = "and";
 "cancelChanges" = "Cancel Changes";
 "cancelChangesDescription" = "This will remove draft content";
 "post" = "Post";
@@ -93,6 +94,10 @@
 "saving" = "Saving";
 "usingAppAccept" = "By using this app you accept the";
 "createdAgo" = "Created %@ ago";
+"acceptTerms" = "Accept Terms";
+"accept" = "Accept";
+"decline" = "Decline";
+
 
 // MARK: Error Strings
 "unknownError" = "An unknown error occured";

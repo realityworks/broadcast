@@ -768,8 +768,8 @@
 			children = (
 				1D916D92256406B10059E549 /* Configuration.swift */,
 				1D916DA325640C810059E549 /* Development.xcconfig */,
-				1D916DA425640C810059E549 /* Production.xcconfig */,
 				1D916DA525640C810059E549 /* Staging.xcconfig */,
+				1D916DA425640C810059E549 /* Production.xcconfig */,
 			);
 			path = Configuration;
 			sourceTree = "<group>";
