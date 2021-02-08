@@ -55,7 +55,7 @@ extension StandardUploadService : UploadService {
         
         /// Performing a check if image or video, if a video, we need to save out to a local file.
         do {
-            media = try uploadMedia.localCopy()
+            media = try uploadMedia.localCopy(withFilename: "media")
         } catch {
             return .error(error)
         }

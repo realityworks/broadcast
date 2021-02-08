@@ -47,7 +47,7 @@ enum Media : Equatable {
         }
     }
     
-    func localCopy() throws -> Media {
+    func localCopy(withFilename filename: String) throws -> Media {
         #warning("Need to look at possibly saving the image also in the future, currently assumes it's saved!")
         switch self {
         case .image:
@@ -56,10 +56,9 @@ enum Media : Equatable {
             do {
                 guard let url = url else {
                     throw BoomdayError.internalMemoryError(text: "Internal file doesn't exist")
-                    return self
                 }
                 
-                return .video(url: try url.copiedToLocal(filename: "video"))
+                return .video(url: try url.copiedToLocal(filename: filename + "_video"))
             } catch {
                 throw error
             }
