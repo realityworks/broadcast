@@ -97,24 +97,14 @@
 "tip1SubTitle" = "This works great for Boomday videos";
 "tip2Title" = "Good sound and lighting";
 "tip2SubTitle" = "Helps to enhance quality";
-"tip3Title" = "Lights. Sound. Action!";
-"tip3SubTitle" = "Good sound and lighting make great videos";
-
-
-    
-
-Be genuine and engaging
-    People want to see the real you
-
-Upload with strong WiFi
-    Ensures your content reaches the platform
-
-Keep it clean
-    Stick to the content standards
-
-Get in touch
-    Contact us if you need any support
-
+"tip3Title" = "Be genuine and engaging";
+"tip3SubTitle" = "People want to see the real you";
+"tip4Title" = "Upload with strong WiFi";
+"tip4SubTitle" = "Ensures your content reaches the platform";
+"tip5Title" = "Keep it clean";
+"tip5SubTitle" = "Stick to the content standards";
+"tip6Title" = "Get in touch";
+"tip6SubTitle" = "Contact us if you need any support";
 
 // MARK: Error Strings
 "unknownError" = "An unknown error occured";
