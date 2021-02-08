@@ -61,11 +61,14 @@ class TipsView : UIView {
         
         verticalStackView.axis = .vertical
         verticalStackView.alignment = .center
+        verticalStackView.translatesAutoresizingMaskIntoConstraints = false
         
         containerView.backgroundColor = .darkGrey
         containerView.roundedCorners()
         
         closeButton.setTitleColor(.primaryLightGrey, for: .normal)
+        
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func configureLayout() {
@@ -75,12 +78,12 @@ class TipsView : UIView {
         containerView.width(315)
         containerView.centerInSuperview()
         
-        scrollView.edgesToSuperview()
-        verticalStackView.edgesToSuperview(insets:
-                                            TinyEdgeInsets(top: 32,
-                                                           left: 24,
-                                                           bottom: 32,
-                                                           right: 24))
+        scrollView.edgesToSuperview(insets:
+                                        TinyEdgeInsets(top: 32,
+                                                       left: 24,
+                                                       bottom: 32,
+                                                       right: 24))
+        verticalStackView.edgesToSuperview(excluding: .bottom)
         
         verticalStackView.addArrangedSubview(subTitleLabel)
         verticalStackView.addArrangedSubview(titleLabel)
@@ -104,6 +107,8 @@ class TipsView : UIView {
         verticalStackView.addArrangedSubview(closeButton)
         closeButton.width(66)
         closeButton.height(30)
+        
+        //scrollView.contentSize = verticalStackView.frame.size
     }
     
     required init?(coder: NSCoder) {
