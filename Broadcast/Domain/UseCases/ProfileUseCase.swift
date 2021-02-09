@@ -163,5 +163,6 @@ extension ProfileUseCase {
     
     func clearTrailerForUpload() {
         stateController.state.selectedTrailerUrl = nil
+        stateController.state.currentTrailerUploadProgress = UploadProgress()
     }
 }
