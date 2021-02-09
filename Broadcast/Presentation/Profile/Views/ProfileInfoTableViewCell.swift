@@ -26,6 +26,7 @@ class ProfileInfoTableViewCell: UITableViewCell {
     let subscribersImageContainer = UIView()
     let subscribersImage = UIImageView(image: .iconRadio)
     let subscribersLabel = UILabel()
+    let loadingIndicator = UIActivityIndicatorView(style: .medium)
     
     var disposeBag = DisposeBag()
 
@@ -78,9 +79,11 @@ class ProfileInfoTableViewCell: UITableViewCell {
         containerStackView.addArrangedSubview(subscribersContainerStackView)
         
         thumbnailImageContainer.addSubview(thumbnailImageView)
+        thumbnailImageContainer.addSubview(loadingIndicator)
         thumbnailImageView.centerInSuperview()
         thumbnailImageContainer.height(100)
         thumbnailImageContainer.width(100)
+        loadingIndicator.centerInSuperview()
         
         subscribersContainerStackView.addArrangedSubview(displayNameLabel)
         subscribersContainerStackView.addArrangedSubview(subscriberDetailContainerStackView)

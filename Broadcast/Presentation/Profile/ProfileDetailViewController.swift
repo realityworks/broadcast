@@ -166,11 +166,18 @@ class ProfileDetailViewController: ViewController {
                 cell.configure(withProfileImage: profileImage,
                                displayName: displayName,
                                subscribers: subscribers)
+                
                 cell.changeThumbnailButton.rx.tap
                     .subscribe(onNext: {
                         self.showMediaOptionsMenu(forTag: PickerTags.profileImage.rawValue)
                     })
                     .disposed(by: cell.disposeBag)
+                
+                viewModel.isUploadingTrailer
+                    .map { !$0 }
+                    .bind(to: cell.loadingIndicator.rx.isHidden)
+                    .disposed(by: cell.disposeBag)
+                
                 return cell
                 
             case .displayName(let displayName):
