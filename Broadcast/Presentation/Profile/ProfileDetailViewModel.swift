@@ -40,8 +40,8 @@ class ProfileDetailViewModel : ViewModel {
     let handleSubject = BehaviorRelay<String?>(value: nil)
     
     // Uploading new profile image management
-    private let isUploadingTrailerSubject = BehaviorSubject<Bool>(value: false)
-    let isUploadingTrailer: Observable<Bool>
+    private let isUploadingProfileImageSubject = BehaviorSubject<Bool>(value: false)
+    let isUploadingProfileImage: Observable<Bool>
     
     // Uploading new trailer management
     private let isUploadingTrailerSubject = BehaviorSubject<Bool>(value: false)
@@ -113,6 +113,7 @@ class ProfileDetailViewModel : ViewModel {
         
         showingTrailer = trailerVideoUrl.map { $0 != nil }
         
+        isUploadingProfileImage = isUploadingProfileImageSubject.asObservable()
         isUploadingTrailer = isUploadingTrailerSubject.asObservable()
 
         progress = uploadingProgressObservable.map { $0.totalProgress }
@@ -259,16 +260,23 @@ extension ProfileDetailViewModel {
     func profileImageSelected(withUrl url: URL) {
         let originalUrl = URL(string: stateController.state.profile?.profileImageUrl)
         
-        profileUseCase.updateLocalProfile(image: url)
+        isUploadingProfileImageSubject.onNext(true)
+        
         profileUseCase.updateProfile(image: url)
             .subscribe(onNext: { progress in
                 Logger.log(level: .info, topic: .debug, message: "Uploading profile image progress: \(progress)")
-            }, onError: { error in
+            }, onError: { [weak self] error in
                 /// Revert to original image
+                guard let self = self else { return }
+                
+                self.isUploadingProfileImageSubject.onNext(false)
+                Logger.log(level: .info, topic: .debug, message: "Failed uploading profile image!")
                 self.profileUseCase.loadProfileImage(fromUrl: originalUrl)
                 self.stateController.sendError(error)
-            }, onCompleted: {
+            }, onCompleted: { [weak self]
+                guard let self = self else { return }
                 Logger.log(level: .info, topic: .debug, message: "Uploading profile image complete!")
+                self.isUploadingProfileImageSubject.onNext(false)
             })
             .disposed(by: disposeBag)
     }

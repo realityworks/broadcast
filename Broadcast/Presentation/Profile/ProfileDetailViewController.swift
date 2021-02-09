@@ -173,10 +173,10 @@ class ProfileDetailViewController: ViewController {
                     })
                     .disposed(by: cell.disposeBag)
                 
-//                self.viewModel.isUploadingTrailer
-//                    .map { !$0 }
-//                    .bind(to: cell.loadingIndicator.rx.isHidden)
-//                    .disposed(by: cell.disposeBag)
+                self.viewModel.isUploadingProfileImage
+                    .map { !$0 }
+                    .bind(to: cell.loadingIndicator.rx.isHidden)
+                    .disposed(by: cell.disposeBag)
                 
                 return cell
                 

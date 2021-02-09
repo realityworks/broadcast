@@ -1870,7 +1870,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KTKP5PRF82;
-				INFOPLIST_FILE = "Broadcast copy-Info.plist";
+				INFOPLIST_FILE = Broadcast/Assets/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1896,7 +1896,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KTKP5PRF82;
-				INFOPLIST_FILE = "Broadcast copy-Info.plist";
+				INFOPLIST_FILE = Broadcast/Assets/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
