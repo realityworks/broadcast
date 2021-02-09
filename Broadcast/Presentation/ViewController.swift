@@ -74,4 +74,24 @@ class ViewController : UIViewController {
             
         }
     }
+    
+    func customBackButton() {
+        guard navigationController?.viewControllers.isEmpty == false else { return }
+        
+        let backButton = UIBarButtonItem(image: UIImage.iconChevronLeft?.sd_resizedImage(with: CGSize(width: 40, height: 40),
+                                                                                         scaleMode: .aspectFill),
+                                         style: .plain,
+                                         target: self, action: #selector(backPressed))
+        backButton.tintColor = .white
+        navigationItem.leftBarButtonItem = backButton
+    }
+}
+
+// MARK: Objc Handlers
+
+extension ViewController {
+    @objc func backPressed() {
+        navigationController?.popViewController(animated: true)
+    }
+
 }

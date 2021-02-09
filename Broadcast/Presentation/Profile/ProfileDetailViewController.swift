@@ -38,6 +38,8 @@ class ProfileDetailViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        customBackButton()
 
         configureViews()
         configureLayout()
@@ -79,14 +81,6 @@ class ProfileDetailViewController: ViewController {
                                                             style: .plain,
                                                             target: self,
                                                             action: #selector(savePressed))
-        
-        #warning("Probably move this up to parent view controller to make the back button standard")
-        let backButton = UIBarButtonItem(image: UIImage.iconChevronLeft,
-                                         style: .plain,
-                                         target: self, action: #selector(backPressed))
-
-        backButton.tintColor = .white
-        navigationItem.leftBarButtonItem = backButton
         
         //Setup the pickers
         pickers.forEach { picker in
@@ -423,11 +417,7 @@ class ProfileDetailViewController: ViewController {
 extension ProfileDetailViewController {
     @objc func savePressed() {
         viewModel.updateProfile()
-    }
-    
-    @objc func backPressed() {
-        navigationController?.popViewController(animated: true)
-    }
+    }    
 }
 
 // MARK: UIImagePickerControllerDelegate
