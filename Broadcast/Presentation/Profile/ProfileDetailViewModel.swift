@@ -257,9 +257,7 @@ extension ProfileDetailViewModel {
             .disposed(by: disposeBag)
     }
     
-    func profileImageSelected(withUrl url: URL) {
-        let originalUrl = URL(string: stateController.state.profile?.profileImageUrl)
-        
+    func profileImageSelected(withUrl url: URL) {        
         isUploadingProfileImageSubject.onNext(true)
         
         profileUseCase.updateProfile(image: url)
@@ -271,9 +269,8 @@ extension ProfileDetailViewModel {
                 
                 self.isUploadingProfileImageSubject.onNext(false)
                 Logger.log(level: .info, topic: .debug, message: "Failed uploading profile image!")
-                self.profileUseCase.loadProfileImage(fromUrl: originalUrl)
                 self.stateController.sendError(error)
-            }, onCompleted: { [weak self]
+            }, onCompleted: { [weak self] in
                 guard let self = self else { return }
                 Logger.log(level: .info, topic: .debug, message: "Uploading profile image complete!")
                 self.isUploadingProfileImageSubject.onNext(false)

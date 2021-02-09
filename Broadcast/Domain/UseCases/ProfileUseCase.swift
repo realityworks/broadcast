@@ -153,14 +153,17 @@ extension ProfileUseCase {
     }
     
     func updateProfile(image url: URL) -> Observable<RxProgress> {
-        let originalProfileImage = stateController.state.profileImage
-        let originalProfileUrl = stateController.state.profile?.profileImageUrl
-
-        updateLocalProfile(image: url)
         do {
+            /// Local state management uses a local file url to revert to so if the image upload fails we can revert to a local version of the file
+            let originalProfileImage = stateController.state.profileImage
+            let originalProfileUrl = stateController.state.profile?.profileImageUrl
+            
             let data = try Data(contentsOf: url)
+            
+            updateLocalProfile(image: url)
             return apiService.uploadProfileImage(withData: data)
                 .do(onError: { [unowned self] error in
+                    originalProfileImage?.write(toKey: UIImage.profileImageKey)
                     self.stateController.state.profileImage = originalProfileImage
                     self.stateController.state.profile?.profileImageUrl = originalProfileUrl
                 })
