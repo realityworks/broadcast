@@ -29,6 +29,6 @@ NOTIFICATIONS_HUB_NAME = default
 
 // App Settings
 APP_NAME = Broadcast
-APP_BUNDLE_ID = com.boomday.Broadcast
+APP_BUNDLE_ID = com.boomday.broadcast
 
 DEBUG_UI_ENABLED = false
