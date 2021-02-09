@@ -39,6 +39,10 @@ class ProfileDetailViewModel : ViewModel {
     let handleObservable: Observable<String?>
     let handleSubject = BehaviorRelay<String?>(value: nil)
     
+    // Uploading new profile image management
+    private let isUploadingTrailerSubject = BehaviorSubject<Bool>(value: false)
+    let isUploadingTrailer: Observable<Bool>
+    
     // Uploading new trailer management
     private let isUploadingTrailerSubject = BehaviorSubject<Bool>(value: false)
     let isUploadingTrailer: Observable<Bool>

@@ -26,7 +26,7 @@ class ProfileInfoTableViewCell: UITableViewCell {
     let subscribersImageContainer = UIView()
     let subscribersImage = UIImageView(image: .iconRadio)
     let subscribersLabel = UILabel()
-    let loadingIndicator = UIActivityIndicatorView(style: .medium)
+    let loadingIndicator = UIActivityIndicatorView(style: .large)
     
     var disposeBag = DisposeBag()
 
@@ -67,6 +67,8 @@ class ProfileInfoTableViewCell: UITableViewCell {
         displayNameLabel.lineBreakMode = .byTruncatingTail
         displayNameLabel.adjustsFontSizeToFitWidth = true
         displayNameLabel.clipsToBounds = false
+        
+        loadingIndicator.startAnimating()
     }
     
     private func layoutViews() {

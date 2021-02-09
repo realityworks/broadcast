@@ -534,7 +534,7 @@
 		1DA3E44525874ADD00F1825F /* GetMediaUploadUrlResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMediaUploadUrlResponse.swift; sourceTree = "<group>"; };
 		1DA63D1C25A8419A0029A509 /* GetTrailerUploadUrlResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTrailerUploadUrlResponse.swift; sourceTree = "<group>"; };
 		1DB0B37D25D232430035C755 /* Broadcast QA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Broadcast QA.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		1DB0B38125D232440035C755 /* Broadcast copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Broadcast copy-Info.plist"; path = "/Users/piotrsuwara/Documents/Development/soda/boomdaycollection/ios-broadcaster-app/Broadcast copy-Info.plist"; sourceTree = "<absolute>"; };
+		1DB0B38125D232440035C755 /* InfoQA.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = InfoQA.plist; path = "/Users/piotrsuwara/Documents/Development/soda/boomdaycollection/ios-broadcaster-app/InfoQA.plist"; sourceTree = "<absolute>"; };
 		1DB3438D2589DC3300486676 /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
 		1DC97C6B25A2F77600EBF667 /* Broadcast.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Broadcast.entitlements; sourceTree = "<group>"; };
 		1DC97C8025A4180100EBF667 /* ProfileSignOutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSignOutTableViewCell.swift; sourceTree = "<group>"; };
@@ -626,7 +626,6 @@
 				1D34341B25624B4C00886245 /* BroadcastUITests */,
 				1D3433F825624B4400886245 /* Products */,
 				1D9314432577E990001C85C1 /* Frameworks */,
-				1DB0B38125D232440035C755 /* Broadcast copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -904,6 +903,7 @@
 				1D79C10925944FDC00AC271B /* Animations */,
 				1D3F71DB257123B600DE7F05 /* Strings */,
 				1D34340825624B4C00886245 /* Info.plist */,
+				1DB0B38125D232440035C755 /* InfoQA.plist */,
 				1D34340525624B4C00886245 /* LaunchScreen.storyboard */,
 				1D34340325624B4C00886245 /* Assets.xcassets */,
 			);
