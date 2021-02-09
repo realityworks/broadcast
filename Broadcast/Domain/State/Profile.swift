@@ -22,7 +22,7 @@ struct Profile : Equatable, Codable {
     let handle: String
     let email: String?
     let subscriberCount: Int
-    let profileImageUrl: String?
+    var profileImageUrl: String?
     var trailerThumbnailUrl: String?
     var trailerVideoUrl: String?
     var isTrailerProcessed: Bool

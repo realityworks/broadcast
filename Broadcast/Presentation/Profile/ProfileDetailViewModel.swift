@@ -40,8 +40,8 @@ class ProfileDetailViewModel : ViewModel {
     let handleSubject = BehaviorRelay<String?>(value: nil)
     
     // Uploading new trailer management
-    private let isUploadingSubject = BehaviorSubject<Bool>(value: false)
-    let isUploading: Observable<Bool>
+    private let isUploadingTrailerSubject = BehaviorSubject<Bool>(value: false)
+    let isUploadingTrailer: Observable<Bool>
     let progress: Observable<Float>
     let progressText: Observable<String>
     
@@ -109,7 +109,7 @@ class ProfileDetailViewModel : ViewModel {
         
         showingTrailer = trailerVideoUrl.map { $0 != nil }
         
-        isUploading = isUploadingSubject.asObservable()
+        isUploadingTrailer = isUploadingTrailerSubject.asObservable()
 
         progress = uploadingProgressObservable.map { $0.totalProgress }
         
@@ -127,8 +127,8 @@ class ProfileDetailViewModel : ViewModel {
         
         let isProgressViewActive: Observable<Bool> = Observable.combineLatest(
             uploadComplete,
-            isUploading) { uploadComplete, isUploading in
-                return (uploadComplete || isUploading)
+            isUploadingTrailer) { uploadComplete, isUploadingTrailer in
+                return (uploadComplete || isUploadingTrailer)
             }
         
         let hasSelectedNewTrailerAfterUpload = selectedNewTrailerRelay
@@ -176,7 +176,7 @@ class ProfileDetailViewModel : ViewModel {
         uploadingProgressObservable
             .map { !($0.completed || $0.failed) }
             .distinctUntilChanged()
-            .bind(to: self.isUploadingSubject)
+            .bind(to: self.isUploadingTrailerSubject)
             .disposed(by: disposeBag)
         
         selectedTrailerUrl.compactMap { _ in true }
@@ -253,16 +253,19 @@ extension ProfileDetailViewModel {
     }
     
     func profileImageSelected(withUrl url: URL) {
-        if let image = UIImage(contentsOfFile: url.path) {
-            profileUseCase.updateLocalProfile(image: image)
-        }
+        let originalUrl = URL(string: stateController.state.profile?.profileImageUrl)
         
+        profileUseCase.updateLocalProfile(image: url)
         profileUseCase.updateProfile(image: url)
-            .subscribe { _ in
-            } onError: { error in
+            .subscribe(onNext: { progress in
+                Logger.log(level: .info, topic: .debug, message: "Uploading profile image progress: \(progress)")
+            }, onError: { error in
+                /// Revert to original image
+                self.profileUseCase.loadProfileImage(fromUrl: originalUrl)
                 self.stateController.sendError(error)
-            } onCompleted: {
-            }
+            }, onCompleted: {
+                Logger.log(level: .info, topic: .debug, message: "Uploading profile image complete!")
+            })
             .disposed(by: disposeBag)
     }
     
@@ -271,10 +274,11 @@ extension ProfileDetailViewModel {
     }
     
     func uploadTrailer(withUrl url: URL) {
-        isUploadingSubject.onNext(true)
+        isUploadingTrailerSubject.onNext(true)
         profileUseCase.uploadTrailer(withUrl: url)
     }
     
+    #warning("Currently not used, was used for refresh!")
     func reloadProfile() {
         profileUseCase.reloadProfile()
             .subscribe(onSuccess: { [weak self] _ in

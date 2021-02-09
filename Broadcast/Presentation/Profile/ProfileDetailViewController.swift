@@ -122,8 +122,11 @@ class ProfileDetailViewController: ViewController {
         configureTableViewBindings()
         
         if let leftBarButtonItem = navigationItem.leftBarButtonItem {
-            viewModel.isUploading
-                .map { !$0 }
+            viewModel.isUploadingTrailer
+                .map {
+                    print("ISUPLOADING: \(!$0)")
+                    return !$0
+                }
                 .bind(to: leftBarButtonItem.rx.isEnabled)
                 .disposed(by: disposeBag)
         }
@@ -353,7 +356,7 @@ class ProfileDetailViewController: ViewController {
             })
             .disposed(by: cell.disposeBag)
         
-        viewModel.isUploading
+        viewModel.isUploadingTrailer
             .map { !$0 }
             .bind(to: cell.changeButton.rx.isEnabled)
             .disposed(by: disposeBag)
@@ -426,20 +429,15 @@ extension ProfileDetailViewController: UIImagePickerControllerDelegate,
                                       UINavigationControllerDelegate {
     // MARK: UIImagePickerControllerDelegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage,
-           let data = image.orientationRemoved().pngData() {
-            let imageUrl = FileManager.default.documentsDirectory().appendingPathComponent("thumbnail.png")
-            try? data.write(to: imageUrl)
-            selected(imageUrl: imageUrl)
-        } else if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage,
-                  let data = image.orientationRemoved().pngData() {
-            let imageUrl = FileManager.default.documentsDirectory().appendingPathComponent("thumbnail.png")
+        if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage ?? info[UIImagePickerController.InfoKey.originalImage] as? UIImage,
+           let data = image.orientationRemoved().jpegData(compressionQuality: 9) {
+            let imageUrl = FileManager.default.documentsDirectory().appendingPathComponent("thumbnail.jpg")
             try? data.write(to: imageUrl)
             selected(imageUrl: imageUrl)
         } else if let imageUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL,
                   let srcData = try? Data(contentsOf: imageUrl),
-                  let data = UIImage(data: srcData)?.orientationRemoved().pngData() {
-            let imageUrl = FileManager.default.documentsDirectory().appendingPathComponent("thumbnail.png")
+                  let data = UIImage(data: srcData)?.orientationRemoved().jpegData(compressionQuality: 9) {
+            let imageUrl = FileManager.default.documentsDirectory().appendingPathComponent("thumbnail.jpg")
             try? data.write(to: imageUrl)
             selected(imageUrl: imageUrl)
         } else if let videoUrl = info[UIImagePickerController.InfoKey.mediaURL] as? URL {

@@ -74,12 +74,12 @@ extension ProfileUseCase {
                                  forKey: user + PersistenceKeys.termsAccepted)
     }
         
-    private func loadProfileImage(fromUrl url: URL?) {
+    func loadProfileImage(fromUrl url: URL?) {
         guard let url = url else { return }
         SDWebImageManager.shared.loadImage(with: url, options: [.allowInvalidSSLCertificates, .continueInBackground], progress: nil) { (image, data, error, cacheType, finished, _) in
             /// Write the image to local data so we can refer to it when required
-            guard let image = image else { return }
-            self.updateLocalProfile(image: image)
+            //guard let image = image else { return }
+            self.updateLocalProfile(image: url)
         }
     }
     
@@ -142,9 +142,14 @@ extension ProfileUseCase {
         stateController.state.profile?.biography = biography
     }
     
-    func updateLocalProfile(image: UIImage) {
-        image.write(toKey: UIImage.profileImageKey)
-        stateController.state.profileImage = image
+    func updateLocalProfile(image url: URL) {
+        Logger.log(level: .info, topic: .debug, message: "Updating Local Profile with image at: \(url)")
+        if let image = UIImage(contentsOfFile: url.path) {
+            Logger.log(level: .info, topic: .debug, message: "Image exists, updating local data!")
+            image.write(toKey: UIImage.profileImageKey)
+            stateController.state.profileImage = image
+            stateController.state.profile?.profileImageUrl = url.absoluteString
+        }
     }
     
     func updateProfile(image url: URL) -> Observable<RxProgress> {
@@ -163,6 +168,6 @@ extension ProfileUseCase {
     
     func clearTrailerForUpload() {
         stateController.state.selectedTrailerUrl = nil
-        stateController.state.currentTrailerUploadProgress = UploadProgress()
+        stateController.state.currentTrailerUploadProgress = nil
     }
 }
