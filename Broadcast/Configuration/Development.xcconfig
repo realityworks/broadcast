@@ -21,7 +21,7 @@ NOTIFICATIONS_CONNECTION_STRING = Endpoint=sb:/$()/boom-dev-notifications.servic
 NOTIFICATIONS_HUB_NAME = default
 
 // App Settings
-APP_NAME = Broadcast (Staging)
+APP_NAME = Broadcast QA
 APP_BUNDLE_ID = com.boomday.broadcast.qa
 
 DEBUG_UI_ENABLED = true
