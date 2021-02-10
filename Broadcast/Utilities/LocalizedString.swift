@@ -66,18 +66,6 @@ enum LocalizedString : String {
     case uploading
     case hotTips
     case greatContent
-    case tip1Title
-    case tip1SubTitle
-    case tip2Title
-    case tip2SubTitle
-    case tip3Title
-    case tip3SubTitle
-    case tip4Title
-    case tip4SubTitle
-    case tip5Title
-    case tip5SubTitle
-    case tip6Title
-    case tip6SubTitle
     case close
     case locker
     case comments
@@ -102,6 +90,19 @@ enum LocalizedString : String {
     case acceptTerms
     case accept
     case decline
+    
+    case tip1Title
+    case tip1SubTitle
+    case tip2Title
+    case tip2SubTitle
+    case tip3Title
+    case tip3SubTitle
+    case tip4Title
+    case tip4SubTitle
+    case tip5Title
+    case tip5SubTitle
+    case tip6Title
+    case tip6SubTitle
     
     // MARK: Error Strings
     case error

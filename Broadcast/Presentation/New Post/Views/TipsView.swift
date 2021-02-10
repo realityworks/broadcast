@@ -28,25 +28,24 @@ class TipsView : UIView {
     }
     
     let tipData: [TipData] = [
-        TipData(image: UIImage.iconCustomPortraitMode,
+        TipData(image: UIImage.iconPortrait,
                 title: LocalizedString.tip1Title,
                 description: LocalizedString.tip1SubTitle),
-        TipData(image: UIImage.iconCustomPortraitMode,
+        TipData(image: UIImage.iconSimpleSun,
                 title: LocalizedString.tip2Title,
                 description: LocalizedString.tip2SubTitle),
-        TipData(image: UIImage.iconCustomPortraitMode,
+        TipData(image: UIImage.iconSmile,
                 title: LocalizedString.tip3Title,
                 description: LocalizedString.tip3SubTitle),
-        TipData(image: UIImage.iconCustomPortraitMode,
+        TipData(image: UIImage.iconWifi,
                 title: LocalizedString.tip4Title,
                 description: LocalizedString.tip4SubTitle),
-        TipData(image: UIImage.iconCustomPortraitMode,
+        TipData(image: UIImage.iconThumbUp,
                 title: LocalizedString.tip5Title,
                 description: LocalizedString.tip5SubTitle),
-        TipData(image: UIImage.iconCustomPortraitMode,
+        TipData(image: UIImage.iconHelpCricle,
                 title: LocalizedString.tip6Title,
                 description: LocalizedString.tip6SubTitle)
-
     ]
     
     init() {
@@ -103,7 +102,20 @@ class TipsView : UIView {
         tipsStackView.addSpace(16)
         tipData.forEach { tipData in
             tipsStackView.addSpace(30)
-            tipsStackView.addArrangedSubview(UIImageView(image: tipData.image))
+            let image = tipData.image?
+                .withTintColor(.white)
+                .sd_resizedImage(with: CGSize(width: 15, height: 15), scaleMode: .aspectFit)
+            let imageView = UIImageView(image: image)
+            
+            imageView.contentMode = .scaleAspectFill
+            imageView.height(40)
+            imageView.aspectRatio(1)
+            imageView.backgroundColor = .primaryRed
+            imageView.clipsToBounds = true
+            imageView.layer.cornerRadius = 20
+            imageView.contentScaleFactor = 0.1
+            
+            tipsStackView.addArrangedSubview(imageView)
             tipsStackView.addSpace(4)
             let titleLabel = UILabel.largeBodyBold(tipData.title, textColor: .white)
             titleLabel.height(24)
