@@ -69,6 +69,10 @@ class ProfileDetailViewModel : ViewModel {
 
     private let finishedReloadProfileSignal = PublishRelay<()>()
     let finishedReloadProfile: Observable<()>
+
+    private let resignRespondersSignal = PublishRelay<()>()
+    let resignResponders: Observable<()>
+
     
     init(dependencies: Dependencies = .standard) {
         
@@ -158,6 +162,8 @@ class ProfileDetailViewModel : ViewModel {
         savingProfile = savingProfileSubject.asObservable()
 
         finishedReloadProfile = finishedReloadProfileSignal.asObservable()
+        
+        resignResponders = resignRespondersSignal.asObservable()
         
         super.init(stateController: dependencies.stateController)
         
@@ -288,5 +294,9 @@ extension ProfileDetailViewModel {
     
     func loadProfile() {
         profileUseCase.loadProfile()
+    }
+    
+    func willResignResponders() {
+        resignRespondersSignal.accept(())
     }
 }

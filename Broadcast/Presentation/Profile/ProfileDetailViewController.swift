@@ -12,7 +12,8 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-class ProfileDetailViewController: ViewController {
+class ProfileDetailViewController: ViewController, KeyboardEventsAdapter {
+    var dismissKeyboardGestureRecognizer: UIGestureRecognizer = UITapGestureRecognizer()
     typealias ProfileDetailSectionModel = SectionModel<LocalizedString?, ProfileDetailViewModel.Row>
     
     private let viewModel = ProfileDetailViewModel()
@@ -56,9 +57,22 @@ class ProfileDetailViewController: ViewController {
         viewModel.loadProfile()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        registerForKeyboardEvents()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        unregisterForKeyboardEvents()
+    }
+    
     private func configureViews() {
-
-        /// Configure pull to refresh
+        
+        /// Configure text editing
+        view.addGestureRecognizer(dismissKeyboardGestureRecognizer)
+        dismissKeyboardGestureRecognizer.delaysTouchesEnded = false
+        dismissKeyboardGestureRecognizer.addTarget(self, action: #selector(dismissKeyboard))
 
         // Configure Views
         // Register the required cells for the view
@@ -173,6 +187,13 @@ class ProfileDetailViewController: ViewController {
                                editingEnabled: true)
                 cell.rx.text
                     .bind(to: self.viewModel.displayNameSubject)
+                    .disposed(by: cell.disposeBag)
+                
+                weak var weakCell = cell
+                cell.rx.textFieldEditEnd
+                    .subscribe(onNext: { _ in
+                        weakCell?.textFieldResign()
+                    })
                     .disposed(by: cell.disposeBag)
 
                 return cell
@@ -406,7 +427,12 @@ class ProfileDetailViewController: ViewController {
 
 extension ProfileDetailViewController {
     @objc func savePressed() {
+        dismissKeyboard()
         viewModel.updateProfile()
+    }
+    
+    @objc func dismissKeyboard() {
+        viewModel.willResignResponders()
     }
 }
 

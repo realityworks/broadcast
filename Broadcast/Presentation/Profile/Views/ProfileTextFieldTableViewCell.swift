@@ -92,6 +92,10 @@ class ProfileTextFieldTableViewCell: UITableViewCell {
             }
         }
     }
+    
+    func textFieldResign() {
+        textField.resignFirstResponder()
+    }
 }
 
 extension Reactive where Base: ProfileTextFieldTableViewCell {
@@ -103,5 +107,9 @@ extension Reactive where Base: ProfileTextFieldTableViewCell {
                                        }, setter: { cell, value in
                                         cell.text = value
                                        })
+    }
+    
+    var textFieldEditEnd: ControlEvent<()> {
+        return base.textField.rx.controlEvent(.editingDidEndOnExit)
     }
 }
