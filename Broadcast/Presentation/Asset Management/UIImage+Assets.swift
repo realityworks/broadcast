@@ -35,6 +35,19 @@ extension UIImage {
     static let iconChevronRight = UIImage(named: "icon-chevron-right")
     static let iconHelpCricle = UIImage(named: "icon-help-circle")
     
+    static let iconAlertCirc = UIImage(named:"icon-alert-circ")
+    static let iconArrowRight = UIImage(named:"icon-arrow-right")
+    static let iconHeart = UIImage(named:"icon-heart")
+    static let iconReload = UIImage(named:"icon-reload")
+    static let iconStar = UIImage(named:"icon-star")
+    static let iconArrowLeft = UIImage(named:"icon-arrow-left")
+    static let iconCheckSimple = UIImage(named:"icon-check-simple")
+    static let iconInfo = UIImage(named:"icon-info")
+    static let iconSmile = UIImage(named:"icon-smile")
+    static let iconWifi = UIImage(named:"icon-wifi")
+
+    
+    
     static var profileImage: UIImage? {
         return UIImage(contentsOfKey: Self.profileImageKey) ?? UIImage(color: .primaryRed)
     }
