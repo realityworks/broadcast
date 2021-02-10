@@ -161,21 +161,20 @@ class ProfileDetailViewModel : ViewModel {
         
         super.init(stateController: dependencies.stateController)
         
-        #warning("Move subscribe to bind and then test")
         displayNameObservable
-            .subscribe(onNext: { self.displayNameSubject.accept($0) })
+            .subscribe(onNext: { [weak self] value in self?.displayNameSubject.accept(value) })
             .disposed(by: disposeBag)
 
         biographyObservable
-            .subscribe(onNext: { self.biographySubject.accept($0) })
+            .subscribe(onNext: { [weak self] value in self?.biographySubject.accept(value) })
             .disposed(by: disposeBag)
 
         emailObservable
-            .subscribe(onNext: { self.emailSubject.accept($0) })
+            .subscribe(onNext: { [weak self] value in self?.emailSubject.accept(value) })
             .disposed(by: disposeBag)
 
         handleObservable
-            .subscribe(onNext: { self.handleSubject.accept($0) })
+            .subscribe(onNext: { [weak self] value in self?.handleSubject.accept(value) })
             .disposed(by: disposeBag)
 
         uploadingProgressObservable
