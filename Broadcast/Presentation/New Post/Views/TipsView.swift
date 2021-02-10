@@ -107,7 +107,7 @@ class TipsView : UIView {
             let imageView = UIImageView(image: tipData.image?.withTintColor(.white))
             view.addSubview(imageView)
             imageView.centerInSuperview()
-            imageView.height(15)
+            imageView.height(25)
             imageView.aspectRatio(1)
             
             imageView.contentMode = .scaleAspectFill
