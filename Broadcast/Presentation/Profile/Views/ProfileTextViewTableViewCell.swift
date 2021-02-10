@@ -58,6 +58,10 @@ class ProfileTextViewTableViewCell: UITableViewCell {
         
         textView.placeholder = placeholder
     }
+    
+    func textViewResign() {
+        textView.resignFirstResponder()
+    }
 }
 
 extension Reactive where Base: ProfileTextViewTableViewCell {

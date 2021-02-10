@@ -195,6 +195,12 @@ class ProfileDetailViewController: ViewController, KeyboardEventsAdapter {
                         weakCell?.textFieldResign()
                     })
                     .disposed(by: cell.disposeBag)
+                
+                self.viewModel.resignResponders
+                    .subscribe(onNext: { _ in
+                        weakCell?.textFieldResign()
+                    })
+                    .disposed(by: cell.disposeBag)
 
                 return cell
 
@@ -207,6 +213,13 @@ class ProfileDetailViewController: ViewController, KeyboardEventsAdapter {
 
                 cell.rx.text
                     .bind(to: self.viewModel.biographySubject)
+                    .disposed(by: cell.disposeBag)
+                
+                weak var weakCell = cell
+                self.viewModel.resignResponders
+                    .subscribe(onNext: { _ in
+                        weakCell?.textViewResign()
+                    })
                     .disposed(by: cell.disposeBag)
 
                 return cell
