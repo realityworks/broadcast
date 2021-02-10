@@ -52,6 +52,10 @@ class ProfileTrailerTableViewCell: UITableViewCell {
         layoutViews()
     }
     
+    deinit {
+        print ("DEINIT PROFILE TRAILER")
+    }
+    
     override func prepareForReuse() {
         disposeBag = DisposeBag()
     }
