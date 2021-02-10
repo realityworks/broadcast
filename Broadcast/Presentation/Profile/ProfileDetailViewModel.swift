@@ -86,7 +86,7 @@ class ProfileDetailViewModel : ViewModel {
         profileImage = dependencies.profileImage.compactMap { $0 ?? UIImage.profileImage }
         
         selectedTrailerUrl = dependencies.selectedTrailerUrlObservable
-        trailerThumbnailUrl = profileObservable.map { URL(string: $0.trailerThumbnailUrl) }
+        trailerThumbnailUrl = profileObservable.map { URL(string: $0.trailerThumbnailUrl)?.queryParametersRemoved() }
         
         trailerVideoUrl = Observable.combineLatest(
             profileObservable.map { URL(string: $0.trailerVideoUrl) },
@@ -297,4 +297,8 @@ extension ProfileDetailViewModel {
 //            })
 //            .disposed(by: disposeBag)
 //    }
+    
+    func loadProfile() {
+        profileUseCase.loadProfile()
+    }
 }

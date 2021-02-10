@@ -51,7 +51,7 @@ class ProfileDetailViewController: ViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.reloadProfile()
+        viewModel.loadProfile()
     }
     
     private func configureViews() {
@@ -143,11 +143,12 @@ class ProfileDetailViewController: ViewController {
         }
 
         /// Bind the refresh control to load posts lists
-        refreshControl.rx.controlEvent(.valueChanged)
-            .subscribe(onNext: {
-                self.viewModel.reloadProfile()
-            })
-            .disposed(by: disposeBag)
+        #warning("Removed reload profile")
+//        refreshControl.rx.controlEvent(.valueChanged)
+//            .subscribe(onNext: {
+//                self.viewModel.reloadProfile()
+//            })
+//            .disposed(by: disposeBag)
         
         viewModel.finishedReloadProfile
             .subscribe(onNext: {

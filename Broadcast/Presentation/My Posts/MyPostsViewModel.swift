@@ -49,7 +49,7 @@ class MyPostsViewModel : ViewModel {
                         postId: $0.id,
                         title: $0.title,
                         caption: $0.caption,
-                        thumbnailUrl: thumbnailUrl,
+                        thumbnailUrl: thumbnailUrl?.queryParametersRemoved(),
                         media: $0.contentMedia,
                         isEncoding: !$0.finishedProcessing,
                         dateCreated: String.localizedWithFormat(
@@ -82,13 +82,16 @@ extension MyPostsViewModel {
         let postContentUseCase: PostContentUseCase
         let myPostsObservable: Observable<[Post]?>
         let isLoadingPostsObservable: Observable<Bool>
+        let willEnterForeground: Observable<Void>
         
         static var standard: Dependencies {
+            let notificationCenter = NotificationCenter.default.rx
             return Dependencies(
                 stateController: Domain.standard.stateController,
                 postContentUseCase: Domain.standard.useCases.postContentUseCase,
                 myPostsObservable: Domain.standard.stateController.stateObservable(of: \.myPosts, distinct: false),
-                isLoadingPostsObservable: Domain.standard.stateController.stateObservable(of: \.isLoadingPosts))
+                isLoadingPostsObservable: Domain.standard.stateController.stateObservable(of: \.isLoadingPosts),
+                willEnterForeground: notificationCenter.notification(UIApplication.willEnterForegroundNotification).map { _ in () })
         }
     }
 }
