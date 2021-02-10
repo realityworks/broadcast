@@ -219,7 +219,6 @@ class PostSummaryView : UIView {
         guard let url = url else { return }
         
         thumbnailImageView.isHidden = !showThumbnail
-        print("THUMBNAIL MEDIA URL: \(url)")
         thumbnailImageView.sd_setImage(with: url,
                                        placeholderImage: UIImage(color: .black))
     }
@@ -228,7 +227,6 @@ class PostSummaryView : UIView {
         guard let url = url else { return }
         
         thumbnailImageView.isHidden = !show
-        print("IMAGE MEDIA URL: \(url)")
         thumbnailImageView.sd_setImage(with: url.appendingQueryItem("dpi", value: "3"),
                                        placeholderImage: UIImage(color: .black))
     }

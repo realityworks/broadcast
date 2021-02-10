@@ -24,6 +24,10 @@ class VideoPlayerView: UIView {
         addSubview(playerController.view)
     }
     
+    deinit {
+        print ("DEINIT VIDEO PLAYER")
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
