@@ -167,6 +167,7 @@ class ProfileDetailViewController: ViewController, KeyboardEventsAdapter {
                 
                 cell.changeThumbnailButton.rx.tap
                     .subscribe(onNext: { [weak self] in
+                        self?.dismissKeyboard()
                         self?.showMediaOptionsMenu(forTag: PickerTags.profileImage.rawValue)
                     })
                     .disposed(by: cell.disposeBag)
@@ -178,10 +179,12 @@ class ProfileDetailViewController: ViewController, KeyboardEventsAdapter {
 
                 return cell
 
-            case .displayName(let displayName):
+            case .displayName:
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextFieldTableViewCell.identifier, for: indexPath) as! ProfileTextFieldTableViewCell
 
-                cell.configure(withTitle: LocalizedString.displayName.localized.uppercased(),
+                let displayName = self.viewModel.displayNameSubject.value ?? .empty
+                let title = LocalizedString.displayName.localized.uppercased()
+                cell.configure(withTitle: title,
                                text: displayName,
                                placeholder: LocalizedString.displayName.localized,
                                editingEnabled: true)
@@ -394,6 +397,7 @@ class ProfileDetailViewController: ViewController, KeyboardEventsAdapter {
 
         cell.changeButton.rx.tap
             .subscribe(onNext: { [weak self] _ in
+                self?.dismissKeyboard()
                 self?.showMediaOptionsMenu(forTag: PickerTags.trailer.rawValue)
             })
             .disposed(by: cell.disposeBag)
