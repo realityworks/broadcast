@@ -207,9 +207,10 @@ class ProfileDetailViewController: ViewController, KeyboardEventsAdapter {
 
                 return cell
 
-            case .biography(let biography):
+            case .biography:
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextViewTableViewCell.identifier, for: indexPath) as! ProfileTextViewTableViewCell
 
+                let biography = self.viewModel.biographySubject.value ?? .empty
                 cell.configure(withTitle: LocalizedString.displayBio.localized.uppercased(),
                                text: biography,
                                placeholder: LocalizedString.displayBio.localized)
