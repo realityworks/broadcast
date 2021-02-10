@@ -102,20 +102,22 @@ class TipsView : UIView {
         tipsStackView.addSpace(16)
         tipData.forEach { tipData in
             tipsStackView.addSpace(30)
-            let image = tipData.image?
-                .withTintColor(.white)
-                .sd_resizedImage(with: CGSize(width: 15, height: 15), scaleMode: .aspectFit)
-            let imageView = UIImageView(image: image)
+            
+            let view = UIView()
+            let imageView = UIImageView(image: tipData.image?.withTintColor(.white))
+            view.addSubview(imageView)
+            imageView.centerInSuperview()
+            imageView.height(15)
+            imageView.aspectRatio(1)
             
             imageView.contentMode = .scaleAspectFill
-            imageView.height(40)
-            imageView.aspectRatio(1)
-            imageView.backgroundColor = .primaryRed
-            imageView.clipsToBounds = true
-            imageView.layer.cornerRadius = 20
-            imageView.contentScaleFactor = 0.1
+            view.height(40)
+            view.aspectRatio(1)
+            view.backgroundColor = .primaryRed
+            view.clipsToBounds = true
+            view.layer.cornerRadius = 20
             
-            tipsStackView.addArrangedSubview(imageView)
+            tipsStackView.addArrangedSubview(view)
             tipsStackView.addSpace(4)
             let titleLabel = UILabel.largeBodyBold(tipData.title, textColor: .white)
             titleLabel.height(24)
