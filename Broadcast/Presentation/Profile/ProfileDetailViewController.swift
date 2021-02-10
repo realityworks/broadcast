@@ -158,7 +158,8 @@ class ProfileDetailViewController: ViewController {
     }
     
     private func configureTableViewBindings() {
-        let datasource = ReactiveTableViewModelSource<ProfileDetailSectionModel>(configureCell: { _, tableView, indexPath, row -> UITableViewCell in
+        let datasource = ReactiveTableViewModelSource<ProfileDetailSectionModel>(configureCell: { [weak self] _, tableView, indexPath, row -> UITableViewCell in
+            guard let self = self else { return UITableViewCell() }
             
             switch row {
             case let .profileInfo(profileImage, displayName, subscribers):
@@ -167,42 +168,42 @@ class ProfileDetailViewController: ViewController {
                                displayName: displayName,
                                subscribers: subscribers)
                 
-                cell.changeThumbnailButton.rx.tap
-                    .subscribe(onNext: {
-                        self.showMediaOptionsMenu(forTag: PickerTags.profileImage.rawValue)
-                    })
-                    .disposed(by: cell.disposeBag)
-                
-                self.viewModel.isUploadingProfileImage
-                    .map { !$0 }
-                    .bind(to: cell.loadingIndicator.rx.isHidden)
-                    .disposed(by: cell.disposeBag)
-                
+//                cell.changeThumbnailButton.rx.tap
+//                    .subscribe(onNext: {
+//                        self.showMediaOptionsMenu(forTag: PickerTags.profileImage.rawValue)
+//                    })
+//                    .disposed(by: cell.disposeBag)
+//
+//                self.viewModel.isUploadingProfileImage
+//                    .map { !$0 }
+//                    .bind(to: cell.loadingIndicator.rx.isHidden)
+//                    .disposed(by: cell.disposeBag)
+//
                 return cell
                 
             case .displayName(let displayName):
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextFieldTableViewCell.identifier, for: indexPath) as! ProfileTextFieldTableViewCell
                 
-                cell.configure(withTitle: LocalizedString.displayName.localized.uppercased(),
-                               text: displayName,
-                               placeholder: LocalizedString.displayName.localized,
-                               editingEnabled: true)
-                cell.rx.text
-                    .bind(to: self.viewModel.displayNameSubject)
-                    .disposed(by: self.disposeBag)
+//                cell.configure(withTitle: LocalizedString.displayName.localized.uppercased(),
+//                               text: displayName,
+//                               placeholder: LocalizedString.displayName.localized,
+//                               editingEnabled: true)
+//                cell.rx.text
+//                    .bind(to: self.viewModel.displayNameSubject)
+//                    .disposed(by: self.disposeBag)
                 
                 return cell
                 
             case .biography(let biography):
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextViewTableViewCell.identifier, for: indexPath) as! ProfileTextViewTableViewCell
                 
-                cell.configure(withTitle: LocalizedString.displayBio.localized.uppercased(),
-                               text: biography,
-                               placeholder: LocalizedString.displayBio.localized)
-                
-                cell.rx.text
-                    .bind(to: self.viewModel.biographySubject)
-                    .disposed(by: cell.disposeBag)
+//                cell.configure(withTitle: LocalizedString.displayBio.localized.uppercased(),
+//                               text: biography,
+//                               placeholder: LocalizedString.displayBio.localized)
+//
+//                cell.rx.text
+//                    .bind(to: self.viewModel.biographySubject)
+//                    .disposed(by: cell.disposeBag)
                 
                 return cell
                 
@@ -235,7 +236,7 @@ class ProfileDetailViewController: ViewController {
             case .simpleInfo(let text):
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileSimpleInfoTableViewCell.identifier, for: indexPath) as! ProfileSimpleInfoTableViewCell
                 
-                cell.configure(withText: text)
+//                cell.configure(withText: text)
                 
                 return cell
                 
@@ -303,7 +304,6 @@ class ProfileDetailViewController: ViewController {
             viewModel.showFailed) {
             
             biography, displayName, email, handle, subscribers, profileImage, showFailed -> [ProfileDetailSectionModel] in
-            
             return [
                 SectionModel(model: nil, items: [
                                 ProfileDetailViewModel.Row.profileInfo(profileImage: profileImage,
@@ -333,7 +333,7 @@ class ProfileDetailViewController: ViewController {
         viewModel.showingTrailer
             .map { $0 }
             .bind(to: cell.selectMediaView.dashedBorderView.rx.isHidden)
-            .disposed(by: disposeBag)
+            .disposed(by: cell.disposeBag)
         
         viewModel.progressText
             .bind(to: cell.progressView.rx.text)
@@ -366,7 +366,7 @@ class ProfileDetailViewController: ViewController {
         viewModel.isUploadingTrailer
             .map { !$0 }
             .bind(to: cell.changeButton.rx.isEnabled)
-            .disposed(by: disposeBag)
+            .disposed(by: cell.disposeBag)
         
         viewModel.showProgressView
             .map { !$0 }
@@ -383,21 +383,21 @@ class ProfileDetailViewController: ViewController {
             .disposed(by: cell.disposeBag)
         
         cell.changeButton.rx.tap
-            .subscribe(onNext: { [unowned self] _ in
-                self.showMediaOptionsMenu(forTag: PickerTags.trailer.rawValue)
+            .subscribe(onNext: { [weak self] _ in
+                self?.showMediaOptionsMenu(forTag: PickerTags.trailer.rawValue)
             })
             .disposed(by: cell.disposeBag)
         
         viewModel.selectedTrailerUrl
             .map { $0 != nil }
             .bind(to: cell.uploadButton.rx.isEnabled)
-            .disposed(by: disposeBag)
+            .disposed(by: cell.disposeBag)
         
         cell.uploadButton.rx.tap
             .withLatestFrom(viewModel.selectedTrailerUrl)
             .compactMap { $0 }
-            .subscribe(onNext: { [unowned self] url in
-                self.viewModel.uploadTrailer(withUrl: url)
+            .subscribe(onNext: { [weak self] url in
+                self?.viewModel.uploadTrailer(withUrl: url)
             })
             .disposed(by: cell.disposeBag)
         
