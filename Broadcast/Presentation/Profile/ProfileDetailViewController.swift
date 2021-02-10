@@ -49,6 +49,11 @@ class ProfileDetailViewController: ViewController {
         viewModel.prepareData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.reloadProfile()
+    }
+    
     private func configureViews() {
         
         /// Configure pull to refresh

@@ -95,17 +95,6 @@ extension ProfileUseCase {
             .disposed(by: disposeBag)
     }
     
-    func reloadProfile() -> Single<LoadProfileResponse> {
-        return apiService.loadProfile()
-            .do(onSuccess: { [self] profileResponse in
-                stateController.state.profile = profileResponse
-                loadProfileImage(fromUrl: URL(string: profileResponse.profileImageUrl))
-            }, onError: { [self] error in
-                stateController.sendError(error)
-                Logger.log(level: .warning, topic: .authentication, message: "Unable to load account details with error: \(error)")
-            })
-    }
-    
     func updateProfile(displayName: String, biography: String) -> Completable {
         return apiService.updateProfile(withDisplayName: displayName, biography: biography)
     }

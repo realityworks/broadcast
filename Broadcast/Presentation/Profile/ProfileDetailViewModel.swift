@@ -288,14 +288,13 @@ extension ProfileDetailViewModel {
     }
     
     #warning("Currently not used, was used for refresh!")
-    func reloadProfile() {
-        profileUseCase.reloadProfile()
-            .subscribe(onSuccess: { [weak self] _ in
-                self?.finishedReloadProfileSignal.accept(())
-            }, onFailure: { [weak self] _ in
-                self?.finishedReloadProfileSignal.accept(())
-            })
-            .disposed(by: disposeBag)
-
-    }
+//    func reloadProfile() {
+//        profileUseCase.reloadProfile()
+//            .subscribe(onSuccess: { [weak self] _ in
+//                self?.finishedReloadProfileSignal.accept(())
+//            }, onFailure: { [weak self] _ in
+//                self?.finishedReloadProfileSignal.accept(())
+//            })
+//            .disposed(by: disposeBag)
+//    }
 }
