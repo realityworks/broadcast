@@ -49,7 +49,7 @@ class MyPostsViewModel : ViewModel {
                         postId: $0.id,
                         title: $0.title,
                         caption: $0.caption,
-                        thumbnailUrl: thumbnailUrl?.queryParametersRemoved(),
+                        thumbnailUrl: thumbnailUrl?.appendingQueryItem("utc", value: "\(Int64(Date.now.timeIntervalSince1970*1000))"),
                         media: $0.contentMedia,
                         isEncoding: !$0.finishedProcessing,
                         dateCreated: String.localizedWithFormat(

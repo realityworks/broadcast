@@ -86,7 +86,7 @@ class ProfileDetailViewModel : ViewModel {
         profileImage = dependencies.profileImage.compactMap { $0 ?? UIImage.profileImage }
         
         selectedTrailerUrl = dependencies.selectedTrailerUrlObservable
-        trailerThumbnailUrl = profileObservable.map { URL(string: $0.trailerThumbnailUrl)?.queryParametersRemoved() }
+        trailerThumbnailUrl = profileObservable.map { URL(string: $0.trailerThumbnailUrl)?.appendingQueryItem("utc", value: "\(Int64(Date.now.timeIntervalSince1970*1000))") }
         
         trailerVideoUrl = Observable.combineLatest(
             profileObservable.map { URL(string: $0.trailerVideoUrl) },
