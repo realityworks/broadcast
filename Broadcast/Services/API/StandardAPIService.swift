@@ -14,7 +14,12 @@ import Alamofire
 typealias APIParameters = Dictionary<String, String>
 typealias Headers = Dictionary<String, String>
 
-class StandardAPIService : Interceptor {
+class StandardAPIService : NSObject,
+                           RequestInterceptor,
+                           URLSessionTaskDelegate,
+                           URLSessionDataDelegate,
+                           URLSessionDelegate {
+    
     fileprivate let baseUrl: URL
     fileprivate let session: Session
     fileprivate var backgroundSession: URLSession!
@@ -31,6 +36,7 @@ class StandardAPIService : Interceptor {
         self.credentialsService = nil
         
         super.init()
+        
         let urlSessionConfiguration = URLSessionConfiguration.background(withIdentifier: "BackgroundAPIService")
         urlSessionConfiguration.sessionSendsLaunchEvents = true
         urlSessionConfiguration.shouldUseExtendedBackgroundIdleMode = true
@@ -38,7 +44,7 @@ class StandardAPIService : Interceptor {
         /// Not ideal, but in the private init, you cannot pass in a delegate to the initiliazer before all of self is initialized, hence the urlSession being initialized as a parameter
         /// Then initialized again here with a delegate.
         /// Here we create our base URLSession used for all video uploads in foreground and background.
-        urlSession = URLSession(configuration: urlSessionConfiguration,
+        self.backgroundSession = URLSession(configuration: urlSessionConfiguration,
                                 delegate: self,
                                 delegateQueue: nil)
     }
