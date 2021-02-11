@@ -27,6 +27,7 @@ class StandardAPIService : Interceptor {
         self.baseUrl = dependencies.baseUrl
         self.schedulers = dependencies.schedulers
         self.session = Session.default
+        self.session.sessionConfiguration.waitsForConnectivity = true
         self.credentialsService = nil
         
         super.init()
