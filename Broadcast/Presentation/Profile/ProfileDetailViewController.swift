@@ -104,7 +104,7 @@ class ProfileDetailViewController: ViewController, KeyboardEventsAdapter {
         //Setup the pickers
         pickers.forEach { picker in
             picker.delegate = self
-            picker.videoExportPreset = AVAssetExportPresetPassthrough
+            picker.videoExportPreset = AVAssetExportPreset1920x1080//AVAssetExportPresetPassthrough
             picker.videoQuality = .typeHigh
         }
     }
