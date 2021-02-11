@@ -5,7 +5,7 @@
 //  Created by Piotr Suwara on 18/11/20.
 //
 
-import Foundation
+import UIKit
 import RxSwift
 import RxCocoa
 import RxAlamofire

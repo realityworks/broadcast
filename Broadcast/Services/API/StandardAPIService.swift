@@ -15,9 +15,10 @@ typealias APIParameters = Dictionary<String, String>
 typealias Headers = Dictionary<String, String>
 
 class StandardAPIService : Interceptor {
-    let baseUrl: URL
-    let session: Session
-    let schedulers: Schedulers
+    fileprivate let baseUrl: URL
+    fileprivate let session: Session
+    fileprivate var backgroundSession: URLSession!
+    fileprivate let schedulers: Schedulers
     
     var credentialsService: CredentialsService?
     
@@ -27,10 +28,19 @@ class StandardAPIService : Interceptor {
         self.baseUrl = dependencies.baseUrl
         self.schedulers = dependencies.schedulers
         self.session = Session.default
-        self.session.sessionConfiguration.waitsForConnectivity = true
         self.credentialsService = nil
         
         super.init()
+        let urlSessionConfiguration = URLSessionConfiguration.background(withIdentifier: "BackgroundAPIService")
+        urlSessionConfiguration.sessionSendsLaunchEvents = true
+        urlSessionConfiguration.shouldUseExtendedBackgroundIdleMode = true
+        
+        /// Not ideal, but in the private init, you cannot pass in a delegate to the initiliazer before all of self is initialized, hence the urlSession being initialized as a parameter
+        /// Then initialized again here with a delegate.
+        /// Here we create our base URLSession used for all video uploads in foreground and background.
+        urlSession = URLSession(configuration: urlSessionConfiguration,
+                                delegate: self,
+                                delegateQueue: nil)
     }
     
     private func getHeaders() -> Single<[String: String]> {
@@ -75,7 +85,10 @@ class StandardAPIService : Interceptor {
                 let request = session.request(url, method: method,
                                               parameters: parameters,
                                               encoding: encoding,
-                                              headers: HTTPHeaders(headers)) { $0.timeoutInterval = timeout }
+                                              headers: HTTPHeaders(headers)) {
+                    $0.timeoutInterval = timeout
+                }
+                
                 return self.session.rx
                     .request(urlRequest: request.convertible, interceptor: self)
                     .validate(statusCode: validStatusCodes)

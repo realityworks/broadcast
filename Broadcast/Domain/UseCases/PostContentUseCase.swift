@@ -76,12 +76,16 @@ extension PostContentUseCase {
         /// Set the initial upload progress to be simply default values
         stateController.state.currentMediaUploadProgress = UploadProgress()
         
+        #warning("Look at using this as a direct indicator upload has started")
+        stateController.state.currentMediaUploadProgress?.started = true
+        
         uploadService.upload(media: media,
                              content: content)
             .subscribe(onNext: { uploadProgress in
                 Logger.log(level: .info, topic: .api, message: "Upload progress : \(uploadProgress.progress)")
                 self.stateController.state.currentMediaUploadProgress = uploadProgress
             }, onError: { error in
+                
                 self.stateController.state.currentMediaUploadProgress?.failed = true
                 if let boomDayError = error as? BoomdayError {
                     self.stateController.state.currentMediaUploadProgress?.errorDescription = boomDayError.localizedDescription
@@ -89,6 +93,7 @@ extension PostContentUseCase {
                     self.stateController.state.currentMediaUploadProgress?.errorDescription = error.localizedDescription
                 }
                 self.stateController.sendError(error)
+                
             }, onCompleted: {
                 Logger.log(level: .info, topic: .api, message: "Post content complete!")
                 self.stateController.state.currentMediaUploadProgress?.completed = true

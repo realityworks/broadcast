@@ -15,6 +15,7 @@ struct UploadProgress : Equatable {
     var progress: Float
     var uploadProgress: Float
     var totalProgress: Float
+    var started: Bool
     var completed: Bool
     var failed: Bool
     var errorDescription: String?
@@ -27,6 +28,7 @@ struct UploadProgress : Equatable {
         self.progress = 0
         self.uploadProgress = 0
         self.totalProgress = 0
+        self.started = false
         self.completed = false
         self.failed = false
         self.errorDescription = nil
