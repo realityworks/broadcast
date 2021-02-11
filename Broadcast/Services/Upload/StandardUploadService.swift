@@ -67,8 +67,6 @@ extension StandardUploadService : UploadService {
         uploadMediaProgress = UploadProgress()
         uploadMediaProgress.sourceUrl = media.url
         
-        apiService.ref
-        
         // Setup the Create Post observable
         let createPostObservable = Observable<UploadEvent>.create { [unowned self] observer in
             apiService.createPost()

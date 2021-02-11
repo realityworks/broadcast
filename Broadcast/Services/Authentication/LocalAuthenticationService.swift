@@ -25,7 +25,7 @@ class LocalAuthenticationService : AuthenticationService {
         return single
     }
     
-    func refresh(token: String) -> Single<AuthenticateResponse> {
+    func refresh() -> Single<AuthenticateResponse> {
         let single = Single<AuthenticateResponse>.create { observer in
             observer(.success(AuthenticateResponse(accessToken: "", refreshToken: "")))
             return Disposables.create { }

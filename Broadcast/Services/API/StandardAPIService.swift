@@ -27,6 +27,17 @@ class StandardAPIService : NSObject,
     
     var credentialsService: CredentialsService?
     
+    typealias DataTaskError = ((Error)->())
+    typealias DataTaskComplete = ((HTTPURLResponse, Data)->())
+    
+    struct DataTaskHandler {
+        let onError: DataTaskError
+        let onComplete: DataTaskComplete
+    }
+    
+    var dataTaskHandlers: Dictionary<Int, DataTaskHandler> = [:]
+    var dataTaskResponse: Dictionary<Int, Data> = [:]
+    
     private let validStatusCodes = [Int](200 ..< 300) + [400, 403, 404, 409, 500, 503, 504]
     
     init(dependencies: Dependencies = .standard) {
@@ -89,22 +100,19 @@ class StandardAPIService : NSObject,
 //            }
             
         return Observable<(HTTPURLResponse, Data)>.create { [self] observer in
-                backgroundSession.dataTask(with: request) { [self] data, response, error in
-                    if let error = error {
-                        observer.onError(error)
-                    } else if let response = response as? HTTPURLResponse,
-                        let data = data {
-                        if validStatusCodes.contains(response.statusCode) {
-                            observer.onNext((response, data))
-                        } else {
-                            observer.onError(BoomdayError.apiStatusCode(code: response.statusCode))
-                        }
-                    }
-                }.resume()
-                
-                return Disposables.create()
-            }
-            .asSingle()
+            let dataTask = backgroundSession.dataTask(with: request)
+            print ("Datatask Started: \(dataTask.taskIdentifier)")
+            dataTask.resume()
+            dataTaskHandlers[dataTask.taskIdentifier] = DataTaskHandler(onError: { error in
+                observer.onError(error)
+            }, onComplete: { response, data in
+                observer.onNext((response, data))
+                observer.onCompleted()
+            })
+            
+            return Disposables.create()
+        }
+        .asSingle()
         
     }
     
@@ -175,7 +183,7 @@ class StandardAPIService : NSObject,
         /// Check if we are getting an invalid authentication token response
         guard let response = request.task?.response as? HTTPURLResponse,
               response.statusCode == 401,
-              let refreshToken = credentialsService?.refreshToken else {
+              credentialsService?.refreshToken != nil else {
             completion(.doNotRetry)
             return
         }
@@ -204,6 +212,14 @@ class StandardAPIService : NSObject,
                    message: "Task did complete with error : \(error?.localizedDescription ?? "No error provided")")
     }
     
+    @objc func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+        Logger.log(level: .info,
+                   topic: .debug,
+                   message: "Did receive data for task!")
+        
+        dataTaskResponse[dataTask.taskIdentifier] = data
+    }
+    
     @objc func urlSession(_ session: URLSession,
                           dataTask: URLSessionDataTask,
                           didReceive response: URLResponse,
@@ -211,6 +227,24 @@ class StandardAPIService : NSObject,
         Logger.log(level: .info,
                    topic: .debug,
                    message: "Did receive reply from server for data task!")
+        
+        let dataTaskHandler = dataTaskHandlers[dataTask.taskIdentifier]
+        
+        DispatchQueue.main.async { [self] in
+            guard let response = response as? HTTPURLResponse else {
+                dataTaskHandler?.onError(BoomdayError.unknown)
+                return
+            }
+            
+            if let error = dataTask.error {
+                dataTaskHandler?.onError(error)
+            } else if !validStatusCodes.contains(response.statusCode) {
+                dataTaskHandler?.onError(BoomdayError.apiStatusCode(code: response.statusCode))
+            } else {
+                dataTaskHandler?.onComplete(response, dataTaskResponse[dataTask.taskIdentifier] ?? Data())
+            }
+
+        }
     }
     
     @objc func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
@@ -233,12 +267,13 @@ extension StandardAPIService : APIService {
     // MARK: Video upload
     
     func createPost() -> Single<CreatePostResponse> {
+        #warning("TEMP CODE TO TEST BACKGROUND SESSION")
         let url = baseUrl
-            .appendingPathComponent("broadcaster")
-            .appendingPathComponent("posts")
-        
+                .appendingPathComponent("broadcaster")
+                .appendingPathComponent("posts")
+                
         return authenticatedRequest(method: .post, url: url)
-            .decode(type: CreatePostResponse.self)
+                .decode(type: CreatePostResponse.self)
     }
     
     func getMediaUploadUrl(forPostID postID: PostID, for media: Media) -> Single<GetMediaUploadUrlResponse> {
