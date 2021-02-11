@@ -63,21 +63,45 @@ class StandardAPIService : NSObject,
     
     /// Background requests always send for a new refresh token
     private func backgroundRequest(method: HTTPMethod,
-                                   url: URL) -> Single<(HTTPURLResponse, Data)> {
+                                   url: URL,
+                                   parameters: Dictionary<String, String>? = nil) -> Single<(HTTPURLResponse, Data)> {
         
         guard let accessToken = credentialsService?.accessToken else { return .error(BoomdayError.refused) }
         
         var request = URLRequest(url: url)
+        do {
+            request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+            request.httpBody = try JSONEncoder().encode(parameters)
+            request.httpMethod = method.rawValue
+        } catch {
+            return .error(BoomdayError.internalMemoryError(text: "Encoding parameters of standard values failed. Please contact support"))
+        }
         
-        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-        request.httpMethod = method.rawValue
-        
-        return Observable<(HTTPURLResponse, Data)>.create { observer in
-//            URLSession.shared.dataTask(with: request) { data, response, error in
-//                let results: Result<None, Error> = Result.fromURLTask(data: data, response: response, error: error)
-//                completion(results)
-//            }.resume()
+//        _ = Observable.from([url])
+//            .map { url in
+//                var request = URLRequest(url: url)
+//                request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+//                request.httpBody = try JSONEncoder().encode(parameters)
+//                request.httpMethod = method.rawValue
+//                return request
+//            }.flatMap { [self] urlRequest in
+//                return backgroundSession.rx.data(request: urlRequest)
+//            }
             
+        return Observable<(HTTPURLResponse, Data)>.create { [self] observer in
+                backgroundSession.dataTask(with: request) { [self] data, response, error in
+                    if let error = error {
+                        observer.onError(error)
+                    } else if let response = response as? HTTPURLResponse,
+                        let data = data {
+                        if validStatusCodes.contains(response.statusCode) {
+                            observer.onNext((response, data))
+                        } else {
+                            observer.onError(BoomdayError.apiStatusCode(code: response.statusCode))
+                        }
+                    }
+                }.resume()
+                
                 return Disposables.create()
             }
             .asSingle()
@@ -156,7 +180,7 @@ class StandardAPIService : NSObject,
             return
         }
         
-        _ = refresh(token: refreshToken)
+        _ = refresh()
             .subscribe(onSuccess: { response in
                 self.credentialsService?.updateCredentials(accessToken: response.accessToken,
                                                            refreshToken: response.refreshToken)
@@ -286,7 +310,7 @@ extension StandardAPIService : APIService {
             .appendingPathComponent(mediaId)
             .appendingPathComponent("complete")
                 
-        return authenticatedRequest(method: .post, url: url, timeout: 60)
+        return backgroundRequest(method: .post, url: url)//, timeout: 60)
             .emptyResponseBody()
     }
     
@@ -300,7 +324,7 @@ extension StandardAPIService : APIService {
             "title": newContent.title,
             "caption": newContent.caption]
         
-        return authenticatedRequest(method: .put, url: url, parameters: parameters)
+        return backgroundRequest(method: .put, url: url, parameters: parameters)
             .emptyResponseBody()
     }
     
@@ -414,7 +438,9 @@ extension StandardAPIService : AuthenticationService {
             .decode(type: AuthenticateResponse.self)
     }
     
-    func refresh(token: String) -> Single<AuthenticateResponse> {
+    func refresh() -> Single<AuthenticateResponse> {
+        guard let token = credentialsService?.refreshToken else { return .error(BoomdayError.refused) }
+        
         let url = baseUrl
             .appendingPathComponent("connect")
             .appendingPathComponent("token")
