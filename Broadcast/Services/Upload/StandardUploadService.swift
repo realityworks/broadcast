@@ -192,7 +192,6 @@ extension StandardUploadService : UploadService {
                                  completeUploadObservable,
                                  setContentObservable,
                                  publishContentObservable)
-            //.observe(on: Schedulers.standard.main)
             .map { event -> UploadProgress in
                 switch event {
                 case .createPost(let postId):

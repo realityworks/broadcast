@@ -61,6 +61,29 @@ class StandardAPIService : NSObject,
         return .error(BoomdayError.unsupported)
     }
     
+    /// Background requests always send for a new refresh token
+    private func backgroundRequest(method: HTTPMethod,
+                                   url: URL) -> Single<(HTTPURLResponse, Data)> {
+        
+        guard let accessToken = credentialsService?.accessToken else { return .error(BoomdayError.refused) }
+        
+        var request = URLRequest(url: url)
+        
+        request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        request.httpMethod = method.rawValue
+        
+        return Observable<(HTTPURLResponse, Data)>.create { observer in
+//            URLSession.shared.dataTask(with: request) { data, response, error in
+//                let results: Result<None, Error> = Result.fromURLTask(data: data, response: response, error: error)
+//                completion(results)
+//            }.resume()
+            
+                return Disposables.create()
+            }
+            .asSingle()
+        
+    }
+    
     private func queryStringBodyUnauthenticatedRequest(
         method: HTTPMethod,
         url: URL,
@@ -104,7 +127,7 @@ class StandardAPIService : NSObject,
     }
     
     //MARK: - Interceptor
-    override func adapt(
+    func adapt(
         _ urlRequest: URLRequest,
         for session: Session,
         completion: @escaping (Result<URLRequest, Error>) -> Void) {
@@ -119,7 +142,7 @@ class StandardAPIService : NSObject,
         completion(.success(modifiedUrlRequest))
     }
     
-    override func retry(
+    func retry(
         _ request: Request,
         for session: Session,
         dueTo error: Error,
@@ -145,6 +168,31 @@ class StandardAPIService : NSObject,
                            message: "Error retrieving accessToken when retrying failed request")
                 completion(.doNotRetryWithError(error))
             })
+    }
+    
+    // MARK: URL Services
+    
+    @objc func urlSession(_ session: URLSession,
+                          task: URLSessionTask,
+                          didCompleteWithError error: Error?) {
+        Logger.log(level: .info,
+                   topic: .debug,
+                   message: "Task did complete with error : \(error?.localizedDescription ?? "No error provided")")
+    }
+    
+    @objc func urlSession(_ session: URLSession,
+                          dataTask: URLSessionDataTask,
+                          didReceive response: URLResponse,
+                          completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
+        Logger.log(level: .info,
+                   topic: .debug,
+                   message: "Did receive reply from server for data task!")
+    }
+    
+    @objc func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
+        Logger.log(level: .info,
+                   topic: .debug,
+                   message: "Background session has finished!")
     }
 }
 
