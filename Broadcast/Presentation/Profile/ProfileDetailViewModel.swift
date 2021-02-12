@@ -158,8 +158,10 @@ class ProfileDetailViewModel : ViewModel {
         trailerVideoProcessed = Observable.combineLatest(isTrailerVideoProcessed, trailerVideoUrl, trailerThumbnailUrl) { processed, trailerVideoUrl, trailerThumbnailUrl in
             print ("processed : \(processed)")
             print ("trailerVideoUrl : \(trailerVideoUrl)")
-            print ("trailerVideoProcess : \(((processed == false && trailerVideoUrl == nil) || processed))")
+            print ("trailerVideoUrl : \(trailerThumbnailUrl)")
+            
             let trailerVideoProcessed = ((processed == false && trailerVideoUrl == nil && trailerThumbnailUrl == nil) || processed)
+            print ("trailerVideoProcess : \(trailerVideoProcessed)")
             return trailerVideoProcessed
         }
 
