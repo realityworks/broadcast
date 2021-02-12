@@ -13,7 +13,7 @@
 SERVICE_ROOT_URL = https:/$()/api.boomday.com/
 
 // Site URL
-SITE_ROOT_URL = https:/$()/frontend.boomday.com/
+SITE_ROOT_URL = https:/$()/prelaunch.boomday.com/
 
 // Notifications Connection String
 NOTIFICATIONS_CONNECTION_STRING = Endpoint=sb:/$()/boom-prod-notifications.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=Ob1SCxP74lKRQtFdgvYylM3FXqWFkj8l8H1MN9WtUQ8=
