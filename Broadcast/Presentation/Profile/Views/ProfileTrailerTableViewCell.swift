@@ -174,11 +174,11 @@ extension Reactive where Base : ProfileTrailerTableViewCell {
     }
     
     var showTrailerProcessing: Binder<Bool> {
-        return Binder(base) { target, trailerVideoProcessed in
-            target.thumbnailImageView.isHidden = trailerVideoProcessed
-            target.blurredEffectView.isHidden = trailerVideoProcessed
-            target.processingView.isHidden = trailerVideoProcessed
-            target.processingView.animating = !trailerVideoProcessed
+        return Binder(base) { target, showTrailerProcessing in
+            target.thumbnailImageView.isHidden = !showTrailerProcessing
+            target.blurredEffectView.isHidden = !showTrailerProcessing
+            target.processingView.isHidden = !showTrailerProcessing
+            target.processingView.animating = showTrailerProcessing
         }
     }
 }
