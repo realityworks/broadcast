@@ -156,7 +156,11 @@ class ProfileDetailViewModel : ViewModel {
             .map { $0.isTrailerProcessed }
         
         trailerVideoProcessed = Observable.combineLatest(isTrailerVideoProcessed, trailerVideoUrl, trailerThumbnailUrl) { processed, trailerVideoUrl, trailerThumbnailUrl in
-            return ((processed == false && trailerVideoUrl == nil) || processed)
+            print ("processed : \(processed)")
+            print ("trailerVideoUrl : \(trailerVideoUrl)")
+            print ("trailerVideoProcess : \(((processed == false && trailerVideoUrl == nil) || processed))")
+            let trailerVideoProcessed = ((processed == false && trailerVideoUrl == nil && trailerThumbnailUrl == nil) || processed)
+            return trailerVideoProcessed
         }
 
         savingProfile = savingProfileSubject.asObservable()
