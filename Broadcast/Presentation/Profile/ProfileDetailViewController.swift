@@ -420,8 +420,8 @@ class ProfileDetailViewController: ViewController, KeyboardEventsAdapter {
             .bind(to: cell.rx.failed)
             .disposed(by: cell.disposeBag)
 
-        viewModel.trailerVideoProcessed
-            .bind(to: cell.rx.trailerVideoProcessed)
+        viewModel.showTrailerProcessing
+            .bind(to: cell.rx.showTrailerProcessing)
             .disposed(by: cell.disposeBag)
         
         weak var weakCell = cell

@@ -48,7 +48,11 @@ class ProfileDetailViewModel : ViewModel {
     let isUploadingTrailer: Observable<Bool>
     let progress: Observable<Float>
     let progressText: Observable<String>
-    let isTrailerVideoProcessed: Observable<Bool>
+    
+    
+    //let hasTrailer: Observable<Bool>
+    //let isTrailerVideoProcessed: Observable<Bool>
+    let showTrailerProcessing: Observable<Bool>
     
     let selectedTrailerUrl: Observable<URL?>
     let trailerVideoUrl: Observable<URL?>
@@ -151,6 +155,9 @@ class ProfileDetailViewModel : ViewModel {
             hasSelectedNewTrailerAfterUpload.map { _ in false })
 
         showUploadButton = showProgressView.map { !$0 }
+        
+        hasTrailer = profileObservable
+            .map { $0.hasTrailer }
         
         isTrailerVideoProcessed = profileObservable
             .map { $0.isTrailerProcessed }
