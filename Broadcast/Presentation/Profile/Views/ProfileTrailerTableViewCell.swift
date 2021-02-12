@@ -37,7 +37,6 @@ class ProfileTrailerTableViewCell: UITableViewCell {
     
     let uploadButton = UIButton.standard(withTitle: LocalizedString.uploadTrailer)
     
-    
     let progressView = ProgressView()
     
     var disposeBag = DisposeBag()

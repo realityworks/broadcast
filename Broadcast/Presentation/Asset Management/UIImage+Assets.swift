@@ -8,7 +8,6 @@
 import UIKit
 
 extension UIImage {
-    static let profileImageKey = "profile-image"
     static let appIcon = UIImage(named: "AppIcon")
     static let boomdayLogo = UIImage(named: "logo-boomday")
     static let broadcasterLogo = UIImage(named: "logo-broadcaster")
@@ -47,8 +46,4 @@ extension UIImage {
     static let iconPortrait = UIImage(named:"icon-portrait")
     static let iconSimpleSun = UIImage(named: "icon-simple-sun")
     static let iconThumbUp = UIImage(named: "icon-thumb-u")
-    
-    static var profileImage: UIImage? {
-        return UIImage(contentsOfKey: Self.profileImageKey) ?? UIImage(color: .primaryRed)
-    }
 }

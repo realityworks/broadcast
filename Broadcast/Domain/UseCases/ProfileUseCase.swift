@@ -91,6 +91,7 @@ extension ProfileUseCase {
         return apiService.loadProfile()
             .subscribe(onSuccess: { [self] profileResponse in
                 stateController.state.profile = profileResponse
+                removeLocalProfileImage()
                 loadProfileImage(fromUrl: URL(string: profileResponse.profileImageUrl))
             }, onFailure: { [self] error in
                 stateController.sendError(error)
@@ -130,16 +131,28 @@ extension ProfileUseCase {
         
     }
     
+    func localProfileImage() -> UIImage? {
+        guard let data: Data = persistenceService.read(key: PersistenceKeys.profileImage) else {
+            return UIImage.appIcon
+        }
+        
+        return UIImage(data: data)
+    }
+    
     func updateLocalProfile(displayName: String, biography: String) {
         stateController.state.profile?.displayName = displayName
         stateController.state.profile?.biography = biography
+    }
+    
+    func removeLocalProfileImage() {
+        persistenceService.remove(key: PersistenceKeys.profileImage)
     }
     
     func updateLocalProfile(image url: URL) {
         Logger.log(level: .info, topic: .debug, message: "Updating Local Profile with image at: \(url)")
         if let image = UIImage(contentsOfFile: url.path) {
             Logger.log(level: .info, topic: .debug, message: "Image exists, updating local data!")
-            image.write(toKey: UIImage.profileImageKey)
+            persistenceService.write(value: image.pngData(), forKey: PersistenceKeys.profileImage)
             stateController.state.profileImage = image
             stateController.state.profile?.profileImageUrl = url.absoluteString
         }
@@ -156,7 +169,9 @@ extension ProfileUseCase {
             updateLocalProfile(image: url)
             return apiService.uploadProfileImage(withData: data)
                 .do(onError: { [unowned self] error in
-                    originalProfileImage?.write(toKey: UIImage.profileImageKey)
+                    self.persistenceService.write(value: originalProfileImage?.pngData(),
+                                                  forKey: PersistenceKeys.profileImage)
+                    
                     self.stateController.state.profileImage = originalProfileImage
                     self.stateController.state.profile?.profileImageUrl = originalProfileUrl
                 })

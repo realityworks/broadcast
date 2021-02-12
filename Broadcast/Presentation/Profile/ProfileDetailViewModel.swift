@@ -88,7 +88,7 @@ class ProfileDetailViewModel : ViewModel {
         handleObservable = profileObservable.map { $0.handle }
 
         subscriberCount = profileObservable.map { $0.subscriberCount }
-        profileImage = dependencies.profileImage.compactMap { $0 ?? UIImage.profileImage }
+        profileImage = dependencies.profileImage.compactMap { $0 ?? dependencies.profileUseCase.localProfileImage() }
 
         selectedTrailerUrl = dependencies.selectedTrailerUrlObservable
         trailerThumbnailUrl = profileObservable.map { URL(string: $0.trailerThumbnailUrl)?.appendingQueryItem("utc", value: "\(Int64(Date.now.timeIntervalSince1970*1000))") }
@@ -156,7 +156,7 @@ class ProfileDetailViewModel : ViewModel {
             .map { $0.isTrailerProcessed }
         
         trailerVideoProcessed = Observable.combineLatest(isTrailerVideoProcessed, trailerVideoUrl, trailerThumbnailUrl) { processed, trailerVideoUrl, trailerThumbnailUrl in
-            return !((processed == false && trailerVideoUrl == nil && trailerThumbnailUrl == nil) || !processed)
+            return ((processed == false && trailerVideoUrl == nil) || processed)
         }
 
         savingProfile = savingProfileSubject.asObservable()

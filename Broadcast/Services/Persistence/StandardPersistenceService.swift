@@ -15,6 +15,10 @@ class StandardPersistenceService : PersistenceService {
     func read<T>(key: String) -> T? {
         return UserDefaults.standard.value(forKey: key) as? T
     }
+    
+    func remove(key: String) {
+        UserDefaults.standard.removeObject(forKey: key)
+    }
 }
 
 // MARK: Instance methods

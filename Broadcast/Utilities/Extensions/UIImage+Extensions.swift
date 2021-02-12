@@ -48,12 +48,6 @@ extension UIImage {
         self.init(data: imageData)
     }
     
-    public func write(toKey key: String) {
-        if let pngRepresentation = pngData() {
-            UserDefaults.standard.set(pngRepresentation, forKey: key)
-        }
-    }
-    
     public func orientationRemoved() -> UIImage {
         UIGraphicsBeginImageContext(size)
         draw(at: .zero)
