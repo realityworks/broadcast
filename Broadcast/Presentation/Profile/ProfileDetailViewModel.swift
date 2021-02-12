@@ -49,9 +49,6 @@ class ProfileDetailViewModel : ViewModel {
     let progress: Observable<Float>
     let progressText: Observable<String>
     
-    
-    //let hasTrailer: Observable<Bool>
-    //let isTrailerVideoProcessed: Observable<Bool>
     let showTrailerProcessing: Observable<Bool>
     
     let selectedTrailerUrl: Observable<URL?>
@@ -60,7 +57,6 @@ class ProfileDetailViewModel : ViewModel {
     let runTimeTitle: Observable<NSAttributedString>
     let mediaTypeTitle: Observable<String>
     let showingTrailer: Observable<Bool>
-    let trailerVideoProcessed: Observable<Bool>
 
     let uploadComplete: Observable<Bool>
     let showFailed = BehaviorRelay<Bool>(value: false)
@@ -120,8 +116,6 @@ class ProfileDetailViewModel : ViewModel {
             }
         }
 
-        showingTrailer = trailerVideoUrl.map { $0 != nil }
-
         isUploadingProfileImage = isUploadingProfileImageSubject.asObservable()
         isUploadingTrailer = isUploadingTrailerSubject.asObservable()
 
@@ -156,20 +150,14 @@ class ProfileDetailViewModel : ViewModel {
 
         showUploadButton = showProgressView.map { !$0 }
         
-        hasTrailer = profileObservable
+        let hasTrailer = profileObservable
             .map { $0.hasTrailer }
         
-        isTrailerVideoProcessed = profileObservable
+        let isTrailerVideoProcessed = profileObservable
             .map { $0.isTrailerProcessed }
         
-        trailerVideoProcessed = Observable.combineLatest(isTrailerVideoProcessed, trailerVideoUrl, trailerThumbnailUrl) { processed, trailerVideoUrl, trailerThumbnailUrl in
-            print ("processed : \(processed)")
-            print ("trailerVideoUrl : \(trailerVideoUrl)")
-            print ("trailerVideoUrl : \(trailerThumbnailUrl)")
-            
-            let trailerVideoProcessed = ((processed == false && trailerVideoUrl == nil && trailerThumbnailUrl == nil) || processed)
-            print ("trailerVideoProcess : \(trailerVideoProcessed)")
-            return trailerVideoProcessed
+        showTrailerProcessing = Observable.combineLatest(hasTrailer, isTrailerVideoProcessed) { hasTrailer, processed in
+            return hasTrailer && !processed
         }
 
         savingProfile = savingProfileSubject.asObservable()
@@ -177,6 +165,12 @@ class ProfileDetailViewModel : ViewModel {
         finishedReloadProfile = finishedReloadProfileSignal.asObservable()
         
         resignResponders = resignRespondersSignal.asObservable()
+        
+        showingTrailer = Observable.combineLatest(
+            trailerVideoUrl,
+            hasTrailer) { url, hasTrailer in
+            return url != nil && hasTrailer == true
+        }
         
         super.init(stateController: dependencies.stateController)
         
