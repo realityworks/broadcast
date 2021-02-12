@@ -28,6 +28,27 @@ extension Single where Element == (HTTPURLResponse, Data), Trait == SingleTrait 
         }
     }
     
+    func decodeUnauthenticated<T>(type _: T.Type) -> Single<T?> where T: Decodable {
+        return flatMap { response, data -> Single<T?> in
+            let decoder = JSONDecoder()
+            do {
+                let statusCode = response.statusCode
+                switch statusCode {
+                case 400:
+                    return .just(nil)
+                case 200...299:
+                    let decodedValue = try decoder.decode(T.self, from: data)
+                    Logger.log(level: .verbose, topic: .api, message: "Struct : \(T.self) - Decoded \(decodedValue)")
+                    return .just(decodedValue)
+                default:
+                    return .error(self.error(from: statusCode, data: data))
+                }
+            } catch let error as DecodingError {
+                return .error(BoomdayError.decoding(error: error))
+            }
+        }
+    }
+    
     func emptyResponseBody(_ successCode: [Int] = Array(200...299)) -> Completable {
         return flatMapCompletable { response, data -> Completable in
             if successCode.contains(response.statusCode) {

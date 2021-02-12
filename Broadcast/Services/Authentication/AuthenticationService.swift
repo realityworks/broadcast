@@ -11,6 +11,7 @@ import RxCocoa
 
 protocol AuthenticationService {
     func authenticate(withUsername username: String, password: String) -> Single<AuthenticateResponse>
-    func refresh() -> Single<AuthenticateResponse>
+    func refreshCredentials() -> Single<AuthenticateResponse>
+    func backgroundRefreshCredentials() -> Single<AuthenticateResponse?>
 }
 

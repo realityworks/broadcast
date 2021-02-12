@@ -72,48 +72,56 @@ class StandardAPIService : NSObject,
         return .error(BoomdayError.unsupported)
     }
     
+    fileprivate func backgroundSessionRequest(withRequest request: URLRequest) -> Single<(HTTPURLResponse, Data)> {
+        return Single<(HTTPURLResponse, Data)>.create { [self] single in
+            let dataTask = backgroundSession.dataTask(with: request)
+            dataTask.resume()
+            dataTaskHandlers[dataTask.taskIdentifier] = DataTaskHandler(onError: { error in
+                single(.failure(error))
+            }, onComplete: { response, data in
+                single(.success((response, data)))
+            })
+            return Disposables.create()
+        }
+    }
+    
     /// Background requests always send for a new refresh token
-    private func backgroundRequest(method: HTTPMethod,
-                                   url: URL,
-                                   parameters: Dictionary<String, String>? = nil) -> Single<(HTTPURLResponse, Data)> {
+    fileprivate func refreshedBackgroundSessionRequest(request: URLRequest) -> Single<(HTTPURLResponse, Data)> {
+        return backgroundRefreshCredentials()
+            .flatMap { authenticateResponse -> Single<(HTTPURLResponse, Data)> in
+                Logger.log(level: .info, topic: .api, message: "Background API Token Refresh complete")
+                
+                if let authenticateResponse = authenticateResponse {
+                    self.credentialsService?.updateCredentials(accessToken: authenticateResponse.accessToken,
+                                                               refreshToken: authenticateResponse.refreshToken)
+                }
+                    
+                return self.backgroundSessionRequest(withRequest: request)
+            }
+    }
+    
+    /// Background requests always send for a new refresh token
+    fileprivate func backgroundRequest(
+        method: HTTPMethod,
+        url: URL,
+        parameters: Dictionary<String, String>? = nil) -> Single<(HTTPURLResponse, Data)> {
         
         guard let accessToken = credentialsService?.accessToken else { return .error(BoomdayError.refused) }
         
         var request = URLRequest(url: url)
         do {
             request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+            request.addValue("Application/json", forHTTPHeaderField: "Content-Type")
+            
             request.httpBody = try JSONEncoder().encode(parameters)
+            print ("BODY: \(request.httpBody)")
             request.httpMethod = method.rawValue
+            
         } catch {
             return .error(BoomdayError.internalMemoryError(text: "Encoding parameters of standard values failed. Please contact support"))
         }
-        
-//        _ = Observable.from([url])
-//            .map { url in
-//                var request = URLRequest(url: url)
-//                request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-//                request.httpBody = try JSONEncoder().encode(parameters)
-//                request.httpMethod = method.rawValue
-//                return request
-//            }.flatMap { [self] urlRequest in
-//                return backgroundSession.rx.data(request: urlRequest)
-//            }
             
-        return Observable<(HTTPURLResponse, Data)>.create { [self] observer in
-            let dataTask = backgroundSession.dataTask(with: request)
-            print ("Datatask Started: \(dataTask.taskIdentifier)")
-            dataTask.resume()
-            dataTaskHandlers[dataTask.taskIdentifier] = DataTaskHandler(onError: { error in
-                observer.onError(error)
-            }, onComplete: { response, data in
-                observer.onNext((response, data))
-                observer.onCompleted()
-            })
-            
-            return Disposables.create()
-        }
-        .asSingle()
-        
+        return refreshedBackgroundSessionRequest(request: request)
     }
     
     private func queryStringBodyUnauthenticatedRequest(
@@ -188,7 +196,7 @@ class StandardAPIService : NSObject,
             return
         }
         
-        _ = refresh()
+        _ = refreshCredentials()
             .subscribe(onSuccess: { response in
                 self.credentialsService?.updateCredentials(accessToken: response.accessToken,
                                                            refreshToken: response.refreshToken)
@@ -212,12 +220,30 @@ class StandardAPIService : NSObject,
                    message: "Task did complete with error : \(error?.localizedDescription ?? "No error provided")")
     }
     
-    @objc func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+    @objc func urlSession(_ session: URLSession,
+                          dataTask: URLSessionDataTask,
+                          didReceive data: Data) {
         Logger.log(level: .info,
                    topic: .debug,
                    message: "Did receive data for task!")
         
         dataTaskResponse[dataTask.taskIdentifier] = data
+        let dataTaskHandler = dataTaskHandlers[dataTask.taskIdentifier]
+
+        DispatchQueue.main.async { [self] in
+            guard let response = dataTask.response as? HTTPURLResponse else {
+                dataTaskHandler?.onError(BoomdayError.unknown)
+                return
+            }
+
+            if let error = dataTask.error {
+                dataTaskHandler?.onError(error)
+            } else if !validStatusCodes.contains(response.statusCode) {
+                dataTaskHandler?.onError(BoomdayError.apiStatusCode(code: response.statusCode))
+            } else {
+                dataTaskHandler?.onComplete(response, dataTaskResponse[dataTask.taskIdentifier] ?? Data())
+            }
+        }
     }
     
     @objc func urlSession(_ session: URLSession,
@@ -231,7 +257,8 @@ class StandardAPIService : NSObject,
         let dataTaskHandler = dataTaskHandlers[dataTask.taskIdentifier]
         
         DispatchQueue.main.async { [self] in
-            guard let response = response as? HTTPURLResponse else {
+            guard let response = dataTask.response as? HTTPURLResponse else {
+                completionHandler(URLSession.ResponseDisposition.cancel)
                 dataTaskHandler?.onError(BoomdayError.unknown)
                 return
             }
@@ -241,10 +268,14 @@ class StandardAPIService : NSObject,
             } else if !validStatusCodes.contains(response.statusCode) {
                 dataTaskHandler?.onError(BoomdayError.apiStatusCode(code: response.statusCode))
             } else {
-                dataTaskHandler?.onComplete(response, dataTaskResponse[dataTask.taskIdentifier] ?? Data())
+                if response.statusCode == 204 {
+                    dataTaskHandler?.onComplete(response, dataTaskResponse[dataTask.taskIdentifier] ?? Data())
+                } else {
+                    completionHandler(URLSession.ResponseDisposition.allow)
+                }
             }
-
         }
+        
     }
     
     @objc func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
@@ -308,7 +339,7 @@ extension StandardAPIService : APIService {
             .appendingPathComponent("media")
             .appendingPathComponent("complete")
                 
-        return authenticatedRequest(method: .post, url: url, timeout: 60)
+        return backgroundRequest(method: .post, url: url)
             .emptyResponseBody()
     }
     
@@ -473,7 +504,27 @@ extension StandardAPIService : AuthenticationService {
             .decode(type: AuthenticateResponse.self)
     }
     
-    func refresh() -> Single<AuthenticateResponse> {
+    func backgroundRefreshCredentials() -> Single<AuthenticateResponse?> {
+        guard let token = credentialsService?.refreshToken else { return .error(BoomdayError.refused) }
+        
+        let url = baseUrl
+            .appendingPathComponent("connect")
+            .appendingPathComponent("token")
+        
+        let parameters = ["refresh_token": token,
+                          "grant_type": "refresh_token"]
+        
+        let requestConvertible = URLAPIQueryStringRequest(.post,
+                                                          url,
+                                                          parameters: parameters,
+                                                          headers: [:])
+        guard let request = try? requestConvertible.asURLRequest() else { return .error(BoomdayError.unknown) }
+        
+        return backgroundSessionRequest(withRequest: request)
+            .decodeUnauthenticated(type: AuthenticateResponse.self)
+    }
+    
+    func refreshCredentials() -> Single<AuthenticateResponse> {
         guard let token = credentialsService?.refreshToken else { return .error(BoomdayError.refused) }
         
         let url = baseUrl
