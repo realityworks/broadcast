@@ -14,11 +14,7 @@ import Alamofire
 typealias APIParameters = Dictionary<String, String>
 typealias Headers = Dictionary<String, String>
 
-class StandardAPIService : NSObject,
-                           RequestInterceptor,
-                           URLSessionTaskDelegate,
-                           URLSessionDataDelegate,
-                           URLSessionDelegate {
+class StandardAPIService : RequestInterceptor {
     
     fileprivate let baseUrl: URL
     fileprivate let session: Session
@@ -228,75 +224,6 @@ class StandardAPIService : NSObject,
                            message: "Error retrieving accessToken when retrying failed request")
                 completion(.doNotRetryWithError(error))
             })
-    }
-    
-    // MARK: URL Services
-    
-    @objc func urlSession(_ session: URLSession,
-                          task: URLSessionTask,
-                          didCompleteWithError error: Error?) {
-        Logger.log(level: .info,
-                   topic: .debug,
-                   message: "Task did complete with error : \(error?.localizedDescription ?? "No error provided")")
-    }
-    
-    @objc func urlSession(_ session: URLSession,
-                          dataTask: URLSessionDataTask,
-                          didReceive data: Data) {
-        Logger.log(level: .info,
-                   topic: .debug,
-                   message: "Did receive data for task!")
-        
-        dataTaskResponse[dataTask.taskIdentifier] = data
-        let dataTaskHandler = dataTaskHandlers[dataTask.taskIdentifier]
-
-        guard let response = dataTask.response as? HTTPURLResponse else {
-            dataTaskHandler?.onError(BoomdayError.unknown)
-            return
-        }
-
-        if let error = dataTask.error {
-            dataTaskHandler?.onError(error)
-        } else if !validStatusCodes.contains(response.statusCode) {
-            dataTaskHandler?.onError(BoomdayError.apiStatusCode(code: response.statusCode))
-        } else {
-            dataTaskHandler?.onComplete(response, dataTaskResponse[dataTask.taskIdentifier] ?? Data())
-        }
-    }
-    
-    @objc func urlSession(_ session: URLSession,
-                          dataTask: URLSessionDataTask,
-                          didReceive response: URLResponse,
-                          completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
-        Logger.log(level: .info,
-                   topic: .debug,
-                   message: "Did receive reply from server for data task!")
-        
-        let dataTaskHandler = dataTaskHandlers[dataTask.taskIdentifier]
-        
-        guard let response = dataTask.response as? HTTPURLResponse else {
-            completionHandler(URLSession.ResponseDisposition.cancel)
-            dataTaskHandler?.onError(BoomdayError.unknown)
-            return
-        }
-        
-        if let error = dataTask.error {
-            dataTaskHandler?.onError(error)
-        } else if !validStatusCodes.contains(response.statusCode) {
-            dataTaskHandler?.onError(BoomdayError.apiStatusCode(code: response.statusCode))
-        } else {
-            if response.statusCode == 204 {
-                dataTaskHandler?.onComplete(response, dataTaskResponse[dataTask.taskIdentifier] ?? Data())
-            } else {
-                completionHandler(URLSession.ResponseDisposition.allow)
-            }
-        }
-    }
-    
-    @objc func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
-        Logger.log(level: .info,
-                   topic: .debug,
-                   message: "Background session has finished!")
     }
 }
 
