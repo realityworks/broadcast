@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     /// Background session completion handler
-    var backgroundSessionCompletion: (()->(Void))? = nil
+    var backgroundSessionCompletion: Dictionary<String, (()->(Void))> = [:]
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Logger.log(level: .info,
                    topic: .debug,
                    message: "Handle Events for Background URLSession : \(identifier)")
-        backgroundSessionCompletion = completionHandler
+        backgroundSessionCompletion[identifier] = completionHandler
     }
 }
 

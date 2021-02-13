@@ -44,14 +44,15 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
         
         super.init()
         
-        let urlSessionConfiguration = URLSessionConfiguration.background(withIdentifier: sessionIdentifier)
-        urlSessionConfiguration.sessionSendsLaunchEvents = true
-        urlSessionConfiguration.shouldUseExtendedBackgroundIdleMode = true
+        let backgroundSessionConfiguration = URLSessionConfiguration.background(withIdentifier: sessionIdentifier)
+        backgroundSessionConfiguration.waitsForConnectivity = true
+        backgroundSessionConfiguration.sessionSendsLaunchEvents = true
+        backgroundSessionConfiguration.shouldUseExtendedBackgroundIdleMode = true
         
         /// Not ideal, but in the private init, you cannot pass in a delegate to the initiliazer before all of self is initialized, hence the urlSession being initialized as a parameter
         /// Then initialized again here with a delegate.
         /// Here we create our base URLSession used for all video uploads in foreground and background.
-        urlSession = URLSession(configuration: urlSessionConfiguration,
+        urlSession = URLSession(configuration: backgroundSessionConfiguration,
                                 delegate: self,
                                 delegateQueue: nil)
     }
@@ -148,11 +149,13 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
         Logger.log(level: .info,
                    topic: .debug,
                    message: "Background session has finished!")
+        
         DispatchQueue.main.async { [unowned self] in
-            #warning("Fix the background session completion")
-            guard let appDelegate: AppDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-            appDelegate.backgroundSessionCompletion?()
+            guard let appDelegate: AppDelegate = UIApplication.shared.delegate as? AppDelegate,
+                  let identifier = session.configuration.identifier
+            else { return self.failureHandler(error: BoomdayError.internalMemoryError(text: "Unable to complete background upload properly, may have failed.")) }
             
+            appDelegate.backgroundSessionCompletion[identifier]?()
             self.uploadCompletionHandler()
         }
     }

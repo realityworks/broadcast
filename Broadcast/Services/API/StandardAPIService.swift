@@ -48,7 +48,8 @@ class StandardAPIService : NSObject,
         
         super.init()
         
-        let urlSessionConfiguration = URLSessionConfiguration.background(withIdentifier: "BackgroundAPIService")
+        let urlSessionConfiguration = URLSessionConfiguration.default//URLSessionConfiguration.background(withIdentifier: "BackgroundAPIService")
+        urlSessionConfiguration.waitsForConnectivity = true
         urlSessionConfiguration.sessionSendsLaunchEvents = true
         urlSessionConfiguration.shouldUseExtendedBackgroundIdleMode = true
         
@@ -73,20 +74,39 @@ class StandardAPIService : NSObject,
     }
     
     fileprivate func backgroundSessionRequest(withRequest request: URLRequest) -> Single<(HTTPURLResponse, Data)> {
+        print("backgroundSessionRequest called with request: \(request)")
         return Single<(HTTPURLResponse, Data)>.create { [self] single in
-            let dataTask = backgroundSession.dataTask(with: request)
+            let dataTask = URLSession.shared.dataTask(with: request) { (data, response, error) in
+                if let error = error {
+                    single(.failure(error))
+                } else {
+                    guard let response = response as? HTTPURLResponse,
+                          let data = data else {
+                        single(.failure(BoomdayError.internalMemoryError(text: "Failed loading response and data")))
+                        return
+                    }
+                    
+                    if !validStatusCodes.contains(response.statusCode) {
+                        single(.failure(BoomdayError.apiStatusCode(code: response.statusCode)))
+                    } else {
+                        single(.success((response, data)))
+                    }
+                }
+            }
             dataTask.resume()
-            dataTaskHandlers[dataTask.taskIdentifier] = DataTaskHandler(onError: { error in
-                single(.failure(error))
-            }, onComplete: { response, data in
-                single(.success((response, data)))
-            })
+//            dataTaskHandlers[dataTask.taskIdentifier] = DataTaskHandler(onError: { error in
+//                single(.failure(error))
+//            }, onComplete: { response, data in
+//                single(.success((response, data)))
+//            })
             return Disposables.create()
         }
+        .observe(on: ConcurrentDispatchQueueScheduler(qos: .background))
     }
     
     /// Background requests always send for a new refresh token
     fileprivate func refreshedBackgroundSessionRequest(request: URLRequest) -> Single<(HTTPURLResponse, Data)> {
+        print("refreshedBackgroundSessionRequest called")
         return backgroundRefreshCredentials()
             .flatMap { authenticateResponse -> Single<(HTTPURLResponse, Data)> in
                 Logger.log(level: .info, topic: .api, message: "Background API Token Refresh complete")
@@ -114,7 +134,7 @@ class StandardAPIService : NSObject,
             request.addValue("Application/json", forHTTPHeaderField: "Content-Type")
             
             request.httpBody = try JSONEncoder().encode(parameters)
-            print ("BODY: \(request.httpBody)")
+            print ("BODY: \(String(data: request.httpBody!, encoding: .utf8))")
             request.httpMethod = method.rawValue
             
         } catch {
@@ -230,19 +250,17 @@ class StandardAPIService : NSObject,
         dataTaskResponse[dataTask.taskIdentifier] = data
         let dataTaskHandler = dataTaskHandlers[dataTask.taskIdentifier]
 
-        DispatchQueue.main.async { [self] in
-            guard let response = dataTask.response as? HTTPURLResponse else {
-                dataTaskHandler?.onError(BoomdayError.unknown)
-                return
-            }
+        guard let response = dataTask.response as? HTTPURLResponse else {
+            dataTaskHandler?.onError(BoomdayError.unknown)
+            return
+        }
 
-            if let error = dataTask.error {
-                dataTaskHandler?.onError(error)
-            } else if !validStatusCodes.contains(response.statusCode) {
-                dataTaskHandler?.onError(BoomdayError.apiStatusCode(code: response.statusCode))
-            } else {
-                dataTaskHandler?.onComplete(response, dataTaskResponse[dataTask.taskIdentifier] ?? Data())
-            }
+        if let error = dataTask.error {
+            dataTaskHandler?.onError(error)
+        } else if !validStatusCodes.contains(response.statusCode) {
+            dataTaskHandler?.onError(BoomdayError.apiStatusCode(code: response.statusCode))
+        } else {
+            dataTaskHandler?.onComplete(response, dataTaskResponse[dataTask.taskIdentifier] ?? Data())
         }
     }
     
@@ -256,26 +274,23 @@ class StandardAPIService : NSObject,
         
         let dataTaskHandler = dataTaskHandlers[dataTask.taskIdentifier]
         
-        DispatchQueue.main.async { [self] in
-            guard let response = dataTask.response as? HTTPURLResponse else {
-                completionHandler(URLSession.ResponseDisposition.cancel)
-                dataTaskHandler?.onError(BoomdayError.unknown)
-                return
-            }
-            
-            if let error = dataTask.error {
-                dataTaskHandler?.onError(error)
-            } else if !validStatusCodes.contains(response.statusCode) {
-                dataTaskHandler?.onError(BoomdayError.apiStatusCode(code: response.statusCode))
-            } else {
-                if response.statusCode == 204 {
-                    dataTaskHandler?.onComplete(response, dataTaskResponse[dataTask.taskIdentifier] ?? Data())
-                } else {
-                    completionHandler(URLSession.ResponseDisposition.allow)
-                }
-            }
+        guard let response = dataTask.response as? HTTPURLResponse else {
+            completionHandler(URLSession.ResponseDisposition.cancel)
+            dataTaskHandler?.onError(BoomdayError.unknown)
+            return
         }
         
+        if let error = dataTask.error {
+            dataTaskHandler?.onError(error)
+        } else if !validStatusCodes.contains(response.statusCode) {
+            dataTaskHandler?.onError(BoomdayError.apiStatusCode(code: response.statusCode))
+        } else {
+            if response.statusCode == 204 {
+                dataTaskHandler?.onComplete(response, dataTaskResponse[dataTask.taskIdentifier] ?? Data())
+            } else {
+                completionHandler(URLSession.ResponseDisposition.allow)
+            }
+        }
     }
     
     @objc func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
@@ -375,7 +390,8 @@ extension StandardAPIService : APIService {
             .appendingPathComponent("media")
             .appendingPathComponent(mediaId)
             .appendingPathComponent("complete")
-                
+        
+        print("uploadMediaComplete called!")
         return backgroundRequest(method: .post, url: url)//, timeout: 60)
             .emptyResponseBody()
     }
@@ -390,6 +406,8 @@ extension StandardAPIService : APIService {
             "title": newContent.title,
             "caption": newContent.caption]
         
+        print("updatePostContent called!")
+        
         return backgroundRequest(method: .put, url: url, parameters: parameters)
             .emptyResponseBody()
     }
@@ -401,7 +419,7 @@ extension StandardAPIService : APIService {
             .appendingPathComponent(postId)
             .appendingPathComponent("publish")
                 
-        return authenticatedRequest(method: .post, url: url)
+        return backgroundRequest(method: .post, url: url)
             .emptyResponseBody()
     }
     
@@ -506,6 +524,7 @@ extension StandardAPIService : AuthenticationService {
     
     func backgroundRefreshCredentials() -> Single<AuthenticateResponse?> {
         guard let token = credentialsService?.refreshToken else { return .error(BoomdayError.refused) }
+        print ("backgroundRefreshCredentials called")
         
         let url = baseUrl
             .appendingPathComponent("connect")
