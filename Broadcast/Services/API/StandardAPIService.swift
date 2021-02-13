@@ -45,9 +45,8 @@ class StandardAPIService : RequestInterceptor {
                 
         let urlSessionConfiguration = URLSessionConfiguration.default//URLSessionConfiguration.background(withIdentifier: "BackgroundAPIService")
         urlSessionConfiguration.waitsForConnectivity = true
-
         //urlSessionConfiguration.sessionSendsLaunchEvents = true
-        //urlSessionConfiguration.shouldUseExtendedBackgroundIdleMode = true
+        urlSessionConfiguration.shouldUseExtendedBackgroundIdleMode = true
         
         /// Not ideal, but in the private init, you cannot pass in a delegate to the initiliazer before all of self is initialized, hence the urlSession being initialized as a parameter
         /// Then initialized again here with a delegate.
@@ -72,7 +71,7 @@ class StandardAPIService : RequestInterceptor {
     fileprivate func backgroundSessionRequest(withRequest request: URLRequest) -> Single<(HTTPURLResponse, Data)> {
         print("backgroundSessionRequest called with request: \(request)")
         return Single<(HTTPURLResponse, Data)>.create { [self] single in
-            let dataTask = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            let dataTask = backgroundSession.dataTask(with: request) { (data, response, error) in
                 if let error = error {
                     single(.failure(error))
                 } else {
