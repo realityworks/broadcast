@@ -228,6 +228,7 @@ extension StandardUploadService : UploadService {
                 
                 return self.uploadMediaProgress
             }
+            .observe(on: ConcurrentDispatchQueueScheduler(qos: .background))
     }
     
     func uploadTrailer(from url: URL) -> Observable<UploadProgress> {

@@ -5,7 +5,8 @@
 //  Created by Piotr Suwara on 18/11/20.
 //
 
-import Foundation
+import UIKit
+import Network
 import RxSwift
 import RxCocoa
 import RxAlamofire
@@ -41,19 +42,18 @@ class StandardAPIService : RequestInterceptor {
         self.schedulers = dependencies.schedulers
         self.session = Session.default
         self.credentialsService = nil
-        
-        super.init()
-        
+                
         let urlSessionConfiguration = URLSessionConfiguration.default//URLSessionConfiguration.background(withIdentifier: "BackgroundAPIService")
         urlSessionConfiguration.waitsForConnectivity = true
-        urlSessionConfiguration.sessionSendsLaunchEvents = true
-        urlSessionConfiguration.shouldUseExtendedBackgroundIdleMode = true
+
+        //urlSessionConfiguration.sessionSendsLaunchEvents = true
+        //urlSessionConfiguration.shouldUseExtendedBackgroundIdleMode = true
         
         /// Not ideal, but in the private init, you cannot pass in a delegate to the initiliazer before all of self is initialized, hence the urlSession being initialized as a parameter
         /// Then initialized again here with a delegate.
         /// Here we create our base URLSession used for all video uploads in foreground and background.
         self.backgroundSession = URLSession(configuration: urlSessionConfiguration,
-                                delegate: self,
+                                delegate: nil,
                                 delegateQueue: nil)
     }
     
@@ -90,11 +90,6 @@ class StandardAPIService : RequestInterceptor {
                 }
             }
             dataTask.resume()
-//            dataTaskHandlers[dataTask.taskIdentifier] = DataTaskHandler(onError: { error in
-//                single(.failure(error))
-//            }, onComplete: { response, data in
-//                single(.success((response, data)))
-//            })
             return Disposables.create()
         }
         .observe(on: ConcurrentDispatchQueueScheduler(qos: .background))
@@ -128,7 +123,7 @@ class StandardAPIService : RequestInterceptor {
         do {
             request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
             request.addValue("Application/json", forHTTPHeaderField: "Content-Type")
-            
+            request.timeoutInterval = TimeInterval(MAXFLOAT)
             request.httpBody = try JSONEncoder().encode(parameters)
             print ("BODY: \(String(data: request.httpBody!, encoding: .utf8))")
             request.httpMethod = method.rawValue
@@ -464,7 +459,8 @@ extension StandardAPIService : AuthenticationService {
                                                           url,
                                                           parameters: parameters,
                                                           headers: [:])
-        guard let request = try? requestConvertible.asURLRequest() else { return .error(BoomdayError.unknown) }
+        guard var request = try? requestConvertible.asURLRequest() else { return .error(BoomdayError.unknown) }
+        request.timeoutInterval = TimeInterval(MAXFLOAT)
         
         return backgroundSessionRequest(withRequest: request)
             .decodeUnauthenticated(type: AuthenticateResponse.self)
