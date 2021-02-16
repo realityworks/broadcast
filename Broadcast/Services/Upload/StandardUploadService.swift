@@ -22,8 +22,8 @@ class StandardUploadService {
     var media: Media?
     var content: PostContent?
     
-    let uploadTrailerFileSession = MediaUploadSession(withIdentifier: "background.session.trailer")
-    let uploadMediaFileSession = MediaUploadSession(withIdentifier: "background.session.media")
+    static let uploadTrailerFileSession = MediaUploadSession(withIdentifier: "background.session.trailer")
+    static let uploadMediaFileSession = MediaUploadSession(withIdentifier: "background.session.media")
 
     var uploadMediaProgress = UploadProgress()
     var uploadTrailerProgress = UploadProgress()
@@ -107,7 +107,7 @@ extension StandardUploadService : UploadService {
             Logger.log(level: .verbose, topic: .debug, message:  "Begin upload media")
             if let sourceUrl = self.uploadMediaProgress.sourceUrl,
                let destinationUrl = self.uploadMediaProgress.destinationURL {
-                uploadMediaFileSession.start(from: sourceUrl,
+                StandardUploadService.uploadMediaFileSession.start(from: sourceUrl,
                                              to: destinationUrl)
                 { sent, total in
                     let progressFloat = total > 0 ? Float(sent) / Float(total) : 0
@@ -260,7 +260,7 @@ extension StandardUploadService : UploadService {
         let uploadTrailerObservable = Observable<UploadEvent>.create { [unowned self] observer in
             if let sourceUrl = self.uploadTrailerProgress.sourceUrl,
                let destinationUrl = self.uploadTrailerProgress.destinationURL {
-                uploadTrailerFileSession.start(from: sourceUrl,
+                StandardUploadService.uploadTrailerFileSession.start(from: sourceUrl,
                                              to: destinationUrl)
                 { sent, total in
                     let progressFloat = total > 0 ? Float(sent) / Float(total) : 0
@@ -318,6 +318,7 @@ extension StandardUploadService : UploadService {
                 
                 return self.uploadTrailerProgress
             }
+            .observe(on: ConcurrentDispatchQueueScheduler(qos: .background))
     }
 }
 

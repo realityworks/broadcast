@@ -61,7 +61,8 @@ class StandardAPIService : RequestInterceptor {
         
         if let accessToken = credentialsService.accessToken {
             return .just([
-                "Authorization": "Bearer \(accessToken)",
+                "User-Agent": "\(Configuration.versionString)_\(Configuration.buildString)",
+                "Authorization": "Bearer \(accessToken)"
             ])
         }
 
@@ -71,24 +72,30 @@ class StandardAPIService : RequestInterceptor {
     fileprivate func backgroundSessionRequest(withRequest request: URLRequest) -> Single<(HTTPURLResponse, Data)> {
         print("backgroundSessionRequest called with request: \(request)")
         return Single<(HTTPURLResponse, Data)>.create { [self] single in
-            let dataTask = backgroundSession.dataTask(with: request) { (data, response, error) in
-                if let error = error {
-                    single(.failure(error))
-                } else {
-                    guard let response = response as? HTTPURLResponse,
-                          let data = data else {
-                        single(.failure(BoomdayError.internalMemoryError(text: "Failed loading response and data")))
-                        return
+            DispatchQueue.global().async {
+                let backgroundTask = UIApplication.shared.beginBackgroundTask()
+                let dataTask = backgroundSession.dataTask(with: request) { (data, response, error) in
+                    if let error = error {
+                        single(.failure(error))
+                    } else {
+                        guard let response = response as? HTTPURLResponse,
+                              let data = data else {
+                            single(.failure(BoomdayError.internalMemoryError(text: "Failed loading response and data")))
+                            return
+                        }
+                        
+                        if !validStatusCodes.contains(response.statusCode) {
+                            single(.failure(BoomdayError.apiStatusCode(code: response.statusCode)))
+                        } else {
+                            single(.success((response, data)))
+                        }
                     }
                     
-                    if !validStatusCodes.contains(response.statusCode) {
-                        single(.failure(BoomdayError.apiStatusCode(code: response.statusCode)))
-                    } else {
-                        single(.success((response, data)))
-                    }
+                    UIApplication.shared.endBackgroundTask(backgroundTask)
                 }
+                
+                dataTask.resume()
             }
-            dataTask.resume()
             return Disposables.create()
         }
         .observe(on: ConcurrentDispatchQueueScheduler(qos: .background))
@@ -122,9 +129,10 @@ class StandardAPIService : RequestInterceptor {
         do {
             request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
             request.addValue("Application/json", forHTTPHeaderField: "Content-Type")
-            request.timeoutInterval = TimeInterval(MAXFLOAT)
+            request.addValue("\(Configuration.versionString)_\(Configuration.buildString)", forHTTPHeaderField: "User-Agent")
+            
+            //request.timeoutInterval = TimeInterval(MAXFLOAT)
             request.httpBody = try JSONEncoder().encode(parameters)
-            print ("BODY: \(String(data: request.httpBody!, encoding: .utf8))")
             request.httpMethod = method.rawValue
             
         } catch {

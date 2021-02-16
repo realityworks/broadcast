@@ -45,7 +45,6 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
         super.init()
         
         let backgroundSessionConfiguration = URLSessionConfiguration.background(withIdentifier: sessionIdentifier)
-        backgroundSessionConfiguration.waitsForConnectivity = true
         backgroundSessionConfiguration.sessionSendsLaunchEvents = true
         backgroundSessionConfiguration.shouldUseExtendedBackgroundIdleMode = true
         

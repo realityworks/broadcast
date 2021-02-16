@@ -82,7 +82,10 @@ extension PostContentUseCase {
         uploadService.upload(media: media,
                              content: content)
             .subscribe(onNext: { uploadProgress in
-                Logger.log(level: .info, topic: .api, message: "Upload progress : \(uploadProgress.progress)")
+                Logger.log(level: .info,
+                           topic: .api,
+                           message: "Progress : \(uploadProgress.progress)\nTotal progress : \(uploadProgress.totalProgress)\nUpload progress : \(uploadProgress.uploadProgress)")
+                
                 self.stateController.state.currentMediaUploadProgress = uploadProgress
             }, onError: { error in
                 self.stateController.state.currentMediaUploadProgress?.failed = true
