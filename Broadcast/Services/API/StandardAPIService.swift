@@ -234,7 +234,6 @@ extension StandardAPIService : APIService {
     // MARK: Video upload
     
     func createPost() -> Single<CreatePostResponse> {
-        #warning("TEMP CODE TO TEST BACKGROUND SESSION")
         let url = baseUrl
                 .appendingPathComponent("broadcaster")
                 .appendingPathComponent("posts")

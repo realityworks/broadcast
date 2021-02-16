@@ -85,7 +85,6 @@ extension PostContentUseCase {
                 Logger.log(level: .info, topic: .api, message: "Upload progress : \(uploadProgress.progress)")
                 self.stateController.state.currentMediaUploadProgress = uploadProgress
             }, onError: { error in
-                
                 self.stateController.state.currentMediaUploadProgress?.failed = true
                 if let boomDayError = error as? BoomdayError {
                     self.stateController.state.currentMediaUploadProgress?.errorDescription = boomDayError.localizedDescription

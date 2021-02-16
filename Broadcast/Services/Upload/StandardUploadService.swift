@@ -277,6 +277,7 @@ extension StandardUploadService : UploadService {
 
             return Disposables.create()
         }
+        .observe(on: ConcurrentDispatchQueueScheduler(qos: .background))
         
         // Trigger complete upload
         let completeUploadObservable = Observable<UploadEvent>.create { [unowned self] observer in
@@ -292,6 +293,7 @@ extension StandardUploadService : UploadService {
             
             return Disposables.create()
         }
+        .observe(on: ConcurrentDispatchQueueScheduler(qos: .background))
         
         return Observable.concat(getUploadUrlObservable,
                                  uploadTrailerObservable,
