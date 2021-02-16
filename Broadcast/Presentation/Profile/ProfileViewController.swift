@@ -74,7 +74,7 @@ class ProfileViewController: ViewController {
 
         viewModel.sendLogSignal
             .subscribe(onNext: { [self] _ in
-                let fileUrl = Logger.saveFile("Log_\(Date.now.asAppDateTimeString())")
+                let fileUrl = Logger.saveFile("Log_\(Date.now.asAppDateTimeString()).txt")
                 let ac = UIActivityViewController(activityItems: [fileUrl], applicationActivities: nil)
                 self.present(ac, animated: true)
             })

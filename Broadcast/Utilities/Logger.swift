@@ -33,7 +33,7 @@ struct Logger {
             return result + log.output + "\n"
         }
         
-        let fileUrl = FileManager.default.documentsDirectory().appendingPathComponent("fileurl")
+        let fileUrl = FileManager.default.documentsDirectory().appendingPathComponent(filename)
         try? logString.write(to: fileUrl, atomically: true, encoding: .utf8)
             
         return fileUrl
