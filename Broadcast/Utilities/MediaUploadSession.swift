@@ -73,7 +73,7 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
         
         finishedUploading = false
         
-        beginUpload()
+        prepareUpload()
     }
     
     // MARK:- URLSessionDelegate
@@ -89,14 +89,6 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
         Logger.log(level: .info,
                    topic: .debug,
                    message: "Task did complete with error : \(error?.localizedDescription ?? "No error provided")")
-        
-        guard task.taskIdentifier == uploadTask?.taskIdentifier else {
-            Logger.log(level: .warning,
-                       topic: .debug,
-                       message: "SessionTask: \(task.taskIdentifier) needs to be \(uploadTask?.taskIdentifier)")
-            failureHandler(error: VideoUploadError.networkError("Upload task failed due to delays"))
-            return
-        }
 
         if let error = error {
             failureHandler(error: VideoUploadError.networkError(error.localizedDescription))
@@ -210,7 +202,7 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
     /// Begins an upload task when the video details of our upload have been passed from the API.
     /// The upload task is prepared with the correct parameters required for the file upload and new sessions kicks of an upload task.
     /// - parameters: videoDetails contains the endpoint upload URL used to upload our video
-    private func beginUpload() {
+    private func prepareUpload() {
         Logger.log(level: .info, topic: .debug, message: "Begin Upload")
         
         guard let from = from,
@@ -219,6 +211,14 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
             return
         }
         
+        urlSession.getAllTasks { [self] allTasks in
+            // Cancel all outstanding tasks!
+            allTasks.forEach { $0.cancel() }
+            beginUpload(from: from, to: to)
+        }
+    }
+    
+    private func beginUpload(from: URL, to: URL) {
         urlSession.reset { [self] in
             /// Use our global background session configuration since we only allow one
             var request = URLRequest(url: to)
