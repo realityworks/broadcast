@@ -90,7 +90,7 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         changeButton.contentHorizontalAlignment = .leading
         
         picker.delegate = self
-        picker.videoExportPreset = AVAssetExportPreset1920x1080//AVAssetExportPresetPassthrough
+        picker.videoExportPreset = AVAssetExportPresetPassthrough
         picker.videoQuality = .typeHigh
     }
     
