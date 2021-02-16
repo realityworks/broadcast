@@ -63,7 +63,7 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
                onProgressUpdate: ((Int64, Int64) -> Void)? = nil,
                onComplete: (() -> Void)? = nil,
                onFailure: ((Error) -> Void)? = nil) {
-        Logger.log(level: .info, topic: .debug, message: "Starting upload")
+        Logger.log(level: .info, topic: .debug, message: "Starting upload with session config : \(urlSession.configuration)")
         
         self.from = from
         self.to = to
@@ -120,7 +120,7 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
         
         Logger.log(level: .info,
                    topic: .debug,
-                   message: "Did send body data  BYTES SENT : \(bytesSent), TOTAL SENT : \(totalBytesSent), TOTAL EXPECTED TO SEND : \(totalBytesExpectedToSend)")
+                   message: "SessionTask: \(task.taskIdentifier) : Did send body data -\n    BYTES SENT : \(bytesSent) \n    TOTAL SENT : \(totalBytesSent), \n    TOTAL EXPECTED TO SEND : \(totalBytesExpectedToSend)")
         
         /// Call the update handler with the number of bytes sent and bytes expected to send.
         DispatchQueue.main.async { [weak self] in
@@ -239,6 +239,8 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
             
             uploadTask = urlSession.uploadTask(with: request, fromFile: from)
             uploadTask?.resume()
+            
+            Logger.info(topic: .api, message: "Starting upload task : \(uploadTask?.taskIdentifier)")
         }
     }
 }
