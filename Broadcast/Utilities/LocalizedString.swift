@@ -24,6 +24,7 @@ enum LocalizedString : String {
     case privacyPolicy
     case termsAndConditions
     case shareProfile
+    case sendLog
     case logout
     case accountSettings
     case support

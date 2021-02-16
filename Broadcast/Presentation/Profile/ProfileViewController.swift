@@ -72,6 +72,14 @@ class ProfileViewController: ViewController {
             })
             .disposed(by: disposeBag)
 
+        viewModel.sendLogSignal
+            .subscribe(onNext: { [self] _ in
+                let fileUrl = Logger.saveFile("Log_\(Date.now.asAppDateTimeString())")
+                let ac = UIActivityViewController(activityItems: [fileUrl], applicationActivities: nil)
+                self.present(ac, animated: true)
+            })
+            .disposed(by: disposeBag)
+            
     }
     
     private func setupDatasourceBindings() {
@@ -109,6 +117,12 @@ class ProfileViewController: ViewController {
             case .share:
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTableViewCell.identifier, for: indexPath) as! ProfileTableViewCell
                 cell.configure(withTitle: LocalizedString.shareProfile,
+                               icon: UIImage.iconShare,
+                               leftInset: 0)
+                return cell
+            case .sendLog:
+                let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTableViewCell.identifier, for: indexPath) as! ProfileTableViewCell
+                cell.configure(withTitle: LocalizedString.sendLog,
                                icon: UIImage.iconShare,
                                leftInset: 0)
                 return cell
@@ -162,6 +176,7 @@ class ProfileViewController: ViewController {
                                 ProfileViewModel.Row.privacyPolicy,
                                 ProfileViewModel.Row.termsAndConditions]),
                 SectionModel(model: LocalizedString.logout, items: [
+                                ProfileViewModel.Row.sendLog,
                                 ProfileViewModel.Row.logout,
                                 ProfileViewModel.Row.version])
             ])
@@ -200,6 +215,8 @@ class ProfileViewController: ViewController {
                 case .share:
                     self.viewModel.shareProfile()
                     break
+                case .sendLog:
+                    self.viewModel.sendLog()
                 case .logout:
                     self.viewModel.logout()
                 case .version:

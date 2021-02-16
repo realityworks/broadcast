@@ -21,6 +21,7 @@
 "privacyPolicy" = "Privacy Policy";
 "termsAndConditions" = "Terms & Conditions";
 "shareProfile" = "Share Boomday profile";
+"sendLog" = "Send Debug Log";
 "logout" = "Sign Out";
 "accountSettings" = "Account settings";
 "support" = "Help & Support";

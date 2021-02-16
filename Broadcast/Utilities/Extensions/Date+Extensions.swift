@@ -50,6 +50,12 @@ extension Date {
         DateFormatter.apiDateTimeFormatter.string(from: self)
     }
     
+    /// Returns a string of a simple date time
+    /// - Returns: encoded Date
+    func asAppDateTimeString() -> String {
+        DateFormatter.appDateTimeFormatter.string(from: self)
+    }
+    
     static func timeAgo(from: Date, to: Date) -> String {
         let formatter = DateComponentsFormatter()
         formatter.calendar = Calendar(identifier: .iso8601)

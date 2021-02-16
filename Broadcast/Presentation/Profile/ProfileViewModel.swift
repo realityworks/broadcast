@@ -25,6 +25,7 @@ class ProfileViewModel : ViewModel {
         case termsAndConditions
         case share
         case logout
+        case sendLog
         case version
     }
     
@@ -33,6 +34,10 @@ class ProfileViewModel : ViewModel {
     
     let shareProfileSubject = PublishRelay<()>()
     let shareProfileSignal: Observable<()>
+    
+    let sendLogSubject = PublishRelay<()>()
+    let sendLogSignal: Observable<()>
+    
     let profileHandle: Observable<String>
     
     init(dependencies: Dependencies = .standard) {
@@ -40,6 +45,8 @@ class ProfileViewModel : ViewModel {
         self.authenticationUseCase = dependencies.authenticationUseCase
     
         shareProfileSignal = shareProfileSubject.asObservable()
+        sendLogSignal = sendLogSubject.asObservable()
+        
         profileHandle = dependencies.profileObservable
             .compactMap { $0 }
             .map { $0.handle }
@@ -79,5 +86,9 @@ extension ProfileViewModel {
     
     func shareProfile() {
         shareProfileSubject.accept(())
+    }
+    
+    func sendLog() {
+        sendLogSubject.accept(())
     }
 }

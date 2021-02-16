@@ -11,6 +11,7 @@ struct Logger {
 
     static var crashOnDebugLogLevels: Set<Log.Level> = [.error]
     static var reportableLogLevels: Set<Log.Level> = [.error]
+    static var logEntries: [Log] = []
 
     static func log(level: Log.Level, topic: Log.Topic, message: String) {
         let log = Log(level: level, topic: topic, message: message)
@@ -18,12 +19,24 @@ struct Logger {
             print(log.output)
         }
         assert(!crashOnDebugLogLevels.contains(level), message)
+        logEntries.append(log)
         
         // Comment out unless we add crashlytics or other external error reporting
 //        if reportableLogLevels.contains(level) {
 //            let error = NSError(domain: "Logger", code: 0, userInfo: log.userInfo)
 //            Crashlytics.crashlytics().record(error: error)
 //        }
+    }
+    
+    static func saveFile(_ filename: String) -> URL {
+        let logString = logEntries.reduce("") { result, log -> String in
+            return result + log.output + "\n"
+        }
+        
+        let fileUrl = FileManager.default.documentsDirectory().appendingPathComponent("fileurl")
+        try? logString.write(to: fileUrl, atomically: true, encoding: .utf8)
+            
+        return fileUrl
     }
 
     static func error(topic: Log.Topic, message: String) {
@@ -43,9 +56,10 @@ struct Logger {
     }
 
     private static func shouldPrintLog(for level: Log.Level) -> Bool {
-        #if RELEASE
-            return false
-        #endif
+        #warning("Test for right configuration")
+//        #if RELEASE
+//            return false
+//        #endif
         switch level {
         case .error: return true
         case .info: return true
