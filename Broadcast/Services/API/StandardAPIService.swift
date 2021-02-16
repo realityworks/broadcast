@@ -130,8 +130,6 @@ class StandardAPIService : RequestInterceptor {
             request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
             request.addValue("Application/json", forHTTPHeaderField: "Content-Type")
             request.addValue("\(Configuration.versionString)_\(Configuration.buildString)", forHTTPHeaderField: "User-Agent")
-            
-            //request.timeoutInterval = TimeInterval(MAXFLOAT)
             request.httpBody = try JSONEncoder().encode(parameters)
             request.httpMethod = method.rawValue
             
