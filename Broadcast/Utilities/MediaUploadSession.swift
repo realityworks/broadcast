@@ -89,6 +89,13 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
         Logger.log(level: .info,
                    topic: .debug,
                    message: "Task did complete with error : \(error?.localizedDescription ?? "No error provided")")
+        
+        guard task.taskIdentifier == uploadTask?.taskIdentifier else {
+            Logger.log(level: .warning,
+                       topic: .debug,
+                       message: "SessionTask: \(task.taskIdentifier) needs to be \(uploadTask?.taskIdentifier)")
+            return
+        }
 
         if let error = error {
             failureHandler(error: VideoUploadError.networkError(error.localizedDescription))
