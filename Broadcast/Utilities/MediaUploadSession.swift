@@ -38,6 +38,7 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
     /// You can only initialize a session once, in our video uploader case we need to make a singleton
     /// The URLSession itself behaves like a singleton.
     private var urlSession: URLSession!
+    private weak var uploadTask: URLSessionUploadTask?
     
     init(withIdentifier sessionIdentifier: String) {
         /// Create our unique session configuration
@@ -88,6 +89,14 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
         Logger.log(level: .info,
                    topic: .debug,
                    message: "Task did complete with error : \(error?.localizedDescription ?? "No error provided")")
+        
+        guard task.taskIdentifier == uploadTask?.taskIdentifier else {
+            Logger.log(level: .warning,
+                       topic: .debug,
+                       message: "SessionTask: \(task.taskIdentifier) needs to be \(uploadTask?.taskIdentifier)")
+            failureHandler(error: VideoUploadError.networkError("Upload task failed due to delays"))
+            return
+        }
 
         if let error = error {
             failureHandler(error: VideoUploadError.networkError(error.localizedDescription))
@@ -101,6 +110,14 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
                           didSendBodyData bytesSent: Int64,
                           totalBytesSent: Int64,
                           totalBytesExpectedToSend: Int64) {
+        
+        guard task.taskIdentifier == uploadTask?.taskIdentifier else {
+            Logger.log(level: .warning,
+                       topic: .debug,
+                       message: "SessionTask: \(task.taskIdentifier) needs to be \(uploadTask?.taskIdentifier)")
+            failureHandler(error: VideoUploadError.networkError("Upload task failed due to delays"))
+            return
+        }
         
         Logger.log(level: .info,
                    topic: .debug,
@@ -130,6 +147,13 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
                           dataTask: URLSessionDataTask,
                           didReceive response: URLResponse,
                           completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
+        guard dataTask.taskIdentifier == uploadTask?.taskIdentifier else {
+            Logger.log(level: .warning,
+                       topic: .debug,
+                       message: "SessionTask: \(dataTask.taskIdentifier) needs to be \(uploadTask?.taskIdentifier)")
+            failureHandler(error: VideoUploadError.networkError("Upload task failed due to delays"))
+            return
+        }
         
         Logger.log(level: .info,
                    topic: .debug,
@@ -163,6 +187,8 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
     
     private func failureHandler(error: Error) {
         Logger.log(level: .warning, topic: .debug, message: error.localizedDescription)
+        uploadTask?.cancel()
+        
         DispatchQueue.main.async { [weak self] in
             self?.onFailure?(error)
         }
@@ -193,17 +219,19 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
             return
         }
         
-        /// Use our global background session configuration since we only allow one
-        var request = URLRequest(url: to)
-        request.httpMethod = "PUT"
-        
-        // Need to add custom http header fields?
-        let fileSize = from.fileSize()!
-        
-        request.addValue("BlockBlob", forHTTPHeaderField: "x-ms-blob-type")
-        request.addValue("\(fileSize)", forHTTPHeaderField: "Content-Length")
-        
-        let uploadTask = urlSession.uploadTask(with: request, fromFile: from)
-        uploadTask.resume()
+        urlSession.reset { [self] in
+            /// Use our global background session configuration since we only allow one
+            var request = URLRequest(url: to)
+            request.httpMethod = "PUT"
+            
+            // Need to add custom http header fields?
+            let fileSize = from.fileSize()!
+            
+            request.addValue("BlockBlob", forHTTPHeaderField: "x-ms-blob-type")
+            request.addValue("\(fileSize)", forHTTPHeaderField: "Content-Length")
+            
+            uploadTask = urlSession.uploadTask(with: request, fromFile: from)
+            uploadTask?.resume()
+        }
     }
 }
