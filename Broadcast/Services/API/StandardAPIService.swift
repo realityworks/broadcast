@@ -43,7 +43,7 @@ class StandardAPIService : RequestInterceptor {
         self.session = Session.default
         self.credentialsService = nil
                 
-        let urlSessionConfiguration = URLSessionConfiguration.default//URLSessionConfiguration.background(withIdentifier: "BackgroundAPIService")
+        let urlSessionConfiguration = URLSessionConfiguration.default
         urlSessionConfiguration.waitsForConnectivity = true
         //urlSessionConfiguration.sessionSendsLaunchEvents = true
         urlSessionConfiguration.shouldUseExtendedBackgroundIdleMode = true
