@@ -177,7 +177,7 @@ class ProfileViewController: ViewController {
                                 ProfileViewModel.Row.privacyPolicy,
                                 ProfileViewModel.Row.termsAndConditions]),
                 SectionModel(model: LocalizedString.logout, items: [
-                                ProfileViewModel.Row.sendLog,
+                                //ProfileViewModel.Row.sendLog,
                                 ProfileViewModel.Row.logout,
                                 ProfileViewModel.Row.version])
             ])

@@ -57,9 +57,9 @@ struct Logger {
 
     private static func shouldPrintLog(for level: Log.Level) -> Bool {
         #warning("Setup per target")
-//        #if RELEASE
-//            return false
-//        #endif
+        #if RELEASE
+            return false
+        #endif
         switch level {
         case .error: return true
         case .info: return true
