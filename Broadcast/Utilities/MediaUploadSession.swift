@@ -103,6 +103,21 @@ class MediaUploadSession : NSObject,
 
         if let error = error {
             failureHandler(error: VideoUploadError.networkError(error.localizedDescription))
+            return
+        }
+        
+        Logger.warning(topic: .api, message: "Task - \(task)")
+        if let httpResponse = task.response as? HTTPURLResponse {
+            Logger.warning(topic: .api, message: "StatusCode - \(httpResponse.statusCode)")
+            if httpResponse.statusCode != 201 {
+                failureHandler(error: VideoUploadError.networkError("Error code : \(httpResponse.statusCode)"))
+                return
+            }
+        }
+        
+        if !finishedUploading {
+            failureHandler(error: VideoUploadError.networkError("Lost connection to the service. Please try uploading again."))
+            return
         }
     }
     
@@ -132,14 +147,9 @@ class MediaUploadSession : NSObject,
             self?.onProgressUpdate?(totalBytesSent, totalBytesExpectedToSend)
         }
         
-        finishedUploading = totalBytesSent == totalBytesExpectedToSend
-        
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            if self.finishedUploading {
-                Logger.log(level: .info, topic: .api, message: "Completed upload with bytes uploaded comparison")
+        if totalBytesSent == totalBytesExpectedToSend {
+            Logger.log(level: .info, topic: .api, message: "Completed upload with bytes uploaded comparison")
                 self.uploadCompletionHandler()
-            }
         }
     }
     
@@ -196,7 +206,9 @@ class MediaUploadSession : NSObject,
     
     func refresh() {
         uploadTask?.suspend()
-        uploadTask?.resume()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1, execute: {
+            self.uploadTask?.resume()
+        })
     }
     
     private func failureHandler(error: Error) {
@@ -210,6 +222,8 @@ class MediaUploadSession : NSObject,
     
     private func uploadCompletionHandler() {
         Logger.log(level: .info, topic: .debug, message: "Upload Completed! Confirming with API Service")
+        
+        finishedUploading = true
         
         urlSession.flush {
             Logger.log(level: .info, topic: .debug, message: "Flushed the background upload")

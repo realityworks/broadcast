@@ -71,10 +71,11 @@ extension StandardUploadService : UploadService {
         let createPostObservable = Observable<UploadEvent>.create { [unowned self] observer in
             apiService.createPost()
                 .subscribe(onSuccess: { response in
+                    Logger.info(topic: .debug, message: "Created Post with ID : \(response.postId)")
                     observer.onNext(UploadEvent.createPost(postId: response.postId))
                     observer.onCompleted()
                 }, onFailure: { error in
-                    Logger.info(topic: .debug, message: "Create Post failed : \(error)")
+                    Logger.warning(topic: .debug, message: "Create Post failed : \(error)")
                     observer.onError(error)
                 })
                 .disposed(by: self.disposeBag)
@@ -88,10 +89,12 @@ extension StandardUploadService : UploadService {
                let media = self.media {
                 apiService.getMediaUploadUrl(forPostID: postId, for: media)
                     .subscribe(onSuccess: { response in
+                        Logger.info(topic: .api,
+                                    message: "Media Upload Ready for URL : \(response.uploadUrl) for media : \(response.mediaId)")
                         observer.onNext(UploadEvent.requestPostUploadUrl(uploadUrl: URL(string: response.uploadUrl), mediaId: response.mediaId))
                         observer.onCompleted()
                     }, onFailure: { error in
-                        Logger.info(topic: .debug, message: "Get media upload URL failed : \(error)")
+                        Logger.warning(topic: .debug, message: "Get media upload URL failed : \(error)")
                         observer.onError(error)
                     })
                     .disposed(by: self.disposeBag)
@@ -114,10 +117,10 @@ extension StandardUploadService : UploadService {
                     let progressFloat = total > 0 ? Float(sent) / Float(total) : 0
                     observer.onNext(UploadEvent.uploadMedia(progress: progressFloat))
                 } onComplete: {
-                    Logger.log(level: .verbose, topic: .debug, message:  "Completed upload")
+                    Logger.info(topic: .debug, message:  "Completed upload")
                     observer.onCompleted()
                 } onFailure: { error in
-                    Logger.info(topic: .debug, message: "Media upload failed : \(error)")
+                    Logger.warning(topic: .debug, message: "Media upload failed : \(error)")
                     observer.onError(error)
                 }
             } else {

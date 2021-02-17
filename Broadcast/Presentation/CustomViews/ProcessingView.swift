@@ -46,8 +46,12 @@ class ProcessingView : UIView {
         processingAnimation.contentMode = .scaleAspectFill
         
         addSubview(processingLabel)
+        processingLabel.textAlignment = .center
+        processingLabel.numberOfLines = 0
+        processingLabel.lineBreakMode = .byWordWrapping
         processingLabel.topToBottom(of: processingAnimation, offset: -16)
         processingLabel.centerXToSuperview()
+        processingLabel.width(250)
         
         processingAnimation.loopMode = .loop
         processingAnimation.backgroundBehavior = .pauseAndRestore
