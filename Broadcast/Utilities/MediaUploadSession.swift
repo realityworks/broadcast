@@ -120,7 +120,7 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
         
         Logger.log(level: .info,
                    topic: .debug,
-                   message: "SessionTask: \(task.taskIdentifier) : Did send body data -\n    BYTES SENT : \(bytesSent) \n    TOTAL SENT : \(totalBytesSent), \n    TOTAL EXPECTED TO SEND : \(totalBytesExpectedToSend)")
+                   message: "SessionTask: \(task.taskIdentifier) : Did send body data - BYTES SENT : \(bytesSent), TOTAL SENT : \(totalBytesSent), TOTAL EXPECTED TO SEND : \(totalBytesExpectedToSend)")
         
         /// Call the update handler with the number of bytes sent and bytes expected to send.
         DispatchQueue.main.async { [weak self] in

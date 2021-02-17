@@ -26,6 +26,9 @@ class NewPostCreateViewModel : ViewModel {
     
     // MARK: Pop back to view controller
     let popBackToMyPostsSignal = PublishRelay<()>()
+    let popBackOnUploadComplete = PublishRelay<()>()
+    
+    let isActive = BehaviorRelay<Bool>(value: true)
     
     // MARK: Media Selection Properties
     let runTimeTitle: Observable<NSAttributedString>
@@ -42,6 +45,7 @@ class NewPostCreateViewModel : ViewModel {
     let showingMedia: Observable<Bool>
     
     let uploadComplete: Observable<Bool>
+    
     let showProgressView: Observable<Bool>
     let showUploadButton: Observable<Bool>
     let showFailed: Observable<Bool>
@@ -132,9 +136,8 @@ class NewPostCreateViewModel : ViewModel {
             .bind(to: self.isUploadingSubject)
             .disposed(by: disposeBag)
         
-        uploadComplete
-            .distinctUntilChanged()
-            .filter { $0 == true }
+        // If app is in background, wait until it is in foreground, otherwise proceed
+        popBackOnUploadComplete
             .do(onNext: { _ in
                 self.reloadPosts()
             })
@@ -150,6 +153,31 @@ class NewPostCreateViewModel : ViewModel {
             showTipsSubject.accept(true)
             persistenceService.write(value: true, forKey: PersistenceKeys.tipsShown)
         }
+        
+        dependencies.didBecomeActive
+            .subscribe { [weak self] _ in
+                self?.isActive.accept(true)
+            }
+            .disposed(by: disposeBag)
+
+        dependencies.willResignActive
+            .subscribe { [weak self] _ in
+                self?.isActive.accept(false)
+            }
+            .disposed(by: disposeBag)
+        
+        configureActiveUploadBindings()
+    }
+    
+    private func configureActiveUploadBindings() {
+        Observable.combineLatest(uploadComplete.distinctUntilChanged(), isActive.asObservable())
+            .map { uploadComplete, isActive in
+                return uploadComplete == true && isActive == true
+            }
+            .filter { $0 == true }
+            .map { _ in () }
+            .bind(to: popBackOnUploadComplete)
+            .disposed(by: disposeBag)
     }
 }
 
@@ -165,12 +193,20 @@ extension NewPostCreateViewModel {
         let postContentUseCase: PostContentUseCase
         let uploadProgressObservable: Observable<UploadProgress?>
         
-        static let standard = Dependencies(
-            stateController: Domain.standard.stateController,
-            schedulers: Schedulers.standard,
-            persistenceService: Services.standard.persistenceService,
-            postContentUseCase: Domain.standard.useCases.postContentUseCase,
-            uploadProgressObservable: Domain.standard.stateController.stateObservable(of: \.currentMediaUploadProgress))
+        let didBecomeActive: Observable<Void>
+        let willResignActive: Observable<Void>
+        
+        static var standard: Dependencies {
+            let notificationCenter = NotificationCenter.default.rx
+            return Dependencies(
+                stateController: Domain.standard.stateController,
+                schedulers: Schedulers.standard,
+                persistenceService: Services.standard.persistenceService,
+                postContentUseCase: Domain.standard.useCases.postContentUseCase,
+                uploadProgressObservable: Domain.standard.stateController.stateObservable(of: \.currentMediaUploadProgress),
+                didBecomeActive: notificationCenter.notification(UIApplication.didBecomeActiveNotification).map { _ in () },
+                willResignActive: notificationCenter.notification(UIApplication.willResignActiveNotification).map { _ in () })
+        }
     }
 }
 
