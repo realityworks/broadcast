@@ -165,6 +165,7 @@ class ProfileViewController: ViewController {
             return cell
         }
         
+        #warning("Add line sendlog item per target")
         let items: Observable<[SectionModel<LocalizedString, ProfileViewModel.Row>]> = Observable.just(
             [
                 SectionModel(model: LocalizedString.accountSettings, items: [

@@ -201,7 +201,6 @@ class MediaUploadSession : NSObject,
     private func failureHandler(error: Error) {
         Logger.log(level: .warning, topic: .debug, message: error.localizedDescription)
         uploadTask?.cancel()
-        uploadTask = nil
         
         DispatchQueue.main.async { [weak self] in
             self?.onFailure?(error)
@@ -214,9 +213,7 @@ class MediaUploadSession : NSObject,
         urlSession.flush {
             Logger.log(level: .info, topic: .debug, message: "Flushed the background upload")
         }
-        
-        uploadTask = nil
-        
+                
         /// On complete and res
         DispatchQueue.main.async { [weak self] in
             self?.onComplete?()

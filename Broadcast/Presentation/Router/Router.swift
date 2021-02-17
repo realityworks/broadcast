@@ -69,6 +69,7 @@ class Router {
             .disposed(by: disposeBag)
         
         errorObservable
+            .throttle(.seconds(2), latest: true, scheduler: schedulers.main)
             .subscribe(onNext: { [unowned self] error in
                 if let boomdayError = error as? BoomdayError {
                     self.show(boomdayError: boomdayError)

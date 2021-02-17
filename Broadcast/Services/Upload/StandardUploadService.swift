@@ -61,7 +61,7 @@ extension StandardUploadService : UploadService {
         }
         
         guard let media = media else {
-            return .error(BoomdayError.internalMemoryError(text: "Internal failure for media, please reinstall app"))
+            return .error(BoomdayError.internalMemoryError(text: "Internal failure for media, you might need to clear more space"))
         }
         
         uploadMediaProgress = UploadProgress()
@@ -74,7 +74,8 @@ extension StandardUploadService : UploadService {
                     observer.onNext(UploadEvent.createPost(postId: response.postId))
                     observer.onCompleted()
                 }, onFailure: { error in
-                    observer.onError(BoomdayError.uploadFailed(UploadEvent.createPost(postId: nil)))
+                    Logger.info(topic: .debug, message: "Create Post failed : \(error)")
+                    observer.onError(error)
                 })
                 .disposed(by: self.disposeBag)
             
@@ -90,8 +91,8 @@ extension StandardUploadService : UploadService {
                         observer.onNext(UploadEvent.requestPostUploadUrl(uploadUrl: URL(string: response.uploadUrl), mediaId: response.mediaId))
                         observer.onCompleted()
                     }, onFailure: { error in
-                        observer.onError(
-                            BoomdayError.uploadFailed(UploadEvent.requestPostUploadUrl(uploadUrl: nil, mediaId: nil)))
+                        Logger.info(topic: .debug, message: "Get media upload URL failed : \(error)")
+                        observer.onError(error)
                     })
                     .disposed(by: self.disposeBag)
             } else {
@@ -116,6 +117,7 @@ extension StandardUploadService : UploadService {
                     Logger.log(level: .verbose, topic: .debug, message:  "Completed upload")
                     observer.onCompleted()
                 } onFailure: { error in
+                    Logger.info(topic: .debug, message: "Media upload failed : \(error)")
                     observer.onError(error)
                 }
             } else {
@@ -137,6 +139,7 @@ extension StandardUploadService : UploadService {
                             observer.onNext(UploadEvent.completeUpload)
                             observer.onCompleted()
                         } onError: { error in
+                            Logger.info(topic: .debug, message: "Media Complete Failed : \(error)")
                             observer.onError(error)
                         }
                         .disposed(by: disposeBag)
@@ -155,11 +158,12 @@ extension StandardUploadService : UploadService {
                     postId: postId,
                     newContent: content)
                     .subscribe {
-                        Logger.log(level: .verbose, topic: .debug, message: "CONTENT SET")
+                        Logger.log(level: .verbose, topic: .debug, message: "Update Content Succesful")
                         observer.onNext(UploadEvent.postContent)
                         observer.onCompleted()
                     } onError: { error in
-                        observer.onError(BoomdayError.publishFailed)
+                        Logger.info(topic: .debug, message: "Update post content failed : \(error)")
+                        observer.onError(error)
                     }
                     .disposed(by: disposeBag)
             } else {
@@ -175,10 +179,11 @@ extension StandardUploadService : UploadService {
             if let postId = self.uploadMediaProgress.postId {
                 apiService.publish(postId: postId)
                     .subscribe {
-                        Logger.log(level: .verbose, topic: .debug, message: "PUBLISHED")
+                        Logger.log(level: .verbose, topic: .debug, message: "Publish Content Successful")
                         observer.onNext(UploadEvent.publish)
                         observer.onCompleted()
                     } onError: { error in
+                        Logger.info(topic: .debug, message: "Publish post content failed : \(error)")
                         observer.onError(BoomdayError.publishFailed)
                     }
                     .disposed(by: disposeBag)

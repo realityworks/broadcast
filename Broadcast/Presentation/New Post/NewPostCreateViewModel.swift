@@ -220,6 +220,7 @@ extension NewPostCreateViewModel {
         isUploadingSubject.onNext(true)
         
         let newPost = PostContent(title: title.value, caption: caption.value)
+        Logger.info(topic: .debug, message: "Upload new post : \(newPost) with media : \(media)")
         postContentUseCase.upload(content: newPost, media: media)
     }
     
