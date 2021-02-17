@@ -19,7 +19,10 @@ enum VideoUploadError : Error {
 /// A request to upload the video is created from our meta data, which returns the URL where we will upload the video data to.
 /// Once the video data is uploaded, the session will receive a completion (one for background, one for foreground) and needs
 /// to finalise the upload by calling an endpoint with our video id to close the upload.
-class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDelegate, URLSessionDelegate {
+class MediaUploadSession : NSObject,
+                           URLSessionTaskDelegate,
+                           URLSessionDataDelegate,
+                           URLSessionDelegate {
     
     // MARK:- Callback Handlers
     private var onProgressUpdate: ((Int64, Int64) -> Void)?
@@ -47,6 +50,7 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
         
         let backgroundSessionConfiguration = URLSessionConfiguration.background(withIdentifier: sessionIdentifier)
         backgroundSessionConfiguration.sessionSendsLaunchEvents = true
+        backgroundSessionConfiguration.isDiscretionary = false
         backgroundSessionConfiguration.shouldUseExtendedBackgroundIdleMode = true
         
         /// Not ideal, but in the private init, you cannot pass in a delegate to the initiliazer before all of self is initialized, hence the urlSession being initialized as a parameter
@@ -114,6 +118,7 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
             Logger.log(level: .warning,
                        topic: .debug,
                        message: "SessionTask: \(task.taskIdentifier) needs to be \(uploadTask?.taskIdentifier)")
+            task.cancel()
             failureHandler(error: VideoUploadError.networkError("Upload task failed due to delays"))
             return
         }
@@ -150,6 +155,7 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
             Logger.log(level: .warning,
                        topic: .debug,
                        message: "SessionTask: \(dataTask.taskIdentifier) needs to be \(uploadTask?.taskIdentifier)")
+            dataTask.cancel()
             failureHandler(error: VideoUploadError.networkError("Upload task failed due to delays"))
             return
         }
@@ -175,7 +181,10 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
         DispatchQueue.main.async { [unowned self] in
             guard let appDelegate: AppDelegate = UIApplication.shared.delegate as? AppDelegate,
                   let identifier = session.configuration.identifier
-            else { return self.failureHandler(error: BoomdayError.internalMemoryError(text: "Unable to complete background upload properly, may have failed.")) }
+            else {
+                self.failureHandler(error: BoomdayError.internalMemoryError(text: "Unable to complete background upload properly, may have failed."))
+                return
+            }
             
             appDelegate.backgroundSessionCompletion[identifier]?()
             self.uploadCompletionHandler()
@@ -184,9 +193,15 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
     
     // MARK:- Utility Functions
     
+    func refresh() {
+        uploadTask?.suspend()
+        uploadTask?.resume()
+    }
+    
     private func failureHandler(error: Error) {
         Logger.log(level: .warning, topic: .debug, message: error.localizedDescription)
         uploadTask?.cancel()
+        uploadTask = nil
         
         DispatchQueue.main.async { [weak self] in
             self?.onFailure?(error)
@@ -199,6 +214,8 @@ class MediaUploadSession : NSObject, URLSessionTaskDelegate, URLSessionDataDeleg
         urlSession.flush {
             Logger.log(level: .info, topic: .debug, message: "Flushed the background upload")
         }
+        
+        uploadTask = nil
         
         /// On complete and res
         DispatchQueue.main.async { [weak self] in
