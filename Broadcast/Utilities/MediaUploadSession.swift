@@ -136,7 +136,8 @@ class MediaUploadSession : NSObject,
         
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            if self.finishedUploading && UIApplication.shared.applicationState == .active {
+            if self.finishedUploading {
+                Logger.log(level: .info, topic: .api, message: "Completed upload with bytes uploaded comparison")
                 self.uploadCompletionHandler()
             }
         }

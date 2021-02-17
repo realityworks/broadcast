@@ -12,14 +12,19 @@ struct Logger {
     static var crashOnDebugLogLevels: Set<Log.Level> = [.error]
     static var reportableLogLevels: Set<Log.Level> = [.error]
     static var logEntries: [Log] = []
-
+    static let queue = DispatchQueue(label: "thread-safe-obj", attributes: .concurrent)
     static func log(level: Log.Level, topic: Log.Topic, message: String) {
         let log = Log(level: level, topic: topic, message: message)
         if shouldPrintLog(for: level) {
             print(log.output)
         }
         assert(!crashOnDebugLogLevels.contains(level), message)
-        logEntries.append(log)
+        
+        // write
+        queue.async(flags: .barrier) {
+            // perform writes on data
+            logEntries.append(log)
+        }
         
         // Comment out unless we add crashlytics or other external error reporting
 //        if reportableLogLevels.contains(level) {
