@@ -250,6 +250,7 @@ class MediaUploadSession : NSObject,
             
             request.addValue("BlockBlob", forHTTPHeaderField: "x-ms-blob-type")
             request.addValue("\(fileSize)", forHTTPHeaderField: "Content-Length")
+            request.timeoutInterval = TimeInterval(60)
             
             uploadTask = urlSession.uploadTask(with: request, fromFile: from)
             uploadTask?.priority = URLSessionTask.highPriority
