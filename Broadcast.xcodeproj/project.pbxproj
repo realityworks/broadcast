@@ -1868,7 +1868,7 @@
 				CODE_SIGN_ENTITLEMENTS = Broadcast/Broadcast.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = KTKP5PRF82;
 				INFOPLIST_FILE = Broadcast/Assets/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1894,7 +1894,7 @@
 				CODE_SIGN_ENTITLEMENTS = Broadcast/Broadcast.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Distribution: Boomday Ltd (KTKP5PRF82)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = KTKP5PRF82;
 				INFOPLIST_FILE = Broadcast/Assets/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
