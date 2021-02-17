@@ -42,7 +42,7 @@ class ProcessingView : UIView {
     private func configureViews() {
         addSubview(processingAnimation)
         processingAnimation.centerXToSuperview()
-        processingAnimation.centerYToSuperview(offset: -8)
+        processingAnimation.centerYToSuperview(offset: -36)
         processingAnimation.contentMode = .scaleAspectFill
         
         addSubview(processingLabel)
@@ -51,7 +51,7 @@ class ProcessingView : UIView {
         processingLabel.lineBreakMode = .byWordWrapping
         processingLabel.topToBottom(of: processingAnimation, offset: -16)
         processingLabel.centerXToSuperview()
-        processingLabel.width(250)
+        processingLabel.width(200)
         
         processingAnimation.loopMode = .loop
         processingAnimation.backgroundBehavior = .pauseAndRestore

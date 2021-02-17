@@ -83,7 +83,7 @@
 "uploadTrailer" = "Upload Trailer";
 "emailUserLockedInfo" = "Email and User Handle cannot be modified.";
 "stripeAccountLockedInfo" = "Connected Account details are locked on this screen.";
-"processing" = "Content is being processed.\nPlease allow 30 minutes for your content to be fully processed and discoverable on the Boomday web-application";
+"processing" = "Content is being processed.\nPlease allow 30 minutes for your content to be fully processed and discoverable on the Boomday web-application.";
 "noPosts" = "NO POSTS";
 "saving" = "Saving";
 "usingAppAccept" = "By using this app you accept the";
