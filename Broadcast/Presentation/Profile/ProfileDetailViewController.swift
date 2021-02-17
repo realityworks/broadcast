@@ -67,6 +67,11 @@ class ProfileDetailViewController: ViewController, KeyboardEventsAdapter {
         unregisterForKeyboardEvents()
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        viewModel.receivedMemoryWarning()
+    }
+    
     private func configureViews() {
         
         /// Configure text editing

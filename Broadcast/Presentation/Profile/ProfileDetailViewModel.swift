@@ -306,4 +306,8 @@ extension ProfileDetailViewModel {
     func willResignResponders() {
         resignRespondersSignal.accept(())
     }
+    
+    func receivedMemoryWarning() {
+        stateController.sendError(BoomdayError.internalMemoryError(text: "Low memory, please remove items from storage to increase space"))
+    }
 }

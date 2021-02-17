@@ -252,6 +252,7 @@ class MediaUploadSession : NSObject,
             request.addValue("\(fileSize)", forHTTPHeaderField: "Content-Length")
             
             uploadTask = urlSession.uploadTask(with: request, fromFile: from)
+            uploadTask?.priority = URLSessionTask.highPriority
             uploadTask?.resume()
             
             Logger.info(topic: .api, message: "Starting upload task : \(uploadTask?.taskIdentifier)")
