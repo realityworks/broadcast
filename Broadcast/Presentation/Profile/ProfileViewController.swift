@@ -165,22 +165,41 @@ class ProfileViewController: ViewController {
             return cell
         }
         
-        #warning("Add line sendlog item per target")
-        let items: Observable<[SectionModel<LocalizedString, ProfileViewModel.Row>]> = Observable.just(
-            [
-                SectionModel(model: LocalizedString.accountSettings, items: [
-                                ProfileViewModel.Row.detail,
-                                ProfileViewModel.Row.stripeAccount,
-                                ProfileViewModel.Row.share]),
-                SectionModel(model: LocalizedString.support, items: [
-                                ProfileViewModel.Row.frequentlyAskedQuestions,
-                                ProfileViewModel.Row.privacyPolicy,
-                                ProfileViewModel.Row.termsAndConditions]),
-                SectionModel(model: LocalizedString.logout, items: [
-                                //ProfileViewModel.Row.sendLog,
-                                ProfileViewModel.Row.logout,
-                                ProfileViewModel.Row.version])
-            ])
+        let items: Observable<[SectionModel<LocalizedString, ProfileViewModel.Row>]>
+            
+        // Special case to handle debug UI
+        if Configuration.debugUIEnabled {
+            items = Observable.just(
+                [
+                    SectionModel(model: LocalizedString.accountSettings, items: [
+                                    ProfileViewModel.Row.detail,
+                                    ProfileViewModel.Row.stripeAccount,
+                                    ProfileViewModel.Row.share]),
+                    SectionModel(model: LocalizedString.support, items: [
+                                    ProfileViewModel.Row.frequentlyAskedQuestions,
+                                    ProfileViewModel.Row.privacyPolicy,
+                                    ProfileViewModel.Row.termsAndConditions]),
+                    SectionModel(model: LocalizedString.logout, items: [
+                                    ProfileViewModel.Row.sendLog,
+                                    ProfileViewModel.Row.logout,
+                                    ProfileViewModel.Row.version])
+                ])
+        } else {
+            items = Observable.just(
+                [
+                    SectionModel(model: LocalizedString.accountSettings, items: [
+                                    ProfileViewModel.Row.detail,
+                                    ProfileViewModel.Row.stripeAccount,
+                                    ProfileViewModel.Row.share]),
+                    SectionModel(model: LocalizedString.support, items: [
+                                    ProfileViewModel.Row.frequentlyAskedQuestions,
+                                    ProfileViewModel.Row.privacyPolicy,
+                                    ProfileViewModel.Row.termsAndConditions]),
+                    SectionModel(model: LocalizedString.logout, items: [
+                                    ProfileViewModel.Row.logout,
+                                    ProfileViewModel.Row.version])
+                ])
+        }
         
         items
             .bind(to: tableView.rx.items(dataSource: datasource))
