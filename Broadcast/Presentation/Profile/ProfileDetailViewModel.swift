@@ -308,6 +308,6 @@ extension ProfileDetailViewModel {
     }
     
     func receivedMemoryWarning() {
-        stateController.sendError(BoomdayError.internalMemoryError(text: "Low memory, please remove items from storage to increase space"))
+//        stateController.sendError(BoomdayError.internalMemoryError(text: "Low memory, please remove items from storage to increase space"))
     }
 }

@@ -115,9 +115,12 @@ class MediaUploadSession : NSObject,
             }
         }
         
-        if !finishedUploading {
-            failureHandler(error: VideoUploadError.networkError("Lost connection to the service. Please try uploading again."))
-            return
+        // Check lost connection
+        DispatchQueue.main.async { [unowned self] in
+            if !finishedUploading && UIApplication.shared.applicationState == .active {
+                failureHandler(error: VideoUploadError.networkError("Lost connection to the service. Please try uploading again."))
+                return
+            }
         }
     }
     
