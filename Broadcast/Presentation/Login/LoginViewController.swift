@@ -148,7 +148,9 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
 
         let activityIndicatorContainerView = UIView()
         contentStackView.addArrangedSubview(activityIndicatorContainerView)
-        contentStackView.addArrangedSubview(applyHereTextView)
+        
+        #warning("Removed due to apple guidelines")
+        //contentStackView.addArrangedSubview(applyHereTextView)
         
         activityIndicatorContainerView.addSubview(activityIndicator)
         activityIndicatorContainerView.height(56)
