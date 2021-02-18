@@ -170,9 +170,11 @@ class LoginViewController: ViewController, KeyboardEventsAdapter {
         
         /// Configure the text views
         welcomeLabel.height(50)
-        applyHereTextView.height(30)
-        applyHereTextView.leftToSuperview()
-        applyHereTextView.rightToSuperview()
+        
+        #warning("Removed due to apple guidelines")
+//        applyHereTextView.height(30)
+//        applyHereTextView.leftToSuperview()
+//        applyHereTextView.rightToSuperview()
         
         forgotPasswordTextView.leftToSuperview()
         forgotPasswordTextView.rightToSuperview()
