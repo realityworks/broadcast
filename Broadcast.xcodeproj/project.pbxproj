@@ -325,20 +325,6 @@
 		1DB3438E2589DC3300486676 /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB3438D2589DC3300486676 /* URL+Extensions.swift */; };
 		1DC97C8125A4180200EBF667 /* ProfileSignOutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC97C8025A4180100EBF667 /* ProfileSignOutTableViewCell.swift */; };
 		1DC97C8525A4524F00EBF667 /* ProfileVersionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC97C8425A4524F00EBF667 /* ProfileVersionTableViewCell.swift */; };
-		1DD1153E25DE57660034BC0E /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD114B425DE57650034BC0E /* libavutil.a */; };
-		1DD1153F25DE57660034BC0E /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD114B425DE57650034BC0E /* libavutil.a */; };
-		1DD1154025DE57660034BC0E /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD114B525DE57650034BC0E /* libavfilter.a */; };
-		1DD1154125DE57660034BC0E /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD114B525DE57650034BC0E /* libavfilter.a */; };
-		1DD1154225DE57660034BC0E /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD114B625DE57650034BC0E /* libavcodec.a */; };
-		1DD1154325DE57660034BC0E /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD114B625DE57650034BC0E /* libavcodec.a */; };
-		1DD1154425DE57660034BC0E /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD114B725DE57650034BC0E /* libavformat.a */; };
-		1DD1154525DE57660034BC0E /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD114B725DE57650034BC0E /* libavformat.a */; };
-		1DD1154625DE57660034BC0E /* libavdevice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD114B825DE57650034BC0E /* libavdevice.a */; };
-		1DD1154725DE57660034BC0E /* libavdevice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD114B825DE57650034BC0E /* libavdevice.a */; };
-		1DD1154825DE57660034BC0E /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD114B925DE57650034BC0E /* libswresample.a */; };
-		1DD1154925DE57660034BC0E /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD114B925DE57650034BC0E /* libswresample.a */; };
-		1DD1154A25DE57660034BC0E /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD114BA25DE57650034BC0E /* libswscale.a */; };
-		1DD1154B25DE57660034BC0E /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD114BA25DE57650034BC0E /* libswscale.a */; };
 		1DD1FE05256CA55F00C598CE /* UITextField+Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD1FE04256CA55F00C598CE /* UITextField+Styling.swift */; };
 		1DD1FE17256CE2E000C598CE /* SwiftRichString in Frameworks */ = {isa = PBXBuildFile; productRef = 1DD1FE16256CE2E000C598CE /* SwiftRichString */; };
 		1DD1FE1D256D6F7300C598CE /* AuthenticateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD1FE1C256D6F7300C598CE /* AuthenticateResponse.swift */; };
@@ -710,20 +696,13 @@
 				1DF1E26225A630AC0093A162 /* RxRelay in Frameworks */,
 				1DF1E26025A630AC0093A162 /* RxCocoa in Frameworks */,
 				1DF1E26725A630FA0093A162 /* Differentiator in Frameworks */,
-				1DD1154425DE57660034BC0E /* libavformat.a in Frameworks */,
-				1DD1154625DE57660034BC0E /* libavdevice.a in Frameworks */,
 				1D916D9E25640C430059E549 /* SDWebImage in Frameworks */,
-				1DD1153E25DE57660034BC0E /* libavutil.a in Frameworks */,
 				1D7C4950259B38A70089EA6B /* RSKPlaceholderTextView in Frameworks */,
-				1DD1154825DE57660034BC0E /* libswresample.a in Frameworks */,
-				1DD1154025DE57660034BC0E /* libavfilter.a in Frameworks */,
-				1DD1154225DE57660034BC0E /* libavcodec.a in Frameworks */,
 				1DE0B57125A6C3CC00BC3CEF /* RxAlamofire in Frameworks */,
 				1D916D202562A1180059E549 /* Alamofire in Frameworks */,
 				1DD1FE17256CE2E000C598CE /* SwiftRichString in Frameworks */,
 				1DD1FE23256DF4B700C598CE /* KeychainAccess in Frameworks */,
 				1D79C106259446F300AC271B /* Lottie in Frameworks */,
-				1DD1154A25DE57660034BC0E /* libswscale.a in Frameworks */,
 				1DF1E26925A630FA0093A162 /* RxDataSources in Frameworks */,
 				1DF1E25E25A630AC0093A162 /* RxSwift in Frameworks */,
 				1D916D262562A16D0059E549 /* TinyConstraints in Frameworks */,
@@ -744,20 +723,13 @@
 				1DB0B34E25D232430035C755 /* RxRelay in Frameworks */,
 				1DB0B34F25D232430035C755 /* RxCocoa in Frameworks */,
 				1DB0B35025D232430035C755 /* Differentiator in Frameworks */,
-				1DD1154525DE57660034BC0E /* libavformat.a in Frameworks */,
-				1DD1154725DE57660034BC0E /* libavdevice.a in Frameworks */,
 				1DB0B35125D232430035C755 /* SDWebImage in Frameworks */,
-				1DD1153F25DE57660034BC0E /* libavutil.a in Frameworks */,
 				1DB0B35225D232430035C755 /* RSKPlaceholderTextView in Frameworks */,
-				1DD1154925DE57660034BC0E /* libswresample.a in Frameworks */,
-				1DD1154125DE57660034BC0E /* libavfilter.a in Frameworks */,
-				1DD1154325DE57660034BC0E /* libavcodec.a in Frameworks */,
 				1DB0B35325D232430035C755 /* RxAlamofire in Frameworks */,
 				1DB0B35425D232430035C755 /* Alamofire in Frameworks */,
 				1DB0B35525D232430035C755 /* SwiftRichString in Frameworks */,
 				1DB0B35625D232430035C755 /* KeychainAccess in Frameworks */,
 				1DB0B35725D232430035C755 /* Lottie in Frameworks */,
-				1DD1154B25DE57660034BC0E /* libswscale.a in Frameworks */,
 				1DB0B35825D232430035C755 /* RxDataSources in Frameworks */,
 				1DB0B35925D232430035C755 /* RxSwift in Frameworks */,
 				1DB0B35A25D232430035C755 /* TinyConstraints in Frameworks */,
