@@ -87,15 +87,17 @@ extension ProfileUseCase {
         }
     }
     
-    func loadProfile() {
+    func loadProfile(completionHandler: ((Bool)->Void)? = nil) {
         return apiService.loadProfile()
             .subscribe(onSuccess: { [self] profileResponse in
                 stateController.state.profile = profileResponse
                 removeLocalProfileImage()
                 loadProfileImage(fromUrl: URL(string: profileResponse.profileImageUrl))
+                completionHandler?(true)
             }, onFailure: { [self] error in
                 stateController.sendError(error)
                 Logger.log(level: .warning, topic: .authentication, message: "Unable to load account details with error: \(error)")
+                completionHandler?(false)
             })
             .disposed(by: disposeBag)
     }
@@ -120,12 +122,12 @@ extension ProfileUseCase {
             }, onCompleted: {
                 Logger.log(level: .info, topic: .api, message: "Trailer upload complete!")
                 self.stateController.state.currentTrailerUploadProgress?.completed = true
-                
-                self.stateController.state.profile?.isTrailerProcessed = false
-                self.stateController.state.profile?.trailerThumbnailUrl = nil
-                self.stateController.state.profile?.trailerVideoUrl = nil
-                
-                self.loadProfile()
+                                
+                self.loadProfile() { success in
+                    if success {
+                        self.stateController.state.selectedTrailerUrl = nil
+                    }
+                }
             })
             .disposed(by: disposeBag)
         
@@ -183,8 +185,6 @@ extension ProfileUseCase {
     
     func selectTrailerForUpload(withUrl url: URL) {
         stateController.state.selectedTrailerUrl = url
-        stateController.state.profile?.hasTrailer = true
-        stateController.state.profile?.isTrailerProcessed = true
     }
     
     func clearTrailerForUpload() {

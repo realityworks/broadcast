@@ -70,7 +70,7 @@ class StandardAPIService : RequestInterceptor {
     }
     
     fileprivate func backgroundSessionRequest(withRequest request: URLRequest) -> Single<(HTTPURLResponse, Data)> {
-        print("backgroundSessionRequest called with request: \(request)")
+        Logger.info(topic: .api, message: "backgroundSessionRequest called with request: \(request)")
         return Single<(HTTPURLResponse, Data)>.create { [self] single in
             DispatchQueue.global().async {
                 let backgroundTask = UIApplication.shared.beginBackgroundTask()
@@ -103,7 +103,7 @@ class StandardAPIService : RequestInterceptor {
     
     /// Background requests always send for a new refresh token
     fileprivate func refreshedBackgroundSessionRequest(request: URLRequest) -> Single<(HTTPURLResponse, Data)> {
-        print("refreshedBackgroundSessionRequest called")
+        Logger.info(topic: .api, message: "refreshedBackgroundSessionRequest called")
         return backgroundRefreshCredentials()
             .flatMap { authenticateResponse -> Single<(HTTPURLResponse, Data)> in
                 Logger.log(level: .info, topic: .api, message: "Background API Token Refresh complete")
@@ -319,7 +319,6 @@ extension StandardAPIService : APIService {
             .appendingPathComponent(mediaId)
             .appendingPathComponent("complete")
         
-        print("uploadMediaComplete called!")
         return backgroundRequest(method: .post, url: url)//, timeout: 60)
             .emptyResponseBody()
     }
@@ -333,9 +332,7 @@ extension StandardAPIService : APIService {
         let parameters = [
             "title": newContent.title,
             "caption": newContent.caption]
-        
-        print("updatePostContent called!")
-        
+                
         return backgroundRequest(method: .put, url: url, parameters: parameters)
             .emptyResponseBody()
     }

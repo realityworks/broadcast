@@ -17,7 +17,6 @@ extension Single where Element == (HTTPURLResponse, Data), Trait == SingleTrait 
                 switch statusCode {
                 case 200...299:
                     let decodedValue = try decoder.decode(T.self, from: data)
-                    print(decodedValue)
                     return .just(decodedValue)
                 default:
                     return .error(self.error(from: statusCode, data: data))

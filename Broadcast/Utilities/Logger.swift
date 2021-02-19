@@ -21,9 +21,11 @@ struct Logger {
         assert(!crashOnDebugLogLevels.contains(level), message)
         
         // write
-        queue.async(flags: .barrier) {
-            // perform writes on data
-            logEntries.append(log)
+        if Configuration.debugUIEnabled {
+            queue.async(flags: .barrier) {
+                // perform writes on data
+                logEntries.append(log)
+            }
         }
         
         // Comment out unless we add crashlytics or other external error reporting

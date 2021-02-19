@@ -156,8 +156,8 @@ class ProfileDetailViewModel : ViewModel {
         let isTrailerVideoProcessed = profileObservable
             .map { $0.isTrailerProcessed }
         
-        showTrailerProcessing = Observable.combineLatest(hasTrailer, isTrailerVideoProcessed) { hasTrailer, processed in
-            return hasTrailer && !processed
+        showTrailerProcessing = Observable.combineLatest(hasTrailer, isTrailerVideoProcessed, selectedTrailerUrl) { hasTrailer, processed, selectedTrailerUrl in
+            return (hasTrailer && !processed) && selectedTrailerUrl == nil
         }
 
         savingProfile = savingProfileSubject.asObservable()
@@ -168,8 +168,9 @@ class ProfileDetailViewModel : ViewModel {
         
         showingTrailer = Observable.combineLatest(
             trailerVideoUrl,
-            hasTrailer) { url, hasTrailer in
-            return url != nil && hasTrailer == true
+            hasTrailer,
+            selectedTrailerUrl) { trailerUrl, hasTrailer, selectedTrailerUrl in
+            return (trailerUrl != nil && hasTrailer == true) || selectedTrailerUrl != nil
         }
         
         super.init(stateController: dependencies.stateController)
