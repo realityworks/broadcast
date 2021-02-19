@@ -62,7 +62,7 @@ class NewPostCreateViewModel : ViewModel {
         let uploadingProgressObservable = dependencies.uploadProgressObservable.compactMap { $0 }
         
         progress = uploadingProgressObservable.map {
-            print("TOTAL PROGRESS for new post: \($0.totalProgress)")
+            Logger.info(topic: .debug, message: "TOTAL PROGRESS for new post: \($0.totalProgress)")
             return $0.totalProgress
         }
         progressText = dependencies.uploadProgressObservable.map { uploadProgress in

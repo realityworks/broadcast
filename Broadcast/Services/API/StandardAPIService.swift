@@ -164,6 +164,8 @@ class StandardAPIService : RequestInterceptor {
         parameters: APIParameters = [:],
         encoding: ParameterEncoding = JSONEncoding.default,
         timeout: TimeInterval = 7.5) -> Single<(HTTPURLResponse, Data)> {
+        
+        Logger.info(topic: .api, message: "Sending request: \(url)")
         return getHeaders()
             .flatMap { [unowned self] headers -> Single<(HTTPURLResponse, Data)> in
                 /// Setup request with session then use the URLRequestConvertible, otherwise no way to inject the timeout
@@ -450,7 +452,7 @@ extension StandardAPIService : AuthenticationService {
     
     func backgroundRefreshCredentials() -> Single<AuthenticateResponse?> {
         guard let token = credentialsService?.refreshToken else { return .error(BoomdayError.refused) }
-        print ("backgroundRefreshCredentials called")
+        Logger.info(topic: .debug, message: "backgroundRefreshCredentials called")
         
         let url = baseUrl
             .appendingPathComponent("connect")
