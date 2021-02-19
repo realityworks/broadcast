@@ -249,8 +249,4 @@ extension NewPostCreateViewModel {
     func popBackToMyPosts() {
         popBackToMyPostsSignal.accept(())
     }
-    
-    func receivedMemoryWarning() {
-//        stateController.sendError(BoomdayError.internalMemoryError(text: "Low memory, please remove items from storage to increase space"))
-    }
 }

@@ -26,6 +26,9 @@ class ProfileDetailViewModel : ViewModel {
         
     let schedulers: Schedulers
     let profileUseCase: ProfileUseCase
+    
+    let isActive = BehaviorRelay<Bool>(value: true)
+    let reloadProfileSignal = PublishRelay<()>()
 
     let subscriberCount: Observable<Int>
     let profileImage: Observable<UIImage>
@@ -206,6 +209,38 @@ class ProfileDetailViewModel : ViewModel {
             .distinctUntilChanged()
             .bind(to: showFailed)
             .disposed(by: disposeBag)
+        
+        // If app is in background, wait until it is in foreground, otherwise proceed
+        reloadProfileSignal
+            .subscribe(onNext: { _ in
+                self.loadProfile(resetSelectedTrailerAfterLoad: true)
+            })
+            .disposed(by: disposeBag)
+
+        dependencies.didBecomeActive
+            .subscribe { [weak self] _ in
+                self?.isActive.accept(true)
+            }
+            .disposed(by: disposeBag)
+
+        dependencies.willResignActive
+            .subscribe { [weak self] _ in
+                self?.isActive.accept(false)
+            }
+            .disposed(by: disposeBag)
+        
+        configureActiveUploadBindings()
+    }
+    
+    private func configureActiveUploadBindings() {
+        Observable.combineLatest(uploadComplete.distinctUntilChanged(), isActive.asObservable())
+            .map { uploadComplete, isActive in
+                return uploadComplete == true && isActive == true
+            }
+            .filter { $0 == true }
+            .map { _ in () }
+            .bind(to: reloadProfileSignal)
+            .disposed(by: disposeBag)
     }
 }
 
@@ -220,15 +255,22 @@ extension ProfileDetailViewModel {
         let profileObservable: Observable<Profile?>
         let trailerUploadProgress: Observable<UploadProgress?>
         let selectedTrailerUrlObservable: Observable<URL?>
+        let didBecomeActive: Observable<Void>
+        let willResignActive: Observable<Void>
         
-        static let standard = Dependencies(
-            stateController: Domain.standard.stateController,
-            schedulers: Schedulers.standard,
-            profileUseCase: Domain.standard.useCases.profileUseCase,
-            profileImage: Domain.standard.stateController.stateObservable(of: \.profileImage),
-            profileObservable: Domain.standard.stateController.stateObservable(of: \.profile),
-            trailerUploadProgress: Domain.standard.stateController.stateObservable(of: \.currentTrailerUploadProgress),
-            selectedTrailerUrlObservable: Domain.standard.stateController.stateObservable(of: \.selectedTrailerUrl))
+        static var standard: Dependencies {
+            let notificationCenter = NotificationCenter.default.rx
+            return Dependencies(
+                stateController: Domain.standard.stateController,
+                schedulers: Schedulers.standard,
+                profileUseCase: Domain.standard.useCases.profileUseCase,
+                profileImage: Domain.standard.stateController.stateObservable(of: \.profileImage),
+                profileObservable: Domain.standard.stateController.stateObservable(of: \.profile),
+                trailerUploadProgress: Domain.standard.stateController.stateObservable(of: \.currentTrailerUploadProgress),
+                selectedTrailerUrlObservable: Domain.standard.stateController.stateObservable(of: \.selectedTrailerUrl),
+                didBecomeActive: notificationCenter.notification(UIApplication.didBecomeActiveNotification).map { _ in () },
+                willResignActive: notificationCenter.notification(UIApplication.willResignActiveNotification).map { _ in () })
+        }
     }
 }
 
@@ -300,15 +342,15 @@ extension ProfileDetailViewModel {
         profileUseCase.uploadTrailer(withUrl: url)
     }
     
-    func loadProfile() {
-        profileUseCase.loadProfile()
+    func loadProfile(resetSelectedTrailerAfterLoad: Bool = false) {
+        profileUseCase.loadProfile() { [weak self] success in
+            if resetSelectedTrailerAfterLoad && success{
+                self?.profileUseCase.removeSelectedTrailer()
+            }
+        }
     }
     
     func willResignResponders() {
         resignRespondersSignal.accept(())
-    }
-    
-    func receivedMemoryWarning() {
-//        stateController.sendError(BoomdayError.internalMemoryError(text: "Low memory, please remove items from storage to increase space"))
     }
 }

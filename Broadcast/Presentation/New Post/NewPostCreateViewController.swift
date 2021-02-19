@@ -73,11 +73,6 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         scrollView.contentSize = contentView.frame.size
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        viewModel.receivedMemoryWarning()
-    }
-    
     // MARK: Internal configuration functions
     
     private func configureViews() {        

@@ -122,12 +122,6 @@ extension ProfileUseCase {
             }, onCompleted: {
                 Logger.log(level: .info, topic: .api, message: "Trailer upload complete!")
                 self.stateController.state.currentTrailerUploadProgress?.completed = true
-                                
-                self.loadProfile() { success in
-                    if success {
-                        self.stateController.state.selectedTrailerUrl = nil
-                    }
-                }
             })
             .disposed(by: disposeBag)
         
@@ -181,6 +175,10 @@ extension ProfileUseCase {
             Logger.log(level: .warning, topic: .authentication, message: "Cannot get image data: \(error)")
             return .error(error)
         }
+    }
+    
+    func removeSelectedTrailer() {
+        stateController.state.selectedTrailerUrl = nil
     }
     
     func selectTrailerForUpload(withUrl url: URL) {
