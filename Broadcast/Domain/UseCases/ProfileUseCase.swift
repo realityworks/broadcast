@@ -183,6 +183,8 @@ extension ProfileUseCase {
     
     func selectTrailerForUpload(withUrl url: URL) {
         stateController.state.selectedTrailerUrl = url
+        stateController.state.profile?.hasTrailer = true
+        stateController.state.profile?.isTrailerProcessed = true
     }
     
     func clearTrailerForUpload() {

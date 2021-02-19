@@ -400,6 +400,18 @@ class ProfileDetailViewController: ViewController, KeyboardEventsAdapter {
         viewModel.uploadComplete
             .bind(to: cell.progressView.rx.uploadSuccess)
             .disposed(by: cell.disposeBag)
+        
+        viewModel.showingTrailer
+            .map { !$0 }
+            .bind(to: cell.changeButton.rx.isHidden)
+            .disposed(by: cell.disposeBag)
+        
+        cell.selectMediaView.selectMediaButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                self?.dismissKeyboard()
+                self?.showMediaOptionsMenu(forTag: PickerTags.trailer.rawValue)
+            })
+            .disposed(by: cell.disposeBag)
 
         cell.changeButton.rx.tap
             .subscribe(onNext: { [weak self] _ in

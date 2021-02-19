@@ -55,6 +55,7 @@ enum LocalizedString : String {
     case welcome
     case tryAgain
     case addMedia
+    case addVideoMedia
     case newPost
     case tips
     case noMedia

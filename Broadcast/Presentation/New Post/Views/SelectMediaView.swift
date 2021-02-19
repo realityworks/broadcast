@@ -15,8 +15,10 @@ class SelectMediaView: UIView {
     let selectMediaButton   = TopImageButton()
     let imageMediaOverlay   = UIImageView()
     let videoMediaOverlay   = VideoPlayerView()
+    let useOnlyVideo:Bool
     
-    override init(frame: CGRect = .zero) {
+    init(useOnlyVideo: Bool = false, frame: CGRect = .zero) {
+        self.useOnlyVideo = useOnlyVideo
         super.init(frame: frame)
         
         configureViews()
@@ -35,7 +37,7 @@ class SelectMediaView: UIView {
         selectMediaButton.backgroundColor = .clear
         selectMediaButton.setImage(UIImage.iconPlusCircle?.withRenderingMode(.alwaysTemplate), for: .normal)
         selectMediaButton.imageView?.tintColor = UIColor.primaryRed
-        selectMediaButton.setTitle(LocalizedString.addMedia, for: .normal)
+        selectMediaButton.setTitle(useOnlyVideo ? LocalizedString.addVideoMedia : LocalizedString.addMedia, for: .normal)
         selectMediaButton.titleLabel?.font = UIFont.smallBodyBold
         selectMediaButton.setTitleColor(UIColor.secondaryBlack, for: .normal)
         selectMediaButton.backgroundColor = .clear

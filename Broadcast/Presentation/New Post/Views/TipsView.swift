@@ -139,9 +139,6 @@ class TipsView : UIView {
         closeButton.width(66)
         closeButton.height(30)
         
-        print("INIT STACK VIEW")
-        print(tipsStackView.frame.size)
-        print(tipsStackView.intrinsicContentSize)
         setNeedsDisplay()
     }
     

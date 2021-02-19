@@ -19,7 +19,7 @@ class ProfileTrailerTableViewCell: UITableViewCell {
     let runTimeLabel = UILabel()
     let selectedMediaTitleLabel = UILabel.largeTitle(.noMedia, textColor: .secondaryBlack)
     
-    let selectMediaView = SelectMediaView()
+    let selectMediaView = SelectMediaView(useOnlyVideo: true)
     let changeButton = UIButton.textDestructive(withTitle: LocalizedString.change)
     
     let blurEffect = UIBlurEffect(style: .light)
