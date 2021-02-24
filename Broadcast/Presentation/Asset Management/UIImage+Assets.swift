@@ -46,4 +46,6 @@ extension UIImage {
     static let iconPortrait = UIImage(named:"icon-portrait")
     static let iconSimpleSun = UIImage(named: "icon-simple-sun")
     static let iconThumbUp = UIImage(named: "icon-thumb-u")
+    
+    static let defaultProfileImage = UIImage(named: "user-boomday-default")
 }

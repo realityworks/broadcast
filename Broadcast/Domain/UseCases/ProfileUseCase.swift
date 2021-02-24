@@ -129,7 +129,7 @@ extension ProfileUseCase {
     
     func localProfileImage() -> UIImage? {
         guard let data: Data = persistenceService.read(key: PersistenceKeys.profileImage) else {
-            return UIImage.appIcon
+            return UIImage.defaultProfileImage
         }
         
         return UIImage(data: data)
