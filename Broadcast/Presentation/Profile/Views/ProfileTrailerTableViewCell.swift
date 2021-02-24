@@ -75,13 +75,8 @@ class ProfileTrailerTableViewCell: UITableViewCell {
         failedStackView.distribution = .fillProportionally
         
         changeButton.contentHorizontalAlignment = .leading
-        
+    
         uploadButton.isEnabled = false
-        
-        uploadButton.setImage(UIImage.iconRadio?.withTintColor(.buttonTitle), for: .normal)
-        uploadButton.setImage(UIImage.iconRadio?.withTintColor(.disabledButtonTitle), for: .disabled)
-                
-        uploadButton.imageEdgeInsets = .right(10)
         
         failedIconView.contentMode = .scaleAspectFit
         
@@ -163,12 +158,6 @@ extension Reactive where Base : ProfileTrailerTableViewCell {
                 LocalizedString.uploadTrailer.localized
             
             target.uploadButton.setTitle(title, for: .normal)
-            
-            let image = failed ?
-                UIImage.iconReload?.withTintColor(.white) :
-                UIImage.iconRadio?.withTintColor(.white)
-            
-            target.uploadButton.setImage(image, for: .normal)
             target.failedContainerView.isHidden = !failed
         }
     }
