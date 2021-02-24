@@ -106,6 +106,7 @@
 		1D7C4949259B2FB70089EA6B /* InsetTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7C4948259B2FB70089EA6B /* InsetTextField.swift */; };
 		1D7C4950259B38A70089EA6B /* RSKPlaceholderTextView in Frameworks */ = {isa = PBXBuildFile; productRef = 1D7C494F259B38A70089EA6B /* RSKPlaceholderTextView */; };
 		1D7C4956259B795E0089EA6B /* TipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7C4955259B795E0089EA6B /* TipsView.swift */; };
+		1D7D72DC25E67A5A00216A16 /* UINavigationController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7D72DB25E67A5A00216A16 /* UINavigationController+Extensions.swift */; };
 		1D87DF532568367E000652D6 /* MyPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF522568367E000652D6 /* MyPostsViewController.swift */; };
 		1D87DF582568368A000652D6 /* MyPostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF572568368A000652D6 /* MyPostsViewModel.swift */; };
 		1D87DF84256839C9000652D6 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF83256839C9000652D6 /* PostDetailViewController.swift */; };
@@ -490,6 +491,7 @@
 		1D7C49422599F61F0089EA6B /* TopImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopImageButton.swift; sourceTree = "<group>"; };
 		1D7C4948259B2FB70089EA6B /* InsetTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetTextField.swift; sourceTree = "<group>"; };
 		1D7C4955259B795E0089EA6B /* TipsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipsView.swift; sourceTree = "<group>"; };
+		1D7D72DB25E67A5A00216A16 /* UINavigationController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extensions.swift"; sourceTree = "<group>"; };
 		1D87DF522568367E000652D6 /* MyPostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsViewController.swift; sourceTree = "<group>"; };
 		1D87DF572568368A000652D6 /* MyPostsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostsViewModel.swift; sourceTree = "<group>"; };
 		1D87DF83256839C9000652D6 /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
@@ -1073,26 +1075,27 @@
 		1DD1FE2C256E16BF00C598CE /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				1DD1FE27256E16B600C598CE /* UIButton+Extensions.swift */,
-				1D91A0CB256C1B8E0043A943 /* UIStackView+Extensions.swift */,
-				1DD1FE2D256E16D100C598CE /* UIImage+Extensions.swift */,
-				1D3F71E72571294F00DE7F05 /* String+Extensions.swift */,
-				1D3F72252571634D00DE7F05 /* RxTableViewSectionedReloadDataSource+Extensions.swift */,
+				1D79C112259451D400AC271B /* AnimationView+Extensions.swift */,
 				1DE3DA2D25751F0E00A7A1F7 /* Date+Extensions.swift */,
 				1DE3DA3125751FE500A7A1F7 /* DateFormatter+Extensions.swift */,
-				1D14AD6E257A0F5100CB2C82 /* UITextField+Extensions.swift */,
-				1D9256C8257E70AF00E988B2 /* Locale+Extension.swift */,
-				1D9256CC257E818800E988B2 /* Float+Extension.swift */,
 				1D419B9E258083450096FBB7 /* Dictionary+Extensions.swift */,
-				1D6FCD7E2581B8490062FF54 /* Single+Extension.swift */,
-				1DB3438D2589DC3300486676 /* URL+Extensions.swift */,
-				1D79C10025924C8600AC271B /* UIColor+Extensions.swift */,
-				1D79C112259451D400AC271B /* AnimationView+Extensions.swift */,
-				1D18E53D259D934800F6B071 /* Int+Extensions.swift */,
-				1DE0B57425A6D16800BC3CEF /* RxAlamofire+Extensions.swift */,
 				1D77CADE25B73C4C0069A381 /* FileManager+Extensions.swift */,
+				1D9256CC257E818800E988B2 /* Float+Extension.swift */,
+				1D18E53D259D934800F6B071 /* Int+Extensions.swift */,
+				1D9256C8257E70AF00E988B2 /* Locale+Extension.swift */,
+				1DE0B57425A6D16800BC3CEF /* RxAlamofire+Extensions.swift */,
+				1D3F72252571634D00DE7F05 /* RxTableViewSectionedReloadDataSource+Extensions.swift */,
+				1D6FCD7E2581B8490062FF54 /* Single+Extension.swift */,
+				1D3F71E72571294F00DE7F05 /* String+Extensions.swift */,
 				1DA0431B25BB0D4D00E3DB8C /* UIApplication+Extensions.swift */,
+				1DD1FE27256E16B600C598CE /* UIButton+Extensions.swift */,
+				1D79C10025924C8600AC271B /* UIColor+Extensions.swift */,
+				1DD1FE2D256E16D100C598CE /* UIImage+Extensions.swift */,
+				1D91A0CB256C1B8E0043A943 /* UIStackView+Extensions.swift */,
+				1D14AD6E257A0F5100CB2C82 /* UITextField+Extensions.swift */,
+				1D7D72DB25E67A5A00216A16 /* UINavigationController+Extensions.swift */,
 				1D57416E25C3156100DEFF47 /* UIView+Extensions.swift */,
+				1DB3438D2589DC3300486676 /* URL+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1339,6 +1342,7 @@
 			files = (
 				1D79C10F2594517500AC271B /* AnimationAsset.swift in Sources */,
 				1D3F71C2256FFC0B00DE7F05 /* UILabel+Styling.swift in Sources */,
+				1D7D72DC25E67A5A00216A16 /* UINavigationController+Extensions.swift in Sources */,
 				1D3F71E82571294F00DE7F05 /* String+Extensions.swift in Sources */,
 				1DA0431C25BB0D4E00E3DB8C /* UIApplication+Extensions.swift in Sources */,
 				1D3ED5FF25663521004236BB /* UIColor+Styling.swift in Sources */,

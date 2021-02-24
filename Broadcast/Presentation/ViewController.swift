@@ -76,13 +76,21 @@ class ViewController : UIViewController {
     }
     
     func customBackButton() {
-        guard navigationController?.viewControllers.isEmpty == false else { return }
+        guard let navigationController = navigationController,
+            !navigationController.viewControllers.isEmpty else { return }
         
-        let backButton = UIBarButtonItem(image: UIImage.iconChevronLeft?.sd_resizedImage(with: CGSize(width: 40, height: 40),
-                                                                                         scaleMode: .aspectFill),
-                                         style: .plain,
-                                         target: self, action: #selector(backPressed))
+        
+        let backButton = UIBarButtonItem(
+            image: UIImage.iconChevronLeft?.sd_resizedImage(
+                with: CGSize(width: 40, height: navigationController.navBarHeight-navigationController.navBarHeight/4),
+                scaleMode: .aspectFit),
+            style: .plain,
+            target: self,
+            action: #selector(backPressed))
+        
+        backButton.imageInsets.left = -16
         backButton.tintColor = .white
+        
         navigationItem.leftBarButtonItem = backButton
     }
 }
