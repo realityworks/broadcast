@@ -79,7 +79,6 @@ class ViewController : UIViewController {
         guard let navigationController = navigationController,
             !navigationController.viewControllers.isEmpty else { return }
         
-        
         let backButton = UIBarButtonItem(
             image: UIImage.iconChevronLeft?.sd_resizedImage(
                 with: CGSize(width: 40, height: navigationController.navBarHeight-navigationController.navBarHeight/4),

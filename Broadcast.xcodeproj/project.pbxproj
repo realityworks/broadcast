@@ -107,6 +107,7 @@
 		1D7C4950259B38A70089EA6B /* RSKPlaceholderTextView in Frameworks */ = {isa = PBXBuildFile; productRef = 1D7C494F259B38A70089EA6B /* RSKPlaceholderTextView */; };
 		1D7C4956259B795E0089EA6B /* TipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7C4955259B795E0089EA6B /* TipsView.swift */; };
 		1D7D72DC25E67A5A00216A16 /* UINavigationController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7D72DB25E67A5A00216A16 /* UINavigationController+Extensions.swift */; };
+		1D7D72F225E67F9D00216A16 /* UINavigationController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7D72DB25E67A5A00216A16 /* UINavigationController+Extensions.swift */; };
 		1D87DF532568367E000652D6 /* MyPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF522568367E000652D6 /* MyPostsViewController.swift */; };
 		1D87DF582568368A000652D6 /* MyPostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF572568368A000652D6 /* MyPostsViewModel.swift */; };
 		1D87DF84256839C9000652D6 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87DF83256839C9000652D6 /* PostDetailViewController.swift */; };
@@ -1498,6 +1499,7 @@
 				1DB0B2D625D232430035C755 /* GetTrailerUploadUrlResponse.swift in Sources */,
 				1DB0B2D725D232430035C755 /* KeyboardEventsAdapter.swift in Sources */,
 				1DB0B2D825D232430035C755 /* ProfileDetailViewModel.swift in Sources */,
+				1D7D72F225E67F9D00216A16 /* UINavigationController+Extensions.swift in Sources */,
 				1DB0B2D925D232430035C755 /* UIImage+Extensions.swift in Sources */,
 				1DB0B2DA25D232430035C755 /* BoomdayError.swift in Sources */,
 				1DB0B2DB25D232430035C755 /* RxTableViewSectionedReloadDataSource+Extensions.swift in Sources */,
