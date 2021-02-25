@@ -14,6 +14,8 @@ import SDWebImage
 class ProfileUseCase {
     typealias T = ProfileUseCase
     
+    static let queue = DispatchQueue(label: "thread-safe-profile-use-case", attributes: .concurrent)
+    
     var stateController: StateController!
     
     private let apiService: APIService
@@ -76,14 +78,16 @@ extension ProfileUseCase {
         
     func loadProfileImage(fromUrl url: URL?) {
         guard let url = url else { return }
-        SDWebImageManager.shared.loadImage(with: url, options: [.allowInvalidSSLCertificates, .continueInBackground], progress: nil) { (image, data, error, cacheType, finished, _) in
+        SDWebImageManager.shared.loadImage(with: url, options: [.allowInvalidSSLCertificates, .continueInBackground, .scaleDownLargeImages], progress: nil) { [self] (image, data, error, cacheType, finished, _) in
             /// Write the image to local data so we can refer to it when required
-            guard let image = image,
-                  let data = image.orientationRemoved().pngData()
-                else { return }
-            let imageUrl = FileManager.default.documentsDirectory().appendingPathComponent("profile.png")
-            try? data.write(to: imageUrl)
-            self.updateLocalProfile(image: imageUrl)
+            //ProfileUseCase.queue.async(flags: .barrier) {
+                guard let image = image,
+                      let data = image.orientationRemoved().pngData()
+                    else { return }
+                let imageUrl = FileManager.default.documentsDirectory().appendingPathComponent("profile.png")
+                try? data.write(to: imageUrl)
+                self.updateLocalProfile(image: imageUrl)
+            //}
         }
     }
     
@@ -92,7 +96,7 @@ extension ProfileUseCase {
             .subscribe(onSuccess: { [self] profileResponse in
                 stateController.state.profile = profileResponse
                 removeLocalProfileImage()
-                loadProfileImage(fromUrl: URL(string: profileResponse.profileImageUrl))
+                loadProfileImage(fromUrl: URL(string: profileResponse.profileImageUrl)?.appendingQueryItem("w", value: "600"))
                 completionHandler?(true)
             }, onFailure: { [self] error in
                 stateController.sendError(error)
