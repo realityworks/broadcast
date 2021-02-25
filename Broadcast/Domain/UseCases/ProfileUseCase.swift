@@ -79,15 +79,14 @@ extension ProfileUseCase {
     func loadProfileImage(fromUrl url: URL?) {
         guard let url = url else { return }
         SDWebImageManager.shared.loadImage(with: url, options: [.allowInvalidSSLCertificates, .continueInBackground, .scaleDownLargeImages], progress: nil) { [self] (image, data, error, cacheType, finished, _) in
+            
             /// Write the image to local data so we can refer to it when required
-            //ProfileUseCase.queue.async(flags: .barrier) {
-                guard let image = image,
-                      let data = image.orientationRemoved().pngData()
-                    else { return }
-                let imageUrl = FileManager.default.documentsDirectory().appendingPathComponent("profile.png")
-                try? data.write(to: imageUrl)
-                self.updateLocalProfile(image: imageUrl)
-            //}
+            guard let image = image,
+                  let data = image.orientationRemoved().pngData()
+                else { return }
+            let imageUrl = FileManager.default.documentsDirectory().appendingPathComponent("profile.png")
+            try? data.write(to: imageUrl)
+            self.updateLocalProfile(image: imageUrl)
         }
     }
     

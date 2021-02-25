@@ -14,6 +14,7 @@ class SavingView: UIView {
     private let titleLabel = UILabel.largeTitle(LocalizedString.saving,
                                                 textColor: .white)
     private let processingAnimation = AnimationView(animationAsset: .processing)
+    private let successAnimation = AnimationView(animationAsset: .success)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -40,6 +41,9 @@ class SavingView: UIView {
         processingAnimation.play()
         
         titleLabel.textAlignment = .left
+        
+        successAnimation.animationSpeed = 2
+        successAnimation.loopMode = .playOnce
     }
     
     private func layoutViews() {
@@ -55,5 +59,30 @@ class SavingView: UIView {
         
         containerStackView.addArrangedSubview(titleLabel)
         titleLabel.width(80)
+        
+        addSubview(successAnimation)
+        successAnimation.edgesToSuperview()
+        successAnimation.isHidden = true
+        successAnimation.currentFrame = 0
+        successAnimation.stop()
+    }
+    
+    func showFinished() {
+        successAnimation.isHidden = false
+        
+        successAnimation.currentFrame = 0
+        successAnimation.play()
+        
+        UIView.animate(withDuration: TimeInterval(0.5)) { [weak self] in
+            guard let self = self else { return }
+            self.containerStackView.alpha = 0
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) { [weak self] in
+            guard let self = self else { return }
+            
+            self.successAnimation.isHidden = true
+            self.containerStackView.alpha = 1
+        }
     }
 }

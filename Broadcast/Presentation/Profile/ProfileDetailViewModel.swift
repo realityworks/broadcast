@@ -67,8 +67,11 @@ class ProfileDetailViewModel : ViewModel {
     let showUploadButton: Observable<Bool>
     let selectedNewTrailerRelay = PublishRelay<Bool>()
 
-    private let savingProfileSubject = BehaviorRelay<Bool>(value: false)
+    private let savingProfileRelay = BehaviorRelay<Bool>(value: false)
+    private let finishedSavingProfileRelay = PublishRelay<()>()
+    let finishedSavingProfileSignal: Observable<()>
     let savingProfile: Observable<Bool>
+    
 
     private let finishedReloadProfileSignal = PublishRelay<()>()
     let finishedReloadProfile: Observable<()>
@@ -163,7 +166,7 @@ class ProfileDetailViewModel : ViewModel {
             return (hasTrailer && !processed) && selectedTrailerUrl == nil
         }
 
-        savingProfile = savingProfileSubject.asObservable()
+        savingProfile = savingProfileRelay.asObservable()
 
         finishedReloadProfile = finishedReloadProfileSignal.asObservable()
         
@@ -175,6 +178,8 @@ class ProfileDetailViewModel : ViewModel {
             selectedTrailerUrl) { trailerUrl, hasTrailer, selectedTrailerUrl in
             return (trailerUrl != nil && hasTrailer == true) || selectedTrailerUrl != nil
         }
+        
+        finishedSavingProfileSignal = finishedSavingProfileRelay.asObservable()
         
         super.init(stateController: dependencies.stateController)
         
@@ -286,16 +291,17 @@ extension ProfileDetailViewModel {
               let biography = biographySubject.value else { return }
         Logger.log(level: .info, topic: .debug, message: "Saving:\nDisplayName: \(displayName)\nBiography: \(biography)")
 
-        savingProfileSubject.accept(true)
+        saveProfileStart()
         profileUseCase.updateProfile(displayName: displayName,
                                      biography: biography)
             .subscribe(onCompleted: { [weak self] in
+                guard let self = self else { return }
                 Logger.log(level: .info, topic: .debug, message: "Updated profile sucessfully!")
 
                 // Mark as update complete (loader)
-                self?.profileUseCase.updateLocalProfile(displayName: displayName,
+                self.profileUseCase.updateLocalProfile(displayName: displayName,
                                                         biography: biography)
-                self?.savingProfileSubject.accept(false)
+                self.saveProfileFinish()
             }, onError: { [weak self] error in
                 Logger.log(level: .warning, topic: .debug, message: "Unable to update the broadcaster profile: \(error)")
 
@@ -307,7 +313,8 @@ extension ProfileDetailViewModel {
                     biography: self.stateController.state.profile?.biography ?? "")
 
                 self.stateController.sendError(error)
-                self.savingProfileSubject.accept(false)
+                self.saveProfileFinish()
+                
             })
             .disposed(by: disposeBag)
     }
@@ -352,5 +359,18 @@ extension ProfileDetailViewModel {
     
     func willResignResponders() {
         resignRespondersSignal.accept(())
+    }
+    
+    private func saveProfileStart() {
+        savingProfileRelay.accept(true)
+    }
+    
+    private func saveProfileFinish() {
+        self.finishedSavingProfileRelay.accept(())
+        
+        /// This needs to in sync with the SavingView animation timing also (Not ideal, but how to
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+            self.savingProfileRelay.accept(false)
+        }
     }
 }

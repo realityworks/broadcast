@@ -140,6 +140,12 @@ class ProfileDetailViewController: ViewController, KeyboardEventsAdapter {
                 .bind(to: leftBarButtonItem.rx.isEnabled)
                 .disposed(by: disposeBag)
         }
+        
+        viewModel.finishedSavingProfileSignal
+            .subscribe(onNext: { [weak self] _ in
+                self?.savingView.showFinished()
+            })
+            .disposed(by: disposeBag)
 
         viewModel.savingProfile
             .map { !$0 }
