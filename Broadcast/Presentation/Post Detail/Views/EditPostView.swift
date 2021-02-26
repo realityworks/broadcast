@@ -55,6 +55,8 @@ class EditPostView: UIView {
         
         titleTextField.rightView = rightLabel
         titleTextField.rightViewMode = .always
+        
+        rightLabel.textAlignment = .center
     }
     
     private func configureLayout() {
@@ -86,7 +88,7 @@ class EditPostView: UIView {
         failedStackView.addArrangedSubview(failedLabel)
         failedStackView.addSpace(4)
         
-        rightLabel.width(40)
+        rightLabel.width(55)
     }
     
     func configure(withUploadTitle buttonTitle: LocalizedString) {
