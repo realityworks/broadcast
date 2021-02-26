@@ -14,6 +14,8 @@ import SwiftRichString
 
 class NewPostCreateViewModel : ViewModel {
     
+    static let maxTitleConstant = 30
+    
     let schedulers: Schedulers
     let postContentUseCase: PostContentUseCase
     let persistenceService: PersistenceService

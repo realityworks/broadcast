@@ -145,6 +145,8 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         /// Layout tips view
         view.addSubview(tipsView)
         tipsView.edgesToSuperview(usingSafeArea: true)
+        
+        editPostView.rightLabel.text = "0/\(NewPostCreateViewModel.maxTitleConstant)"
     }
     
     private func configureBindings() {
@@ -248,11 +250,19 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     }
     
     private func configureTextFieldBindings() {
-        editPostView.rx.titleChanged
+        let latestTitle = editPostView.rx.titleChanged
             .withLatestFrom(self.editPostView.rx.titleText)
             .compactMap { $0 }
-            .map { String($0.prefix(10)) }
+        
+        latestTitle
+            .map { String($0.prefix(NewPostCreateViewModel.maxTitleConstant)) }
             .bind(to: viewModel.title)
+            .disposed(by: disposeBag)
+        
+        latestTitle
+            .map { $0.count }
+            .map { "\($0)/\(NewPostCreateViewModel.maxTitleConstant)" }
+            .bind(to: editPostView.rx.titleRightLabelText)
             .disposed(by: disposeBag)
         
         viewModel.title

@@ -53,11 +53,8 @@ class EditPostView: UIView {
         
         failedIconView.contentMode = .scaleAspectFit
         
-        
-        rightLabel.width(40)
         titleTextField.rightView = rightLabel
         titleTextField.rightViewMode = .always
-        rightLabel.text = "1/10"
     }
     
     private func configureLayout() {
@@ -88,6 +85,8 @@ class EditPostView: UIView {
         failedStackView.addArrangedSubview(failedIconView)
         failedStackView.addArrangedSubview(failedLabel)
         failedStackView.addSpace(4)
+        
+        rightLabel.width(40)
     }
     
     func configure(withUploadTitle buttonTitle: LocalizedString) {
