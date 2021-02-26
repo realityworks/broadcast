@@ -22,10 +22,7 @@ class EditPostView: UIView {
     fileprivate let failedIconView = UIImageView(image: UIImage.iconSlash?.withTintColor(.primaryRed))
     fileprivate let failedLabel = UILabel.bodyMedium(.uploadFailed,
                                          textColor: .secondaryBlack)
-    
-    //fileprivate let titleHeading = UILabel.lightGreySmallBody(LocalizedString.postTitle)
-    //fileprivate let captionHeading = UILabel.lightGreySmallBody(LocalizedString.captionTitle)
-    
+        
     init() {
         super.init(frame: .zero)
 
