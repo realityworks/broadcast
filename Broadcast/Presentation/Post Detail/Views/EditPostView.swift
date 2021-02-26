@@ -16,6 +16,7 @@ class EditPostView: UIView {
     let titleTextField = UITextField.standard(withPlaceholder: LocalizedString.postDescription, insets: .left(16))
     let captionTextView = UITextView.standard(withPlaceholder: LocalizedString.captionDescription)
     let submitButton = UIButton.standard(withTitle: LocalizedString.submitPost)
+    let rightLabel = UILabel.body(textColor: .primaryGrey)
     
     fileprivate let failedContainerView = UIView()
     fileprivate let failedStackView = UIStackView()
@@ -51,6 +52,12 @@ class EditPostView: UIView {
         submitButton.imageEdgeInsets = .right(10)
         
         failedIconView.contentMode = .scaleAspectFit
+        
+        
+        rightLabel.width(40)
+        titleTextField.rightView = rightLabel
+        titleTextField.rightViewMode = .always
+        rightLabel.text = "1/10"
     }
     
     private func configureLayout() {
@@ -117,6 +124,10 @@ extension Reactive where Base : EditPostView {
     
     var captionText: ControlProperty<String?> {
         return base.captionTextView.rx.text
+    }
+    
+    var titleRightLabelText: Binder<String?> {
+        return base.rightLabel.rx.text
     }
     
     var submitTapped: ControlEvent<Void> {
