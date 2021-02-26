@@ -249,8 +249,14 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
     
     private func configureTextFieldBindings() {
         editPostView.rx.titleChanged
-            .map { [weak self] in self?.editPostView.titleTextField.text ?? "" }
+            .withLatestFrom(self.editPostView.rx.titleText)
+            .compactMap { $0 }
+            .map { String($0.prefix(10)) }
             .bind(to: viewModel.title)
+            .disposed(by: disposeBag)
+        
+        viewModel.title
+            .bind(to: editPostView.rx.titleText)
             .disposed(by: disposeBag)
         
         editPostView.rx.titleEditEnd
@@ -259,11 +265,11 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
             })
             .disposed(by: disposeBag)
 
-        viewModel.title
-            .subscribe(onNext: { [weak self] text in
-                self?.editPostView.titleTextField.text = text
-            })
-            .disposed(by: disposeBag)
+//        viewModel.title
+//            .subscribe(onNext: { [weak self] text in
+//                self?.editPostView.titleTextField.text = text
+//            })
+//            .disposed(by: disposeBag)
         
         viewModel.caption
             .subscribe(onNext: { [weak self] text in

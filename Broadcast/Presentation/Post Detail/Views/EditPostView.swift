@@ -111,6 +111,10 @@ extension Reactive where Base : EditPostView {
         return base.titleTextField.rx.controlEvent(.editingDidEndOnExit)
     }
     
+    var titleText: ControlProperty<String?> {
+        return base.titleTextField.rx.text
+    }
+    
     var captionText: ControlProperty<String?> {
         return base.captionTextView.rx.text
     }
