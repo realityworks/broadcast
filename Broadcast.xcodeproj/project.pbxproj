@@ -1776,7 +1776,7 @@
 				CODE_SIGN_ENTITLEMENTS = Broadcast/Broadcast.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KTKP5PRF82;
 				INFOPLIST_FILE = Broadcast/Assets/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1788,7 +1788,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/ffmpeg/lib",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1806,7 +1806,7 @@
 				CODE_SIGN_ENTITLEMENTS = Broadcast/Broadcast.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Distribution: Boomday Ltd (KTKP5PRF82)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KTKP5PRF82;
 				INFOPLIST_FILE = Broadcast/Assets/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1818,7 +1818,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/ffmpeg/lib",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Boomday Broadcast App";
@@ -1882,7 +1882,7 @@
 				CODE_SIGN_ENTITLEMENTS = Broadcast/Broadcast.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KTKP5PRF82;
 				INFOPLIST_FILE = Broadcast/Assets/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1894,7 +1894,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/ffmpeg/lib",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1912,7 +1912,7 @@
 				CODE_SIGN_ENTITLEMENTS = Broadcast/Broadcast.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Distribution: Boomday Ltd (KTKP5PRF82)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KTKP5PRF82;
 				INFOPLIST_FILE = Broadcast/Assets/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1924,7 +1924,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/ffmpeg/lib",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Boomday Broadcaster QA";
