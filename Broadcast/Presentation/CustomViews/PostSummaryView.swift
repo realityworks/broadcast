@@ -219,7 +219,7 @@ class PostSummaryView : UIView {
         guard let url = url else { return }
         
         thumbnailImageView.isHidden = !showThumbnail
-        thumbnailImageView.sd_setImage(with: url,
+        thumbnailImageView.sd_setImage(with: url.appendingQueryItem("utc", value: "\(Int64(Date.now.timeIntervalSince1970*1000))"),
                                        placeholderImage: UIImage(color: .black))
     }
     
@@ -227,7 +227,11 @@ class PostSummaryView : UIView {
         guard let url = url else { return }
         
         thumbnailImageView.isHidden = !show
-        thumbnailImageView.sd_setImage(with: url.appendingQueryItem("dpi", value: "3"),
+        let mappedUrl = url
+            .appendingQueryItem("w", value: "600")
+            .appendingQueryItem("h", value: "600")
+            .appendingQueryItem("dpi", value: "3")
+        thumbnailImageView.sd_setImage(with: mappedUrl,
                                        placeholderImage: UIImage(color: .black))
     }
     

@@ -30,11 +30,11 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Camera Access is required to record footage for your videos</string>
+	<string>Camera Access is required to record footage for your videos and take photos</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Camera Access is required to record audio for your videos.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Access to photo library is required to select photos for content</string>
+	<string>Access to photo library is required to select photos and videos for content</string>
 	<key>SERVICE_ROOT_URL</key>
 	<string>$(SERVICE_ROOT_URL)</string>
 	<key>SITE_ROOT_URL</key>

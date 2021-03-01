@@ -274,12 +274,6 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
                 self?.editPostView.titleTextField.resignFirstResponder()
             })
             .disposed(by: disposeBag)
-
-//        viewModel.title
-//            .subscribe(onNext: { [weak self] text in
-//                self?.editPostView.titleTextField.text = text
-//            })
-//            .disposed(by: disposeBag)
         
         viewModel.caption
             .subscribe(onNext: { [weak self] text in
@@ -376,21 +370,21 @@ extension NewPostCreateViewController: UIImagePickerControllerDelegate,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage,
-           let data = image.orientationRemoved().pngData() {
-            let imageUrl = FileManager.default.documentsDirectory().appendingPathComponent("selected.png")
+           let data = image.orientationRemoved().jpegData(compressionQuality: 1) {
+            let imageUrl = FileManager.default.documentsDirectory().appendingPathComponent("selected.jpg")
             try? data.write(to: imageUrl)
             Logger.info(topic: .debug, message: "Selected image with Edited Image")
             selected(imageUrl: imageUrl)
         } else if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage,
-                  let data = image.orientationRemoved().pngData() {
-            let imageUrl = FileManager.default.documentsDirectory().appendingPathComponent("selected.png")
+                  let data = image.orientationRemoved().jpegData(compressionQuality: 1) {
+            let imageUrl = FileManager.default.documentsDirectory().appendingPathComponent("selected.jpg")
             try? data.write(to: imageUrl)
             Logger.info(topic: .debug, message: "Selected image with Original Image")
             selected(imageUrl: imageUrl)
         } else if let imageUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL,
                   let srcData = try? Data(contentsOf: imageUrl),
-                  let data = UIImage(data: srcData)?.orientationRemoved().pngData() {
-            let imageUrl = FileManager.default.documentsDirectory().appendingPathComponent("selected.png")
+                  let data = UIImage(data: srcData)?.orientationRemoved().jpegData(compressionQuality: 1) {
+            let imageUrl = FileManager.default.documentsDirectory().appendingPathComponent("selected.jpg")
             try? data.write(to: imageUrl)
             Logger.info(topic: .debug, message: "Selected image with url at : \(imageUrl)")
             selected(imageUrl: imageUrl)
