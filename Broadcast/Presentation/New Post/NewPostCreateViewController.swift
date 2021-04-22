@@ -218,7 +218,11 @@ class NewPostCreateViewController : ViewController, KeyboardEventsAdapter {
         viewModel.progressText
             .bind(to: progressView.rx.text)
             .disposed(by: disposeBag)
-            
+        
+        viewModel.progressText
+            .bind(to: editPostView.failedLabel.rx.text)
+            .disposed(by: disposeBag)
+        
         viewModel.selectedMedia
             .compactMap { $0 }
             .subscribe(onNext: { [weak self] media in

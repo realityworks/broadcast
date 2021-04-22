@@ -35,7 +35,7 @@ class StandardAPIService : RequestInterceptor {
     var dataTaskHandlers: Dictionary<Int, DataTaskHandler> = [:]
     var dataTaskResponse: Dictionary<Int, Data> = [:]
     
-    private let validStatusCodes = [Int](200 ..< 300) + [400, 403, 404, 409, 500, 503, 504]
+    private let validStatusCodes = [Int](200 ..< 300) + [400, 403, 404, 409, 500, 503, 504, 511, 512, 513]
     
     init(dependencies: Dependencies = .standard) {
         self.baseUrl = dependencies.baseUrl

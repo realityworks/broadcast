@@ -69,7 +69,9 @@ class NewPostCreateViewModel : ViewModel {
         }
         progressText = dependencies.uploadProgressObservable.map { uploadProgress in
             guard let uploadProgress = uploadProgress else { return UploadProgress.initialProgressText }
-            return uploadProgress.progressText
+            let progressText = uploadProgress.progressText
+            Logger.info(topic: .debug, message: "Updated progress text: \(progressText)")
+            return progressText
         }
         
         selectedMedia = selectedMediaSubject.compactMap { $0 }

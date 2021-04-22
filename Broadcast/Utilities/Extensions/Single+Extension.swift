@@ -69,6 +69,10 @@ extension Single where Element == (HTTPURLResponse, Data), Trait == SingleTrait 
             return BoomdayError.refused
         case 404:
             return BoomdayError.apiNotFound
+        case 511, 512:
+            return BoomdayError.noMembershipError
+        case 513:
+            return BoomdayError.paymentFailedError
         default:
             return BoomdayError.apiStatusCode(code: statusCode)
         }

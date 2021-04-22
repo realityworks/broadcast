@@ -18,6 +18,8 @@ enum BoomdayError : Error {
     case uploadFailed(UploadEvent)
     case publishFailed
     case internalMemoryError(text: String)
+    case noMembershipError
+    case paymentFailedError
     
     var localizedDescription: String {
         switch self {
@@ -41,7 +43,10 @@ enum BoomdayError : Error {
             return "\(LocalizedString.uploadFailed.localized) : \(event)"
         case .internalMemoryError(let text):
             return "\(LocalizedString.internalMemoryError.localized) : \(text)"
-            
+        case .noMembershipError:
+            return LocalizedString.noMembershipError.localized
+        case .paymentFailedError:
+            return LocalizedString.paymentFailedError.localized
         }
     }
     

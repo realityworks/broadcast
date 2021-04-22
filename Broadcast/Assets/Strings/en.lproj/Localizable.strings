@@ -119,3 +119,5 @@
 "publishError" = "Pushing your post failed, try again later";
 "uploadEventError" = "An error occured attempting to upload and publish your post";
 "internalMemoryError" = "Internal Memory Error";
+"noMembershipError" = "Please setup your boomday membership account to post content. Visit your profile on Boomday.com for more information!";
+"paymentFailedError" = "Your payment has currently failed. Please correct billing to post content.\n\nVisit your profile on Boomday.com for more information!";

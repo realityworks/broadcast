@@ -17,12 +17,12 @@ class EditPostView: UIView {
     let captionTextView = UITextView.standard(withPlaceholder: LocalizedString.captionDescription)
     let submitButton = UIButton.standard(withTitle: LocalizedString.submitPost)
     let rightLabel = UILabel.body(textColor: .primaryGrey)
+    let failedLabel = UILabel.bodyMedium(.uploadFailed,
+                                         textColor: .secondaryBlack)
     
     fileprivate let failedContainerView = UIView()
     fileprivate let failedStackView = UIStackView()
     fileprivate let failedIconView = UIImageView(image: UIImage.iconSlash?.withTintColor(.primaryRed))
-    fileprivate let failedLabel = UILabel.bodyMedium(.uploadFailed,
-                                         textColor: .secondaryBlack)
         
     init() {
         super.init(frame: .zero)
@@ -44,7 +44,7 @@ class EditPostView: UIView {
         failedStackView.axis = .vertical
         failedStackView.spacing = 0
         failedStackView.alignment = .center
-        failedStackView.distribution = .fillProportionally
+        failedStackView.distribution = .fill
         
         submitButton.setImage(UIImage.iconRadio?.withTintColor(.buttonTitle), for: .normal)
         submitButton.setImage(UIImage.iconRadio?.withTintColor(.disabledButtonTitle), for: .disabled)
@@ -57,6 +57,10 @@ class EditPostView: UIView {
         titleTextField.rightViewMode = .always
         
         rightLabel.textAlignment = .center
+        
+        failedLabel.lineBreakMode = .byWordWrapping
+        failedLabel.numberOfLines = 0
+        failedLabel.textAlignment = .center
     }
     
     private func configureLayout() {
@@ -82,7 +86,6 @@ class EditPostView: UIView {
         failedStackView.edgesToSuperview()
         
         failedContainerView.widthToSuperview()
-        failedContainerView.height(50)
         
         failedStackView.addArrangedSubview(failedIconView)
         failedStackView.addArrangedSubview(failedLabel)
@@ -122,7 +125,7 @@ extension Reactive where Base : EditPostView {
     var titleText: ControlProperty<String?> {
         return base.titleTextField.rx.text
     }
-    
+        
     var captionText: ControlProperty<String?> {
         return base.captionTextView.rx.text
     }
