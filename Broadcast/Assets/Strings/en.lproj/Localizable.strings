@@ -119,5 +119,5 @@
 "publishError" = "Pushing your post failed, try again later";
 "uploadEventError" = "An error occured attempting to upload and publish your post";
 "internalMemoryError" = "Internal Memory Error";
-"noMembershipError" = "Membership account is not setup. Visit your profile on Boomday.com to setup.";
-"paymentFailedError" = "Billing and payment is not set. Visit your profile on Boomday.com to setup.";
+"noMembershipError" = "Membership account is not setup. Fix via profile on Boomday.com.";
+"paymentFailedError" = "Billing and payment is not set. Fix via profile on Boomday.com.";
